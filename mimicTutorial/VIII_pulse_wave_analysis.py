@@ -96,15 +96,15 @@ def main():
     print("Values of Delta T:")
     print(delta_t)
 
-    agi = np.zeros(len(fidp["dia"]))
-    for beat_no in range(len(fidp["dia"])):
+    agi = np.zeros(len(fidp["bmag2d"]))
+    for beat_no in range(len(fidp["bmag2d"])):
         agi[beat_no] = (fidp["bmag2d"][beat_no] - fidp["cmag2d"][beat_no]
                         - fidp["dmag2d"][beat_no] - fidp["emag2d"][beat_no]) / fs
     print("Values of Aging Index:")
     print(agi)
 
-    ct = np.zeros(len(fidp["dia"]))
-    for beat_no in range(len(fidp["dia"])):
+    ct = np.zeros(len(fidp["p1p"]))
+    for beat_no in range(len(fidp["p1p"])):
         # CT = Systolic peak - Onset
         ct[beat_no] = (fidp["p1p"][beat_no] - fidp["ons"][beat_no]) / fs
     print("Values of CT:")
