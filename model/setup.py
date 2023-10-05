@@ -4,6 +4,9 @@ import pandas as pd
 
 
 def load_records(db_name):
+    """
+    Load all records from database
+    """
     subjects = wfdb.get_record_list(db_name)
     print(f"The '{db_name}' database contains data from {len(subjects)} subjects")
 
@@ -27,6 +30,11 @@ def load_records(db_name):
 
 
 def filter_records(records, database_name):
+    """
+    Filter records according to criteria:
+        - ABP and Pleth signals present
+        - 10 min of continuous signal available
+    """
     required_sigs = ['ABP', 'Pleth']
     matching_recs = {'seg_name': [], 'length': [], 'dir': []}
     rec = 0
@@ -85,5 +93,68 @@ def filter_records(records, database_name):
 
 
 def save_records_to_csv(records):
+    """
+    Save filtered records to .csv File
+    """
     df_matching_recs = pd.DataFrame(data=records)
     df_matching_recs.to_csv('matching_records.csv', index=False)
+
+
+def load_basic_data_from_segment(segment_name, segment_dir):
+    """
+    Load basic segment data
+    """
+    print("Loading basic segment data")
+    segment_data = wfdb.rdrecord(record_name=segment_name, pn_dir=segment_dir)
+
+    print(
+        f"This segment contains waveform data for the following {segment_data.n_sig} signals: {segment_data.sig_name}")
+    print(f"The signals are sampled at a base rate of {segment_data.fs} Hz (and some are sampled at multiples of this)")
+    print(f"They last for {segment_data.sig_len / (60 * segment_data.fs):.1f} minutes")
+
+
+def load_metadata_from_segment(rel_segment_name, rel_segment_dir):
+    """
+    Load and return metadata
+    """
+    segment_metadata = wfdb.rdheader(record_name=rel_segment_name, pn_dir=rel_segment_dir)
+    # print(f'Metadata loaded from segment: {rel_segment_name}')
+    return segment_metadata
+
+
+def load_data_from_segment(fs, start_seconds, n_seconds_to_load, rel_segment_name, rel_segment_dir):
+    """
+    Load full data from
+    :param fs: Sampling Frequency
+    :param start_seconds: Start time of segment reading
+    :param n_seconds_to_load: Segment length to load
+    :param rel_segment_name: Segment name
+    :param rel_segment_dir: Segment directory
+    :return: Fully loaded segment data
+    """
+    samp_from = fs * start_seconds
+    samp_to = fs * (start_seconds + n_seconds_to_load)
+
+    segment_data = wfdb.rdrecord(record_name=rel_segment_name,
+                                 sampfrom=samp_from,
+                                 sampto=samp_to,
+                                 pn_dir=rel_segment_dir)
+
+    print(f"Data loaded from segment: {rel_segment_name}")
+    return segment_data
+
+
+def get_abp_pleth_col_no(segment_data):
+    """
+    Method to find out which column in the record PPG and ABP are recorded in
+    :param segment_data: the segment data of a record
+    :return: abp and pleth columns in integer
+    """
+    abp_col = 0
+    pleth_col = 0
+    for sig_no in range(0, len(segment_data.sig_name)):
+        if "ABP" in segment_data.sig_name[sig_no]:
+            abp_col = sig_no
+        if "Pleth" in segment_data.sig_name[sig_no]:
+            pleth_col = sig_no
+    return abp_col, pleth_col
