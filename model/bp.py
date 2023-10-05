@@ -67,5 +67,5 @@ for segment in segments:
     # df_abp_ppg.to_csv('abp_ppg_data.csv', index=False)
     # break
 
-    plot_abp_ppg(segment[0], abp, ppg, fs)
+    plot_abp_ppg(segment[0], ppg, abp, fs)
     i = i + 1
