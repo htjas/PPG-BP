@@ -1,7 +1,7 @@
 import wfdb
 from matplotlib import pyplot as plt
 import numpy as np
-from scripts import *
+from init_scripts import *
 import pandas as pd
 from jproperties import Properties
 from visual import *
