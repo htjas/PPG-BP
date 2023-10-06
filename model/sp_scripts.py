@@ -5,22 +5,45 @@ from visual import *
 from init_scripts import *
 
 
-def load_segment_data_from_csv():
-    filenames = os.listdir('data')
+def process_data(folder, fs):
+    """
+    Method for signal processing abp and bp data
+    :param fs:
+    :param folder: name of folder containing abp and ppg data
+    """
+    filenames = os.listdir(folder)
+    filenames.sort()
 
     i = 1
     for filename in filenames:
-        print(f"File {i} / {len(filenames)} - {filename}")
+        if "ppg" in filename:
+            break
 
-        df = pd.read_csv(f"data/{filename}")
-        segment_values = df.values
+        sig, seg_name, end = split_filename(filename)
+
+        # print(f"File {i} / {round(len(filenames)/2)} - {filename}")
+        df = pd.read_csv(f"{folder}/abp_{seg_name}.{end}")
+        abp = df.values
+        # print(f"abp signal of segment - {seg_name}, tenth value - {abp[10]}")
+
+        df = pd.read_csv(f"{folder}/ppg_{seg_name}.{end}")
+        ppg = df.values
+        # print(f"ppg signal of segment - {seg_name}, tenth value - {ppg[10]}")
 
         i += 1
-        break
+
+
+def split_filename(filename):
+    x = filename.split("_", 1)
+    y = x[1].split('.')
+    sig = x[0]
+    seg_name = y[0]
+    end = y[1]
+    return sig, seg_name, end
 
 
 def main():
-    load_segment_data_from_csv()
+    process_data('data', 62.4725)
 
 
 if __name__ == "__main__":

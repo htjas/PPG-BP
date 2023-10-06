@@ -2,6 +2,7 @@ import wfdb
 from matplotlib import pyplot as plt
 import numpy as np
 from init_scripts import *
+from sp_scripts import *
 import pandas as pd
 from jproperties import Properties
 from visual import *
@@ -25,3 +26,7 @@ segments = df.values
 
 # get 10 minutes of bp and ppg data, and save to /data folder
 # extract_save_bp_ppg_data(segments, configs.get('path_of_data').data)
+
+# Signal processing
+fs = float(configs.get('default_fs').data)
+# process_data('data', fs)
