@@ -10,7 +10,7 @@ def plot_wfdb_segment(segment_name, segment_data):
                    time_units='seconds')
 
 
-def plot_abp_ppg(segment_name, ppg, abp, fs):
+def plot_abp_ppg(segment_name, abp, ppg, fs):
     """
     Plot the simultaneous PPG and ABP graphs
     :param segment_name: name of the segment
@@ -26,11 +26,11 @@ def plot_abp_ppg(segment_name, ppg, abp, fs):
 
     t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
 
-    ax1.plot(t, ppg, color='green', label='PPG')
-    ax1.set_title("PPG")
+    ax1.plot(t, abp, color='red', label='ABP')
+    ax1.set_title("ABP")
 
-    ax2.plot(t, abp, color='red', label='ABP')
-    ax2.set_title("ABP")
+    ax2.plot(t, ppg, color='green', label='PPG')
+    ax2.set_title("PPG")
 
     plt.show()
 

@@ -1,6 +1,7 @@
 import wfdb
 from pathlib import Path
 import pandas as pd
+from visual import *
 
 
 def load_records(db_name):
@@ -100,6 +101,17 @@ def save_records_to_csv(records):
     df_matching_recs.to_csv('matching_records.csv', index=False)
 
 
+def load_filter_save_records(database_name):
+    """
+    Combine 3 methods of MIMIC data initialization
+    :param database_name: name of the database to be loaded
+    :return: Result is a .csv file of segments that match the criteria, saved in the parent directory
+    """
+    records = load_records(database_name)
+    matching_records = filter_records(records, database_name)
+    save_records_to_csv(matching_records)
+
+
 def load_basic_data_from_segment(segment_name, segment_dir):
     """
     Load basic segment data
@@ -158,3 +170,36 @@ def get_abp_pleth_col_no(segment_data):
         if "Pleth" in segment_data.sig_name[sig_no]:
             pleth_col = sig_no
     return abp_col, pleth_col
+
+
+def extract_save_bp_ppg_data(segments, path):
+    # Extract 10 minutes of simultaneous BP and PPG signals from each record
+    i = 1
+    for segment in segments:
+        print(f"Segment {i} / {len(segments)}")
+
+        segment_metadata = load_metadata_from_segment(segment[0], segment[2])
+
+        segment_data = load_data_from_segment(round(segment_metadata.fs),
+                                              0,
+                                              # 600 doesn't work, incrementing issue
+                                              605,
+                                              segment[0],
+                                              segment[2])
+
+        # plot_wfdb_segment(segment[0], segment_data)
+
+        abp_col, pleth_col = get_abp_pleth_col_no(segment_data)
+
+        abp = segment_data.p_signal[:, abp_col]
+        ppg = segment_data.p_signal[:, pleth_col]
+        fs = segment_data.fs
+
+        df_abp = pd.DataFrame(data=abp)
+        df_abp.to_csv(f"{path}abp_{segment[0]}.csv", index=False)
+
+        df_ppg = pd.DataFrame(data=ppg)
+        df_ppg.to_csv(f"{path}ppg_{segment[0]}.csv", index=False)
+
+        plot_abp_ppg(segment[0], abp, ppg, fs)
+        i = i + 1
