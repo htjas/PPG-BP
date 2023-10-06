@@ -202,4 +202,4 @@ def extract_save_bp_ppg_data(segments, path):
         df_ppg.to_csv(f"{path}ppg_{segment[0]}.csv", index=False)
 
         plot_abp_ppg(segment[0], abp, ppg, fs)
-        i = i + 1
+        i += 1
