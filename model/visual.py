@@ -28,9 +28,11 @@ def plot_abp_ppg(segment_name, abp, ppg, fs):
 
     ax1.plot(t, abp, color='red', label='ABP')
     ax1.set_title("ABP")
+    ax1.set_xlim([0, 60])
 
     ax2.plot(t, ppg, color='green', label='PPG')
     ax2.set_title("PPG")
+    ax2.set_xlim([0, 60])
 
     plt.show()
 
