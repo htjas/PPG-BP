@@ -6,6 +6,10 @@ from init_scripts import *
 
 
 def manual_filter_data(folder):
+    """
+    Method for removing the data that contains extreme values (possibly faulty)
+    :param folder: the path where the files are stored
+    """
     filenames = os.listdir(folder)
     filenames.sort()
 
