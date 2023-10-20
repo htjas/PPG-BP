@@ -67,14 +67,28 @@ def process_data(folder, fs):
         # Raw plot
         plot_abp_ppg(seg_name, abp, ppg, fs)
 
-        # filter cut-offs
+        # Filtering
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
 
-        # Filtered Plot
-        plot_abp_ppg(seg_name + " (filtered)",
+        ppg_filt = filter_ppg(lpf_cutoff, hpf_cutoff, fs, ppg)
+
+        plot_abp_ppg(seg_name + " (PPG filtered)",
                      abp,
-                     filter_ppg(lpf_cutoff, hpf_cutoff, fs, ppg),
+                     ppg_filt,
+                     fs)
+
+        # Savitzky-Golay Derivation
+        d1, d2 = savgol_derivatives(ppg_filt)
+
+        plot_abp_ppg(seg_name + " (PPG D1)",
+                     abp,
+                     d1,
+                     fs)
+
+        plot_abp_ppg(seg_name + " (PPG D2)",
+                     abp,
+                     d2,
                      fs)
 
         # Move one file at a time
@@ -120,6 +134,22 @@ def filter_ppg_sos_chebyshev(lpf_cutoff, hpf_cutoff, fs):
                               fs=fs)
 
     return sos_cheb, w, h
+
+
+def savgol_derivatives(ppg_filt):
+    # Calculate first derivative
+    d1ppg = sp.signal.savgol_filter(ppg_filt,
+                                    9,
+                                    5,
+                                    deriv=1,
+                                    axis=0)
+    # Calculate second derivative
+    d2ppg = sp.signal.savgol_filter(ppg_filt,
+                                    9,
+                                    5,
+                                    deriv=2,
+                                    axis=0)
+    return d1ppg, d2ppg
 
 
 def split_filename(filename):
