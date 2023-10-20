@@ -71,11 +71,9 @@ def process_data(folder, fs):
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
 
-        filter_ppg(lpf_cutoff, hpf_cutoff, fs, ppg)
-
         # Filtered Plot
         plot_abp_ppg(seg_name + " (filtered)",
-                     filter_abp(lpf_cutoff, hpf_cutoff, fs, abp),
+                     abp,
                      filter_ppg(lpf_cutoff, hpf_cutoff, fs, ppg),
                      fs)
 
@@ -90,13 +88,6 @@ def filter_ppg(lpf, hpf, fs, ppg):
     # sos = filter_ppg_sos_chebyshev(lpf, hpf, fs)
     ppg_filtered = sp.signal.sosfiltfilt(sos[0], ppg, 0)
     return ppg_filtered
-
-
-def filter_abp(lpf, hpf, fs, abp):
-    sos = filter_butterworth(lpf, hpf, fs)
-    # sos = filter_ppg_sos_chebyshev(lpf, hpf, fs)
-    abp_filtered = sp.signal.sosfiltfilt(sos[0], abp, 0)
-    return abp_filtered
 
 
 def filter_butterworth(lpf_cutoff, hpf_cutoff, fs):
