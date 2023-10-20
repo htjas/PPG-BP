@@ -3,6 +3,7 @@ import pathlib
 import pandas as pd
 import scipy as sp
 from visual import *
+from methods import *
 from init_scripts import *
 
 
@@ -71,10 +72,11 @@ def process_data(folder, fs):
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
 
-        ppg_filt = filter_ppg(lpf_cutoff, hpf_cutoff, fs, ppg)
+        ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
+        abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp)
 
-        plot_abp_ppg(seg_name + " (PPG filtered)",
-                     abp,
+        plot_abp_ppg(seg_name + " (filtered)",
+                     abp_filt,
                      ppg_filt,
                      fs)
 
@@ -82,14 +84,17 @@ def process_data(folder, fs):
         d1, d2 = savgol_derivatives(ppg_filt)
 
         plot_abp_ppg(seg_name + " (PPG D1)",
-                     abp,
+                     abp_filt,
                      d1,
                      fs)
 
         plot_abp_ppg(seg_name + " (PPG D2)",
-                     abp,
+                     abp_filt,
                      d2,
                      fs)
+
+        # print(len(pulse_detection(ppg_filt, 'd2max')))
+        print(len(pulse_detection(abp, 'd2max')))
 
         # Move one file at a time
         x = input()
@@ -97,25 +102,25 @@ def process_data(folder, fs):
         i += 1
 
 
-def filter_ppg(lpf, hpf, fs, ppg):
+def filter_data(lpf, hpf, fs, data):
     sos = filter_butterworth(lpf, hpf, fs)
     # sos = filter_ppg_sos_chebyshev(lpf, hpf, fs)
-    ppg_filtered = sp.signal.sosfiltfilt(sos[0], ppg, 0)
-    return ppg_filtered
+    data_filtered = sp.sosfiltfilt(sos[0], data, 0)
+    return data_filtered
 
 
 def filter_butterworth(lpf_cutoff, hpf_cutoff, fs):
     # Butterworth filter
-    sos_butt = sp.signal.butter(10,
-                                [lpf_cutoff, hpf_cutoff],
-                                btype='bp',
-                                analog=False,
-                                output='sos',
-                                fs=fs)
+    sos_butt = sp.butter(10,
+                         [lpf_cutoff, hpf_cutoff],
+                         btype='bp',
+                         analog=False,
+                         output='sos',
+                         fs=fs)
 
-    w, h = sp.signal.sosfreqz(sos_butt,
-                              2000,
-                              fs=fs)
+    w, h = sp.sosfreqz(sos_butt,
+                       2000,
+                       fs=fs)
 
     return sos_butt, w, h
 
@@ -138,18 +143,29 @@ def filter_ppg_sos_chebyshev(lpf_cutoff, hpf_cutoff, fs):
 
 def savgol_derivatives(ppg_filt):
     # Calculate first derivative
-    d1ppg = sp.signal.savgol_filter(ppg_filt,
-                                    9,
-                                    5,
-                                    deriv=1,
-                                    axis=0)
+    d1ppg = sp.savgol_filter(ppg_filt,
+                             9,
+                             5,
+                             deriv=1,
+                             axis=0)
     # Calculate second derivative
-    d2ppg = sp.signal.savgol_filter(ppg_filt,
-                                    9,
-                                    5,
-                                    deriv=2,
-                                    axis=0)
+    d2ppg = sp.savgol_filter(ppg_filt,
+                             9,
+                             5,
+                             deriv=2,
+                             axis=0)
     return d1ppg, d2ppg
+
+
+def pulse_detection(data, algorithm):
+    # Pulse detection Algorithms
+    temp_fs = 125
+
+    beats = pulse_detect(data, temp_fs, 5, algorithm)
+    if beats.any():
+        print(f"Detected {len(beats)} beats in the PPG signal using the {algorithm} algorithm")
+
+    return beats
 
 
 def split_filename(filename):
