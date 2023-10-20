@@ -58,12 +58,18 @@ def process_data(folder, fs):
 
         print(f"File {i} / {round(len(filenames) / 2)} - {filename}")
         df = pd.read_csv(f"{folder}/abp_{seg_name}.{end}")
-        abp = df.to_numpy()
-        # print(f"abp signal of segment - {seg_name}, tenth value - {abp[10]}")
+        values = df.values
+        abp = []
+        for value in values:
+            abp.append(float(value))
+        abp = np.array(abp)
 
         df = pd.read_csv(f"{folder}/ppg_{seg_name}.{end}")
-        ppg = df.to_numpy()
-        # print(f"ppg signal of segment - {seg_name}, tenth value - {ppg[10]}")
+        values = df.values
+        ppg = []
+        for value in values:
+            ppg.append(float(value))
+        ppg = np.array(ppg)
 
         # Raw plot
         plot_abp_ppg(seg_name, abp, ppg, fs)
@@ -105,7 +111,7 @@ def process_data(folder, fs):
 def filter_data(lpf, hpf, fs, data):
     sos = filter_butterworth(lpf, hpf, fs)
     # sos = filter_ppg_sos_chebyshev(lpf, hpf, fs)
-    data_filtered = sp.sosfiltfilt(sos[0], data, 0)
+    data_filtered = sp.sosfiltfilt(sos[0], data)
     return data_filtered
 
 
@@ -146,14 +152,12 @@ def savgol_derivatives(ppg_filt):
     d1ppg = sp.savgol_filter(ppg_filt,
                              9,
                              5,
-                             deriv=1,
-                             axis=0)
+                             deriv=1)
     # Calculate second derivative
     d2ppg = sp.savgol_filter(ppg_filt,
                              9,
                              5,
-                             deriv=2,
-                             axis=0)
+                             deriv=2)
     return d1ppg, d2ppg
 
 
