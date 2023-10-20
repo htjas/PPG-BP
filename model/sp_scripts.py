@@ -1,6 +1,7 @@
 import os
 import pathlib
 import pandas as pd
+import scipy as sp
 from visual import *
 from init_scripts import *
 
@@ -54,20 +55,80 @@ def process_data(folder, fs):
 
         sig, seg_name, end = split_filename(filename)
 
-        # print(f"File {i} / {round(len(filenames)/2)} - {filename}")
+        print(f"File {i} / {round(len(filenames) / 2)} - {filename}")
         df = pd.read_csv(f"{folder}/abp_{seg_name}.{end}")
-        abp = df.values
+        abp = df.to_numpy()
         # print(f"abp signal of segment - {seg_name}, tenth value - {abp[10]}")
 
         df = pd.read_csv(f"{folder}/ppg_{seg_name}.{end}")
-        ppg = df.values
+        ppg = df.to_numpy()
         # print(f"ppg signal of segment - {seg_name}, tenth value - {ppg[10]}")
 
+        # Raw plot
         plot_abp_ppg(seg_name, abp, ppg, fs)
 
+        # filter cut-offs
+        lpf_cutoff = 0.7  # Hz
+        hpf_cutoff = 10  # Hz
+
+        filter_ppg(lpf_cutoff, hpf_cutoff, fs, ppg)
+
+        # Filtered Plot
+        plot_abp_ppg(seg_name + " (filtered)",
+                     filter_abp(lpf_cutoff, hpf_cutoff, fs, abp),
+                     filter_ppg(lpf_cutoff, hpf_cutoff, fs, ppg),
+                     fs)
+
+        # Move one file at a time
         x = input()
 
         i += 1
+
+
+def filter_ppg(lpf, hpf, fs, ppg):
+    sos = filter_butterworth(lpf, hpf, fs)
+    # sos = filter_ppg_sos_chebyshev(lpf, hpf, fs)
+    ppg_filtered = sp.signal.sosfiltfilt(sos[0], ppg, 0)
+    return ppg_filtered
+
+
+def filter_abp(lpf, hpf, fs, abp):
+    sos = filter_butterworth(lpf, hpf, fs)
+    # sos = filter_ppg_sos_chebyshev(lpf, hpf, fs)
+    abp_filtered = sp.signal.sosfiltfilt(sos[0], abp, 0)
+    return abp_filtered
+
+
+def filter_butterworth(lpf_cutoff, hpf_cutoff, fs):
+    # Butterworth filter
+    sos_butt = sp.signal.butter(10,
+                                [lpf_cutoff, hpf_cutoff],
+                                btype='bp',
+                                analog=False,
+                                output='sos',
+                                fs=fs)
+
+    w, h = sp.signal.sosfreqz(sos_butt,
+                              2000,
+                              fs=fs)
+
+    return sos_butt, w, h
+
+
+def filter_ppg_sos_chebyshev(lpf_cutoff, hpf_cutoff, fs):
+    # Chebyshev filter
+    sos_cheb = sp.signal.cheby2(10,
+                                5,
+                                [lpf_cutoff, hpf_cutoff],
+                                btype='bp',
+                                analog=False,
+                                output='sos',
+                                fs=fs)
+    w, h = sp.signal.sosfreqz(sos_cheb,
+                              2000,
+                              fs=fs)
+
+    return sos_cheb, w, h
 
 
 def split_filename(filename):
@@ -80,8 +141,8 @@ def split_filename(filename):
 
 
 def main():
-    # process_data('data', 62.4725)
-    manual_filter_data('data')
+    process_data('data', 62.4725)
+    # manual_filter_data('data')
 
 
 if __name__ == "__main__":
