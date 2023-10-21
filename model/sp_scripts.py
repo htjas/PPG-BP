@@ -59,17 +59,11 @@ def process_data(folder, fs):
         print(f"File {i} / {round(len(filenames) / 2)} - {filename}")
         df = pd.read_csv(f"{folder}/abp_{seg_name}.{end}")
         values = df.values
-        abp = []
-        for value in values:
-            abp.append(float(value))
-        abp = np.array(abp)
+        abp = values[:, 0]
 
         df = pd.read_csv(f"{folder}/ppg_{seg_name}.{end}")
         values = df.values
-        ppg = []
-        for value in values:
-            ppg.append(float(value))
-        ppg = np.array(ppg)
+        ppg = values[:, 0]
 
         # Raw plot
         plot_abp_ppg(seg_name, abp, ppg, fs)
