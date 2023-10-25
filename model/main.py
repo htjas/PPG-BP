@@ -25,8 +25,9 @@ df = pd.read_csv('matching_records.csv')
 segments = df.values
 
 # get 10 minutes of bp and ppg data, and save to /data folder
-# extract_save_bp_ppg_data(segments, configs.get('path_of_data').data)
+path = configs.get('path_of_data').data
+# extract_save_bp_ppg_data(segments, path)
 
 # Signal processing
 fs = float(configs.get('default_fs').data)
-# process_data('data', fs)
+process_data(path, fs)

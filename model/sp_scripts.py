@@ -40,13 +40,13 @@ def manual_filter_data(folder):
         i += 1
 
 
-def process_data(folder, fs):
+def process_data(path, fs):
     """
     Method for signal processing abp and bp data
     :param fs:
-    :param folder: name of folder containing abp and ppg data
+    :param path: name of folder containing abp and ppg data
     """
-    filenames = os.listdir(folder)
+    filenames = os.listdir(path)
     filenames.sort()
 
     i = 1
@@ -57,11 +57,11 @@ def process_data(folder, fs):
         sig, seg_name, end = split_filename(filename)
 
         print(f"File {i} / {round(len(filenames) / 2)} - {filename}")
-        df = pd.read_csv(f"{folder}/abp_{seg_name}.{end}")
+        df = pd.read_csv(f"{path}abp_{seg_name}.{end}")
         values = df.values
         abp = values[:, 0]
 
-        df = pd.read_csv(f"{folder}/ppg_{seg_name}.{end}")
+        df = pd.read_csv(f"{path}ppg_{seg_name}.{end}")
         values = df.values
         ppg = values[:, 0]
 
@@ -176,7 +176,7 @@ def split_filename(filename):
 
 
 def main():
-    process_data('data', 62.4725)
+    process_data('data/', 62.4725)
     # manual_filter_data('data')
 
 
