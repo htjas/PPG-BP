@@ -2,6 +2,7 @@ import wfdb
 from pathlib import Path
 import pandas as pd
 from visual import *
+import os
 
 
 def load_records(db_name):
@@ -193,7 +194,14 @@ def extract_save_bp_ppg_data(segments, path):
 
         abp = segment_data.p_signal[:, abp_col]
         ppg = segment_data.p_signal[:, pleth_col]
+
+        if check_if_faulty(abp) or check_if_faulty(ppg):
+            i += 1
+            continue
+
         fs = segment_data.fs
+
+        path = os.path.abspath(os.getcwd()) + path
 
         df_abp = pd.DataFrame(data=abp)
         df_abp.to_csv(f"{path}abp_{segment[0]}.csv", index=False)
@@ -201,5 +209,13 @@ def extract_save_bp_ppg_data(segments, path):
         df_ppg = pd.DataFrame(data=ppg)
         df_ppg.to_csv(f"{path}ppg_{segment[0]}.csv", index=False)
 
-        plot_abp_ppg(segment[0], abp, ppg, fs)
+        # plot_abp_ppg(segment[0], abp, ppg, fs)
         i += 1
+
+
+def check_if_faulty(data):
+    for value in data:
+        if value < 0 or value > 250:
+            print(value)
+            print("Segment contains faulty values")
+            return True

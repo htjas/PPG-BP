@@ -183,11 +183,13 @@ def peak_correction(x, locs, fs, t, stride, th_len):
                 # print('Locations: ' + str(locs_pks))
 
                 if len(locs_pks) != 0:
+                    print(len(locs_pks))
                     opt = locs_pks - win[j]
 
                     dif_abs = np.abs(opt - np.median(dif))
                     min_val = np.min(dif_abs)
                     ind_min, = np.where(dif_abs == min_val)
+                    print(ind_min)
 
                     win = np.append(win, locs_pks[ind_min])
                     win = np.sort(win)
@@ -196,6 +198,8 @@ def peak_correction(x, locs, fs, t, stride, th_len):
                 else:
                     opt = np.round(win[j] + np.median(dif))
                     if opt < win[j + 1]:
+                        print(len(locs_pks))
+                        print(ind_min)
                         win = np.append(win, locs_pks[ind_min])
                         win = np.sort(win)
                         dif = np.diff(win)
