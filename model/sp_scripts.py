@@ -101,14 +101,18 @@ def process_data(path, fs):
 
         t = len(ppg_filt) / fs
 
-        diff1 = abs(len(pulse_detection(ppg_filt, 'd2max', t, 'PPG')) -
-                    len(pulse_detection(abp_filt, 'd2max', t, 'ABP')))
+        try:
+            diff1 = abs(len(pulse_detection(ppg_filt, 'd2max', t, 'PPG')) -
+                        len(pulse_detection(abp_filt, 'd2max', t, 'ABP')))
 
-        diff2 = abs(len(pulse_detection(ppg_filt, 'upslopes', t, 'PPG')) -
-                    len(pulse_detection(abp_filt, 'upslopes', t, 'ABP')))
+            diff2 = abs(len(pulse_detection(ppg_filt, 'upslopes', t, 'PPG')) -
+                        len(pulse_detection(abp_filt, 'upslopes', t, 'ABP')))
 
-        diff3 = abs(len(pulse_detection(ppg_filt, 'delineator', t, 'PPG')) -
-                    len(pulse_detection(abp_filt, 'delineator', t, 'ABP')))
+            diff3 = abs(len(pulse_detection(ppg_filt, 'delineator', t, 'PPG')) -
+                        len(pulse_detection(abp_filt, 'delineator', t, 'ABP')))
+        except IndexError as e:
+            print(f"{filename} is faulty - {e}")
+            continue
 
         sum1 += diff1
         sum2 += diff2
@@ -183,8 +187,8 @@ def pulse_detection(data, algorithm, duration, sig):
     temp_fs = 125
 
     beats = pulse_detect(data, temp_fs, 5, algorithm, duration)
-    if beats.any():
-        print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
+    # if beats.any():
+    #     print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
 
     return beats
 
@@ -199,8 +203,8 @@ def split_filename(filename):
 
 
 def main():
-    # process_data('data/', 62.4725)
-    manual_filter_data('data')
+    process_data('data/', 62.4725)
+    # manual_filter_data('data')
 
 
 if __name__ == "__main__":
