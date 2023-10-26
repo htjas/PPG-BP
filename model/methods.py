@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-def pulse_detect(x, fs, w, alg):
+def pulse_detect(x, fs, w, alg, dur):
     """
     Description: Pulse detection and correction from pulsatile signals
     Inputs:  x, array with pulsatile signal [user defined units]
@@ -48,7 +48,7 @@ def pulse_detect(x, fs, w, alg):
     # Pre-processing of signal
     x_d = sp.detrend(x)
     sos = sp.butter(10, [0.5, 10], btype='bp', analog=False, output='sos', fs=fs)
-    x_f = sp.sosfiltfilt(sos, x_d, 0)
+    x_f = sp.sosfiltfilt(sos, x_d)
 
     # Peak detection in windows of length w
     n_int = np.floor(len(x_f) / (w * fs))
@@ -88,7 +88,7 @@ def pulse_detect(x, fs, w, alg):
     ind, = np.where(ibis <= len(x_f))
     ibis = ibis[ind]
 
-    ibis = peak_correction(x, ibis, fs, 20, 5, [0.5, 1.5])
+    ibis = peak_correction(x, ibis, fs, dur, 5, [0.5, 1.5])
 
     # fig = plt.figure()
     # plt.plot(x)
@@ -183,13 +183,11 @@ def peak_correction(x, locs, fs, t, stride, th_len):
                 # print('Locations: ' + str(locs_pks))
 
                 if len(locs_pks) != 0:
-                    print(len(locs_pks))
                     opt = locs_pks - win[j]
 
                     dif_abs = np.abs(opt - np.median(dif))
                     min_val = np.min(dif_abs)
                     ind_min, = np.where(dif_abs == min_val)
-                    print(ind_min)
 
                     win = np.append(win, locs_pks[ind_min])
                     win = np.sort(win)
@@ -198,8 +196,6 @@ def peak_correction(x, locs, fs, t, stride, th_len):
                 else:
                     opt = np.round(win[j] + np.median(dif))
                     if opt < win[j + 1]:
-                        print(len(locs_pks))
-                        print(ind_min)
                         win = np.append(win, locs_pks[ind_min])
                         win = np.sort(win)
                         dif = np.diff(win)
@@ -231,8 +227,7 @@ def peak_correction(x, locs, fs, t, stride, th_len):
         elif locs[i] == len(x):
             locs = np.delete(locs, locs[i])
         else:
-            # print('Previous: ' + str(x[locs[i] - 1]) + ', actual: ' + str(x[locs[i]]) + ', next: ' + str(x[locs[i]
-            # + 1]))
+            # print('Previous: ' + str(x[locs[i] - 1]) + ', actual: ' + str(x[locs[i]]) + ', next: ' + str(x[locs[i] + 1]))
             cond = (x[locs[i]] >= x[locs[i] - 1]) and (x[locs[i]] >= x[locs[i] + 1])
             # print('Condition: ' + str(cond))
             if cond:
@@ -253,9 +248,9 @@ def peak_correction(x, locs, fs, t, stride, th_len):
                         aux = x[locs[i - 1]:locs[i + 1]]
                         aux_loc = locs[i] - locs[i - 1]
                         aux_start = locs[i - 1]
-                    # print('i ' + str(i) + ' out of ' + str(len(locs)) + ', aux length: ' + str(len(aux)) + ',
-                    # location: ' + str(aux_loc)) print('Locs i - 1: ' + str(locs[i - 1]) + ', locs i: ' + str(locs[
-                    # i]) + ', locs i + 1: ' + str(locs[i + 1]))
+                    # print('i ' + str(i) + ' out of ' + str(len(locs)) + ', aux length: ' + str(len(aux)) +
+                    #      ', location: ' + str(aux_loc))
+                    # print('Locs i - 1: ' + str(locs[i - 1]) + ', locs i: ' + str(locs[i]) + ', locs i + 1: ' + str(locs[i + 1]))
 
                     pre = find_closest_peak(aux, aux_loc, 'backward')
                     pos = find_closest_peak(aux, aux_loc, 'forward')

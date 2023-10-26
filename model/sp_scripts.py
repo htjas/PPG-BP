@@ -93,10 +93,19 @@ def process_data(path, fs):
                      d2,
                      fs)
 
-        # print(len(pulse_detection(ppg_filt, 'd2max')))
-        print(len(pulse_detection(abp, 'd2max')))
+        t = len(ppg_filt) / fs
+
+        pulse_detection(ppg_filt, 'd2max', t, 'PPG')
+        pulse_detection(abp_filt, 'd2max', t, 'ABP')
+
+        pulse_detection(ppg_filt, 'upslopes', t, 'PPG')
+        pulse_detection(abp_filt, 'upslopes', t, 'ABP')
+
+        pulse_detection(ppg_filt, 'delineator', t, 'PPG')
+        pulse_detection(abp_filt, 'delineator', t, 'ABP')
 
         # Move one file at a time
+        print("---")
         x = input()
 
         i += 1
@@ -155,13 +164,13 @@ def savgol_derivatives(ppg_filt):
     return d1ppg, d2ppg
 
 
-def pulse_detection(data, algorithm):
+def pulse_detection(data, algorithm, duration, sig):
     # Pulse detection Algorithms
     temp_fs = 125
 
-    beats = pulse_detect(data, temp_fs, 5, algorithm)
+    beats = pulse_detect(data, temp_fs, 5, algorithm, duration)
     if beats.any():
-        print(f"Detected {len(beats)} beats in the PPG signal using the {algorithm} algorithm")
+        print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
 
     return beats
 
