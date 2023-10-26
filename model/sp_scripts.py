@@ -24,20 +24,24 @@ def manual_filter_data(folder):
         df = pd.read_csv(f"{folder}/{filename}")
         values = df.values
         print(f"File {i}/{len(filenames)} - {filename} ")
+        seg_count = 0
         for value in values:
-            if value < 0 or value > 250:
-                print(value)
-                print(f"{filename} contains faulty values")
-                count += 1
+            if value < 0 or value > 250 or np.isnan(value) or np.isinf(value):
+                # print(value)
+                # print(f"{filename} contains faulty values")
+                seg_count += 1
 
+                # Deletion of faulty files
                 # sig, seg_name, end = split_filename(filename)
                 # os.remove(f"{folder}/{filename}")
                 # os.remove(f"{folder}/ppg_{seg_name}.{end}")
 
                 break
-        print(count)
-
+        if seg_count > 0:
+            print(seg_count)
+            count += 1
         i += 1
+    print(count)
 
 
 def process_data(path, fs):
@@ -49,6 +53,7 @@ def process_data(path, fs):
     filenames = os.listdir(path)
     filenames.sort()
 
+    sum1, sum2, sum3 = 0, 0, 0
     i = 1
     for filename in filenames:
         if "ppg" in filename:
@@ -66,7 +71,7 @@ def process_data(path, fs):
         ppg = values[:, 0]
 
         # Raw plot
-        plot_abp_ppg(seg_name, abp, ppg, fs)
+        # plot_abp_ppg(seg_name, abp, ppg, fs)
 
         # Filtering
         lpf_cutoff = 0.7  # Hz
@@ -75,40 +80,49 @@ def process_data(path, fs):
         ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
         abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp)
 
-        plot_abp_ppg(seg_name + " (filtered)",
-                     abp_filt,
-                     ppg_filt,
-                     fs)
-
-        # Savitzky-Golay Derivation
-        d1, d2 = savgol_derivatives(ppg_filt)
-
-        plot_abp_ppg(seg_name + " (PPG D1)",
-                     abp_filt,
-                     d1,
-                     fs)
-
-        plot_abp_ppg(seg_name + " (PPG D2)",
-                     abp_filt,
-                     d2,
-                     fs)
+        # # Filtered and Derivative plot
+        # plot_abp_ppg(seg_name + " (filtered)",
+        #              abp_filt,
+        #              ppg_filt,
+        #              fs)
+        #
+        # # Savitzky-Golay Derivation
+        # d1, d2 = savgol_derivatives(ppg_filt)
+        #
+        # plot_abp_ppg(seg_name + " (PPG D1)",
+        #              abp_filt,
+        #              d1,
+        #              fs)
+        #
+        # plot_abp_ppg(seg_name + " (PPG D2)",
+        #              abp_filt,
+        #              d2,
+        #              fs)
 
         t = len(ppg_filt) / fs
 
-        pulse_detection(ppg_filt, 'd2max', t, 'PPG')
-        pulse_detection(abp_filt, 'd2max', t, 'ABP')
+        diff1 = abs(len(pulse_detection(ppg_filt, 'd2max', t, 'PPG')) -
+                    len(pulse_detection(abp_filt, 'd2max', t, 'ABP')))
 
-        pulse_detection(ppg_filt, 'upslopes', t, 'PPG')
-        pulse_detection(abp_filt, 'upslopes', t, 'ABP')
+        diff2 = abs(len(pulse_detection(ppg_filt, 'upslopes', t, 'PPG')) -
+                    len(pulse_detection(abp_filt, 'upslopes', t, 'ABP')))
 
-        pulse_detection(ppg_filt, 'delineator', t, 'PPG')
-        pulse_detection(abp_filt, 'delineator', t, 'ABP')
+        diff3 = abs(len(pulse_detection(ppg_filt, 'delineator', t, 'PPG')) -
+                    len(pulse_detection(abp_filt, 'delineator', t, 'ABP')))
+
+        sum1 += diff1
+        sum2 += diff2
+        sum3 += diff3
+
+        print(sum1, sum2, sum3)
 
         # Move one file at a time
-        print("---")
-        x = input()
+        # print("---")
+        # x = input()
 
         i += 1
+    print(sum1, sum2, sum3)
+    print(min(sum1, sum2, sum3))
 
 
 def filter_data(lpf, hpf, fs, data):
@@ -185,8 +199,8 @@ def split_filename(filename):
 
 
 def main():
-    process_data('data/', 62.4725)
-    # manual_filter_data('data')
+    # process_data('data/', 62.4725)
+    manual_filter_data('data')
 
 
 if __name__ == "__main__":
