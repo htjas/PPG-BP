@@ -47,13 +47,12 @@ def manual_filter_data(folder):
 def process_data(path, fs):
     """
     Method for signal processing abp and bp data
-    :param fs:
+    :param fs: Frequency of sampling
     :param path: name of folder containing abp and ppg data
     """
     filenames = os.listdir(path)
     filenames.sort()
 
-    sum1, sum2, sum3 = 0, 0, 0
     i = 1
     for filename in filenames:
         if "ppg" in filename:
@@ -70,7 +69,7 @@ def process_data(path, fs):
         values = df.values
         ppg = values[:, 0]
 
-        # Raw plot
+        # # Raw plot
         # plot_abp_ppg(seg_name, abp, ppg, fs)
 
         # Filtering
@@ -99,34 +98,21 @@ def process_data(path, fs):
         #              d2,
         #              fs)
 
+        # Beat detection
         t = len(ppg_filt) / fs
-
         try:
-            diff1 = abs(len(pulse_detection(ppg_filt, 'd2max', t, 'PPG')) -
-                        len(pulse_detection(abp_filt, 'd2max', t, 'ABP')))
-
-            diff2 = abs(len(pulse_detection(ppg_filt, 'upslopes', t, 'PPG')) -
-                        len(pulse_detection(abp_filt, 'upslopes', t, 'ABP')))
-
-            diff3 = abs(len(pulse_detection(ppg_filt, 'delineator', t, 'PPG')) -
-                        len(pulse_detection(abp_filt, 'delineator', t, 'ABP')))
-        except IndexError as e:
+            ppg_beats = pulse_detection(ppg_filt, 'delineator', t, 'PPG')
+            abp_beats = pulse_detection(abp_filt, 'delineator', t, 'ABP')
+        except Exception as e:
             print(f"{filename} is faulty - {e}")
+            i += 1
             continue
 
-        sum1 += diff1
-        sum2 += diff2
-        sum3 += diff3
-
-        print(sum1, sum2, sum3)
-
-        # Move one file at a time
-        # print("---")
-        # x = input()
+        # # Move one file at a time
+        print("---")
+        x = input()
 
         i += 1
-    print(sum1, sum2, sum3)
-    print(min(sum1, sum2, sum3))
 
 
 def filter_data(lpf, hpf, fs, data):
@@ -187,8 +173,8 @@ def pulse_detection(data, algorithm, duration, sig):
     temp_fs = 125
 
     beats = pulse_detect(data, temp_fs, 5, algorithm, duration)
-    # if beats.any():
-    #     print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
+    if beats.any():
+        print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
 
     return beats
 
