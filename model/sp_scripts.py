@@ -50,6 +50,7 @@ def process_data(path, fs):
     :param fs: Frequency of sampling
     :param path: name of folder containing abp and ppg data
     """
+    path = os.path.abspath(os.getcwd()) + path
     filenames = os.listdir(path)
     filenames.sort()
 
@@ -108,9 +109,12 @@ def process_data(path, fs):
             i += 1
             continue
 
+        # Plot with pulse
+        plot_abp_ppg_with_pulse(seg_name, abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+
         # # Move one file at a time
         print("---")
-        x = input()
+        x = input("> next")
 
         i += 1
 
@@ -189,7 +193,7 @@ def split_filename(filename):
 
 
 def main():
-    process_data('data/', 62.4725)
+    process_data('/data/', 62.4725)
     # manual_filter_data('data')
 
 
