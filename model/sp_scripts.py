@@ -1,6 +1,7 @@
 import os
 import pathlib
 import pandas as pd
+import pylab as pl
 import scipy as sp
 from visual import *
 from methods import *
@@ -55,6 +56,7 @@ def process_data(path, fs):
     filenames.sort()
 
     i = 1
+    count = 0
     for filename in filenames:
         if "ppg" in filename:
             break
@@ -99,22 +101,37 @@ def process_data(path, fs):
         #              d2,
         #              fs)
 
-        # Beat detection
+        # Beat and Fiducials detection from PPG
         t = len(ppg_filt) / fs
         try:
             ppg_beats = pulse_detection(ppg_filt, 'delineator', t, 'PPG')
-            abp_beats = pulse_detection(abp_filt, 'delineator', t, 'ABP')
+            ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True)
+            # plt.show()
         except Exception as e:
-            print(f"{filename} is faulty - {e}")
-            i += 1
-            continue
+            # print(f"Delineator error {e}")
+            try:
+                ppg_beats = pulse_detection(ppg_filt, 'd2max', t, 'PPG')
+                ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True)
+                # plt.show()
+            except Exception as e:
+                # print(f"D2Max error {e}")
+                try:
+                    ppg_beats = pulse_detection(ppg_filt, 'upslopes', t, 'PPG')
+                    ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True)
+                    # plt.show()
+                except Exception as e:
+                    # print(f"Upslopes error {e}")
+                    print(f"PPG Fiducials of {seg_name} couldn't be determined - {e}")
+                    count += 1
 
-        # Plot with pulse
-        plot_abp_ppg_with_pulse(seg_name, abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+        if len(ppg_fidp) != 0:
+            print("Fiducials discovered")
 
         # # Move one file at a time
         print("---")
-        x = input("> next")
+        print(f"Non usable segments: {count}")
+        print("---")
+        # x = input("> next")
 
         i += 1
 
