@@ -10,6 +10,33 @@ def plot_wfdb_segment(segment_name, segment_data):
                    time_units='seconds')
 
 
+def plot_ppg_quad(seg_name, fs, ppg, ppg_filt, d1, d2):
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2,
+                                                 sharex=False,
+                                                 sharey=False,
+                                                 figsize=(8, 8))
+    fig.suptitle(f"Segment {seg_name}")
+
+    t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
+
+    ax1.plot(t, ppg, color='black', label='PPG Raw')
+    ax1.set_title("PPG Raw")
+    ax1.set_xlim([55, 60])
+
+    ax2.plot(t, ppg_filt, color='black', label='PPG Filt')
+    ax2.set_title("PPG Filt")
+    ax2.set_xlim([55, 60])
+
+    ax3.plot(t, d1, color='black', label='PPG Filt D1')
+    ax3.set_title("PPG Filt D1")
+    ax3.set_xlim([55, 60])
+
+    ax4.plot(t, d2, color='black', label='PPG Filt D2')
+    ax4.set_title("PPG Filt D2")
+    ax4.set_xlim([55, 60])
+
+    plt.show()
+
 def plot_abp_ppg(segment_name, abp, ppg, fs):
     """
     Plot the simultaneous PPG and ABP graphs
