@@ -127,8 +127,6 @@ def process_ppg_data(path, fs):
         values = df.values
         ppg = values[:, 0]
 
-        t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
-
         # Filtering
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
@@ -140,6 +138,9 @@ def process_ppg_data(path, fs):
         plot_ppg_quad(seg_name, fs, ppg, ppg_filt, d1, d2)
 
         ppg_beats, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
+
+        ct = ct_detection(ppg_fidp, fs)
+        print(ct, len(ct))
 
         i += 1
 
@@ -177,6 +178,14 @@ def beat_fidp_detection(ppg_filt, fs, seg_name):
     #     df_ppg.to_csv(f"{os.path.abspath(os.getcwd())}/usable_ppg_fidp_data/ppg_fidp_{seg_name}.csv", index=False)
 
     return ppg_beats, ppg_fidp
+
+
+def ct_detection(fidp, fs):
+    # CT = Systolic peak - Onset
+    ct = np.zeros(len(fidp["p1p"]))
+    for beat_no in range(len(fidp["p1p"])):
+        ct[beat_no] = (fidp["p1p"][beat_no] - fidp["ons"][beat_no]) / fs
+    return ct
 
 
 def filter_data(lpf, hpf, fs, data):
