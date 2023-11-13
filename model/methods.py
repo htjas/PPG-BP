@@ -1350,6 +1350,7 @@ def fiducial_points(x, pks, fs, vis):
         ax4.scatter(p2p, d3x[p2p.astype(int)], color='green', label='p2')
         ax4.legend()
         ax4.set_ylabel('d3x')
+        ax4.set_xlim([10000, 10500])
 
         plt.subplots_adjust(left=0.1,
                             bottom=0.1,
@@ -1357,6 +1358,8 @@ def fiducial_points(x, pks, fs, vis):
                             top=0.9,
                             wspace=0.4,
                             hspace=0.4)
+
+        plt.show()
 
     # Creation of dictionary
     fidp = {'pks': pks.astype(int),

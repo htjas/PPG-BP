@@ -155,10 +155,9 @@ def process_ppg_data(path, fs):
 
         plot_quad(seg_name, sig, fs, ppg, ppg_filt, d1, d2)
 
-        ppg_beats, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
+        ppg_beats, alg, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
 
         ct = ct_detection(ppg_fidp, fs)
-        print(ct, len(ct))
 
         i += 1
 
@@ -187,44 +186,42 @@ def process_bp_data(path, fs):
 
         d1, d2 = savgol_derivatives(abp_filt)
 
-        # plot_quad(seg_name, sig, fs, abp, abp_filt, d1, d2)
+        plot_quad(seg_name, sig, fs, abp, abp_filt, d1, d2)
 
-        abp_beats, abp_fidp = beat_fidp_detection(abp_filt, fs, seg_name)
+        abp_beats, alg, abp_fidp = beat_fidp_detection(abp_filt, fs, seg_name)
 
-        if len(abp_fidp) != 0:
-            ct = ct_detection(abp_fidp, fs)
-            print(len(ct))
-        else:
-            os.remove(f"usable_bp_data/{filename}")
-            os.remove(f"usable_ppg_fidp_data/ppg-fidp_{seg_name}.{end}")
+        sys, dia = sys_dia_detection(abp_fidp, abp_filt)
+
+        print(sys[0:5])
+        print(dia[0:5])
 
         i += 1
-
-        # x = input()
+        x = input()
 
 
 def beat_fidp_detection(data, fs, seg_name):
     # Beat and Fiducials detection from PPG
     t = len(data) / fs
+    alg = 'delineator'
     try:
         beats = pulse_detection(data, 'delineator', t, 'PPG')
         fidp = fiducial_points(data, beats, fs, vis=True)
-        # plt.show()
     except Exception as e:
-        # print(f"Delineator error {e}")
+        print(f"Delineator error - {e}")
+        alg = 'd2max'
         try:
             beats = pulse_detection(data, 'd2max', t, 'PPG')
             fidp = fiducial_points(data, beats, fs, vis=True)
-            # plt.show()
         except Exception as e:
-            # print(f"D2Max error {e}")
+            alg = 'upslopes'
+            print(f"D2Max error - {e}")
             try:
                 beats = pulse_detection(data, 'upslopes', t, 'PPG')
                 fidp = fiducial_points(data, beats, fs, vis=True)
-                # plt.show()
             except Exception as e:
-                # print(f"Upslopes error {e}")
+                print(f"Upslopes error - {e}")
                 print(f"Fiducials of {seg_name} couldn't be determined - {e}")
+                alg = ''
                 fidp = []
 
     # # Create .csv files from valid data
@@ -233,15 +230,46 @@ def beat_fidp_detection(data, fs, seg_name):
     #     df_ppg = pd.DataFrame(data=ppg)
     #     df_ppg.to_csv(f"{os.path.abspath(os.getcwd())}/usable_ppg_fidp_data/ppg_fidp_{seg_name}.csv", index=False)
 
-    return beats, fidp
+    return beats, alg, fidp
 
 
 def ct_detection(fidp, fs):
     # CT = Systolic peak - Onset
-    ct = np.zeros(len(fidp["p1p"]))
-    for beat_no in range(len(fidp["p1p"])):
-        ct[beat_no] = (fidp["p1p"][beat_no] - fidp["ons"][beat_no]) / fs
-    return ct
+    # ct = np.zeros(len(fidp["pks"]))
+    ts = np.zeros(len(fidp["pks"]), dtype=int)
+    values = np.zeros(len(fidp["pks"]), dtype=float)
+    for beat_no in range(len(fidp["pks"])):
+        ts[beat_no] = fidp["pks"][beat_no]
+        values[beat_no] = (fidp["pks"][beat_no] - fidp["ons"][beat_no]) / fs
+    return np.column_stack((ts, values))
+
+
+def agi_detection(fidp, fs):
+    # (From second derivative) Aging Index = b - c - d - e
+    ts = np.zeros(len(fidp["pks"]), dtype=int)
+    values = np.zeros(len(fidp["pks"]), dtype=float)
+    for beat_no in range(len(fidp["bmag2d"])):
+        ts[beat_no] = fidp["bmag2d"][beat_no]
+        values[beat_no] = (fidp["bmag2d"][beat_no] - fidp["cmag2d"][beat_no]
+                           - fidp["dmag2d"][beat_no] - fidp["emag2d"][beat_no]) / fs
+    return np.column_stack((ts, values))
+
+
+def sys_dia_detection(fidp, data):
+    # (From filtered data) Systolic BP = pks; Diastolic BP = dia
+    tss = np.zeros(len(fidp["pks"]), dtype=int)
+    tsd = np.zeros(len(fidp["dia"]), dtype=int)
+    sys = np.zeros(len(fidp["pks"]), dtype=float)
+    dia = np.zeros(len(fidp["dia"]), dtype=float)
+    for beat_no in range(len(fidp["pks"])):
+        tss[beat_no] = fidp["pks"][beat_no]
+        sys[beat_no] = data[int(tss[beat_no])]
+        tsd[beat_no] = fidp["dia"][beat_no]
+        dia[beat_no] = data[int(tsd[beat_no])]
+    sys = np.column_stack((tss, sys))
+    dia = np.column_stack((tsd, dia))
+
+    return sys, dia
 
 
 def filter_data(lpf, hpf, fs, data):
