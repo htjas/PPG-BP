@@ -153,7 +153,7 @@ def process_ppg_data(path, fs):
 
         d1, d2 = savgol_derivatives(ppg_filt)
 
-        plot_ppg_quad(seg_name, fs, ppg, ppg_filt, d1, d2)
+        plot_quad(seg_name, sig, fs, ppg, ppg_filt, d1, d2)
 
         ppg_beats, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
 
@@ -175,53 +175,57 @@ def process_bp_data(path, fs):
         sig, seg_name, end = split_filename(filename)
         print(f"File {i} / {len(filenames)} - {filename}")
 
-        df = pd.read_csv(f"{path}ppg-fidp_{seg_name}.{end}")
+        df = pd.read_csv(f"{path}abp_{seg_name}.{end}")
         values = df.values
-        ppg = values[:, 0]
+        abp = values[:, 0]
 
         # Filtering
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
 
-        ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
+        abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp)
 
-        d1, d2 = savgol_derivatives(ppg_filt)
+        d1, d2 = savgol_derivatives(abp_filt)
 
-        plot_ppg_quad(seg_name, fs, ppg, ppg_filt, d1, d2)
+        # plot_quad(seg_name, sig, fs, abp, abp_filt, d1, d2)
 
-        ppg_beats, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
+        abp_beats, abp_fidp = beat_fidp_detection(abp_filt, fs, seg_name)
 
-        ct = ct_detection(ppg_fidp, fs)
-        print(ct, len(ct))
+        if len(abp_fidp) != 0:
+            ct = ct_detection(abp_fidp, fs)
+            print(len(ct))
+        else:
+            os.remove(f"usable_bp_data/{filename}")
+            os.remove(f"usable_ppg_fidp_data/ppg-fidp_{seg_name}.{end}")
 
         i += 1
 
-        x = input()
+        # x = input()
 
 
-def beat_fidp_detection(ppg_filt, fs, seg_name):
+def beat_fidp_detection(data, fs, seg_name):
     # Beat and Fiducials detection from PPG
-    t = len(ppg_filt) / fs
+    t = len(data) / fs
     try:
-        ppg_beats = pulse_detection(ppg_filt, 'delineator', t, 'PPG')
-        ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True)
+        beats = pulse_detection(data, 'delineator', t, 'PPG')
+        fidp = fiducial_points(data, beats, fs, vis=True)
         # plt.show()
     except Exception as e:
         # print(f"Delineator error {e}")
         try:
-            ppg_beats = pulse_detection(ppg_filt, 'd2max', t, 'PPG')
-            ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True)
+            beats = pulse_detection(data, 'd2max', t, 'PPG')
+            fidp = fiducial_points(data, beats, fs, vis=True)
             # plt.show()
         except Exception as e:
             # print(f"D2Max error {e}")
             try:
-                ppg_beats = pulse_detection(ppg_filt, 'upslopes', t, 'PPG')
-                ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True)
+                beats = pulse_detection(data, 'upslopes', t, 'PPG')
+                fidp = fiducial_points(data, beats, fs, vis=True)
                 # plt.show()
             except Exception as e:
                 # print(f"Upslopes error {e}")
-                print(f"PPG Fiducials of {seg_name} couldn't be determined - {e}")
-                ppg_fidp = []
+                print(f"Fiducials of {seg_name} couldn't be determined - {e}")
+                fidp = []
 
     # # Create .csv files from valid data
     # if len(ppg_fidp) != 0:
@@ -229,7 +233,7 @@ def beat_fidp_detection(ppg_filt, fs, seg_name):
     #     df_ppg = pd.DataFrame(data=ppg)
     #     df_ppg.to_csv(f"{os.path.abspath(os.getcwd())}/usable_ppg_fidp_data/ppg_fidp_{seg_name}.csv", index=False)
 
-    return ppg_beats, ppg_fidp
+    return beats, fidp
 
 
 def ct_detection(fidp, fs):
@@ -314,9 +318,10 @@ def split_filename(filename):
 
 
 def main():
-    manual_filter_data('data')
+    # manual_filter_data('data')
     # process_data('/data/', 62.4725)
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
+    process_bp_data('/usable_bp_data/', 62.4725)
 
 
 if __name__ == "__main__":
