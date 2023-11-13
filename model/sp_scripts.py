@@ -1,5 +1,6 @@
 import os
 import pathlib
+import shutil
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -18,33 +19,50 @@ def manual_filter_data(folder):
     filenames = os.listdir(folder)
     filenames.sort()
 
+    filenames_ppg = os.listdir('usable_ppg_fidp_data')
+    filenames_ppg.sort()
+
+    common = []
+
+    for filename_ppg in filenames_ppg:
+        sig, seg_name_ppg, end = split_filename(filename_ppg)
+        for filename_bp in filenames:
+            sig, seg_name_bp, end = split_filename(filename_bp)
+            if sig == 'ppg':
+                break
+            if seg_name_ppg == seg_name_bp:
+                common.append(filename_bp)
+                # shutil.copy2(f"{folder}/{filename_bp}", 'usable_bp_data')
+
     i = 1
     count = 0
-    for filename in filenames:
-        if "ppg" in filename:
-            break
 
-        df = pd.read_csv(f"{folder}/{filename}")
-        values = df.values
-        print(f"File {i}/{len(filenames)} - {filename} ")
-        seg_count = 0
-        for value in values:
-            if value < 0 or value > 250 or np.isnan(value) or np.isinf(value):
-                # print(value)
-                # print(f"{filename} contains faulty values")
-                seg_count += 1
-
-                # Deletion of faulty files
-                # sig, seg_name, end = split_filename(filename)
-                # os.remove(f"{folder}/{filename}")
-                # os.remove(f"{folder}/ppg_{seg_name}.{end}")
-
-                break
-        if seg_count > 0:
-            print(seg_count)
-            count += 1
-        i += 1
-    print(count)
+    # for filename in filenames:
+    #     if "ppg" in filename:
+    #         break
+    #
+    #     print(f"File {i}/{len(filenames)} - {filename} ")
+    #
+    #     df = pd.read_csv(f"{folder}/{filename}")
+    #     values = df.values
+    #     seg_count = 0
+    #     for value in values:
+    #         if value < 0 or value > 250 or np.isnan(value) or np.isinf(value):
+    #             # print(value)
+    #             # print(f"{filename} contains faulty values")
+    #             seg_count += 1
+    #
+    #             # Deletion of faulty files
+    #             # sig, seg_name, end = split_filename(filename)
+    #             # os.remove(f"{folder}/{filename}")
+    #             # os.remove(f"{folder}/ppg_{seg_name}.{end}")
+    #
+    #             break
+    #     if seg_count > 0:
+    #         print(seg_count)
+    #         count += 1
+    #     i += 1
+    # print(count)
 
 
 def process_data(path, fs):
@@ -114,6 +132,40 @@ def process_data(path, fs):
 
 
 def process_ppg_data(path, fs):
+    path = os.path.abspath(os.getcwd()) + path
+    filenames = os.listdir(path)
+    filenames.sort()
+
+    i = 1
+    for filename in filenames:
+        sig, seg_name, end = split_filename(filename)
+        print(f"File {i} / {len(filenames)} - {filename}")
+
+        df = pd.read_csv(f"{path}ppg-fidp_{seg_name}.{end}")
+        values = df.values
+        ppg = values[:, 0]
+
+        # Filtering
+        lpf_cutoff = 0.7  # Hz
+        hpf_cutoff = 10  # Hz
+
+        ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
+
+        d1, d2 = savgol_derivatives(ppg_filt)
+
+        plot_ppg_quad(seg_name, fs, ppg, ppg_filt, d1, d2)
+
+        ppg_beats, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
+
+        ct = ct_detection(ppg_fidp, fs)
+        print(ct, len(ct))
+
+        i += 1
+
+        x = input()
+
+
+def process_bp_data(path, fs):
     path = os.path.abspath(os.getcwd()) + path
     filenames = os.listdir(path)
     filenames.sort()
@@ -262,9 +314,9 @@ def split_filename(filename):
 
 
 def main():
-    # manual_filter_data('data')
+    manual_filter_data('data')
     # process_data('/data/', 62.4725)
-    process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
+    # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
 
 
 if __name__ == "__main__":
