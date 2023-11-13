@@ -192,9 +192,6 @@ def process_bp_data(path, fs):
 
         sys, dia = sys_dia_detection(abp_fidp, abp_filt)
 
-        print(sys[0:5])
-        print(dia[0:5])
-
         i += 1
         x = input()
 
@@ -205,19 +202,19 @@ def beat_fidp_detection(data, fs, seg_name):
     alg = 'delineator'
     try:
         beats = pulse_detection(data, 'delineator', t, 'PPG')
-        fidp = fiducial_points(data, beats, fs, vis=True)
+        fidp = fiducial_points(data, beats, fs, vis=False)
     except Exception as e:
         print(f"Delineator error - {e}")
         alg = 'd2max'
         try:
             beats = pulse_detection(data, 'd2max', t, 'PPG')
-            fidp = fiducial_points(data, beats, fs, vis=True)
+            fidp = fiducial_points(data, beats, fs, vis=False)
         except Exception as e:
             alg = 'upslopes'
             print(f"D2Max error - {e}")
             try:
                 beats = pulse_detection(data, 'upslopes', t, 'PPG')
-                fidp = fiducial_points(data, beats, fs, vis=True)
+                fidp = fiducial_points(data, beats, fs, vis=False)
             except Exception as e:
                 print(f"Upslopes error - {e}")
                 print(f"Fiducials of {seg_name} couldn't be determined - {e}")
@@ -264,8 +261,13 @@ def sys_dia_detection(fidp, data):
     for beat_no in range(len(fidp["pks"])):
         tss[beat_no] = fidp["pks"][beat_no]
         sys[beat_no] = data[int(tss[beat_no])]
+        # TODO try/catch for longer signal (pks/dia) -> index out of bounds
         tsd[beat_no] = fidp["dia"][beat_no]
         dia[beat_no] = data[int(tsd[beat_no])]
+
+    plot_extracted_data(tss, sys)
+    plot_extracted_data(tsd, dia)
+
     sys = np.column_stack((tss, sys))
     dia = np.column_stack((tsd, dia))
 

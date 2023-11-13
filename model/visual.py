@@ -37,6 +37,13 @@ def plot_quad(seg_name, sig, fs, raw, filt, d1, d2):
 
     plt.show()
 
+
+def plot_extracted_data(x, y):
+
+    plt.plot(x, y, color='black')
+    plt.show()
+
+
 def plot_abp_ppg(segment_name, abp, ppg, fs):
     """
     Plot the simultaneous PPG and ABP graphs
