@@ -232,10 +232,10 @@ def beat_fidp_detection(data, fs, seg_name):
 
 def ct_detection(fidp, fs):
     # CT = Systolic peak - Onset
-    # ct = np.zeros(len(fidp["pks"]))
-    ts = np.zeros(len(fidp["pks"]), dtype=int)
-    values = np.zeros(len(fidp["pks"]), dtype=float)
-    for beat_no in range(len(fidp["pks"])):
+    length = min(len(fidp["pks"]), len(fidp["ons"]))
+    ts = np.zeros(length, dtype=int)
+    values = np.zeros(length, dtype=float)
+    for beat_no in range(length):
         ts[beat_no] = fidp["pks"][beat_no]
         values[beat_no] = (fidp["pks"][beat_no] - fidp["ons"][beat_no]) / fs
     return np.column_stack((ts, values))
@@ -243,10 +243,12 @@ def ct_detection(fidp, fs):
 
 def agi_detection(fidp, fs):
     # (From second derivative) Aging Index = b - c - d - e
-    ts = np.zeros(len(fidp["pks"]), dtype=int)
-    values = np.zeros(len(fidp["pks"]), dtype=float)
-    for beat_no in range(len(fidp["bmag2d"])):
-        ts[beat_no] = fidp["bmag2d"][beat_no]
+    length = min(len(fidp["bmag2d"]), len(fidp["cmag2d"]),
+                 len(fidp["dmag2d"]), len(fidp["emag2d"]))
+    ts = np.zeros(length, dtype=int)
+    values = np.zeros(length, dtype=float)
+    for beat_no in range(length):
+        ts[beat_no] = fidp["a2d"][beat_no]
         values[beat_no] = (fidp["bmag2d"][beat_no] - fidp["cmag2d"][beat_no]
                            - fidp["dmag2d"][beat_no] - fidp["emag2d"][beat_no]) / fs
     return np.column_stack((ts, values))
@@ -254,19 +256,19 @@ def agi_detection(fidp, fs):
 
 def sys_dia_detection(fidp, data):
     # (From filtered data) Systolic BP = pks; Diastolic BP = dia
-    tss = np.zeros(len(fidp["pks"]), dtype=int)
-    tsd = np.zeros(len(fidp["dia"]), dtype=int)
-    sys = np.zeros(len(fidp["pks"]), dtype=float)
-    dia = np.zeros(len(fidp["dia"]), dtype=float)
-    for beat_no in range(len(fidp["pks"])):
+    length = min(len(fidp["pks"]), len(fidp["dia"]))
+    tss = np.zeros(length, dtype=int)
+    tsd = np.zeros(length, dtype=int)
+    sys = np.zeros(length, dtype=float)
+    dia = np.zeros(length, dtype=float)
+    for beat_no in range(length):
         tss[beat_no] = fidp["pks"][beat_no]
         sys[beat_no] = data[int(tss[beat_no])]
-        # TODO try/catch for longer signal (pks/dia) -> index out of bounds
         tsd[beat_no] = fidp["dia"][beat_no]
         dia[beat_no] = data[int(tsd[beat_no])]
 
-    plot_extracted_data(tss, sys)
-    plot_extracted_data(tsd, dia)
+    # plot_extracted_data(tss, sys)
+    # plot_extracted_data(tsd, dia)
 
     sys = np.column_stack((tss, sys))
     dia = np.column_stack((tsd, dia))
