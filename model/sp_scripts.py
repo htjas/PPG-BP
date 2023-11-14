@@ -1,7 +1,7 @@
 import os
 import pathlib
 import shutil
-
+import statistics
 import matplotlib.pyplot as plt
 import pandas as pd
 import pylab as pl
@@ -136,6 +136,8 @@ def process_ppg_data(path, fs):
     filenames = os.listdir(path)
     filenames.sort()
 
+    median_agi = []
+
     i = 1
     for filename in filenames:
         sig, seg_name, end = split_filename(filename)
@@ -151,23 +153,28 @@ def process_ppg_data(path, fs):
 
         ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
 
-        d1, d2 = savgol_derivatives(ppg_filt)
-
-        plot_quad(seg_name, sig, fs, ppg, ppg_filt, d1, d2)
+        # d1, d2 = savgol_derivatives(ppg_filt)
+        #
+        # plot_quad(seg_name, sig, fs, ppg, ppg_filt, d1, d2)
 
         ppg_beats, alg, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
 
-        ct = ct_detection(ppg_fidp, fs)
+        agi = agi_detection(ppg_fidp, fs)
+
+        median_agi, mean_agi = calculate_median_mean(agi, fs, 30)
 
         i += 1
-
         x = input()
+    return median_agi
 
 
 def process_bp_data(path, fs):
     path = os.path.abspath(os.getcwd()) + path
     filenames = os.listdir(path)
     filenames.sort()
+
+    median_sys = []
+    median_dia = []
 
     i = 1
     for filename in filenames:
@@ -184,16 +191,38 @@ def process_bp_data(path, fs):
 
         abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp)
 
-        d1, d2 = savgol_derivatives(abp_filt)
-
-        plot_quad(seg_name, sig, fs, abp, abp_filt, d1, d2)
+        # d1, d2 = savgol_derivatives(abp_filt)
+        #
+        # plot_quad(seg_name, sig, fs, abp, abp_filt, d1, d2)
 
         abp_beats, alg, abp_fidp = beat_fidp_detection(abp_filt, fs, seg_name)
 
         sys, dia = sys_dia_detection(abp_fidp, abp_filt)
 
+        median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
+
+        median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
+
         i += 1
         x = input()
+    return median_sys, median_dia
+
+
+def calculate_median_mean(data, fs, window):
+    values = []
+    median_values = []
+    mean_values = []
+    time_window = window
+    for j in range(len(data)):
+        time_passed = data[j][0] / fs
+        values.append(float(data[j][1]))
+        if time_passed > time_window:
+            median_values.append(statistics.median(values))
+            mean_values.append(statistics.mean(values))
+            values = []
+            time_window = time_window + window
+
+    return median_values, mean_values
 
 
 def beat_fidp_detection(data, fs, seg_name):
@@ -204,19 +233,19 @@ def beat_fidp_detection(data, fs, seg_name):
         beats = pulse_detection(data, 'delineator', t, 'PPG')
         fidp = fiducial_points(data, beats, fs, vis=False)
     except Exception as e:
-        print(f"Delineator error - {e}")
+        # print(f"Delineator error - {e}")
         alg = 'd2max'
         try:
             beats = pulse_detection(data, 'd2max', t, 'PPG')
             fidp = fiducial_points(data, beats, fs, vis=False)
         except Exception as e:
             alg = 'upslopes'
-            print(f"D2Max error - {e}")
+            # print(f"D2Max error - {e}")
             try:
                 beats = pulse_detection(data, 'upslopes', t, 'PPG')
                 fidp = fiducial_points(data, beats, fs, vis=False)
             except Exception as e:
-                print(f"Upslopes error - {e}")
+                # print(f"Upslopes error - {e}")
                 print(f"Fiducials of {seg_name} couldn't be determined - {e}")
                 alg = ''
                 fidp = []
@@ -334,8 +363,8 @@ def pulse_detection(data, algorithm, duration, sig):
     temp_fs = 125
 
     beats = pulse_detect(data, temp_fs, 5, algorithm, duration)
-    if beats.any():
-        print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
+    # if beats.any():
+    #     print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
 
     return beats
 
@@ -352,8 +381,8 @@ def split_filename(filename):
 def main():
     # manual_filter_data('data')
     # process_data('/data/', 62.4725)
-    # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
-    process_bp_data('/usable_bp_data/', 62.4725)
+    agi = process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
+    sys, dia = process_bp_data('/usable_bp_data/', 62.4725)
 
 
 if __name__ == "__main__":
