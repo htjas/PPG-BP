@@ -10,6 +10,25 @@ def plot_wfdb_segment(segment_name, segment_data):
                    time_units='seconds')
 
 
+def plot_trio(seg_name, x1, y1, x2, y2, x3, y3):
+    fig, (ax1, ax2) = plt.subplots(2, 1,
+                                                 sharex=False,
+                                                 sharey=False,
+                                                 figsize=(8, 8))
+    fig.suptitle(f"Segment {seg_name}")
+
+    ax1.scatter(x1, y1, color='black', label='Agi')
+    ax1.set_title("Agi")
+    ax1.set_xlim([0, 1000])
+
+    ax2.scatter(x2, y2, color='red', label='Sys')
+    ax2.scatter(x3, y3, color='blue', label='Dia')
+    ax2.set_title("Sys + Dia")
+    ax2.set_xlim([0, 1000])
+
+    plt.show()
+
+
 def plot_quad(seg_name, sig, fs, raw, filt, d1, d2):
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2,
                                                  sharex=False,
@@ -38,9 +57,12 @@ def plot_quad(seg_name, sig, fs, raw, filt, d1, d2):
     plt.show()
 
 
-def plot_extracted_data(x, y):
-
-    plt.plot(x, y, color='black')
+def plot_extracted_data(seg_name, x1, y1, x2, y2, x3, y3):
+    plt.suptitle(seg_name)
+    plt.scatter(x1, y1, color='black')
+    plt.scatter(x2, y2, color='red')
+    plt.scatter(x3, y3, color='blue')
+    plt.xlim([0, 1000])
     plt.show()
 
 
@@ -100,7 +122,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
                 abp[abp_beats],
                 color='black',
                 marker='o')
-    ax1.set_xlim([0, 60])
+    ax1.set_xlim([0, 5])
     ax1.set_title('ABP with IBIS')
 
     ax2.plot(t, ppg, color='green')
@@ -108,7 +130,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
                 ppg[ppg_beats],
                 color='black',
                 marker='o')
-    ax2.set_xlim([0, 60])
+    ax2.set_xlim([0, 5])
     ax2.set_title('PPG with IBIS')
 
     plt.show()

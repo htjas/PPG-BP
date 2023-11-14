@@ -65,66 +65,57 @@ def manual_filter_data(folder):
     # print(count)
 
 
-def process_data(path, fs):
+def process_data(fs):
     """
-    Method for signal processing abp and bp data
+    Method for signal processing abp and ppg data
     :param fs: Frequency of sampling
-    :param path: name of folder containing abp and ppg data
     """
-    path = os.path.abspath(os.getcwd()) + path
-    filenames = os.listdir(path)
+    abs_path = os.path.abspath(os.getcwd())
+    bp_path = abs_path + '/usable_bp_data'
+    ppg_path = abs_path + '/usable_ppg_fidp_data'
+    filenames = os.listdir(bp_path)
     filenames.sort()
 
     i = 1
     for filename in filenames:
-        if "ppg" in filename:
-            break
-
         sig, seg_name, end = split_filename(filename)
 
-        print(f"File {i} / {round(len(filenames) / 2)} - {filename}")
-        df = pd.read_csv(f"{path}abp_{seg_name}.{end}")
+        print(f"Segment {i} / {len(filenames)} - {seg_name}")
+        df = pd.read_csv(f"{bp_path}/abp_{seg_name}.{end}")
         values = df.values
         abp = values[:, 0]
 
-        df = pd.read_csv(f"{path}ppg_{seg_name}.{end}")
+        df = pd.read_csv(f"{ppg_path}/ppg-fidp_{seg_name}.{end}")
         values = df.values
         ppg = values[:, 0]
-
-        # Raw plot
-        plot_abp_ppg(seg_name, abp, ppg, fs)
 
         # Filtering
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
 
-        ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
         abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp)
+        ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
 
-        # Filtered and Derivative plot
-        plot_abp_ppg(seg_name + " (filtered)",
-                     abp_filt,
-                     ppg_filt,
-                     fs)
+        ppg_beats, alg, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
+        abp_beats, alg, abp_fidp = beat_fidp_detection(abp_filt, fs, seg_name)
 
-        # Savitzky-Golay Derivation
-        d1, d2 = savgol_derivatives(ppg_filt)
+        plot_abp_ppg_with_pulse(seg_name, abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
 
-        plot_abp_ppg(seg_name + " (PPG D1)",
-                     abp_filt,
-                     d1,
-                     fs)
+        ppg_beats, _ = sp.find_peaks(ppg_filt)
+        abp_beats, _ = sp.find_peaks(abp_filt)
 
-        plot_abp_ppg(seg_name + " (PPG D2)",
-                     abp_filt,
-                     d2,
-                     fs)
+        plot_abp_ppg_with_pulse(seg_name, abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
 
-        # # Beats + FIDP from PPG
-        # ppg_beats, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
+        agi, ts, val = agi_detection(ppg_fidp, fs)
+        sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
+
+        plot_trio(seg_name, ts, val, tss, sysv, tsd, diav)
+
+        median_agi, mean_agi = calculate_median_mean(agi, fs, 30)
+        median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
+        median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
 
         print("---")
-
         # Move one file at a time
         x = input("> next")
 
@@ -280,7 +271,7 @@ def agi_detection(fidp, fs):
         ts[beat_no] = fidp["a2d"][beat_no]
         values[beat_no] = (fidp["bmag2d"][beat_no] - fidp["cmag2d"][beat_no]
                            - fidp["dmag2d"][beat_no] - fidp["emag2d"][beat_no]) / fs
-    return np.column_stack((ts, values))
+    return np.column_stack((ts, values)), ts, values
 
 
 def sys_dia_detection(fidp, data):
@@ -288,21 +279,21 @@ def sys_dia_detection(fidp, data):
     length = min(len(fidp["pks"]), len(fidp["dia"]))
     tss = np.zeros(length, dtype=int)
     tsd = np.zeros(length, dtype=int)
-    sys = np.zeros(length, dtype=float)
-    dia = np.zeros(length, dtype=float)
+    sysv = np.zeros(length, dtype=float)
+    diav = np.zeros(length, dtype=float)
     for beat_no in range(length):
         tss[beat_no] = fidp["pks"][beat_no]
-        sys[beat_no] = data[int(tss[beat_no])]
+        sysv[beat_no] = data[int(tss[beat_no])]
         tsd[beat_no] = fidp["dia"][beat_no]
-        dia[beat_no] = data[int(tsd[beat_no])]
+        diav[beat_no] = data[int(tsd[beat_no])]
 
     # plot_extracted_data(tss, sys)
     # plot_extracted_data(tsd, dia)
 
-    sys = np.column_stack((tss, sys))
-    dia = np.column_stack((tsd, dia))
+    sys = np.column_stack((tss, sysv))
+    dia = np.column_stack((tsd, diav))
 
-    return sys, dia
+    return sys, dia, tss, sysv, tsd, diav
 
 
 def filter_data(lpf, hpf, fs, data):
@@ -380,9 +371,9 @@ def split_filename(filename):
 
 def main():
     # manual_filter_data('data')
-    # process_data('/data/', 62.4725)
-    agi = process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
-    sys, dia = process_bp_data('/usable_bp_data/', 62.4725)
+    process_data(62.4725)
+    # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
+    # process_bp_data('/usable_bp_data/', 62.4725)
 
 
 if __name__ == "__main__":
