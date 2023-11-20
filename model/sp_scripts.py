@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import pylab as pl
 import scipy as sp
+import wfdb.processing
+import pprint
+
 from visual import *
 from methods import *
 from init_scripts import *
@@ -99,21 +102,60 @@ def process_data(fs):
         ppg_beats, alg, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
         abp_beats, alg, abp_fidp = beat_fidp_detection(abp_filt, fs, seg_name)
 
-        plot_abp_ppg_with_pulse(seg_name, abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+        # TODO
+        # peaks = sp.find_peaks(ppg)
+        # values = ppg[peaks]
+        # new_peaks = find_highly_contrasting_values(values)
+        #  -- based on indexes of contrasting values adjust peaks
+        #  -- iterate for as long as needed
+        # calculate_heart_rate(new_peaks)
 
-        ppg_beats, _ = sp.find_peaks(ppg_filt)
-        abp_beats, _ = sp.find_peaks(abp_filt)
+        abp_beat_interval = len(abp_filt) / len(abp_beats)
+        print(abp_beat_interval)
 
-        plot_abp_ppg_with_pulse(seg_name, abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+        ppg_beat_interval = len(ppg_filt) / len(ppg_beats)
+        print(ppg_beat_interval)
 
-        agi, ts, val = agi_detection(ppg_fidp, fs)
-        sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
+        print(f"{len(abp_beats)} beats found, Heart Rate - {len(abp_beats) / (len(abp_filt)/fs) * 60}")
+        print(f"{len(ppg_beats)} beats found, Heart Rate - {len(ppg_beats) / (len(ppg_filt)/fs) * 60}")
 
-        plot_trio(seg_name, ts, val, tss, sysv, tsd, diav)
+        plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
 
-        median_agi, mean_agi = calculate_median_mean(agi, fs, 30)
-        median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
-        median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
+        ppg_beats, _ = sp.find_peaks(ppg_filt, distance=ppg_beat_interval/2)
+        abp_beats, _ = sp.find_peaks(abp_filt, distance=abp_beat_interval/2)
+
+        abp_beat_interval = len(abp_filt) / len(abp_beats)
+        print(abp_beat_interval)
+
+        ppg_beat_interval = len(ppg_filt) / len(ppg_beats)
+        print(ppg_beat_interval)
+
+        print(f"{len(abp_beats)} beats found, Heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}")
+        print(f"{len(ppg_beats)} beats found, Heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}")
+
+        plot_abp_ppg_with_pulse(seg_name + ' (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+
+        ppg_hard, ppg_soft = wfdb.processing.find_peaks(ppg_filt)
+        abp_hard, abp_soft = wfdb.processing.find_peaks(abp_filt)
+
+        # plot_abp_ppg_with_pulse(seg_name + ' (wfdb.find_peaks)', abp_filt, abp_hard, ppg_filt, ppg_hard, fs)
+
+        abp_d1, abp_d2 = savgol_derivatives(abp_filt)
+        ppg_d1, ppg_d2 = savgol_derivatives(ppg_filt)
+
+        ppg_beats, _ = sp.find_peaks(abp_d1)
+        abp_beats, _ = sp.find_peaks(ppg_d1)
+
+        # plot_abp_ppg_with_pulse(seg_name + ' (wfdb D1)', abp_d1, abp_beats, ppg_d1, ppg_beats, fs)
+
+        # agi, ts, val = agi_detection(ppg_fidp, fs)
+        # sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
+        #
+        # plot_trio(seg_name, ts, val, tss, sysv, tsd, diav)
+        #
+        # median_agi, mean_agi = calculate_median_mean(agi, fs, 30)
+        # median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
+        # median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
 
         print("---")
         # Move one file at a time

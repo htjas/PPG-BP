@@ -77,7 +77,7 @@ def filter_records(records, database_name):
                 matching_recs['seg_name'].append(segment)
                 matching_recs['length'].append(seg_length)
                 matching_recs['dir'].append(record_dir)
-                print(' (met requirements)')
+                print(f" (met requirements)  Segment length - {seg_length/ 60:.1f}")
                 # # Since we only need one segment per record break out of loop
                 # break
             else:
@@ -219,3 +219,13 @@ def check_if_faulty(data):
             print(value)
             print("Segment contains faulty values")
             return True
+
+
+def main():
+    records = load_records('mimic4wdb/0.1.0')
+    matching_records = filter_records(records, 'mimic4wdb/0.1.0')
+    print(len(matching_records))
+
+
+if __name__ == "__main__":
+    main()

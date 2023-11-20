@@ -122,7 +122,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
                 abp[abp_beats],
                 color='black',
                 marker='o')
-    ax1.set_xlim([0, 5])
+    ax1.set_xlim([0, 20])
     ax1.set_title('ABP with IBIS')
 
     ax2.plot(t, ppg, color='green')
@@ -130,7 +130,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
                 ppg[ppg_beats],
                 color='black',
                 marker='o')
-    ax2.set_xlim([0, 5])
+    ax2.set_xlim([0, 20])
     ax2.set_title('PPG with IBIS')
 
     plt.show()
