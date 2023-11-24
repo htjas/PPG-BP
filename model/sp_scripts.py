@@ -70,7 +70,7 @@ def manual_filter_data(folder):
 
 def process_data(fs):
     """
-    Method for signal processing abp and ppg data
+    Main method for signal processing abp and ppg data
     :param fs: Frequency of sampling
     """
     abs_path = os.path.abspath(os.getcwd())
@@ -81,11 +81,7 @@ def process_data(fs):
 
     i = 1
     for filename in filenames:
-        # if i != 9:
-        #     i += 1
-        #     continue
         sig, seg_name, end = split_filename(filename)
-
         print(f"Segment {i} / {len(filenames)} - {seg_name}")
         df = pd.read_csv(f"{bp_path}/abp_{seg_name}.{end}")
         values = df.values
@@ -98,57 +94,30 @@ def process_data(fs):
         # Filtering
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
-
         abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp)
         ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
 
+        # First iteration of beat finding (MIMIC default methods)
         abp_beats, ppg_beats = get_optimal_beats_lists(abp_filt, ppg_filt, fs)
-
-        # TODO
-        # peaks = sp.find_peaks(ppg)
-        # values = ppg[peaks]
-        # new_peaks = find_highly_contrasting_values(values)
-        #  -- based on indexes of contrasting values adjust peaks
-        #  -- iterate for as long as needed
-        # calculate_heart_rate(new_peaks)
-
         abp_beat_interval = len(abp_filt) / len(abp_beats)
         ppg_beat_interval = len(ppg_filt) / len(ppg_beats)
+        # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
 
-        print(
-            f"{len(abp_beats)} beats found, Heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}, Beat Interval - {abp_beat_interval}")
-        print(
-            f"{len(ppg_beats)} beats found, Heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}, Beat Interval - {ppg_beat_interval}")
-
-        plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
-
-        ppg_beats, _ = sp.find_peaks(ppg_filt, distance=ppg_beat_interval*.75)
-        abp_beats, _ = sp.find_peaks(abp_filt, distance=abp_beat_interval*.75)
-
-        abp_beat_interval = len(abp_filt) / len(abp_beats)
-
-        ppg_beat_interval = len(ppg_filt) / len(ppg_beats)
-
-        print(
-            f"{len(abp_beats)} beats found, Heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}, Beat Interval - {abp_beat_interval}")
-        print(
-            f"{len(ppg_beats)} beats found, Heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}, Beat Interval - {ppg_beat_interval}")
-
+        # Second iteration of beat finding (SP manual methods)
+        abp_beats, abp_properties = sp.find_peaks(abp_filt, distance=abp_beat_interval*.75)
+        ppg_beats, ppg_properties = sp.find_peaks(ppg_filt, distance=ppg_beat_interval*.75)
         plot_abp_ppg_with_pulse(seg_name + ' (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+        print(f"ABP heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}")
+        print(f"PPG heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}")
 
-        ppg_hard, ppg_soft = wfdb.processing.find_peaks(ppg_filt)
-        abp_hard, abp_soft = wfdb.processing.find_peaks(abp_filt)
-
-        # plot_abp_ppg_with_pulse(seg_name + ' (wfdb.find_peaks)', abp_filt, abp_hard, ppg_filt, ppg_hard, fs)
-
-        abp_d1, abp_d2 = savgol_derivatives(abp_filt)
-        ppg_d1, ppg_d2 = savgol_derivatives(ppg_filt)
-
-        ppg_beats, _ = sp.find_peaks(abp_d1)
-        abp_beats, _ = sp.find_peaks(ppg_d1)
-
+        # abp_d1, abp_d2 = savgol_derivatives(abp_filt)
+        # ppg_d1, ppg_d2 = savgol_derivatives(ppg_filt)
+        #
+        # ppg_beats, _ = sp.find_peaks(abp_d1)
+        # abp_beats, _ = sp.find_peaks(ppg_d1)
+        #
         # plot_abp_ppg_with_pulse(seg_name + ' (wfdb D1)', abp_d1, abp_beats, ppg_d1, ppg_beats, fs)
-
+        #
         # agi, ts, val = agi_detection(ppg_fidp, fs)
         # sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
         #
@@ -160,7 +129,7 @@ def process_data(fs):
 
         print("---")
         # Move one file at a time
-        x = input("> next")
+        # x = input("> next")
 
         i += 1
 
@@ -231,7 +200,7 @@ def process_bp_data(path, fs):
 
         abp_beats, alg, abp_fidp = beat_fidp_detection(abp_filt, fs, seg_name)
 
-        sys, dia = sys_dia_detection(abp_fidp, abp_filt)
+        sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
 
         median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
 
@@ -397,16 +366,20 @@ def pulse_detection(data, algorithm, duration, sig):
     temp_fs = 125
 
     beats = pulse_detect(data, temp_fs, 5, algorithm, duration)
-    if beats.any():
-        print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
+    # if beats.any():
+    #     print(f"Detected {len(beats)} beats in the {sig} signal using the {algorithm} algorithm")
 
     return beats
 
 
 def get_optimal_beats_lists(abp, ppg, fs):
-    abp_opt = []
-    ppg_opt = []
-
+    """
+    Signal processing script for examining which default beat detection algorithm is the most efficient
+    :param abp: List of ABP data
+    :param ppg: List of PPG data
+    :param fs: Sampling frequency
+    :return: Lists of optimally detected ABP and PPG pulses
+    """
     abp_beats1 = pulse_detection(abp, 'd2max', len(abp) / fs, 'abp')
     ppg_beats1 = pulse_detection(ppg, 'd2max', len(ppg) / fs, 'ppg')
     abp_beats2 = pulse_detection(abp, 'upslopes', len(abp) / fs, 'abp')
@@ -421,16 +394,12 @@ def get_optimal_beats_lists(abp, ppg, fs):
     sorted_avg = sorted([avg1, avg2, avg3])
     diff_avg12 = sorted_avg[1] - sorted_avg[0]
     diff_avg23 = sorted_avg[2] - sorted_avg[1]
-    print(sorted_avg)
-    print(diff_avg12, diff_avg23)
 
     outlier = None
     if diff_avg23 > diff_avg12 * 2:
         outlier = sorted_avg[2]
-        print('Outlier ', outlier)
     elif diff_avg12 > diff_avg23 * 2:
         outlier = sorted_avg[0]
-        print('Outlier ', outlier)
 
     diff1 = abs(len(abp_beats1) - len(ppg_beats1))
     diff2 = abs(len(abp_beats2) - len(ppg_beats2))
@@ -441,18 +410,9 @@ def get_optimal_beats_lists(abp, ppg, fs):
     diffper3 = diff3 / avg3 * 100
 
     if outlier is None:
-        print(diffper1, diffper2, diffper3)
-        smallest_diffper = min(diffper1, diffper2, diffper3)
-
-        if smallest_diffper == diffper1:
-            abp_opt = abp_beats1
-            ppg_opt = ppg_beats1
-        elif smallest_diffper == diffper2:
-            abp_opt = abp_beats2
-            ppg_opt = ppg_beats2
-        elif smallest_diffper == diffper3:
-            abp_opt = abp_beats3
-            ppg_opt = ppg_beats3
+        abp_opt, ppg_opt = get_best_beats_from_diffper(diffper1, diffper2, diffper3,
+                                                       abp_beats1, abp_beats2, abp_beats3,
+                                                       ppg_beats1, ppg_beats2, ppg_beats3)
     else:
         if outlier == avg1:
             diffper1 = 100
@@ -460,19 +420,30 @@ def get_optimal_beats_lists(abp, ppg, fs):
             diffper2 = 100
         elif outlier == avg3:
             diffper3 = 100
+        abp_opt, ppg_opt = get_best_beats_from_diffper(diffper1, diffper2, diffper3,
+                                                       abp_beats1, abp_beats2, abp_beats3,
+                                                       ppg_beats1, ppg_beats2, ppg_beats3)
 
-        print(diffper1, diffper2, diffper3)
-        smallest_diffper = min(diffper1, diffper2, diffper3)
+    return abp_opt, ppg_opt
 
-        if smallest_diffper == diffper1:
-            abp_opt = abp_beats1
-            ppg_opt = ppg_beats1
-        elif smallest_diffper == diffper2:
-            abp_opt = abp_beats2
-            ppg_opt = ppg_beats2
-        elif smallest_diffper == diffper3:
-            abp_opt = abp_beats3
-            ppg_opt = ppg_beats3
+
+def get_best_beats_from_diffper(diffper1, diffper2, diffper3,
+                                abp_beats1, abp_beats2, abp_beats3,
+                                ppg_beats1, ppg_beats2, ppg_beats3):
+    smallest_diffper = min(diffper1, diffper2, diffper3)
+
+    abp_opt = []
+    ppg_opt = []
+
+    if smallest_diffper == diffper1:
+        abp_opt = abp_beats1
+        ppg_opt = ppg_beats1
+    elif smallest_diffper == diffper2:
+        abp_opt = abp_beats2
+        ppg_opt = ppg_beats2
+    elif smallest_diffper == diffper3:
+        abp_opt = abp_beats3
+        ppg_opt = ppg_beats3
 
     return abp_opt, ppg_opt
 
