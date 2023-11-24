@@ -1130,9 +1130,7 @@ def fiducial_points(x, pks, fs, vis):
         stop = ons[i + 1]
         ibi_portion = x[start:stop]
         ibi_1d_portion = d1x[start:stop]
-        low_stop = np.where(m1d < stop)
-        high_start = np.where(m1d > start)
-        ind_m1d, = np.intersect1d(low_stop, high_start)
+        ind_m1d, = np.intersect1d(np.where(m1d < stop), np.where(m1d > start))
         ind_m1d = m1d[ind_m1d] - start
         # plt.figure()
         # plt.plot(ibi_portion/np.max(ibi_portion))
@@ -1206,7 +1204,7 @@ def fiducial_points(x, pks, fs, vis):
                     ind_c, = np.where(ind_c_aux > ind_b)
                     ind_c = ind_c_aux[ind_c]
                     if len(ind_c) > 1:
-                        ind_c = ind_c[0]
+                        ind_c = [ind_c[0]]
                     c2d = np.append(c2d, ind_c + start)
                     # plt.scatter(ind_c, ibi_2d_portion[ind_c]/np.max(ibi_2d_portion), marker = 'o')
             # d point:
@@ -1302,11 +1300,11 @@ def fiducial_points(x, pks, fs, vis):
     cmag2d = np.zeros(len(b2d))
     dmag2d = np.zeros(len(b2d))
     emag2d = np.zeros(len(b2d))
-    for beat_no in range(0, len(b2d)):
-        bmag2d[beat_no] = d2x[b2d[beat_no]] / d2x[a2d[beat_no]]
-        cmag2d[beat_no] = d2x[c2d[beat_no]] / d2x[a2d[beat_no]]
-        dmag2d[beat_no] = d2x[d2d[beat_no]] / d2x[a2d[beat_no]]
-        emag2d[beat_no] = d2x[e2d[beat_no]] / d2x[a2d[beat_no]]
+    # for beat_no in range(0, len(d2d)):
+    #     bmag2d[beat_no] = d2x[b2d[beat_no]] / d2x[a2d[beat_no]]
+    #     cmag2d[beat_no] = d2x[c2d[beat_no]] / d2x[a2d[beat_no]]
+    #     dmag2d[beat_no] = d2x[d2d[beat_no]] / d2x[a2d[beat_no]]
+    #     emag2d[beat_no] = d2x[e2d[beat_no]] / d2x[a2d[beat_no]]
 
     # Added by PC: Refine the list of fiducial points to only include those corresponding to beats for which a full set of points is available
     off = ons[1:]
