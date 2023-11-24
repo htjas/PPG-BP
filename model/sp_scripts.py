@@ -104,11 +104,13 @@ def process_data(fs):
         # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
 
         # Second iteration of beat finding (SP manual methods)
-        abp_beats, abp_properties = sp.find_peaks(abp_filt, distance=abp_beat_interval*.75)
-        ppg_beats, ppg_properties = sp.find_peaks(ppg_filt, distance=ppg_beat_interval*.75)
+        abp_beats, _ = sp.find_peaks(abp_filt, distance=abp_beat_interval * .75)
+        ppg_beats, _ = sp.find_peaks(ppg_filt, distance=ppg_beat_interval * .75)
         plot_abp_ppg_with_pulse(seg_name + ' (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
         print(f"ABP heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}")
         print(f"PPG heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}")
+
+        delay = 18  # = 288 ms
 
         # abp_d1, abp_d2 = savgol_derivatives(abp_filt)
         # ppg_d1, ppg_d2 = savgol_derivatives(ppg_filt)
