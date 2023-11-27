@@ -81,6 +81,9 @@ def process_data(fs):
 
     i = 1
     for filename in filenames:
+        # if i < 11:
+        #     i += 1
+        #     continue
         sig, seg_name, end = split_filename(filename)
         print(f"Segment {i} / {len(filenames)} - {seg_name}")
         df = pd.read_csv(f"{bp_path}/abp_{seg_name}.{end}")
@@ -104,16 +107,21 @@ def process_data(fs):
         # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
 
         # Second iteration of beat finding (SP manual methods)
-        abp_beats, _ = sp.find_peaks(abp_filt, distance=abp_beat_interval * .75)
-        ppg_beats, _ = sp.find_peaks(ppg_filt, distance=ppg_beat_interval * .75)
-        # plot_abp_ppg_with_pulse(seg_name + ' (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+        abp_beats, _ = sp.find_peaks(abp_filt, distance=abp_beat_interval * .75, prominence=10)
+        ppg_beats, _ = sp.find_peaks(ppg_filt, distance=ppg_beat_interval * .75, prominence=0.000)
+        # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+
+        abp_dips, _ = sp.find_peaks(-abp_filt, distance=abp_beat_interval * .75, prominence=10)
+        ppg_dips, _ = sp.find_peaks(-ppg_filt, distance=ppg_beat_interval * .75, prominence=0.001)
+        # plot_abp_ppg_with_pulse(seg_name + ' ONSETS (sp.find_peaks)', abp_filt, abp_dips, ppg_filt, ppg_dips, fs)
+
         print(f"ABP heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}")
         print(f"PPG heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}")
 
         delay = 18  # = 288 ms
 
-        abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=True)
-        ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True)
+        abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=True, header='ABP of ' + seg_name)
+        ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True, header='PPG of ' + seg_name)
 
         # abp_d1, abp_d2 = savgol_derivatives(abp_filt)
         # ppg_d1, ppg_d2 = savgol_derivatives(ppg_filt)
@@ -239,19 +247,19 @@ def beat_fidp_detection(data, fs, seg_name):
     alg = 'delineator'
     try:
         beats = pulse_detection(data, 'delineator', t, 'PPG')
-        fidp = fiducial_points(data, beats, fs, vis=False)
+        fidp = fiducial_points(data, beats, fs, vis=False, header=seg_name)
     except Exception as e:
         # print(f"Delineator error - {e}")
         alg = 'd2max'
         try:
             beats = pulse_detection(data, 'd2max', t, 'PPG')
-            fidp = fiducial_points(data, beats, fs, vis=False)
+            fidp = fiducial_points(data, beats, fs, vis=False, header=seg_name)
         except Exception as e:
             alg = 'upslopes'
             # print(f"D2Max error - {e}")
             try:
                 beats = pulse_detection(data, 'upslopes', t, 'PPG')
-                fidp = fiducial_points(data, beats, fs, vis=False)
+                fidp = fiducial_points(data, beats, fs, vis=False, header=seg_name)
             except Exception as e:
                 # print(f"Upslopes error - {e}")
                 print(f"Fiducials of {seg_name} couldn't be determined - {e}")

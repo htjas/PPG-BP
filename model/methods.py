@@ -992,7 +992,7 @@ def delineator(x, fs):
     return ibis
 
 
-def fiducial_points(x, pks, fs, vis):
+def fiducial_points(x, pks, fs, vis, header):
     """
     Description: Pulse detection and correction from pulsatile signals
     Inputs:  x, array with pulsatile signal [user defined units]
@@ -1165,6 +1165,8 @@ def fiducial_points(x, pks, fs, vis):
         # plt.plot(ibi_2d_portion/np.max(ibi_2d_portion))
         aux_m2d_pks, _ = sp.find_peaks(ibi_2d_portion)
         aux_m2d_ons, _ = sp.find_peaks(-ibi_2d_portion)
+        if len(aux_m2d_pks) == 0 or len(aux_m2d_ons) == 0:
+            continue
         # a point:
         ind_a, = np.where(ibi_2d_portion[aux_m2d_pks] == np.max(ibi_2d_portion[aux_m2d_pks]))
         ind_a = aux_m2d_pks[ind_a]
@@ -1317,7 +1319,7 @@ def fiducial_points(x, pks, fs, vis):
     # Visualise results
     if vis == True:
         fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, sharex=True, sharey=False, figsize=(10, 10))
-        fig.suptitle('Fiducial points')
+        fig.suptitle(f"Fiducial points - {header}")
 
         ax1.plot(x, color='black')
         ax1.scatter(pks, x[pks.astype(int)], color='orange', label='pks')
@@ -1326,12 +1328,12 @@ def fiducial_points(x, pks, fs, vis):
         ax1.scatter(dia, x[dia.astype(int)], color='yellow', label='dia')
         ax1.scatter(dic, x[dic.astype(int)], color='blue', label='dic')
         ax1.scatter(tip, x[tip.astype(int)], color='purple', label='dic')
-        ax1.legend()
+        ax1.legend(loc='center right')
         ax1.set_ylabel('x')
 
         ax2.plot(d1x, color='black')
         ax2.scatter(m1d, d1x[m1d.astype(int)], color='orange', label='m1d')
-        ax2.legend()
+        ax2.legend(loc='center right')
         ax2.set_ylabel('d1x')
 
         ax3.plot(d2x, color='black')
@@ -1340,15 +1342,15 @@ def fiducial_points(x, pks, fs, vis):
         ax3.scatter(c2d, d2x[c2d.astype(int)], color='yellow', label='c')
         ax3.scatter(d2d, d2x[d2d.astype(int)], color='blue', label='d')
         ax3.scatter(e2d, d2x[e2d.astype(int)], color='purple', label='e')
-        ax3.legend()
+        ax3.legend(loc='center right')
         ax3.set_ylabel('d2x')
 
         ax4.plot(d3x, color='black')
         ax4.scatter(p1p, d3x[p1p.astype(int)], color='orange', label='p1')
         ax4.scatter(p2p, d3x[p2p.astype(int)], color='green', label='p2')
-        ax4.legend()
+        ax4.legend(loc='center right')
         ax4.set_ylabel('d3x')
-        ax4.set_xlim([10000, 10500])
+        ax4.set_xlim([25500, 25700])
 
         plt.subplots_adjust(left=0.1,
                             bottom=0.1,
