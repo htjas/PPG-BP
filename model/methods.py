@@ -1130,7 +1130,11 @@ def fiducial_points(x, pks, fs, vis, header):
         stop = ons[i + 1]
         ibi_portion = x[start:stop]
         ibi_1d_portion = d1x[start:stop]
-        ind_m1d, = np.intersect1d(np.where(m1d < stop), np.where(m1d > start))
+        low_stop = np.where(m1d < stop)
+        high_start = np.where(m1d > start)
+        if np.intersect1d(low_stop, high_start).size == 0:
+            continue
+        ind_m1d, = np.intersect1d(low_stop, high_start)
         ind_m1d = m1d[ind_m1d] - start
         # plt.figure()
         # plt.plot(ibi_portion/np.max(ibi_portion))
@@ -1180,6 +1184,8 @@ def fiducial_points(x, pks, fs, vis, header):
                 b2d = np.append(b2d, ind_b + start)
                 # plt.scatter(ind_b, ibi_2d_portion[ind_b]/np.max(ibi_2d_portion), marker = 'o')
         # e point:
+        if len(ind_m1d) == 0:
+            continue
         ind_e, = np.where(aux_m2d_pks > ind_m1d - start)
         aux_m2d_pks = aux_m2d_pks[ind_e]
         ind_e, = np.where(aux_m2d_pks < 0.6 * len(ibi_2d_portion))
