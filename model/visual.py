@@ -118,26 +118,26 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
 
     ax1.plot(t, abp, color='red')
-    # ax1.scatter(t[0] + abp_beats / fs,
-    #             abp[abp_beats],
-    #             color='black',
-    #             marker='o')
+    ax1.scatter(t[0] + abp_beats / fs,
+                abp[abp_beats],
+                color='black',
+                marker='o')
     # Dotted lines for synchronisation purposes
-    # y_limits = ax1.get_ylim()
-    # for beat in abp_beats:
-    #     ax1.plot([t[beat], t[beat]], [y_limits[0], abp[beat]], color='red', linestyle='--')
+    y_limits = ax1.get_ylim()
+    for beat in abp_beats:
+        ax1.plot([t[beat], t[beat]], [y_limits[0], abp[beat]], color='red', linestyle='--')
     # ax1.set_xlim([260, 280])
     ax1.set_title('ABP with IBIS')
 
     ax2.plot(t, ppg, color='green')
-    # ax2.scatter(t[0] + ppg_beats / fs,
-    #             ppg[ppg_beats],
-    #             color='black',
-    #             marker='o')
+    ax2.scatter(t[0] + ppg_beats / fs,
+                ppg[ppg_beats],
+                color='black',
+                marker='o')
     # Dotted lines for synchronisation purposes
-    # y_limits = ax2.get_ylim()
-    # for beat in ppg_beats:
-    #     ax2.plot([t[beat], t[beat]], [y_limits[1], ppg[beat]], color='green', linestyle='--')
+    y_limits = ax2.get_ylim()
+    for beat in ppg_beats:
+        ax2.plot([t[beat], t[beat]], [y_limits[1], ppg[beat]], color='green', linestyle='--')
     # ax2.set_xlim([260, 280])
     ax2.set_title('PPG with IBIS')
 

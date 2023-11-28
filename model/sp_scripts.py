@@ -99,22 +99,29 @@ def process_data(fs):
         # Filtering
 
         # Gaussian filter
-        # abp_smooth = gaussian_filter1d(abp, 5)
-        # ppg_smooth = gaussian_filter1d(ppg, 5)
-        # plot_abp_ppg(seg_name, abp_smooth, ppg_smooth, fs)
+        abp_smooth = gaussian_filter1d(abp, 5)
+        ppg_smooth = gaussian_filter1d(ppg, 5)
+        plot_abp_ppg(seg_name + ' gauss smooth', abp_smooth, ppg_smooth, fs)
 
         # Butterworth filter
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
-        abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp)
-        ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
+        abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp_smooth)
+        ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg_smooth)
+        plot_abp_ppg(seg_name + ' butt filtered', abp_filt, ppg_filt, fs)
 
+        # Whiskers filter
         abp_filt = whiskers_filter(abp_filt)
         ppg_filt = whiskers_filter(ppg_filt)
+        plot_abp_ppg(seg_name + ' whiskers filtered', abp_filt, ppg_filt, fs)
 
+        # Gaussian filter
+        abp_smooth = gaussian_filter1d(abp_filt, 5)
+        ppg_smooth = gaussian_filter1d(ppg_filt, 5)
+        plot_abp_ppg(seg_name + ' gauss smooth', abp_smooth, ppg_smooth, fs)
 
         # First iteration of beat finding (MIMIC default methods)
-        abp_beats, ppg_beats = get_optimal_beats_lists(abp_filt, ppg_filt, fs)
+        abp_beats, ppg_beats = get_optimal_beats_lists(abp_smooth, ppg_smooth, fs)
         abp_beat_interval = len(abp_filt) / len(abp_beats)
         ppg_beat_interval = len(ppg_filt) / len(ppg_beats)
         # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
@@ -122,9 +129,9 @@ def process_data(fs):
         # Second iteration of beat finding (SP manual methods)
         abp_beats, _ = sp.find_peaks(abp_filt, distance=abp_beat_interval * .75, prominence=10)
         ppg_beats, _ = sp.find_peaks(ppg_filt, distance=ppg_beat_interval * .75, prominence=0.000)
-        plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
-        print(f"ABP heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}")
-        print(f"PPG heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}")
+        # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+        print(f"ABP beats - {len(abp_beats)}, Heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}")
+        print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}")
 
         abp_dips, _ = sp.find_peaks(-abp_filt, distance=abp_beat_interval * .75, prominence=10)
         ppg_dips, _ = sp.find_peaks(-ppg_filt, distance=ppg_beat_interval * .75, prominence=0.001)
@@ -376,39 +383,62 @@ def whiskers_filter(data):
     bp = plt.boxplot(data)
     plt.close()
 
+    # get lower and upper amplitude thresholds
     whiskers = [whiskers.get_ydata() for whiskers in bp['whiskers']]
-
     lower_amp = whiskers[0][1]
     upper_amp = whiskers[1][1]
+    print(lower_amp, upper_amp)
 
+    # get all indexes of outliers, outside the amplitude thresholds
     ind_outliers = []
     for i in range(len(data)):
         if data[i] < lower_amp or data[i] > upper_amp:
             ind_outliers.append(i)
 
-    ind_consecutives = []
-    current_group = [ind_outliers[0]]
-    for i in range(1, len(ind_outliers)):
-        if ind_outliers[i] == ind_outliers[i - 1] + 1:
-            current_group.append(ind_outliers[i])
-        else:
-            ind_consecutives.append(current_group)
-            current_group = [ind_outliers[i]]
-    ind_consecutives.append(current_group)
+    if len(ind_outliers) != 0:
+        # get all grouped arrays with values not within the whiskers range
+        ind_consecutives = []
+        current_group = [ind_outliers[0]]
+        for i in range(1, len(ind_outliers)):
+            if ind_outliers[i] == ind_outliers[i - 1] + 1:
+                current_group.append(ind_outliers[i])
+            else:
+                ind_consecutives.append(current_group)
+                current_group = [ind_outliers[i]]
+        ind_consecutives.append(current_group)
 
-    val_consecutives = []
-    for arr in ind_consecutives:
-        corr_arr = data[arr]
-        if corr_arr[0] < lower_amp:
-            min_val = min(corr_arr)
-            multiplier = (lower_amp / min_val)
-        else:
-            max_val = max(corr_arr)
-            multiplier = (upper_amp / max_val)
-        val_consecutives.append(corr_arr * multiplier * 1.1)
+        # get top (min or max) value of each consecutive group
+        for array_indexes in ind_consecutives:
+            array_values = data[array_indexes]
+            if array_values[0] < lower_amp:
+                top_val = min(array_values)
+                top_ind = array_indexes[np.argmin(array_values)]
+                coef = top_val / lower_amp
+            else:
+                top_val = max(array_values)
+                top_ind = array_indexes[np.argmax(array_values)]
+                coef = top_val / upper_amp
+            adj_top_val = top_val / coef * 1.01
+            if adj_top_val > top_val:
+                continue
+            data[top_ind] = adj_top_val
+            one_minus_threshold_val = data[array_indexes[0] - 1]
+            one_minus_threshold_ind = array_indexes[0] - 1
+            distance_to_top = top_ind - one_minus_threshold_ind
+            f1 = (adj_top_val - one_minus_threshold_val) / distance_to_top
+            one_plus_threshold_val = data[array_indexes[-1] + 1]
+            one_plus_threshold_ind = array_indexes[-1] + 1
+            distance_to_bottom = one_plus_threshold_ind - top_ind
+            f2 = (one_plus_threshold_val - adj_top_val) / distance_to_bottom
 
-    for j in range(len(data)):
-         print()
+            x1, x2 = 1, 1
+            for ind in array_indexes:
+                if ind < top_ind:
+                    data[ind] = (f1 * x1) + one_minus_threshold_val
+                    x1 += 1
+                elif ind > top_ind:
+                    data[ind] = (f2 * x2) + adj_top_val
+                    x2 += 1
 
     return data
 
