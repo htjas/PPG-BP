@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import pylab as pl
 import scipy as sp
+from scipy.ndimage import gaussian_filter1d
 import wfdb.processing
 import pprint
 
@@ -93,12 +94,24 @@ def process_data(fs):
         df = pd.read_csv(f"{ppg_path}/ppg-fidp_{seg_name}.{end}")
         values = df.values
         ppg = values[:, 0]
+        plot_abp_ppg(seg_name, abp, ppg, fs)
 
         # Filtering
+
+        # Gaussian filter
+        # abp_smooth = gaussian_filter1d(abp, 5)
+        # ppg_smooth = gaussian_filter1d(ppg, 5)
+        # plot_abp_ppg(seg_name, abp_smooth, ppg_smooth, fs)
+
+        # Butterworth filter
         lpf_cutoff = 0.7  # Hz
         hpf_cutoff = 10  # Hz
         abp_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, abp)
         ppg_filt = filter_data(lpf_cutoff, hpf_cutoff, fs, ppg)
+
+        abp_filt = whiskers_filter(abp_filt)
+        ppg_filt = whiskers_filter(ppg_filt)
+
 
         # First iteration of beat finding (MIMIC default methods)
         abp_beats, ppg_beats = get_optimal_beats_lists(abp_filt, ppg_filt, fs)
@@ -109,19 +122,18 @@ def process_data(fs):
         # Second iteration of beat finding (SP manual methods)
         abp_beats, _ = sp.find_peaks(abp_filt, distance=abp_beat_interval * .75, prominence=10)
         ppg_beats, _ = sp.find_peaks(ppg_filt, distance=ppg_beat_interval * .75, prominence=0.000)
-        # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+        plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp_filt, abp_beats, ppg_filt, ppg_beats, fs)
+        print(f"ABP heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}")
+        print(f"PPG heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}")
 
         abp_dips, _ = sp.find_peaks(-abp_filt, distance=abp_beat_interval * .75, prominence=10)
         ppg_dips, _ = sp.find_peaks(-ppg_filt, distance=ppg_beat_interval * .75, prominence=0.001)
         # plot_abp_ppg_with_pulse(seg_name + ' ONSETS (sp.find_peaks)', abp_filt, abp_dips, ppg_filt, ppg_dips, fs)
 
-        print(f"ABP heart Rate - {len(abp_beats) / (len(abp_filt) / fs) * 60}")
-        print(f"PPG heart Rate - {len(ppg_beats) / (len(ppg_filt) / fs) * 60}")
-
         delay = 18  # = 288 ms
 
-        abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=True, header='ABP of ' + seg_name)
-        ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True, header='PPG of ' + seg_name)
+        # abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=True, header='ABP of ' + seg_name)
+        # ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True, header='PPG of ' + seg_name)
 
         # abp_d1, abp_d2 = savgol_derivatives(abp_filt)
         # ppg_d1, ppg_d2 = savgol_derivatives(ppg_filt)
@@ -142,7 +154,7 @@ def process_data(fs):
 
         print("---")
         # Move one file at a time
-        # x = input("> next")
+        x = input("> next")
 
         i += 1
 
@@ -346,18 +358,59 @@ def filter_butterworth(lpf_cutoff, hpf_cutoff, fs):
 
 def filter_ppg_sos_chebyshev(lpf_cutoff, hpf_cutoff, fs):
     # Chebyshev filter
-    sos_cheb = sp.signal.cheby2(10,
-                                5,
-                                [lpf_cutoff, hpf_cutoff],
-                                btype='bp',
-                                analog=False,
-                                output='sos',
-                                fs=fs)
-    w, h = sp.signal.sosfreqz(sos_cheb,
-                              2000,
-                              fs=fs)
+    sos_cheb = sp.cheby2(10,
+                         5,
+                         [lpf_cutoff, hpf_cutoff],
+                         btype='bp',
+                         analog=False,
+                         output='sos',
+                         fs=fs)
+    w, h = sp.sosfreqz(sos_cheb,
+                       2000,
+                       fs=fs)
 
     return sos_cheb, w, h
+
+
+def whiskers_filter(data):
+    bp = plt.boxplot(data)
+    plt.close()
+
+    whiskers = [whiskers.get_ydata() for whiskers in bp['whiskers']]
+
+    lower_amp = whiskers[0][1]
+    upper_amp = whiskers[1][1]
+
+    ind_outliers = []
+    for i in range(len(data)):
+        if data[i] < lower_amp or data[i] > upper_amp:
+            ind_outliers.append(i)
+
+    ind_consecutives = []
+    current_group = [ind_outliers[0]]
+    for i in range(1, len(ind_outliers)):
+        if ind_outliers[i] == ind_outliers[i - 1] + 1:
+            current_group.append(ind_outliers[i])
+        else:
+            ind_consecutives.append(current_group)
+            current_group = [ind_outliers[i]]
+    ind_consecutives.append(current_group)
+
+    val_consecutives = []
+    for arr in ind_consecutives:
+        corr_arr = data[arr]
+        if corr_arr[0] < lower_amp:
+            min_val = min(corr_arr)
+            multiplier = (lower_amp / min_val)
+        else:
+            max_val = max(corr_arr)
+            multiplier = (upper_amp / max_val)
+        val_consecutives.append(corr_arr * multiplier * 1.1)
+
+    for j in range(len(data)):
+         print()
+
+    return data
 
 
 def savgol_derivatives(ppg_filt):
