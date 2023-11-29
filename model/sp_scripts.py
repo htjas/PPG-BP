@@ -94,9 +94,15 @@ def process_data(fs):
 
     i = 1
     for filename in filenames:
-        # if i != 14:
-        #     i += 1
-        #     continue
+        if i != 111:
+            i += 1
+            continue
+        # if i !=
+        # scal 7, 27, 37, 78, 88, 104
+        # low hr 15, 19, 55, 63, 64, 82, 86, 109, 110
+        # high hr 71
+        # big diff 31, 32, 36, 46, 47, 50, 51, 56, 57, 60, 80, 81, 83, 84, 98, 111, 113
+
         # Data Reading
         seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
 
@@ -317,10 +323,15 @@ def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
 
 
 def pre_process_data(abp, ppg, fs, seg_name):
-    lpf_cutoff = 0.7  # Hz
-    hpf_cutoff = 10  # Hz
+    # Gaussian filter
+    abp = gaussian_filter1d(abp, 2)
+    ppg = gaussian_filter1d(ppg, 2)
+    # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
-    # Butterworth filter
+    # lpf_cutoff = 0.2  # Hz
+    # hpf_cutoff = 2  # Hz
+    #
+    # # Butterworth filter
     # abp = filter_butterworth(abp, lpf_cutoff, hpf_cutoff, fs)
     # ppg = filter_butterworth(ppg, lpf_cutoff, hpf_cutoff, fs)
     # plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
@@ -418,18 +429,21 @@ def whiskers_filter(data):
             if upper_amp < top_val < adj_top_val:
                 continue
             data[top_ind] = adj_top_val
-            # create function for calculation of other new values
-            if 0 < array_indexes[0] and array_indexes[-1] < len(data)-1:
-                one_minus_threshold_val = data[array_indexes[0] - 1]
-                one_minus_threshold_ind = array_indexes[0] - 1
-                one_plus_threshold_val = data[array_indexes[-1] + 1]
-                one_plus_threshold_ind = array_indexes[-1] + 1
-            elif array_indexes[0] == 0:
+            # check if first group index is also first overall index
+            if array_indexes[0] == 0:
                 one_minus_threshold_val = data[array_indexes[0]]
                 one_minus_threshold_ind = array_indexes[0]
-            else:  # array_indexes[-1] == len(data)-1:
+            else:
+                one_minus_threshold_val = data[array_indexes[0] - 1]
+                one_minus_threshold_ind = array_indexes[0] - 1
+            # check if last group index is also last overall index
+            if array_indexes[-1] == len(data) - 1:
                 one_plus_threshold_val = data[array_indexes[-1]]
                 one_plus_threshold_ind = array_indexes[-1]
+            else:
+                one_plus_threshold_val = data[array_indexes[-1] + 1]
+                one_plus_threshold_ind = array_indexes[-1] + 1
+            # create function for calculation of other new values
             distance_to_top = top_ind - one_minus_threshold_ind
             distance_to_bottom = one_plus_threshold_ind - top_ind
             f1 = (adj_top_val - one_minus_threshold_val) / distance_to_top
@@ -469,8 +483,8 @@ def signal_processing(seg_name, abp, ppg, fs):
     # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # Second iteration of beat finding (SP manual methods)
-    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=10)
-    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.000)
+    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.001)
+    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.001)
     # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
     print(f"ABP beats - {len(abp_beats)}, Heart Rate - {len(abp_beats) / (len(abp) / fs) * 60}")
     print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {len(ppg_beats) / (len(ppg) / fs) * 60}")

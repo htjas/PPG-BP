@@ -1176,12 +1176,14 @@ def fiducial_points(x, pks, fs, vis, header):
         # a point:
         ind_a, = np.where(ibi_2d_portion[aux_m2d_pks] == np.max(ibi_2d_portion[aux_m2d_pks]))
         ind_a = aux_m2d_pks[ind_a]
+        ind_a = ind_a[0]
         if (ind_a < ind_m1d):
             a2d = np.append(a2d, ind_a + start)
             # plt.scatter(ind_a, ibi_2d_portion[ind_a]/np.max(ibi_2d_portion), marker = 'o')
             # b point:
             ind_b = np.where(ibi_2d_portion[aux_m2d_ons] == np.min(ibi_2d_portion[aux_m2d_ons]))
             ind_b = aux_m2d_ons[ind_b]
+            ind_b = ind_b[0]
             if (ind_b > ind_a) and (ind_b < len(ibi_2d_portion)):
                 b2d = np.append(b2d, ind_b + start)
                 # plt.scatter(ind_b, ibi_2d_portion[ind_b]/np.max(ibi_2d_portion), marker = 'o')

@@ -84,12 +84,12 @@ def plot_abp_ppg(segment_name, abp, ppg, fs):
 
     ax1.plot(t, abp, color='red', label='ABP')
     ax1.set_title("ABP")
-    # ax1.set_xlim([260, 280])
+    ax1.set_xlim([5, 15])
     # ax1.set_ylim([-40, 140])
 
     ax2.plot(t, ppg, color='green', label='PPG')
     ax2.set_title("PPG")
-    # ax2.set_xlim([260, 280])
+    ax2.set_xlim([5, 15])
     # ax2.set_ylim([-0.3, 1.1])
 
     plt.show()
@@ -128,7 +128,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     # y_limits = ax1.get_ylim()
     # for beat in abp_beats:
     #     ax1.plot([t[beat], t[beat]], [y_limits[0], abp[beat]], color='red', linestyle='--')
-    # ax1.set_xlim([260, 280])
+    ax1.set_xlim([5, 15])
     ax1.set_title('ABP with IBIS')
 
     ax2.plot(t, ppg, color='green')
@@ -140,7 +140,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     # y_limits = ax2.get_ylim()
     # for beat in ppg_beats:
     #     ax2.plot([t[beat], t[beat]], [y_limits[1], ppg[beat]], color='green', linestyle='--')
-    # ax2.set_xlim([260, 280])
+    ax2.set_xlim([5, 15])
     ax2.set_title('PPG with IBIS')
 
     plt.show()
