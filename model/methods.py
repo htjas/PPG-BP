@@ -625,6 +625,8 @@ def d2max(x, fs):
     blocks_init = blocks_init + 1
     blocks_end, = np.where(np.diff(boi) < 0)
     blocks_end = blocks_end + 1
+    if len(blocks_init) == 0 or len(blocks_end) == 0:
+        return np.array(0)
     if blocks_init[0] > blocks_end[0]:
         blocks_init = np.append(1, blocks_init)
     if blocks_init[-1] > blocks_end[-1]:

@@ -21,52 +21,64 @@ def manual_filter_data(folder):
     :param folder: the path where the files are stored
     """
     filenames = os.listdir(folder)
+    print(len(filenames))
     filenames.sort()
 
-    filenames_ppg = os.listdir('usable_ppg_fidp_data')
-    filenames_ppg.sort()
+    # for filename in filenames:
+    #     sig, seg_name_bp, end = split_filename(filename)
+    #     if sig == 'abp':
+    #         shutil.copy2(f"{folder}/{filename}", 'usable_bp_data_2')
+    #     if sig == 'ppg':
+    #         shutil.copy2(f"{folder}/{filename}", 'usable_ppg_data_2')
+    #
+    # print(len(os.listdir('usable_bp_data_2')))
+    # print(len(os.listdir('usable_ppg_data_2')))
 
-    common = []
-
-    for filename_ppg in filenames_ppg:
-        sig, seg_name_ppg, end = split_filename(filename_ppg)
-        for filename_bp in filenames:
-            sig, seg_name_bp, end = split_filename(filename_bp)
-            if sig == 'ppg':
-                break
-            if seg_name_ppg == seg_name_bp:
-                common.append(filename_bp)
-                # shutil.copy2(f"{folder}/{filename_bp}", 'usable_bp_data')
+    # filenames_ppg = os.listdir('usable_ppg_fidp_data')
+    # filenames_ppg.sort()
+    #
+    # common = []
+    #
+    # for filename_ppg in filenames_ppg:
+    #     sig, seg_name_ppg, end = split_filename(filename_ppg)
+    #     for filename_bp in filenames:
+    #         sig, seg_name_bp, end = split_filename(filename_bp)
+    #         if sig == 'ppg':
+    #             break
+    #         if seg_name_ppg == seg_name_bp:
+    #             common.append(filename_bp)
+    #             # shutil.copy2(f"{folder}/{filename_bp}", 'usable_bp_data')
 
     i = 1
     count = 0
 
-    # for filename in filenames:
-    #     if "ppg" in filename:
-    #         break
-    #
-    #     print(f"File {i}/{len(filenames)} - {filename} ")
-    #
-    #     df = pd.read_csv(f"{folder}/{filename}")
-    #     values = df.values
-    #     seg_count = 0
-    #     for value in values:
-    #         if value < 0 or value > 250 or np.isnan(value) or np.isinf(value):
-    #             # print(value)
-    #             # print(f"{filename} contains faulty values")
-    #             seg_count += 1
-    #
-    #             # Deletion of faulty files
-    #             # sig, seg_name, end = split_filename(filename)
-    #             # os.remove(f"{folder}/{filename}")
-    #             # os.remove(f"{folder}/ppg_{seg_name}.{end}")
-    #
-    #             break
-    #     if seg_count > 0:
-    #         print(seg_count)
-    #         count += 1
-    #     i += 1
-    # print(count)
+    for filename in filenames:
+        print(f"File {i}/{len(filenames)} - {filename} ")
+        df = pd.read_csv(f"{folder}/{filename}")
+        values = df.values
+        seg_count = 0
+        for value in values:
+            if np.isnan(value) or np.isinf(value) or value == 0.0:
+                print(value)
+                print(f"{filename} contains faulty values")
+                seg_count += 1
+
+                # Deletion of faulty files
+                sig, seg_name, end = split_filename(filename)
+                os.remove(f"{folder}/{filename}")
+                os.remove(f"usable_bp_data_2/abp_{seg_name}.{end}")
+
+                break
+        if seg_count > 0:
+            print(seg_count)
+            count += 1
+        i += 1
+    print(count)
+
+    filenames = os.listdir(folder)
+    print(len(filenames))
+    filenames = os.listdir('usable_bp_data_2')
+    print(len(filenames))
 
 
 def process_data(fs):
@@ -75,13 +87,16 @@ def process_data(fs):
     :param fs: Frequency of sampling
     """
     abs_path = os.path.abspath(os.getcwd())
-    bp_path = abs_path + '/usable_bp_data'
-    ppg_path = abs_path + '/usable_ppg_fidp_data'
+    bp_path = abs_path + '/usable_bp_data_2'
+    ppg_path = abs_path + '/usable_ppg_data_2'
     filenames = os.listdir(bp_path)
     filenames.sort()
 
     i = 1
     for filename in filenames:
+        # if i != 14:
+        #     i += 1
+        #     continue
         # Data Reading
         seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
 
@@ -92,8 +107,8 @@ def process_data(fs):
         abp_beats, ppg_beats, abp_dips, ppg_dips = signal_processing(seg_name, abp_filt, ppg_filt, fs)
         delay = 18  # = 288 ms
 
-        abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=True, header='ABP of ' + seg_name)
-        ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=True, header='PPG of ' + seg_name)
+        abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=False, header='ABP of ' + seg_name)
+        ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
 
         # agi, ts, val = agi_detection(ppg_fidp, fs)
         # sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
@@ -106,7 +121,7 @@ def process_data(fs):
 
         print("---")
         # Move one file at a time
-        x = input("> next")
+        # x = input("> next")
 
         i += 1
 
@@ -293,10 +308,10 @@ def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
     values = df.values
     abp = values[:, 0]
 
-    df = pd.read_csv(f"{ppg_path}/ppg-fidp_{seg_name}.{end}")
+    df = pd.read_csv(f"{ppg_path}/ppg_{seg_name}.{end}")
     values = df.values
     ppg = values[:, 0]
-    plot_abp_ppg(seg_name, abp, ppg, fs)
+    # plot_abp_ppg(seg_name, abp, ppg, fs)
 
     return seg_name, abp, ppg
 
@@ -323,7 +338,7 @@ def pre_process_data(abp, ppg, fs, seg_name):
     # Gaussian filter
     abp = gaussian_filter1d(abp, 2)
     ppg = gaussian_filter1d(ppg, 2)
-    plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
+    # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
     return abp, ppg
 
@@ -404,13 +419,20 @@ def whiskers_filter(data):
                 continue
             data[top_ind] = adj_top_val
             # create function for calculation of other new values
-            one_minus_threshold_val = data[array_indexes[0] - 1]
-            one_minus_threshold_ind = array_indexes[0] - 1
+            if 0 < array_indexes[0] and array_indexes[-1] < len(data)-1:
+                one_minus_threshold_val = data[array_indexes[0] - 1]
+                one_minus_threshold_ind = array_indexes[0] - 1
+                one_plus_threshold_val = data[array_indexes[-1] + 1]
+                one_plus_threshold_ind = array_indexes[-1] + 1
+            elif array_indexes[0] == 0:
+                one_minus_threshold_val = data[array_indexes[0]]
+                one_minus_threshold_ind = array_indexes[0]
+            else:  # array_indexes[-1] == len(data)-1:
+                one_plus_threshold_val = data[array_indexes[-1]]
+                one_plus_threshold_ind = array_indexes[-1]
             distance_to_top = top_ind - one_minus_threshold_ind
-            f1 = (adj_top_val - one_minus_threshold_val) / distance_to_top
-            one_plus_threshold_val = data[array_indexes[-1] + 1]
-            one_plus_threshold_ind = array_indexes[-1] + 1
             distance_to_bottom = one_plus_threshold_ind - top_ind
+            f1 = (adj_top_val - one_minus_threshold_val) / distance_to_top
             f2 = (one_plus_threshold_val - adj_top_val) / distance_to_bottom
             # assign new values
             x1, x2 = 1, 1
@@ -449,7 +471,7 @@ def signal_processing(seg_name, abp, ppg, fs):
     # Second iteration of beat finding (SP manual methods)
     abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=10)
     ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.000)
-    plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
     print(f"ABP beats - {len(abp_beats)}, Heart Rate - {len(abp_beats) / (len(abp) / fs) * 60}")
     print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {len(ppg_beats) / (len(ppg) / fs) * 60}")
 
@@ -557,7 +579,7 @@ def split_filename(filename):
 
 
 def main():
-    # manual_filter_data('data')
+    # manual_filter_data('usable_ppg_data_2')
     process_data(62.4725)
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)
