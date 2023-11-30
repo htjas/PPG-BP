@@ -94,9 +94,9 @@ def process_data(fs):
 
     i = 1
     for filename in filenames:
-        if i != 111:
-            i += 1
-            continue
+        # if i != 111:
+        #     i += 1
+        #     continue
         # if i !=
         # scal 7, 27, 37, 78, 88, 104
         # low hr 15, 19, 55, 63, 64, 82, 86, 109, 110
@@ -445,7 +445,11 @@ def whiskers_filter(data):
                 one_plus_threshold_ind = array_indexes[-1] + 1
             # create function for calculation of other new values
             distance_to_top = top_ind - one_minus_threshold_ind
+            if distance_to_top == 0:
+                distance_to_top = 1
             distance_to_bottom = one_plus_threshold_ind - top_ind
+            if distance_to_bottom == 0:
+                distance_to_bottom = 1
             f1 = (adj_top_val - one_minus_threshold_val) / distance_to_top
             f2 = (one_plus_threshold_val - adj_top_val) / distance_to_bottom
             # assign new values
