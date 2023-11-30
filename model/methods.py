@@ -1286,9 +1286,13 @@ def fiducial_points(x, pks, fs, vis, header):
         if (len(aux_p3d_ons) != 0 and len(ind_c) != 0 and len(ind_d) != 0):
             if ind_c == ind_d:
                 ind_p2, = np.where(aux_p3d_ons > ind_d - start)
+                if len(ind_p2) == 0:
+                    continue
                 ind_p2 = aux_p3d_ons[ind_p2[0]]
             else:
                 ind_p2, = np.where(aux_p3d_ons < ind_d - start)
+                if len(ind_p2) == 0:
+                    continue
                 ind_p2 = aux_p3d_ons[ind_p2[-1]]
             if len(ind_dic) != 0:
                 aux_x_pks, _ = sp.find_peaks(ibi_portion)
