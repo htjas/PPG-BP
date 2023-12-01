@@ -52,26 +52,46 @@ def manual_filter_data(folder):
     i = 1
     count = 0
 
+    df = pd.read_csv(os.path.abspath(os.getcwd()) + '/faulty_data/segments_low_hr.csv')
+    low_hrs = df.values
+    df = pd.read_csv(os.path.abspath(os.getcwd()) + '/faulty_data/segments_big_diff.csv')
+    big_diffs = df.values
+
     for filename in filenames:
         print(f"File {i}/{len(filenames)} - {filename} ")
-        df = pd.read_csv(f"{folder}/{filename}")
-        values = df.values
-        seg_count = 0
-        for value in values:
-            if np.isnan(value) or np.isinf(value) or value == 0.0:
-                print(value)
-                print(f"{filename} contains faulty values")
-                seg_count += 1
-
-                # Deletion of faulty files
+        for lh in low_hrs:
+            if lh[0] in filename:
+                print(lh[0], filename)
                 sig, seg_name, end = split_filename(filename)
                 os.remove(f"{folder}/{filename}")
                 os.remove(f"usable_bp_data_2/abp_{seg_name}.{end}")
-
-                break
-        if seg_count > 0:
-            print(seg_count)
-            count += 1
+        for bd in big_diffs:
+            if bd[0] in filename:
+                print(bd[0], filename)
+                sig, seg_name, end = split_filename(filename)
+                try:
+                    os.remove(f"{folder}/{filename}")
+                    os.remove(f"usable_bp_data_2/abp_{seg_name}.{end}")
+                except Exception as e:
+                    print(e)
+        # df = pd.read_csv(f"{folder}/{filename}")
+        # values = df.values
+        # seg_count = 0
+        # for value in values:
+        #     if np.isnan(value) or np.isinf(value) or value == 0.0:
+        #         print(value)
+        #         print(f"{filename} contains faulty values")
+        #         seg_count += 1
+        #
+        #         # Deletion of faulty files
+        #         # sig, seg_name, end = split_filename(filename)
+        #         # os.remove(f"{folder}/{filename}")
+        #         # os.remove(f"usable_bp_data_2/abp_{seg_name}.{end}")
+        #
+        #         break
+        # if seg_count > 0:
+        #     print(seg_count)
+        #     count += 1
         i += 1
     print(count)
 
@@ -93,28 +113,47 @@ def process_data(fs):
     filenames.sort()
 
     i = 1
+    count_low_hr, count_high_hr, count_diff = 0, 0, 0
+    seg_low_hr, seg_high_hr, seg_big_diff = [], [], []
     for filename in filenames:
-        # if i != 111:
+        # if i != 81:
         #     i += 1
         #     continue
-        # if i !=
+
         # low hr 15, 19,51, 55, 63, 64, 82, 86, 88, 109, 110
-        # high hr 71
         # big diff 31, 32, 36, 46, 47, 50, 51, 56, 57, 60, 80, 81, 83, 84, 98, 111, 113
+        #
+        # low hr 19, 51, 55, 64
+        # big diff 15, 16, 30, 31, 32, 36, 46,47, 50, 54, 56, 57, 63, 74
 
-        # Data Reading
-        seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
+        try:
+            # Data Reading
+            seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
 
-        # Data Pre-Processing
-        abp_filt, ppg_filt = pre_process_data(abp, ppg, fs, seg_name)
+            # Data Pre-Processing
+            abp_filt, ppg_filt = pre_process_data(abp, ppg, fs, seg_name)
 
-        # Signal Processing (Beat and Dip detection)
-        abp_beats, ppg_beats, abp_dips, ppg_dips = signal_processing(seg_name, abp_filt, ppg_filt, fs)
-        delay = 18  # = 288 ms
+            # Signal Processing (Beat and Dip detection)
+            abp_beats, ppg_beats, abp_dips, ppg_dips, abp_hr, ppg_hr = signal_processing(seg_name, abp_filt, ppg_filt, fs)
+            # delay = 18  # = 288 ms
 
-        abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=False, header='ABP of ' + seg_name)
-        ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
+            if abp_hr < 40 or ppg_hr < 40:
+                print("Low HR")
+                count_low_hr += 1
+                seg_low_hr.append(seg_name)
+            if abp_hr > 150 or ppg_hr > 150:
+                print("High HR")
+                count_high_hr += 1
+                seg_high_hr.append(seg_name)
+            if abs(abp_hr - ppg_hr) > 5:
+                print("Big Diff")
+                count_diff += 1
+                seg_big_diff.append(seg_name)
 
+            abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=False, header='ABP of ' + seg_name)
+            ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
+        except Exception as e:
+            print('ERROR', e)
         # agi, ts, val = agi_detection(ppg_fidp, fs)
         # sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
         #
@@ -127,8 +166,15 @@ def process_data(fs):
         print("---")
         # Move one file at a time
         # x = input("> next")
-
         i += 1
+
+    print(f"Low HR - {count_low_hr}, High HR - {count_high_hr}, Big Diff - {count_diff}")
+    df = pd.DataFrame(data=seg_low_hr)
+    df.to_csv('faulty_data/segments_low_hr.csv', index=False)
+    df = pd.DataFrame(data=seg_high_hr)
+    df.to_csv('faulty_data/segments_high_hr.csv', index=False)
+    df = pd.DataFrame(data=seg_big_diff)
+    df.to_csv('faulty_data/segments_big_diff.csv', index=False)
 
 
 def process_ppg_data(path, fs):
@@ -322,9 +368,9 @@ def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
 
 
 def pre_process_data(abp, ppg, fs, seg_name):
-    # Gaussian filter
-    abp = gaussian_filter1d(abp, 2)
-    ppg = gaussian_filter1d(ppg, 2)
+    # 1st Gaussian filter
+    abp = gaussian_filter1d(abp, sigma=2)
+    ppg = gaussian_filter1d(ppg, sigma=2)
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
     # lpf_cutoff = 0.2  # Hz
@@ -345,9 +391,16 @@ def pre_process_data(abp, ppg, fs, seg_name):
     ppg = whiskers_filter(ppg)
     # plot_abp_ppg(seg_name + ' whiskers filtered', abp, ppg, fs)
 
-    # Gaussian filter
-    abp = gaussian_filter1d(abp, 2)
-    ppg = gaussian_filter1d(ppg, 2)
+    # 2nd Gaussian filter
+    med_a = np.median(abp)
+    med_p = np.median(ppg)
+    std_a = np.std(abp)
+    std_p = np.std(ppg)
+    sigma_a = med_a / std_a * 0.5
+    sigma_p = med_p / std_p * 0.3
+    print(f"Sigma ABP - {sigma_a}, Sigma PPG - {sigma_p}")
+    abp = gaussian_filter1d(abp, sigma=sigma_a)
+    ppg = gaussian_filter1d(ppg, sigma=sigma_p)
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
     return abp, ppg
@@ -486,17 +539,19 @@ def signal_processing(seg_name, abp, ppg, fs):
     # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # Second iteration of beat finding (SP manual methods)
-    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.001)
+    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.001)
     # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
-    print(f"ABP beats - {len(abp_beats)}, Heart Rate - {len(abp_beats) / (len(abp) / fs) * 60}")
-    print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {len(ppg_beats) / (len(ppg) / fs) * 60}")
+    abp_hr = len(abp_beats) / (len(abp) / fs) * 60
+    ppg_hr = len(ppg_beats) / (len(ppg) / fs) * 60
+    print(f"ABP beats - {len(abp_beats)}, Heart Rate - {abp_hr}")
+    print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {ppg_hr}")
 
-    abp_dips, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=10)
+    abp_dips, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_dips, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval * .75, prominence=0.001)
     # plot_abp_ppg_with_pulse(seg_name + ' ONSETS (sp.find_peaks)', abp, abp_dips, ppg, ppg_dips, fs)
 
-    return abp_beats, ppg_beats, abp_dips, ppg_dips
+    return abp_beats, ppg_beats, abp_dips, ppg_dips, abp_hr, ppg_hr
 
 
 def pulse_detection(data, algorithm, duration, sig):

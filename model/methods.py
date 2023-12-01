@@ -1077,7 +1077,7 @@ def fiducial_points(x, pks, fs, vis, header):
         aux_dia = aux_dia.astype(int)
         if len(aux_dic) != 0:
             ind_max, = np.where(ibi_2d_portion[aux_dic] == np.max(ibi_2d_portion[aux_dic]))
-            aux_dic_max = aux_dic[ind_max]
+            aux_dic_max = aux_dic[ind_max][0]
             if len(aux_dia) != 0:
                 nearest = aux_dia - aux_dic_max
                 aux_dic = aux_dic_max
