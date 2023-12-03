@@ -113,72 +113,63 @@ def process_data(fs):
     filenames.sort()
 
     i = 1
-    count_low_hr, count_high_hr, count_diff = 0, 0, 0
-    seg_low_hr, seg_high_hr, seg_big_diff = [], [], []
     for filename in filenames:
-        # if i != 81:
-        #     i += 1
-        #     continue
-
-        # low hr 15, 19,51, 55, 63, 64, 82, 86, 88, 109, 110
-        # big diff 31, 32, 36, 46, 47, 50, 51, 56, 57, 60, 80, 81, 83, 84, 98, 111, 113
-        #
-        # low hr 19, 51, 55, 64
-        # big diff 15, 16, 30, 31, 32, 36, 46,47, 50, 54, 56, 57, 63, 74
-
         try:
-            # Data Reading
+            # 1: Data Reading
             seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
 
-            # Data Pre-Processing
+            # 2: Data Pre-Processing
             abp_filt, ppg_filt = pre_process_data(abp, ppg, fs, seg_name)
 
             # Feature extraction
-            ppg_fdf = frequency_domain_features(ppg_filt, fs)
-            print(ppg_fdf)
+            # ppg_fdf = frequency_domain_features(ppg_filt, fs)
+            # print(ppg_fdf)
 
-            # Signal Processing (Beat and Dip detection)
+            # 3: Signal Processing (Beat and Dip detection)
             abp_beats, ppg_beats, abp_dips, ppg_dips, abp_hr, ppg_hr = signal_processing(seg_name, abp_filt, ppg_filt, fs)
             # delay = 18  # = 288 ms
-
-            if abp_hr < 40 or ppg_hr < 40:
-                print("Low HR")
-                count_low_hr += 1
-                seg_low_hr.append(seg_name)
-            if abp_hr > 150 or ppg_hr > 150:
-                print("High HR")
-                count_high_hr += 1
-                seg_high_hr.append(seg_name)
-            if abs(abp_hr - ppg_hr) > 5:
-                print("Big Diff")
-                count_diff += 1
-                seg_big_diff.append(seg_name)
 
             abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=False, header='ABP of ' + seg_name)
             ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
         except Exception as e:
             print('ERROR', e)
-        # agi, ts, val = agi_detection(ppg_fidp, fs)
-        # sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
-        #
-        # plot_trio(seg_name, ts, val, tss, sysv, tsd, diav)
-        #
-        # median_agi, mean_agi = calculate_median_mean(agi, fs, 30)
+
+        # 4: Feature extraction and average value calculation
+        ct, tsc, ctv = ct_detection(ppg_fidp, fs)
+        sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
+
+        print(len(ct), ct[0:5])
+        print(len(sys), sys[0:5])
+        print(len(dia), dia[0:5])
+
+        # plot_trio(seg_name, tsc, ctv, tss, sysv, tsd, diav)
+        # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
         # median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
         # median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
 
+        # 5: Overall vector creation
+        # Create ‘overall’ vectors by concatenating each of the three vectors across all ICU stays
+        # Result: three vectors each of length 1200 (i.e. 20 values for 60 ICU stays)
+
+        # 6: Data labelling
+        # Create a vector of ICU stays (i.e. a vector of length 1200
+        # which contains the ICU stay ID from which each window was obtained).
+
+        # 7: Split data into training and testing
+
+        # 8: Linear regression model creation
+        # Use the model to estimate SBP (or DBP) from each SI value in the testing data.
+        #   This should produce a vector of estimated SBP (or DBP) values of length 600.
+        # Calculate the errors between the estimated and reference SBP (or DBP) values
+        #   (using error = estimated - reference).
+        # Calculate error statistics for the entire testing dataset.
+        #   e.g. mean absolute error, bias (i.e. mean error),
+        #   limits of agreement (i.e. 1.96 * standard deviation of errors).
+
         print("---")
         # Move one file at a time
-        # x = input("> next")
+        x = input("> next")
         i += 1
-
-    print(f"Low HR - {count_low_hr}, High HR - {count_high_hr}, Big Diff - {count_diff}")
-    df = pd.DataFrame(data=seg_low_hr)
-    df.to_csv('faulty_data/segments_low_hr.csv', index=False)
-    df = pd.DataFrame(data=seg_high_hr)
-    df.to_csv('faulty_data/segments_high_hr.csv', index=False)
-    df = pd.DataFrame(data=seg_big_diff)
-    df.to_csv('faulty_data/segments_big_diff.csv', index=False)
 
 
 def process_ppg_data(path, fs):
@@ -318,7 +309,7 @@ def ct_detection(fidp, fs):
     for beat_no in range(length):
         ts[beat_no] = fidp["pks"][beat_no]
         values[beat_no] = (fidp["pks"][beat_no] - fidp["ons"][beat_no]) / fs
-    return np.column_stack((ts, values))
+    return np.column_stack((ts, values)), ts, values
 
 
 def agi_detection(fidp, fs):
