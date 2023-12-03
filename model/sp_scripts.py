@@ -133,6 +133,10 @@ def process_data(fs):
             # Data Pre-Processing
             abp_filt, ppg_filt = pre_process_data(abp, ppg, fs, seg_name)
 
+            # Feature extraction
+            ppg_fdf = frequency_domain_features(ppg_filt, fs)
+            print(ppg_fdf)
+
             # Signal Processing (Beat and Dip detection)
             abp_beats, ppg_beats, abp_dips, ppg_dips, abp_hr, ppg_hr = signal_processing(seg_name, abp_filt, ppg_filt, fs)
             # delay = 18  # = 288 ms
@@ -403,6 +407,14 @@ def pre_process_data(abp, ppg, fs, seg_name):
     ppg = gaussian_filter1d(ppg, sigma=sigma_p)
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
+    # Standardization
+    # mean_a = np.mean(abp)
+    # mean_p = np.mean(ppg)
+    # stand_abp = (abp - mean_a) / std_a
+    # stand_ppg = (ppg - mean_p) / std_p
+    #
+    # plot_abp_ppg(seg_name + ' Standardized', stand_abp, stand_ppg, fs)
+
     return abp, ppg
 
 
@@ -517,6 +529,36 @@ def whiskers_filter(data):
     return data
 
 
+def frequency_domain_features(ppg, sampling_rate):
+    # Compute the Fast Fourier Transform (FFT)
+    fft_result = np.fft.fft(ppg)
+
+    # Compute the frequencies corresponding to the FFT result
+    frequencies = np.fft.fftfreq(len(fft_result), 1 / sampling_rate)
+
+    # Only consider positive frequencies (since PPG is a real-valued signal)
+    positive_frequencies = frequencies[:len(frequencies) // 2]
+
+    # Magnitude spectrum (absolute values of FFT result)
+    magnitude_spectrum = np.abs(fft_result[:len(fft_result) // 2])
+
+    # Find the index corresponding to the maximum magnitude
+    peak_frequency_index = np.argmax(magnitude_spectrum)
+    peak_frequency = positive_frequencies[peak_frequency_index]
+
+    # Other frequency domain features
+    mean_frequency = np.sum(positive_frequencies * magnitude_spectrum) / np.sum(magnitude_spectrum)
+    total_power = np.sum(magnitude_spectrum)
+    normalized_power_at_peak = magnitude_spectrum[peak_frequency_index] / total_power
+
+    return {
+        'peak_frequency': peak_frequency,
+        'mean_frequency': mean_frequency,
+        'total_power': total_power,
+        'normalized_power_at_peak': normalized_power_at_peak
+    }
+
+
 def savgol_derivatives(ppg_filt):
     # Calculate first derivative
     d1ppg = sp.savgol_filter(ppg_filt,
@@ -540,7 +582,7 @@ def signal_processing(seg_name, abp, ppg, fs):
 
     # Second iteration of beat finding (SP manual methods)
     abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
-    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.001)
+    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
     # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
     abp_hr = len(abp_beats) / (len(abp) / fs) * 60
     ppg_hr = len(ppg_beats) / (len(ppg) / fs) * 60
@@ -548,7 +590,7 @@ def signal_processing(seg_name, abp, ppg, fs):
     print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {ppg_hr}")
 
     abp_dips, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=0.5)
-    ppg_dips, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval * .75, prominence=0.001)
+    ppg_dips, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval * .75, prominence=0.01)
     # plot_abp_ppg_with_pulse(seg_name + ' ONSETS (sp.find_peaks)', abp, abp_dips, ppg, ppg_dips, fs)
 
     return abp_beats, ppg_beats, abp_dips, ppg_dips, abp_hr, ppg_hr
