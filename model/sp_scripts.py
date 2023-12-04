@@ -125,22 +125,18 @@ def process_data(fs):
             # ppg_fdf = frequency_domain_features(ppg_filt, fs)
             # print(ppg_fdf)
 
-            # 3: Signal Processing (Beat and Dip detection)
-            abp_beats, ppg_beats, abp_dips, ppg_dips, abp_hr, ppg_hr = signal_processing(seg_name, abp_filt, ppg_filt, fs)
-            # delay = 18  # = 288 ms
-
-            abp_fidp = fiducial_points(abp_filt, abp_beats, fs, vis=False, header='ABP of ' + seg_name)
-            ppg_fidp = fiducial_points(ppg_filt, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
         except Exception as e:
             print('ERROR', e)
+
+        # 3: Signal Processing (Beat and Dip detection)
+        result = signal_processing(seg_name, abp_filt, ppg_filt, fs)
+
+        abp_fidp = fiducial_points(result['abp'], result['abp_beats'], fs, vis=True, header='ABP of ' + seg_name)
+        ppg_fidp = fiducial_points(result['ppg'], result['ppg_beats'], fs, vis=True, header='PPG of ' + seg_name)
 
         # 4: Feature extraction and average value calculation
         ct, tsc, ctv = ct_detection(ppg_fidp, fs)
         sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
-
-        print(len(ct), ct[0:5])
-        print(len(sys), sys[0:5])
-        print(len(dia), dia[0:5])
 
         # plot_trio(seg_name, tsc, ctv, tss, sysv, tsd, diav)
         # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
@@ -393,7 +389,7 @@ def pre_process_data(abp, ppg, fs, seg_name):
     std_p = np.std(ppg)
     sigma_a = med_a / std_a * 0.5
     sigma_p = med_p / std_p * 0.3
-    print(f"Sigma ABP - {sigma_a}, Sigma PPG - {sigma_p}")
+    # print(f"Sigma ABP - {sigma_a}, Sigma PPG - {sigma_p}")
     abp = gaussian_filter1d(abp, sigma=sigma_a)
     ppg = gaussian_filter1d(ppg, sigma=sigma_p)
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
@@ -569,22 +565,78 @@ def signal_processing(seg_name, abp, ppg, fs):
     abp_beats, ppg_beats = get_optimal_beats_lists(abp, ppg, fs)
     abp_beat_interval = len(abp) / len(abp_beats)
     ppg_beat_interval = len(ppg) / len(ppg_beats)
-    # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
+    plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
 
-    # Second iteration of beat finding (SP manual methods)
+    # Second iteration: Peak finding (SP manual methods)
     abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
-    # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+
+    # Signal synchronization : delay approx = 18 (288 ms)
+    abp, ppg = synchronization(abp, ppg, abp_beats, ppg_beats)
+    plot_abp_ppg(seg_name + ' Synchronised', abp, ppg, fs)
+
+    # Third iteration: Peak finding
+    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
+    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
+    plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+
     abp_hr = len(abp_beats) / (len(abp) / fs) * 60
     ppg_hr = len(ppg_beats) / (len(ppg) / fs) * 60
     print(f"ABP beats - {len(abp_beats)}, Heart Rate - {abp_hr}")
     print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {ppg_hr}")
 
-    abp_dips, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=0.5)
-    ppg_dips, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval * .75, prominence=0.01)
-    # plot_abp_ppg_with_pulse(seg_name + ' ONSETS (sp.find_peaks)', abp, abp_dips, ppg, ppg_dips, fs)
+    return {
+        'abp': abp,
+        'ppg': ppg,
+        'abp_beats': abp_beats,
+        'ppg_beats': ppg_beats,
+        'abp_hr': abp_hr,
+        'ppg_hr': ppg_hr
+    }
 
-    return abp_beats, ppg_beats, abp_dips, ppg_dips, abp_hr, ppg_hr
+
+def synchronization(abp, ppg, abp_dips, ppg_dips):
+    # Find closest PPG dip to first ABP dip
+    first_abp_ind = 0
+    first_abp = abp_dips[first_abp_ind]
+    differences = abs(ppg_dips - first_abp)
+    first_ppg_ind = np.argmin(differences)
+    first_ppg = ppg_dips[first_ppg_ind]
+    # print([first_abp_ind, first_abp], [first_ppg_ind, first_ppg])
+
+    # Find closest ABP dip to last PPG dip
+    last_ppg_ind = len(ppg_dips) - 1
+    last_ppg = ppg_dips[last_ppg_ind]
+    differences = abs(abp_dips - last_ppg)
+    last_abp_ind = np.argmin(differences)
+    last_abp = abp_dips[last_abp_ind]
+    # print([last_abp_ind, last_abp], [last_ppg_ind, last_ppg])
+
+    # Splice original ABP and PPG arrays
+    new_abp = abp[first_abp:last_abp]
+    new_ppg = ppg[first_ppg:last_ppg]
+    # print(len(new_abp), len(new_ppg))
+
+    return new_abp, new_ppg
+
+    # return {
+    #     'abp': new_abp,
+    #     'ppg': new_ppg,
+    #     'abp_dips': new_abp_dips,
+    #     'ppg_dips': new_ppg_dips,
+    # }
+
+    # adj_abp_beats = []
+    # adj_ppg_beats = []
+    # for a_beat in abp_beats:
+    #     for p_beat in ppg_beats:
+    #         adj_p_beat = p_beat - d
+    #         if adj_p_beat - 7 < a_beat < adj_p_beat + 7:
+    #             adj_ppg_beats.append(adj_p_beat)
+    #             adj_abp_beats.append(a_beat)
+    # print(len(adj_abp_beats), len(adj_ppg_beats))
+    # return adj_abp_beats, adj_ppg_beats
 
 
 def pulse_detection(data, algorithm, duration, sig):

@@ -17,14 +17,14 @@ def plot_trio(seg_name, x1, y1, x2, y2, x3, y3):
                                    figsize=(8, 8))
     fig.suptitle(f"Segment {seg_name}")
 
-    ax1.scatter(x1, y1, color='black', label='Agi')
-    ax1.set_title("Agi")
-    ax1.set_xlim([0, 1000])
+    ax1.scatter(x2, y2, color='red', label='Sys')
+    ax1.scatter(x3, y3, color='blue', label='Dia')
+    ax1.set_title("Sys + Dia")
+    ax1.set_xlim([7500, 9000])
 
-    ax2.scatter(x2, y2, color='red', label='Sys')
-    ax2.scatter(x3, y3, color='blue', label='Dia')
-    ax2.set_title("Sys + Dia")
-    ax2.set_xlim([0, 1000])
+    ax2.scatter(x1, y1, color='black', label='Agi')
+    ax2.set_title("Agi")
+    ax2.set_xlim([7500, 9000])
 
     plt.show()
 
@@ -80,16 +80,16 @@ def plot_abp_ppg(segment_name, abp, ppg, fs):
                                    figsize=(8, 8))
     fig.suptitle(f"Segment {segment_name}")
 
-    t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
-
+    t = np.arange(0, (len(abp) / fs), 1.0 / fs)
     ax1.plot(t, abp, color='red', label='ABP')
     ax1.set_title("ABP")
-    ax1.set_xlim([580, 601])
+    ax1.set_xlim([-0.1, 10])
     # ax1.set_ylim([-40, 140])
 
+    t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
     ax2.plot(t, ppg, color='green', label='PPG')
     ax2.set_title("PPG")
-    ax2.set_xlim([580, 601])
+    ax2.set_xlim([-0.1, 10])
     # ax2.set_ylim([-0.3, 1.1])
 
     plt.show()
@@ -117,7 +117,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
                                    figsize=(8, 8))
     fig.suptitle(f"Segment {segment_name}")
 
-    t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
+    t = np.arange(0, (len(abp) / fs), 1.0 / fs)
 
     ax1.plot(t, abp, color='red')
     ax1.scatter(t[0] + abp_beats / fs,
@@ -128,9 +128,10 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     # y_limits = ax1.get_ylim()
     # for beat in abp_beats:
     #     ax1.plot([t[beat], t[beat]], [y_limits[0], abp[beat]], color='red', linestyle='--')
-    ax1.set_xlim([580, 601])
+    ax1.set_xlim([-0.1, 10])
     ax1.set_title('ABP with IBIS')
 
+    t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
     ax2.plot(t, ppg, color='green')
     ax2.scatter(t[0] + ppg_beats / fs,
                 ppg[ppg_beats],
@@ -140,7 +141,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     # y_limits = ax2.get_ylim()
     # for beat in ppg_beats:
     #     ax2.plot([t[beat], t[beat]], [y_limits[1], ppg[beat]], color='green', linestyle='--')
-    ax2.set_xlim([580, 601])
+    ax2.set_xlim([-0.1, 10])
     ax2.set_title('PPG with IBIS')
 
     plt.show()
