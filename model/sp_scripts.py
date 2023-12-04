@@ -114,6 +114,9 @@ def process_data(fs):
 
     i = 1
     for filename in filenames:
+        if i != 14:  # 24
+            i += 1
+            continue
         try:
             # 1: Data Reading
             seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -131,8 +134,8 @@ def process_data(fs):
         # 3: Signal Processing (Beat and Dip detection)
         result = signal_processing(seg_name, abp_filt, ppg_filt, fs)
 
-        abp_fidp = fiducial_points(result['abp'], result['abp_beats'], fs, vis=True, header='ABP of ' + seg_name)
-        ppg_fidp = fiducial_points(result['ppg'], result['ppg_beats'], fs, vis=True, header='PPG of ' + seg_name)
+        abp_fidp = fiducial_points(result['abp'], result['abp_beats'], fs, vis=False, header='ABP of ' + seg_name)
+        ppg_fidp = fiducial_points(result['ppg'], result['ppg_beats'], fs, vis=False, header='PPG of ' + seg_name)
 
         # 4: Feature extraction and average value calculation
         ct, tsc, ctv = ct_detection(ppg_fidp, fs)
@@ -164,7 +167,7 @@ def process_data(fs):
 
         print("---")
         # Move one file at a time
-        x = input("> next")
+        # x = input("> next")
         i += 1
 
 
@@ -562,15 +565,31 @@ def savgol_derivatives(ppg_filt):
 
 def signal_processing(seg_name, abp, ppg, fs):
     # First iteration of beat finding (MIMIC default methods)
-    abp_beats, ppg_beats = get_optimal_beats_lists(abp, ppg, fs)
+    abp_beats, ppg_beats, questionable = get_optimal_beats_lists(abp, ppg, fs)
+    plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
+    print(len(abp_beats), len(ppg_beats))
+
+    if questionable:
+        mean_value = np.mean(abp)
+        above_mean = abp > mean_value
+        counta = np.count_nonzero(np.diff(above_mean.astype(int)) == -1)
+        mean_value = np.mean(ppg)
+        above_mean = ppg > mean_value
+        countp = np.count_nonzero(np.diff(above_mean.astype(int)) == -1)
+        interval = len(abp) / ((counta + countp)/2)
+
+        a, _ = sp.find_peaks(abp, distance=interval, prominence=5)
+        p, _ = sp.find_peaks(ppg, distance=interval, prominence=0.01)
+        plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, a, ppg, p, fs)
+        print(len(a), len(p))
+
     abp_beat_interval = len(abp) / len(abp_beats)
     ppg_beat_interval = len(ppg) / len(ppg_beats)
-    plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # Second iteration: Peak finding (SP manual methods)
-    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
-    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
-    plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    abp_beats, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=0.5)
+    ppg_beats, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval * .75, prominence=0.01)
+    plot_abp_ppg_with_pulse(seg_name + ' DIPS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # Signal synchronization : delay approx = 18 (288 ms)
     abp, ppg = synchronization(abp, ppg, abp_beats, ppg_beats)
@@ -579,7 +598,11 @@ def signal_processing(seg_name, abp, ppg, fs):
     # Third iteration: Peak finding
     abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
-    plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+
+    # Beat grouping
+    abp_beats, ppg_beats = group_beats(abp_beats, ppg_beats)
+    plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
 
     abp_hr = len(abp_beats) / (len(abp) / fs) * 60
     ppg_hr = len(ppg_beats) / (len(ppg) / fs) * 60
@@ -598,9 +621,11 @@ def signal_processing(seg_name, abp, ppg, fs):
 
 def synchronization(abp, ppg, abp_dips, ppg_dips):
     # Find closest PPG dip to first ABP dip
-    first_abp_ind = 0
-    first_abp = abp_dips[first_abp_ind]
-    differences = abs(ppg_dips - first_abp)
+    for i in range(0, len(abp_dips)):
+        first_abp = abp_dips[i]
+        differences = abs(ppg_dips - first_abp)
+        if min(differences) < 30:
+            break
     first_ppg_ind = np.argmin(differences)
     first_ppg = ppg_dips[first_ppg_ind]
     # print([first_abp_ind, first_abp], [first_ppg_ind, first_ppg])
@@ -620,23 +645,40 @@ def synchronization(abp, ppg, abp_dips, ppg_dips):
 
     return new_abp, new_ppg
 
-    # return {
-    #     'abp': new_abp,
-    #     'ppg': new_ppg,
-    #     'abp_dips': new_abp_dips,
-    #     'ppg_dips': new_ppg_dips,
-    # }
 
-    # adj_abp_beats = []
-    # adj_ppg_beats = []
-    # for a_beat in abp_beats:
-    #     for p_beat in ppg_beats:
-    #         adj_p_beat = p_beat - d
-    #         if adj_p_beat - 7 < a_beat < adj_p_beat + 7:
-    #             adj_ppg_beats.append(adj_p_beat)
-    #             adj_abp_beats.append(a_beat)
-    # print(len(adj_abp_beats), len(adj_ppg_beats))
-    # return adj_abp_beats, adj_ppg_beats
+def group_beats(abp_beats, ppg_beats):
+    i = 0
+    while i < min(len(abp_beats), len(ppg_beats)):
+        a = abp_beats[i]
+        p = ppg_beats[i]
+        if p - 10 <= a <= p + 10:
+            i += 1
+        else:
+            if a < p:
+                # print(f"remove abp beat {a}")
+                abp_beats = abp_beats[abp_beats != a]
+                # if not value_exists(ppg_beats, a):
+                #     ppg_beats = ppg_beats[ppg_beats != p]
+            elif a > p:
+                # print(f"remove ppg beat {p}")
+                ppg_beats = ppg_beats[ppg_beats != p]
+                # if not value_exists(abp_beats, p):
+                #     abp_beats = abp_beats[abp_beats != a]
+    if len(abp_beats) > len(ppg_beats):
+        diff = len(abp_beats) - len(ppg_beats)
+        abp_beats = abp_beats[abp_beats != abp_beats[-diff]]
+    return abp_beats, ppg_beats
+
+
+def value_exists(beats, a):
+    v = True
+    for x in beats:
+        if x - 10 <= a <= x + 10:
+            v = True
+            break
+        else:
+            v = False
+    return v
 
 
 def pulse_detection(data, algorithm, duration, sig):
@@ -674,10 +716,13 @@ def get_optimal_beats_lists(abp, ppg, fs):
     diff_avg23 = sorted_avg[2] - sorted_avg[1]
 
     outlier = None
+    questionable = False
     if diff_avg23 > diff_avg12 * 2:
         outlier = sorted_avg[2]
     elif diff_avg12 > diff_avg23 * 2:
         outlier = sorted_avg[0]
+    else:
+        questionable = True
 
     diff1 = abs(len(abp_beats1) - len(ppg_beats1))
     diff2 = abs(len(abp_beats2) - len(ppg_beats2))
@@ -702,7 +747,7 @@ def get_optimal_beats_lists(abp, ppg, fs):
                                                        abp_beats1, abp_beats2, abp_beats3,
                                                        ppg_beats1, ppg_beats2, ppg_beats3)
 
-    return abp_opt, ppg_opt
+    return abp_opt, ppg_opt, questionable
 
 
 def get_best_beats_from_diffper(diffper1, diffper2, diffper3,

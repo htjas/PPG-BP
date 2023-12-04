@@ -81,12 +81,18 @@ def plot_abp_ppg(segment_name, abp, ppg, fs):
     fig.suptitle(f"Segment {segment_name}")
 
     t = np.arange(0, (len(abp) / fs), 1.0 / fs)
+    if len(t) != len(abp):
+        diff = len(t) - len(abp)
+        t = t[0:-diff]
     ax1.plot(t, abp, color='red', label='ABP')
     ax1.set_title("ABP")
     ax1.set_xlim([-0.1, 10])
     # ax1.set_ylim([-40, 140])
 
     t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
+    if len(t) != len(ppg):
+        diff = len(t) - len(ppg)
+        t = t[0:-diff]
     ax2.plot(t, ppg, color='green', label='PPG')
     ax2.set_title("PPG")
     ax2.set_xlim([-0.1, 10])
@@ -118,6 +124,9 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     fig.suptitle(f"Segment {segment_name}")
 
     t = np.arange(0, (len(abp) / fs), 1.0 / fs)
+    if len(t) != len(abp):
+        diff = len(t) - len(abp)
+        t = t[0:-diff]
 
     ax1.plot(t, abp, color='red')
     ax1.scatter(t[0] + abp_beats / fs,
@@ -132,6 +141,9 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     ax1.set_title('ABP with IBIS')
 
     t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
+    if len(t) != len(ppg):
+        diff = len(t) - len(ppg)
+        t = t[0:-diff]
     ax2.plot(t, ppg, color='green')
     ax2.scatter(t[0] + ppg_beats / fs,
                 ppg[ppg_beats],
