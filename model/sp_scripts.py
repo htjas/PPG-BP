@@ -52,19 +52,19 @@ def manual_filter_data(folder):
     i = 1
     count = 0
 
-    df = pd.read_csv(os.path.abspath(os.getcwd()) + '/faulty_data/segments_low_hr.csv')
-    low_hrs = df.values
+    # df = pd.read_csv(os.path.abspath(os.getcwd()) + '/faulty_data/segments_low_hr.csv')
+    # low_hrs = df.values
     df = pd.read_csv(os.path.abspath(os.getcwd()) + '/faulty_data/segments_big_diff.csv')
     big_diffs = df.values
 
     for filename in filenames:
         print(f"File {i}/{len(filenames)} - {filename} ")
-        for lh in low_hrs:
-            if lh[0] in filename:
-                print(lh[0], filename)
-                sig, seg_name, end = split_filename(filename)
-                os.remove(f"{folder}/{filename}")
-                os.remove(f"usable_bp_data_2/abp_{seg_name}.{end}")
+        # for lh in low_hrs:
+        #     if lh[0] in filename:
+        #         print(lh[0], filename)
+        #         sig, seg_name, end = split_filename(filename)
+        #         os.remove(f"{folder}/{filename}")
+        #         os.remove(f"usable_bp_data_2/abp_{seg_name}.{end}")
         for bd in big_diffs:
             if bd[0] in filename:
                 print(bd[0], filename)
@@ -113,10 +113,11 @@ def process_data(fs):
     filenames.sort()
 
     i = 1
+    tot_median_cts, tot_median_sys, tot_median_dia = np.array([]), np.array([]), np.array([])
     for filename in filenames:
-        if i != 24:  # 24
-            i += 1
-            continue
+        # if i == 3:
+        #     i += 1
+        #     break
         try:
             # 1: Data Reading
             seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -124,51 +125,55 @@ def process_data(fs):
             # 2: Data Pre-Processing
             abp_filt, ppg_filt = pre_process_data(abp, ppg, fs, seg_name)
 
+            # 3: Signal Processing (Detecting Beats and Fiducials)
+            result = signal_processing(seg_name, abp_filt, ppg_filt, fs)
+
+            abp_fidp = fiducial_points(result['abp'], result['abp_beats'], fs, vis=False, header='ABP of ' + seg_name)
+            ppg_fidp = fiducial_points(result['ppg'], result['ppg_beats'], fs, vis=False, header='PPG of ' + seg_name)
+
             # Feature extraction
             # ppg_fdf = frequency_domain_features(ppg_filt, fs)
             # print(ppg_fdf)
 
+            # 4: Feature extraction and average value calculation
+            sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, result['abp'])
+            ct, tsc, ctv = ct_detection(ppg_fidp, fs)
+            # plot_trio(seg_name, tsc, ctv, tss, sysv, tsd, diav)
+
+            median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
+            median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
+            median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
+
+            tot_median_cts = np.concatenate((tot_median_cts, median_ct))
+            tot_median_sys = np.concatenate((tot_median_sys, median_sys))
+            tot_median_dia = np.concatenate((tot_median_dia, median_dia))
+
         except Exception as e:
             print('ERROR', e)
-
-        # 3: Signal Processing (Beat and Dip detection)
-        result = signal_processing(seg_name, abp_filt, ppg_filt, fs)
-
-        abp_fidp = fiducial_points(result['abp'], result['abp_beats'], fs, vis=False, header='ABP of ' + seg_name)
-        ppg_fidp = fiducial_points(result['ppg'], result['ppg_beats'], fs, vis=False, header='PPG of ' + seg_name)
-
-        # 4: Feature extraction and average value calculation
-        ct, tsc, ctv = ct_detection(ppg_fidp, fs)
-        sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
-
-        # plot_trio(seg_name, tsc, ctv, tss, sysv, tsd, diav)
-        # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
-        # median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
-        # median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
-
-        # 5: Overall vector creation
-        # Create ‘overall’ vectors by concatenating each of the three vectors across all ICU stays
-        # Result: three vectors each of length 1200 (i.e. 20 values for 60 ICU stays)
-
-        # 6: Data labelling
-        # Create a vector of ICU stays (i.e. a vector of length 1200
-        # which contains the ICU stay ID from which each window was obtained).
-
-        # 7: Split data into training and testing
-
-        # 8: Linear regression model creation
-        # Use the model to estimate SBP (or DBP) from each SI value in the testing data.
-        #   This should produce a vector of estimated SBP (or DBP) values of length 600.
-        # Calculate the errors between the estimated and reference SBP (or DBP) values
-        #   (using error = estimated - reference).
-        # Calculate error statistics for the entire testing dataset.
-        #   e.g. mean absolute error, bias (i.e. mean error),
-        #   limits of agreement (i.e. 1.96 * standard deviation of errors).
 
         print("---")
         # Move one file at a time
         # x = input("> next")
         i += 1
+
+    # Convert the list of lists to a NumPy array
+    mid = int(len(tot_median_cts) / 2)
+    df = pd.DataFrame(data=tot_median_cts[:mid])
+    df.to_csv('features/training/total_median_cts_train.csv', index=False)
+    df = pd.DataFrame(data=tot_median_cts[mid:])
+    df.to_csv('features/testing/total_median_cts_test.csv', index=False)
+
+    mid = int(len(tot_median_sys) / 2)
+    df = pd.DataFrame(data=tot_median_sys[:mid])
+    df.to_csv('features/training/total_median_systoles_train.csv', index=False)
+    df = pd.DataFrame(data=tot_median_sys[mid:])
+    df.to_csv('features/testing/total_median_systoles_test.csv', index=False)
+
+    mid = int(len(tot_median_sys) / 2)
+    df = pd.DataFrame(data=tot_median_dia[:mid])
+    df.to_csv('features/training/total_median_diastoles_train.csv', index=False)
+    df = pd.DataFrame(data=tot_median_dia[mid:])
+    df.to_csv('features/testing/total_median_diastoles_test.csv', index=False)
 
 
 def process_ppg_data(path, fs):
@@ -262,7 +267,7 @@ def calculate_median_mean(data, fs, window):
             values = []
             time_window = time_window + window
 
-    return median_values, mean_values
+    return np.array(median_values), np.array(mean_values)
 
 
 def beat_fidp_detection(data, fs, seg_name):
@@ -566,15 +571,15 @@ def savgol_derivatives(ppg_filt):
 def signal_processing(seg_name, abp, ppg, fs):
     # First iteration of beat finding (MIMIC default methods)
     abp_beats, ppg_beats = get_optimal_beats_lists(abp, ppg, fs)
-    plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
+    # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # For comparison: beat detection from mean crossing
     beats_a, beats_p = get_beats_from_mean_crossings(abp, ppg)
     is_larger = len(beats_a) + len(beats_p) > len(abp_beats) + len(beats_p)
     is_closer = abs(len(beats_a) - len(beats_p)) < abs(len(abp_beats) - len(ppg_beats))
     if is_larger and is_closer:
-        print(f"Mimic beats - {len(abp_beats), len(ppg_beats)},"
-              f" Mean Crossing beats - {len(beats_a), len(beats_p)} ")
+        # print(f"Mimic beats - {len(abp_beats), len(ppg_beats)},"
+        #       f" Mean Crossing beats - {len(beats_a), len(beats_p)} ")
         abp_beats = beats_a
         ppg_beats = beats_p
         # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (downward mean crossings)', abp, abp_beats, ppg, ppg_beats, fs)
@@ -584,21 +589,21 @@ def signal_processing(seg_name, abp, ppg, fs):
     ppg_beat_interval = len(ppg) / len(ppg_beats)
     abp_beats, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_beats, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval * .75, prominence=0.01)
-    plot_abp_ppg_with_pulse(seg_name + ' DIPS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    # plot_abp_ppg_with_pulse(seg_name + ' DIPS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # Signal synchronization : delay approx = 18 (288 ms)
     abp, ppg = synchronization(abp, ppg, abp_beats, ppg_beats)
-    plot_abp_ppg(seg_name + ' Synchronised', abp, ppg, fs)
+    # plot_abp_ppg(seg_name + ' Synchronised', abp, ppg, fs)
 
     # Third iteration: Peak finding
     abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
-    plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
     normal_length_a, normal_length_p = len(abp_beats), len(ppg_beats)
 
     # Beat grouping
     abp_beats, ppg_beats = group_beats(abp_beats, ppg_beats)
-    plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
+    # plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
 
     if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
         print(f"too big of a difference after grouping -"
@@ -652,7 +657,7 @@ def group_beats(abp_beats, ppg_beats):
     while i < min(len(abp_beats), len(ppg_beats)):
         a = abp_beats[i]
         p = ppg_beats[i]
-        if p - 10 <= a <= p + 10:
+        if p - 20 <= a <= p + 20:
             i += 1
         else:
             if a < p:
@@ -668,6 +673,9 @@ def group_beats(abp_beats, ppg_beats):
     if len(abp_beats) > len(ppg_beats):
         diff = len(abp_beats) - len(ppg_beats)
         abp_beats = abp_beats[abp_beats != abp_beats[-diff]]
+    elif len(abp_beats) < len(ppg_beats):
+        diff = len(ppg_beats) - len(abp_beats)
+        ppg_beats = ppg_beats[ppg_beats != ppg_beats[-diff]]
     return abp_beats, ppg_beats
 
 

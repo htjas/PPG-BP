@@ -30,4 +30,4 @@ path = configs.get('path_of_data').data
 
 # Signal processing
 fs = float(configs.get('default_fs').data)
-process_data(path, fs)
+process_data(fs)
