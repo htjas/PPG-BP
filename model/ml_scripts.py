@@ -1,12 +1,55 @@
+import pandas as pd
 import sklearn
+import os
+
+import sklearn.linear_model
 
 
-def create_model():
-    print()
+def run_model():
+    abs_path = os.path.abspath(os.getcwd())
+    ppg_train_path = abs_path + '/features/training/total_median_cts_train.csv'
+    df = pd.read_csv(ppg_train_path)
+    values = df.values
+    ppg_train = values[:, 0]
+
+    ppg_test_path = abs_path + '/features/testing/total_median_cts_test.csv'
+    df = pd.read_csv(ppg_test_path)
+    values = df.values
+    ppg_test = values[:, 0]
+
+    # abp_train_path = abs_path + '/features/training/total_median_dia_train.csv'
+    abp_train_path = abs_path + '/features/training/total_median_systoles_train.csv'
+    df = pd.read_csv(abp_train_path)
+    values = df.values
+    abp_train = values[:, 0]
+
+    abp_test_path = abs_path + '/features/testing/total_median_systoles_test.csv'
+    df = pd.read_csv(abp_test_path)
+    values = df.values
+    abp_test = values[:, 0]
+
+    # Assuming X contains CTs and y contains Systoles (or Diastoles)
+    ppg_train = ppg_train[:len(abp_train)]
+    ppg_train = ppg_train.reshape(-1, 1)
+    abp_train = abp_train.reshape(-1, 1)
+
+    model = sklearn.linear_model.LinearRegression()
+    model.fit(ppg_train, abp_train)
+
+    ppg_test = ppg_test[:len(abp_test)]
+    ppg_test = ppg_test.reshape(-1, 1)
+
+    # Make predictions on the test set
+    predictions = model.predict(ppg_test)
+
+    abp_test = abp_test.reshape(-1, 1)
+    # Evaluate the model
+    mse = sklearn.metrics.mean_squared_error(abp_test, predictions)
+    print(f'Mean Squared Error: {mse}')
 
 
 def main():
-    print('ML scripts')
+    run_model()
     # 5: Overall vector creation
     # Create ‘overall’ vectors by concatenating each of the three vectors across all ICU stays
     # Result: three vectors each of length 1200 (i.e. 20 values for 60 ICU stays)
