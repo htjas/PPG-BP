@@ -78,7 +78,7 @@ def plot_abp_ppg(segment_name, abp, ppg, fs):
                                    sharex=False,
                                    sharey=False,
                                    figsize=(8, 8))
-    fig.suptitle(f"Segment {segment_name}")
+    fig.suptitle(f"{segment_name}")
 
     t = np.arange(0, (len(abp) / fs), 1.0 / fs)
     if len(t) != len(abp):
@@ -121,7 +121,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
                                    sharex=False,
                                    sharey=False,
                                    figsize=(8, 8))
-    fig.suptitle(f"Segment {segment_name}")
+    fig.suptitle(f"{segment_name}")
 
     t = np.arange(0, (len(abp) / fs), 1.0 / fs)
     if len(t) != len(abp):

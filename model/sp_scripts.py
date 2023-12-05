@@ -114,7 +114,7 @@ def process_data(fs):
 
     i = 1
     for filename in filenames:
-        if i != 14:  # 24
+        if i != 24:  # 24
             i += 1
             continue
         try:
@@ -565,28 +565,23 @@ def savgol_derivatives(ppg_filt):
 
 def signal_processing(seg_name, abp, ppg, fs):
     # First iteration of beat finding (MIMIC default methods)
-    abp_beats, ppg_beats, questionable = get_optimal_beats_lists(abp, ppg, fs)
+    abp_beats, ppg_beats = get_optimal_beats_lists(abp, ppg, fs)
     plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
-    print(len(abp_beats), len(ppg_beats))
 
-    if questionable:
-        mean_value = np.mean(abp)
-        above_mean = abp > mean_value
-        counta = np.count_nonzero(np.diff(above_mean.astype(int)) == -1)
-        mean_value = np.mean(ppg)
-        above_mean = ppg > mean_value
-        countp = np.count_nonzero(np.diff(above_mean.astype(int)) == -1)
-        interval = len(abp) / ((counta + countp)/2)
-
-        a, _ = sp.find_peaks(abp, distance=interval, prominence=5)
-        p, _ = sp.find_peaks(ppg, distance=interval, prominence=0.01)
-        plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, a, ppg, p, fs)
-        print(len(a), len(p))
-
-    abp_beat_interval = len(abp) / len(abp_beats)
-    ppg_beat_interval = len(ppg) / len(ppg_beats)
+    # For comparison: beat detection from mean crossing
+    beats_a, beats_p = get_beats_from_mean_crossings(abp, ppg)
+    is_larger = len(beats_a) + len(beats_p) > len(abp_beats) + len(beats_p)
+    is_closer = abs(len(beats_a) - len(beats_p)) < abs(len(abp_beats) - len(ppg_beats))
+    if is_larger and is_closer:
+        print(f"Mimic beats - {len(abp_beats), len(ppg_beats)},"
+              f" Mean Crossing beats - {len(beats_a), len(beats_p)} ")
+        abp_beats = beats_a
+        ppg_beats = beats_p
+        # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (downward mean crossings)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # Second iteration: Peak finding (SP manual methods)
+    abp_beat_interval = len(abp) / len(abp_beats)
+    ppg_beat_interval = len(ppg) / len(ppg_beats)
     abp_beats, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_beats, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval * .75, prominence=0.01)
     plot_abp_ppg_with_pulse(seg_name + ' DIPS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
@@ -598,11 +593,16 @@ def signal_processing(seg_name, abp, ppg, fs):
     # Third iteration: Peak finding
     abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
-    # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    normal_length_a, normal_length_p = len(abp_beats), len(ppg_beats)
 
     # Beat grouping
     abp_beats, ppg_beats = group_beats(abp_beats, ppg_beats)
     plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
+
+    if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
+        print(f"too big of a difference after grouping -"
+              f"{max(normal_length_a, normal_length_p) - max(len(abp_beats), len(ppg_beats))}")
 
     abp_hr = len(abp_beats) / (len(abp) / fs) * 60
     ppg_hr = len(ppg_beats) / (len(ppg) / fs) * 60
@@ -623,10 +623,11 @@ def synchronization(abp, ppg, abp_dips, ppg_dips):
     # Find closest PPG dip to first ABP dip
     for i in range(0, len(abp_dips)):
         first_abp = abp_dips[i]
-        differences = abs(ppg_dips - first_abp)
-        if min(differences) < 30:
+        differences = ppg_dips - first_abp
+        smallest_diff = min(num for num in differences if num > 0)
+        if smallest_diff < 30:
+            first_ppg_ind, = np.argwhere(differences == smallest_diff)[0]
             break
-    first_ppg_ind = np.argmin(differences)
     first_ppg = ppg_dips[first_ppg_ind]
     # print([first_abp_ind, first_abp], [first_ppg_ind, first_ppg])
 
@@ -681,6 +682,22 @@ def value_exists(beats, a):
     return v
 
 
+def get_beats_from_mean_crossings(abp, ppg):
+    mean_value = np.mean(abp)
+    above_mean = abp > mean_value
+    count_a = np.count_nonzero(np.diff(above_mean.astype(int)) == -1)
+    mean_value = np.mean(ppg)
+    above_mean = ppg > mean_value
+    count_p = np.count_nonzero(np.diff(above_mean.astype(int)) == -1)
+    abp_beat_interval = len(abp) / ((count_a + count_p) / 2)
+    ppg_beat_interval = abp_beat_interval
+
+    abp_beats, _ = sp.find_peaks(-abp, distance=abp_beat_interval, prominence=5)
+    ppg_beats, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval, prominence=0.01)
+
+    return abp_beats, ppg_beats
+
+
 def pulse_detection(data, algorithm, duration, sig):
     # Pulse detection Algorithms
     temp_fs = 125
@@ -716,13 +733,10 @@ def get_optimal_beats_lists(abp, ppg, fs):
     diff_avg23 = sorted_avg[2] - sorted_avg[1]
 
     outlier = None
-    questionable = False
     if diff_avg23 > diff_avg12 * 2:
         outlier = sorted_avg[2]
     elif diff_avg12 > diff_avg23 * 2:
         outlier = sorted_avg[0]
-    else:
-        questionable = True
 
     diff1 = abs(len(abp_beats1) - len(ppg_beats1))
     diff2 = abs(len(abp_beats2) - len(ppg_beats2))
@@ -746,8 +760,7 @@ def get_optimal_beats_lists(abp, ppg, fs):
         abp_opt, ppg_opt = get_best_beats_from_diffper(diffper1, diffper2, diffper3,
                                                        abp_beats1, abp_beats2, abp_beats3,
                                                        ppg_beats1, ppg_beats2, ppg_beats3)
-
-    return abp_opt, ppg_opt, questionable
+    return abp_opt, ppg_opt
 
 
 def get_best_beats_from_diffper(diffper1, diffper2, diffper3,
