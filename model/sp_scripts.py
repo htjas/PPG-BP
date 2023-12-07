@@ -1,8 +1,10 @@
+import inspect
 import os
 import pathlib
 import shutil
 import statistics
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import pylab as pl
 import scipy as sp
@@ -113,11 +115,12 @@ def process_data(fs):
     filenames.sort()
 
     i = 1
-    tot_median_cts, tot_median_sys, tot_median_dia = np.array([]), np.array([]), np.array([])
+    tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
+    a_sysv, p_sysv, a_diav, p_diav = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
-        # if i == 3:
-        #     i += 1
-        #     break
+        if i != 48:
+            i += 1
+            continue
         try:
             # 1: Data Reading
             seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -131,49 +134,28 @@ def process_data(fs):
             abp_fidp = fiducial_points(result['abp'], result['abp_beats'], fs, vis=False, header='ABP of ' + seg_name)
             ppg_fidp = fiducial_points(result['ppg'], result['ppg_beats'], fs, vis=False, header='PPG of ' + seg_name)
 
-            # Feature extraction
-            # ppg_fdf = frequency_domain_features(ppg_filt, fs)
-            # print(ppg_fdf)
-
-            # 4: Feature extraction and average value calculation
-            sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, result['abp'])
-            ct, tsc, ctv = ct_detection(ppg_fidp, fs)
-            # plot_trio(seg_name, tsc, ctv, tss, sysv, tsd, diav)
-
-            median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
-            median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
-            median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
-
-            tot_median_cts = np.concatenate((tot_median_cts, median_ct))
-            tot_median_sys = np.concatenate((tot_median_sys, median_sys))
-            tot_median_dia = np.concatenate((tot_median_dia, median_dia))
+            # 4: Feature extraction and grouping
+            a_sysv, p_sysv, a_diav, p_diav = extract_features(abp_fidp, ppg_fidp, result)
 
         except Exception as e:
             print('ERROR', e)
+
+        tot_ppg_sys = np.concatenate((tot_ppg_sys, p_sysv))
+        tot_ppg_dia = np.concatenate((tot_ppg_dia, p_diav))
+        tot_abp_sys = np.concatenate((tot_abp_sys, a_sysv))
+        tot_abp_dia = np.concatenate((tot_abp_dia, a_diav))
+        print(len(tot_ppg_sys), len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_dia))
 
         print("---")
         # Move one file at a time
         # x = input("> next")
         i += 1
 
-    # Convert the list of lists to a NumPy array
-    mid = int(len(tot_median_cts) / 2)
-    df = pd.DataFrame(data=tot_median_cts[:mid])
-    df.to_csv('features/training/total_median_cts_train.csv', index=False)
-    df = pd.DataFrame(data=tot_median_cts[mid:])
-    df.to_csv('features/testing/total_median_cts_test.csv', index=False)
-
-    mid = int(len(tot_median_sys) / 2)
-    df = pd.DataFrame(data=tot_median_sys[:mid])
-    df.to_csv('features/training/total_median_systoles_train.csv', index=False)
-    df = pd.DataFrame(data=tot_median_sys[mid:])
-    df.to_csv('features/testing/total_median_systoles_test.csv', index=False)
-
-    mid = int(len(tot_median_sys) / 2)
-    df = pd.DataFrame(data=tot_median_dia[:mid])
-    df.to_csv('features/training/total_median_diastoles_train.csv', index=False)
-    df = pd.DataFrame(data=tot_median_dia[mid:])
-    df.to_csv('features/testing/total_median_diastoles_test.csv', index=False)
+    # Save extracted features to .csv
+    save_split_features([[tot_ppg_sys, 'tot_ppg_sys'],
+                         [tot_ppg_dia, 'tot_ppg_dia'],
+                         [tot_abp_sys, 'tot_abp_sys'],
+                         [tot_abp_dia, 'tot_abp_dia']])
 
 
 def process_ppg_data(path, fs):
@@ -253,6 +235,112 @@ def process_bp_data(path, fs):
     return median_sys, median_dia
 
 
+def extract_features(abp_fidp, ppg_fidp, result):
+    a_sys, a_dia, a_tss, a_sysv, a_tsd, a_diav = sys_dia_detection(abp_fidp, result['abp'])
+    p_sys, p_dia, p_tss, p_sysv, p_tsd, p_diav = sys_dia_detection(ppg_fidp, result['ppg'])
+
+    a_tss, p_tss, a_tsd, p_tsd = group_timestamps(a_tss, p_tss, a_tsd, p_tsd)
+    # a_tsd, p_tsd, a_og_tsd, p_og_tsd = group_timestamps(a_tsd, p_tsd)
+
+    a_comm = np.intersect1d(a_tss, a_tsd)
+    p_comm = np.intersect1d(p_tss, p_tsd)
+
+    a_sysv = a_sysv[a_tss]
+    p_sysv = p_sysv[p_tss]
+    a_diav = a_diav[a_tsd]
+    p_diav = p_diav[p_tsd]
+
+    # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
+    # median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
+    # median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
+
+    # ppg_fdf = frequency_domain_features(ppg_filt, fs)
+    # print(ppg_fdf)
+    # ct, tsc, ctv = ct_detection(ppg_fidp, fs)
+
+    return a_sysv, p_sysv, a_diav, p_diav
+
+
+def group_timestamps(a_tss, a_tsd, p_tss, p_tsd):
+    abp_sys_timestamps, abp_dia_timestamps, ppg_sys_timestamps, ppg_dia_timestamps = [], [], [], []
+    i, as_ext, ps_ext, ad_ext, pd_ext = 0, 0, 0, 0, 0
+    while i < min(len(a_tss), len(a_tsd), len(p_tss), len(p_tsd)):
+        ats = a_tss[i]
+        atd = a_tsd[i]
+        pts = p_tss[i]
+        ptd = p_tsd[i]
+        if (i < len(a_tss) - 1 and i < len(p_tss) - 1
+                and i < len(a_tsd) - 1 and i < len(p_tsd) - 1):
+            if (ats <= pts <= a_tss[i + 1] - 5
+                    and atd <= ptd <= a_tsd[i + 1] - 5):
+                abp_sys_timestamps.append(i + as_ext)
+                ppg_sys_timestamps.append(i + ps_ext)
+                abp_dia_timestamps.append(i + as_ext)
+                ppg_dia_timestamps.append(i + ps_ext)
+                i += 1
+            elif (pts <= ats <= p_tss[i + 1] - 5
+                  and ptd <= atd <= p_tsd[i + 1] - 5):
+                abp_sys_timestamps.append(i + as_ext)
+                ppg_sys_timestamps.append(i + ps_ext)
+                abp_dia_timestamps.append(i + as_ext)
+                ppg_dia_timestamps.append(i + ps_ext)
+                i += 1
+            else:
+                if ats < pts:
+                    a_tss = a_tss[a_tss != ats]
+                    as_ext += 1
+                elif ats > pts:
+                    p_tss = p_tss[p_tss != pts]
+                    ps_ext += 1
+                if atd < ptd:
+                    a_tsd = a_tsd[a_tsd != atd]
+                    ad_ext += 1
+                elif atd > ptd:
+                    p_tsd = p_tsd[p_tsd != ptd]
+                    pd_ext += 1
+        else:
+            abp_sys_timestamps.append(i + as_ext)
+            ppg_sys_timestamps.append(i + ps_ext)
+            abp_dia_timestamps.append(i + as_ext)
+            ppg_dia_timestamps.append(i + ps_ext)
+            break
+    abp_sys_timestamps, ppg_sys_timestamps = equal_out_by_shortening(abp_sys_timestamps, ppg_sys_timestamps)
+    abp_dia_timestamps, ppg_dia_timestamps = equal_out_by_shortening(abp_dia_timestamps, ppg_dia_timestamps)
+
+    return abp_sys_timestamps, ppg_sys_timestamps, abp_dia_timestamps, ppg_dia_timestamps
+
+
+def save_split_features(features):
+    for feat in features:
+        mid = int(len(feat[0]) / 2)
+        df = pd.DataFrame(data=feat[0][:mid])
+        df.to_csv(f"features/training/{feat[1]}_train.csv", index=False)
+        df = pd.DataFrame(data=feat[0][mid:])
+        df.to_csv(f"features/testing/{feat[1]}_test.csv", index=False)
+
+    # mid = int(len(tot_median_sys) / 2)
+    # df = pd.DataFrame(data=tot_median_sys[:mid])
+    # df.to_csv('features/training/total_median_systoles_train.csv', index=False)
+    # df = pd.DataFrame(data=tot_median_sys[mid:])
+    # df.to_csv('features/testing/total_median_systoles_test.csv', index=False)
+    #
+    # mid = int(len(tot_median_dia) / 2)
+    # df = pd.DataFrame(data=tot_median_dia[:mid])
+    # df.to_csv('features/training/total_median_diastoles_train.csv', index=False)
+    # df = pd.DataFrame(data=tot_median_dia[mid:])
+    # df.to_csv('features/testing/total_median_diastoles_test.csv', index=False)
+
+
+def equal_out_by_shortening(a_ts, p_ts):
+    if len(a_ts) > len(p_ts):
+        diff = len(a_ts) - len(p_ts)
+        a_ts = a_ts[:-diff]
+    elif len(a_ts) < len(p_ts):
+        diff = len(p_ts) - len(a_ts)
+        p_ts = p_ts[:-diff]
+    return a_ts, p_ts
+
+
 def calculate_median_mean(data, fs, window):
     values = []
     median_values = []
@@ -311,7 +399,7 @@ def ct_detection(fidp, fs):
     ts = np.zeros(length, dtype=int)
     values = np.zeros(length, dtype=float)
     for beat_no in range(length):
-        ts[beat_no] = fidp["pks"][beat_no]
+        ts[beat_no] = beat_no  # fidp["pks"][beat_no]
         values[beat_no] = (fidp["pks"][beat_no] - fidp["ons"][beat_no]) / fs
     return np.column_stack((ts, values)), ts, values
 
@@ -331,16 +419,19 @@ def agi_detection(fidp, fs):
 
 def sys_dia_detection(fidp, data):
     # (From filtered data) Systolic BP = pks; Diastolic BP = dia
-    length = min(len(fidp["pks"]), len(fidp["dia"]))
+    sys = fidp['pks']
+    dia = fidp['dia']
+    sys, dia = group_sys_dia(sys, dia)
+    length = min(len(sys), len(dia))
     tss = np.zeros(length, dtype=int)
     tsd = np.zeros(length, dtype=int)
     sysv = np.zeros(length, dtype=float)
     diav = np.zeros(length, dtype=float)
     for beat_no in range(length):
-        tss[beat_no] = fidp["pks"][beat_no]
-        sysv[beat_no] = data[int(tss[beat_no])]
-        tsd[beat_no] = fidp["dia"][beat_no]
-        diav[beat_no] = data[int(tsd[beat_no])]
+        tss[beat_no] = sys[beat_no]
+        sysv[beat_no] = data[sys[beat_no]]
+        tsd[beat_no] = dia[beat_no]
+        diav[beat_no] = data[dia[beat_no]]
 
     # plot_extracted_data(tss, sys)
     # plot_extracted_data(tsd, dia)
@@ -349,6 +440,25 @@ def sys_dia_detection(fidp, data):
     dia = np.column_stack((tsd, diav))
 
     return sys, dia, tss, sysv, tsd, diav
+
+
+def group_sys_dia(sys, dia):
+    i = 0
+    while i < min(len(sys), len(dia)):
+        s = sys[i]
+        d = dia[i]
+        if i < len(sys) - 1:
+            if s < d < sys[i + 1]:
+                i += 1
+            else:
+                if s < d:
+                    sys = sys[sys != s]
+                elif s > d:
+                    dia = dia[dia != d]
+        else:
+            break
+    sys, dia = equal_out_by_shortening(sys, dia)
+    return sys, dia
 
 
 def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
@@ -670,12 +780,7 @@ def group_beats(abp_beats, ppg_beats):
                 ppg_beats = ppg_beats[ppg_beats != p]
                 # if not value_exists(abp_beats, p):
                 #     abp_beats = abp_beats[abp_beats != a]
-    if len(abp_beats) > len(ppg_beats):
-        diff = len(abp_beats) - len(ppg_beats)
-        abp_beats = abp_beats[abp_beats != abp_beats[-diff]]
-    elif len(abp_beats) < len(ppg_beats):
-        diff = len(ppg_beats) - len(abp_beats)
-        ppg_beats = ppg_beats[ppg_beats != ppg_beats[-diff]]
+    abp_beats, ppg_beats = equal_out_by_shortening(abp_beats, ppg_beats)
     return abp_beats, ppg_beats
 
 

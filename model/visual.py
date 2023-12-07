@@ -10,21 +10,22 @@ def plot_wfdb_segment(segment_name, segment_data):
                    time_units='seconds')
 
 
-def plot_trio(seg_name, x1, y1, x2, y2, x3, y3):
+def plot_features(seg_name, x1, y1, x2, y2, x3, y3, x4, y4):
     fig, (ax1, ax2) = plt.subplots(2, 1,
                                    sharex=False,
                                    sharey=False,
                                    figsize=(8, 8))
     fig.suptitle(f"Segment {seg_name}")
 
-    ax1.scatter(x2, y2, color='red', label='Sys')
-    ax1.scatter(x3, y3, color='blue', label='Dia')
-    ax1.set_title("Sys + Dia")
-    ax1.set_xlim([7500, 9000])
+    ax1.scatter(np.arange(len(y1)), y1, color='red', label='Sys')
+    ax1.scatter(np.arange(len(y2)), y2, color='blue', label='Dia')
+    ax1.set_title("ABP")
+    # ax1.set_xlim([0, 100])
 
-    ax2.scatter(x1, y1, color='black', label='Agi')
-    ax2.set_title("Agi")
-    ax2.set_xlim([7500, 9000])
+    ax2.scatter(np.arange(len(y3)), y3, color='red', label='Sys')
+    ax2.scatter(np.arange(len(y4)), y4, color='blue', label='Dia')
+    ax2.set_title("PPG")
+    # ax2.set_xlim([0, 100])
 
     plt.show()
 
