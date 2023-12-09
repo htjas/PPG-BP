@@ -262,28 +262,19 @@ def extract_features(abp_fidp, ppg_fidp, result):
 
 
 def group_timestamps(a_tss, a_tsd, p_tss, p_tsd):
-    abp_sys_timestamps, abp_dia_timestamps, ppg_sys_timestamps, ppg_dia_timestamps = [], [], [], []
-    i, as_ext, ps_ext, ad_ext, pd_ext = 0, 0, 0, 0, 0
-    while i < min(len(a_tss), len(a_tsd), len(p_tss), len(p_tsd)):
+    abp_sys_timestamps, ppg_sys_timestamps = [], []
+    i, as_ext, ps_ext = 0, 0, 0
+    while i < min(len(a_tss), len(p_tss)):
         ats = a_tss[i]
-        atd = a_tsd[i]
         pts = p_tss[i]
-        ptd = p_tsd[i]
-        if (i < len(a_tss) - 1 and i < len(p_tss) - 1
-                and i < len(a_tsd) - 1 and i < len(p_tsd) - 1):
-            if (ats <= pts <= a_tss[i + 1] - 5
-                    and atd <= ptd <= a_tsd[i + 1] - 5):
+        if i < len(a_tss) - 1 and i < len(p_tss) - 1:
+            if ats <= pts <= a_tss[i + 1] - 5:
                 abp_sys_timestamps.append(i + as_ext)
                 ppg_sys_timestamps.append(i + ps_ext)
-                abp_dia_timestamps.append(i + as_ext)
-                ppg_dia_timestamps.append(i + ps_ext)
                 i += 1
-            elif (pts <= ats <= p_tss[i + 1] - 5
-                  and ptd <= atd <= p_tsd[i + 1] - 5):
+            elif pts <= ats <= p_tss[i + 1] - 5:
                 abp_sys_timestamps.append(i + as_ext)
                 ppg_sys_timestamps.append(i + ps_ext)
-                abp_dia_timestamps.append(i + as_ext)
-                ppg_dia_timestamps.append(i + ps_ext)
                 i += 1
             else:
                 if ats < pts:
@@ -292,6 +283,26 @@ def group_timestamps(a_tss, a_tsd, p_tss, p_tsd):
                 elif ats > pts:
                     p_tss = p_tss[p_tss != pts]
                     ps_ext += 1
+        else:
+            abp_sys_timestamps.append(i + as_ext)
+            ppg_sys_timestamps.append(i + ps_ext)
+            break
+
+    abp_dia_timestamps, ppg_dia_timestamps = [], []
+    i, ad_ext, pd_ext = 0, 0, 0
+    while i < min(len(a_tsd), len(p_tsd)):
+        atd = a_tsd[i]
+        ptd = p_tsd[i]
+        if i < len(a_tsd) - 1 and i < len(p_tsd) - 1:
+            if atd <= ptd <= a_tsd[i + 1] - 5:
+                abp_dia_timestamps.append(i + ad_ext)
+                ppg_dia_timestamps.append(i + pd_ext)
+                i += 1
+            elif ptd <= atd <= p_tsd[i + 1] - 5:
+                abp_dia_timestamps.append(i + ad_ext)
+                ppg_dia_timestamps.append(i + pd_ext)
+                i += 1
+            else:
                 if atd < ptd:
                     a_tsd = a_tsd[a_tsd != atd]
                     ad_ext += 1
@@ -299,11 +310,10 @@ def group_timestamps(a_tss, a_tsd, p_tss, p_tsd):
                     p_tsd = p_tsd[p_tsd != ptd]
                     pd_ext += 1
         else:
-            abp_sys_timestamps.append(i + as_ext)
-            ppg_sys_timestamps.append(i + ps_ext)
             abp_dia_timestamps.append(i + as_ext)
             ppg_dia_timestamps.append(i + ps_ext)
             break
+
     abp_sys_timestamps, ppg_sys_timestamps = equal_out_by_shortening(abp_sys_timestamps, ppg_sys_timestamps)
     abp_dia_timestamps, ppg_dia_timestamps = equal_out_by_shortening(abp_dia_timestamps, ppg_dia_timestamps)
 
