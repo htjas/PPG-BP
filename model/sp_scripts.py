@@ -261,63 +261,54 @@ def extract_features(abp_fidp, ppg_fidp, result):
     return a_sysv, p_sysv, a_diav, p_diav
 
 
-def group_timestamps(a_tss, a_tsd, p_tss, p_tsd):
-    abp_sys_timestamps, ppg_sys_timestamps = [], []
-    i, as_ext, ps_ext = 0, 0, 0
-    while i < min(len(a_tss), len(p_tss)):
-        ats = a_tss[i]
-        pts = p_tss[i]
-        if i < len(a_tss) - 1 and i < len(p_tss) - 1:
-            if ats <= pts <= a_tss[i + 1] - 5:
-                abp_sys_timestamps.append(i + as_ext)
-                ppg_sys_timestamps.append(i + ps_ext)
-                i += 1
-            elif pts <= ats <= p_tss[i + 1] - 5:
-                abp_sys_timestamps.append(i + as_ext)
-                ppg_sys_timestamps.append(i + ps_ext)
-                i += 1
-            else:
-                if ats < pts:
-                    a_tss = a_tss[a_tss != ats]
-                    as_ext += 1
-                elif ats > pts:
-                    p_tss = p_tss[p_tss != pts]
-                    ps_ext += 1
-        else:
-            abp_sys_timestamps.append(i + as_ext)
-            ppg_sys_timestamps.append(i + ps_ext)
-            break
+def group_timestamps(a_tss, p_tss, a_tsd, p_tsd):
 
-    abp_dia_timestamps, ppg_dia_timestamps = [], []
-    i, ad_ext, pd_ext = 0, 0, 0
-    while i < min(len(a_tsd), len(p_tsd)):
-        atd = a_tsd[i]
-        ptd = p_tsd[i]
-        if i < len(a_tsd) - 1 and i < len(p_tsd) - 1:
-            if atd <= ptd <= a_tsd[i + 1] - 5:
-                abp_dia_timestamps.append(i + ad_ext)
-                ppg_dia_timestamps.append(i + pd_ext)
-                i += 1
-            elif ptd <= atd <= p_tsd[i + 1] - 5:
-                abp_dia_timestamps.append(i + ad_ext)
-                ppg_dia_timestamps.append(i + pd_ext)
-                i += 1
-            else:
-                if atd < ptd:
-                    a_tsd = a_tsd[a_tsd != atd]
-                    ad_ext += 1
-                elif atd > ptd:
-                    p_tsd = p_tsd[p_tsd != ptd]
-                    pd_ext += 1
-        else:
-            abp_dia_timestamps.append(i + as_ext)
-            ppg_dia_timestamps.append(i + ps_ext)
-            break
+    a_tss, p_tss, abp_sys_timestamps, ppg_sys_timestamps = group_a_p(a_tss, p_tss)
+    a_tsd, p_tsd, abp_dia_timestamps, ppg_dia_timestamps = group_a_p(a_tsd, p_tsd)
 
+    a_ind_diff, = np.where(a_tss != a_tsd)
+    p_ind_diff, = np.where(p_tss != p_tsd)
+
+    a_tss, p_tss = equal_out_by_shortening(a_tss, p_tss)
+    a_tsd, p_tsd = equal_out_by_shortening(a_tsd, p_tsd)
     abp_sys_timestamps, ppg_sys_timestamps = equal_out_by_shortening(abp_sys_timestamps, ppg_sys_timestamps)
     abp_dia_timestamps, ppg_dia_timestamps = equal_out_by_shortening(abp_dia_timestamps, ppg_dia_timestamps)
 
+    a_comm = np.intersect1d(abp_sys_timestamps, abp_dia_timestamps)
+    p_comm = np.intersect1d(ppg_sys_timestamps, ppg_dia_timestamps)
+
     return abp_sys_timestamps, ppg_sys_timestamps, abp_dia_timestamps, ppg_dia_timestamps
+
+
+def group_a_p(a_s, p_s):
+    abp_timestamps, ppg_timestamps = [], []
+    i, as_ext, ps_ext = 0, 0, 0
+    while i < min(len(a_s), len(p_s)):
+        a = a_s[i]
+        p = p_s[i]
+        if i < len(a_s) - 1 and i < len(p_s) - 1:
+            if a <= p <= a_s[i + 1] - 5 and p - 20 <= a <= p + 20:
+                abp_timestamps.append(i + as_ext)
+                ppg_timestamps.append(i + ps_ext)
+                i += 1
+            elif p <= a <= p_s[i + 1] - 5 and a - 20 <= p <= a + 20:
+                abp_timestamps.append(i + as_ext)
+                ppg_timestamps.append(i + ps_ext)
+                i += 1
+            else:
+                if a < p:
+                    a_s = a_s[a_s != a]
+                    as_ext += 1
+                elif a > p:
+                    p_s = p_s[p_s != p]
+                    ps_ext += 1
+        else:
+            break
+
+    a_s, p_s = equal_out_by_shortening(a_s, p_s)
+    abp_timestamps, ppg_timestamps = equal_out_by_shortening(abp_timestamps, ppg_timestamps)
+
+    return a_s, p_s, abp_timestamps, ppg_timestamps
 
 
 def save_split_features(features):
