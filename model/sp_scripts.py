@@ -117,7 +117,7 @@ def process_data(fs):
     i = 1
     tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
-        a_sysv, p_sysv, a_diav, p_diav = np.array([]), np.array([]), np.array([]), np.array([])
+        a_sys, p_sys, a_dia, p_dia = np.array([]), np.array([]), np.array([]), np.array([])
         # if i != 11:
         #     i += 1
         #     continue
@@ -135,15 +135,15 @@ def process_data(fs):
             ppg_fidp = fiducial_points(result['ppg'], result['ppg_beats'], fs, vis=False, header='PPG of ' + seg_name)
 
             # 4: Feature extraction and grouping
-            a_sysv, p_sysv, a_diav, p_diav = extract_features(abp_fidp, ppg_fidp, result)
+            a_sys, p_sys, a_dia, p_dia = extract_features(abp_fidp, ppg_fidp, result, fs)
 
         except Exception as e:
             print('ERROR', e)
 
-        tot_ppg_sys = np.concatenate((tot_ppg_sys, p_sysv))
-        tot_ppg_dia = np.concatenate((tot_ppg_dia, p_diav))
-        tot_abp_sys = np.concatenate((tot_abp_sys, a_sysv))
-        tot_abp_dia = np.concatenate((tot_abp_dia, a_diav))
+        tot_ppg_sys = np.concatenate((tot_ppg_sys, p_sys))
+        tot_ppg_dia = np.concatenate((tot_ppg_dia, p_dia))
+        tot_abp_sys = np.concatenate((tot_abp_sys, a_sys))
+        tot_abp_dia = np.concatenate((tot_abp_dia, a_dia))
 
         print("---")
         # Move one file at a time
@@ -151,10 +151,10 @@ def process_data(fs):
         i += 1
 
     # Save extracted features to .csv
-    save_split_features([[tot_ppg_sys, 'tot_ppg_sys'],
-                         [tot_ppg_dia, 'tot_ppg_dia'],
-                         [tot_abp_sys, 'tot_abp_sys'],
-                         [tot_abp_dia, 'tot_abp_dia']])
+    save_split_features([[tot_ppg_sys, 'med_ppg_sys'],
+                         [tot_ppg_dia, 'med_ppg_dia'],
+                         [tot_abp_sys, 'med_abp_sys'],
+                         [tot_abp_dia, 'med_abp_dia']])
 
 
 def process_ppg_data(path, fs):
@@ -234,29 +234,32 @@ def process_bp_data(path, fs):
     return median_sys, median_dia
 
 
-def extract_features(abp_fidp, ppg_fidp, result):
+def extract_features(abp_fidp, ppg_fidp, result, fs):
     a_sys, a_dia, a_tss, a_sysv, a_tsd, a_diav = sys_dia_detection(abp_fidp, result['abp'])
     p_sys, p_dia, p_tss, p_sysv, p_tsd, p_diav = sys_dia_detection(ppg_fidp, result['ppg'])
 
     a_ts_i, p_ts_i = group_timestamps(a_tss, p_tss, a_tsd, p_tsd)
 
     if (len(a_ts_i) != 0 or len(p_ts_i)) != 0 and len(a_ts_i) == len(p_ts_i):
-        a_sysv = a_sysv[a_ts_i]
-        p_sysv = p_sysv[p_ts_i]
-        a_diav = a_diav[a_ts_i]
-        p_diav = p_diav[p_ts_i]
+        a_sys, a_sysv = a_sys[a_ts_i], a_sysv[a_ts_i]
+        p_sys, p_sysv = p_sys[p_ts_i], p_sysv[p_ts_i]
+        a_dia, a_diav = a_dia[a_ts_i], a_diav[a_ts_i]
+        p_dia, p_diav = p_dia[p_ts_i], p_diav[p_ts_i]
     else:
         raise Exception('No matching timestamps found')
 
     # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
-    # median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
-    # median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
+    abp_median_sys, abp_mean_sys = calculate_median_mean(a_sys, fs, 30)
+    abp_median_dia, abp_mean_dia = calculate_median_mean(a_dia, fs, 30)
+
+    ppg_median_sys, ppg_mean_sys = calculate_median_mean(p_sys, fs, 30)
+    ppg_median_dia, ppg_mean_dia = calculate_median_mean(p_dia, fs, 30)
 
     # ppg_fdf = frequency_domain_features(ppg_filt, fs)
     # print(ppg_fdf)
     # ct, tsc, ctv = ct_detection(ppg_fidp, fs)
 
-    return a_sysv, p_sysv, a_diav, p_diav
+    return abp_median_sys, ppg_median_sys, abp_median_dia, ppg_median_dia
 
 
 def group_timestamps(a_tss, p_tss, a_tsd, p_tsd):

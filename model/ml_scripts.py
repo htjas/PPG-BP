@@ -1,21 +1,28 @@
-import pandas as pd
-import sklearn
-import os
+import logging
 
 import sklearn.linear_model
+import sklearn
+import pandas as pd
+import os
+from init_scripts import init_logger
+
 
 def run_model():
+    # Get Logger
+    logger = init_logger('ml_logs')
+    logger.info("Starting ML model (median sys and ppg estimation with svr)")
+
     # Training Data
-    ppg_sys_train = read_data('/features/training/tot_ppg_sys_train.csv')
-    ppg_dia_train = read_data('/features/training/tot_ppg_dia_train.csv')
-    abp_sys_train = read_data('/features/training/tot_abp_sys_train.csv')
-    abp_dia_train = read_data('/features/training/tot_abp_dia_train.csv')
+    ppg_sys_train = read_data('/features/training/med_ppg_sys_train.csv')
+    ppg_dia_train = read_data('/features/training/med_ppg_dia_train.csv')
+    abp_sys_train = read_data('/features/training/med_abp_sys_train.csv')
+    abp_dia_train = read_data('/features/training/med_abp_dia_train.csv')
 
     # Testing Data
-    ppg_sys_test = read_data('/features/testing/tot_ppg_sys_test.csv')
-    ppg_dia_test = read_data('/features/testing/tot_ppg_dia_test.csv')
-    abp_sys_test = read_data('/features/testing/tot_abp_sys_test.csv')
-    abp_dia_test = read_data('/features/testing/tot_abp_dia_test.csv')
+    ppg_sys_test = read_data('/features/testing/med_ppg_sys_test.csv')
+    ppg_dia_test = read_data('/features/testing/med_ppg_dia_test.csv')
+    abp_sys_test = read_data('/features/testing/med_abp_sys_test.csv')
+    abp_dia_test = read_data('/features/testing/med_abp_dia_test.csv')
 
     run_linear_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
     run_linear_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
@@ -42,7 +49,7 @@ def run_linear_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
 
     # Evaluate the model
     mse = sklearn.metrics.mean_squared_error(abp_test, predictions)
-    print(f'Linear Regression - Mean Squared Error: {mse} ({feat})')
+    logging.info(f'Linear Regression - Mean Squared Error: {mse} ({feat})')
 
 
 def run_sv_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
@@ -54,7 +61,7 @@ def run_sv_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
 
     # Evaluate the model
     mse = sklearn.metrics.mean_squared_error(abp_test, predictions)
-    print(f'SVR - Mean Squared Error: {mse} ({feat})')
+    logging.info(f'SVR - Mean Squared Error: {mse} ({feat})')
 
 
 def main():

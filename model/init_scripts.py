@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 from visual import *
 import os
+import logging
 
 
 def load_records(db_name):
@@ -219,6 +220,26 @@ def check_if_faulty(data):
             print(value)
             print("Segment contains faulty values")
             return True
+
+
+def init_logger(filename):
+    # Configure the logging settings
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s - %(levelname)s - %(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S')
+
+    # Create a file handler and set the log level
+    file_handler = logging.FileHandler(f'{filename}.log')
+    file_handler.setLevel(logging.DEBUG)
+
+    # Create a formatter and set it for the file handler
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+    file_handler.setFormatter(formatter)
+
+    # Add the file handler to the root logger
+    logging.getLogger('').addHandler(file_handler)
+
+    return logging
 
 
 def main():

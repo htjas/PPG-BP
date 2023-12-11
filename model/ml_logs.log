@@ -1,0 +1,16 @@
+2023-12-11 14:49:49 - INFO - Starting ML model
+2023-12-11 14:51:44 - INFO - Starting ML model
+2023-12-11 14:51:44 - INFO - Linear Regression - Mean Squared Error: 344.19860784077764 (SYS)
+2023-12-11 14:51:44 - INFO - Linear Regression - Mean Squared Error: 118.16273139792574 (DIA)
+2023-12-11 14:51:53 - INFO - SVR - Mean Squared Error: 334.9594419065256 (SYS)
+2023-12-11 14:52:03 - INFO - SVR - Mean Squared Error: 120.5517650459113 (DIA)
+2023-12-11 14:54:31 - INFO - Starting ML model
+2023-12-11 14:54:31 - INFO - Linear Regression - Mean Squared Error: 337.96769433222715 (SYS)
+2023-12-11 14:54:31 - INFO - Linear Regression - Mean Squared Error: 147.79519617560564 (DIA)
+2023-12-11 14:54:31 - INFO - SVR - Mean Squared Error: 305.71180941642916 (SYS)
+2023-12-11 14:54:31 - INFO - SVR - Mean Squared Error: 131.6888326691406 (DIA)
+2023-12-11 17:35:26 - INFO - Starting ML model (median sys and ppg estimation with svr)
+2023-12-11 17:35:26 - INFO - Linear Regression - Mean Squared Error: 337.96769433222715 (SYS)
+2023-12-11 17:35:26 - INFO - Linear Regression - Mean Squared Error: 147.79519617560564 (DIA)
+2023-12-11 17:35:26 - INFO - SVR - Mean Squared Error: 305.71180941642916 (SYS)
+2023-12-11 17:35:26 - INFO - SVR - Mean Squared Error: 131.6888326691406 (DIA)
