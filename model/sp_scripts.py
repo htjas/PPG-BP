@@ -116,11 +116,11 @@ def process_data(fs):
 
     i = 1
     tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
-    a_sysv, p_sysv, a_diav, p_diav = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
-        if i != 48:
-            i += 1
-            continue
+        a_sysv, p_sysv, a_diav, p_diav = np.array([]), np.array([]), np.array([]), np.array([])
+        # if i != 11:
+        #     i += 1
+        #     continue
         try:
             # 1: Data Reading
             seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -144,7 +144,6 @@ def process_data(fs):
         tot_ppg_dia = np.concatenate((tot_ppg_dia, p_diav))
         tot_abp_sys = np.concatenate((tot_abp_sys, a_sysv))
         tot_abp_dia = np.concatenate((tot_abp_dia, a_diav))
-        print(len(tot_ppg_sys), len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_dia))
 
         print("---")
         # Move one file at a time
@@ -239,16 +238,15 @@ def extract_features(abp_fidp, ppg_fidp, result):
     a_sys, a_dia, a_tss, a_sysv, a_tsd, a_diav = sys_dia_detection(abp_fidp, result['abp'])
     p_sys, p_dia, p_tss, p_sysv, p_tsd, p_diav = sys_dia_detection(ppg_fidp, result['ppg'])
 
-    a_tss, p_tss, a_tsd, p_tsd = group_timestamps(a_tss, p_tss, a_tsd, p_tsd)
-    # a_tsd, p_tsd, a_og_tsd, p_og_tsd = group_timestamps(a_tsd, p_tsd)
+    a_ts_i, p_ts_i = group_timestamps(a_tss, p_tss, a_tsd, p_tsd)
 
-    a_comm = np.intersect1d(a_tss, a_tsd)
-    p_comm = np.intersect1d(p_tss, p_tsd)
-
-    a_sysv = a_sysv[a_tss]
-    p_sysv = p_sysv[p_tss]
-    a_diav = a_diav[a_tsd]
-    p_diav = p_diav[p_tsd]
+    if (len(a_ts_i) != 0 or len(p_ts_i)) != 0 and len(a_ts_i) == len(p_ts_i):
+        a_sysv = a_sysv[a_ts_i]
+        p_sysv = p_sysv[p_ts_i]
+        a_diav = a_diav[a_ts_i]
+        p_diav = p_diav[p_ts_i]
+    else:
+        raise Exception('No matching timestamps found')
 
     # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
     # median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
@@ -263,52 +261,42 @@ def extract_features(abp_fidp, ppg_fidp, result):
 
 def group_timestamps(a_tss, p_tss, a_tsd, p_tsd):
 
-    a_tss, p_tss, abp_sys_timestamps, ppg_sys_timestamps = group_a_p(a_tss, p_tss)
-    a_tsd, p_tsd, abp_dia_timestamps, ppg_dia_timestamps = group_a_p(a_tsd, p_tsd)
-
-    a_ind_diff, = np.where(a_tss != a_tsd)
-    p_ind_diff, = np.where(p_tss != p_tsd)
-
-    a_tss, p_tss = equal_out_by_shortening(a_tss, p_tss)
-    a_tsd, p_tsd = equal_out_by_shortening(a_tsd, p_tsd)
-    abp_sys_timestamps, ppg_sys_timestamps = equal_out_by_shortening(abp_sys_timestamps, ppg_sys_timestamps)
-    abp_dia_timestamps, ppg_dia_timestamps = equal_out_by_shortening(abp_dia_timestamps, ppg_dia_timestamps)
+    abp_sys_timestamps, ppg_sys_timestamps = group_a_b(a_tss, p_tss)
+    abp_dia_timestamps, ppg_dia_timestamps = group_a_b(a_tsd, p_tsd)
 
     a_comm = np.intersect1d(abp_sys_timestamps, abp_dia_timestamps)
     p_comm = np.intersect1d(ppg_sys_timestamps, ppg_dia_timestamps)
 
-    return abp_sys_timestamps, ppg_sys_timestamps, abp_dia_timestamps, ppg_dia_timestamps
+    return a_comm, p_comm
 
 
-def group_a_p(a_s, p_s):
-    abp_timestamps, ppg_timestamps = [], []
-    i, as_ext, ps_ext = 0, 0, 0
-    while i < min(len(a_s), len(p_s)):
-        a = a_s[i]
-        p = p_s[i]
-        if i < len(a_s) - 1 and i < len(p_s) - 1:
-            if a <= p <= a_s[i + 1] - 5 and p - 20 <= a <= p + 20:
-                abp_timestamps.append(i + as_ext)
-                ppg_timestamps.append(i + ps_ext)
+def group_a_b(a_ts, b_ts):
+    a_ts_i, b_ts_i = [], []
+    i, as_ext, bs_ext = 0, 0, 0
+    while i < min(len(a_ts), len(b_ts)):
+        a = a_ts[i]
+        b = b_ts[i]
+        if i < len(a_ts) - 1 and i < len(b_ts) - 1:
+            if a <= b <= a_ts[i + 1] - 5 and b - 20 <= a <= b + 20:
+                a_ts_i.append(i + as_ext)
+                b_ts_i.append(i + bs_ext)
                 i += 1
-            elif p <= a <= p_s[i + 1] - 5 and a - 20 <= p <= a + 20:
-                abp_timestamps.append(i + as_ext)
-                ppg_timestamps.append(i + ps_ext)
+            elif b <= a <= b_ts[i + 1] - 5 and a - 20 <= b <= a + 20:
+                a_ts_i.append(i + as_ext)
+                b_ts_i.append(i + bs_ext)
                 i += 1
             else:
-                if a < p:
-                    a_s = a_s[a_s != a]
+                if a < b:
+                    a_ts = a_ts[a_ts != a]
                     as_ext += 1
-                elif a > p:
-                    p_s = p_s[p_s != p]
-                    ps_ext += 1
+                elif a > b:
+                    b_ts = b_ts[b_ts != b]
+                    bs_ext += 1
         else:
             break
 
-    a_s, p_s = equal_out_by_shortening(a_s, p_s)
-    abp_timestamps, ppg_timestamps = equal_out_by_shortening(abp_timestamps, ppg_timestamps)
-
-    return a_s, p_s, abp_timestamps, ppg_timestamps
+    a_ts_i, b_ts_i = equal_out_by_shortening(a_ts_i, b_ts_i)
+    return a_ts_i, b_ts_i
 
 
 def save_split_features(features):
