@@ -4,48 +4,57 @@ import os
 
 import sklearn.linear_model
 
-
 def run_model():
+    # Training Data
+    ppg_sys_train = read_data('/features/training/tot_ppg_sys_train.csv')
+    ppg_dia_train = read_data('/features/training/tot_ppg_dia_train.csv')
+    abp_sys_train = read_data('/features/training/tot_abp_sys_train.csv')
+    abp_dia_train = read_data('/features/training/tot_abp_dia_train.csv')
+
+    # Testing Data
+    ppg_sys_test = read_data('/features/testing/tot_ppg_sys_test.csv')
+    ppg_dia_test = read_data('/features/testing/tot_ppg_dia_test.csv')
+    abp_sys_test = read_data('/features/testing/tot_abp_sys_test.csv')
+    abp_dia_test = read_data('/features/testing/tot_abp_dia_test.csv')
+
+    run_linear_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
+    run_linear_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
+
+    run_sv_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
+    run_sv_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
+
+
+def read_data(path):
     abs_path = os.path.abspath(os.getcwd())
-    ppg_train_path = abs_path + '/features/training/total_median_cts_train.csv'
-    df = pd.read_csv(ppg_train_path)
+    dest = abs_path + path
+    df = pd.read_csv(dest)
     values = df.values
-    ppg_train = values[:, 0]
+    return values[:, 0]
 
-    ppg_test_path = abs_path + '/features/testing/total_median_cts_test.csv'
-    df = pd.read_csv(ppg_test_path)
-    values = df.values
-    ppg_test = values[:, 0]
 
-    # abp_train_path = abs_path + '/features/training/total_median_dia_train.csv'
-    abp_train_path = abs_path + '/features/training/total_median_systoles_train.csv'
-    df = pd.read_csv(abp_train_path)
-    values = df.values
-    abp_train = values[:, 0]
-
-    abp_test_path = abs_path + '/features/testing/total_median_systoles_test.csv'
-    df = pd.read_csv(abp_test_path)
-    values = df.values
-    abp_test = values[:, 0]
-
-    # Assuming X contains CTs and y contains Systoles (or Diastoles)
-    ppg_train = ppg_train[:len(abp_train)]
-    ppg_train = ppg_train.reshape(-1, 1)
-    abp_train = abp_train.reshape(-1, 1)
-
-    model = sklearn.linear_model.LinearRegression()
-    model.fit(ppg_train, abp_train)
-
-    ppg_test = ppg_test[:len(abp_test)]
-    ppg_test = ppg_test.reshape(-1, 1)
+def run_linear_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
+    # Create and Fit model
+    lr_model = sklearn.linear_model.LinearRegression()
+    lr_model.fit(ppg_train.reshape(-1, 1), abp_train)
 
     # Make predictions on the test set
-    predictions = model.predict(ppg_test)
+    predictions = lr_model.predict(ppg_test.reshape(-1, 1))
 
-    abp_test = abp_test.reshape(-1, 1)
     # Evaluate the model
     mse = sklearn.metrics.mean_squared_error(abp_test, predictions)
-    print(f'Mean Squared Error: {mse}')
+    print(f'Linear Regression - Mean Squared Error: {mse} ({feat})')
+
+
+def run_sv_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
+    svr_model = sklearn.svm.SVR(kernel='linear')
+    svr_model.fit(ppg_train.reshape(-1, 1), abp_train)
+
+    # Make predictions on the test set
+    predictions = svr_model.predict(ppg_test.reshape(-1, 1))
+
+    # Evaluate the model
+    mse = sklearn.metrics.mean_squared_error(abp_test, predictions)
+    print(f'SVR - Mean Squared Error: {mse} ({feat})')
 
 
 def main():
