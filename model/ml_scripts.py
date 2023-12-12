@@ -10,7 +10,8 @@ from init_scripts import init_logger
 def run_model():
     # Get Logger
     logger = init_logger('ml_logs')
-    logger.info("Starting ML model (total sys and ppg estimation with chebyshev filter with svr)")
+    logger.info("----------------------------")
+    logger.info("Starting ML model (total sys and ppg estimation with svr rbf kernel)")
 
     # Training Data
     ppg_sys_train = read_data('/features/training/tot_ppg_sys_train.csv')
@@ -59,7 +60,7 @@ def run_linear_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
 
 
 def run_sv_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
-    svr_model = sklearn.svm.SVR(kernel='linear')
+    svr_model = sklearn.svm.SVR(kernel='rbf')
     svr_model.fit(ppg_train.reshape(-1, 1), abp_train)
 
     # Make predictions on the test set
