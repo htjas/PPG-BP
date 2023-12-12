@@ -136,6 +136,7 @@ def process_data(fs):
 
             # 4: Feature extraction and grouping
             a_sys, p_sys, a_dia, p_dia = extract_features(abp_fidp, ppg_fidp, result, fs)
+            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia))
 
         except Exception as e:
             print('ERROR', e)
@@ -151,10 +152,10 @@ def process_data(fs):
         i += 1
 
     # Save extracted features to .csv
-    save_split_features([[tot_ppg_sys, 'med_ppg_sys'],
-                         [tot_ppg_dia, 'med_ppg_dia'],
-                         [tot_abp_sys, 'med_abp_sys'],
-                         [tot_abp_dia, 'med_abp_dia']])
+    save_split_features([[tot_ppg_sys, 'tot_ppg_sys'],
+                         [tot_ppg_dia, 'tot_ppg_dia'],
+                         [tot_abp_sys, 'tot_abp_sys'],
+                         [tot_abp_dia, 'tot_abp_dia']])
 
 
 def process_ppg_data(path, fs):
@@ -249,17 +250,17 @@ def extract_features(abp_fidp, ppg_fidp, result, fs):
         raise Exception('No matching timestamps found')
 
     # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
-    abp_median_sys, abp_mean_sys = calculate_median_mean(a_sys, fs, 30)
-    abp_median_dia, abp_mean_dia = calculate_median_mean(a_dia, fs, 30)
-
-    ppg_median_sys, ppg_mean_sys = calculate_median_mean(p_sys, fs, 30)
-    ppg_median_dia, ppg_mean_dia = calculate_median_mean(p_dia, fs, 30)
+    # abp_median_sys, abp_mean_sys = calculate_median_mean(a_sys, fs, 30)
+    # abp_median_dia, abp_mean_dia = calculate_median_mean(a_dia, fs, 30)
+    #
+    # ppg_median_sys, ppg_mean_sys = calculate_median_mean(p_sys, fs, 30)
+    # ppg_median_dia, ppg_mean_dia = calculate_median_mean(p_dia, fs, 30)
 
     # ppg_fdf = frequency_domain_features(ppg_filt, fs)
     # print(ppg_fdf)
     # ct, tsc, ctv = ct_detection(ppg_fidp, fs)
 
-    return abp_median_sys, ppg_median_sys, abp_median_dia, ppg_median_dia
+    return a_sysv, p_sysv, a_diav, p_diav
 
 
 def group_timestamps(a_tss, p_tss, a_tsd, p_tsd):
