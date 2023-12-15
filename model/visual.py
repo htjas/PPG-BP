@@ -158,3 +158,11 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     ax2.set_title('PPG with IBIS')
 
     plt.show()
+
+
+def plot_ml_features(title, x, y, x1, y1):
+    plt.suptitle(title)
+    plt.scatter(x, y, color='blue', label='Training')
+    plt.scatter(x1, y1, color='red', label='Predicted')
+    plt.legend()
+    plt.show()
