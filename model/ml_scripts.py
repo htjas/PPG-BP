@@ -17,7 +17,7 @@ def run_model():
     # Get Logger
     logger = init_logger('ml_logs')
     logger.info("----------------------------")
-    logger.info("Starting ML model (total sys and ppg estimation with Tensorflow ANN) + plotting")
+    logger.info("Starting ML model (total SYS prediction from SYS+DIA) + plotting")
 
     # Training Data
     ppg_sys_train = read_data('/features/training/tot_ppg_sys_train.csv')
@@ -31,14 +31,18 @@ def run_model():
     abp_sys_test = read_data('/features/testing/tot_abp_sys_test.csv')
     abp_dia_test = read_data('/features/testing/tot_abp_dia_test.csv')
 
-    # run_linear_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
-    # run_linear_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
-    #
-    # run_sv_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
-    # run_sv_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
-    #
-    # run_random_forest('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
-    # run_random_forest('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
+    run_linear_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
+    run_linear_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
+
+    ppg_train = np.column_stack((ppg_sys_train, ppg_dia_train))
+    ppg_test = np.column_stack((ppg_sys_test, ppg_dia_test))
+    run_multi_linear_regression('SYS from SYS+DIA', ppg_train, abp_sys_train, ppg_test, abp_sys_test)
+
+    run_sv_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
+    run_sv_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
+
+    run_random_forest('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
+    run_random_forest('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
 
     run_ann('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
     run_ann('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
@@ -59,6 +63,19 @@ def run_linear_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
     logging.info(f'LR - MSE: {mse}, MAE: {mae}, R^2: {r2}, Bias: {bias}, LoA: {loa} ({feat})')
 
 
+def run_multi_linear_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
+    mlr_model = LinearRegression()
+    mlr_model.fit(ppg_train, abp_train)
+    predictions = mlr_model.predict(ppg_test)
+    visual.plot_ml_features_line('MLR SYS+DIA', abp_test, predictions)
+    mse = mean_squared_error(abp_test, predictions)
+    mae = mean_absolute_error(abp_test, predictions)
+    r2 = r2_score(abp_test, predictions)
+    bias = np.mean(predictions - abp_test)
+    loa_l, loa_u = calculate_limits_of_agreement(predictions, abp_test)
+    logging.info(f'MLR - MSE: {mse}, MAE: {mae}, R^2: {r2}, Bias: {bias}, LoA: {loa_l, loa_u} ({feat})')
+
+
 def run_sv_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
     svr_model = sklearn.svm.SVR(kernel='sigmoid')
     mse, mae, r2, bias, loa = fit_predict_evaluate(svr_model, 'SVR - total ' + feat,
@@ -74,13 +91,6 @@ def run_random_forest(feat, ppg_train, abp_train, ppg_test, abp_test):
 
 
 def run_ann(feat, x_train, y_train, x_test, y_test):
-    # Standardize the data
-    # scaler = StandardScaler()
-    # x_train_scaled = scaler.fit_transform(x_train)
-    # x_test_scaled = scaler.transform(x_test)
-
-    input_shape = x_train.reshape(-1, 1).shape[1]
-
     # Build a simple neural network model
     model = tf.keras.models.Sequential([
         tf.keras.layers.Dense(128, activation='relu'),
