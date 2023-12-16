@@ -118,7 +118,7 @@ def process_data(fs):
     tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
         a_sys, p_sys, a_dia, p_dia = np.array([]), np.array([]), np.array([]), np.array([])
-        # if i != 11:
+        # if i != 4:
         #     i += 1
         #     continue
         try:
@@ -420,14 +420,23 @@ def sys_dia_detection(fidp, data):
     tsd = np.zeros(length, dtype=int)
     sysv = np.zeros(length, dtype=float)
     diav = np.zeros(length, dtype=float)
-    for beat_no in range(length):
-        tss[beat_no] = sys[beat_no]
-        sysv[beat_no] = data[sys[beat_no]]
-        tsd[beat_no] = dia[beat_no]
-        diav[beat_no] = data[dia[beat_no]]
+    beat_no = 0
+    while beat_no < len(tss):
+        sys_beat, dia_beat = data[sys[beat_no]], data[dia[beat_no]]
+        if sys_beat >= dia_beat:
+            tss[beat_no] = sys[beat_no]
+            sysv[beat_no] = data[sys[beat_no]]
+            tsd[beat_no] = dia[beat_no]
+            diav[beat_no] = data[dia[beat_no]]
+            beat_no += 1
+        else:
+            tss = np.delete(tss, beat_no)
+            sysv = np.delete(sysv, beat_no)
+            tsd = np.delete(tsd, beat_no)
+            diav = np.delete(diav, beat_no)
+            beat_no += 1
 
-    # plot_extracted_data(tss, sys)
-    # plot_extracted_data(tsd, dia)
+    # plot_extracted_data('SYS + DIA', sysv, diav)
 
     sys = np.column_stack((tss, sysv))
     dia = np.column_stack((tsd, diav))

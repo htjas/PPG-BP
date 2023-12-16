@@ -58,12 +58,11 @@ def plot_quad(seg_name, sig, fs, raw, filt, d1, d2):
     plt.show()
 
 
-def plot_extracted_data(seg_name, x1, y1, x2, y2, x3, y3):
+def plot_extracted_data(seg_name, y1, y2):
     plt.suptitle(seg_name)
-    plt.scatter(x1, y1, color='black')
-    plt.scatter(x2, y2, color='red')
-    plt.scatter(x3, y3, color='blue')
-    plt.xlim([0, 1000])
+    plt.scatter(np.arange(len(y1)), y1, color='red')
+    plt.scatter(np.arange(len(y2)), y2, color='blue')
+    # plt.xlim([0, 1000])
     plt.show()
 
 
