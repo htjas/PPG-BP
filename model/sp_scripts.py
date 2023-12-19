@@ -118,9 +118,9 @@ def process_data(fs):
     tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
         a_sys, p_sys, a_dia, p_dia = np.array([]), np.array([]), np.array([]), np.array([])
-        # if i != 4:
-        #     i += 1
-        #     continue
+        if i != 11:
+            i += 1
+            continue
         try:
             # 1: Data Reading
             seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -305,11 +305,15 @@ def group_a_b(a_ts, b_ts):
 
 def save_split_features(features):
     for feat in features:
-        mid = int(len(feat[0]) / 2)
-        df = pd.DataFrame(data=feat[0][:mid])
-        df.to_csv(f"features/training/{feat[1]}_train.csv", index=False)
-        df = pd.DataFrame(data=feat[0][mid:])
-        df.to_csv(f"features/testing/{feat[1]}_test.csv", index=False)
+        df = pd.DataFrame(data=feat[0])
+        df.to_csv(f"features/all/{feat[1]}.csv", index=False)
+
+    # for feat in features:
+    #     mid = int(len(feat[0]) / 2)
+    #     df = pd.DataFrame(data=feat[0][:mid])
+    #     df.to_csv(f"features/training/{feat[1]}_train.csv", index=False)
+    #     df = pd.DataFrame(data=feat[0][mid:])
+    #     df.to_csv(f"features/testing/{feat[1]}_test.csv", index=False)
 
     # mid = int(len(tot_median_sys) / 2)
     # df = pd.DataFrame(data=tot_median_sys[:mid])

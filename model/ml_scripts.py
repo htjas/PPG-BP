@@ -3,6 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
 import sklearn
 import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
@@ -17,19 +18,18 @@ def run_model():
     # Get Logger
     logger = init_logger('ml_logs')
     logger.info("----------------------------")
-    logger.info("Starting ML model (total SYS prediction from SYS+DIA) + plotting")
+    logger.info("Starting ML model (total SYS, test/train splitting 80/20) + plotting")
 
-    # Training Data
-    ppg_sys_train = read_data('/features/training/tot_ppg_sys_train.csv')
-    ppg_dia_train = read_data('/features/training/tot_ppg_dia_train.csv')
-    abp_sys_train = read_data('/features/training/tot_abp_sys_train.csv')
-    abp_dia_train = read_data('/features/training/tot_abp_dia_train.csv')
+    # All Data
+    ppg_sys = read_data('/features/all/tot_ppg_sys.csv')
+    ppg_dia = read_data('/features/all/tot_ppg_dia.csv')
+    abp_sys = read_data('/features/all/tot_abp_sys.csv')
+    abp_dia = read_data('/features/all/tot_abp_dia.csv')
 
-    # Testing Data
-    ppg_sys_test = read_data('/features/testing/tot_ppg_sys_test.csv')
-    ppg_dia_test = read_data('/features/testing/tot_ppg_dia_test.csv')
-    abp_sys_test = read_data('/features/testing/tot_abp_sys_test.csv')
-    abp_dia_test = read_data('/features/testing/tot_abp_dia_test.csv')
+    ppg_sys_train, ppg_sys_test, abp_sys_train, abp_sys_test = train_test_split(
+        ppg_sys, abp_sys, test_size=0.2, random_state=42)
+    ppg_dia_train, ppg_dia_test, abp_dia_train, abp_dia_test = train_test_split(
+        ppg_dia, abp_dia, test_size=0.2, random_state=42)
 
     run_linear_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
     run_linear_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
@@ -46,6 +46,8 @@ def run_model():
 
     run_ann('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
     run_ann('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
+
+    # TODO: RNN models : Feedforward/MLPs, LSTMs, GRUs
 
 
 def read_data(path):
