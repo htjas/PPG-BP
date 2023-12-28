@@ -118,9 +118,9 @@ def process_data(fs):
     tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
         a_sys, p_sys, a_dia, p_dia = np.array([]), np.array([]), np.array([]), np.array([])
-        if i != 11:
-            i += 1
-            continue
+        # if i != 11:
+        #     i += 1
+        #     continue
         try:
             # 1: Data Reading
             seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -130,13 +130,24 @@ def process_data(fs):
 
             # 3: Signal Processing (Detecting Beats and Fiducials)
             result = signal_processing(seg_name, abp_filt, ppg_filt, fs)
+            abp, ppg = result['abp'], result['ppg']
+            abp_beats, ppg_beats = result['abp_beats'], result['ppg_beats']
 
-            abp_fidp = fiducial_points(result['abp'], result['abp_beats'], fs, vis=False, header='ABP of ' + seg_name)
-            ppg_fidp = fiducial_points(result['ppg'], result['ppg_beats'], fs, vis=False, header='PPG of ' + seg_name)
+            abp_fidp = fiducial_points(abp, abp_beats, fs, vis=False, header='ABP of ' + seg_name)
+            ppg_fidp = fiducial_points(ppg, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
 
-            # 4: Feature extraction and grouping
-            a_sys, p_sys, a_dia, p_dia = extract_features(abp_fidp, ppg_fidp, result, fs)
+            # 4.1: Feature extraction and grouping
+            a_sys, p_sys, a_dia, p_dia = extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs)
             print(len(a_sys), len(p_sys), len(a_dia), len(p_dia))
+
+            # 4.2: Feature extraction using FFT
+            abp_fft = np.fft.fft(abp[abp_beats[0]: abp_beats[2]])
+            ppg_fft = np.fft.fft(ppg[ppg_beats[0]: ppg_beats[2]])
+            plot_abp_ppg('FFT', abp_fft, ppg_fft, fs)
+            # abp_fdf = frequency_domain_features(abp, fs)
+            # ppg_fdf = frequency_domain_features(ppg, fs)
+            # plot_fft_features(ppg, abp, ppg_fdf['positive_frequencies'], abp_fdf['positive_frequencies'],
+            #                   ppg_fdf['magnitude_spectrum'], abp_fdf['magnitude_spectrum'], fs)
 
         except Exception as e:
             print('ERROR', e)
@@ -175,10 +186,7 @@ def process_ppg_data(path, fs):
         ppg = values[:, 0]
 
         # Filtering
-        lpf_cutoff = 0.7  # Hz
-        hpf_cutoff = 10  # Hz
-
-        ppg_filt = filter_butterworth(lpf_cutoff, hpf_cutoff, fs, ppg)
+        ppg_filt = filter_butterworth(fs, ppg)
 
         # d1, d2 = savgol_derivatives(ppg_filt)
         #
@@ -213,10 +221,8 @@ def process_bp_data(path, fs):
         abp = values[:, 0]
 
         # Filtering
-        lpf_cutoff = 0.7  # Hz
-        hpf_cutoff = 10  # Hz
 
-        abp_filt = filter_butterworth(lpf_cutoff, hpf_cutoff, fs, abp)
+        abp_filt = filter_butterworth(fs, abp)
 
         # d1, d2 = savgol_derivatives(abp_filt)
         #
@@ -235,9 +241,9 @@ def process_bp_data(path, fs):
     return median_sys, median_dia
 
 
-def extract_features(abp_fidp, ppg_fidp, result, fs):
-    a_sys, a_dia, a_tss, a_sysv, a_tsd, a_diav = sys_dia_detection(abp_fidp, result['abp'])
-    p_sys, p_dia, p_tss, p_sysv, p_tsd, p_diav = sys_dia_detection(ppg_fidp, result['ppg'])
+def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
+    a_sys, a_dia, a_tss, a_sysv, a_tsd, a_diav = sys_dia_detection(abp_fidp, abp)
+    p_sys, p_dia, p_tss, p_sysv, p_tsd, p_diav = sys_dia_detection(ppg_fidp, ppg)
 
     a_ts_i, p_ts_i = group_timestamps(a_tss, p_tss, a_tsd, p_tsd)
 
@@ -256,8 +262,6 @@ def extract_features(abp_fidp, ppg_fidp, result, fs):
     # ppg_median_sys, ppg_mean_sys = calculate_median_mean(p_sys, fs, 30)
     # ppg_median_dia, ppg_mean_dia = calculate_median_mean(p_dia, fs, 30)
 
-    # ppg_fdf = frequency_domain_features(ppg_filt, fs)
-    # print(ppg_fdf)
     # ct, tsc, ctv = ct_detection(ppg_fidp, fs)
 
     return a_sysv, p_sysv, a_diav, p_diav
@@ -477,34 +481,38 @@ def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
     df = pd.read_csv(f"{ppg_path}/ppg_{seg_name}.{end}")
     values = df.values
     ppg = values[:, 0]
-    # plot_abp_ppg(seg_name, abp, ppg, fs)
+    plot_abp_ppg(seg_name, abp, ppg, fs)
 
     return seg_name, abp, ppg
 
 
 def pre_process_data(abp, ppg, fs, seg_name):
     # 1st Gaussian filter
-    abp = gaussian_filter1d(abp, sigma=2)
-    ppg = gaussian_filter1d(ppg, sigma=2)
+    # abp = gaussian_filter1d(abp, sigma=2)
+    # ppg = gaussian_filter1d(ppg, sigma=2)
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
-    # lpf_cutoff = 0.2  # Hz
-    # hpf_cutoff = 2  # Hz
-    #
-    # # Butterworth filter
-    # abp = filter_butterworth(abp, lpf_cutoff, hpf_cutoff, fs)
-    # ppg = filter_butterworth(ppg, lpf_cutoff, hpf_cutoff, fs)
-    # plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
+
+
+    # Butterworth filter
+    abp = butter_lowpass_filter(abp, 0.1, fs, 2)
+    ppg = butter_lowpass_filter(ppg, 0.1, fs, 2)
+    plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
 
     # Chebyshev filter
     # abp = filter_chebyshev(abp, lpf_cutoff, hpf_cutoff, fs)
     # ppg = filter_chebyshev(ppg, lpf_cutoff, hpf_cutoff, fs)
     # plot_abp_ppg(seg_name + ' cheb filtered', abp, ppg, fs)
 
+    # Savgol filter
+    ppg = filter_savgol(ppg)
+    abp = filter_savgol(abp)
+    plot_abp_ppg(seg_name + ' savgol filtered', abp, ppg, fs)
+
     # Whiskers filter
     abp = whiskers_filter(abp)
     ppg = whiskers_filter(ppg)
-    # plot_abp_ppg(seg_name + ' whiskers filtered', abp, ppg, fs)
+    plot_abp_ppg(seg_name + ' whiskers filtered', abp, ppg, fs)
 
     # 2nd Gaussian filter
     med_a = np.median(abp)
@@ -516,7 +524,7 @@ def pre_process_data(abp, ppg, fs, seg_name):
     # print(f"Sigma ABP - {sigma_a}, Sigma PPG - {sigma_p}")
     abp = gaussian_filter1d(abp, sigma=sigma_a)
     ppg = gaussian_filter1d(ppg, sigma=sigma_p)
-    # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
+    plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
     # Standardization
     # mean_a = np.mean(abp)
@@ -529,7 +537,19 @@ def pre_process_data(abp, ppg, fs, seg_name):
     return abp, ppg
 
 
-def filter_butterworth(data, lpf_cutoff, hpf_cutoff, fs):
+def butter_lowpass_filter(data, cutoff, fs, order):
+    nyq = 0.25 * fs  # Nyquist Frequency
+    normal_cutoff = cutoff / nyq
+    # Get the filter coefficients
+    b, a = sp.butter(order, cutoff, btype='low', analog=False)
+    y = sp.filtfilt(b, a, data)
+    return y
+
+
+def filter_butterworth(data, fs):
+    lpf_cutoff = 1.25  # Hz
+    hpf_cutoff = 31  # Hz
+
     # Butterworth filter
     sos_butt = sp.butter(10,
                          [lpf_cutoff, hpf_cutoff],
@@ -544,7 +564,9 @@ def filter_butterworth(data, lpf_cutoff, hpf_cutoff, fs):
     return sp.sosfiltfilt(sos[0], data)
 
 
-def filter_chebyshev(data, lpf_cutoff, hpf_cutoff, fs):
+def filter_chebyshev(data, fs):
+    lpf_cutoff = 1.25  # Hz
+    hpf_cutoff = 31  # Hz
     # Chebyshev filter
     sos_cheb = sp.cheby2(10,
                          5,
@@ -640,14 +662,14 @@ def whiskers_filter(data):
     return data
 
 
-def frequency_domain_features(ppg, sampling_rate):
+def frequency_domain_features(signal, fs):
     # Compute the Fast Fourier Transform (FFT)
-    fft_result = np.fft.fft(ppg)
+    fft_result = np.fft.fft(signal)
 
     # Compute the frequencies corresponding to the FFT result
-    frequencies = np.fft.fftfreq(len(fft_result), 1 / sampling_rate)
+    frequencies = np.fft.fftfreq(len(fft_result), 1 / fs)
 
-    # Only consider positive frequencies (since PPG is a real-valued signal)
+    # Only consider positive frequencies
     positive_frequencies = frequencies[:len(frequencies) // 2]
 
     # Magnitude spectrum (absolute values of FFT result)
@@ -663,11 +685,18 @@ def frequency_domain_features(ppg, sampling_rate):
     normalized_power_at_peak = magnitude_spectrum[peak_frequency_index] / total_power
 
     return {
+        'positive_frequencies': positive_frequencies,
+        'magnitude_spectrum': magnitude_spectrum,
         'peak_frequency': peak_frequency,
         'mean_frequency': mean_frequency,
         'total_power': total_power,
         'normalized_power_at_peak': normalized_power_at_peak
     }
+
+
+def filter_savgol(x):
+    x_f = sp.savgol_filter(x, 10, 4)
+    return x_f
 
 
 def savgol_derivatives(ppg_filt):

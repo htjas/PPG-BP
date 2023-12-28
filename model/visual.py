@@ -15,8 +15,6 @@ def plot_features(seg_name, x1, y1, x2, y2, x3, y3, x4, y4):
                                    sharex=False,
                                    sharey=False,
                                    figsize=(8, 8))
-    fig.suptitle(f"Segment {seg_name}")
-
     ax1.scatter(np.arange(len(y1)), y1, color='red', label='Sys')
     ax1.scatter(np.arange(len(y2)), y2, color='blue', label='Dia')
     ax1.set_title("ABP")
@@ -27,6 +25,7 @@ def plot_features(seg_name, x1, y1, x2, y2, x3, y3, x4, y4):
     ax2.set_title("PPG")
     # ax2.set_xlim([0, 100])
 
+    plt.suptitle(f"Segment {seg_name}")
     plt.show()
 
 
@@ -98,6 +97,7 @@ def plot_abp_ppg(segment_name, abp, ppg, fs):
     ax2.set_xlim([-0.1, 10])
     # ax2.set_ylim([-0.3, 1.1])
 
+    plt.title(segment_name)
     plt.show()
 
     # t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
@@ -156,6 +156,40 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     ax2.set_xlim([-0.1, 10])
     ax2.set_title('PPG with IBIS')
 
+    plt.show()
+
+
+def plot_fft_features(ppg_signal, abp_signal, ppg_frequencies, abp_frequencies,
+                      ppg_magnitude_spectrum, abp_magnitude_spectrum, fs):
+    t = np.arange(0, (len(ppg_signal) / fs), 1.0 / fs)
+
+    plt.figure(figsize=(12, 6))
+
+    plt.subplot(2, 2, 1)
+    plt.plot(t, ppg_signal)
+    plt.title('PPG Signal')
+    plt.xlabel('Time (s)')
+
+    plt.subplot(2, 2, 2)
+    plt.plot(ppg_frequencies, ppg_magnitude_spectrum)
+    plt.title('PPG Frequency Spectrum')
+    plt.xlabel('Frequency (Hz)')
+    plt.ylim([0, 100])
+
+    t = np.arange(0, (len(abp_signal) / fs), 1.0 / fs)
+
+    plt.subplot(2, 2, 3)
+    plt.plot(t, abp_signal)
+    plt.title('ABP Signal')
+    plt.xlabel('Time (s)')
+
+    plt.subplot(2, 2, 4)
+    plt.plot(abp_frequencies, abp_magnitude_spectrum)
+    plt.title('AP Frequency Spectrum')
+    plt.xlabel('Frequency (Hz)')
+    plt.ylim([0, 20000])
+
+    plt.tight_layout()
     plt.show()
 
 
