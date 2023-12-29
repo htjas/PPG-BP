@@ -1,9 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  21 SEP 2023 13:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  29 DEC 2023 22:12
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **Thesis.tex
-(./Thesis.tex
+(/home/hugasj/PycharmProjects/pythonProject/Thesis/Thesis.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21>
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -167,7 +168,7 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count195
 \l__pdf_internal_box=\box53
 )
-(./Thesis.aux)
+(/home/hugasj/PycharmProjects/pythonProject/Thesis/Thesis.aux)
 \openout1 = `Thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
@@ -212,7 +213,8 @@ e
 ))
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Thesis.toc
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+(/home/hugasj/PycharmProjects/pythonProject/Thesis/Thesis.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -221,8 +223,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `Thesis.toc'.
 
- [2]
-[3] [4]
+ [2] [3] [4]
 
 LaTeX Warning: Citation `johnson_mimic-iv_2023' on page 5 undefined on input li
 ne 129.
@@ -247,7 +248,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 178--179
 
  []
 
-[6] (./Thesis.bbl [7]
+[6] (/home/hugasj/PycharmProjects/pythonProject/Thesis/Thesis.bbl [7]
 Underfull \hbox (badness 1609) in paragraph at lines 44--48
 []\OT1/cmr/m/n/10 given-i=Abraham fam-ily=Savitzky, given=Abraham. and M. J. E.
  Go-lay.
@@ -259,14 +260,14 @@ Underfull \hbox (badness 1205) in paragraph at lines 56--62
 Hae-
  []
 
-[8] [9]) [10] (./Thesis.aux)
+[8] [9]) [10] (/home/hugasj/PycharmProjects/pythonProject/Thesis/Thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4379 strings out of 480204
- 95895 string characters out of 5895010
+ 4380 strings out of 480204
+ 96535 string characters out of 5895010
  509750 words of memory out of 5000000
  22335 multiletter control sequences out of 15000+600000
  472004 words of font info for 37 fonts, out of 8000000 for 9000
@@ -278,7 +279,8 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Thesis.pdf (10 pages, 128327 bytes).
+Output written on /home/hugasj/PycharmProjects/pythonProject/Thesis/Thesis.pdf 
+(10 pages, 128327 bytes).
 PDF statistics:
  67 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream
