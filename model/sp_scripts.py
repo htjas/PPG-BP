@@ -141,9 +141,9 @@ def process_data(fs):
             print(len(a_sys), len(p_sys), len(a_dia), len(p_dia))
 
             # 4.2: Feature extraction using FFT
-            abp_fft = np.fft.fft(abp[abp_beats[0]: abp_beats[2]])
-            ppg_fft = np.fft.fft(ppg[ppg_beats[0]: ppg_beats[2]])
-            plot_abp_ppg('FFT', abp_fft, ppg_fft, fs)
+            # abp_fft = np.fft.fft(abp[abp_beats[0]: abp_beats[2]])
+            # ppg_fft = np.fft.fft(ppg[ppg_beats[0]: ppg_beats[2]])
+            # plot_abp_ppg('FFT', abp_fft, ppg_fft, fs)
             # abp_fdf = frequency_domain_features(abp, fs)
             # ppg_fdf = frequency_domain_features(ppg, fs)
             # plot_fft_features(ppg, abp, ppg_fdf['positive_frequencies'], abp_fdf['positive_frequencies'],
@@ -152,21 +152,21 @@ def process_data(fs):
         except Exception as e:
             print('ERROR', e)
 
-        tot_ppg_sys = np.concatenate((tot_ppg_sys, p_sys))
-        tot_ppg_dia = np.concatenate((tot_ppg_dia, p_dia))
-        tot_abp_sys = np.concatenate((tot_abp_sys, a_sys))
-        tot_abp_dia = np.concatenate((tot_abp_dia, a_dia))
+        # tot_ppg_sys = np.concatenate((tot_ppg_sys, p_sys))
+        # tot_ppg_dia = np.concatenate((tot_ppg_dia, p_dia))
+        # tot_abp_sys = np.concatenate((tot_abp_sys, a_sys))
+        # tot_abp_dia = np.concatenate((tot_abp_dia, a_dia))
 
         print("---")
         # Move one file at a time
-        # x = input("> next")
+        x = input("> next")
         i += 1
 
     # Save extracted features to .csv
-    save_split_features([[tot_ppg_sys, 'tot_ppg_sys'],
-                         [tot_ppg_dia, 'tot_ppg_dia'],
-                         [tot_abp_sys, 'tot_abp_sys'],
-                         [tot_abp_dia, 'tot_abp_dia']])
+    # save_split_features([[tot_ppg_sys, 'tot_ppg_sys'],
+    #                      [tot_ppg_dia, 'tot_ppg_dia'],
+    #                      [tot_abp_sys, 'tot_abp_sys'],
+    #                      [tot_abp_dia, 'tot_abp_dia']])
 
 
 def process_ppg_data(path, fs):
@@ -492,11 +492,9 @@ def pre_process_data(abp, ppg, fs, seg_name):
     # ppg = gaussian_filter1d(ppg, sigma=2)
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
-
-
     # Butterworth filter
-    abp = butter_lowpass_filter(abp, 0.1, fs, 2)
-    ppg = butter_lowpass_filter(ppg, 0.1, fs, 2)
+    abp = butter_lowpass_filter(abp, 5, fs, 4)
+    ppg = butter_lowpass_filter(ppg, 5, fs, 4)
     plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
 
     # Chebyshev filter
@@ -505,26 +503,26 @@ def pre_process_data(abp, ppg, fs, seg_name):
     # plot_abp_ppg(seg_name + ' cheb filtered', abp, ppg, fs)
 
     # Savgol filter
-    ppg = filter_savgol(ppg)
-    abp = filter_savgol(abp)
-    plot_abp_ppg(seg_name + ' savgol filtered', abp, ppg, fs)
+    # ppg = filter_savgol(ppg)
+    # abp = filter_savgol(abp)
+    # plot_abp_ppg(seg_name + ' savgol filtered', abp, ppg, fs)
 
     # Whiskers filter
-    abp = whiskers_filter(abp)
-    ppg = whiskers_filter(ppg)
-    plot_abp_ppg(seg_name + ' whiskers filtered', abp, ppg, fs)
+    # abp = whiskers_filter(abp)
+    # ppg = whiskers_filter(ppg)
+    # plot_abp_ppg(seg_name + ' whiskers filtered', abp, ppg, fs)
 
     # 2nd Gaussian filter
-    med_a = np.median(abp)
-    med_p = np.median(ppg)
-    std_a = np.std(abp)
-    std_p = np.std(ppg)
-    sigma_a = med_a / std_a * 0.5
-    sigma_p = med_p / std_p * 0.3
-    # print(f"Sigma ABP - {sigma_a}, Sigma PPG - {sigma_p}")
-    abp = gaussian_filter1d(abp, sigma=sigma_a)
-    ppg = gaussian_filter1d(ppg, sigma=sigma_p)
-    plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
+    # med_a = np.median(abp)
+    # med_p = np.median(ppg)
+    # std_a = np.std(abp)
+    # std_p = np.std(ppg)
+    # sigma_a = med_a / std_a * 0.5
+    # sigma_p = med_p / std_p * 0.3
+    # # print(f"Sigma ABP - {sigma_a}, Sigma PPG - {sigma_p}")
+    # abp = gaussian_filter1d(abp, sigma=sigma_a)
+    # ppg = gaussian_filter1d(ppg, sigma=sigma_p)
+    # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
     # Standardization
     # mean_a = np.mean(abp)
@@ -537,13 +535,16 @@ def pre_process_data(abp, ppg, fs, seg_name):
     return abp, ppg
 
 
-def butter_lowpass_filter(data, cutoff, fs, order):
-    nyq = 0.25 * fs  # Nyquist Frequency
-    normal_cutoff = cutoff / nyq
-    # Get the filter coefficients
-    b, a = sp.butter(order, cutoff, btype='low', analog=False)
-    y = sp.filtfilt(b, a, data)
-    return y
+def butter_lowpass_filter(data, cutoff_frequency, fs, order):
+    # Design the Butterworth filter
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff_frequency / nyquist
+    b, a = sp.butter(order, normal_cutoff, btype='low', analog=False, output='ba')
+
+    # Apply the filter to the data
+    filtered_data = sp.lfilter(b, a, data)
+
+    return filtered_data
 
 
 def filter_butterworth(data, fs):
@@ -748,7 +749,7 @@ def signal_processing(seg_name, abp, ppg, fs):
 
     # Beat grouping
     abp_beats, ppg_beats = group_beats(abp_beats, ppg_beats)
-    # plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
+    plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
 
     if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
         print(f"too big of a difference after grouping -"
