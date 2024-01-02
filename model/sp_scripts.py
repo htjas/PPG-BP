@@ -487,6 +487,8 @@ def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
 
 
 def pre_process_data(abp, ppg, fs, seg_name):
+    # TODO: find optimal filtering approach
+
     # 1st Gaussian filter
     # abp = gaussian_filter1d(abp, sigma=2)
     # ppg = gaussian_filter1d(ppg, sigma=2)

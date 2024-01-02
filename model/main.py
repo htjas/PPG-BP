@@ -15,8 +15,9 @@ with open('details.properties', 'rb') as config_file:
 
 # Init (Fetching and Filtering)
 
-# database_name = configs.get('mimic4').data
-# load_filter_save_records(database_name)
+# TODO: fetch MIMIC3 for training and testing, MIMIC4 for validation
+database_name = configs.get('mimic4_url').data
+load_filter_save_records(database_name)
 
 # After Init
 print("Reading matching_records.csv")
@@ -25,8 +26,8 @@ df = pd.read_csv('matching_records.csv')
 segments = df.values
 
 # get 10 minutes of bp and ppg data, and save to /data folder
-path = configs.get('path_of_data').data
-# extract_save_bp_ppg_data(segments, path)
+path = configs.get('path_of_mimic4_data').data
+extract_save_bp_ppg_data(segments, path)
 
 # Signal processing
 fs = float(configs.get('default_fs').data)
