@@ -73,7 +73,7 @@ def manual_filter_data(folder):
                 sig, seg_name, end = split_filename(filename)
                 try:
                     os.remove(f"{folder}/{filename}")
-                    os.remove(f"usable_bp_data_2/abp_{seg_name}.{end}")
+                    os.remove(f"mimic4/usable_bp_data_2/abp_{seg_name}.{end}")
                 except Exception as e:
                     print(e)
         # df = pd.read_csv(f"{folder}/{filename}")
@@ -99,7 +99,7 @@ def manual_filter_data(folder):
 
     filenames = os.listdir(folder)
     print(len(filenames))
-    filenames = os.listdir('usable_bp_data_2')
+    filenames = os.listdir('mimic4/usable_bp_data_2')
     print(len(filenames))
 
 
@@ -109,8 +109,8 @@ def process_data(fs):
     :param fs: Frequency of sampling
     """
     abs_path = os.path.abspath(os.getcwd())
-    bp_path = abs_path + '/usable_bp_data_2'
-    ppg_path = abs_path + '/usable_ppg_data_2'
+    bp_path = abs_path + '/mimic4/usable_bp_data_2'
+    ppg_path = abs_path + '/mimic4/usable_ppg_data_2'
     filenames = os.listdir(bp_path)
     filenames.sort()
 
