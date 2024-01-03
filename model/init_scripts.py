@@ -1,3 +1,5 @@
+import time
+
 import wfdb
 from pathlib import Path
 import pandas as pd
@@ -89,7 +91,8 @@ def filter_and_save_single_subject(subject, database_name, path):
                 sigs_present = segment_metadata.sig_name
                 if all(x in sigs_present for x in required_sigs):
                     print(f" (met requirements)  Segment length - {seg_duration / 60:.1f}"
-                          f", checking for consecutive non-faulty values", end="", flush=True)
+                          f", checking for consecutive non-faulty values ({time.strftime('%H:%M:%S')})",
+                          end="", flush=True)
                 else:
                     print(' (long enough, but missing signal(s))')
                     continue
