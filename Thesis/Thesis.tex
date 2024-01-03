@@ -113,20 +113,26 @@ Basic information about PPG. How does it work. Main use cases. Potential use cas
 
 The PPG is an optical sensor, consisting of a light-emitting diode (LED) paired with a photodetector (PD), hence it is simple, inexpensive and can be easily build into a wearable device. The PPG waveform can be obtained using two modes, reflectance and transmission. This waveform corresponds to the blood volume in blood vessels. The PPG is primarily traditionally is utilised in healthcare for measuring heart rate and bloodoxygen saturation using a pulse oximeter \cite{allenPhotoplethysmographyItsApplication2007}.
 
-Peripheral volumetric changes and BP are correlated \cite{langewoutersPressurediameterRelationshipsSegments1986}.
-Some characteristic PPG features can used to estimate Systolic BP (SBP) and Diastolic BP (DBP) using machine learning functions. However, there is no simple, clear and continuous relationship between these features and BP. This approach relies heavily on signal pre-processing, extracting PPG features and employing machine learning algorithms for estimating BP as a function of these features.
+Peripheral volumetric changes and BP are correlated~\cite{langewoutersPressurediameterRelationshipsSegments1986}.
+Some characteristic PPG features can be used to estimate Systolic BP (SBP) and Diastolic BP (DBP) using machine learning functions. However, there is no simple, clear and continuous relationship between these features and BP. This approach relies heavily on signal pre-processing, extracting PPG features and employing machine learning algorithms for estimating BP as a function of these features.
+
+\subsubsection{MIMIC-III}
+
+origin of MIMIC\@.
+When was it created?
+How is it structured?
 
 \subsubsection{MIMIC-IV}
 
+Multiparameter Intelligent Monitoring in Intensive Care IV (MIMIC-IV)~\cite{johnson_mimic-iv_2023}.
+
 \begin{enumerate}
-\item How is the database structured?
+        \item How is the database structured?
 \item Which patients and how many of them have both PPG and BP data?
-\item Ambulatory Blood Pressue (ABP)
+\item Arterial Blood Pressue (ABP)
 \end{enumerate}
 
-How the database is structured. What values it contains. Number of relevant patients for this study.
-
-Multiparameter Intelligent Monitoring in Intensive Care IV (MIMIC-IV) \cite{johnson_mimic-iv_2023}.
+How does it differ from MIMIC3?
 
 \subsection{Computing Background}
 
@@ -145,7 +151,7 @@ These methods require simultaneous measurement at two different sites on the bod
 
 \item What are the different types of filters for processing the PPG signal? 
 
-Signal filtering types include: Chebyshev filter, Butterworth filter \cite{liangOptimalFilterShort2018}.
+Signal filtering types include: Chebyshev filter, Butterworth filter~\cite{liangOptimalFilterShort2018}.
 
 Savitzky-Golay (SG) filter \cite{savitzkySmoothingDifferentiationData1964}
 
