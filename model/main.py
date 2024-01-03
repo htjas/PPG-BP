@@ -15,7 +15,6 @@ with open('details.properties', 'rb') as config_file:
 
 # Init (Fetching and Filtering)
 
-# TODO: fetch MIMIC3 for training and testing, MIMIC4 for validation
 database_name = configs.get('mimic4_url').data
 load_filter_save_records(database_name)
 

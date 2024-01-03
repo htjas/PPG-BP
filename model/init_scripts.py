@@ -20,7 +20,7 @@ def load_filter_and_save_records(db_name, path, no_records):
 
     subjects = wfdb.get_record_list(db_name)
     random.shuffle(subjects)
-    print(f"The '{db_name}' database contains data from {len(subjects)} subjects")
+    print(f"The '{db_name}' database contains data from {len(subjects)} subjects ({time.strftime('%H:%M:%S')})")
     path = os.path.abspath(os.getcwd()) + path
     records = []
     su = 0
