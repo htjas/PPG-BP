@@ -109,8 +109,8 @@ def process_data(fs):
     :param fs: Frequency of sampling
     """
     abs_path = os.path.abspath(os.getcwd())
-    bp_path = abs_path + '/mimic4/usable_bp_data_2'
-    ppg_path = abs_path + '/mimic4/usable_ppg_data_2'
+    bp_path = abs_path + '/mimic3/abp'
+    ppg_path = abs_path + '/mimic3/ppg'
     filenames = os.listdir(bp_path)
     filenames.sort()
 
@@ -118,7 +118,7 @@ def process_data(fs):
     tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
         a_sys, p_sys, a_dia, p_dia = np.array([]), np.array([]), np.array([]), np.array([])
-        # if i != 11:
+        # if i != 5:
         #     i += 1
         #     continue
         try:
@@ -126,6 +126,7 @@ def process_data(fs):
             seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
 
             # 2: Data Pre-Processing
+            # TODO: find optimal filtering approach
             abp_filt, ppg_filt = pre_process_data(abp, ppg, fs, seg_name)
 
             # 3: Signal Processing (Detecting Beats and Fiducials)
@@ -136,11 +137,12 @@ def process_data(fs):
             abp_fidp = fiducial_points(abp, abp_beats, fs, vis=False, header='ABP of ' + seg_name)
             ppg_fidp = fiducial_points(ppg, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
 
-            # 4.1: Feature extraction and grouping
+            # TODO: extract a larger number of synchronous features for multiple feature Machine Learning
+            # 4.1: Feature extraction from fidp
             a_sys, p_sys, a_dia, p_dia = extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs)
             print(len(a_sys), len(p_sys), len(a_dia), len(p_dia))
 
-            # 4.2: Feature extraction using FFT
+            # 4.2: Feature extraction from FFT
             # abp_fft = np.fft.fft(abp[abp_beats[0]: abp_beats[2]])
             # ppg_fft = np.fft.fft(ppg[ppg_beats[0]: ppg_beats[2]])
             # plot_abp_ppg('FFT', abp_fft, ppg_fft, fs)
@@ -156,6 +158,7 @@ def process_data(fs):
         # tot_ppg_dia = np.concatenate((tot_ppg_dia, p_dia))
         # tot_abp_sys = np.concatenate((tot_abp_sys, a_sys))
         # tot_abp_dia = np.concatenate((tot_abp_dia, a_dia))
+        # print(len(tot_ppg_sys), len(tot_ppg_dia), len(tot_abp_sys), len(tot_abp_dia))
 
         print("---")
         # Move one file at a time
@@ -285,11 +288,11 @@ def group_a_b(a_ts, b_ts):
         a = a_ts[i]
         b = b_ts[i]
         if i < len(a_ts) - 1 and i < len(b_ts) - 1:
-            if a <= b <= a_ts[i + 1] - 5 and b - 20 <= a <= b + 20:
+            if a <= b <= a_ts[i + 1] - 5 and b - 30 <= a <= b + 30:
                 a_ts_i.append(i + as_ext)
                 b_ts_i.append(i + bs_ext)
                 i += 1
-            elif b <= a <= b_ts[i + 1] - 5 and a - 20 <= b <= a + 20:
+            elif b <= a <= b_ts[i + 1] - 5 and a - 30 <= b <= a + 30:
                 a_ts_i.append(i + as_ext)
                 b_ts_i.append(i + bs_ext)
                 i += 1
@@ -299,6 +302,11 @@ def group_a_b(a_ts, b_ts):
                     as_ext += 1
                 elif a > b:
                     b_ts = b_ts[b_ts != b]
+                    bs_ext += 1
+                else:
+                    a_ts = a_ts[a_ts != a]
+                    b_ts = b_ts[b_ts != b]
+                    as_ext += 1
                     bs_ext += 1
         else:
             break
@@ -310,7 +318,7 @@ def group_a_b(a_ts, b_ts):
 def save_split_features(features):
     for feat in features:
         df = pd.DataFrame(data=feat[0])
-        df.to_csv(f"features/all/{feat[1]}.csv", index=False)
+        df.to_csv(f"features/train_test/{feat[1]}.csv", index=False)
 
     # for feat in features:
     #     mid = int(len(feat[0]) / 2)
@@ -487,27 +495,29 @@ def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
 
 
 def pre_process_data(abp, ppg, fs, seg_name):
-    # TODO: find optimal filtering approach
-
     # 1st Gaussian filter
     # abp = gaussian_filter1d(abp, sigma=2)
     # ppg = gaussian_filter1d(ppg, sigma=2)
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
+    # Savgol filter
+    ppg = filter_savgol(ppg)
+    abp = filter_savgol(abp)
+    # plot_abp_ppg(seg_name + ' savgol filtered', abp, ppg, fs)
+
     # Butterworth filter
     abp = butter_lowpass_filter(abp, 5, fs, 4)
     ppg = butter_lowpass_filter(ppg, 5, fs, 4)
-    plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
+    # abp = filter_butterworth(abp, fs)
+    # ppg = filter_butterworth(ppg, fs)
+    # plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
 
     # Chebyshev filter
-    # abp = filter_chebyshev(abp, lpf_cutoff, hpf_cutoff, fs)
-    # ppg = filter_chebyshev(ppg, lpf_cutoff, hpf_cutoff, fs)
+    # abp = chebyshev2_lowpass_filter(abp, 2, fs)
+    # ppg = chebyshev2_lowpass_filter(ppg, 2, fs)
+    # abp = filter_chebyshev(abp, fs)
+    # ppg = filter_chebyshev(ppg, fs)
     # plot_abp_ppg(seg_name + ' cheb filtered', abp, ppg, fs)
-
-    # Savgol filter
-    # ppg = filter_savgol(ppg)
-    # abp = filter_savgol(abp)
-    # plot_abp_ppg(seg_name + ' savgol filtered', abp, ppg, fs)
 
     # Whiskers filter
     # abp = whiskers_filter(abp)
@@ -528,11 +538,12 @@ def pre_process_data(abp, ppg, fs, seg_name):
 
     # Standardization
     # mean_a = np.mean(abp)
-    # mean_p = np.mean(ppg)
     # stand_abp = (abp - mean_a) / std_a
-    # stand_ppg = (ppg - mean_p) / std_p
+    # mean_p = np.mean(ppg)
+    # std_p = np.std(ppg)
+    # ppg = (ppg - mean_p) / std_p
     #
-    # plot_abp_ppg(seg_name + ' Standardized', stand_abp, stand_ppg, fs)
+    # plot_abp_ppg(seg_name + ' post-filtering', abp, ppg, fs)
 
     return abp, ppg
 
@@ -547,6 +558,14 @@ def butter_lowpass_filter(data, cutoff_frequency, fs, order):
     filtered_data = sp.lfilter(b, a, data)
 
     return filtered_data
+
+
+def chebyshev2_lowpass_filter(data, cutoff_freq, fs):
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff_freq / nyquist
+    b, a = sp.cheby2(4, 2, normal_cutoff, btype='low', analog=False)
+    y = sp.lfilter(b, a, data)
+    return y
 
 
 def filter_butterworth(data, fs):
@@ -568,11 +587,11 @@ def filter_butterworth(data, fs):
 
 
 def filter_chebyshev(data, fs):
-    lpf_cutoff = 1.25  # Hz
-    hpf_cutoff = 31  # Hz
+    lpf_cutoff = 1.2  # Hz
+    hpf_cutoff = 60  # Hz
     # Chebyshev filter
-    sos_cheb = sp.cheby2(10,
-                         5,
+    sos_cheb = sp.cheby2(4,
+                         20,
                          [lpf_cutoff, hpf_cutoff],
                          btype='bp',
                          analog=False,
@@ -581,7 +600,8 @@ def filter_chebyshev(data, fs):
     w, h = sp.sosfreqz(sos_cheb,
                        2000,
                        fs=fs)
-    return sp.sosfiltfilt(sos_cheb[0], data)
+    sos = sos_cheb, w, h
+    return sp.sosfiltfilt(sos[0], data)
 
 
 def whiskers_filter(data):
@@ -698,7 +718,7 @@ def frequency_domain_features(signal, fs):
 
 
 def filter_savgol(x):
-    x_f = sp.savgol_filter(x, 10, 4)
+    x_f = sp.savgol_filter(x, 51, 4)
     return x_f
 
 
@@ -732,7 +752,7 @@ def signal_processing(seg_name, abp, ppg, fs):
         ppg_beats = beats_p
         # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (downward mean crossings)', abp, abp_beats, ppg, ppg_beats, fs)
 
-    # Second iteration: Peak finding (SP manual methods)
+    # Second iteration: dip finding (SP manual methods)
     abp_beat_interval = len(abp) / len(abp_beats)
     ppg_beat_interval = len(ppg) / len(ppg_beats)
     abp_beats, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=0.5)
@@ -751,7 +771,7 @@ def signal_processing(seg_name, abp, ppg, fs):
 
     # Beat grouping
     abp_beats, ppg_beats = group_beats(abp_beats, ppg_beats)
-    plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
+    # plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
 
     if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
         print(f"too big of a difference after grouping -"
@@ -946,7 +966,7 @@ def split_filename(filename):
 
 def main():
     # manual_filter_data('usable_ppg_data_2')
-    process_data(62.4725)
+    process_data(125)
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)
 

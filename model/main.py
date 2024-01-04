@@ -29,5 +29,5 @@ path = configs.get('path_of_mimic4_data').data
 extract_save_bp_ppg_data(segments, path)
 
 # Signal processing
-fs = float(configs.get('default_fs').data)
+fs = float(configs.get('fs_mimic4').data)
 process_data(fs)
