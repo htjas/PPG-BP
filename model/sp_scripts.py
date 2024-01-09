@@ -111,6 +111,8 @@ def process_data(fs):
     abs_path = os.path.abspath(os.getcwd())
     bp_path = abs_path + '/mimic3/abp'
     ppg_path = abs_path + '/mimic3/ppg'
+    # bp_path = abs_path + '/mimic4/usable_bp_data_2'
+    # ppg_path = abs_path + '/mimic4/usable_ppg_data_2'
     filenames = os.listdir(bp_path)
     filenames.sort()
 
@@ -123,11 +125,10 @@ def process_data(fs):
         #     continue
         try:
             # 1: Data Reading
-            seg_name, abp, ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
+            seg_name, raw_abp, raw_ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
 
             # 2: Data Pre-Processing
-            # TODO: find optimal filtering approach
-            abp_filt, ppg_filt = pre_process_data(abp, ppg, fs, seg_name)
+            abp_filt, ppg_filt = pre_process_data(raw_abp, raw_ppg, fs, seg_name)
 
             # 3: Signal Processing (Detecting Beats and Fiducials)
             result = signal_processing(seg_name, abp_filt, ppg_filt, fs)
@@ -489,7 +490,7 @@ def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
     df = pd.read_csv(f"{ppg_path}/ppg_{seg_name}.{end}")
     values = df.values
     ppg = values[:, 0]
-    plot_abp_ppg(seg_name, abp, ppg, fs)
+    # plot_abp_ppg(seg_name, abp, ppg, fs)
 
     return seg_name, abp, ppg
 
@@ -501,13 +502,13 @@ def pre_process_data(abp, ppg, fs, seg_name):
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
     # Savgol filter
-    ppg = filter_savgol(ppg)
     abp = filter_savgol(abp)
+    ppg = filter_savgol(ppg)
     # plot_abp_ppg(seg_name + ' savgol filtered', abp, ppg, fs)
 
     # Butterworth filter
-    abp = butter_lowpass_filter(abp, 5, fs, 4)
-    ppg = butter_lowpass_filter(ppg, 5, fs, 4)
+    abp = butter_lowpass_filter(abp, 5, 125, 4)
+    ppg = butter_lowpass_filter(ppg, 5, 125, 4)
     # abp = filter_butterworth(abp, fs)
     # ppg = filter_butterworth(ppg, fs)
     # plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
@@ -526,24 +527,25 @@ def pre_process_data(abp, ppg, fs, seg_name):
 
     # 2nd Gaussian filter
     # med_a = np.median(abp)
-    # med_p = np.median(ppg)
     # std_a = np.std(abp)
-    # std_p = np.std(ppg)
     # sigma_a = med_a / std_a * 0.5
+    # abp = gaussian_filter1d(abp, sigma=sigma_a)
+
+    # med_p = np.median(ppg)
+    # std_p = np.std(ppg)
     # sigma_p = med_p / std_p * 0.3
     # # print(f"Sigma ABP - {sigma_a}, Sigma PPG - {sigma_p}")
-    # abp = gaussian_filter1d(abp, sigma=sigma_a)
     # ppg = gaussian_filter1d(ppg, sigma=sigma_p)
     # plot_abp_ppg(seg_name + ' gauss smooth', abp, ppg, fs)
 
     # Standardization
     # mean_a = np.mean(abp)
-    # stand_abp = (abp - mean_a) / std_a
-    # mean_p = np.mean(ppg)
-    # std_p = np.std(ppg)
-    # ppg = (ppg - mean_p) / std_p
-    #
-    # plot_abp_ppg(seg_name + ' post-filtering', abp, ppg, fs)
+    # std_a = np.std(abp)
+    # abp = (abp - mean_a) / std_a
+    mean_p = np.mean(ppg)
+    std_p = np.std(ppg)
+    ppg = (ppg - mean_p) / std_p
+    plot_abp_ppg(seg_name + ' post-filtering', abp, ppg, fs)
 
     return abp, ppg
 
@@ -738,7 +740,7 @@ def savgol_derivatives(ppg_filt):
 
 def signal_processing(seg_name, abp, ppg, fs):
     # First iteration of beat finding (MIMIC default methods)
-    abp_beats, ppg_beats = get_optimal_beats_lists(abp, ppg, fs)
+    abp_beats, ppg_beats = get_optimal_beats_lists(abp, ppg)
     # plot_abp_ppg_with_pulse(seg_name + ' (mimic)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # For comparison: beat detection from mean crossing
@@ -752,12 +754,12 @@ def signal_processing(seg_name, abp, ppg, fs):
         ppg_beats = beats_p
         # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (downward mean crossings)', abp, abp_beats, ppg, ppg_beats, fs)
 
-    # Second iteration: dip finding (SP manual methods)
+    # Second iteration: Peak finding (SP manual methods)
     abp_beat_interval = len(abp) / len(abp_beats)
     ppg_beat_interval = len(ppg) / len(ppg_beats)
-    abp_beats, _ = sp.find_peaks(-abp, distance=abp_beat_interval * .75, prominence=0.5)
-    ppg_beats, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval * .75, prominence=0.01)
-    # plot_abp_ppg_with_pulse(seg_name + ' DIPS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
+    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
+    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
+    # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # Signal synchronization : delay approx = 18 (288 ms)
     abp, ppg = synchronization(abp, ppg, abp_beats, ppg_beats)
@@ -771,7 +773,7 @@ def signal_processing(seg_name, abp, ppg, fs):
 
     # Beat grouping
     abp_beats, ppg_beats = group_beats(abp_beats, ppg_beats)
-    # plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
+    plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
 
     if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
         print(f"too big of a difference after grouping -"
@@ -792,24 +794,28 @@ def signal_processing(seg_name, abp, ppg, fs):
     }
 
 
-def synchronization(abp, ppg, abp_dips, ppg_dips):
-    # Find closest PPG dip to first ABP dip
-    for i in range(0, len(abp_dips)):
-        first_abp = abp_dips[i]
-        differences = ppg_dips - first_abp
-        smallest_diff = min(num for num in differences if num > 0)
-        if smallest_diff < 30:
+def synchronization(abp, ppg, abp_beats, ppg_beats):
+    # Find closest PPG beat to first ABP beat
+    first_ppg_ind, first_abp = None, None
+    for i in range(0, len(abp_beats)):
+        first_abp = abp_beats[i]
+        differences = ppg_beats - first_abp
+        arr = [num for num in differences if num > 0]
+        if len(arr) == 0:
+            raise Exception("Beat synchronisation failed: no proximal beats found")
+        smallest_diff = min(arr)
+        if smallest_diff < 50:
             first_ppg_ind, = np.argwhere(differences == smallest_diff)[0]
             break
-    first_ppg = ppg_dips[first_ppg_ind]
+    first_ppg = ppg_beats[first_ppg_ind]
     # print([first_abp_ind, first_abp], [first_ppg_ind, first_ppg])
 
     # Find closest ABP dip to last PPG dip
-    last_ppg_ind = len(ppg_dips) - 1
-    last_ppg = ppg_dips[last_ppg_ind]
-    differences = abs(abp_dips - last_ppg)
+    last_ppg_ind = len(ppg_beats) - 1
+    last_ppg = ppg_beats[last_ppg_ind]
+    differences = abs(abp_beats - last_ppg)
     last_abp_ind = np.argmin(differences)
-    last_abp = abp_dips[last_abp_ind]
+    last_abp = abp_beats[last_abp_ind]
     # print([last_abp_ind, last_abp], [last_ppg_ind, last_ppg])
 
     # Splice original ABP and PPG arrays
@@ -880,7 +886,7 @@ def pulse_detection(data, algorithm, duration, sig):
     return beats
 
 
-def get_optimal_beats_lists(abp, ppg, fs):
+def get_optimal_beats_lists(abp, ppg, fs=62.4725):
     """
     Signal processing script for examining which default beat detection algorithm is the most efficient
     :param abp: List of ABP data
@@ -964,9 +970,9 @@ def split_filename(filename):
     return sig, seg_name, end
 
 
-def main():
+def main(fs=125):
     # manual_filter_data('usable_ppg_data_2')
-    process_data(125)
+    process_data(fs)
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)
 
