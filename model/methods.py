@@ -1341,7 +1341,7 @@ def fiducial_points(x, pks, fs, vis, header):
         ax1.scatter(off, x[off.astype(int)], marker='*', color='green', label='off')
         ax1.scatter(dia, x[dia.astype(int)], color='yellow', label='dia')
         ax1.scatter(dic, x[dic.astype(int)], color='blue', label='dic')
-        ax1.scatter(tip, x[tip.astype(int)], color='purple', label='dic')
+        ax1.scatter(tip, x[tip.astype(int)], color='purple', label='tip')
         ax1.legend(loc='center right')
         ax1.set_ylabel('x')
 

@@ -140,8 +140,11 @@ def process_data(fs):
 
             # TODO: extract a larger number of synchronous features for multiple feature Machine Learning
             # 4.1: Feature extraction from fidp
-            a_sys, p_sys, a_dia, p_dia = extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs)
-            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia))
+            fidp_features = extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs)
+            a_sys, a_dia = fidp_features['a_sys'], fidp_features['a_dia']
+            p_sys, p_dia = fidp_features['p_sys'], fidp_features['p_dia']
+            p_ct, p_dt, p_dia_t = fidp_features['p_ct'], fidp_features['p_dt'], fidp_features['p_dia_t']
+            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia), len(p_ct), len(p_dt), len(p_dia_t))
 
             # 4.2: Feature extraction from FFT
             # abp_fft = np.fft.fft(abp[abp_beats[0]: abp_beats[2]])
@@ -198,7 +201,7 @@ def process_ppg_data(path, fs):
 
         ppg_beats, alg, ppg_fidp = beat_fidp_detection(ppg_filt, fs, seg_name)
 
-        agi = agi_detection(ppg_fidp, fs)
+        agi = agi_detection(ppg_fidp, ppg_beats, fs)
 
         median_agi, mean_agi = calculate_median_mean(agi, fs, 30)
 
@@ -259,6 +262,11 @@ def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
     else:
         raise Exception('No matching timestamps found')
 
+    ct, tsc, ctv = ct_detection(ppg_fidp, p_sys, fs)
+    dt, tsdt, dtv = delta_t_detection(ppg_fidp, p_sys, fs)
+    dia_t, tsdia_t, dia_tv = diastolic_time_detection(ppg_fidp, p_sys, fs)
+    pa, tspa, pav = pulse_area_detection(ppg_fidp, p_sys, ppg, fs)
+
     # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
     # abp_median_sys, abp_mean_sys = calculate_median_mean(a_sys, fs, 30)
     # abp_median_dia, abp_mean_dia = calculate_median_mean(a_dia, fs, 30)
@@ -266,13 +274,20 @@ def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
     # ppg_median_sys, ppg_mean_sys = calculate_median_mean(p_sys, fs, 30)
     # ppg_median_dia, ppg_mean_dia = calculate_median_mean(p_dia, fs, 30)
 
-    # ct, tsc, ctv = ct_detection(ppg_fidp, fs)
+    # agi, tsa, agv = agi_detection(ppg_fidp, p_sys, fs)
 
-    return a_sysv, p_sysv, a_diav, p_diav
+    return {
+        'a_sys': a_sys,
+        'a_dia': a_dia,
+        'p_sys': p_sys,
+        'p_dia': p_dia,
+        'p_ct': ct,
+        'p_dt': dt,
+        'p_dia_t': dia_t
+    }
 
 
 def group_timestamps(a_tss, p_tss, a_tsd, p_tsd):
-
     abp_sys_timestamps, ppg_sys_timestamps = group_a_b(a_tss, p_tss)
     abp_dia_timestamps, ppg_dia_timestamps = group_a_b(a_tsd, p_tsd)
 
@@ -403,27 +418,104 @@ def beat_fidp_detection(data, fs, seg_name):
     return beats, alg, fidp
 
 
-def ct_detection(fidp, fs):
+def ct_detection(fidp, peaks, fs):
     # CT = Systolic peak - Onset
-    length = min(len(fidp["pks"]), len(fidp["ons"]))
+
+    indexes = peaks[:, 0]
+    length = len(indexes)
     ts = np.zeros(length, dtype=int)
     values = np.zeros(length, dtype=float)
-    for beat_no in range(length):
-        ts[beat_no] = beat_no  # fidp["pks"][beat_no]
-        values[beat_no] = (fidp["pks"][beat_no] - fidp["ons"][beat_no]) / fs
+
+    for beat_no, i in enumerate(indexes):
+        # Find the index in fidp["pks"] where its value is equal to i
+        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
+
+        if pk_index is not None:
+            ts[beat_no] = i
+            values[beat_no] = (fidp["pks"][pk_index] - fidp["ons"][pk_index]) / fs
+
     return np.column_stack((ts, values)), ts, values
 
 
-def agi_detection(fidp, fs):
-    # (From second derivative) Aging Index = b - c - d - e
-    length = min(len(fidp["bmag2d"]), len(fidp["cmag2d"]),
-                 len(fidp["dmag2d"]), len(fidp["emag2d"]))
+def delta_t_detection(fidp, peaks, fs):
+    # delta T = Dicrotic notch - Systolic peak
+
+    indexes = peaks[:, 0]
+    length = len(indexes)
     ts = np.zeros(length, dtype=int)
     values = np.zeros(length, dtype=float)
-    for beat_no in range(length):
-        ts[beat_no] = fidp["a2d"][beat_no]
-        values[beat_no] = (fidp["bmag2d"][beat_no] - fidp["cmag2d"][beat_no]
-                           - fidp["dmag2d"][beat_no] - fidp["emag2d"][beat_no]) / fs
+
+    for beat_no, i in enumerate(indexes):
+        # Find the index in fidp["pks"] where its value is equal to i
+        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
+
+        if pk_index is not None:
+            ts[beat_no] = i
+            values[beat_no] = (fidp["dia"][pk_index] - fidp["pks"][pk_index]) / fs
+
+    return np.column_stack((ts, values)), ts, values
+
+
+def diastolic_time_detection(fidp, peaks, fs):
+    # Diastolic Time = Offset - Systolic peak
+
+    indexes = peaks[:, 0]
+    length = len(indexes)
+    ts = np.zeros(length, dtype=int)
+    values = np.zeros(length, dtype=float)
+
+    for beat_no, i in enumerate(indexes):
+        # Find the index in fidp["pks"] where its value is equal to i
+        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
+
+        if pk_index is not None:
+            ts[beat_no] = i
+            values[beat_no] = (fidp["off"][pk_index] - fidp["pks"][pk_index]) / fs
+
+    return np.column_stack((ts, values)), ts, values
+
+
+def pulse_area_detection(fidp, peaks, data, fs):
+    # Pulse Area = Integral of PPG with limits [ons:off]
+
+    indexes = peaks[:, 0]
+    length = len(indexes)
+    ts = np.zeros(length, dtype=int)
+    values = np.zeros(length, dtype=float)
+
+    for beat_no, i in enumerate(indexes):
+        # Find the index in fidp["pks"] where its value is equal to i
+        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
+
+        if pk_index is not None:
+            ts[beat_no] = i
+
+            # Extract the relevant portion of the dataset between diastolic dips
+            time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["off"][pk_index]
+            # time[diastolic_dip_indices[0]:diastolic_dip_indices[1] + 1]
+            signal_interval_start, signal_interval_end = data[time_interval_start], data[time_interval_end]
+            # signal[diastolic_dip_indices[0]:diastolic_dip_indices[1] + 1]
+
+    return np.column_stack((ts, values)), ts, values
+
+
+def agi_detection(fidp, peaks, fs):
+    # (From second derivative) Aging Index = b - c - d - e
+
+    indexes = peaks[:, 0]
+    length = len(indexes)
+    ts = np.zeros(length, dtype=int)
+    values = np.zeros(length, dtype=float)
+
+    for beat_no, i in enumerate(indexes):
+        # Find the index in fidp["pks"] where its value is equal to i
+        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
+
+        if pk_index is not None:
+            ts[beat_no] = i
+            values[beat_no] = (fidp["b2d"][beat_no] - fidp["c2d"][beat_no]
+                               - fidp["d2d"][beat_no] - fidp["e2d"][beat_no]) / fs
+
     return np.column_stack((ts, values)), ts, values
 
 
@@ -545,7 +637,7 @@ def pre_process_data(abp, ppg, fs, seg_name):
     mean_p = np.mean(ppg)
     std_p = np.std(ppg)
     ppg = (ppg - mean_p) / std_p
-    plot_abp_ppg(seg_name + ' post-filtering', abp, ppg, fs)
+    # plot_abp_ppg(seg_name + ' post-filtering', abp, ppg, fs)
 
     return abp, ppg
 
@@ -773,7 +865,7 @@ def signal_processing(seg_name, abp, ppg, fs):
 
     # Beat grouping
     abp_beats, ppg_beats = group_beats(abp_beats, ppg_beats)
-    plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
+    # plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
 
     if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
         print(f"too big of a difference after grouping -"
