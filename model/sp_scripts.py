@@ -8,7 +8,9 @@ import numpy as np
 import pandas as pd
 import pylab as pl
 import scipy as sp
+import scipy.integrate
 from scipy.ndimage import gaussian_filter1d
+from scipy.integrate import simps
 import wfdb.processing
 import pprint
 
@@ -143,8 +145,9 @@ def process_data(fs):
             fidp_features = extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs)
             a_sys, a_dia = fidp_features['a_sys'], fidp_features['a_dia']
             p_sys, p_dia = fidp_features['p_sys'], fidp_features['p_dia']
-            p_ct, p_dt, p_dia_t = fidp_features['p_ct'], fidp_features['p_dt'], fidp_features['p_dia_t']
-            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia), len(p_ct), len(p_dt), len(p_dia_t))
+            p_ct, p_dt = fidp_features['p_ct'], fidp_features['p_dt']
+            p_dia_t, p_pa = fidp_features['p_dia_t'], fidp_features['p_pa']
+            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia), len(p_ct), len(p_dt), len(p_dia_t), len(p_pa))
 
             # 4.2: Feature extraction from FFT
             # abp_fft = np.fft.fft(abp[abp_beats[0]: abp_beats[2]])
@@ -277,13 +280,14 @@ def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
     # agi, tsa, agv = agi_detection(ppg_fidp, p_sys, fs)
 
     return {
-        'a_sys': a_sys,
-        'a_dia': a_dia,
-        'p_sys': p_sys,
-        'p_dia': p_dia,
-        'p_ct': ct,
-        'p_dt': dt,
-        'p_dia_t': dia_t
+        'a_sys': a_sysv,
+        'a_dia': a_diav,
+        'p_sys': p_sysv,
+        'p_dia': p_diav,
+        'p_ct': ctv,
+        'p_dt': dtv,
+        'p_dia_t': dia_tv,
+        'p_pa': pav
     }
 
 
@@ -490,11 +494,11 @@ def pulse_area_detection(fidp, peaks, data, fs):
         if pk_index is not None:
             ts[beat_no] = i
 
-            # Extract the relevant portion of the dataset between diastolic dips
             time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["off"][pk_index]
-            # time[diastolic_dip_indices[0]:diastolic_dip_indices[1] + 1]
-            signal_interval_start, signal_interval_end = data[time_interval_start], data[time_interval_end]
-            # signal[diastolic_dip_indices[0]:diastolic_dip_indices[1] + 1]
+            time_interval = np.arange(time_interval_start, time_interval_end)
+            signal_interval = data[time_interval_start:time_interval_end]
+
+            values[beat_no] = simps(signal_interval, time_interval)
 
     return np.column_stack((ts, values)), ts, values
 
@@ -634,9 +638,9 @@ def pre_process_data(abp, ppg, fs, seg_name):
     # mean_a = np.mean(abp)
     # std_a = np.std(abp)
     # abp = (abp - mean_a) / std_a
-    mean_p = np.mean(ppg)
-    std_p = np.std(ppg)
-    ppg = (ppg - mean_p) / std_p
+    # mean_p = np.mean(ppg)
+    # std_p = np.std(ppg)
+    # ppg = (ppg - mean_p) / std_p
     # plot_abp_ppg(seg_name + ' post-filtering', abp, ppg, fs)
 
     return abp, ppg
