@@ -145,9 +145,8 @@ def process_data(fs):
             fidp_features = extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs)
             a_sys, a_dia = fidp_features['a_sys'], fidp_features['a_dia']
             p_sys, p_dia = fidp_features['p_sys'], fidp_features['p_dia']
-            p_ct, p_dt = fidp_features['p_ct'], fidp_features['p_dt']
-            p_dia_t, p_pa = fidp_features['p_dia_t'], fidp_features['p_pa']
-            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia), len(p_ct), len(p_dt), len(p_dia_t), len(p_pa))
+            p_tdf = fidp_features['p_td_features']
+            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia), len(p_tdf))
 
             # 4.2: Feature extraction from FFT
             # abp_fft = np.fft.fft(abp[abp_beats[0]: abp_beats[2]])
@@ -265,10 +264,7 @@ def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
     else:
         raise Exception('No matching timestamps found')
 
-    ct, tsc, ctv = ct_detection(ppg_fidp, p_sys, fs)
-    dt, tsdt, dtv = delta_t_detection(ppg_fidp, p_sys, fs)
-    dia_t, tsdia_t, dia_tv = diastolic_time_detection(ppg_fidp, p_sys, fs)
-    pa, tspa, pav = pulse_area_detection(ppg_fidp, p_sys, ppg, fs)
+    td_features = time_domain_feature_detection(ppg_fidp, p_sys, ppg, fs)
 
     # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
     # abp_median_sys, abp_mean_sys = calculate_median_mean(a_sys, fs, 30)
@@ -284,10 +280,7 @@ def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
         'a_dia': a_diav,
         'p_sys': p_sysv,
         'p_dia': p_diav,
-        'p_ct': ctv,
-        'p_dt': dtv,
-        'p_dia_t': dia_tv,
-        'p_pa': pav
+        'p_td_features': td_features
     }
 
 
@@ -422,13 +415,19 @@ def beat_fidp_detection(data, fs, seg_name):
     return beats, alg, fidp
 
 
-def ct_detection(fidp, peaks, fs):
-    # CT = Systolic peak - Onset
-
+def time_domain_feature_detection(fidp, peaks, data, fs):
     indexes = peaks[:, 0]
     length = len(indexes)
     ts = np.zeros(length, dtype=int)
-    values = np.zeros(length, dtype=float)
+    sys_t = np.zeros(length, dtype=float)
+    sys_area = np.zeros(length, dtype=float)
+    dia_t = np.zeros(length, dtype=float)
+    dia_area = np.zeros(length, dtype=float)
+    delta_t = np.zeros(length, dtype=float)
+    delta_area = np.zeros(length, dtype=float)
+    pulse_area = np.zeros(length, dtype=float)
+    dia_sys_area_ratio = np.zeros(length, dtype=float)
+    res_index = np.zeros(length, dtype=float)
 
     for beat_no, i in enumerate(indexes):
         # Find the index in fidp["pks"] where its value is equal to i
@@ -436,71 +435,74 @@ def ct_detection(fidp, peaks, fs):
 
         if pk_index is not None:
             ts[beat_no] = i
-            values[beat_no] = (fidp["pks"][pk_index] - fidp["ons"][pk_index]) / fs
+            sys_t[beat_no], sys_area[beat_no] = systolic_time_detection(fidp, pk_index, data, fs)
+            dia_t[beat_no], dia_area[beat_no] = diastolic_time_detection(fidp, pk_index, data, fs)
+            delta_t[beat_no], delta_area[beat_no] = delta_t_detection(fidp, pk_index, data, fs)
+            pulse_area[beat_no] = pulse_area_detection(fidp, pk_index, data)
+            dia_sys_area_ratio[beat_no] = dia_area[beat_no] / sys_area[beat_no]
+            res_index[beat_no] = resistive_index_detection(fidp, pk_index, data)
 
-    return np.column_stack((ts, values)), ts, values
-
-
-def delta_t_detection(fidp, peaks, fs):
-    # delta T = Dicrotic notch - Systolic peak
-
-    indexes = peaks[:, 0]
-    length = len(indexes)
-    ts = np.zeros(length, dtype=int)
-    values = np.zeros(length, dtype=float)
-
-    for beat_no, i in enumerate(indexes):
-        # Find the index in fidp["pks"] where its value is equal to i
-        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
-
-        if pk_index is not None:
-            ts[beat_no] = i
-            values[beat_no] = (fidp["dia"][pk_index] - fidp["pks"][pk_index]) / fs
-
-    return np.column_stack((ts, values)), ts, values
+    return np.column_stack((ts, sys_t, sys_area, dia_t, dia_area,
+                            delta_t, delta_area, pulse_area,
+                            dia_sys_area_ratio, res_index))
 
 
-def diastolic_time_detection(fidp, peaks, fs):
+def systolic_time_detection(fidp, pk_index, data, fs):
+    # Systolic Time = Systolic peak - Onset
+    value = (fidp["pks"][pk_index] - fidp["ons"][pk_index]) / fs
+
+    # Systolic Area = Integral of PPG with limits [ons:pks]
+    time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["pks"][pk_index]
+    time_interval = np.arange(time_interval_start, time_interval_end)
+    signal_interval = data[time_interval_start:time_interval_end]
+    area = simps(signal_interval, time_interval)
+
+    return value, area
+
+
+def diastolic_time_detection(fidp, pk_index, data, fs):
     # Diastolic Time = Offset - Systolic peak
+    value = (fidp["off"][pk_index] - fidp["pks"][pk_index]) / fs
 
-    indexes = peaks[:, 0]
-    length = len(indexes)
-    ts = np.zeros(length, dtype=int)
-    values = np.zeros(length, dtype=float)
+    # Systolic Area = Integral of PPG with limits [ons:pks]
+    time_interval_start, time_interval_end = fidp["pks"][pk_index], fidp["off"][pk_index]
+    time_interval = np.arange(time_interval_start, time_interval_end)
+    signal_interval = data[time_interval_start:time_interval_end]
+    area = simps(signal_interval, time_interval)
 
-    for beat_no, i in enumerate(indexes):
-        # Find the index in fidp["pks"] where its value is equal to i
-        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
-
-        if pk_index is not None:
-            ts[beat_no] = i
-            values[beat_no] = (fidp["off"][pk_index] - fidp["pks"][pk_index]) / fs
-
-    return np.column_stack((ts, values)), ts, values
+    return value, area
 
 
-def pulse_area_detection(fidp, peaks, data, fs):
+def delta_t_detection(fidp, pk_index, data, fs):
+    # delta T = Dicrotic notch - Systolic peak
+    value = (fidp["dia"][pk_index] - fidp["pks"][pk_index]) / fs
+
+    # Systolic Area = Integral of PPG with limits [ons:pks]
+    time_interval_start, time_interval_end = fidp["pks"][pk_index], fidp["dia"][pk_index]
+    time_interval = np.arange(time_interval_start, time_interval_end)
+    signal_interval = data[time_interval_start:time_interval_end]
+    area = simps(signal_interval, time_interval)
+
+    return value, area
+
+
+def pulse_area_detection(fidp, pk_index, data):
     # Pulse Area = Integral of PPG with limits [ons:off]
+    time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["off"][pk_index]
+    time_interval = np.arange(time_interval_start, time_interval_end)
+    signal_interval = data[time_interval_start:time_interval_end]
 
-    indexes = peaks[:, 0]
-    length = len(indexes)
-    ts = np.zeros(length, dtype=int)
-    values = np.zeros(length, dtype=float)
+    value = simps(signal_interval, time_interval)
 
-    for beat_no, i in enumerate(indexes):
-        # Find the index in fidp["pks"] where its value is equal to i
-        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
+    return value
 
-        if pk_index is not None:
-            ts[beat_no] = i
 
-            time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["off"][pk_index]
-            time_interval = np.arange(time_interval_start, time_interval_end)
-            signal_interval = data[time_interval_start:time_interval_end]
-
-            values[beat_no] = simps(signal_interval, time_interval)
-
-    return np.column_stack((ts, values)), ts, values
+def resistive_index_detection(fidp, pk_index, data):
+    # RI = (data[dia] - data[off]) / (data[pks] - data[off])
+    h1 = data[fidp["dia"][pk_index]] - data[fidp["off"][pk_index]]
+    h2 = data[fidp["pks"][pk_index]] - data[fidp["off"][pk_index]]
+    value = h1 / h2
+    return value
 
 
 def agi_detection(fidp, peaks, fs):
