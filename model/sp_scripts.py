@@ -122,9 +122,9 @@ def process_data(fs):
     tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
         a_sys, p_sys, a_dia, p_dia = np.array([]), np.array([]), np.array([]), np.array([])
-        if i != 13:
-            i += 1
-            continue
+        # if i < 13:
+        #     i += 1
+        #     continue
         try:
             # 1: Data Reading
             seg_name, raw_abp, raw_ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -146,7 +146,9 @@ def process_data(fs):
             a_sys, a_dia = features['a_sys'], features['a_dia']
             p_sys, p_dia = features['p_sys'], features['p_dia']
             ppg_features = features['ppg_features']
-            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia), len(ppg_features))
+            if len(a_sys) == len(ppg_features):
+                print(f"{2 + ppg_features.shape[1] + 1} features extracted from "
+                      f"{len(ppg_features)} PPG beats")
 
         except Exception as e:
             print('ERROR', e)
@@ -159,7 +161,7 @@ def process_data(fs):
 
         print("---")
         # Move one file at a time
-        x = input("> next")
+        # x = input("> next")
         i += 1
 
     # Save extracted features to .csv
@@ -257,6 +259,11 @@ def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs):
 
     # Time and Frequency Domain Feature extraction
     ppg_features = extra_feature_detection(ppg_fidp, p_sys, ppg, fs)
+    if len(ppg_features) != len(a_sys):
+        a_sysv = a_sysv[:len(ppg_features)]
+        p_sysv = p_sysv[:len(ppg_features)]
+        a_diav = a_diav[:len(ppg_features)]
+        p_diav = p_diav[:len(ppg_features)]
 
     # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
     # abp_median_sys, abp_mean_sys = calculate_median_mean(a_sys, fs, 30)
@@ -415,44 +422,74 @@ def extra_feature_detection(fidp, peaks, data, fs):
     # Frequency Domain Features from FFT
     fd_feature_names = ['mean_frequency', 'total_power', 'normalized_power_at_peak']
 
-    length = len(peaks)
-    td_features = {name: np.zeros(length, dtype=float) for name in td_feature_names}
-    fd_features = {name: np.zeros(length, dtype=float) for name in fd_feature_names}
+    td_features = {name: np.array([], dtype=float) for name in td_feature_names}
+    fd_features = {name: np.array([], dtype=float) for name in fd_feature_names}
 
-    for beat_no, i in enumerate(peaks[:, 0]):
+    beat_no = 0
+    for i in peaks[:, 0]:
         # Find the index in fidp["pks"] where its value is equal to i
         pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
 
         if pk_index is not None:
-            td_features = time_domain_feature_detection(td_features, beat_no, i, fidp, pk_index, data, fs)
-            fd_features = frequency_domain_feature_detection(fd_features, beat_no, fidp, pk_index, data, fs)
+            try:
+                if (pk_index < len(fidp["ons"]) and pk_index < len(fidp["off"])
+                        and pk_index < len(fidp["pks"]) and pk_index < len(fidp["dia"])):
+                    td_features = time_domain_feature_detection(td_features, i, fidp, pk_index, data, fs)
+                    fd_features = frequency_domain_feature_detection(fd_features, fidp, pk_index, data, fs)
+                    beat_no += 1
+                else:
+                    raise IndexError("Reached end of one of FIDPs")
+            except IndexError as e:
+                print(e, f'-> saving {beat_no} extracted features')
+                td_features = {name: td_features[name][:beat_no] for name in td_feature_names}
+                fd_features = {name: fd_features[name][:beat_no] for name in fd_feature_names}
+                break
+            except Exception as e:
+                raise Exception(f'Feature Extraction failed: {e}')
 
     tot_td_features = np.column_stack([td_features[name] for name in td_feature_names])
     tot_fd_features = np.column_stack([fd_features[name] for name in fd_feature_names])
     return np.column_stack((tot_td_features, tot_fd_features))
 
 
-def frequency_domain_feature_detection(features, beat_no, fidp, pk_index, data, fs):
+def time_domain_feature_detection(features, i, fidp, pk_index, data, fs):
+    if pk_index < len(fidp["ons"]) and pk_index < len(fidp["pks"]):
+        features['ts'] = np.append(features['ts'], i)
+
+        st, sa = systolic_time_detection(fidp, pk_index, data, fs)
+        features['sys_t'], features['sys_area'] = np.append(features['sys_t'], st), np.append(features['sys_t'], sa)
+
+        dt, da = diastolic_time_detection(fidp, pk_index, data, fs)
+        features['dia_t'], features['dia_area'] = np.append(features['dia_t'], dt), np.append(features['dia_area'], da)
+
+        det, dea = delta_t_detection(fidp, pk_index, data, fs)
+        features['delta_t'], features['delta_area'] = (np.append(features['delta_t'], det),
+                                                       np.append(features['delta_area'], dea))
+
+        features['pulse_area'] = np.append(features['pulse_area'], pulse_area_detection(fidp, pk_index, data))
+
+        features['dia_sys_area_ratio'] = np.append(features['dia_sys_area_ratio'], da / sa)
+
+        features['res_index'] = np.append(features['res_index'], resistive_index_detection(fidp, pk_index, data))
+
+        v1, v2 = vessel_volume_index_detection(fidp, pk_index, data)
+        features['vvi_sys'], features['vvi_dia'] = (np.append(features['vvi_sys'], v1),
+                                                    np.append(features['vvi_dia'], v2))
+        return features
+    else:
+        raise IndexError("Reached end of one of FIDPs")
+
+
+def frequency_domain_feature_detection(features, fidp, pk_index, data, fs):
     # Frequency Domain Feature detection using FFT
     time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["off"][pk_index]
     signal_interval = data[time_interval_start:time_interval_end]
     ppg_fdf = frequency_domain_features(signal_interval, fs)
 
-    features['mean_frequency'][beat_no] = ppg_fdf['mean_frequency']
-    features['total_power'][beat_no] = ppg_fdf['total_power']
-    features['normalized_power_at_peak'][beat_no] = ppg_fdf['normalized_power_at_peak']
-    return features
-
-
-def time_domain_feature_detection(features, beat_no, i, fidp, pk_index, data, fs):
-    features['ts'][beat_no] = i
-    features['sys_t'][beat_no], features['sys_area'][beat_no] = systolic_time_detection(fidp, pk_index, data, fs)
-    features['dia_t'][beat_no], features['dia_area'][beat_no] = diastolic_time_detection(fidp, pk_index, data, fs)
-    features['delta_t'][beat_no], features['delta_area'][beat_no] = delta_t_detection(fidp, pk_index, data, fs)
-    features['pulse_area'][beat_no] = pulse_area_detection(fidp, pk_index, data)
-    features['dia_sys_area_ratio'][beat_no] = features['dia_area'][beat_no] / features['sys_area'][beat_no]
-    features['res_index'][beat_no] = resistive_index_detection(fidp, pk_index, data)
-    features['vvi_sys'][beat_no], features['vvi_dia'][beat_no] = vessel_volume_index_detection(fidp, pk_index, data)
+    features['mean_frequency'] = np.append(features['mean_frequency'], ppg_fdf['mean_frequency'])
+    features['total_power'] = np.append(features['total_power'], ppg_fdf['total_power'])
+    features['normalized_power_at_peak'] = np.append(features['normalized_power_at_peak'],
+                                                     ppg_fdf['normalized_power_at_peak'])
     return features
 
 
@@ -575,28 +612,30 @@ def agi_detection(fidp, peaks, fs):
 def sys_dia_detection(fidp, data):
     # (From filtered data) Systolic BP = pks; Diastolic BP = dia
     sys = fidp['pks']
-    dia = fidp['dia']
+    # TODO: ask if Diastolic pressure ons, dia or off?
+    dia = fidp['off']
     sys, dia = group_sys_dia(sys, dia)
     length = min(len(sys), len(dia))
     tss = np.zeros(length, dtype=int)
     tsd = np.zeros(length, dtype=int)
     sysv = np.zeros(length, dtype=float)
     diav = np.zeros(length, dtype=float)
-    beat_no = 0
+    beat_no, adj_beat_no = 0, 0
     while beat_no < len(tss):
-        sys_beat, dia_beat = data[sys[beat_no]], data[dia[beat_no]]
+        sys_beat = data[sys[beat_no + adj_beat_no]]
+        dia_beat = data[dia[beat_no + adj_beat_no]]
         if sys_beat >= dia_beat:
-            tss[beat_no] = sys[beat_no]
-            sysv[beat_no] = data[sys[beat_no]]
-            tsd[beat_no] = dia[beat_no]
-            diav[beat_no] = data[dia[beat_no]]
+            tss[beat_no] = sys[beat_no + adj_beat_no]
+            sysv[beat_no] = sys_beat
+            tsd[beat_no] = dia[beat_no + adj_beat_no]
+            diav[beat_no] = dia_beat
             beat_no += 1
         else:
             tss = np.delete(tss, beat_no)
             sysv = np.delete(sysv, beat_no)
             tsd = np.delete(tsd, beat_no)
             diav = np.delete(diav, beat_no)
-            beat_no += 1
+            adj_beat_no += 1
 
     # plot_extracted_data('SYS + DIA', sysv, diav)
 
@@ -891,11 +930,11 @@ def signal_processing(seg_name, abp, ppg, fs):
     # plot_abp_ppg_with_pulse(seg_name + ' Grouped', abp, abp_beats, ppg, ppg_beats, fs)
 
     if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
-        print(f"too big of a difference after grouping -"
-              f"{max(normal_length_a, normal_length_p) - max(len(abp_beats), len(ppg_beats))}")
+        raise Exception(f"too big of a difference after grouping -"
+                        f"{max(normal_length_a, normal_length_p) - max(len(abp_beats), len(ppg_beats))}")
 
-    abp_hr = len(abp_beats) / (len(abp) / fs) * 60
-    ppg_hr = len(ppg_beats) / (len(ppg) / fs) * 60
+    abp_hr = round(len(abp_beats) / (len(abp) / fs) * 60, 1)
+    ppg_hr = round(len(ppg_beats) / (len(ppg) / fs) * 60, 1)
     print(f"ABP beats - {len(abp_beats)}, Heart Rate - {abp_hr}")
     print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {ppg_hr}")
 
@@ -946,7 +985,7 @@ def group_beats(abp_beats, ppg_beats):
     while i < min(len(abp_beats), len(ppg_beats)):
         a = abp_beats[i]
         p = ppg_beats[i]
-        if p - 20 <= a <= p + 20:
+        if p - 40 <= a <= p + 40:
             i += 1
         else:
             if a < p:
