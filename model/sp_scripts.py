@@ -122,9 +122,9 @@ def process_data(fs):
     tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
     for filename in filenames:
         a_sys, p_sys, a_dia, p_dia = np.array([]), np.array([]), np.array([]), np.array([])
-        # if i != 5:
-        #     i += 1
-        #     continue
+        if i != 13:
+            i += 1
+            continue
         try:
             # 1: Data Reading
             seg_name, raw_abp, raw_ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -141,21 +141,12 @@ def process_data(fs):
             ppg_fidp = fiducial_points(ppg, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
 
             # TODO: extract a larger number of synchronous features for multiple feature Machine Learning
-            # 4.1: Feature extraction from fidp
-            fidp_features = extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs)
-            a_sys, a_dia = fidp_features['a_sys'], fidp_features['a_dia']
-            p_sys, p_dia = fidp_features['p_sys'], fidp_features['p_dia']
-            p_tdf = fidp_features['p_td_features']
-            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia), len(p_tdf))
-
-            # 4.2: Feature extraction from FFT
-            # abp_fft = np.fft.fft(abp[abp_beats[0]: abp_beats[2]])
-            # ppg_fft = np.fft.fft(ppg[ppg_beats[0]: ppg_beats[2]])
-            # plot_abp_ppg('FFT', abp_fft, ppg_fft, fs)
-            # abp_fdf = frequency_domain_features(abp, fs)
-            # ppg_fdf = frequency_domain_features(ppg, fs)
-            # plot_fft_features(ppg, abp, ppg_fdf['positive_frequencies'], abp_fdf['positive_frequencies'],
-            #                   ppg_fdf['magnitude_spectrum'], abp_fdf['magnitude_spectrum'], fs)
+            # 4: Feature extraction
+            features = extract_features(abp_fidp, ppg_fidp, abp, ppg, fs)
+            a_sys, a_dia = features['a_sys'], features['a_dia']
+            p_sys, p_dia = features['p_sys'], features['p_dia']
+            ppg_features = features['ppg_features']
+            print(len(a_sys), len(p_sys), len(a_dia), len(p_dia), len(ppg_features))
 
         except Exception as e:
             print('ERROR', e)
@@ -250,7 +241,7 @@ def process_bp_data(path, fs):
     return median_sys, median_dia
 
 
-def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
+def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs):
     a_sys, a_dia, a_tss, a_sysv, a_tsd, a_diav = sys_dia_detection(abp_fidp, abp)
     p_sys, p_dia, p_tss, p_sysv, p_tsd, p_diav = sys_dia_detection(ppg_fidp, ppg)
 
@@ -264,7 +255,8 @@ def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
     else:
         raise Exception('No matching timestamps found')
 
-    td_features = time_domain_feature_detection(ppg_fidp, p_sys, ppg, fs)
+    # Time and Frequency Domain Feature extraction
+    ppg_features = extra_feature_detection(ppg_fidp, p_sys, ppg, fs)
 
     # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
     # abp_median_sys, abp_mean_sys = calculate_median_mean(a_sys, fs, 30)
@@ -280,7 +272,7 @@ def extract_fidp_features(abp_fidp, ppg_fidp, abp, ppg, fs):
         'a_dia': a_diav,
         'p_sys': p_sysv,
         'p_dia': p_diav,
-        'p_td_features': td_features
+        'ppg_features': ppg_features
     }
 
 
@@ -415,36 +407,81 @@ def beat_fidp_detection(data, fs, seg_name):
     return beats, alg, fidp
 
 
-def time_domain_feature_detection(fidp, peaks, data, fs):
-    indexes = peaks[:, 0]
-    length = len(indexes)
-    ts = np.zeros(length, dtype=int)
-    sys_t = np.zeros(length, dtype=float)
-    sys_area = np.zeros(length, dtype=float)
-    dia_t = np.zeros(length, dtype=float)
-    dia_area = np.zeros(length, dtype=float)
-    delta_t = np.zeros(length, dtype=float)
-    delta_area = np.zeros(length, dtype=float)
-    pulse_area = np.zeros(length, dtype=float)
-    dia_sys_area_ratio = np.zeros(length, dtype=float)
-    res_index = np.zeros(length, dtype=float)
+def extra_feature_detection(fidp, peaks, data, fs):
+    # Time Domain Features from FIDPs
+    td_feature_names = ['ts', 'sys_t', 'sys_area', 'dia_t', 'dia_area',
+                        'delta_t', 'delta_area', 'pulse_area',
+                        'dia_sys_area_ratio', 'res_index', 'vvi_sys', 'vvi_dia']
+    # Frequency Domain Features from FFT
+    fd_feature_names = ['mean_frequency', 'total_power', 'normalized_power_at_peak']
 
-    for beat_no, i in enumerate(indexes):
+    length = len(peaks)
+    td_features = {name: np.zeros(length, dtype=float) for name in td_feature_names}
+    fd_features = {name: np.zeros(length, dtype=float) for name in fd_feature_names}
+
+    for beat_no, i in enumerate(peaks[:, 0]):
         # Find the index in fidp["pks"] where its value is equal to i
         pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
 
         if pk_index is not None:
-            ts[beat_no] = i
-            sys_t[beat_no], sys_area[beat_no] = systolic_time_detection(fidp, pk_index, data, fs)
-            dia_t[beat_no], dia_area[beat_no] = diastolic_time_detection(fidp, pk_index, data, fs)
-            delta_t[beat_no], delta_area[beat_no] = delta_t_detection(fidp, pk_index, data, fs)
-            pulse_area[beat_no] = pulse_area_detection(fidp, pk_index, data)
-            dia_sys_area_ratio[beat_no] = dia_area[beat_no] / sys_area[beat_no]
-            res_index[beat_no] = resistive_index_detection(fidp, pk_index, data)
+            td_features = time_domain_feature_detection(td_features, beat_no, i, fidp, pk_index, data, fs)
+            fd_features = frequency_domain_feature_detection(fd_features, beat_no, fidp, pk_index, data, fs)
 
-    return np.column_stack((ts, sys_t, sys_area, dia_t, dia_area,
-                            delta_t, delta_area, pulse_area,
-                            dia_sys_area_ratio, res_index))
+    tot_td_features = np.column_stack([td_features[name] for name in td_feature_names])
+    tot_fd_features = np.column_stack([fd_features[name] for name in fd_feature_names])
+    return np.column_stack((tot_td_features, tot_fd_features))
+
+
+def frequency_domain_feature_detection(features, beat_no, fidp, pk_index, data, fs):
+    # Frequency Domain Feature detection using FFT
+    time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["off"][pk_index]
+    signal_interval = data[time_interval_start:time_interval_end]
+    ppg_fdf = frequency_domain_features(signal_interval, fs)
+
+    features['mean_frequency'][beat_no] = ppg_fdf['mean_frequency']
+    features['total_power'][beat_no] = ppg_fdf['total_power']
+    features['normalized_power_at_peak'][beat_no] = ppg_fdf['normalized_power_at_peak']
+    return features
+
+
+def time_domain_feature_detection(features, beat_no, i, fidp, pk_index, data, fs):
+    features['ts'][beat_no] = i
+    features['sys_t'][beat_no], features['sys_area'][beat_no] = systolic_time_detection(fidp, pk_index, data, fs)
+    features['dia_t'][beat_no], features['dia_area'][beat_no] = diastolic_time_detection(fidp, pk_index, data, fs)
+    features['delta_t'][beat_no], features['delta_area'][beat_no] = delta_t_detection(fidp, pk_index, data, fs)
+    features['pulse_area'][beat_no] = pulse_area_detection(fidp, pk_index, data)
+    features['dia_sys_area_ratio'][beat_no] = features['dia_area'][beat_no] / features['sys_area'][beat_no]
+    features['res_index'][beat_no] = resistive_index_detection(fidp, pk_index, data)
+    features['vvi_sys'][beat_no], features['vvi_dia'][beat_no] = vessel_volume_index_detection(fidp, pk_index, data)
+    return features
+
+
+def frequency_domain_features(signal, fs):
+    # Compute the Fast Fourier Transform (FFT)
+    fft_result = np.fft.fft(signal)
+
+    # Compute the frequencies corresponding to the FFT result
+    frequencies = np.fft.fftfreq(len(fft_result), 1 / fs)
+
+    # Only consider positive frequencies
+    positive_frequencies = frequencies[:len(frequencies) // 2]
+
+    # Magnitude spectrum (absolute values of FFT result)
+    magnitude_spectrum = np.abs(fft_result[:len(fft_result) // 2])
+
+    # Find the index corresponding to the maximum magnitude
+    peak_frequency_index = np.argmax(magnitude_spectrum)
+
+    # Other frequency domain features
+    mean_frequency = np.sum(positive_frequencies * magnitude_spectrum) / np.sum(magnitude_spectrum)
+    total_power = np.sum(magnitude_spectrum)
+    normalized_power_at_peak = magnitude_spectrum[peak_frequency_index] / total_power
+
+    return {
+        'mean_frequency': mean_frequency,
+        'total_power': total_power,
+        'normalized_power_at_peak': normalized_power_at_peak
+    }
 
 
 def systolic_time_detection(fidp, pk_index, data, fs):
@@ -503,6 +540,16 @@ def resistive_index_detection(fidp, pk_index, data):
     h2 = data[fidp["pks"][pk_index]] - data[fidp["off"][pk_index]]
     value = h1 / h2
     return value
+
+
+def vessel_volume_index_detection(fidp, pk_index, data):
+    # Vessel Volume Fill-Up (systolic) Index = data[pks] / max(data[all_systoles])
+    max_v = max(data[fidp["pks"]])
+    v1 = data[fidp["pks"][pk_index]] / max_v
+    # Vessel Volume Drained (diastolic) Index = max(data[all_systoles]) / data[off]
+    min_v = min(data[fidp["off"]])
+    v2 = min_v / data[fidp["off"][pk_index]]
+    return v1, v2
 
 
 def agi_detection(fidp, peaks, fs):
@@ -785,38 +832,6 @@ def whiskers_filter(data):
     return data
 
 
-def frequency_domain_features(signal, fs):
-    # Compute the Fast Fourier Transform (FFT)
-    fft_result = np.fft.fft(signal)
-
-    # Compute the frequencies corresponding to the FFT result
-    frequencies = np.fft.fftfreq(len(fft_result), 1 / fs)
-
-    # Only consider positive frequencies
-    positive_frequencies = frequencies[:len(frequencies) // 2]
-
-    # Magnitude spectrum (absolute values of FFT result)
-    magnitude_spectrum = np.abs(fft_result[:len(fft_result) // 2])
-
-    # Find the index corresponding to the maximum magnitude
-    peak_frequency_index = np.argmax(magnitude_spectrum)
-    peak_frequency = positive_frequencies[peak_frequency_index]
-
-    # Other frequency domain features
-    mean_frequency = np.sum(positive_frequencies * magnitude_spectrum) / np.sum(magnitude_spectrum)
-    total_power = np.sum(magnitude_spectrum)
-    normalized_power_at_peak = magnitude_spectrum[peak_frequency_index] / total_power
-
-    return {
-        'positive_frequencies': positive_frequencies,
-        'magnitude_spectrum': magnitude_spectrum,
-        'peak_frequency': peak_frequency,
-        'mean_frequency': mean_frequency,
-        'total_power': total_power,
-        'normalized_power_at_peak': normalized_power_at_peak
-    }
-
-
 def filter_savgol(x):
     x_f = sp.savgol_filter(x, 51, 4)
     return x_f
@@ -857,6 +872,8 @@ def signal_processing(seg_name, abp, ppg, fs):
     ppg_beat_interval = len(ppg) / len(ppg_beats)
     abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
     ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
+    if len(abp_beats) < 100 or len(ppg_beats) < 100:
+        raise Exception('Signal Processing failed: a substantial amount of beats not found')
     # plot_abp_ppg_with_pulse(seg_name + ' PEAKS (sp.find_peaks)', abp, abp_beats, ppg, ppg_beats, fs)
 
     # Signal synchronization : delay approx = 18 (288 ms)
