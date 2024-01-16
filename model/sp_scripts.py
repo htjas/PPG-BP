@@ -147,7 +147,7 @@ def process_data(fs):
             p_sys, p_dia = features['p_sys'], features['p_dia']
             ppg_features = features['ppg_features']
             if len(a_sys) == len(ppg_features):
-                print(f"{2 + ppg_features.shape[1] + 1} features extracted from "
+                print(f"{2 + ppg_features.shape[1] - 1} features extracted from "
                       f"{len(ppg_features)} PPG beats")
 
         except Exception as e:
@@ -161,7 +161,7 @@ def process_data(fs):
 
         print("---")
         # Move one file at a time
-        # x = input("> next")
+        x = input("> next")
         i += 1
 
     # Save extracted features to .csv
@@ -417,8 +417,11 @@ def beat_fidp_detection(data, fs, seg_name):
 def extra_feature_detection(fidp, peaks, data, fs):
     # Time Domain Features from FIDPs
     td_feature_names = ['ts', 'sys_t', 'sys_area', 'dia_t', 'dia_area',
-                        'delta_t', 'delta_area', 'pulse_area',
-                        'dia_sys_area_ratio', 'res_index', 'vvi_sys', 'vvi_dia']
+                        'delta_t', 'delta_area', 'pulse_area', 'dia_sys_area_ratio',
+                        'res_index', 'vvi_sys', 'vvi_dia', 'dw10', 'dw+sw10', 'dw/sw10',
+                        'dw25', 'dw+sw25', 'dw/sw25', 'dw33', 'dw+sw33', 'dw/sw33',
+                        'dw50', 'dw+sw50', 'dw/sw50', 'dw66', 'dw+sw66', 'dw/sw66',
+                        'dw75', 'dw+sw75', 'dw/sw75']
     # Frequency Domain Features from FFT
     fd_feature_names = ['mean_frequency', 'total_power', 'normalized_power_at_peak']
 
@@ -475,6 +478,16 @@ def time_domain_feature_detection(features, i, fidp, pk_index, data, fs):
         v1, v2 = vessel_volume_index_detection(fidp, pk_index, data)
         features['vvi_sys'], features['vvi_dia'] = (np.append(features['vvi_sys'], v1),
                                                     np.append(features['vvi_dia'], v2))
+
+        percentage_values = [10, 25, 33, 50, 66, 75]
+        for percent in percentage_values:
+            sw, dw = systolic_diastolic_width_detection(fidp, pk_index, data, fs, percent)
+            features[f'dw{percent}'], features[f'dw+sw{percent}'], features[f'dw/sw{percent}'] = (
+                np.append(features[f'dw{percent}'], dw),
+                np.append(features[f'dw+sw{percent}'], dw + sw),
+                np.append(features[f'dw/sw{percent}'], dw / sw)
+            )
+
         return features
     else:
         raise IndexError("Reached end of one of FIDPs")
@@ -587,6 +600,20 @@ def vessel_volume_index_detection(fidp, pk_index, data):
     min_v = min(data[fidp["off"]])
     v2 = min_v / data[fidp["off"][pk_index]]
     return v1, v2
+
+
+def systolic_diastolic_width_detection(fidp, pk_index, data, fs, p):
+    # Systolic width = data[(data[pks]-data[ons])*p/100]
+    ind_ons, ind_pk, ind_off = fidp["ons"][pk_index], fidp["pks"][pk_index], fidp["off"][pk_index]
+    val_ons, val_pk, val_off = data[ind_ons], data[ind_pk], data[ind_off]
+    threshold = p / 100 * (val_pk - val_ons) + val_ons
+    sys_arr = np.abs(np.array(data[ind_ons:ind_pk]) - threshold)
+    ind_sw = np.argmin(sys_arr)
+    sw = (len(sys_arr) - 1 - ind_sw) / fs
+    dia_arr = np.abs(np.array(data[ind_pk:ind_off]) - threshold)
+    ind_dw = np.argmin(dia_arr)
+    dw = (ind_dw - 0) / fs
+    return sw, dw
 
 
 def agi_detection(fidp, peaks, fs):
