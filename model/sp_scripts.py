@@ -119,10 +119,10 @@ def process_data(fs):
     filenames.sort()
 
     i = 1
-    tot_ppg_sys, tot_ppg_dia, tot_abp_sys, tot_abp_dia = np.array([]), np.array([]), np.array([]), np.array([])
+    tot_abp_sys, tot_abp_dia, tot_ppg_feats = np.array([]), np.array([]), np.zeros((1, 35))
     for filename in filenames:
-        a_sys, p_sys, a_dia, p_dia = np.array([]), np.array([]), np.array([]), np.array([])
-        # if i < 13:
+        a_sys, a_dia, ppg_features = np.array([]), np.array([]), np.zeros((1, 35))
+        # if i != 1:
         #     i += 1
         #     continue
         try:
@@ -144,31 +144,34 @@ def process_data(fs):
             # 4: Feature extraction
             features = extract_features(abp_fidp, ppg_fidp, abp, ppg, fs)
             a_sys, a_dia = features['a_sys'], features['a_dia']
-            p_sys, p_dia = features['p_sys'], features['p_dia']
             ppg_features = features['ppg_features']
             if len(a_sys) == len(ppg_features):
-                print(f"{2 + ppg_features.shape[1] - 1} features extracted from "
+                print(f"{ppg_features.shape[1] - 1} features extracted from "
                       f"{len(ppg_features)} PPG beats")
 
         except Exception as e:
             print('ERROR', e)
+            print("---")
+            i += 1
+            continue
 
-        # tot_ppg_sys = np.concatenate((tot_ppg_sys, p_sys))
-        # tot_ppg_dia = np.concatenate((tot_ppg_dia, p_dia))
-        # tot_abp_sys = np.concatenate((tot_abp_sys, a_sys))
-        # tot_abp_dia = np.concatenate((tot_abp_dia, a_dia))
-        # print(len(tot_ppg_sys), len(tot_ppg_dia), len(tot_abp_sys), len(tot_abp_dia))
+        tot_abp_sys = np.concatenate((tot_abp_sys, a_sys))
+        tot_abp_dia = np.concatenate((tot_abp_dia, a_dia))
+        tot_ppg_feats = np.concatenate((tot_ppg_feats, ppg_features))
+        print(f'Total number of ABP Systolic, Diastolic and PPG values extracted:'
+              f' {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats)-1}')
 
         print("---")
         # Move one file at a time
-        x = input("> next")
+        # x = input("> next")
         i += 1
 
+    # Remove timestamps column ant initial first empty row
+    tot_ppg_feats = tot_ppg_feats[1:, 1:]
     # Save extracted features to .csv
-    # save_split_features([[tot_ppg_sys, 'tot_ppg_sys'],
-    #                      [tot_ppg_dia, 'tot_ppg_dia'],
-    #                      [tot_abp_sys, 'tot_abp_sys'],
-    #                      [tot_abp_dia, 'tot_abp_dia']])
+    save_split_features([[tot_abp_sys, 'tot_abp_sys'],
+                         [tot_abp_dia, 'tot_abp_dia'],
+                         [tot_ppg_feats, 'tot_ppg_feats']])
 
 
 def process_ppg_data(path, fs):
@@ -244,6 +247,7 @@ def process_bp_data(path, fs):
 
 
 def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs):
+    # ABP Systolic and Diastolic Pressure extraction, synchronised with appropriate PPG values
     a_sys, a_dia, a_tss, a_sysv, a_tsd, a_diav = sys_dia_detection(abp_fidp, abp)
     p_sys, p_dia, p_tss, p_sysv, p_tsd, p_diav = sys_dia_detection(ppg_fidp, ppg)
 
@@ -251,34 +255,20 @@ def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs):
 
     if (len(a_ts_i) != 0 or len(p_ts_i)) != 0 and len(a_ts_i) == len(p_ts_i):
         a_sys, a_sysv = a_sys[a_ts_i], a_sysv[a_ts_i]
-        p_sys, p_sysv = p_sys[p_ts_i], p_sysv[p_ts_i]
         a_dia, a_diav = a_dia[a_ts_i], a_diav[a_ts_i]
-        p_dia, p_diav = p_dia[p_ts_i], p_diav[p_ts_i]
+        p_sys, p_sysv = p_sys[p_ts_i], p_sysv[p_ts_i]
     else:
         raise Exception('No matching timestamps found')
 
     # Time and Frequency Domain Feature extraction
-    ppg_features = extra_feature_detection(ppg_fidp, p_sys, ppg, fs)
+    ppg_features = ppg_feature_extraction(ppg_fidp, p_sys, ppg, fs)
     if len(ppg_features) != len(a_sys):
         a_sysv = a_sysv[:len(ppg_features)]
-        p_sysv = p_sysv[:len(ppg_features)]
         a_diav = a_diav[:len(ppg_features)]
-        p_diav = p_diav[:len(ppg_features)]
-
-    # median_ct, mean_ct = calculate_median_mean(ct, fs, 30)
-    # abp_median_sys, abp_mean_sys = calculate_median_mean(a_sys, fs, 30)
-    # abp_median_dia, abp_mean_dia = calculate_median_mean(a_dia, fs, 30)
-    #
-    # ppg_median_sys, ppg_mean_sys = calculate_median_mean(p_sys, fs, 30)
-    # ppg_median_dia, ppg_mean_dia = calculate_median_mean(p_dia, fs, 30)
-
-    # agi, tsa, agv = agi_detection(ppg_fidp, p_sys, fs)
 
     return {
         'a_sys': a_sysv,
         'a_dia': a_diav,
-        'p_sys': p_sysv,
-        'p_dia': p_diav,
         'ppg_features': ppg_features
     }
 
@@ -414,9 +404,9 @@ def beat_fidp_detection(data, fs, seg_name):
     return beats, alg, fidp
 
 
-def extra_feature_detection(fidp, peaks, data, fs):
+def ppg_feature_extraction(fidp, systoles, data, fs):
     # Time Domain Features from FIDPs
-    td_feature_names = ['ts', 'sys_t', 'sys_area', 'dia_t', 'dia_area',
+    td_feature_names = ['ts', 'sys', 'dia', 'sys_t', 'sys_area', 'dia_t', 'dia_area',
                         'delta_t', 'delta_area', 'pulse_area', 'dia_sys_area_ratio',
                         'res_index', 'vvi_sys', 'vvi_dia', 'dw10', 'dw+sw10', 'dw/sw10',
                         'dw25', 'dw+sw25', 'dw/sw25', 'dw33', 'dw+sw33', 'dw/sw33',
@@ -429,7 +419,7 @@ def extra_feature_detection(fidp, peaks, data, fs):
     fd_features = {name: np.array([], dtype=float) for name in fd_feature_names}
 
     beat_no = 0
-    for i in peaks[:, 0]:
+    for i in systoles[:, 0]:
         # Find the index in fidp["pks"] where its value is equal to i
         pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
 
@@ -437,7 +427,10 @@ def extra_feature_detection(fidp, peaks, data, fs):
             try:
                 if (pk_index < len(fidp["ons"]) and pk_index < len(fidp["off"])
                         and pk_index < len(fidp["pks"]) and pk_index < len(fidp["dia"])):
-                    td_features = time_domain_feature_detection(td_features, i, fidp, pk_index, data, fs)
+                    td_features['ts'] = np.append(td_features['ts'], i)
+                    td_features['sys'] = np.append(td_features['sys'], data[fidp["pks"][pk_index]])
+                    td_features['dia'] = np.append(td_features['dia'], data[fidp["off"][pk_index]])
+                    td_features = time_domain_feature_detection(td_features, fidp, pk_index, data, fs)
                     fd_features = frequency_domain_feature_detection(fd_features, fidp, pk_index, data, fs)
                     beat_no += 1
                 else:
@@ -455,42 +448,37 @@ def extra_feature_detection(fidp, peaks, data, fs):
     return np.column_stack((tot_td_features, tot_fd_features))
 
 
-def time_domain_feature_detection(features, i, fidp, pk_index, data, fs):
-    if pk_index < len(fidp["ons"]) and pk_index < len(fidp["pks"]):
-        features['ts'] = np.append(features['ts'], i)
+def time_domain_feature_detection(features, fidp, pk_index, data, fs):
+    st, sa = systolic_time_detection(fidp, pk_index, data, fs)
+    features['sys_t'], features['sys_area'] = np.append(features['sys_t'], st), np.append(features['sys_t'], sa)
 
-        st, sa = systolic_time_detection(fidp, pk_index, data, fs)
-        features['sys_t'], features['sys_area'] = np.append(features['sys_t'], st), np.append(features['sys_t'], sa)
+    dt, da = diastolic_time_detection(fidp, pk_index, data, fs)
+    features['dia_t'], features['dia_area'] = np.append(features['dia_t'], dt), np.append(features['dia_area'], da)
 
-        dt, da = diastolic_time_detection(fidp, pk_index, data, fs)
-        features['dia_t'], features['dia_area'] = np.append(features['dia_t'], dt), np.append(features['dia_area'], da)
+    det, dea = delta_t_detection(fidp, pk_index, data, fs)
+    features['delta_t'], features['delta_area'] = (np.append(features['delta_t'], det),
+                                                   np.append(features['delta_area'], dea))
 
-        det, dea = delta_t_detection(fidp, pk_index, data, fs)
-        features['delta_t'], features['delta_area'] = (np.append(features['delta_t'], det),
-                                                       np.append(features['delta_area'], dea))
+    features['pulse_area'] = np.append(features['pulse_area'], pulse_area_detection(fidp, pk_index, data))
 
-        features['pulse_area'] = np.append(features['pulse_area'], pulse_area_detection(fidp, pk_index, data))
+    features['dia_sys_area_ratio'] = np.append(features['dia_sys_area_ratio'], da / sa)
 
-        features['dia_sys_area_ratio'] = np.append(features['dia_sys_area_ratio'], da / sa)
+    features['res_index'] = np.append(features['res_index'], resistive_index_detection(fidp, pk_index, data))
 
-        features['res_index'] = np.append(features['res_index'], resistive_index_detection(fidp, pk_index, data))
+    v1, v2 = vessel_volume_index_detection(fidp, pk_index, data)
+    features['vvi_sys'], features['vvi_dia'] = (np.append(features['vvi_sys'], v1),
+                                                np.append(features['vvi_dia'], v2))
 
-        v1, v2 = vessel_volume_index_detection(fidp, pk_index, data)
-        features['vvi_sys'], features['vvi_dia'] = (np.append(features['vvi_sys'], v1),
-                                                    np.append(features['vvi_dia'], v2))
+    percentage_values = [10, 25, 33, 50, 66, 75]
+    for percent in percentage_values:
+        sw, dw = systolic_diastolic_width_detection(fidp, pk_index, data, fs, percent)
+        features[f'dw{percent}'], features[f'dw+sw{percent}'], features[f'dw/sw{percent}'] = (
+            np.append(features[f'dw{percent}'], dw),
+            np.append(features[f'dw+sw{percent}'], dw + sw),
+            np.append(features[f'dw/sw{percent}'], dw / sw)
+        )
 
-        percentage_values = [10, 25, 33, 50, 66, 75]
-        for percent in percentage_values:
-            sw, dw = systolic_diastolic_width_detection(fidp, pk_index, data, fs, percent)
-            features[f'dw{percent}'], features[f'dw+sw{percent}'], features[f'dw/sw{percent}'] = (
-                np.append(features[f'dw{percent}'], dw),
-                np.append(features[f'dw+sw{percent}'], dw + sw),
-                np.append(features[f'dw/sw{percent}'], dw / sw)
-            )
-
-        return features
-    else:
-        raise IndexError("Reached end of one of FIDPs")
+    return features
 
 
 def frequency_domain_feature_detection(features, fidp, pk_index, data, fs):

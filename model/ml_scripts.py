@@ -5,7 +5,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 import sklearn
-import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import pandas as pd
@@ -44,8 +43,8 @@ def run_model():
     run_random_forest('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
     run_random_forest('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
 
-    run_ann('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
-    run_ann('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
+    # run_ann('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
+    # run_ann('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
 
     # TODO: RNN models : Feedforward/MLPs, LSTMs, GRUs
 
@@ -92,35 +91,35 @@ def run_random_forest(feat, ppg_train, abp_train, ppg_test, abp_test):
     logging.info(f'RF - MSE: {mse}, MAE: {mae}, R^2: {r2}, Bias: {bias}, LoA: {loa} ({feat})')
 
 
-def run_ann(feat, x_train, y_train, x_test, y_test):
-    # Build a simple neural network model
-    model = tf.keras.models.Sequential([
-        tf.keras.layers.Dense(128, activation='relu'),
-        tf.keras.layers.Dropout(0.2),
-        tf.keras.layers.Dense(1)  # Output layer with one unit for regression
-    ])
-
-    # Compile the model
-    model.compile(optimizer='adam', loss='mean_squared_error')
-
-    # Train the model
-    history = model.fit(x_train.reshape(-1, 1), y_train, epochs=50, validation_data=(x_test.reshape(-1, 1), y_test))
-
-    # Evaluate the model on the test set
-    y_pred = model.predict(x_test.reshape(-1, 1))
-    mse = mean_squared_error(y_test, y_pred)
-
-    # Plot training history
-    plt.plot(history.history['loss'], label='Training Loss')
-    plt.plot(history.history['val_loss'], label='Validation Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Mean Squared Error')
-    plt.legend()
-    plt.show()
-
-    # Print MSE on the test set
-    logging.info(f'TF ANN - MSE: {mse} ({feat})')
-    visual.plot_ml_features('ANN ' + feat, x_test, y_test, x_test, y_pred)
+# def run_ann(feat, x_train, y_train, x_test, y_test):
+#     # Build a simple neural network model
+#     model = tf.keras.models.Sequential([
+#         tf.keras.layers.Dense(128, activation='relu'),
+#         tf.keras.layers.Dropout(0.2),
+#         tf.keras.layers.Dense(1)  # Output layer with one unit for regression
+#     ])
+#
+#     # Compile the model
+#     model.compile(optimizer='adam', loss='mean_squared_error')
+#
+#     # Train the model
+#     history = model.fit(x_train.reshape(-1, 1), y_train, epochs=50, validation_data=(x_test.reshape(-1, 1), y_test))
+#
+#     # Evaluate the model on the test set
+#     y_pred = model.predict(x_test.reshape(-1, 1))
+#     mse = mean_squared_error(y_test, y_pred)
+#
+#     # Plot training history
+#     plt.plot(history.history['loss'], label='Training Loss')
+#     plt.plot(history.history['val_loss'], label='Validation Loss')
+#     plt.xlabel('Epoch')
+#     plt.ylabel('Mean Squared Error')
+#     plt.legend()
+#     plt.show()
+#
+#     # Print MSE on the test set
+#     logging.info(f'TF ANN - MSE: {mse} ({feat})')
+#     visual.plot_ml_features('ANN ' + feat, x_test, y_test, x_test, y_pred)
 
 
 def fit_predict_evaluate(model, model_name, ppg_train, abp_train, ppg_test, abp_test):
