@@ -11,6 +11,8 @@ import pandas as pd
 import os
 from init_scripts import init_logger
 import visual
+import torch
+import torch.nn as nn
 
 
 def run_model():
