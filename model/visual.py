@@ -205,5 +205,6 @@ def plot_ml_features_line(title, y1, y2):
     plt.suptitle(title)
     plt.plot(np.arange(len(y1)), y1, color='blue', label='Actual')
     plt.plot(np.arange(len(y2)), y2, color='red', label='Predicted')
+    # plt.xlim([0, 200])
     plt.legend()
     plt.show()

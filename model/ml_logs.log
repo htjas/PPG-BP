@@ -101,3 +101,31 @@
 2023-12-19 18:53:46 - INFO - RF - MSE: 173.88466712446652, MAE: 9.799687938412305, R^2: -0.44851325472601644, Bias: 0.1286046325024058, LoA: [25.974508424769905, 25.974508424769905] (DIA)
 2023-12-19 18:54:55 - INFO - TF ANN - MSE: 377.86188794380865 (SYS)
 2023-12-19 18:56:01 - INFO - TF ANN - MSE: 120.2319302517403 (DIA)
+2024-01-18 10:26:21 - INFO - ----------------------------
+2024-01-18 10:26:21 - INFO - Starting ML model (total SYS, test/train splitting 80/20) + plotting
+2024-01-18 10:26:23 - INFO - MLR - MSE: 392.553, MAE: 14.814, R^2: 0.143,
+					  Bias: 0.155, LoA: (-38.677, 38.988) (SYS from 34 PPG Features)
+2024-01-18 11:08:09 - INFO - ----------------------------
+2024-01-18 11:08:09 - INFO - Starting ML model (7s median SYS, test/train splitting 80/20) + plotting
+2024-01-18 11:08:15 - INFO - MLR - MSE: 351.729, MAE: 13.943, R^2: 0.139,
+					  Bias: 0.201, LoA: (-36.556, 36.959) (SYS from 34 PPG Features)
+2024-01-18 11:15:49 - INFO - ----------------------------
+2024-01-18 11:15:49 - INFO - Starting ML model (1s median SYS, test/train splitting 80/20) + plotting
+2024-01-18 11:16:03 - INFO - MLR - MSE: 367.048, MAE: 14.373, R^2: 0.146,
+					  Bias: 0.176, LoA: (-37.373, 37.726) (SYS from 34 PPG Features)
+2024-01-18 11:18:21 - INFO - ----------------------------
+2024-01-18 11:18:21 - INFO - Starting ML model (20s median SYS, test/train splitting 80/20) + plotting
+2024-01-18 11:18:35 - INFO - MLR - MSE: 325.393, MAE: 13.392, R^2: 0.119,
+					  Bias: 0.131, LoA: (-35.224, 35.486) (SYS from 34 PPG Features)
+2024-01-18 11:19:25 - INFO - ----------------------------
+2024-01-18 11:19:25 - INFO - Starting ML model (60s median SYS, test/train splitting 80/20) + plotting
+2024-01-18 11:19:41 - INFO - MLR - MSE: 248.229, MAE: 10.667, R^2: 0.049,
+					  Bias: 0.072, LoA: (-30.809, 30.952) (SYS from 34 PPG Features)
+2024-01-18 11:22:15 - INFO - ----------------------------
+2024-01-18 11:22:15 - INFO - Starting ML model (60s median SYS, not random test/train splitting 80/20) + plotting
+2024-01-18 11:22:31 - INFO - MLR - MSE: 266.159, MAE: 13.941, R^2: -2.951,
+					  Bias: 11.671, LoA: (-10.671, 34.014) (SYS from 34 PPG Features)
+2024-01-18 11:25:15 - INFO - ----------------------------
+2024-01-18 11:25:15 - INFO - Starting ML model (300s median SYS, not random test/train splitting 80/20) + plotting
+2024-01-18 11:25:45 - INFO - MLR - MSE: 64.056, MAE: 7.579, R^2: -1730.125,
+					  Bias: 7.561, LoA: (2.417, 12.705) (SYS from 34 PPG Features)
