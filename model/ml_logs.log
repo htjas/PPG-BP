@@ -129,3 +129,7 @@
 2024-01-18 11:25:15 - INFO - Starting ML model (300s median SYS, not random test/train splitting 80/20) + plotting
 2024-01-18 11:25:45 - INFO - MLR - MSE: 64.056, MAE: 7.579, R^2: -1730.125,
 					  Bias: 7.561, LoA: (2.417, 12.705) (SYS from 34 PPG Features)
+2024-01-18 13:29:24 - INFO - ----------------------------
+2024-01-18 13:29:24 - INFO - Starting ML model (Linear Regression using PyTorch)
+2024-01-18 13:29:26 - INFO - PyTorch LR: learning_rate=0.01, epochs=1000 (SYS from 34 PPG Features)
+					  MSE: 418.738, MAE: 17.471, R^2: -0.593, Bias: 9.555, LoA: (-25.912, 45.022)
