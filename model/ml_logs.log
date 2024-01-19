@@ -133,3 +133,7 @@
 2024-01-18 13:29:24 - INFO - Starting ML model (Linear Regression using PyTorch)
 2024-01-18 13:29:26 - INFO - PyTorch LR: learning_rate=0.01, epochs=1000 (SYS from 34 PPG Features)
 					  MSE: 418.738, MAE: 17.471, R^2: -0.593, Bias: 9.555, LoA: (-25.912, 45.022)
+2024-01-19 16:20:51 - INFO - ----------------------------
+2024-01-19 16:20:51 - INFO - Starting ML model (Linear Regression using PyTorch)
+2024-01-19 16:20:52 - INFO - PyTorch LR: learning_rate=0.01, epochs=1000 (SYS from 34 PPG Features)
+					  MSE: 418.3320, RMSE: 20.4532, MAE: 17.462, R^2: -0.592, Bias: 9.555, LoA: (-25.890, 45.000)

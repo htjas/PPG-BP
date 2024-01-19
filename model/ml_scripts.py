@@ -206,7 +206,7 @@ def torch_regression(X_train, y_train, X_test, y_test, feat):
         # Evaluating and Logging
         mse, mae, r2, bias, loa_l, loa_u = evaluate(y_test, y_pred)
         logging.info(f'PyTorch LR: learning_rate=0.01, epochs=1000 ({feat})\n'
-                     f'\t\t\t\t\t  MSE: {mse:.3f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
+                     f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {np.sqrt(mse):.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
                      f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
 
         # Plotting
