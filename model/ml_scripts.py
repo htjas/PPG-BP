@@ -16,20 +16,20 @@ import torch.nn as nn
 import torch.optim as optim
 
 
-def run_model(abp_feat):
+def run_model(target):
     # Get Logger
     logger = init_logger('ml_logs')
     logger.info("----------------------------")
     logger.info("Starting ML model (Linear Regression using PyTorch)")
 
     # All Data
-    abp = read_single_feature_data(f'/features/train_test/tot_abp_{abp_feat}.csv')
-    ppg_feats = read_multiple_feature_data('/features/train_test/tot_ppg_feats.csv')
+    abp = read_single_feature_data(f'/features/train_test/tot_med_abp_{target}.csv')
+    ppg_feats = read_multiple_feature_data('/features/train_test/tot_med_ppg_feats.csv')
 
     ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg_feats, abp, test_size=0.2, shuffle=False, stratify=None)  # random_state=42)
+        ppg_feats, abp, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
 
-    torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'SYS from 34 PPG Features')
+    torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'SYS from 34 Median PPG Features')
 
     # run_multi_linear_regression('SYS from 34 PPG Features', ppg_train, abp_train, ppg_test, abp_test)
 

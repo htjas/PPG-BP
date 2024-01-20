@@ -105,14 +105,16 @@ def manual_filter_data(folder):
     print(len(filenames))
 
 
-def process_data(fs):
+def process_data(fs, folder, goal):
     """
     Main method for signal processing abp and ppg data
+    :param goal: For what goal features will be used (train_test/validate)
+    :param folder: Fetching data folder
     :param fs: Frequency of sampling
     """
     abs_path = os.path.abspath(os.getcwd())
-    bp_path = abs_path + '/mimic3/abp'
-    ppg_path = abs_path + '/mimic3/ppg'
+    bp_path = abs_path + folder + 'abp'
+    ppg_path = abs_path + folder + 'ppg'
     # bp_path = abs_path + '/mimic4/usable_bp_data_2'
     # ppg_path = abs_path + '/mimic4/usable_ppg_data_2'
     filenames = os.listdir(bp_path)
@@ -165,7 +167,7 @@ def process_data(fs):
         tot_med_abp_dia = np.concatenate((tot_med_abp_dia, a_dia_med))
         tot_med_ppg_feats = np.concatenate((tot_med_ppg_feats, ppg_feat_med))
         print(f'Total number of ABP Systolic, Diastolic and PPG values extracted:'
-              f' {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats)-1}')
+              f' {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats) - 1}')
         print(f'Median values of ABP Systolic, Diastolic and PPG extracted:'
               f' {len(tot_med_abp_sys), len(tot_med_abp_dia), len(tot_med_ppg_feats)}')
 
@@ -177,12 +179,12 @@ def process_data(fs):
     # Remove timestamps column
     tot_ppg_feats = tot_ppg_feats[:, 1:]
     # Save extracted features to .csv
-    save_split_features([[tot_abp_sys, 'tot_abp_sys'],
-                         [tot_abp_dia, 'tot_abp_dia'],
-                         [tot_ppg_feats, 'tot_ppg_feats'],
-                         [tot_med_abp_sys, 'tot_med_abp_sys'],
-                         [tot_med_abp_dia, 'tot_med_abp_dia'],
-                         [tot_med_ppg_feats, 'tot_med_ppg_feats']])
+    save_split_features(goal, [[tot_abp_sys, 'tot_abp_sys'],
+                               [tot_abp_dia, 'tot_abp_dia'],
+                               [tot_ppg_feats, 'tot_ppg_feats'],
+                               [tot_med_abp_sys, 'tot_med_abp_sys'],
+                               [tot_med_abp_dia, 'tot_med_abp_dia'],
+                               [tot_med_ppg_feats, 'tot_med_ppg_feats']])
 
 
 def process_ppg_data(path, fs):
@@ -341,10 +343,10 @@ def group_a_b(a_ts, b_ts):
     return a_ts_i, b_ts_i
 
 
-def save_split_features(features):
+def save_split_features(goal, features):
     for feat in features:
         df = pd.DataFrame(data=feat[0])
-        df.to_csv(f"features/train_test/{feat[1]}.csv", index=False)
+        df.to_csv(f"features/{goal}/{feat[1]}.csv", index=False)
 
     # for feat in features:
     #     mid = int(len(feat[0]) / 2)
@@ -1191,7 +1193,7 @@ def split_filename(filename):
 
 def main(fs=125):
     # manual_filter_data('usable_ppg_data_2')
-    process_data(fs)
+    process_data(fs, '/mimic3/', 'train_test')
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)
 

@@ -1,11 +1,7 @@
-import wfdb
-from matplotlib import pyplot as plt
-import numpy as np
-from init_scripts import *
-from sp_scripts import *
-import pandas as pd
+from init_scripts import load_filter_and_save_records
+from sp_scripts import process_data
+from ml_scripts import run_model
 from jproperties import Properties
-from visual import *
 
 configs = Properties()
 
@@ -13,21 +9,15 @@ configs = Properties()
 with open('details.properties', 'rb') as config_file:
     configs.load(config_file)
 
-# Init (Fetching and Filtering)
-
-database_name = configs.get('mimic4_url').data
-load_filter_save_records(database_name)
-
-# After Init
-print("Reading matching_records.csv")
-df = pd.read_csv('matching_records.csv')
-# All segments array
-segments = df.values
-
-# get 10 minutes of bp and ppg data, and save to /data folder
-path = configs.get('path_of_mimic4_data').data
-extract_save_bp_ppg_data(segments, path)
+# Loading, Filtering and Saving Records
+db_mm3 = configs.get('mimic3_url').data
+path_mm3 = configs.get('path_of_mimic3_data').data
+load_filter_and_save_records(db_mm3, path_mm3, 300)
 
 # Signal processing
-fs = float(configs.get('fs_mimic4').data)
-process_data(fs)
+fs_mm3 = float(configs.get('fs_mimic3').data)
+goal_mm3 = configs.get('goal_mimic3').data
+process_data(fs_mm3, path_mm3, goal_mm3)
+
+# Machine Learning
+run_model(target='sys')

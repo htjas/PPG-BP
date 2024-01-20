@@ -9,7 +9,7 @@ import logging
 import random
 
 
-def load_filter_and_save_records(db_name, path, no_records):
+def load_filter_and_save_records(db_name, path, records_to_load):
     """
     Load records from database,
      filter them directly according to criteria found in filter_single_record() method,
@@ -41,7 +41,7 @@ def load_filter_and_save_records(db_name, path, no_records):
         if res is not None:
             records = os.listdir(path + 'abp')
             print(f"-------------------------------- so far {len(records)} records saved")
-            if len(records) > no_records:
+            if len(records) > records_to_load:
                 break
 
     print(f"Loaded {len(records)} records from the '{db_name}' database")
