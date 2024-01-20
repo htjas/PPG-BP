@@ -119,9 +119,9 @@ def process_data(fs):
     filenames.sort()
 
     i = 1
-    tot_abp_sys, tot_abp_dia, tot_ppg_feats = np.array([]), np.array([]), np.zeros((1, 35))
+    tot_abp_sys, tot_abp_dia, tot_ppg_feats = np.array([]), np.array([]), np.empty((0, 35))
+    tot_med_abp_sys, tot_med_abp_dia, tot_med_ppg_feats = np.array([]), np.array([]), np.empty((0, 34))
     for filename in filenames:
-        a_sys, a_dia, ppg_features = np.array([]), np.array([]), np.zeros((1, 35))
         # if i != 1:
         #     i += 1
         #     continue
@@ -140,14 +140,17 @@ def process_data(fs):
             abp_fidp = fiducial_points(abp, abp_beats, fs, vis=False, header='ABP of ' + seg_name)
             ppg_fidp = fiducial_points(ppg, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
 
-            # TODO: extract a larger number of synchronous features for multiple feature Machine Learning
             # 4: Feature extraction
-            features = extract_features(abp_fidp, ppg_fidp, abp, ppg, fs)
+            median_window = 7
+            features = extract_features(abp_fidp, ppg_fidp, abp, ppg, fs, median_window)
             a_sys, a_dia = features['a_sys'], features['a_dia']
             ppg_features = features['ppg_features']
+            a_sys_med, a_dia_med = features['a_sys_med'], features['a_dia_med']
+            ppg_feat_med = features['ppg_feat_med']
             if len(a_sys) == len(ppg_features):
-                print(f"{ppg_features.shape[1] - 1} features extracted from "
-                      f"{len(ppg_features)} PPG beats")
+                print(f"{ppg_features.shape[1] - 1} PPG features")
+                print(f"{len(ppg_features)} total values")
+                print(f"{len(ppg_feat_med)} median values from {median_window} beat intervals")
 
         except Exception as e:
             print('ERROR', e)
@@ -158,20 +161,28 @@ def process_data(fs):
         tot_abp_sys = np.concatenate((tot_abp_sys, a_sys))
         tot_abp_dia = np.concatenate((tot_abp_dia, a_dia))
         tot_ppg_feats = np.concatenate((tot_ppg_feats, ppg_features))
+        tot_med_abp_sys = np.concatenate((tot_med_abp_sys, a_sys_med))
+        tot_med_abp_dia = np.concatenate((tot_med_abp_dia, a_dia_med))
+        tot_med_ppg_feats = np.concatenate((tot_med_ppg_feats, ppg_feat_med))
         print(f'Total number of ABP Systolic, Diastolic and PPG values extracted:'
               f' {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats)-1}')
+        print(f'Median values of ABP Systolic, Diastolic and PPG extracted:'
+              f' {len(tot_med_abp_sys), len(tot_med_abp_dia), len(tot_med_ppg_feats)}')
 
         print("---")
         # Move one file at a time
         # x = input("> next")
         i += 1
 
-    # Remove timestamps column ant initial first empty row
-    tot_ppg_feats = tot_ppg_feats[1:, 1:]
+    # Remove timestamps column
+    tot_ppg_feats = tot_ppg_feats[:, 1:]
     # Save extracted features to .csv
     save_split_features([[tot_abp_sys, 'tot_abp_sys'],
                          [tot_abp_dia, 'tot_abp_dia'],
-                         [tot_ppg_feats, 'tot_ppg_feats']])
+                         [tot_ppg_feats, 'tot_ppg_feats'],
+                         [tot_med_abp_sys, 'tot_med_abp_sys'],
+                         [tot_med_abp_dia, 'tot_med_abp_dia'],
+                         [tot_med_ppg_feats, 'tot_med_ppg_feats']])
 
 
 def process_ppg_data(path, fs):
@@ -201,7 +212,7 @@ def process_ppg_data(path, fs):
 
         agi = agi_detection(ppg_fidp, ppg_beats, fs)
 
-        median_agi, mean_agi = calculate_median_mean(agi, fs, 30)
+        median_agi, mean_agi = calculate_median_values(agi, 30)
 
         i += 1
         x = input()
@@ -237,16 +248,16 @@ def process_bp_data(path, fs):
 
         sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
 
-        median_sys, mean_sys = calculate_median_mean(sys, fs, 30)
+        median_sys, mean_sys = calculate_median_values(sys, 30)
 
-        median_dia, mean_dia = calculate_median_mean(dia, fs, 30)
+        median_dia, mean_dia = calculate_median_values(dia, 30)
 
         i += 1
         x = input()
     return median_sys, median_dia
 
 
-def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs):
+def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs, med_window):
     # ABP Systolic and Diastolic Pressure extraction, synchronised with appropriate PPG values
     a_sys, a_dia, a_tss, a_sysv, a_tsd, a_diav = sys_dia_detection(abp_fidp, abp)
     p_sys, p_dia, p_tss, p_sysv, p_tsd, p_diav = sys_dia_detection(ppg_fidp, ppg)
@@ -266,10 +277,23 @@ def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs):
         a_sysv = a_sysv[:len(ppg_features)]
         a_diav = a_diav[:len(ppg_features)]
 
+    a_sys_med = calculate_median_values(a_sys, med_window)
+    a_dia_med = calculate_median_values(a_dia, med_window)
+    ppg_feat_med = calculate_median_values_mult(ppg_features, med_window)
+
+    if len(a_sys_med) != len(a_dia_med) or len(a_dia_med) != len(ppg_feat_med):
+        length = min(len(a_sys_med), len(a_dia_med), len(ppg_feat_med))
+        a_sys_med = a_sys_med[:length]
+        a_dia_med = a_dia_med[:length]
+        ppg_feat_med = ppg_feat_med[:length]
+
     return {
         'a_sys': a_sysv,
         'a_dia': a_diav,
-        'ppg_features': ppg_features
+        'ppg_features': ppg_features,
+        'a_sys_med': a_sys_med,
+        'a_dia_med': a_dia_med,
+        'ppg_feat_med': ppg_feat_med
     }
 
 
@@ -352,21 +376,47 @@ def equal_out_by_shortening(a_ts, p_ts):
     return a_ts, p_ts
 
 
-def calculate_median_mean(data, fs, window):
-    values = []
-    median_values = []
-    mean_values = []
-    time_window = window
-    for j in range(len(data)):
-        time_passed = data[j][0] / fs
-        values.append(float(data[j][1]))
-        if time_passed > time_window:
-            median_values.append(statistics.median(values))
-            mean_values.append(statistics.mean(values))
-            values = []
-            time_window = time_window + window
+def calculate_median_values(data, window, s_err=0.8, fs=125):
+    values, median_values = np.array([]), np.array([])
+    for beat_no in range(len(data)):
+        if len(data) > beat_no + 1:
+            ts_diff = data[beat_no + 1][0] - data[beat_no][0]
+            if ts_diff > s_err * fs:
+                values = np.array([])
+                continue
+            val = data[beat_no][1]
+            values = np.append(values, val)
+            if len(values) == window:
+                median_values = np.append(median_values, np.median(values))
+                values = np.array([])
+    return median_values
 
-    return np.array(median_values), np.array(mean_values)
+
+def calculate_median_values_mult(data, window, s_err=0.8, fs=125):
+    columns = data.shape[1]
+    tot_median_values = np.empty((len(data), 0))
+
+    for column_no in range(1, columns):  # Start from 1 to skip timestamp column
+        median_values, values = np.array([]), np.array([])
+
+        for row_no in range(len(data)):
+            if len(data) > row_no + 1:
+                ts_diff = data[row_no + 1][0] - data[row_no][0]
+                if ts_diff > s_err * fs:
+                    values = np.array([])
+                    continue
+
+                val = data[row_no][column_no]
+                values = np.append(values, val)
+
+                if len(values) == window:
+                    median_value = np.median(values)
+                    median_values = np.append(median_values, median_value)
+                    values = np.array([])
+
+        tot_median_values = np.column_stack((tot_median_values[:len(median_values), :], median_values))
+
+    return tot_median_values
 
 
 def beat_fidp_detection(data, fs, seg_name):
