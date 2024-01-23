@@ -1,46 +1,52 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  19 JAN 2024 15:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.4.24)  23 JAN 2024 18:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Thesis.tex
-(./Thesis.tex
-LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-01-21>
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
-Document Class: scrartcl 2021/11/13 v3.35 KOMA-Script document class (article)
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
-Package: scrkbase 2021/11/13 v3.35 KOMA-Script package (KOMA-Script-dependent b
+**./Thesis.tex
+(Thesis.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-03-30>
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrartcl.cl
+s
+Document Class: scrartcl 2022/10/12 v3.38 KOMA-Script document class (article)
+
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrkbase.st
+y
+Package: scrkbase 2022/10/12 v3.38 KOMA-Script package (KOMA-Script-dependent b
 asics and keyval usage)
 
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
-Package: scrbase 2021/11/13 v3.35 KOMA-Script package (KOMA-Script-independent 
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.sty
+Package: scrbase 2022/10/12 v3.38 KOMA-Script package (KOMA-Script-independent 
 basics and keyval usage)
 
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
-Package: scrlfile 2021/11/13 v3.35 KOMA-Script package (file load hooks)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile.st
+y
+Package: scrlfile 2022/10/12 v3.38 KOMA-Script package (file load hooks)
 
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
-Package: scrlfile-hook 2021/11/13 v3.35 KOMA-Script package (using LaTeX hooks)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile-ho
+ok.sty
+Package: scrlfile-hook 2022/10/12 v3.38 KOMA-Script package (using LaTeX hooks)
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlogo.sty
-Package: scrlogo 2021/11/13 v3.35 KOMA-Script package (logo)
-)))
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.sty
+Package: scrlogo 2022/10/12 v3.38 KOMA-Script package (logo)
+))) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
 Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
 Already applied: [0000/00/00] Usage of raw or classic option list on input line
  368.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/tocbasic.sty
-Package: tocbasic 2021/11/13 v3.35 KOMA-Script package (handling toc-files)
-\scr@dte@tocline@numberwidth=\skip47
-\scr@dte@tocline@numbox=\box50
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\tocbasic.st
+y
+Package: tocbasic 2022/10/12 v3.38 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip48
+\scr@dte@tocline@numbox=\box51
 )
-Package tocbasic Info: babel extension for `toc' omitted
-(tocbasic)             because of missing \bbl@set@language on input line 135.
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 135.
 Package scrartcl Info: You've used standard option `10pt'.
 (scrartcl)             This is correct!
 (scrartcl)             Internally I'm using `fontsize=10pt'.
@@ -48,20 +54,22 @@ Package scrartcl Info: You've used standard option `10pt'.
 (scrartcl)             you'd have to use `fontsize=10pt' there
 (scrartcl)             instead of `10pt', too.
 Class scrartcl Info: File `scrsize10pt.clo' used to setup font sizes on input l
-ine 2242.
+ine 2367.
 
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrsize10pt.clo
-File: scrsize10pt.clo 2021/11/13 v3.35 KOMA-Script font size class option (10pt
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrsize10pt
+.clo
+File: scrsize10pt.clo 2022/10/12 v3.38 KOMA-Script font size class option (10pt
 )
 )
-(/usr/share/texlive/texmf-dist/tex/latex/koma-script/typearea.sty
-Package: typearea 2021/11/13 v3.35 KOMA-Script package (type area)
-\ta@bcor=\skip48
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\typearea.st
+y
+Package: typearea 2022/10/12 v3.38 KOMA-Script package (type area)
+\ta@bcor=\skip49
 \ta@div=\count185
-\ta@hblk=\skip49
-\ta@vblk=\skip50
-\ta@temp=\skip51
-\footheight=\skip52
+\ta@hblk=\skip50
+\ta@vblk=\skip51
+\ta@temp=\skip52
+\footheight=\skip53
 Package typearea Info: These are the values describing the layout:
 (typearea)             DIV  = 8
 (typearea)             BCOR = 0.0pt
@@ -78,7 +86,7 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 10.0pt
 (typearea)              \footskip       = 42.0pt
 (typearea)              \baselineskip   = 12.0pt
-(typearea)              on input line 1743.
+(typearea)              on input line 1767.
 )
 \c@part=\count186
 \c@section=\count187
@@ -86,88 +94,87 @@ Package typearea Info: These are the values describing the layout:
 \c@subsubsection=\count189
 \c@paragraph=\count190
 \c@subparagraph=\count191
-\scr@dte@section@maxnumwidth=\skip53
+\scr@dte@section@maxnumwidth=\skip54
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\section on input line 4852.
+(scrartcl)           for `\section on input line 4994.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\section on input line 4852.
-\scr@dte@part@maxnumwidth=\skip54
+(scrartcl)           for `\section on input line 4994.
+\scr@dte@part@maxnumwidth=\skip55
 Class scrartcl Info: using compatibility default `afterindent=false'
-(scrartcl)           for `\part on input line 4860.
-\scr@dte@subsection@maxnumwidth=\skip55
+(scrartcl)           for `\part on input line 5002.
+\scr@dte@subsection@maxnumwidth=\skip56
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subsection on input line 4870.
+(scrartcl)           for `\subsection on input line 5012.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subsection on input line 4870.
-\scr@dte@subsubsection@maxnumwidth=\skip56
+(scrartcl)           for `\subsection on input line 5012.
+\scr@dte@subsubsection@maxnumwidth=\skip57
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subsubsection on input line 4880.
+(scrartcl)           for `\subsubsection on input line 5022.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subsubsection on input line 4880.
-\scr@dte@paragraph@maxnumwidth=\skip57
+(scrartcl)           for `\subsubsection on input line 5022.
+\scr@dte@paragraph@maxnumwidth=\skip58
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\paragraph on input line 4891.
+(scrartcl)           for `\paragraph on input line 5033.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\paragraph on input line 4891.
-\scr@dte@subparagraph@maxnumwidth=\skip58
+(scrartcl)           for `\paragraph on input line 5033.
+\scr@dte@subparagraph@maxnumwidth=\skip59
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subparagraph on input line 4901.
+(scrartcl)           for `\subparagraph on input line 5043.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subparagraph on input line 4901.
-\abovecaptionskip=\skip59
-\belowcaptionskip=\skip60
-\c@pti@nb@sid@b@x=\box51
-Package tocbasic Info: babel extension for `lof' omitted
-(tocbasic)             because of missing \bbl@set@language on input line 6076.
-
-\scr@dte@figure@maxnumwidth=\skip61
+(scrartcl)           for `\subparagraph on input line 5043.
+\abovecaptionskip=\skip60
+\belowcaptionskip=\skip61
+\c@pti@nb@sid@b@x=\box52
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 6211.
+\scr@dte@figure@maxnumwidth=\skip62
 \c@figure=\count192
-Package tocbasic Info: babel extension for `lot' omitted
-(tocbasic)             because of missing \bbl@set@language on input line 6091.
-
-\scr@dte@table@maxnumwidth=\skip62
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 6227.
+\scr@dte@table@maxnumwidth=\skip63
 \c@table=\count193
-Class scrartcl Info: Redefining `\numberline' on input line 6258.
-\bibindent=\dimen138
+Class scrartcl Info: Redefining `\numberline' on input line 6397.
+\bibindent=\dimen140
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen139
-\Gin@req@width=\dimen140
-)
-(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen141
-\WF@size=\dimen142
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
+\wrapoverhang=\dimen143
+\WF@size=\dimen144
 \c@WF@wrappedlines=\count194
-\WF@box=\box52
+\WF@box=\box53
 \WF@everypar=\toks17
 Package: wrapfig 2003/01/31  v 3.6
-)
-(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count195
-\l__pdf_internal_box=\box53
-)
-(./Thesis.aux)
+\l__pdf_internal_box=\box54
+) (Thesis.aux)
 \openout1 = `Thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
@@ -184,35 +191,44 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
 LaTeX Font Info:    ... okay on input line 9.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
 LaTeX Font Info:    ... okay on input line 9.
+Package scrbase Info: activating english \abstractname on input line 9.
+Package scrbase Info: activating english \partname on input line 9.
+Package scrbase Info: activating english \figurename on input line 9.
+Package scrbase Info: activating english \tablename on input line 9.
 Package scrbase Info: activating english \contentsname on input line 9.
 Package scrbase Info: activating english \listfigurename on input line 9.
 Package scrbase Info: activating english \listtablename on input line 9.
+Package scrbase Info: activating english \refname on input line 9.
+Package scrbase Info: activating english \indexname on input line 9.
 
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count196
-\scratchdimen=\dimen143
-\scratchbox=\box54
+\scratchdimen=\dimen145
+\scratchbox=\box55
 \nofMPsegments=\count197
 \nofMParguments=\count198
 \everyMPshowfont=\toks18
 \MPscratchCnt=\count199
-\MPscratchDim=\dimen144
+\MPscratchDim=\dimen146
 \MPnumerator=\count266
 \makeMPintoPDFobject=\count267
 \everyMPtoPDFconversion=\toks19
-) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
-[1
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
+fg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+)) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Thesis.toc
+{C:/Users/htjas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+(Thesis.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -221,33 +237,32 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `Thesis.toc'.
 
- [2]
-[3] [4]
+ [2] [3] [4] [5]
 
-LaTeX Warning: Citation `johnson_mimic-iv_2023' on page 5 undefined on input li
-ne 129.
+LaTeX Warning: Citation `johnson_mimic-iv_2023' on page 6 undefined on input li
+ne 148.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 146--147
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 172--173
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 191--192
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--187
+Underfull \hbox (badness 10000) in paragraph at lines 193--194
 
  []
 
-[6] (./Thesis.bbl [7]
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--206
+
+ []
+
+[7] (Thesis.bbl [8]
 Underfull \hbox (badness 1609) in paragraph at lines 44--48
 []\OT1/cmr/m/n/10 given-i=Abraham fam-ily=Savitzky, given=Abraham. and M. J. E.
  Go-lay.
@@ -259,29 +274,29 @@ Underfull \hbox (badness 1205) in paragraph at lines 56--62
 Hae-
  []
 
-[8] [9]) [10] (./Thesis.aux)
+[9] [10]) [11] (Thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4379 strings out of 480204
- 95895 string characters out of 5895010
- 507750 words of memory out of 5000000
- 22335 multiletter control sequences out of 15000+600000
- 472004 words of font info for 37 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
- 108i,7n,106p,10696b,291s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Thesis.pdf (10 pages, 129574 bytes).
+ 4440 strings out of 476331
+ 98270 string characters out of 5787765
+ 1859660 words of memory out of 5000000
+ 24883 multiletter control sequences out of 15000+600000
+ 515032 words of font info for 41 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 108i,8n,106p,10698b,289s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on Thesis.pdf (11 pages, 139602 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
+ 68 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

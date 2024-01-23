@@ -73,7 +73,6 @@ This study examines the current methods and aims to develop efficient approaches
 
 \item \textbf{Can PPG-based data be used to estimate blood pressure accurately?}
 
-\item \textbf{What is the optimal interface for displaying and syncing blood pressure data in an interoperable manner?}
 \end{enumerate}
 
 This thesis is organized as follows:
@@ -83,9 +82,8 @@ This thesis is organized as follows:
 The tasks of the thesis are as follows:
 
 \begin{enumerate}
-\item Statistical Analysis: to search for beneficial relationships in the MIMIC-IV database, specifically for correlations between PPG and BP data.
-\item Machine Learning: to develop an algorithm based on the data from the statistical analysis, to reliably predict BP from PPG. 
-\item Interface Development: to create a backend and frontend application, for WD collected data processing and integration in to EHR systems.
+\item Signal Processing: to find an optimal data fetching and filtering approach from available MIMIC Databases. Likewise to create a consistent algorithm for key feature extraction.
+\item Machine Learning: to develop a model based on the resulting features from Signal Processing, to reliably predict BP from PPG. 
 \end{enumerate}
 
 \section{Theoretical Background}
@@ -95,10 +93,31 @@ The tasks of the thesis are as follows:
 \subsubsection{Blood Pressure}
 
 \begin{enumerate}
-\item How is BP calculated generally?
+\item Basic information about BP. How is it measured. What are the main methods. What is the significance of measuring BP. \cite{WhatBloodPressure2019}
 \end{enumerate}
 
-Basic information about BP. How is it measured. What are the main methods. What is the significance of measuring BP. \cite{WhatBloodPressure2019}
+Arterial blood pressure (ABP) is a dynamic parameter that can change with each heartbeat, and it is typically represented as a waveform rather than a single numeric value.
+The arterial blood pressure waveform consists of two main components: systolic pressure (peak pressure during ventricular contraction) and diastolic pressure (lowest pressure during ventricular relaxation).
+
+Continuous monitoring of arterial blood pressure is often done in clinical settings, especially in critical care environments, using an arterial line connected to a pressure transducer. The resulting waveform is displayed on a monitor in real-time.
+However, for ease of interpretation and documentation, numeric values are commonly extracted from the waveform at specific time intervals.
+
+In situations where high temporal resolution is crucial, arterial blood pressure can be recorded beat-to-beat, providing a value for each heartbeat.
+This is particularly important in situations where rapid changes in blood pressure need to be closely monitored, such as during certain medical procedures or in critically ill patients.
+
+For routine monitoring and documentation, numeric values are often averaged over a specific time interval, such as every 1, 5, or 15 minutes.
+This averaged value may be reported as the mean arterial pressure (MAP), which is a weighted average of the systolic and diastolic pressures over a cardiac cycle.
+Some monitoring systems may also provide systolic and diastolic blood pressure readings at regular intervals.
+
+Blood pressure measured using a cuff, also known as non-invasive blood pressure (NIBP), is typically recorded as numeric values at specific time intervals. The process involves inflating the cuff to temporarily stop blood flow and then gradually releasing the pressure to detect the sounds associated with the flow of blood through the brachial artery. The two primary values obtained are systolic pressure (maximum pressure during heartbeats) and diastolic pressure (minimum pressure between heartbeats).
+
+During the process of cuff inflation and deflation, each heartbeat generates characteristic sounds (Korotkoff sounds) that are detected by a stethoscope placed over the brachial artery.
+Systolic pressure is recorded when the first tapping sounds are heard, and diastolic pressure is recorded when the sounds disappear or change character.
+This beat-to-beat approach provides information about individual fluctuations in blood pressure.
+
+Many automated blood pressure monitors, especially those used in clinical settings, provide averaged values over a specific time interval.
+The monitor may calculate mean arterial pressure (MAP) or provide systolic and diastolic blood pressure readings averaged over a set period, such as every 1, 3, or 5 minutes.
+Averaging over time helps to smooth out transient changes and provides a more stable representation for clinical assessment.
 
 Alternative approaches for measuring BP have emerged over the past years.
 Volume clamping \cite{kimBallistocardiogramBasedApproachCuffless2018} and tonometry \cite{imholzFifteenYearsExperience1998} are some of the other methods. These non-invasive techniques offer continuous monitoring of blood pressure values. 
@@ -196,12 +215,30 @@ A study by Joung et al \cite{joungContinuousCufflessBlood2023} was conducted to 
 To precisely design a learning-based BP estimation model such that its estimation accuracy obtained during the test is sustained after being built upon a practical cuffless BP monitoring system, the following delicate yet realistic experimental principles are applicable: i) the number of subjects should be sufficiently large, ii) subject independent training and test datasets are required, and iii) the intrasubject BP variation should be carefully scrutinized in the model design \cite{joungContinuousCufflessBlood2023}.
 
 \section{Methods}
+
+\begin{enumerate}
+
+\item Data fetching and reading using WFDB and NumPy libraries.
+
+\item Digital signal filtering using Savitzky-Golay and Butterworth Lowpass filters.
+
+\item Beat detection algorithms from MIMIC WFDB Tutorial used for primary estimation.
+Beat detection improved with manual implementation of SciPy library.
+
+\item Fiducial Point calculation based on the algorithm provided in the MIMIC WFDB Tutorial.
+
+\item Feature extraction with personally created code to extract time domain features, and NumPy library to extract frequency domain features (FFT). Median value calculation using NumPy library.
+
+\item Machine Learning Model creation using PyTorch and Scikit-Learn libraries.
+
+\end{enumerate}
+
 \section{Results}
 
 1st iteration:
 
-306 records with 10 minutes length were extracted from the MIMIC3 Database for creation (training and testing) of a Machine Learning model.
-Signaling processing approaches were included <.....>
+306 records of 10 minutes each were extracted from the MIMIC-III Database for creation (training and testing) of a Machine Learning model.
+Signaling processing approaches were included (see 4.2).
 Feature extraction:
 - For target reference ABP Systolic and Diastolic values were extracted from the waveform data.
 - For Machine Learning, 34 features were extracted from the PPG waveform
