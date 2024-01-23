@@ -149,3 +149,19 @@
 2024-01-20 23:12:36 - INFO - Starting ML model, randomized data (Linear Regression using PyTorch)
 2024-01-20 23:13:15 - INFO - PyTorch LR: learning_rate=0.01, epochs=100000 (SYS from 34 Median PPG Features)
 					  MSE: 425.1227, RMSE: 20.6185, MAE: 15.539, R^2: 0.207, Bias: -0.158, LoA: (-40.576, 40.260)
+2024-01-23 14:56:53 - INFO - ----------------------------
+2024-01-23 14:56:53 - INFO - Starting ML model (Linear Regression using PyTorch)
+2024-01-23 14:57:01 - INFO - PyTorch LR: learning_rate=0.01, epochs=1000 (SYS from 34 Median PPG Features)
+					  MSE: 444.5426, RMSE: 21.0842, MAE: 16.002, R^2: 0.171, Bias: -0.158, LoA: (-41.489, 41.173)
+2024-01-23 15:02:07 - INFO - ----------------------------
+2024-01-23 15:02:07 - INFO - Starting ML model (Linear Regression using PyTorch)
+2024-01-23 15:02:15 - INFO - PyTorch LR: learning_rate=0.01, epochs=1000 (SYS from 34 Median PPG Features)
+					  MSE: 444.5936, RMSE: 21.0854, MAE: 16.004, R^2: 0.170, Bias: -0.158, LoA: (-41.491, 41.175)
+2024-01-23 15:04:01 - INFO - ----------------------------
+2024-01-23 15:04:01 - INFO - Starting ML model (Linear Regression using PyTorch)
+2024-01-23 15:04:14 - INFO - PyTorch LR: learning_rate=0.01, epochs=1000 (SYS from 34 Median PPG Features)
+					  MSE: 444.4286, RMSE: 21.0815, MAE: 16.000, R^2: 0.171, Bias: -0.158, LoA: (-41.483, 41.168)
+2024-01-23 15:11:53 - INFO - ----------------------------
+2024-01-23 15:11:53 - INFO - Starting ML model (Linear Regression using PyTorch)
+2024-01-23 15:12:03 - INFO - PyTorch LR: learning_rate=0.01, epochs=1000 (SYS from 34 Median PPG Features)
+					  MSE: 444.4879, RMSE: 21.0829, MAE: 16.001, R^2: 0.171, Bias: -0.158, LoA: (-41.486, 41.170)

@@ -1,0 +1,12 @@
+Epoch [100/1000], Loss: 699.1024
+Epoch [200/1000], Loss: 463.5133
+Epoch [300/1000], Loss: 456.8549
+Epoch [400/1000], Loss: 454.9087
+Epoch [500/1000], Loss: 453.3781
+Epoch [600/1000], Loss: 452.0594
+Epoch [700/1000], Loss: 450.8918
+Epoch [800/1000], Loss: 449.8436
+Epoch [900/1000], Loss: 448.8945
+Epoch [1000/1000], Loss: 448.0308
+2024-01-23 15:04:14 - INFO - PyTorch LR: learning_rate=0.01, epochs=1000 (SYS from 34 Median PPG Features)
+					  MSE: 444.4286, RMSE: 21.0815, MAE: 16.000, R^2: 0.171, Bias: -0.158, LoA: (-41.483, 41.168)

@@ -1,0 +1,45 @@
+{
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.9.13",
+    "heartbeatAt": "2024-01-23T14:11:58.022324",
+    "startedAt": "2024-01-23T14:11:56.194465",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "C:\\Users\\htjas\\PycharmProjects\\PPG-BP\\model\\ml_scripts.py",
+    "codePathLocal": "ml_scripts.py",
+    "codePath": "model\\ml_scripts.py",
+    "git": {
+        "remote": "https://github.com/htjas/PPG-BP.git",
+        "commit": "615a401f57caaddce83d2b3690ce656c5542394a"
+    },
+    "email": null,
+    "root": "C:/Users/htjas/PycharmProjects/PPG-BP",
+    "host": "HuXPS13",
+    "username": "htjas",
+    "executable": "C:\\Users\\htjas\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+    "cpu_count": 2,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 2701.0,
+        "min": 0.0,
+        "max": 2701.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2701.0,
+            "min": 0.0,
+            "max": 2701.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 118.62630081176758,
+            "used": 76.4353256225586
+        }
+    },
+    "memory": {
+        "total": 7.734169006347656
+    }
+}

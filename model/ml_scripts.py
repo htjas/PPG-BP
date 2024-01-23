@@ -14,6 +14,7 @@ import visual
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import wandb
 
 
 def run_model(target):
@@ -21,6 +22,9 @@ def run_model(target):
     logger = init_logger('ml_logs')
     logger.info("----------------------------")
     logger.info("Starting ML model (Linear Regression using PyTorch)")
+    wandb.init(
+        project="ppg-bp"
+    )
 
     # All Data
     abp = read_single_feature_data(f'/features/train_test/tot_med_abp_{target}.csv')
@@ -192,6 +196,8 @@ def torch_regression(X_train, y_train, X_test, y_test, feat):
         loss.backward()
         optimizer.step()
 
+        wandb.log({"loss": loss})
+
         if (epoch + 1) % 100 == 0:
             print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
 
@@ -205,9 +211,14 @@ def torch_regression(X_train, y_train, X_test, y_test, feat):
 
         # Evaluating and Logging
         mse, mae, r2, bias, loa_l, loa_u = evaluate(y_test, y_pred)
+        rmse = np.sqrt(mse)
         logging.info(f'PyTorch LR: learning_rate=0.01, epochs=1000 ({feat})\n'
-                     f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {np.sqrt(mse):.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
+                     f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
                      f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
+
+        wandb.log({"mse": mse, "rmse": rmse, "mae": mae})
+
+        wandb.finish()
 
         # Plotting
         # visual.plot_ml_features_line('PyTorch LR', y_test, y_pred)

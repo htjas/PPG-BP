@@ -1364,7 +1364,7 @@ def fiducial_points(x, pks, fs, vis, header):
         ax4.scatter(p2p, d3x[p2p.astype(int)], color='green', label='p2')
         ax4.legend(loc='center right')
         ax4.set_ylabel('d3x')
-        ax4.set_xlim([-10, 200])
+        ax4.set_xlim([len(x)-200, len(x)])
 
         plt.subplots_adjust(left=0.1,
                             bottom=0.1,
