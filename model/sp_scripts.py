@@ -149,7 +149,7 @@ def process_data(fs, folder, goal):
             ppg_features = features['ppg_features']
             a_sys_med, a_dia_med = features['a_sys_med'], features['a_dia_med']
             ppg_feat_med = features['ppg_feat_med']
-            if len(a_sys) == len(ppg_features):
+            if len(a_sys) == len(ppg_features) and len(a_dia_med) == len(ppg_feat_med):
                 print(f"{ppg_features.shape[1] - 1} PPG features")
                 print(f"{len(ppg_features)} total values")
                 print(f"{len(ppg_feat_med)} median values from {median_window} beat intervals")
@@ -167,7 +167,7 @@ def process_data(fs, folder, goal):
         tot_med_abp_dia = np.concatenate((tot_med_abp_dia, a_dia_med))
         tot_med_ppg_feats = np.concatenate((tot_med_ppg_feats, ppg_feat_med))
         print(f'Total number of ABP Systolic, Diastolic and PPG values extracted:'
-              f' {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats) - 1}')
+              f' {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats)}')
         print(f'Median values of ABP Systolic, Diastolic and PPG extracted:'
               f' {len(tot_med_abp_sys), len(tot_med_abp_dia), len(tot_med_ppg_feats)}')
 
@@ -274,20 +274,26 @@ def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs, med_window):
         raise Exception('No matching timestamps found')
 
     # Time and Frequency Domain Feature extraction
-    ppg_features = ppg_feature_extraction(ppg_fidp, p_sys, ppg, fs)
-    if len(ppg_features) != len(a_sys):
-        a_sysv = a_sysv[:len(ppg_features)]
-        a_diav = a_diav[:len(ppg_features)]
+    ppg_td_features, ppg_fd_features, fft_starts = ppg_feature_extraction(ppg_fidp, p_sys, ppg, fs)
+    if len(ppg_td_features) != len(a_sys):
+        a_sysv = a_sysv[:len(ppg_td_features)]
+        a_diav = a_diav[:len(ppg_td_features)]
 
     a_sys_med = calculate_median_values(a_sys, med_window)
     a_dia_med = calculate_median_values(a_dia, med_window)
-    ppg_feat_med = calculate_median_values_mult(ppg_features, med_window)
+    ppg_td_feat_med, td_med_timestamps = calculate_median_values_mult(ppg_td_features, med_window, fs)
+    ppg_fd_feat_med = calculate_median_fft_values(fft_starts, td_med_timestamps, ppg, fs)
 
-    if len(a_sys_med) != len(a_dia_med) or len(a_dia_med) != len(ppg_feat_med):
-        length = min(len(a_sys_med), len(a_dia_med), len(ppg_feat_med))
+    if len(a_sys_med) != len(a_dia_med) or len(a_dia_med) != len(ppg_td_feat_med) \
+            or len(ppg_td_feat_med) != len(ppg_fd_feat_med):
+        length = min(len(a_sys_med), len(a_dia_med), len(ppg_td_feat_med), len(ppg_fd_feat_med))
         a_sys_med = a_sys_med[:length]
         a_dia_med = a_dia_med[:length]
-        ppg_feat_med = ppg_feat_med[:length]
+        ppg_td_feat_med = ppg_td_feat_med[:length]
+        ppg_fd_feat_med = ppg_fd_feat_med[:length]
+
+    ppg_features = np.column_stack((ppg_td_features, ppg_fd_features))
+    ppg_feat_med = np.column_stack((ppg_td_feat_med, ppg_fd_feat_med))
 
     return {
         'a_sys': a_sysv,
@@ -394,31 +400,63 @@ def calculate_median_values(data, window, s_err=0.8, fs=125):
     return median_values
 
 
-def calculate_median_values_mult(data, window, s_err=0.8, fs=125):
+def calculate_median_values_mult(data, window, fs, s_err=0.8):
     columns = data.shape[1]
     tot_median_values = np.empty((len(data), 0))
+    med_timestamps = set()
 
     for column_no in range(1, columns):  # Start from 1 to skip timestamp column
         median_values, values = np.array([]), np.array([])
+        timestamps = []
 
         for row_no in range(len(data)):
             if len(data) > row_no + 1:
-                ts_diff = data[row_no + 1][0] - data[row_no][0]
+                start_ts = data[row_no][0]
+                ts_diff = data[row_no + 1][0] - start_ts
                 if ts_diff > s_err * fs:
                     values = np.array([])
+                    timestamps = []
                     continue
 
                 val = data[row_no][column_no]
                 values = np.append(values, val)
+                timestamps.append(int(start_ts))
 
                 if len(values) == window:
                     median_value = np.median(values)
                     median_values = np.append(median_values, median_value)
+                    med_timestamps.add(timestamps[0])
                     values = np.array([])
+                    timestamps = []
 
         tot_median_values = np.column_stack((tot_median_values[:len(median_values), :], median_values))
+    med_timestamps = list(med_timestamps)
+    med_timestamps.sort()
+    return tot_median_values, med_timestamps
 
-    return tot_median_values
+
+def calculate_median_fft_values(tot_ts, td_ts, data, fs):
+    freqs, pows, npows = np.array([]), np.array([]), np.array([])
+    ind_ts = find_start_timestamps_between_ons(tot_ts, td_ts)
+    for i in range(len(ind_ts)):
+        if i < len(ind_ts) - 1:
+            signal_interval = data[ind_ts[i]:ind_ts[i+1]]
+            ppg_fdf = frequency_domain_features(signal_interval, fs)
+            freqs = np.append(freqs, ppg_fdf['mean_frequency'])
+            pows = np.append(pows, ppg_fdf['total_power'])
+            npows = np.append(npows, ppg_fdf['normalized_power_at_peak'])
+    return np.column_stack((freqs, pows, npows))
+
+
+def find_start_timestamps_between_ons(arr_ts1, arr_ts2):
+    values_between = []
+    for ts2 in arr_ts2:
+        for i in range(len(arr_ts1)):
+            if i < len(arr_ts1) - 1:
+                if arr_ts1[i] < ts2 < arr_ts1[i+1]:
+                    values_between.append(arr_ts1[i])
+                    break
+    return values_between
 
 
 def beat_fidp_detection(data, fs, seg_name):
@@ -466,6 +504,7 @@ def ppg_feature_extraction(fidp, systoles, data, fs):
                         'dw75', 'dw+sw75', 'dw/sw75']
     # Frequency Domain Features from FFT
     fd_feature_names = ['mean_frequency', 'total_power', 'normalized_power_at_peak']
+    start_ts = []
 
     td_features = {name: np.array([], dtype=float) for name in td_feature_names}
     fd_features = {name: np.array([], dtype=float) for name in fd_feature_names}
@@ -483,7 +522,8 @@ def ppg_feature_extraction(fidp, systoles, data, fs):
                     td_features['sys'] = np.append(td_features['sys'], data[fidp["pks"][pk_index]])
                     td_features['dia'] = np.append(td_features['dia'], data[fidp["off"][pk_index]])
                     td_features = time_domain_feature_detection(td_features, fidp, pk_index, data, fs)
-                    fd_features = frequency_domain_feature_detection(fd_features, fidp, pk_index, data, fs)
+                    fd_features, ts = frequency_domain_feature_detection(fd_features, fidp, pk_index, data, fs)
+                    start_ts.append(ts)
                     beat_no += 1
                 else:
                     raise IndexError("Reached end of one of FIDPs")
@@ -497,7 +537,8 @@ def ppg_feature_extraction(fidp, systoles, data, fs):
 
     tot_td_features = np.column_stack([td_features[name] for name in td_feature_names])
     tot_fd_features = np.column_stack([fd_features[name] for name in fd_feature_names])
-    return np.column_stack((tot_td_features, tot_fd_features))
+    return tot_td_features, tot_fd_features, start_ts
+    # return np.column_stack((tot_td_features, tot_fd_features))
 
 
 def time_domain_feature_detection(features, fidp, pk_index, data, fs):
@@ -543,7 +584,7 @@ def frequency_domain_feature_detection(features, fidp, pk_index, data, fs):
     features['total_power'] = np.append(features['total_power'], ppg_fdf['total_power'])
     features['normalized_power_at_peak'] = np.append(features['normalized_power_at_peak'],
                                                      ppg_fdf['normalized_power_at_peak'])
-    return features
+    return features, time_interval_start
 
 
 def frequency_domain_features(signal, fs):
