@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.4.24)  23 JAN 2024 18:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.4.24)  24 JAN 2024 16:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -47,18 +47,18 @@ Package: tocbasic 2022/10/12 v3.38 KOMA-Script package (handling toc-files)
 Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             because of feature `nobabel' available
 (tocbasic)             for `toc' on input line 135.
-Package scrartcl Info: You've used standard option `10pt'.
+Package scrartcl Info: You've used standard option `12pt'.
 (scrartcl)             This is correct!
-(scrartcl)             Internally I'm using `fontsize=10pt'.
+(scrartcl)             Internally I'm using `fontsize=12pt'.
 (scrartcl)             If you'd like to set the option with \KOMAoptions,
-(scrartcl)             you'd have to use `fontsize=10pt' there
-(scrartcl)             instead of `10pt', too.
-Class scrartcl Info: File `scrsize10pt.clo' used to setup font sizes on input l
+(scrartcl)             you'd have to use `fontsize=12pt' there
+(scrartcl)             instead of `12pt', too.
+Class scrartcl Info: File `scrsize12pt.clo' used to setup font sizes on input l
 ine 2367.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrsize10pt
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrsize12pt
 .clo
-File: scrsize10pt.clo 2022/10/12 v3.38 KOMA-Script font size class option (10pt
+File: scrsize12pt.clo 2022/10/12 v3.38 KOMA-Script font size class option (12pt
 )
 )
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\typearea.st
@@ -71,21 +71,21 @@ Package: typearea 2022/10/12 v3.38 KOMA-Script package (type area)
 \ta@temp=\skip52
 \footheight=\skip53
 Package typearea Info: These are the values describing the layout:
-(typearea)             DIV  = 8
+(typearea)             DIV  = 12
 (typearea)             BCOR = 0.0pt
 (typearea)             \paperwidth      = 597.50793pt
-(typearea)              \textwidth      = 373.44246pt
-(typearea)              DIV departure   = -4%
-(typearea)              \evensidemargin = 39.76274pt
-(typearea)              \oddsidemargin  = 39.76274pt
+(typearea)              \textwidth      = 448.13095pt
+(typearea)              DIV departure   = -6%
+(typearea)              \evensidemargin = 2.4185pt
+(typearea)              \oddsidemargin  = 2.4185pt
 (typearea)             \paperheight     = 845.04694pt
-(typearea)              \textheight     = 538.0pt
-(typearea)              \topmargin      = 0.36087pt
-(typearea)              \headheight     = 15.0pt
-(typearea)              \headsep        = 18.0pt
-(typearea)              \topskip        = 10.0pt
-(typearea)              \footskip       = 42.0pt
-(typearea)              \baselineskip   = 12.0pt
+(typearea)              \textheight     = 635.5pt
+(typearea)              \topmargin      = -41.72441pt
+(typearea)              \headheight     = 18.125pt
+(typearea)              \headsep        = 21.75pt
+(typearea)              \topskip        = 12.0pt
+(typearea)              \footskip       = 50.75pt
+(typearea)              \baselineskip   = 14.5pt
 (typearea)              on input line 1767.
 )
 \c@part=\count186
@@ -169,6 +169,9 @@ Package: wrapfig 2003/01/31  v 3.6
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
@@ -177,29 +180,29 @@ File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
 ) (Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-Package scrbase Info: activating english \abstractname on input line 9.
-Package scrbase Info: activating english \partname on input line 9.
-Package scrbase Info: activating english \figurename on input line 9.
-Package scrbase Info: activating english \tablename on input line 9.
-Package scrbase Info: activating english \contentsname on input line 9.
-Package scrbase Info: activating english \listfigurename on input line 9.
-Package scrbase Info: activating english \listtablename on input line 9.
-Package scrbase Info: activating english \refname on input line 9.
-Package scrbase Info: activating english \indexname on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+Package scrbase Info: activating english \abstractname on input line 10.
+Package scrbase Info: activating english \partname on input line 10.
+Package scrbase Info: activating english \figurename on input line 10.
+Package scrbase Info: activating english \tablename on input line 10.
+Package scrbase Info: activating english \contentsname on input line 10.
+Package scrbase Info: activating english \listfigurename on input line 10.
+Package scrbase Info: activating english \listtablename on input line 10.
+Package scrbase Info: activating english \refname on input line 10.
+Package scrbase Info: activating english \indexname on input line 10.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
@@ -230,9 +233,11 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 {C:/Users/htjas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 (Thesis.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 3.
+(Font)              <12> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 3.
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
 )
 \tf@toc=\write3
 \openout3 = `Thesis.toc'.
@@ -240,63 +245,50 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [2] [3] [4] [5]
 
 LaTeX Warning: Citation `johnson_mimic-iv_2023' on page 6 undefined on input li
-ne 148.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
-
- []
+ne 149.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--194
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--206
+Underfull \hbox (badness 10000) in paragraph at lines 206--207
 
  []
 
-[7] (Thesis.bbl [8]
-Underfull \hbox (badness 1609) in paragraph at lines 44--48
-[]\OT1/cmr/m/n/10 given-i=Abraham fam-ily=Savitzky, given=Abraham. and M. J. E.
- Go-lay.
- []
-
-
-Underfull \hbox (badness 1205) in paragraph at lines 56--62
-[]\OT1/cmr/m/n/10 Jingon Joung, Chul-Woo Jung, Hyung-Chul Lee, Moon-Jung Chae, 
-Hae-
- []
-
-[9] [10]) [11] (Thesis.aux)
+[8] [9] (Thesis.bbl [10] [11] [12]) [13] [14] (Thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4440 strings out of 476331
- 98270 string characters out of 5787765
+ 4505 strings out of 476331
+ 99560 string characters out of 5787765
  1859660 words of memory out of 5000000
- 24883 multiletter control sequences out of 15000+600000
- 515032 words of font info for 41 fonts, out of 8000000 for 9000
+ 24938 multiletter control sequences out of 15000+600000
+ 517771 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,8n,106p,10698b,289s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,8n,106p,10698b,291s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmbx10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmbx12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Thesis.pdf (11 pages, 139602 bytes).
+cmbx12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmr12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmr17.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on Thesis.pdf (14 pages, 120872 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
+ 73 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
