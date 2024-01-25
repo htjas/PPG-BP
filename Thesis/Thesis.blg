@@ -5,7 +5,11 @@ Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
 Reallocating 'name_of_file' (item size: 1) to 15 items.
 Database file #1: literature.bib
+Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
+--line 12 of file literature.bib
 Warning--I didn't find a database entry for "johnson_mimic-iv_2023"
+Warning--I didn't find a database entry for "takazawaAssessmentVasoactiveAgents1998a"
+Warning--I didn't find a database entry for "ruiz-rodriguezInnovativeContinuousNoninvasive2013"
 Warning--to sort, need author or key in WhatBloodPressure2019
 Warning--empty author in WhatBloodPressure2019
 Warning--empty year in WhatBloodPressure2019
@@ -15,12 +19,19 @@ Warning--empty journal in burtPrevalenceHypertensionUS1995
 Warning--empty year in burtPrevalenceHypertensionUS1995
 Warning--empty journal in charltonAssessingHemodynamicsPhotoplethysmogram2022
 Warning--empty year in charltonAssessingHemodynamicsPhotoplethysmogram2022
+Warning--empty journal in clarkArterialCatheterization1992
+Warning--empty year in clarkArterialCatheterization1992
+Warning--empty year in demersPhysiologyMeanArterial2024
 Warning--empty journal in el-hajjDeepLearningModels2021
 Warning--empty year in el-hajjDeepLearningModels2021
+Warning--empty journal in ettehadBloodPressureLowering2016
+Warning--empty year in ettehadBloodPressureLowering2016
 Warning--empty journal in ezzatiSelectedMajorRisk2002
 Warning--empty year in ezzatiSelectedMajorRisk2002
 Warning--empty journal in savitzkySmoothingDifferentiationData1964
 Warning--empty year in savitzkySmoothingDifferentiationData1964
+Warning--empty journal in hillImputationContinuousArterial2021
+Warning--empty year in hillImputationContinuousArterial2021
 Warning--empty journal in imholzFifteenYearsExperience1998
 Warning--empty year in imholzFifteenYearsExperience1998
 Warning--empty journal in joungContinuousCufflessBlood2023
@@ -32,68 +43,68 @@ Warning--empty year in knightAccuracyWearablePhotoplethysmography2022
 Warning--empty year in kurylyakNeuralNetworkbasedMethod2013
 Warning--empty journal in langewoutersPressurediameterRelationshipsSegments1986
 Warning--empty year in langewoutersPressurediameterRelationshipsSegments1986
+Warning--empty journal in lehmanMethodsBloodPressure2013
+Warning--empty year in lehmanMethodsBloodPressure2013
 Warning--empty journal in leungHypertensionCanada20162016
 Warning--empty year in leungHypertensionCanada20162016
 Warning--empty journal in liangOptimalFilterShort2018
 Warning--empty year in liangOptimalFilterShort2018
 Warning--empty booktitle in liuIntegratedNavigationTethered2017
 Warning--empty year in liuIntegratedNavigationTethered2017
+Warning--empty journal in naylorArterialCathetersEarly2020
+Warning--empty year in naylorArterialCathetersEarly2020
 Warning--empty year in organizationWorldHealthStatistics2023
 Warning--empty journal in peterReviewMethodsNoninvasive2014
 Warning--empty year in peterReviewMethodsNoninvasive2014
 Warning--empty year in poonCufflessNoninvasiveMeasurements2005
 Warning--empty year in reyesWirelessPhotoplethysmographicDevice2012
-Warning--empty journal in ruiz-rodriguezInnovativeContinuousNoninvasive2013
-Warning--empty year in ruiz-rodriguezInnovativeContinuousNoninvasive2013
 Warning--empty journal in sharmaCuffLessContinuousBlood2017
 Warning--empty year in sharmaCuffLessContinuousBlood2017
 Warning--empty year in suLongtermBloodPressure2018
 Warning--empty year in suzukiCufflessBloodPressure2009
-Warning--empty journal in takazawaAssessmentVasoactiveAgents1998a
-Warning--empty year in takazawaAssessmentVasoactiveAgents1998a
 Warning--empty year in tengContinuousNoninvasiveEstimation2003
 Warning--empty journal in xingOpticalBloodPressure2016
 Warning--empty year in xingOpticalBloodPressure2016
 Warning--empty year in yoonMultipleDiagnosisBased2002
-You've used 28 entries,
+You've used 33 entries,
             2118 wiz_defined-function locations,
-            666 strings with 14072 characters,
-and the built_in function-call counts, 14756 in all, are:
-= -- 1290
-> -- 1105
+            700 strings with 15899 characters,
+and the built_in function-call counts, 17365 in all, are:
+= -- 1501
+> -- 1355
 < -- 11
-+ -- 442
-- -- 410
-* -- 1354
-:= -- 2416
-add.period$ -- 84
-call.type$ -- 28
-change.case$ -- 288
++ -- 541
+- -- 504
+* -- 1606
+:= -- 2877
+add.period$ -- 99
+call.type$ -- 33
+change.case$ -- 350
 chr.to.int$ -- 0
-cite$ -- 77
-duplicate$ -- 414
-empty$ -- 861
-format.name$ -- 410
-if$ -- 2894
+cite$ -- 89
+duplicate$ -- 469
+empty$ -- 987
+format.name$ -- 504
+if$ -- 3378
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 29
-newline$ -- 141
-num.names$ -- 54
-pop$ -- 377
+int.to.str$ -- 33
+missing$ -- 33
+newline$ -- 165
+num.names$ -- 64
+pop$ -- 455
 preamble$ -- 1
-purify$ -- 261
+purify$ -- 318
 quote$ -- 0
-skip$ -- 289
+skip$ -- 323
 stack$ -- 0
-substring$ -- 826
-swap$ -- 100
+substring$ -- 910
+swap$ -- 102
 text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 110
-warning$ -- 49
-while$ -- 104
-width$ -- 30
-write$ -- 262
-(There were 50 warnings)
+type$ -- 130
+warning$ -- 56
+while$ -- 119
+width$ -- 35
+write$ -- 306
+(There were 60 warnings)
