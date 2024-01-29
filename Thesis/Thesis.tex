@@ -19,10 +19,11 @@ Machine Learning Approach}
 		\vspace*{1cm}
 		\begin{figure}[h]
       		\centering
-			\includegraphics[scale=0.6]{images/hs/hd}
-			\includegraphics[scale=1]{images/hs/hhn}
-			\includegraphics[scale=0.06]{images/hs/tmu}
-		\end{figure}		
+			\includegraphics[scale=0.6]{Images/hs/hd}
+			\includegraphics[scale=1]{Images/hs/hhn}
+			\includegraphics[scale=0.06]{Images/hs/tmu}
+			\label{fig:unis}
+		\end{figure}
 		
         \vspace*{1cm}
             
@@ -54,8 +55,8 @@ Machine Learning Approach}
 		\vfill
     		\Large
     		\noindent
-    		Supervisor: \tab\hspace{-2cm} Prof. Dr. Rolf Bendl\\
-    		Co-Supervisor: \tab\hspace{-2cm} Prof. Dr. Abdul Syed-Shabbir\\
+    		Supervisor: \tab\hspace{-2cm} Prof.\ Dr. Rolf Bendl\\
+    		Co-Supervisor: \tab\hspace{-2cm} Prof.\ Dr. Syed Abdul Shabbir\\
     		Submitted by: \tab\hspace{-2cm} Hugas Jasinskas\\
     		Matriculation number: \tab\hspace{-2cm} 202509\\
     		Submitted on: \tab\hspace{-2cm} \today{}\\
@@ -91,215 +92,19 @@ Place, Date \tab Signature
 \newpage
 \onehalfspacing
 
-\section{Abstract}
+\section{Abstract}\label{sec:abstract}
+
+
 \section{Introduction}
-\label{introduction}
-\subsection{Subject and Motivation}
-\label{subject_motivation}
-
-Cardiovascular diseases (CVDs) are the leading cause of death worldwide, according to WHO publishing statistics \cite{organizationWorldHealthStatistics2023}. One of the main factors contributing to CVDs is Hypertension.
-It is the leading risk factor for mortality, and is ranked third as a cause of disability-adjusted life-years \cite{ezzatiSelectedMajorRisk2002}.
-Currently, there is a significant need for continuous blood pressure (BP) monitoring due to various factors. Primarily, while hypertension is a manageable condition, the availability of accurate high BP detection remains scarce, especially in low-resource environments \cite{burtPrevalenceHypertensionUS1995}. 
-Additionally, blood pressure (BP) is subject to rapid fluctuations influenced by various factors, including stress, emotions, dietary intake, physical activity, and medication usage \cite{poonCufflessNoninvasiveMeasurements2005}.
-Continuous monitoring of blood pressure, rather than relying on isolated measurements, plays a vital role in the early detection and treatment of hypertension  \cite{el-hajjDeepLearningModels2021}.
-
-The current accurate methods for measuring BP continuously are either invasive or involving a cuff-mechanism.
-Catheterization is internationally recognized as the "gold standard" for obtaining the most accurate measurement of continuous blood pressure \cite{sharmaCuffLessContinuousBlood2017}.
-However, due to its invasive nature and limited applicability to hospital settings, this method requires medical intervention, which renders it inconvenient for everyday use.
-
-While cuff-based devices are commonly utilized for this objective, it is worth noting that over 30\% of home blood pressure monitors are found to be inaccurate, rendering continuous measurement unfeasible \cite{leungHypertensionCanada20162016}. Moreover, this approach relies on the individual consciously and intentionally engaging in manual blood pressure monitoring, which poses limitations and might be often overlooked.
-
-An ideal technology for measuring blood pressure should have the following attributes: non-invasiveness, cuffless operation, optical functionality, wearable design, and cost-effectiveness \cite{el-hajjDeepLearningModels2021}.
-One approach satisfying these requirements is the estimation of BP from a single measurement PPG sensor.
-This approach, using two modes, reflectance and transmission, has gained an increasing amount of attention in the literature due its simplicity, and ability to provide continuous and cuffless measurement \cite{el-hajjDeepLearningModels2021}.
-Typically, the photoplethysmography (PPG) technique has been traditionally employed in healthcare settings to measure heart rate \cite{reyesWirelessPhotoplethysmographicDevice2012} and blood oxygen saturation using a pulse oximeter \cite{yoonMultipleDiagnosisBased2002}.
-
-Nevertheless, establishing a straightforward, distinct, and continuous relationship between these characteristics and blood pressure (BP) has proven to be challenging.
-To address this, the approach heavily depends on signal pre-processing techniques, extracting PPG features, and utilizing machine learning algorithms to estimate BP based on these features \cite{el-hajjDeepLearningModels2021}.
-A recent scoping review by Knight et al. concluded that PPG can be successfully used to continuously measure BP, by evaluating latest publications and finding over 80\% accuracy in detecting hypertension \cite{knightAccuracyWearablePhotoplethysmography2022}.
-
-This study examines the current methods and aims to develop efficient approaches for the continuous and accurate measurement of blood pressure using PPG and addresses the following research questions: 
-
-\begin{enumerate}
-\item \textbf{What is the relationship between photoplethysmogram (PPG) data and blood pressure among ICU patients?}
-
-\item \textbf{Can PPG-based data be used to estimate blood pressure accurately?}
-
-\end{enumerate}
-
-\subsection{Tasks and Objectives}
-\label{tasks_objectives}
-
-The tasks of the thesis are as follows:
-
-\begin{enumerate}
-\item Signal Processing: to find an optimal data fetching and filtering approach from available MIMIC Databases. Likewise to create a consistent algorithm for key feature extraction.
-\item Machine Learning: to develop a model based on the resulting features from Signal Processing, to reliably predict BP from PPG. 
-\end{enumerate}
-
-\subsection{Structure of the Thesis}
-\label{structure}
-
-This thesis is organized as follows:
-
-In Chapter \ref{background}, the foundations of the used terms and prerequisites for the methods are explained. For example, in \ref{med_background}, the terms \enquote{Blood Pressure} (\ref{bp}) and \enquote{Photoplethysmography} (\ref{ppg}) are discussed. Furthermore, the general structure of MIMIC databases is explained (\ref{mimic3}, \ref{mimic4}). In addition, the essential information about the Computing part of this research is provided (\ref{computing_background} and \ref{signal_processing}, \ref{machine_learning}).
-
-In Chapter \ref{methods}, the methodology is explained.
-
-Chapter \ref{results} presents the results:
-
-The focus of Chapters \ref{discussion} and \ref{conclusion} is on summarizing the work. Here, both the future prospects for this research field and the next steps in relation to this broader health app analysis project are presented.
+\label{sec:introduction}
+\input{introduction}
 
 \section{Theoretical Background}
-\label{background}
-
-\subsection{Medical Background}
-\label{med_background}
-
-\subsubsection{Blood Pressure}
-\label{bp}
-
-% general BP
-Blood pressure (BP) is a physiological measure of the force exerted by circulating blood against the walls of the arteries \cite{WhatBloodPressure2019}.
-It is highly dependant on blood flow, which refers to the movement of blood through a vessel, tissue, or organ.
-Blood circulation begins with the contraction of the heart's ventricles.
-This action generates a type of hydrostatic pressure, which is the force exerted by a fluid due to gravitational pull, typically against the walls of the container that confines it.
-
-BP is a type of hydrostatic pressure, representing the force exerted by blood on the walls of blood vessels or the heart's chambers.
-While it can be assessed in various body regions, the term \enquote{blood pressure} without specific qualifiers commonly refers to systemic arterial BP.
-This denotes the pressure of blood within the arteries of the systemic circulation.
-In clinical settings, this pressure is measured in millimeters of mercury (mmHg) and is typically acquired using the brachial artery in the arm \cite{betts20BloodFlow2022}.
-
-% measuring significance
-Measuring BP is crucial for assessing cardiovascular health and identifying potential risks. It allows for the early detection of conditions like hypertension and hypotension, enabling timely interventions to prevent serious cardiovascular events \cite{naylorArterialCathetersEarly2020}. BP serves as a key indicator of the risk for heart attacks, strokes, and heart failure, guiding preventive measures and treatment strategies \cite{ettehadBloodPressureLowering2016}.
-
-% cuff BP measuring
-One of the most common BP measurement methods is one using a sphygmomanometer, also known as non-invasive blood pressure (NIBP), is typically recorded as numeric values at specific time intervals.
-The process involves inflating the cuff to temporarily stop blood flow and then gradually releasing the pressure to detect the sounds associated with the flow of blood through the brachial artery.
-The two primary values obtained are systolic pressure (maximum pressure during heartbeats) and diastolic pressure (minimum pressure between heartbeats).
-During the process of cuff inflation and deflation, each heartbeat generates characteristic sounds (Korotkoff sounds) that are detected by a stethoscope placed over the brachial artery.
-Systolic pressure is recorded when the first tapping sounds are heard, and diastolic pressure is recorded when the sounds disappear or change character.
-This beat-to-beat approach provides information about individual fluctuations in blood pressure \cite{betts20BloodFlow2022}.
-
-While measuring blood pressure with a cuff using a sphygmomanometer is a common and convenient method, it has its limitations as it cannot be done continuously. This intermittent approach provides valuable insights into systolic and diastolic pressures at specific time intervals, but it may not capture the nuanced changes that occur between measurements. To address the need for continuous monitoring, other methods, such as arterial catheterization, are employed. 
-
-% arterial BP
-Arterial catheterization is commonly employed in critical patient care, serving dual purposes: continuous blood pressure monitoring and obtaining frequent blood gas measurements. Typically conducted at bedside, the procedure utilizes percutaneous methods like the Seldinger technique to cannulate arteries \cite{clarkArterialCatheterization1992}.
-The resulting arterial blood pressure (ABP) is a dynamic parameter that can change with each heartbeat, and it is typically represented as a waveform rather than a single numeric value.
-The ABP waveform consists of two main components: systolic pressure and diastolic pressure.
-Such continuous monitoring of ABP is usually done in clinical settings, using an arterial line connected to a pressure transducer. The resulting waveform is displayed on a monitor in real-time.
-However, for ease of interpretation and documentation, numeric values are commonly extracted from the waveform at specific time intervals \cite{hillImputationContinuousArterial2021}.
-
-In situations where high temporal resolution is crucial, ABP can be recorded beat-to-beat, providing a value for each heartbeat.
-This is particularly important in situations where rapid changes in blood pressure need to be closely monitored, such as during certain medical procedures or in critically ill patients \cite{lehmanMethodsBloodPressure2013}.
-
-For routine monitoring and documentation, numeric values are often averaged over a specific time interval, such as every 1, 5, or 15 minutes.
-This averaged value may be reported as the mean arterial pressure (MAP), which is a weighted average of the systolic and diastolic pressures over a cardiac cycle \cite{demersPhysiologyMeanArterial2024}
-Some monitoring systems may also provide systolic and diastolic blood pressure readings at regular intervals.
-
-Alternative approaches for measuring BP have emerged over the past years.
-Volume clamping \cite{kimBallistocardiogramBasedApproachCuffless2018} and tonometry \cite{imholzFifteenYearsExperience1998} are some of the other methods. These non-invasive techniques offer continuous monitoring of blood pressure values. 
-Volume clamping, which involves the use of a small finger cuff and a photoplethysmography (PPG) sensor, is one method for continuous blood pressure measurement. Tonometry, on the other hand, is a cuffless approach that utilizes a manometer-tipped probe pressed directly on an artery.
-The volume clamping approach allows for instantaneous and prolonged blood pressure measurement. However, it is associated with high costs and still necessitates the use of a cuff, which can be inconvenient and uncomfortable. Conversely, the tonometry method is sensitive to movement of the arm and probe, making it challenging to maintain accuracy in practical applications. Additionally, constant calibration with a cuff blood pressure device is required \cite{peterReviewMethodsNoninvasive2014}.
-
-\subsubsection{Photoplethysmography}
-\label{ppg}
-
-\begin{enumerate}
-\item How does PPG work?
-\end{enumerate}
-
-Basic information about PPG. How does it work. Main use cases. Potential use cases.
-
-The PPG is an optical sensor, consisting of a light-emitting diode (LED) paired with a photodetector (PD), hence it is simple, inexpensive and can be easily build into a wearable device. The PPG waveform can be obtained using two modes, reflectance and transmission. This waveform corresponds to the blood volume in blood vessels. The PPG is primarily traditionally is utilised in healthcare for measuring heart rate and bloodoxygen saturation using a pulse oximeter \cite{allenPhotoplethysmographyItsApplication2007}.
-
-Peripheral volumetric changes and BP are correlated~\cite{langewoutersPressurediameterRelationshipsSegments1986}.
-Some characteristic PPG features can be used to estimate Systolic BP (SBP) and Diastolic BP (DBP) using machine learning functions. However, there is no simple, clear and continuous relationship between these features and BP. This approach relies heavily on signal pre-processing, extracting PPG features and employing machine learning algorithms for estimating BP as a function of these features.
-
-\subsubsection{MIMIC-III}
-\label{mimic3}
-
-origin of MIMIC\@.
-When was it created?
-How is it structured?
-
-\subsubsection{MIMIC-IV}
-\label{mimic4}
-
-Multiparameter Intelligent Monitoring in Intensive Care IV (MIMIC-IV)~\cite{johnson_mimic-iv_2023}.
-
-\begin{enumerate}
-        \item How is the database structured?
-\item Which patients and how many of them have both PPG and BP data?
-\item Arterial Blood Pressue (ABP)
-\end{enumerate}
-
-How does it differ from MIMIC3?
-
-\subsection{Computing Background}
-\label{computing_background}
-
-\subsubsection{Signal Processing}
-\label{signal_processing}
-
-\begin{enumerate}
-\item What are the methods of signal processing for reading PPG?
-
-Approaches for processing the given PPG data in correlation to BP:\newline
-
-\textbf{Time (PTT) based on  PPG \& ECG - Inverse correlation between BP and PTT.} PTT is the time delay for the pressure wave to travel between to sites on the body. It can be calculated as the time difference between proximal and distal waveforms indicative of the arterial pulse.
-
-\textbf{Pulse Arrival Time (PAT) = PTT + pre-ejection period.} It is defined as the time that takes the pulse wave to travel from the heart to a peripheral site e.g. finger, toe, etc. It can simply be estimated as the time delay between the R peak of the ECG waveform and a point on the rising edge of a distal PPG waveform.
-
-These methods require simultaneous measurement at two different sites on the body, hence two measurement sensors (ECG and PPG) are needed for recording the signals in order to estimate these parameters.
-
-\item What are the different types of filters for processing the PPG signal? 
-
-Signal filtering types include: Chebyshev filter, Butterworth filter~\cite{liangOptimalFilterShort2018}.
-
-Savitzky-Golay (SG) filter \cite{savitzkySmoothingDifferentiationData1964}
-
-Second derivative \& Age analysis \cite{takazawaAssessmentVasoactiveAgents1998a}
-
-Hemodynamics and vascular age \cite{charltonAssessingHemodynamicsPhotoplethysmogram2022}
-
-\end{enumerate}
-
-\subsubsection{Machine Learning}
-\label{machine_learning}
-
-\begin{enumerate}
-\item What are the methods of machine learning for estimating BP from PPG?
-\end{enumerate}
-
-Approaches for estimating BP from PPG: \newline
-
-BP estimation using ML techniques is data driven, unlike the traditional PTT/PAT only models. Several studies attempted to fit regression models, such as \textbf{multilinear regression, support vector machine and random forest}, for estimating BP using PTT/PAT based approach with some degree of success, but the results did not always satisfy the international standards.\newline
-
-Teng and Zhang \cite{tengContinuousNoninvasiveEstimation2003} tried to fit a \textbf{linear regression} model to study the relationship between four PPG features and BP. It was reported that the diastolic time has higher correlation with SBP and DBP than the other features.
-
-Suzuki and Oguri \cite{suzukiCufflessBloodPressure2009} used \textbf{AdaBoost} classifier for the estimation of BP. In this technique, SBP values were classified according to a threshold and afterwards the nonlinear machine learning model was employed for estimating SBP.
-
-Ruiz-Rodriguez et al. \cite{ruiz-rodriguezInnovativeContinuousNoninvasive2013} employed a probabilistic generative model, \textbf{Deep Belief Network Restricted Boltzmann Machine}, for predicting SBP, DBP and mean arterial pressure simultaneously. The results of this study were highly variable, and therefore was not reliable.
-
-Kurylyak et al. \cite{kurylyakNeuralNetworkbasedMethod2013} extracted 21 characteristic features from the PPG waveform. These features were used for estimating SBP and DBP using a \textbf{feed forward neural network}. The results were promising towards an accurate cuffless BP monitoring.
-
-Xing and Sun \cite{xingOpticalBloodPressure2016} applied \textbf{Fast Fourier Transformation} for selecting frequency domain features from the PPG waveform followed by a \textbf{feed forward neural} network for BP estimation. However, the authors suggested that these features are not sufficient for effective BP estimation.
-
-Liu et al. \cite{liuIntegratedNavigationTethered2017}, added 14 features extracted from the PPG’s second derivate, in addition to the 21 features used in Kurylyak et al. A \textbf{support vector machine (SVM)} was then applied for estimating SBP and DBP. The authors reported that these 14 features further improved the estimation.\newline 
-
-The relationship between BP and PPG features is not always linear. Therefore, linear models are inappropriate and often fail to model the relationship between BP and PPG when tested on a large dataset collected from a diverse population. Other classical machine learning models, such as \textbf{SVM}, and \textbf{random forest}, provide better precision. Estimation using these models requires establishing one model per objective, hence, SBP and DBP are estimated separately. However, DBP strongly correlates with SBP and improve its estimation [49], thus should be modelled simultaneously using one model architecture. This can be achieved using neural networks. \textbf{Neural network} models can leverage large amount of data faster and more accurately compared to classical machine learning models.
-
-El-Hajj and Kyriacou proposed using \textbf{Bidirectional Long Short-term memory (Bi-LSTM) and Bidirectional Gated Recurrent Units (Bi-GRU) with attention mechanisms} \cite{el-hajjDeepLearningModels2021}.
-
-In Su et al. \cite{suLongtermBloodPressure2018}, a four layers \textbf{LSTM} with bidirectional structure and residual connections has been employed for BP estimation using the PTT approach. The reported results outperform other PTT based BP regression models.
-
-A study by Joung et al \cite{joungContinuousCufflessBlood2023} was conducted to evaluate a learning-based cuffless BP estimation system with calibration in challenging circumstances. A one dimensional CNN-based network was designed, that could efficiently extract BP from PPG signals using a comparative paired 1D-CNN structure with calibration. 
-
-To precisely design a learning-based BP estimation model such that its estimation accuracy obtained during the test is sustained after being built upon a practical cuffless BP monitoring system, the following delicate yet realistic experimental principles are applicable: i) the number of subjects should be sufficiently large, ii) subject independent training and test datasets are required, and iii) the intrasubject BP variation should be carefully scrutinized in the model design \cite{joungContinuousCufflessBlood2023}.
+\label{sec:background}
+\input{theoretical-background}
 
 \section{Methods}
-\label{methods}
+\label{sec:methods}
 
 \begin{enumerate}
 
@@ -319,7 +124,7 @@ Beat detection improved with manual implementation of SciPy library.
 \end{enumerate}
 
 \section{Results}
-\label{results}
+\label{sec:results}
 
 1st iteration:
 
@@ -332,12 +137,12 @@ A total of 161269 values were extracted, resulting in a 34x161269 matrix.
 
 
 \section{Discussion}
-\label{discussion}
+\label{sec:discussion}
 
 \section{Conclusion}
-\label{conclusion}
+\label{sec:conclusion}
 
 \bibliographystyle{plain}
-\bibliography{literature.bib}
+\bibliography{literature}
 
 \end{document}

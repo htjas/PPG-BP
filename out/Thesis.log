@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  29 JAN 2024 13:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  29 JAN 2024 21:22
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **Thesis.tex
 (./Thesis.tex
@@ -269,7 +270,7 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count272
 \l__pdf_internal_box=\box57
 )
-(./Thesis.aux)
+(/home/hugasj/PycharmProjects/pythonProject/out/Thesis.aux)
 \openout1 = `Thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -312,132 +313,99 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-
-LaTeX Warning: File `images/hs/hd.png' not found on input line 22.
-
-
-! Package pdftex.def Error: File `images/hs/hd.png' not found: using draft sett
-ing.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.22 ...cludegraphics[scale=0.6]{images/hs/hd.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `images/hs/hhn.png' not found on input line 23.
-
-
-! Package pdftex.def Error: File `images/hs/hhn.png' not found: using draft set
-ting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.23 ...ncludegraphics[scale=1]{images/hs/hhn.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `images/hs/tmu.png' not found on input line 24.
-
-
-! Package pdftex.def Error: File `images/hs/tmu.png' not found: using draft set
-ting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.24 ...udegraphics[scale=0.06]{images/hs/tmu.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+<Images/hs/hd.png, id=1, 144.54pt x 75.8835pt>
+File: Images/hs/hd.png Graphic file (type png)
+<use Images/hs/hd.png>
+Package pdftex.def Info: Images/hs/hd.png  used on input line 22.
+(pdftex.def)             Requested size: 86.72466pt x 45.53044pt.
+<Images/hs/hhn.png, id=3, 115.18031pt x 44.41594pt>
+File: Images/hs/hhn.png Graphic file (type png)
+<use Images/hs/hhn.png>
+Package pdftex.def Info: Images/hs/hhn.png  used on input line 23.
+(pdftex.def)             Requested size: 115.18001pt x 44.41582pt.
+<Images/hs/tmu.png, id=4, 1204.5pt x 664.4825pt>
+File: Images/hs/tmu.png Graphic file (type png)
+<use Images/hs/tmu.png>
+Package pdftex.def Info: Images/hs/tmu.png  used on input line 24.
+(pdftex.def)             Requested size: 72.26688pt x 39.86722pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <17.28> on input line 57.
+(Font)              <17.28> on input line 58.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 57.
+(Font)              <12> on input line 58.
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--62
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
 
  []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Images/hs/hd.png> <./Ima
+ges/hs/hhn.png> <./Images/hs/tmu.png>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 83.
+(Font)              <8> on input line 84.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 83.
- [2] (./Thesis.toc)
+(Font)              <6> on input line 84.
+ [2]
+(/home/hugasj/PycharmProjects/pythonProject/out/Thesis.toc)
 \tf@toc=\write3
 \openout3 = `Thesis.toc'.
 
+ [3]
+(./introduction.tex [4]) [5] (./theoretical-background.tex [6] [7] [8] [9]
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 183--184
 
-[3] [4] [5] [6] [7]
+ []
 
-LaTeX Warning: Citation `johnson_mimic-iv_2023' on page 8 undefined on input li
-ne 229.
+[11]
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 248--249
+LaTeX Warning: Citation `takazawaAssessmentVasoactiveAgents1998' on page 12 und
+efined on input line 197.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--211
 
  []
 
 
-LaTeX Warning: Citation `takazawaAssessmentVasoactiveAgents1998a' on page 9 und
-efined on input line 262.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 275--276
+Underfull \hbox (badness 10000) in paragraph at lines 212--214
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
+LaTeX Warning: Citation `ruiz-rodriguezInnovativeContinuousNoninvasive2013a' on
+ page 12 undefined on input line 219.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--232
 
  []
 
-[9]
-
-LaTeX Warning: Citation `ruiz-rodriguezInnovativeContinuousNoninvasive2013' on 
-page 10 undefined on input line 283.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 289--290
-
- []
-
-[10] [11] (./Thesis.bbl [12] [13] [14] [15]) [16] (./Thesis.aux)
+[12]) [13] (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.bbl [14]
+[15] [16] [17] [18]) [19]
+(/home/hugasj/PycharmProjects/pythonProject/out/Thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6753 strings out of 480204
- 137061 string characters out of 5895010
- 549517 words of memory out of 5000000
- 24621 multiletter control sequences out of 15000+600000
- 475527 words of font info for 49 fonts, out of 8000000 for 9000
+ 6705 strings out of 480204
+ 136731 string characters out of 5895010
+ 549593 words of memory out of 5000000
+ 24582 multiletter control sequences out of 15000+600000
+ 475358 words of font info for 48 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 108i,8n,106p,10696b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,8n,106p,10696b,358s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Thesis.pdf (16 pages, 128534 bytes).
+xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on /home/hugasj/PycharmProjects/pythonProject/out/Thesis.pdf (19
+ pages, 313700 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
+ 97 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

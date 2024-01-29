@@ -1,0 +1,324 @@
+\begin{thebibliography}{10}
+
+\bibitem{WhatBloodPressure2019}
+What is blood pressure and how is it measured?
+\newblock In {\em {{InformedHealth}}.Org [{{Internet}}]}. {Institute for
+  Quality and Efficiency in Health Care (IQWiG)}.
+
+\bibitem{allenPhotoplethysmographyItsApplication2007a}
+John Allen.
+\newblock Photoplethysmography and its application in clinical physiological
+  measurement.
+\newblock 28(3):R1.
+
+\bibitem{aoyagiPulseOximetryIts2002}
+Takuo Aoyagi and Katsuyuki Miyasaka.
+\newblock Pulse oximetry: Its invention, contribution to medicine, and future
+  tasks.
+\newblock 94:S1--3.
+
+\bibitem{betts20BloodFlow2022}
+J.~Gordon Betts, Kelly~A. Young, James~A. Wise, Eddie Johnson, Brandon Poe,
+  Dean~H. Kruse, Oksana Korol, Jody~E. Johnson, Mark Womble, Peter DeSaix,
+  J.~Gordon Betts, Kelly~A. Young, James~A. Wise, Eddie Johnson, Brandon Poe,
+  Dean~H. Kruse, Oksana Korol, Jody~E. Johnson, Mark Womble, and Peter DeSaix.
+\newblock 20.2 {{Blood Flow}}, {{Blood Pressure}}, and {{Resistance}} -
+  {{Anatomy}} and {{Physiology}} 2e | {{OpenStax}}.
+
+\bibitem{burtPrevalenceHypertensionUS1995}
+V.L. Burt, P.~Whelton, E.J. Roccella, C.~Brown, J.A. Cutler, M.~Higgins, M.J.
+  Horan, and D.~Labarthe.
+\newblock Prevalence of hypertension in the {{US}} adult population:
+  {{Results}} from the third {{National Health}} and {{Nutrition Examination
+  Survey}}, 1988-1991.
+\newblock 25(3):305--313.
+
+\bibitem{castanedaReviewWearablePhotoplethysmography2018}
+Denisse Castaneda, Aibhlin Esparza, Mohammad Ghamari, Cinna Soltanpur, and
+  Homer Nazeran.
+\newblock A review on wearable photoplethysmography sensors and their potential
+  future applications in health care.
+\newblock 4(4):195--202.
+
+\bibitem{challonerPhotoelectricPlethysmographMeasurement1974}
+A.~V.~J. Challoner and C.~A. Ramsay.
+\newblock A photoelectric plethysmograph for the measurement of cutaneous blood
+  flow.
+\newblock 19(3):317.
+
+\bibitem{charltonAssessingHemodynamicsPhotoplethysmogram2022}
+Peter~H. Charlton, Birutė Paliakaitė, Kristjan Pilt, Martin Bachler, Serena
+  Zanelli, Dániel Kulin, John Allen, Magid Hallab, Elisabetta Bianchini,
+  Christopher~C. Mayer, Dimitrios Terentes-Printzios, Verena Dittrich, Bernhard
+  Hametner, Dave Veerasingam, Dejan Žikić, and Vaidotas Marozas.
+\newblock Assessing hemodynamics from the photoplethysmogram to gain insights
+  into vascular age: A review from {{VascAgeNet}}.
+\newblock 322(4):H493--H522.
+
+\bibitem{clarkArterialCatheterization1992}
+V.~L. Clark and J.~A. Kruse.
+\newblock Arterial catheterization.
+\newblock 8(4):687--697.
+
+\bibitem{demersPhysiologyMeanArterial2024}
+Daniel DeMers and Daliah Wachs.
+\newblock Physiology, {{Mean Arterial Pressure}}.
+\newblock In {\em {{StatPearls}}}. {StatPearls Publishing}.
+
+\bibitem{el-hajjDeepLearningModels2021}
+C~El-Hajj and given-i=PA family=Kyriacou, given=PA.
+\newblock Deep learning models for cuffless blood pressure monitoring from
+  {{PPG}} signals using attention mechanism.
+\newblock 65:102301.
+
+\bibitem{ettehadBloodPressureLowering2016}
+Dena Ettehad, Connor~A. Emdin, Amit Kiran, Simon~G. Anderson, Thomas Callender,
+  Jonathan Emberson, John Chalmers, Anthony Rodgers, and Kazem Rahimi.
+\newblock Blood pressure lowering for prevention of cardiovascular disease and
+  death: A systematic review and meta-analysis.
+\newblock 387(10022):957--967.
+
+\bibitem{ezzatiSelectedMajorRisk2002}
+Majid Ezzati, Alan~D Lopez, Anthony Rodgers, Stephen Vander~Hoorn, and
+  Christopher~JL Murray.
+\newblock Selected major risk factors and global and regional burden of
+  disease.
+\newblock 360(9343):1347--1360.
+
+\bibitem{savitzkySmoothingDifferentiationData1964}
+given-i={{Abraham}} family=Savitzky, given=Abraham. and M.~J.~E. Golay.
+\newblock Smoothing and {{Differentiation}} of {{Data}} by {{Simplified Least
+  Squares Procedures}}.
+\newblock 36(8):1627--1639.
+
+\bibitem{hertzmanPhotoelectricPlethysmographyFingers1937}
+Alrick~B. Hertzman.
+\newblock Photoelectric {{Plethysmography}} of the {{Fingers}} and {{Toes}} in
+  {{Man}}.
+\newblock 37(3):529--534.
+
+\bibitem{hillImputationContinuousArterial2021}
+Brian~L. Hill, Nadav Rakocz, Ákos Rudas, Jeffrey~N. Chiang, Sidong Wang, Ira
+  Hofer, Maxime Cannesson, and Eran Halperin.
+\newblock Imputation of the continuous arterial line blood pressure waveform
+  from non-invasive measurements using deep learning.
+\newblock 11:15755.
+
+\bibitem{imholzFifteenYearsExperience1998}
+B.P.M. Imholz, W.~Wieling, G.A. Van~Montfrans, and K.H. Wesseling.
+\newblock Fifteen years experience with finger arterial pressure monitoring:
+  {{Assessment}} of the technology.
+\newblock 38(3):605--616.
+
+\bibitem{johnsonMIMICIVFreelyAccessible2023}
+Alistair E.~W. Johnson, Lucas Bulgarelli, Lu~Shen, Alvin Gayles, Ayad Shammout,
+  Steven Horng, Tom~J. Pollard, Sicheng Hao, Benjamin Moody, Brian Gow,
+  Li-wei~H. Lehman, Leo~A. Celi, and Roger~G. Mark.
+\newblock {{MIMIC-IV}}, a freely accessible electronic health record dataset.
+\newblock 10(1):1.
+
+\bibitem{joungContinuousCufflessBlood2023}
+Jingon Joung, Chul-Woo Jung, Hyung-Chul Lee, Moon-Jung Chae, Hae-Sung Kim,
+  Jonghun Park, Won-Yong Shin, Changhyun Kim, Minhyung Lee, and Changwoo Choi.
+\newblock Continuous cuffless blood pressure monitoring using
+  photoplethysmography-based {{PPG2BP-net}} for high intrasubject blood
+  pressure variations.
+\newblock 13:8605.
+
+\bibitem{kimBallistocardiogramBasedApproachCuffless2018}
+Chang-Sei Kim, Andrew~M. Carek, Omer~T. Inan, Ramakrishna Mukkamala, and Jin-Oh
+  Hahn.
+\newblock Ballistocardiogram-{{Based Approach}} to {{Cuffless Blood Pressure
+  Monitoring}}: {{Proof}} of {{Concept}} and {{Potential Challenges}}.
+\newblock 65(11):2384--2391.
+
+\bibitem{knightAccuracyWearablePhotoplethysmography2022}
+Sheida Knight, Jessica Lipoth, Mina Namvari, Carol Gu, Mojtaba Hedayati~Ch,
+  Shabbir Syed-Abdul, and Raymond~J. Spiteri.
+\newblock The {{Accuracy}} of {{Wearable Photoplethysmography Sensors}} for
+  {{Telehealth Monitoring}}: {{A Scoping Review}}.
+
+\bibitem{kurylyakNeuralNetworkbasedMethod2013}
+Yuriy Kurylyak, Francesco Lamonaca, and Domenico Grimaldi.
+\newblock A {{Neural Network-based}} method for continuous blood pressure
+  estimation from a {{PPG}} signal.
+\newblock In {\em 2013 {{IEEE International Instrumentation}} and {{Measurement
+  Technology Conference}} ({{I2MTC}})}, pages 280--283.
+
+\bibitem{langewoutersPressurediameterRelationshipsSegments1986}
+G.J. Langewouters, A.~Zwart, R.~Busse, and K.H. Wesseling.
+\newblock Pressure-diameter relationships of segments of human finger arteries.
+\newblock 7(1):43--55.
+
+\bibitem{lehmanMethodsBloodPressure2013}
+Li-wei~H. Lehman, Mohammed Saeed, Daniel Talmor, Roger Mark, and Atul Malhotra.
+\newblock Methods of {{Blood Pressure Measurement}} in the {{ICU}}.
+\newblock 41(1):34--40.
+
+\bibitem{leungHypertensionCanada20162016}
+Alexander~A. Leung, Kara Nerenberg, Stella~S. Daskalopoulou, Kerry McBrien,
+  Kelly~B. Zarnke, Kaberi Dasgupta, Lyne Cloutier, Mark Gelfer, Maxime
+  Lamarre-Cliche, Alain Milot, Peter Bolli, Guy Tremblay, Donna McLean,
+  Sheldon~W. Tobe, Marcel Ruzicka, Kevin~D. Burns, Michel Vallée, G.~V.~Ramesh
+  Prasad, Marcel Lebel, Ross~D. Feldman, Peter Selby, Andrew Pipe, Ernesto~L.
+  Schiffrin, Philip~A. McFarlane, Paul Oh, Robert~A. Hegele, Milan Khara,
+  Thomas~W. Wilson, S.~Brian Penner, Ellen Burgess, Robert~J. Herman, Simon~L.
+  Bacon, Simon~W. Rabkin, Richard~E. Gilbert, Tavis~S. Campbell, Steven Grover,
+  George Honos, Patrice Lindsay, Michael~D. Hill, Shelagh~B. Coutts, Gord
+  Gubitz, Norman R.~C. Campbell, Gordon~W. Moe, Jonathan~G. Howlett,
+  Jean-Martin Boulanger, Ally Prebtani, Pierre Larochelle, Lawrence~A. Leiter,
+  Charlotte Jones, Richard~I. Ogilvie, Vincent Woo, Janusz Kaczorowski, Luc
+  Trudeau, Robert~J. Petrella, Swapnil Hiremath, Denis Drouin, Kim~L. Lavoie,
+  Pavel Hamet, George Fodor, Jean~C. Grégoire, Richard Lewanczuk, George~K.
+  Dresser, Mukul Sharma, Debra Reid, Scott~A. Lear, Gregory Moullec, Milan
+  Gupta, Laura~A. Magee, Alexander~G. Logan, Kevin~C. Harris, Janis Dionne,
+  Anne Fournier, Geneviève Benoit, Janusz Feber, Luc Poirier, Raj~S. Padwal,
+  Doreen~M. Rabi, and {CHEP Guidelines Task Force}.
+\newblock Hypertension {{Canada}}'s 2016 {{Canadian Hypertension Education
+  Program Guidelines}} for {{Blood Pressure Measurement}}, {{Diagnosis}},
+  {{Assessment}} of {{Risk}}, {{Prevention}}, and {{Treatment}} of
+  {{Hypertension}}.
+\newblock 32(5):569--588.
+
+\bibitem{liangOptimalFilterShort2018}
+Yongbo Liang, Mohamed Elgendi, Zhencheng Chen, and Rabab Ward.
+\newblock An optimal filter for short photoplethysmogram signals.
+\newblock 5(1):180076.
+
+\bibitem{liuIntegratedNavigationTethered2017}
+M.~Liu, X.~Zhan, J.~Tu, B.~Liu, and Z.H. Zhu.
+\newblock Integrated navigation for tethered nano-satellite system by modified
+  input-delay neural networks and {{PROSAC}}.
+\newblock volume 2017-May, pages 202--210.
+
+\bibitem{molitorNewBloodlessMethod1936}
+Hans Molitor and Michael Kniazuk.
+\newblock A {{New Bloodless Method}} for {{Continuous Recording}} of
+  {{Peripheral Circulatory Changes}}.
+\newblock 57(1):6--18.
+
+\bibitem{naylorArterialCathetersEarly2020}
+Amanda~J. Naylor, Daniel~I. Sessler, Kamal Maheshwari, Ashish~K. Khanna,
+  Dongsheng Yang, Edward~J. Mascha, Iman Suleiman, Eric~M. Reville, Devan Cote,
+  Matthew~T. Hutcherson, Bianka~M. Nguyen, Hesham Elsharkawy, and Andrea Kurz.
+\newblock Arterial {{Catheters}} for {{Early Detection}} and {{Treatment}} of
+  {{Hypotension During Major Noncardiac Surgery}}: {{A Randomized Trial}}.
+\newblock 131(5):1540--1550.
+
+\bibitem{organizationWorldHealthStatistics2023}
+World~Health Organization.
+\newblock {\em World Health Statistics 2023: Monitoring Health for the
+  {{SDGs}}, {{Sustainable Development Goals}}}.
+\newblock {World Health Organization}.
+
+\bibitem{peterReviewMethodsNoninvasive2014}
+L.~Peter, N.~Noury, and M.~Cerny.
+\newblock A review of methods for non-invasive and continuous blood pressure
+  monitoring: {{Pulse}} transit time method is promising?
+\newblock 35(5):271--282.
+
+\bibitem{ponnadaTechnologicalConsiderationsSensorassisted2019}
+Aditya Ponnada.
+\newblock Technological considerations for sensor-assisted chronic pain
+  assessment in natural environments.
+
+\bibitem{poonCufflessNoninvasiveMeasurements2005}
+C.C.Y. Poon and Y.T. Zhang.
+\newblock Cuff-less and {{Noninvasive Measurements}} of {{Arterial Blood
+  Pressure}} by {{Pulse Transit Time}}.
+\newblock In {\em 2005 {{IEEE Engineering}} in {{Medicine}} and {{Biology}}
+  27th {{Annual Conference}}}, pages 5877--5880.
+
+\bibitem{reyesWirelessPhotoplethysmographicDevice2012}
+Ivan Reyes, Homer Nazeran, Mario Franco, and Emily Haltiwanger.
+\newblock Wireless photoplethysmographic device for heart rate variability
+  signal acquisition and analysis.
+\newblock In {\em 2012 {{Annual International Conference}} of the {{IEEE
+  Engineering}} in {{Medicine}} and {{Biology Society}}}, pages 2092--2095.
+
+\bibitem{rheeArtifactresistantPowerefficientDesign2001}
+Sokwoo Rhee, Boo-Ho Yang, and H.H. Asada.
+\newblock Artifact-resistant power-efficient design of finger-ring
+  plethysmographic sensors.
+\newblock 48(7):795--805.
+
+\bibitem{sharmaCuffLessContinuousBlood2017}
+Manuja Sharma, Karinne Barbosa, Victor Ho, Devon Griggs, Tadesse Ghirmai,
+  Sandeep~K. Krishnan, Tzung~K. Hsiai, Jung-Chih Chiao, and Hung Cao.
+\newblock Cuff-{{Less}} and {{Continuous Blood Pressure Monitoring}}: {{A
+  Methodological Review}}.
+\newblock 5(2):21.
+
+\bibitem{srivastavValsalvaManeuver2024}
+Shival Srivastav, Radia~T. Jamil, and Roman Zeltser.
+\newblock Valsalva {{Maneuver}}.
+\newblock In {\em {{StatPearls}}}. {StatPearls Publishing}.
+
+\bibitem{suLongtermBloodPressure2018}
+Peng Su, Xiao-Rong Ding, Yuan-Ting Zhang, Jing Liu, Fen Miao, and Ni~Zhao.
+\newblock Long-term blood pressure prediction with deep recurrent neural
+  networks.
+\newblock In {\em 2018 {{IEEE EMBS International Conference}} on {{Biomedical}}
+  \& {{Health Informatics}} ({{BHI}})}, pages 323--328.
+
+\bibitem{suzukiCufflessBloodPressure2009}
+Satomi Suzuki and Koji Oguri.
+\newblock Cuffless blood pressure estimation by error-correcting output coding
+  method based on an aggregation of {{AdaBoost}} with a photoplethysmograph
+  sensor.
+\newblock In {\em 2009 {{Annual International Conference}} of the {{IEEE
+  Engineering}} in {{Medicine}} and {{Biology Society}}}, pages 6765--6768.
+
+\bibitem{sviridovaHumanPhotoplethysmogramNew2015}
+Nina Sviridova and Kenshi Sakai.
+\newblock Human photoplethysmogram: New insight into chaotic characteristics.
+\newblock 77:53--63.
+
+\bibitem{tengContinuousNoninvasiveEstimation2003}
+X.F. Teng and Y.T. Zhang.
+\newblock Continuous and noninvasive estimation of arterial blood pressure
+  using a photoplethysmographic approach.
+\newblock In {\em Proceedings of the 25th {{Annual International Conference}}
+  of the {{IEEE Engineering}} in {{Medicine}} and {{Biology Society}} ({{IEEE
+  Cat}}. {{No}}.{{03CH37439}})}, volume~4, pages 3153--3156 Vol.4.
+
+\bibitem{weisslerSystolicTimeIntervals1968}
+A.~M. Weissler, W.~S. Harris, and C.~D. Schoenfeld.
+\newblock Systolic time intervals in heart failure in man.
+\newblock 37(2):149--159.
+
+\bibitem{wieringaContactlessMultipleWavelength2005b}
+F.~P. Wieringa, F.~Mastik, and {A. F. W. van der Steen}.
+\newblock Contactless multiple wavelength photoplethysmographic imaging: A
+  first step toward "{{SpO2}} camera" technology.
+\newblock 33(8):1034--1041.
+
+\bibitem{xingOpticalBloodPressure2016}
+X.~Xing and M.~Sun.
+\newblock Optical blood pressure estimation with photoplethysmography and
+  fft-based neural networks.
+\newblock 7(8):3007--3020.
+
+\bibitem{yoonMultipleDiagnosisBased2002}
+Gilwon Yoon, Jong~Youn Lee, Kye~Jin Jeon, Kun-Kook Park, Hyung~S. Yeo, Hyun~Tae
+  Hwang, Hong~Sig Kim, and In-Duk Hwang.
+\newblock Multiple diagnosis based on photoplethysmography: Hematocrit,
+  {{SpO2}}, pulse, and respiration.
+\newblock In {\em Optics in {{Health Care}} and {{Biomedical Optics}}:
+  {{Diagnostics}} and {{Treatment}}}, volume 4916, pages 185--188. {SPIE}.
+
+\bibitem{yoshiyaSpectrophotometricMonitoringArterial1980}
+I.~Yoshiya, Y.~Shimada, and K.~Tanaka.
+\newblock Spectrophotometric monitoring of arterial oxygen saturation in the
+  fingertip.
+\newblock 18(1):27--32.
+
+\bibitem{zhengRingtypeDeviceNoninvasive2003}
+D.C. Zheng and Y.T. Zhang.
+\newblock A ring-type device for the noninvasive measurement of arterial blood
+  pressure.
+\newblock In {\em Proceedings of the 25th {{Annual International Conference}}
+  of the {{IEEE Engineering}} in {{Medicine}} and {{Biology Society}} ({{IEEE
+  Cat}}. {{No}}.{{03CH37439}})}, volume~4, pages 3184--3187 Vol.4.
+
+\end{thebibliography}

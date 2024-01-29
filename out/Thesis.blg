@@ -1,0 +1,133 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Thesis.aux
+The style file: plain.bst
+Database file #1: literature.bib
+Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
+--line 33 of file literature.bib
+Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
+--line 598 of file literature.bib
+Warning--I didn't find a database entry for "takazawaAssessmentVasoactiveAgents1998"
+Warning--I didn't find a database entry for "ruiz-rodriguezInnovativeContinuousNoninvasive2013a"
+Warning--to sort, need author or key in WhatBloodPressure2019
+Warning--empty author in WhatBloodPressure2019
+Warning--empty year in WhatBloodPressure2019
+Warning--empty journal in allenPhotoplethysmographyItsApplication2007a
+Warning--empty year in allenPhotoplethysmographyItsApplication2007a
+Warning--empty journal in aoyagiPulseOximetryIts2002
+Warning--empty year in aoyagiPulseOximetryIts2002
+Warning--empty journal in burtPrevalenceHypertensionUS1995
+Warning--empty year in burtPrevalenceHypertensionUS1995
+Warning--empty journal in castanedaReviewWearablePhotoplethysmography2018
+Warning--empty year in castanedaReviewWearablePhotoplethysmography2018
+Warning--empty journal in challonerPhotoelectricPlethysmographMeasurement1974
+Warning--empty year in challonerPhotoelectricPlethysmographMeasurement1974
+Warning--empty journal in charltonAssessingHemodynamicsPhotoplethysmogram2022
+Warning--empty year in charltonAssessingHemodynamicsPhotoplethysmogram2022
+Warning--empty journal in clarkArterialCatheterization1992
+Warning--empty year in clarkArterialCatheterization1992
+Warning--empty year in demersPhysiologyMeanArterial2024
+Warning--empty journal in el-hajjDeepLearningModels2021
+Warning--empty year in el-hajjDeepLearningModels2021
+Warning--empty journal in ettehadBloodPressureLowering2016
+Warning--empty year in ettehadBloodPressureLowering2016
+Warning--empty journal in ezzatiSelectedMajorRisk2002
+Warning--empty year in ezzatiSelectedMajorRisk2002
+Warning--empty journal in savitzkySmoothingDifferentiationData1964
+Warning--empty year in savitzkySmoothingDifferentiationData1964
+Warning--empty journal in hertzmanPhotoelectricPlethysmographyFingers1937
+Warning--empty year in hertzmanPhotoelectricPlethysmographyFingers1937
+Warning--empty journal in hillImputationContinuousArterial2021
+Warning--empty year in hillImputationContinuousArterial2021
+Warning--empty journal in imholzFifteenYearsExperience1998
+Warning--empty year in imholzFifteenYearsExperience1998
+Warning--empty journal in johnsonMIMICIVFreelyAccessible2023
+Warning--empty year in johnsonMIMICIVFreelyAccessible2023
+Warning--empty journal in joungContinuousCufflessBlood2023
+Warning--empty year in joungContinuousCufflessBlood2023
+Warning--empty journal in kimBallistocardiogramBasedApproachCuffless2018
+Warning--empty year in kimBallistocardiogramBasedApproachCuffless2018
+Warning--empty journal in knightAccuracyWearablePhotoplethysmography2022
+Warning--empty year in knightAccuracyWearablePhotoplethysmography2022
+Warning--empty year in kurylyakNeuralNetworkbasedMethod2013
+Warning--empty journal in langewoutersPressurediameterRelationshipsSegments1986
+Warning--empty year in langewoutersPressurediameterRelationshipsSegments1986
+Warning--empty journal in lehmanMethodsBloodPressure2013
+Warning--empty year in lehmanMethodsBloodPressure2013
+Warning--empty journal in leungHypertensionCanada20162016
+Warning--empty year in leungHypertensionCanada20162016
+Warning--empty journal in liangOptimalFilterShort2018
+Warning--empty year in liangOptimalFilterShort2018
+Warning--empty booktitle in liuIntegratedNavigationTethered2017
+Warning--empty year in liuIntegratedNavigationTethered2017
+Warning--empty journal in molitorNewBloodlessMethod1936
+Warning--empty year in molitorNewBloodlessMethod1936
+Warning--empty journal in naylorArterialCathetersEarly2020
+Warning--empty year in naylorArterialCathetersEarly2020
+Warning--empty year in organizationWorldHealthStatistics2023
+Warning--empty journal in peterReviewMethodsNoninvasive2014
+Warning--empty year in peterReviewMethodsNoninvasive2014
+Warning--empty year in poonCufflessNoninvasiveMeasurements2005
+Warning--empty year in reyesWirelessPhotoplethysmographicDevice2012
+Warning--empty journal in rheeArtifactresistantPowerefficientDesign2001
+Warning--empty year in rheeArtifactresistantPowerefficientDesign2001
+Warning--empty journal in sharmaCuffLessContinuousBlood2017
+Warning--empty year in sharmaCuffLessContinuousBlood2017
+Warning--empty year in srivastavValsalvaManeuver2024
+Warning--empty year in suLongtermBloodPressure2018
+Warning--empty year in suzukiCufflessBloodPressure2009
+Warning--empty journal in sviridovaHumanPhotoplethysmogramNew2015
+Warning--empty year in sviridovaHumanPhotoplethysmogramNew2015
+Warning--empty year in tengContinuousNoninvasiveEstimation2003
+Warning--empty journal in weisslerSystolicTimeIntervals1968
+Warning--empty year in weisslerSystolicTimeIntervals1968
+Warning--empty journal in wieringaContactlessMultipleWavelength2005b
+Warning--empty year in wieringaContactlessMultipleWavelength2005b
+Warning--empty journal in xingOpticalBloodPressure2016
+Warning--empty year in xingOpticalBloodPressure2016
+Warning--empty year in yoonMultipleDiagnosisBased2002
+Warning--empty journal in yoshiyaSpectrophotometricMonitoringArterial1980
+Warning--empty year in yoshiyaSpectrophotometricMonitoringArterial1980
+Warning--empty year in zhengRingtypeDeviceNoninvasive2003
+You've used 47 entries,
+            2118 wiz_defined-function locations,
+            778 strings with 19063 characters,
+and the built_in function-call counts, 22433 in all, are:
+= -- 1970
+> -- 1620
+< -- 13
++ -- 649
+- -- 594
+* -- 2027
+:= -- 3698
+add.period$ -- 141
+call.type$ -- 47
+change.case$ -- 437
+chr.to.int$ -- 0
+cite$ -- 127
+duplicate$ -- 638
+empty$ -- 1368
+format.name$ -- 594
+if$ -- 4390
+int.to.chr$ -- 0
+int.to.str$ -- 47
+missing$ -- 46
+newline$ -- 234
+num.names$ -- 92
+pop$ -- 578
+preamble$ -- 1
+purify$ -- 391
+quote$ -- 0
+skip$ -- 430
+stack$ -- 0
+substring$ -- 1253
+swap$ -- 118
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 186
+warning$ -- 80
+while$ -- 169
+width$ -- 49
+write$ -- 433
+(There were 84 warnings)
