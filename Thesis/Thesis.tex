@@ -126,6 +126,18 @@ Beat detection improved with manual implementation of SciPy library.
 \section{Results}
 \label{sec:results}
 
+\subsection{Data Fetching}
+\label{subsec:data_fetching}
+
+Data for Validation from MIMIC4:
+
+5508 records each containing 37795 values corresponding to ~605 seconds (fs=64.4725);
+
+Data for Training/Testing from MIMIC3:
+
+\subsection{Data Processing}
+\label{subsec:data_processing}
+
 1st iteration:
 
 306 records of 10 minutes each were extracted from the MIMIC-III Database for creation (training and testing) of a Machine Learning model.
@@ -133,7 +145,7 @@ Signaling processing approaches were included (see 4.2).
 Feature extraction:
 - For target reference ABP Systolic and Diastolic values were extracted from the waveform data.
 - For Machine Learning, 34 features were extracted from the PPG waveform
-A total of 161269 values were extracted, resulting in a 34x161269 matrix.
+A total of 161,269 values were extracted, resulting in a 34x161269 matrix.
 
 
 \section{Discussion}

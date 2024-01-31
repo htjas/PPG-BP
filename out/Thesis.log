@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  29 JAN 2024 21:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  31 JAN 2024 21:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -382,17 +382,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 229--232
  []
 
 [12]) [13] (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.bbl [14]
-[15] [16] [17] [18]) [19]
+[15] [16] [17] [18] [19]) [20]
 (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6705 strings out of 480204
- 136731 string characters out of 5895010
- 549593 words of memory out of 5000000
- 24582 multiletter control sequences out of 15000+600000
+ 6707 strings out of 480204
+ 136777 string characters out of 5895010
+ 549615 words of memory out of 5000000
+ 24584 multiletter control sequences out of 15000+600000
  475358 words of font info for 48 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  108i,8n,106p,10696b,358s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -401,11 +401,11 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on /home/hugasj/PycharmProjects/pythonProject/out/Thesis.pdf (19
- pages, 313700 bytes).
+Output written on /home/hugasj/PycharmProjects/pythonProject/out/Thesis.pdf (20
+ pages, 314890 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 100 PDF objects out of 1000 (max. 8388607)
+ 62 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
