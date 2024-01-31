@@ -774,6 +774,7 @@ def delineator(x, fs):
     else:
         n = 1
     # print(n)
+    close_win = np.floor(0.1 * fs)
 
     max_min = np.empty(0)
     if n > 1:

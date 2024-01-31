@@ -75,7 +75,7 @@ def manual_filter_data(folder):
                 sig, seg_name, end = split_filename(filename)
                 try:
                     os.remove(f"{folder}/{filename}")
-                    os.remove(f"mimic4/usable_bp_data_2/abp_{seg_name}.{end}")
+                    os.remove(f"mimic4/old/usable_bp_data_2/abp_{seg_name}.{end}")
                 except Exception as e:
                     print(e)
         # df = pd.read_csv(f"{folder}/{filename}")
@@ -101,13 +101,14 @@ def manual_filter_data(folder):
 
     filenames = os.listdir(folder)
     print(len(filenames))
-    filenames = os.listdir('mimic4/usable_bp_data_2')
+    filenames = os.listdir('mimic4/old/usable_bp_data_2')
     print(len(filenames))
 
 
-def process_data(fs, folder, goal):
+def process_data(fs, folder, goal, median_window):
     """
     Main method for signal processing abp and ppg data
+    :param median_window: time interval to calculate median values
     :param goal: For what goal features will be used (train_test/validate)
     :param folder: Fetching data folder
     :param fs: Frequency of sampling
@@ -115,8 +116,6 @@ def process_data(fs, folder, goal):
     abs_path = os.path.abspath(os.getcwd())
     bp_path = abs_path + folder + 'abp'
     ppg_path = abs_path + folder + 'ppg'
-    # bp_path = abs_path + '/mimic4/usable_bp_data_2'
-    # ppg_path = abs_path + '/mimic4/usable_ppg_data_2'
     filenames = os.listdir(bp_path)
     filenames.sort()
 
@@ -143,19 +142,17 @@ def process_data(fs, folder, goal):
             ppg_fidp = fiducial_points(ppg, ppg_beats, fs, vis=False, header='PPG of ' + seg_name)
 
             # 4: Feature extraction
-            median_window = 7
             features = extract_features(abp_fidp, ppg_fidp, abp, ppg, fs, median_window)
             a_sys, a_dia = features['a_sys'], features['a_dia']
             ppg_features = features['ppg_features']
             a_sys_med, a_dia_med = features['a_sys_med'], features['a_dia_med']
             ppg_feat_med = features['ppg_feat_med']
             if len(a_sys) == len(ppg_features) and len(a_dia_med) == len(ppg_feat_med):
-                print(f"{ppg_features.shape[1] - 1} PPG features")
-                print(f"{len(ppg_features)} total values")
-                print(f"{len(ppg_feat_med)} median values from {median_window} beat intervals")
+                print(f"\t{ppg_features.shape[1] - 1} PPG features x {len(ppg_features)} total values")
+                print(f"\t{len(ppg_feat_med)} median values from {median_window} second beat intervals")
 
         except Exception as e:
-            print('ERROR', e)
+            print('\tERROR', e)
             print("---")
             i += 1
             continue
@@ -167,9 +164,9 @@ def process_data(fs, folder, goal):
         tot_med_abp_dia = np.concatenate((tot_med_abp_dia, a_dia_med))
         tot_med_ppg_feats = np.concatenate((tot_med_ppg_feats, ppg_feat_med))
         print(f'Total number of ABP Systolic, Diastolic and PPG values extracted:'
-              f' {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats)}')
+              f'\t {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats)}')
         print(f'Median values of ABP Systolic, Diastolic and PPG extracted:'
-              f' {len(tot_med_abp_sys), len(tot_med_abp_dia), len(tot_med_ppg_feats)}')
+              f'\t\t\t {len(tot_med_abp_sys), len(tot_med_abp_dia), len(tot_med_ppg_feats)}')
 
         print("---")
         # Move one file at a time
@@ -214,7 +211,7 @@ def process_ppg_data(path, fs):
 
         agi = agi_detection(ppg_fidp, ppg_beats, fs)
 
-        median_agi, mean_agi = calculate_median_values(agi, 30)
+        median_agi, mean_agi = calculate_median_values(agi, 30, fs)
 
         i += 1
         x = input()
@@ -250,9 +247,9 @@ def process_bp_data(path, fs):
 
         sys, dia, tss, sysv, tsd, diav = sys_dia_detection(abp_fidp, abp_filt)
 
-        median_sys, mean_sys = calculate_median_values(sys, 30)
+        median_sys, mean_sys = calculate_median_values(sys, 30, fs)
 
-        median_dia, mean_dia = calculate_median_values(dia, 30)
+        median_dia, mean_dia = calculate_median_values(dia, 30, fs)
 
         i += 1
         x = input()
@@ -276,11 +273,12 @@ def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs, med_window):
     # Time and Frequency Domain Feature extraction
     ppg_td_features, ppg_fd_features, fft_starts = ppg_feature_extraction(ppg_fidp, p_sys, ppg, fs)
     if len(ppg_td_features) != len(a_sys):
-        a_sysv = a_sysv[:len(ppg_td_features)]
-        a_diav = a_diav[:len(ppg_td_features)]
+        length = len(ppg_td_features)
+        a_sys, a_sysv = a_sys[:length], a_sysv[:length]
+        a_dia, a_diav = a_dia[:length], a_diav[:length]
 
-    a_sys_med = calculate_median_values(a_sys, med_window)
-    a_dia_med = calculate_median_values(a_dia, med_window)
+    a_sys_med = calculate_median_values(a_sys, med_window, fs)
+    a_dia_med = calculate_median_values(a_dia, med_window, fs)
     ppg_td_feat_med, td_med_timestamps = calculate_median_values_mult(ppg_td_features, med_window, fs)
     ppg_fd_feat_med = calculate_median_fft_values(fft_starts, td_med_timestamps, ppg, fs)
 
@@ -384,7 +382,7 @@ def equal_out_by_shortening(a_ts, p_ts):
     return a_ts, p_ts
 
 
-def calculate_median_values(data, window, s_err=0.8, fs=125):
+def calculate_median_values(data, window, fs, s_err=7):
     values, median_values = np.array([]), np.array([])
     for beat_no in range(len(data)):
         if len(data) > beat_no + 1:
@@ -400,7 +398,7 @@ def calculate_median_values(data, window, s_err=0.8, fs=125):
     return median_values
 
 
-def calculate_median_values_mult(data, window, fs, s_err=0.8):
+def calculate_median_values_mult(data, window, fs, s_err=7):
     columns = data.shape[1]
     tot_median_values = np.empty((len(data), 0))
     med_timestamps = set()
@@ -526,14 +524,14 @@ def ppg_feature_extraction(fidp, systoles, data, fs):
                     start_ts.append(ts)
                     beat_no += 1
                 else:
-                    raise IndexError("Reached end of one of FIDPs")
+                    raise IndexError("\tReached end of one of FIDPs")
             except IndexError as e:
-                print(e, f'-> saving {beat_no} extracted features')
+                print(e, f'-> saving {beat_no} extracted values')
                 td_features = {name: td_features[name][:beat_no] for name in td_feature_names}
                 fd_features = {name: fd_features[name][:beat_no] for name in fd_feature_names}
                 break
             except Exception as e:
-                raise Exception(f'Feature Extraction failed: {e}')
+                raise Exception(f'\tFeature Extraction failed: {e}')
 
     tot_td_features = np.column_stack([td_features[name] for name in td_feature_names])
     tot_fd_features = np.column_stack([fd_features[name] for name in fd_feature_names])
@@ -774,7 +772,7 @@ def group_sys_dia(sys, dia):
 
 def read_seg_data(i, i_len, filename, bp_path, ppg_path, fs):
     sig, seg_name, end = split_filename(filename)
-    print(f"Segment {i} / {i_len} - {seg_name}")
+    print(f"Segment {i} / {i_len} - {seg_name} ({time.strftime('%H:%M:%S')})")
     df = pd.read_csv(f"{bp_path}/abp_{seg_name}.{end}")
     values = df.values
     abp = values[:, 0]
@@ -1043,8 +1041,8 @@ def signal_processing(seg_name, abp, ppg, fs):
 
     abp_hr = round(len(abp_beats) / (len(abp) / fs) * 60, 1)
     ppg_hr = round(len(ppg_beats) / (len(ppg) / fs) * 60, 1)
-    print(f"ABP beats - {len(abp_beats)}, Heart Rate - {abp_hr}")
-    print(f"PPG beats - {len(ppg_beats)}, Heart Rate - {ppg_hr}")
+    print(f"\tABP beats - {len(abp_beats)}, Heart Rate - {abp_hr}")
+    print(f"\tPPG beats - {len(ppg_beats)}, Heart Rate - {ppg_hr}")
 
     return {
         'abp': abp,
@@ -1234,7 +1232,7 @@ def split_filename(filename):
 
 def main(fs=125):
     # manual_filter_data('usable_ppg_data_2')
-    process_data(fs, '/mimic3/', 'train_test')
+    process_data(fs, '/mimic3/', 'train_test', 7)
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)
 

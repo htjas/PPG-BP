@@ -9,17 +9,17 @@ import logging
 import random
 
 
-def load_filter_and_save_records(db_name, path, records_to_load):
+def load_filter_and_save_records(db_name, path, records_to_load, single_record_arrays):
     """
     Load records from database,
      filter them directly according to criteria found in filter_single_record() method,
      save them to the given path
     """
-    current_records = os.listdir('./mimic3/abp')
+    current_records = os.listdir(f'.{path}abp')
     record_names = [item.split('_')[1] for item in current_records]
 
     subjects = wfdb.get_record_list(db_name)
-    random.shuffle(subjects)
+    # random.shuffle(subjects)
     print(f"The '{db_name}' database contains data from {len(subjects)} subjects ({time.strftime('%H:%M:%S')})")
     path = os.path.abspath(os.getcwd()) + path
     records = []
@@ -32,22 +32,22 @@ def load_filter_and_save_records(db_name, path, records_to_load):
         if subject_name in record_names:
             print(f"    (already in saved records, skipping)")
             continue
-        studies = wfdb.get_record_list(f'{db_name}/{subject}')
         su = su + 1
         print(f"Subject {su}/{len(subjects)} - {subject}")
-        study = studies[0]
-        p = Path(f"{subject}/{study}")
-        res = filter_and_save_single_subject(p, db_name, path)
-        if res is not None:
-            records = os.listdir(path + 'abp')
-            print(f"-------------------------------- so far {len(records)} records saved")
-            if len(records) > records_to_load:
-                break
+        studies = wfdb.get_record_list(f'{db_name}/{subject}')
+        for study in studies:
+            p = Path(f"{subject}/{study}")
+            res = filter_and_save_single_subject(p, db_name, path, single_record_arrays)
+            if res is not None:
+                records = os.listdir(path + 'abp')
+                print(f"-------------------------------- so far {len(records)} records saved")
+                if len(records) > records_to_load:
+                    break
 
     print(f"Loaded {len(records)} records from the '{db_name}' database")
 
 
-def filter_and_save_single_subject(subject, database_name, path):
+def filter_and_save_single_subject(subject, database_name, path, no_records):
     """
     Filter records of a subject according to criteria:
         - ABP and Pleth signals present
@@ -56,7 +56,10 @@ def filter_and_save_single_subject(subject, database_name, path):
         - ABP values are between 30 and 250
         - PPG values are between 0 and 1
     """
-    required_sigs = ['ABP', 'PLETH']  # 'Pleth' for MIMIC4 'PLETH' for MIMIC3
+    if database_name == 'mimic4wdb/0.1.0':
+        required_sigs = ['ABP', 'Pleth']  # 'Pleth' for MIMIC4 'PLETH' for MIMIC3
+    else:
+        required_sigs = ['ABP', 'PLETH']
     req_seg_duration = 10 * 60 + 5
 
     try:
@@ -74,8 +77,8 @@ def filter_and_save_single_subject(subject, database_name, path):
             segments = record_data.seg_name
             gen = (segment for segment in segments if segment != '~')
             for segment in gen:
-                if tot_arr_count == 10:
-                    print(" - reached 10 records limit from single subject")
+                if tot_arr_count == no_records:
+                    print(f" - reached {no_records} records limit from single subject")
                     break
                 print(' - Segment: {}'.format(segment), end="", flush=True)
                 segment_metadata = wfdb.rdheader(record_name=segment,
@@ -101,16 +104,16 @@ def filter_and_save_single_subject(subject, database_name, path):
                                              sampfrom=0,
                                              sampto=tot_seg_length,
                                              pn_dir=record_dir)
-                abp_col, pleth_col = get_abp_pleth_col_no(segment_data)
+                abp_col, pleth_col = get_abp_pleth_col_no(segment_data, required_sigs[1])
                 abp = segment_data.p_signal[:, abp_col]
                 ppg = segment_data.p_signal[:, pleth_col]
 
-                req_cons = fs * req_seg_duration
-                current_count, cons_count = 0, 0
+                req_cons = int(fs * req_seg_duration)
+                current_count, cons_count, max_cons_count = 0, 0, 0
                 abp_cons, ppg_cons = np.array([]), np.array([])
 
                 for i, (a, p) in enumerate(zip(abp, ppg)):
-                    if tot_arr_count == 10:
+                    if tot_arr_count == no_records:
                         break
                     if (
                             30 < a < 250 and
@@ -119,7 +122,9 @@ def filter_and_save_single_subject(subject, database_name, path):
                             not (np.isnan(p) or np.isinf(p) or p == 0.0)
                     ):
                         current_count += 1
-                        if current_count == req_cons:
+                        if current_count > max_cons_count:
+                            max_cons_count = current_count
+                        if current_count >= req_cons:
                             abp_cons = abp[i - req_cons + 1:i + 1]
                             ppg_cons = ppg[i - req_cons + 1:i + 1]
 
@@ -135,7 +140,8 @@ def filter_and_save_single_subject(subject, database_name, path):
                         current_count = 0
 
                 if len(abp_cons) == 0 or len(ppg_cons) == 0:
-                    print(f" - ✕")
+                    m = int(max_cons_count / fs)
+                    print(f" - ✕ (max {m} seconds array found)")
                 else:
                     print(f" - ✔ ({cons_count} array(s) of 10 min found and saved)")
 
@@ -298,18 +304,19 @@ def load_data_from_segment(fs, start_seconds, n_seconds_to_load, rel_segment_nam
     return segment_data
 
 
-def get_abp_pleth_col_no(segment_data):
+def get_abp_pleth_col_no(segment_data, pleth):
     """
     Method to find out which column in the record PPG and ABP are recorded in
     :param segment_data: the segment data of a record
+    :param pleth: name of the PPG column (different for MIMIC3 and MIMIC4)
     :return: abp and pleth columns in integer
     """
-    abp_col = 0
-    pleth_col = 0
+    abp_col = None
+    pleth_col = None
     for sig_no in range(0, len(segment_data.sig_name)):
         if "ABP" in segment_data.sig_name[sig_no]:
             abp_col = sig_no
-        if "PLETH" in segment_data.sig_name[sig_no]:
+        if pleth in segment_data.sig_name[sig_no]:
             pleth_col = sig_no
     return abp_col, pleth_col
 
@@ -331,7 +338,7 @@ def extract_save_bp_ppg_data(segments, path):
 
         # plot_wfdb_segment(segment[0], segment_data)
 
-        abp_col, pleth_col = get_abp_pleth_col_no(segment_data)
+        abp_col, pleth_col = get_abp_pleth_col_no(segment_data, 'pleth')
 
         abp = segment_data.p_signal[:, abp_col]
         ppg = segment_data.p_signal[:, pleth_col]
@@ -383,7 +390,7 @@ def init_logger(filename):
 
 
 def main():
-    load_filter_and_save_records('mimic3wdb/1.0', '/mimic3/', 300)
+    load_filter_and_save_records('mimic4wdb/0.1.0', '/mimic4/', 300, 10)
 
     # records = load_records('mimic4wdb/0.1.0')
     # matching_records = filter_records(records, 'mimic4wdb/0.1.0')
