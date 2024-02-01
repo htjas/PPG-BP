@@ -19,7 +19,7 @@ def load_filter_and_save_records(db_name, path, records_to_load, single_record_a
     record_names = [item.split('_')[1] for item in current_records]
 
     subjects = wfdb.get_record_list(db_name)
-    # random.shuffle(subjects)
+    random.shuffle(subjects)
     print(f"The '{db_name}' database contains data from {len(subjects)} subjects ({time.strftime('%H:%M:%S')})")
     path = os.path.abspath(os.getcwd()) + path
     records = []
@@ -35,14 +35,15 @@ def load_filter_and_save_records(db_name, path, records_to_load, single_record_a
         su = su + 1
         print(f"Subject {su}/{len(subjects)} - {subject}")
         studies = wfdb.get_record_list(f'{db_name}/{subject}')
-        for study in studies:
-            p = Path(f"{subject}/{study}")
-            res = filter_and_save_single_subject(p, db_name, path, single_record_arrays)
-            if res is not None:
-                records = os.listdir(path + 'abp')
-                print(f"-------------------------------- so far {len(records)} records saved")
-                if len(records) > records_to_load:
-                    break
+        # for study in studies:
+        study = studies[0]
+        p = Path(f"{subject}/{study}")
+        res = filter_and_save_single_subject(p, db_name, path, single_record_arrays)
+        if res is not None:
+            records = os.listdir(path + 'abp')
+            print(f"-------------------------------- so far {len(records)} records saved")
+            if len(records) > records_to_load:
+                break
 
     print(f"Loaded {len(records)} records from the '{db_name}' database")
 
