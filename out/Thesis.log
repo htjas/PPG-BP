@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  31 JAN 2024 23:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  1 FEB 2024 16:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -389,10 +389,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6707 strings out of 480204
- 136777 string characters out of 5895010
- 549615 words of memory out of 5000000
- 24584 multiletter control sequences out of 15000+600000
+ 6709 strings out of 480204
+ 136829 string characters out of 5895010
+ 550637 words of memory out of 5000000
+ 24586 multiletter control sequences out of 15000+600000
  475358 words of font info for 48 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  108i,8n,106p,10696b,358s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -402,7 +402,7 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
 Output written on /home/hugasj/PycharmProjects/pythonProject/out/Thesis.pdf (20
- pages, 315326 bytes).
+ pages, 316032 bytes).
 PDF statistics:
  100 PDF objects out of 1000 (max. 8388607)
  62 compressed objects within 1 object stream
