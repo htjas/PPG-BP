@@ -120,8 +120,10 @@ def process_data(fs, folder, goal, median_window):
     filenames.sort()
 
     i = 1
-    tot_abp_sys, tot_abp_dia, tot_ppg_feats = np.array([]), np.array([]), np.empty((0, 35))
-    tot_med_abp_sys, tot_med_abp_dia, tot_med_ppg_feats = np.array([]), np.array([]), np.empty((0, 34))
+    tot_abp_sys, tot_abp_dia, tot_abp_map, tot_ppg_feats = (
+        np.array([]), np.array([]), np.array([]), np.empty((0, 35)))
+    tot_med_abp_sys, tot_med_abp_dia, tot_med_abp_map, tot_med_ppg_feats = (
+        np.array([]), np.array([]), np.array([]), np.empty((0, 34)))
     for filename in filenames:
         # if i != 1:
         #     i += 1
@@ -144,12 +146,16 @@ def process_data(fs, folder, goal, median_window):
             # 4: Feature extraction
             features = extract_features(abp_fidp, ppg_fidp, abp, ppg, fs, median_window)
             a_sys, a_dia = features['a_sys'], features['a_dia']
+            a_map = a_dia + ((a_sys - a_dia) / 3)
             ppg_features = features['ppg_features']
             a_sys_med, a_dia_med = features['a_sys_med'], features['a_dia_med']
+            a_map_med = a_dia_med + ((a_sys_med - a_dia_med) / 3)
             ppg_feat_med = features['ppg_feat_med']
             if len(a_sys) == len(ppg_features) and len(a_dia_med) == len(ppg_feat_med):
                 print(f"\t{ppg_features.shape[1] - 1} PPG features x {len(ppg_features)} total values")
                 print(f"\t{len(ppg_feat_med)} median values from {median_window} second beat intervals")
+            else:
+                raise Exception('unforeseen error')
 
         except Exception as e:
             print('\tERROR', e)
@@ -159,14 +165,16 @@ def process_data(fs, folder, goal, median_window):
 
         tot_abp_sys = np.concatenate((tot_abp_sys, a_sys))
         tot_abp_dia = np.concatenate((tot_abp_dia, a_dia))
+        tot_abp_map = np.concatenate((tot_abp_map, a_map))
         tot_ppg_feats = np.concatenate((tot_ppg_feats, ppg_features))
         tot_med_abp_sys = np.concatenate((tot_med_abp_sys, a_sys_med))
         tot_med_abp_dia = np.concatenate((tot_med_abp_dia, a_dia_med))
+        tot_med_abp_map = np.concatenate((tot_med_abp_map, a_map_med))
         tot_med_ppg_feats = np.concatenate((tot_med_ppg_feats, ppg_feat_med))
-        print(f'Total number of ABP Systolic, Diastolic and PPG values extracted:'
-              f'\t {len(tot_abp_sys), len(tot_abp_dia), len(tot_ppg_feats)}')
-        print(f'Median values of ABP Systolic, Diastolic and PPG extracted:'
-              f'\t\t\t {len(tot_med_abp_sys), len(tot_med_abp_dia), len(tot_med_ppg_feats)}')
+        print(f'ABP Systolic, Diastolic, MAP and PPG total values:'
+              f'\t {len(tot_abp_sys), len(tot_abp_dia), len(tot_abp_map), len(tot_ppg_feats)}')
+        print(f'ABP Systolic, Diastolic MAP and PPG median values:'
+              f'\t {len(tot_med_abp_sys), len(tot_med_abp_dia), len(tot_med_abp_map), len(tot_med_ppg_feats)}')
 
         print("---")
         # Move one file at a time
@@ -178,9 +186,11 @@ def process_data(fs, folder, goal, median_window):
     # Save extracted features to .csv
     save_split_features(goal, [[tot_abp_sys, 'tot_abp_sys'],
                                [tot_abp_dia, 'tot_abp_dia'],
+                               [tot_abp_map, 'tot_abp_map'],
                                [tot_ppg_feats, 'tot_ppg_feats'],
                                [tot_med_abp_sys, 'tot_med_abp_sys'],
                                [tot_med_abp_dia, 'tot_med_abp_dia'],
+                               [tot_med_abp_map, 'tot_med_abp_map'],
                                [tot_med_ppg_feats, 'tot_med_ppg_feats']])
 
 
@@ -263,12 +273,15 @@ def extract_features(abp_fidp, ppg_fidp, abp, ppg, fs, med_window):
 
     a_ts_i, p_ts_i = group_timestamps(a_tss, p_tss, a_tsd, p_tsd)
 
-    if (len(a_ts_i) != 0 or len(p_ts_i)) != 0 and len(a_ts_i) == len(p_ts_i):
+    if len(a_ts_i) != len(p_ts_i):
+        raise Exception('Feature Extraction failed: Timestamps could not be grouped')
+
+    if (len(a_ts_i) != 0 or len(p_ts_i)) != 0:
         a_sys, a_sysv = a_sys[a_ts_i], a_sysv[a_ts_i]
         a_dia, a_diav = a_dia[a_ts_i], a_diav[a_ts_i]
         p_sys, p_sysv = p_sys[p_ts_i], p_sysv[p_ts_i]
     else:
-        raise Exception('No matching timestamps found')
+        raise Exception('Feature Extraction failed: No matching timestamps found')
 
     # Time and Frequency Domain Feature extraction
     ppg_td_features, ppg_fd_features, fft_starts = ppg_feature_extraction(ppg_fidp, p_sys, ppg, fs)
@@ -438,7 +451,7 @@ def calculate_median_fft_values(tot_ts, td_ts, data, fs):
     ind_ts = find_start_timestamps_between_ons(tot_ts, td_ts)
     for i in range(len(ind_ts)):
         if i < len(ind_ts) - 1:
-            signal_interval = data[ind_ts[i]:ind_ts[i+1]]
+            signal_interval = data[ind_ts[i]:ind_ts[i + 1]]
             ppg_fdf = frequency_domain_features(signal_interval, fs)
             freqs = np.append(freqs, ppg_fdf['mean_frequency'])
             pows = np.append(pows, ppg_fdf['total_power'])
@@ -451,7 +464,7 @@ def find_start_timestamps_between_ons(arr_ts1, arr_ts2):
     for ts2 in arr_ts2:
         for i in range(len(arr_ts1)):
             if i < len(arr_ts1) - 1:
-                if arr_ts1[i] < ts2 < arr_ts1[i+1]:
+                if arr_ts1[i] < ts2 < arr_ts1[i + 1]:
                     values_between.append(arr_ts1[i])
                     break
     return values_between
@@ -718,7 +731,6 @@ def agi_detection(fidp, peaks, fs):
 def sys_dia_detection(fidp, data):
     # (From filtered data) Systolic BP = pks; Diastolic BP = dia
     sys = fidp['pks']
-    # TODO: ask if Diastolic pressure ons, dia or off?
     dia = fidp['off']
     sys, dia = group_sys_dia(sys, dia)
     length = min(len(sys), len(dia))
@@ -797,8 +809,11 @@ def pre_process_data(abp, ppg, fs, seg_name):
     # plot_abp_ppg(seg_name + ' savgol filtered', abp, ppg, fs)
 
     # Butterworth filter
-    abp = butter_lowpass_filter(abp, 5, 125, 4)
-    ppg = butter_lowpass_filter(ppg, 5, 125, 4)
+    abp = butter_lowpass_filter(abp, 5, fs, 4)
+    ppg = butter_lowpass_filter(ppg, 5, fs, 4)
+    starting_cutoff = int(fs * 0.5)  # half second
+    abp = abp[starting_cutoff:]
+    ppg = ppg[starting_cutoff:]
     # abp = filter_butterworth(abp, fs)
     # ppg = filter_butterworth(ppg, fs)
     # plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
