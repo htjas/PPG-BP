@@ -30,7 +30,7 @@ def load_filter_and_save_records(db_name, path, records_to_load, single_record_a
         #     continue
         subject_name = subject.split('/')[1]
         if subject_name in record_names:
-            print(f"    (already in saved records, skipping)")
+            print(f" - (already in saved records, skipping)")
             continue
         su = su + 1
         print(f"Subject {su}/{len(subjects)} - {subject}")

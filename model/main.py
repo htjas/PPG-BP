@@ -36,12 +36,14 @@ db_mm3 = configs.get('mimic3_url').data
 path_mm3 = configs.get('path_of_mimic3_data').data
 
 # abs_path = os.path.abspath(os.getcwd())
+# n_fetched_records = len(os.listdir(abs_path + path_mm3 + 'abp'))
+
 # mm4_values_size = len(pd.read_csv(f'{abs_path}/features/{goal_mm4}/tot_med_ppg_feats.csv'))
 # mm3_values_size = len(pd.read_csv(f'{abs_path}/features/{goal_mm3}/tot_med_ppg_feats.csv'))
 
 # while mm4_values_size * 4 > mm3_values_size:
 # Loading, Filtering and Saving Records
-load_filter_and_save_records(db_mm3, path_mm3, records_to_load=2500, single_record_arrays=100)
+# load_filter_and_save_records(db_mm3, path_mm3, records_to_load=20000, single_record_arrays=100)
 # Signal processing
 process_data(fs_mm3, path_mm3, goal_mm3, 7)
 

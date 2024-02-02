@@ -1247,7 +1247,8 @@ def split_filename(filename):
 
 def main(fs=125):
     # manual_filter_data('usable_ppg_data_2')
-    process_data(fs, '/mimic3/', 'train_test', 7)
+    # process_data(fs, '/mimic3/', 'train_test_1', 7)
+    process_data(125, '/mimic3/', 'train_test_1', 7)
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)
 
