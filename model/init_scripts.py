@@ -17,6 +17,8 @@ def load_filter_and_save_records(db_name, path, records_to_load, single_record_a
     """
     current_records = os.listdir(f'.{path}abp')
     record_names = [item.split('_')[1] for item in current_records]
+    df = pd.read_csv('checked_segments.csv')
+    checked_records = [str(item) for sublist in df.values.tolist() for item in sublist]
 
     subjects = wfdb.get_record_list(db_name)
     random.shuffle(subjects)
@@ -25,15 +27,15 @@ def load_filter_and_save_records(db_name, path, records_to_load, single_record_a
     records = []
     su = 0
     for subject in subjects:
-        # if subject != '36/3618396/':
-        #     su += 1
-        #     continue
-        subject_name = subject.split('/')[1]
-        if subject_name in record_names:
-            print(f" - (already in saved records, skipping)")
+        if subject != '38/3850585/':
+            su += 1
             continue
         su = su + 1
         print(f"Subject {su}/{len(subjects)} - {subject}")
+        subject_name = subject.split('/')[1]
+        if subject_name in record_names or subject_name in checked_records:
+            print(f" - (already in saved or checked records, skipping)")
+            continue
         studies = wfdb.get_record_list(f'{db_name}/{subject}')
         # for study in studies:
         study = studies[0]
@@ -390,9 +392,26 @@ def init_logger(filename):
     return logging
 
 
-def main():
-    load_filter_and_save_records('mimic4wdb/0.1.0', '/mimic4/', 300, 10)
+def get_checked_segments():
+    file_path = 'output_log.txt'
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+    segments = []
+    # Find lines starting with "Subject" and split on '-'
+    for line in lines:
+        if line.startswith("Subject"):
+            parts = line.split('-')
+            if len(parts) > 1:
+                output = parts[1].strip()
+                seg_name = output.split('/')[1]
+                segments.append(seg_name)
+    df = pd.DataFrame(data=segments)
+    df.to_csv("checked_segments.csv", index=False)
 
+
+def main():
+    load_filter_and_save_records('mimic3wdb/1.0', '/mimic3/', 300, 10)
+    # get_checked_segments()
     # records = load_records('mimic4wdb/0.1.0')
     # matching_records = filter_records(records, 'mimic4wdb/0.1.0')
     # print(len(matching_records))
