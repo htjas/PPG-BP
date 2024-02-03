@@ -14,174 +14,210 @@ Machine Learning Approach}
 
 \begin{document}
 
-\begin{titlepage}
-	\begin{center}
-		\vspace*{1cm}
-		\begin{figure}[h]
-      		\centering
-			\includegraphics[scale=0.6]{Images/hs/hd}
-			\includegraphics[scale=1]{Images/hs/hhn}
-			\includegraphics[scale=0.06]{Images/hs/tmu}
-			\label{fig:unis}
-		\end{figure}
-		
-        \vspace*{1cm}
-            
-        \Huge
-        \textbf{Master's Thesis}
-            
-        \vspace{0.5cm}
+    \begin{titlepage}
+        \begin{center}
+            \vspace*{1cm}
+            \begin{figure}[h]
+                \centering
+                \includegraphics[scale=0.6]{images/hs/hd}
+                \includegraphics[scale=1]{images/hs/hhn}
+                \includegraphics[scale=0.06]{images/hs/tmu}
+                \label{fig:unis}
+            \end{figure}
+
+            \vspace*{1cm}
+
+            \Huge
+            \textbf{Master's Thesis}
+
+            \vspace{0.5cm}
+            \Large
+            Medical Informatics Master
+
+            \vspace{0.5cm}
+            \Large
+            Universität Heidelberg / Hochschule Heilbronn
+
+            \vspace{0.5cm}
+            \Large
+            in Cooperation with Taipei Medical University
+
+            \hrulefill
+
+            \vspace{1cm}
+
+            \Huge
+            \textbf{Predicting Blood Pressure from Photoplethysmogram Waveform Data: A Signal Processing and
+            Machine Learning Approach}
+
+        \end{center}
+
+        \vfill
         \Large
-        Medical Informatics Master
-        
-        \vspace{0.5cm}
-        \Large
-        Universität Heidelberg / Hochschule Heilbronn
-        
-        \vspace{0.5cm}
-        \Large
-        in Cooperation with Taipei Medical University
-        
-        \hrulefill
-            
-        \vspace{1cm}
-        
-        \Huge
-        \textbf{Predicting Blood Pressure from Photoplethysmogram Waveform Data: A Signal Processing and
-Machine Learning Approach}
-        
-    	\end{center}
-    
-		\vfill
-    		\Large
-    		\noindent
-    		Supervisor: \tab\hspace{-2cm} Prof.\ Dr. Rolf Bendl\\
-    		Co-Supervisor: \tab\hspace{-2cm} Prof.\ Dr. Syed Abdul Shabbir\\
-    		Submitted by: \tab\hspace{-2cm} Hugas Jasinskas\\
-    		Matriculation number: \tab\hspace{-2cm} 202509\\
-    		Submitted on: \tab\hspace{-2cm} \today{}\\
-    
-\end{titlepage}
+        \noindent
+        Supervisor: \tab\hspace{-2cm} Prof.\ Dr. Rolf Bendl\\
+        Co-Supervisor: \tab\hspace{-2cm} Prof.\ Dr. Syed Abdul Shabbir\\
+        Submitted by: \tab\hspace{-2cm} Hugas Jasinskas\\
+        Matriculation number: \tab\hspace{-2cm} 202509\\
+        Submitted on: \tab\hspace{-2cm} \today{}\\
 
-\newpage
+    \end{titlepage}
 
-\begin{Huge}
-	\centerline{Affidavit}
-\end{Huge}
+    \newpage
 
-\vspace{2cm}
+    \begin{Huge}
+        \centerline{Affidavit}
+    \end{Huge}
 
-\begin{Large}
+    \vspace{2cm}
 
-I hereby declare under oath that I have independently prepared the present work without using sources other than those indicated; any thoughts taken directly or indirectly from external sources (including electronic sources) are identified as such.
+    \begin{Large}
 
-The work has not been submitted to any examination authority, either domestic or foreign, in the same or similar form, and has not been published.
+        I hereby declare under oath that I have independently prepared the present work without using sources other than those indicated; any thoughts taken directly or indirectly from external sources (including electronic sources) are identified as such.
 
-\end{Large}
+        The work has not been submitted to any examination authority, either domestic or foreign, in the same or similar form, and has not been published.
 
-\vfill
+    \end{Large}
 
-\rule{4cm}{0.5mm} \tab \rule{4cm}{0.5mm}
+    \vfill
 
-Place, Date \tab Signature
+    \rule{4cm}{0.5mm} \tab \rule{4cm}{0.5mm}
 
-\newpage
+    Place, Date \tab Signature
 
-\tableofcontents
+    \newpage
 
-\newpage
-\onehalfspacing
+    \tableofcontents
 
-\section{Abstract}\label{sec:abstract}
+    \newpage
+    \onehalfspacing
 
 
-\section{Introduction}
-\label{sec:introduction}
-\input{introduction}
+    \section{Abstract}\label{sec:abstract}
 
-\section{Theoretical Background}
-\label{sec:background}
-\input{theoretical-background}
 
-\section{Methods}
-\label{sec:methods}
+    \section{Introduction}
+    \label{sec:introduction}
+    \input{introduction}
 
-\begin{enumerate}
 
-\item Data fetching and reading using WFDB and NumPy libraries.
+    \section{Theoretical Background}
+    \label{sec:background}
+    \input{theoretical-background}
 
-\item Digital signal filtering using Savitzky-Golay and Butterworth Lowpass filters.
 
-\item Beat detection algorithms from MIMIC WFDB Tutorial used for primary estimation.
-Beat detection improved with manual implementation of SciPy library.
+    \section{Methods}
+    \label{sec:methods}
 
-\item Fiducial Point calculation based on the algorithm provided in the MIMIC WFDB Tutorial.
+    \begin{enumerate}
 
-\item Feature extraction with personally created code to extract time domain features, and NumPy library to extract frequency domain features (FFT). Median value calculation using NumPy library.
+        \item Data fetching and reading using WFDB and NumPy libraries.
 
-\item Machine Learning Model creation using PyTorch and Scikit-Learn libraries.
+        \subitem Get all available data from MIMIC-IV DB.\
+        \subitem This data is used as the validation dataset, since it is the one that's most up-to-date,
+        most modern, and supposedly most reliable
+        \subitem There are 198 subjects and 200 total studies in the DB (two subjects have two separate studies)
+        \subitem The studies contain records with various signals (ECG, ABP, Pleth etc.) and are of different lengths
+        \subitem A single record can contain various segments also of different lengths and signals
+        \subitem Segments contain continuous values, that are used in this research
+        \subitem Only segments with at least 10 minutes of length are considered
+        \subitem These segments must also not contain \enquote{faulty} values
+        \subitem Faulty values: NaN, inf, negative values, for ABP values not below 30 and not above 250,
+        for PPG only between 0 and 1
+        \subitem If a 10-minute part of the segment matches these criteria, it is saved to the ./validation directory,
+        as 2 separate and synchronous ABP and PPG files
+        \subitem If a segment is longer than 10 minutes, then more 10 minute segments may be extracted
+        (marked by a \_ and a number representing the sequence)
+        \subitem Example of the files: \texttt{abp\_80057524\_0005\_0}, \texttt{ppg\_80057524\_0020\_18}
 
-\end{enumerate}
+        For MIMIC-IV data fetching, no limits on the total records and single study records are given.
+        For MIMIC-III - 4 times the records of MIMIC-IV are fetched and a maximum of 100 segments per study is set,
+        to avoid over-representation of single person or study data in the ML part of the research.
 
-\section{Results}
-\label{sec:results}
+        \item Digital signal filtering using Savitzky-Golay and Butterworth Lowpass filters.
 
-\subsection{Data Fetching}
-\label{subsec:data_fetching}
+        \item Beat detection algorithms from MIMIC WFDB Tutorial used for primary estimation.
+        Beat detection improved with manual implementation of SciPy library.
 
-Data for Validation from MIMIC4:
-5508 records each containing 37795 values corresponding to ~605 seconds (fs=64.4725);
+        \item Fiducial Point calculation based on the algorithm provided in the MIMIC WFDB Tutorial.
 
-Data for Training/Testing from MIMIC3 (1st Iteration):
-306 records each containing 75625 values corresponding to 605 seconds (fs=125);
+        \item Feature extraction with personally created code to extract time domain features, and NumPy library to extract frequency domain features (FFT). Median value calculation using NumPy library.
 
-\subsection{Data Processing}
-\label{subsec:data_processing}
+        \item Machine Learning Model creation using PyTorch and Scikit-Learn libraries.
 
-Same Signaling processing approaches were included (see 4.2) for both the MIMIC4 and MIMIC3 data.
+    \end{enumerate}
 
-\subsection{Feature Extraction}
-\label{subsec:feature_extraction}
 
-CAVE: out of the 34 features, 2 (delta T and resistive index) depend on the accurate detection of the dicrotic notch.
-Significantly more values can be extracted if finding the dicrotic notch would not be necessary
+    \section{Results}
+    \label{sec:results}
 
-FE from MIMIC4:
-- For target reference Systolic, Diastolic and MAP values were extracted from the waveform data.
-- For Machine Learning, 34 features were extracted from the PPG waveform
-A total of n values were extracted, resulting in a 34 x n matrix.
-Total of m median values were extracted
+    \subsection{Data Fetching}
+    \label{subsec:data_fetching}
 
-FE 1st iteration from MIMIC3:
+    Data for Validation from MIMIC4:
+    5508 records each containing 37795 values corresponding to ~605 seconds (fs=64.4725);
 
-- For target reference ABP Systolic and Diastolic values were extracted from the waveform data.
-- For Machine Learning, 34 features were extracted from the PPG waveform
-A total of 161,269 values were extracted, resulting in a 34x161269 matrix.
-Total of 14,958 median values were extracted
+    Data for Training/Testing from MIMIC3 (1st Iteration):
+    306 records each containing 75625 values corresponding to 605 seconds (fs=125);
 
-\subsection{Machine Learning}
-\label{subsec:machine_learning}
+    \subsection{Data Processing}
+    \label{subsec:data_processing}
 
-\section{Discussion}
-\label{sec:discussion}
+    Same Signaling processing approaches were included (see 4.2) for both the MIMIC4 and MIMIC3 data.
 
-Limitations:
-- not knowing what devices were used
-- how they were calibrated
-- how accurate they are
-- pulse oximeter and arterial catheter parameters
-- sampling rates are different for every device (even between MIMIC 3 and 4)
+    \subsection{Feature Extraction}
+    \label{subsec:feature_extraction}
 
-Possible Improvements:
-- integrate both the ECG and PPG graphs for a more precise prediction
-- use further signal processing approaches
-- manually filter waveform graphics (e.g.\ faulty PPG signal)
-- expand on machine learning algorithms
+    CAVE: out of the 34 features, 2 (delta T and resistive index) depend on the accurate detection of the dicrotic notch.
+    Significantly more values can be extracted if finding the dicrotic notch would not be necessary
 
-\section{Conclusion}
-\label{sec:conclusion}
+    FE from MIMIC4 for Validation:
+    - For target reference Systolic, Diastolic and MAP values were extracted from the waveform data.
+    - For Machine Learning, 34 features were extracted from the PPG waveform
+    A total of \textbf{1,309,265} values were extracted, resulting in a 34 x 1,309,265 matrix.
+    Total of \textbf{183,140} median values were extracted
 
-\bibliographystyle{plain}
-\bibliography{literature}
+    FE 1st iteration from MIMIC3:
+
+    - For target reference ABP Systolic and Diastolic values were extracted from the waveform data.
+    - For Machine Learning, 34 features were extracted from the PPG waveform
+    A total of 161,269 values were extracted, resulting in a 34 x 161269 matrix.
+    Total of 14,958 median values were extracted
+
+    The summarized results are displayed in Figure~\ref{fig:data_flow}.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.6]{images/flow_diagrams/flow_diagram}
+        \caption{Flow Diagram presenting the Data Fetching and Processing}
+        \label{fig:data_flow}
+    \end{figure}
+
+    \subsection{Machine Learning}
+    \label{subsec:machine_learning}
+
+
+    \section{Discussion}
+    \label{sec:discussion}
+
+    Limitations:
+    - not knowing what devices were used
+    - how they were calibrated
+    - how accurate they are
+    - pulse oximeter and arterial catheter parameters
+    - sampling rates are different for every device (even between MIMIC 3 and 4)
+
+    Possible Improvements:
+    - integrate both the ECG and PPG graphs for a more precise prediction
+    - use further signal processing approaches
+    - manually filter waveform graphics (e.g.\ faulty PPG signal)
+    - expand on machine learning algorithms
+
+
+    \section{Conclusion}
+    \label{sec:conclusion}
+
+    \bibliographystyle{plain}
+    \bibliography{literature}
 
 \end{document}

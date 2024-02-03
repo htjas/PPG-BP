@@ -76,7 +76,7 @@ As technology advances, these methods contribute to a comprehensive understandin
 % meaning and basic information
 Photoplethysmography (PPG) is an optical measurement technique designed to identify changes in blood volume within the microvascular bed of tissue~\cite{challonerPhotoelectricPlethysmographMeasurement1974}.
 Its clinical application is extensive, as the technology is integrated into commercially available medical devices, including pulse oximeters, vascular diagnostics, and digital beat-to-beat blood pressure measurement systems.
-The fundamental structure of PPG technology is straightforward, requiring only a few opto-electronic components: a light source for tissue illumination (e.g., skin) and a photodetector (PD) to gauge slight variations in light intensity correlated with changes in perfusion in the catchment volume.
+The fundamental structure of PPG technology is straightforward, requiring only a few opto-electronic components: a light source for tissue illumination, usually a light-emitting diode (LED) and a photodiode (PD) to gauge slight variations in light intensity correlated with changes in perfusion in the catchment volume.
 
 % history and origins
 \vspace{0.2cm}
@@ -98,7 +98,7 @@ In individuals with healthy compliant arteries, a dicrotic notch is commonly obs
 
 In the late 1970s, there arose a renewed interest in the PPG technology, driven by the demand for compact, dependable, cost-effective, and user-friendly noninvasive cardiovascular assessment techniques~\cite{yoshiyaSpectrophotometricMonitoringArterial1980}.
 The progress in opto-electronics and clinical instrumentation has played a significant role in advancing PPG technology.
-Semiconductor advancements, particularly in light-emitting diodes (LED), photodiodes, and phototransistors, have brought about substantial improvements in the size, sensitivity, reliability, and reproducibility of PPG probe design.
+Semiconductor advancements, particularly in LEDs, photodiodes, and phototransistors, have brought about substantial improvements in the size, sensitivity, reliability, and reproducibility of PPG probe design.
 A significant leap in the clinical application of PPG-based technology occurred with the introduction of the pulse oximeter~\cite{aoyagiPulseOximetryIts2002}.
 This device revolutionized non-invasive monitoring of patients' arterial oxygen saturation, marking a major advancement in the field.
 
@@ -109,17 +109,38 @@ PPG was found to have substantial potential in telemedicine, particularly for re
 Miniaturization, user-friendliness, and robustness stand as pivotal design criteria for such systems.
 This is exemplified by finger ring-based PPG sensors for monitoring beat-to-beat pulsations (\cite{rheeArtifactresistantPowerefficientDesign2001}, ~\cite{zhengRingtypeDeviceNoninvasive2003}).
 
+Most PPG devices these days either use the transmissive or reflective operating modes (illustrated in Figure~\ref{fig:reflection}).
+Currently, the prevalent method is the transmissive mode, chosen for its notable accuracy and stability~\cite{leeReflectancePulseOximetry2016}.
+However, there is a growing interest in reflective-mode PPG due to its elimination of the need for a thin measurement site.
+This method proves versatile, applicable to various sites such as the feet, forehead, chest, and wrists.
+Especially when the wrist serves as the designated measurement site, PPG sensors can be conveniently employed in the form of a band or watch.
 
-% how does it work TODO: add PPG waveform images
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{images/ppg/reflection}
+    \caption{PPG Transmission (a) and Reflection (b) operating modes \cite{mohanSpotMeasurementHeart2016}}
+    \label{fig:reflection}
+\end{figure}
+
+% how does it work
 \vspace{0.2cm}
 \textit{Working Principle}
 \vspace{0.2cm}
 
-The PPG signal consists of pulsatile (AC) and superimposed (DC) components.
-The AC component originates from variations in blood volume associated with heartbeats, while the DC component is influenced by factors such as respiration, sympathetic nervous system activity, and temperature regulation~\cite{allenPhotoplethysmographyItsApplication2007a}.
+The PPG signal consists of pulsatile (AC) and superimposed (DC) components (see Figure~\ref{fig:acdc}).
+The AC component originates from variations in blood volume associated with heartbeats,
+while the DC component is influenced by factors such as respiration, sympathetic nervous system activity, and temperature regulation~\cite{allenPhotoplethysmographyItsApplication2007a}.
 The AC component specifically illustrates changes in blood volume during phasic cardiac activity, representing both the systolic and diastolic phases.
 The systolic phase, also known as the \enquote{rise time}, initiates with a valley and concludes at the pulse wave systolic peak.
 The pulse wave concludes with another valley at the end of the diastolic phase~\cite{weisslerSystolicTimeIntervals1968}.
+In most PPG waveform analyses including this one, the AC component in the form of a waveform signal is used.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/ppg/ac+dc}
+    \caption{AC and DC components of the PPG signal \cite{mohanSpotMeasurementHeart2016}}
+    \label{fig:acdc}
+\end{figure}
 
 % main and potential use cases
 \vspace{0.2cm}
@@ -135,7 +156,15 @@ Some devices also include red-light PPG sensors, which are effective for measuri
 While red-light PPG can penetrate tissue layers more deeply using near-infrared spectroscopy, it is susceptible to disturbance from ambient light.
 In contrast, green light, being less absorbed by the skin, minimizes the impact of ambient light noise on the heart rate signal.
 As a result, wearable devices commonly utilize green light rather than red-light PPG~\cite{ponnadaTechnologicalConsiderationsSensorassisted2019}.
-%TODO add different PPG device photos
+Different types of devices implement the PPG technology.
+It can be found in pulse oximeters, smartphones, smartwatches and other wearable devices (examples in Figure~\ref{fig:ppg-devices}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{images/ppg/ppg-devices}
+    \caption{AC and DC components of the PPG signal \cite{zanelliPotentialAIBased2023}}
+    \label{fig:ppg-devices}
+\end{figure}
 
 % Conclusion parahraph
 \vspace{0.2cm}
@@ -194,7 +223,7 @@ How does it differ from MIMIC3?
 
     Savitzky-Golay (SG) filter~\cite{savitzkySmoothingDifferentiationData1964}
 
-    Second derivative \& Age analysis~\cite{takazawaAssessmentVasoactiveAgents1998}
+    Second derivative \& Age analysis~\cite{takazawaAssessmentVasoactiveAgents1998a}
 
     Hemodynamics and vascular age~\cite{charltonAssessingHemodynamicsPhotoplethysmogram2022}
 
@@ -216,7 +245,7 @@ Teng and Zhang~\cite{tengContinuousNoninvasiveEstimation2003} tried to fit a \te
 
 Suzuki and Oguri~\cite{suzukiCufflessBloodPressure2009} used \textbf{AdaBoost} classifier for the estimation of BP. In this technique, SBP values were classified according to a threshold and afterwards the nonlinear machine learning model was employed for estimating SBP\@.
 
-Ruiz-Rodriguez et al.~\cite{ruiz-rodriguezInnovativeContinuousNoninvasive2013a} employed a probabilistic generative model, \textbf{Deep Belief Network Restricted Boltzmann Machine}, for predicting SBP, DBP and mean arterial pressure simultaneously.
+Ruiz-Rodriguez et al.~\cite{ruiz-rodriguezInnovativeContinuousNoninvasive2013} employed a probabilistic generative model, \textbf{Deep Belief Network Restricted Boltzmann Machine}, for predicting SBP, DBP and mean arterial pressure simultaneously.
 The results of this study were highly variable, and therefore was not reliable.
 
 Kurylyak et al. \cite{kurylyakNeuralNetworkbasedMethod2013} extracted 21 characteristic features from the PPG waveform.

@@ -6,9 +6,7 @@ Database file #1: literature.bib
 Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
 --line 33 of file literature.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 598 of file literature.bib
-Warning--I didn't find a database entry for "takazawaAssessmentVasoactiveAgents1998"
-Warning--I didn't find a database entry for "ruiz-rodriguezInnovativeContinuousNoninvasive2013a"
+--line 629 of file literature.bib
 Warning--to sort, need author or key in WhatBloodPressure2019
 Warning--empty author in WhatBloodPressure2019
 Warning--empty year in WhatBloodPressure2019
@@ -52,6 +50,8 @@ Warning--empty year in knightAccuracyWearablePhotoplethysmography2022
 Warning--empty year in kurylyakNeuralNetworkbasedMethod2013
 Warning--empty journal in langewoutersPressurediameterRelationshipsSegments1986
 Warning--empty year in langewoutersPressurediameterRelationshipsSegments1986
+Warning--empty journal in leeReflectancePulseOximetry2016
+Warning--empty year in leeReflectancePulseOximetry2016
 Warning--empty journal in lehmanMethodsBloodPressure2013
 Warning--empty year in lehmanMethodsBloodPressure2013
 Warning--empty journal in leungHypertensionCanada20162016
@@ -60,6 +60,8 @@ Warning--empty journal in liangOptimalFilterShort2018
 Warning--empty year in liangOptimalFilterShort2018
 Warning--empty booktitle in liuIntegratedNavigationTethered2017
 Warning--empty year in liuIntegratedNavigationTethered2017
+Warning--empty journal in mohanSpotMeasurementHeart2016
+Warning--empty year in mohanSpotMeasurementHeart2016
 Warning--empty journal in molitorNewBloodlessMethod1936
 Warning--empty year in molitorNewBloodlessMethod1936
 Warning--empty journal in naylorArterialCathetersEarly2020
@@ -71,6 +73,8 @@ Warning--empty year in poonCufflessNoninvasiveMeasurements2005
 Warning--empty year in reyesWirelessPhotoplethysmographicDevice2012
 Warning--empty journal in rheeArtifactresistantPowerefficientDesign2001
 Warning--empty year in rheeArtifactresistantPowerefficientDesign2001
+Warning--empty journal in ruiz-rodriguezInnovativeContinuousNoninvasive2013
+Warning--empty year in ruiz-rodriguezInnovativeContinuousNoninvasive2013
 Warning--empty journal in sharmaCuffLessContinuousBlood2017
 Warning--empty year in sharmaCuffLessContinuousBlood2017
 Warning--empty year in srivastavValsalvaManeuver2024
@@ -78,6 +82,8 @@ Warning--empty year in suLongtermBloodPressure2018
 Warning--empty year in suzukiCufflessBloodPressure2009
 Warning--empty journal in sviridovaHumanPhotoplethysmogramNew2015
 Warning--empty year in sviridovaHumanPhotoplethysmogramNew2015
+Warning--empty journal in takazawaAssessmentVasoactiveAgents1998a
+Warning--empty year in takazawaAssessmentVasoactiveAgents1998a
 Warning--empty year in tengContinuousNoninvasiveEstimation2003
 Warning--empty journal in weisslerSystolicTimeIntervals1968
 Warning--empty year in weisslerSystolicTimeIntervals1968
@@ -88,46 +94,48 @@ Warning--empty year in xingOpticalBloodPressure2016
 Warning--empty year in yoonMultipleDiagnosisBased2002
 Warning--empty journal in yoshiyaSpectrophotometricMonitoringArterial1980
 Warning--empty year in yoshiyaSpectrophotometricMonitoringArterial1980
+Warning--empty booktitle in zanelliPotentialAIBased2023
+Warning--empty year in zanelliPotentialAIBased2023
 Warning--empty year in zhengRingtypeDeviceNoninvasive2003
-You've used 47 entries,
+You've used 52 entries,
             2118 wiz_defined-function locations,
-            778 strings with 19063 characters,
-and the built_in function-call counts, 22433 in all, are:
-= -- 1970
-> -- 1620
+            801 strings with 20181 characters,
+and the built_in function-call counts, 24383 in all, are:
+= -- 2145
+> -- 1745
 < -- 13
-+ -- 649
-- -- 594
-* -- 2027
-:= -- 3698
-add.period$ -- 141
-call.type$ -- 47
-change.case$ -- 437
++ -- 698
+- -- 638
+* -- 2203
+:= -- 4023
+add.period$ -- 155
+call.type$ -- 52
+change.case$ -- 474
 chr.to.int$ -- 0
-cite$ -- 127
-duplicate$ -- 638
-empty$ -- 1368
-format.name$ -- 594
-if$ -- 4390
+cite$ -- 142
+duplicate$ -- 695
+empty$ -- 1500
+format.name$ -- 638
+if$ -- 4765
 int.to.chr$ -- 0
-int.to.str$ -- 47
-missing$ -- 46
-newline$ -- 234
-num.names$ -- 92
-pop$ -- 578
+int.to.str$ -- 52
+missing$ -- 51
+newline$ -- 258
+num.names$ -- 102
+pop$ -- 630
 preamble$ -- 1
-purify$ -- 391
+purify$ -- 423
 quote$ -- 0
-skip$ -- 430
+skip$ -- 460
 stack$ -- 0
-substring$ -- 1253
-swap$ -- 118
+substring$ -- 1375
+swap$ -- 119
 text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 186
-warning$ -- 80
-while$ -- 169
-width$ -- 49
-write$ -- 433
-(There were 84 warnings)
+type$ -- 206
+warning$ -- 90
+while$ -- 187
+width$ -- 54
+write$ -- 476
+(There were 92 warnings)

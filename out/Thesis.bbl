@@ -150,6 +150,11 @@ G.J. Langewouters, A.~Zwart, R.~Busse, and K.H. Wesseling.
 \newblock Pressure-diameter relationships of segments of human finger arteries.
 \newblock 7(1):43--55.
 
+\bibitem{leeReflectancePulseOximetry2016}
+Hooseok Lee, Hoon Ko, and Jinseok Lee.
+\newblock Reflectance pulse oximetry: {{Practical}} issues and limitations.
+\newblock 2(4):195--198.
+
 \bibitem{lehmanMethodsBloodPressure2013}
 Li-wei~H. Lehman, Mohammed Saeed, Daniel Talmor, Roger Mark, and Atul Malhotra.
 \newblock Methods of {{Blood Pressure Measurement}} in the {{ICU}}.
@@ -190,6 +195,12 @@ M.~Liu, X.~Zhan, J.~Tu, B.~Liu, and Z.H. Zhu.
 \newblock Integrated navigation for tethered nano-satellite system by modified
   input-delay neural networks and {{PROSAC}}.
 \newblock volume 2017-May, pages 202--210.
+
+\bibitem{mohanSpotMeasurementHeart2016}
+P~Mohan, Nagarajan Velmurugan, and J~Vignesh.
+\newblock Spot measurement of heart rate based on morphology of
+  {{PhotoPlethysmoGraphic}} ({{PPG}}) signals.
+\newblock 41:1--10.
 
 \bibitem{molitorNewBloodlessMethod1936}
 Hans Molitor and Michael Kniazuk.
@@ -242,6 +253,13 @@ Sokwoo Rhee, Boo-Ho Yang, and H.H. Asada.
   plethysmographic sensors.
 \newblock 48(7):795--805.
 
+\bibitem{ruiz-rodriguezInnovativeContinuousNoninvasive2013}
+Juan~C. Ruiz-Rodríguez, Adolf Ruiz-Sanmartín, Vicent Ribas, and Jesús
+  Caballero.
+\newblock Innovative continuous non-invasive cuffless blood pressure monitoring
+  based on photoplethysmography technology.
+\newblock 39(9):1618--1625.
+
 \bibitem{sharmaCuffLessContinuousBlood2017}
 Manuja Sharma, Karinne Barbosa, Victor Ho, Devon Griggs, Tadesse Ghirmai,
   Sandeep~K. Krishnan, Tzung~K. Hsiai, Jung-Chih Chiao, and Hung Cao.
@@ -273,6 +291,13 @@ Satomi Suzuki and Koji Oguri.
 Nina Sviridova and Kenshi Sakai.
 \newblock Human photoplethysmogram: New insight into chaotic characteristics.
 \newblock 77:53--63.
+
+\bibitem{takazawaAssessmentVasoactiveAgents1998a}
+K.~Takazawa, N.~Tanaka, M.~Fujita, O.~Matsuoka, T.~Saiki, M.~Aikawa, S.~Tamura,
+  and C.~Ibukiyama.
+\newblock Assessment of vasoactive agents and vascular aging by the second
+  derivative of photoplethysmogram waveform.
+\newblock 32(2):365--370.
 
 \bibitem{tengContinuousNoninvasiveEstimation2003}
 X.F. Teng and Y.T. Zhang.
@@ -312,6 +337,11 @@ I.~Yoshiya, Y.~Shimada, and K.~Tanaka.
 \newblock Spectrophotometric monitoring of arterial oxygen saturation in the
   fingertip.
 \newblock 18(1):27--32.
+
+\bibitem{zanelliPotentialAIBased2023}
+Serena Zanelli, Mounim El~Yacoubi, Magid Hallab, and Mehdi Ammi.
+\newblock On the potential of {{AI}} based health assessment from
+  photopletysmographic signals.
 
 \bibitem{zhengRingtypeDeviceNoninvasive2003}
 D.C. Zheng and Y.T. Zhang.
