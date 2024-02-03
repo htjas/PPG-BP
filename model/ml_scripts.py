@@ -27,8 +27,8 @@ def run_model(target):
     )
 
     # All Data
-    abp = read_single_feature_data(f'/features/train_test_1/tot_med_abp_{target}.csv')
-    ppg_feats = read_multiple_feature_data('/features/train_test_1/tot_med_ppg_feats.csv')
+    abp = read_single_feature_data(f'/features/train_test/tot_med_abp_{target}.csv')
+    ppg_feats = read_multiple_feature_data('/features/train_test/med_ppg_feats7.csv')
 
     ppg_train, ppg_test, abp_train, abp_test = train_test_split(
         ppg_feats, abp, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)

@@ -183,15 +183,22 @@ def process_data(fs, folder, goal, median_window):
 
     # Remove timestamps column
     tot_ppg_feats = tot_ppg_feats[:, 1:]
+    # Stack values
+    total_abp_values = np.column_stack((tot_abp_sys, tot_abp_dia, tot_abp_map))
+    median_abp_values = np.column_stack((tot_med_abp_sys, tot_med_abp_dia, tot_med_abp_map))
     # Save extracted features to .csv
-    save_split_features(goal, [[tot_abp_sys, 'tot_abp_sys'],
-                               [tot_abp_dia, 'tot_abp_dia'],
-                               [tot_abp_map, 'tot_abp_map'],
+    save_split_features(goal, [[total_abp_values, 'tot_abp_feats'],
+                               [median_abp_values, f'med_abp_feats{median_window}'],
                                [tot_ppg_feats, 'tot_ppg_feats'],
-                               [tot_med_abp_sys, 'tot_med_abp_sys'],
-                               [tot_med_abp_dia, 'tot_med_abp_dia'],
-                               [tot_med_abp_map, 'tot_med_abp_map'],
-                               [tot_med_ppg_feats, 'tot_med_ppg_feats']])
+                               [tot_med_ppg_feats, f'med_ppg_feats{median_window}']])
+    # save_split_features(goal, [[tot_abp_sys, 'tot_abp_sys'],
+    #                            [tot_abp_dia, 'tot_abp_dia'],
+    #                            [tot_abp_map, 'tot_abp_map'],
+    #                            [tot_ppg_feats, 'tot_ppg_feats'],
+    #                            [tot_med_abp_sys, 'tot_med_abp_sys'],
+    #                            [tot_med_abp_dia, 'tot_med_abp_dia'],
+    #                            [tot_med_abp_map, 'tot_med_abp_map'],
+    #                            [tot_med_ppg_feats, 'tot_med_ppg_feats']])
 
 
 def process_ppg_data(path, fs):
