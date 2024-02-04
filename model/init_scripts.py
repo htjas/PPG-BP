@@ -27,9 +27,9 @@ def load_filter_and_save_records(db_name, path, records_to_load, single_record_a
     records = []
     su = 0
     for subject in subjects:
-        if subject != '38/3850585/':
-            su += 1
-            continue
+        # if subject != '38/3850585/':
+        #     su += 1
+        #     continue
         su = su + 1
         print(f"Subject {su}/{len(subjects)} - {subject}")
         subject_name = subject.split('/')[1]
@@ -76,10 +76,13 @@ def filter_and_save_single_subject(subject, database_name, path, no_records):
             return None
 
         if hasattr(record_data, 'seg_name'):
-            tot_arr_count = 0
+            tot_arr_count, cons_faulty_seg_count = 0, 0
             segments = record_data.seg_name
             gen = (segment for segment in segments if segment != '~')
             for segment in gen:
+                if cons_faulty_seg_count == 3:
+                    print(f" - 3 segments contain only faulty values, skipping")
+                    break
                 if tot_arr_count == no_records:
                     print(f" - reached {no_records} records limit from single subject")
                     break
@@ -145,6 +148,8 @@ def filter_and_save_single_subject(subject, database_name, path, no_records):
                 if len(abp_cons) == 0 or len(ppg_cons) == 0:
                     m = int(max_cons_count / fs)
                     print(f" - ✕ (max {m} seconds array found)")
+                    if m < 3:
+                        cons_faulty_seg_count += 1
                 else:
                     print(f" - ✔ ({cons_count} array(s) of 10 min found and saved)")
 
