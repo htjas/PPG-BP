@@ -125,9 +125,9 @@ def process_data(fs, folder, goal, median_window):
     tot_med_abp_sys, tot_med_abp_dia, tot_med_abp_map, tot_med_ppg_feats = (
         np.array([]), np.array([]), np.array([]), np.empty((0, 34)))
     for filename in filenames:
-        # if i != 1:
-        #     i += 1
-        #     continue
+        if i != 1:
+            i += 1
+            continue
         try:
             # 1: Data Reading
             seg_name, raw_abp, raw_ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -526,25 +526,39 @@ def ppg_feature_extraction(fidp, systoles, data, fs):
 
     td_features = {name: np.array([], dtype=float) for name in td_feature_names}
     fd_features = {name: np.array([], dtype=float) for name in fd_feature_names}
+    f_ons, f_pks, f_dia, f_off = fidp["ons"], fidp["pks"], fidp["dia"], fidp["off"]
 
     beat_no = 0
     for i in systoles[:, 0]:
-        # Find the index in fidp["pks"] where its value is equal to i
-        pk_index = next((index for index, value in enumerate(fidp["pks"]) if value == i), None)
-
+        # Find the index in f_pks where its value is equal to i
+        pk_index = next((index for index, value in enumerate(f_pks) if value == i), None)
         if pk_index is not None:
             try:
-                if (pk_index < len(fidp["ons"]) and pk_index < len(fidp["off"])
-                        and pk_index < len(fidp["pks"]) and pk_index < len(fidp["dia"])):
-                    td_features['ts'] = np.append(td_features['ts'], i)
-                    td_features['sys'] = np.append(td_features['sys'], data[fidp["pks"][pk_index]])
-                    td_features['dia'] = np.append(td_features['dia'], data[fidp["off"][pk_index]])
-                    td_features = time_domain_feature_detection(td_features, fidp, pk_index, data, fs)
-                    fd_features, ts = frequency_domain_feature_detection(fd_features, fidp, pk_index, data, fs)
-                    start_ts.append(ts)
-                    beat_no += 1
+                ons_pks = f_ons[pk_index] < f_pks[pk_index]
+                pks_dia = f_pks[pk_index] < f_dia[pk_index]
+                dia_off = f_dia[pk_index] < f_off[pk_index]
+
+                if ons_pks and pks_dia and dia_off:
+                    if (pk_index < len(fidp["ons"]) and pk_index < len(fidp["off"])
+                            and pk_index < len(fidp["pks"]) and pk_index < len(fidp["dia"])):
+                        td_features['ts'] = np.append(td_features['ts'], i)
+                        td_features['sys'] = np.append(td_features['sys'], data[f_pks[pk_index]])
+                        td_features['dia'] = np.append(td_features['dia'], data[f_off[pk_index]])
+                        td_features = time_domain_feature_detection(td_features, f_ons, f_pks, f_dia, f_off,
+                                                                    pk_index, data, fs)
+                        fd_features, ts = frequency_domain_feature_detection(fd_features,
+                                                                             f_ons, f_off, pk_index, data, fs)
+                        start_ts.append(ts)
+                        beat_no += 1
+                    else:
+                        raise IndexError("\tReached end of one of FIDPs")
                 else:
-                    raise IndexError("\tReached end of one of FIDPs")
+                    if not ons_pks:
+                        f_ons = np.insert(f_ons, pk_index, 0)
+                    if not pks_dia:
+                        f_pks = np.insert(f_pks, pk_index, 0)
+                    if not dia_off:
+                        f_dia = np.insert(f_dia, pk_index, 0)
             except IndexError as e:
                 print(e, f'-> saving {beat_no} extracted values')
                 td_features = {name: td_features[name][:beat_no] for name in td_feature_names}
@@ -559,30 +573,31 @@ def ppg_feature_extraction(fidp, systoles, data, fs):
     # return np.column_stack((tot_td_features, tot_fd_features))
 
 
-def time_domain_feature_detection(features, fidp, pk_index, data, fs):
-    st, sa = systolic_time_detection(fidp, pk_index, data, fs)
+def time_domain_feature_detection(features, f_ons, f_pks, f_dia, f_off, pk_index, data, fs):
+    st, sa = systolic_time_detection(f_pks, f_ons, pk_index, data, fs)
     features['sys_t'], features['sys_area'] = np.append(features['sys_t'], st), np.append(features['sys_t'], sa)
 
-    dt, da = diastolic_time_detection(fidp, pk_index, data, fs)
+    dt, da = diastolic_time_detection(f_off, f_pks, pk_index, data, fs)
     features['dia_t'], features['dia_area'] = np.append(features['dia_t'], dt), np.append(features['dia_area'], da)
 
-    det, dea = delta_t_detection(fidp, pk_index, data, fs)
+    det, dea = delta_t_detection(f_dia, f_pks, pk_index, data, fs)
     features['delta_t'], features['delta_area'] = (np.append(features['delta_t'], det),
                                                    np.append(features['delta_area'], dea))
 
-    features['pulse_area'] = np.append(features['pulse_area'], pulse_area_detection(fidp, pk_index, data))
+    features['pulse_area'] = np.append(features['pulse_area'], pulse_area_detection(f_ons, f_off, pk_index, data))
 
     features['dia_sys_area_ratio'] = np.append(features['dia_sys_area_ratio'], da / sa)
 
-    features['res_index'] = np.append(features['res_index'], resistive_index_detection(fidp, pk_index, data))
+    features['res_index'] = np.append(features['res_index'],
+                                      resistive_index_detection(f_dia, f_pks, f_off, pk_index, data))
 
-    v1, v2 = vessel_volume_index_detection(fidp, pk_index, data)
+    v1, v2 = vessel_volume_index_detection(f_pks, f_off, pk_index, data)
     features['vvi_sys'], features['vvi_dia'] = (np.append(features['vvi_sys'], v1),
                                                 np.append(features['vvi_dia'], v2))
 
     percentage_values = [10, 25, 33, 50, 66, 75]
     for percent in percentage_values:
-        sw, dw = systolic_diastolic_width_detection(fidp, pk_index, data, fs, percent)
+        sw, dw = systolic_diastolic_width_detection(f_ons, f_pks, f_off, pk_index, data, fs, percent)
         features[f'dw{percent}'], features[f'dw+sw{percent}'], features[f'dw/sw{percent}'] = (
             np.append(features[f'dw{percent}'], dw),
             np.append(features[f'dw+sw{percent}'], dw + sw),
@@ -592,9 +607,9 @@ def time_domain_feature_detection(features, fidp, pk_index, data, fs):
     return features
 
 
-def frequency_domain_feature_detection(features, fidp, pk_index, data, fs):
+def frequency_domain_feature_detection(features, f_ons, f_off, pk_index, data, fs):
     # Frequency Domain Feature detection using FFT
-    time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["off"][pk_index]
+    time_interval_start, time_interval_end = f_ons[pk_index], f_off[pk_index]
     signal_interval = data[time_interval_start:time_interval_end]
     ppg_fdf = frequency_domain_features(signal_interval, fs)
 
@@ -633,12 +648,12 @@ def frequency_domain_features(signal, fs):
     }
 
 
-def systolic_time_detection(fidp, pk_index, data, fs):
+def systolic_time_detection(f_pks, f_ons, pk_index, data, fs):
     # Systolic Time = Systolic peak - Onset
-    value = (fidp["pks"][pk_index] - fidp["ons"][pk_index]) / fs
+    value = (f_pks[pk_index] - f_ons[pk_index]) / fs
 
     # Systolic Area = Integral of PPG with limits [ons:pks]
-    time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["pks"][pk_index]
+    time_interval_start, time_interval_end = f_ons[pk_index], f_pks[pk_index]
     time_interval = np.arange(time_interval_start, time_interval_end)
     signal_interval = data[time_interval_start:time_interval_end]
     area = simps(signal_interval, time_interval)
@@ -646,12 +661,12 @@ def systolic_time_detection(fidp, pk_index, data, fs):
     return value, area
 
 
-def diastolic_time_detection(fidp, pk_index, data, fs):
+def diastolic_time_detection(f_off, f_pks, pk_index, data, fs):
     # Diastolic Time = Offset - Systolic peak
-    value = (fidp["off"][pk_index] - fidp["pks"][pk_index]) / fs
+    value = (f_off[pk_index] - f_pks[pk_index]) / fs
 
-    # Systolic Area = Integral of PPG with limits [ons:pks]
-    time_interval_start, time_interval_end = fidp["pks"][pk_index], fidp["off"][pk_index]
+    # Diastolic Area = Integral of PPG with limits [pks:off]
+    time_interval_start, time_interval_end = f_pks[pk_index], f_off[pk_index]
     time_interval = np.arange(time_interval_start, time_interval_end)
     signal_interval = data[time_interval_start:time_interval_end]
     area = simps(signal_interval, time_interval)
@@ -659,22 +674,23 @@ def diastolic_time_detection(fidp, pk_index, data, fs):
     return value, area
 
 
-def delta_t_detection(fidp, pk_index, data, fs):
+def delta_t_detection(f_dia, f_pks, pk_index, data, fs):
     # delta T = Dicrotic notch - Systolic peak
-    value = (fidp["dia"][pk_index] - fidp["pks"][pk_index]) / fs
+    value = (f_dia[pk_index] - f_pks[pk_index]) / fs
 
-    # Systolic Area = Integral of PPG with limits [ons:pks]
-    time_interval_start, time_interval_end = fidp["pks"][pk_index], fidp["dia"][pk_index]
+    # Delta Area = Integral of PPG with limits [pks:dia]
+    time_interval_start, time_interval_end = f_pks[pk_index], f_dia[pk_index]
     time_interval = np.arange(time_interval_start, time_interval_end)
     signal_interval = data[time_interval_start:time_interval_end]
-    area = simps(signal_interval, time_interval)
+    abs_time_interval = np.arange(0, len(signal_interval))
+    area = simps(signal_interval, abs_time_interval)
 
     return value, area
 
 
-def pulse_area_detection(fidp, pk_index, data):
+def pulse_area_detection(f_ons, f_off, pk_index, data):
     # Pulse Area = Integral of PPG with limits [ons:off]
-    time_interval_start, time_interval_end = fidp["ons"][pk_index], fidp["off"][pk_index]
+    time_interval_start, time_interval_end = f_ons[pk_index], f_off[pk_index]
     time_interval = np.arange(time_interval_start, time_interval_end)
     signal_interval = data[time_interval_start:time_interval_end]
 
@@ -683,27 +699,27 @@ def pulse_area_detection(fidp, pk_index, data):
     return value
 
 
-def resistive_index_detection(fidp, pk_index, data):
+def resistive_index_detection(f_dia, f_pks, f_off, pk_index, data):
     # RI = (data[dia] - data[off]) / (data[pks] - data[off])
-    h1 = data[fidp["dia"][pk_index]] - data[fidp["off"][pk_index]]
-    h2 = data[fidp["pks"][pk_index]] - data[fidp["off"][pk_index]]
+    h1 = data[f_dia[pk_index]] - data[f_off[pk_index]]
+    h2 = data[f_pks[pk_index]] - data[f_off[pk_index]]
     value = h1 / h2
     return value
 
 
-def vessel_volume_index_detection(fidp, pk_index, data):
+def vessel_volume_index_detection(f_pks, f_off, pk_index, data):
     # Vessel Volume Fill-Up (systolic) Index = data[pks] / max(data[all_systoles])
-    max_v = max(data[fidp["pks"]])
-    v1 = data[fidp["pks"][pk_index]] / max_v
+    max_v = max(data[f_pks[f_pks != 0]])
+    v1 = data[f_pks[pk_index]] / max_v
     # Vessel Volume Drained (diastolic) Index = max(data[all_systoles]) / data[off]
-    min_v = min(data[fidp["off"]])
-    v2 = min_v / data[fidp["off"][pk_index]]
+    min_v = min(data[f_off[f_off != 0]])
+    v2 = min_v / data[f_off[pk_index]]
     return v1, v2
 
 
-def systolic_diastolic_width_detection(fidp, pk_index, data, fs, p):
+def systolic_diastolic_width_detection(f_ons, f_pks, f_off, pk_index, data, fs, p):
     # Systolic width = data[(data[pks]-data[ons])*p/100]
-    ind_ons, ind_pk, ind_off = fidp["ons"][pk_index], fidp["pks"][pk_index], fidp["off"][pk_index]
+    ind_ons, ind_pk, ind_off = f_ons[pk_index], f_pks[pk_index], f_off[pk_index]
     val_ons, val_pk, val_off = data[ind_ons], data[ind_pk], data[ind_off]
     threshold = p / 100 * (val_pk - val_ons) + val_ons
     sys_arr = np.abs(np.array(data[ind_ons:ind_pk]) - threshold)
@@ -1255,7 +1271,7 @@ def split_filename(filename):
 def main(fs=125):
     # manual_filter_data('usable_ppg_data_2')
     # process_data(fs, '/mimic3/', 'train_test_1', 7)
-    process_data(125, '/mimic3/', 'train_test_1', 7)
+    process_data(125, '/mimic3/', 'train_test', 7)
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)
 
