@@ -16,13 +16,13 @@ with open('details.properties', 'rb') as config_file:
 #
 
 # Loading, Filtering and Saving Records
-# db_mm4 = configs.get('mimic4_url').data
-# path_mm4 = configs.get('path_of_mimic4_data').data
+db_mm4 = configs.get('mimic4_url').data
+path_mm4 = configs.get('path_of_mimic4_data').data
 # load_filter_and_save_records(db_mm4, path_mm4, records_to_load=999999, single_record_arrays=999999)
 
 # # Signal processing
-# fs_mm4 = float(configs.get('fs_mimic4').data)
-# goal_mm4 = configs.get('goal_mimic4').data
+fs_mm4 = float(configs.get('fs_mimic4').data)
+goal_mm4 = configs.get('goal_mimic4').data
 median_interval = 7
 # process_data(fs_mm4, path_mm4, goal_mm4, median_interval)
 
@@ -32,7 +32,6 @@ median_interval = 7
 
 fs_mm3 = float(configs.get('fs_mimic3').data)
 goal_mm3 = configs.get('goal_mimic3').data
-goal_mm4 = configs.get('goal_mimic4').data
 db_mm3 = configs.get('mimic3_url').data
 path_mm3 = configs.get('path_of_mimic3_data').data
 
@@ -44,16 +43,16 @@ path_mm3 = configs.get('path_of_mimic3_data').data
 
 # while mm4_values_size * 4 > mm3_values_size:
 # Loading, Filtering and Saving Records
-load_filter_and_save_records(db_mm3, path_mm3, records_to_load=22032, single_record_arrays=100)
+# load_filter_and_save_records(db_mm3, path_mm3, records_to_load=22032, single_record_arrays=100)
 # Signal processing
-# process_data(fs_mm3, path_mm3, goal_mm3, median_interval)
+process_data(fs_mm3, path_mm3, goal_mm3, median_interval)
 
 #
 # # Machine Learning\
 #
-path_med_abp_feats = configs.get(f'abp_median{median_interval}_features_path').data
-path_med_ppg_feats = configs.get(f'ppg_median{median_interval}_features_path').data
-
-run_model(path_med_abp_feats, path_med_ppg_feats)  # training-testing
+# path_med_abp_feats = configs.get(f'abp_median{median_interval}_features_path').data
+# path_med_ppg_feats = configs.get(f'ppg_median{median_interval}_features_path').data
+#
+# run_model(path_med_abp_feats, path_med_ppg_feats)  # training-testing
 #
 # validate_model() - validation
