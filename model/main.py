@@ -23,7 +23,8 @@ with open('details.properties', 'rb') as config_file:
 # # Signal processing
 # fs_mm4 = float(configs.get('fs_mimic4').data)
 # goal_mm4 = configs.get('goal_mimic4').data
-# process_data(fs_mm4, path_mm4, goal_mm4, 7)
+median_interval = 7
+# process_data(fs_mm4, path_mm4, goal_mm4, median_interval)
 
 #
 # Load records and extract median values from MIMIC3 features (Training and Testing dataset: 4x - 80%)
@@ -45,10 +46,14 @@ path_mm3 = configs.get('path_of_mimic3_data').data
 # Loading, Filtering and Saving Records
 load_filter_and_save_records(db_mm3, path_mm3, records_to_load=22032, single_record_arrays=100)
 # Signal processing
-# process_data(fs_mm3, path_mm3, goal_mm3, 7)
+# process_data(fs_mm3, path_mm3, goal_mm3, median_interval)
 
 #
-# # Machine Learning
-# run_model(target='sys')  # training-testing
+# # Machine Learning\
 #
-# # validate_model() - validation
+path_med_abp_feats = configs.get(f'abp_median{median_interval}_features_path').data
+path_med_ppg_feats = configs.get(f'ppg_median{median_interval}_features_path').data
+
+run_model(path_med_abp_feats, path_med_ppg_feats)  # training-testing
+#
+# validate_model() - validation

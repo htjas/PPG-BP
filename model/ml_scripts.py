@@ -17,23 +17,55 @@ import torch.optim as optim
 import wandb
 
 
-def run_model(target):
+def run_model(abp_path, ppg_path):
     # Get Logger
-    logger = init_logger('ml_logs')
-    logger.info("----------------------------")
-    logger.info("Starting ML model (Linear Regression using PyTorch)")
-    wandb.init(
-        project="ppg-bp"
-    )
+    # logger = init_logger('ml_logs')
+    # logger.info("----------------------------")
+    # logger.info("Starting ML model (Linear Regression using PyTorch)")
+    # wandb.init(
+    #     project="ppg-bp"
+    # )
 
     # All Data
-    abp = read_single_feature_data(f'/features/train_test/tot_med_abp_{target}.csv')
-    ppg_feats = read_multiple_feature_data('/features/train_test/med_ppg_feats7.csv')
+    abp = read_multiple_feature_data(abp_path)
+    ppg = read_multiple_feature_data(ppg_path)
+    abp_sys, abp_dia, abp_map = abp[:, 0], abp[:, 1], abp[:, 2]
 
     ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg_feats, abp, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-
+        ppg, abp_sys, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
     torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'SYS from 34 Median PPG Features')
+
+    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+        ppg, abp_dia, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
+    torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'DIA from 34 Median PPG Features')
+
+    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+        ppg, abp_map, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
+    torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'MAP from 34 Median PPG Features')
+
+    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+        ppg, abp_sys, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
+    torch_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'SYS from 34 Median PPG Features')
+
+    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+        ppg, abp_dia, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
+    torch_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'DIA from 34 Median PPG Features')
+
+    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+        ppg, abp_map, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
+    torch_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'MAP from 34 Median PPG Features')
+
+    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+        ppg, abp_sys, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
+    torch_conv_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'SYS from 34 Median PPG Features')
+
+    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+        ppg, abp_dia, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
+    torch_conv_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'DIA from 34 Median PPG Features')
+
+    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+        ppg, abp_map, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
+    torch_conv_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'MAP from 34 Median PPG Features')
 
     # run_multi_linear_regression('SYS from 34 PPG Features', ppg_train, abp_train, ppg_test, abp_test)
 
@@ -212,7 +244,170 @@ def torch_regression(X_train, y_train, X_test, y_test, feat):
         # Evaluating and Logging
         mse, mae, r2, bias, loa_l, loa_u = evaluate(y_test, y_pred)
         rmse = np.sqrt(mse)
-        logging.info(f'PyTorch LR: learning_rate=0.01, epochs=1000 ({feat})\n'
+        logging.info(f'PyTorch LR: learning_rate={learning_rate}, epochs={num_epochs} ({feat})\n'
+                     f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
+                     f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
+
+        wandb.log({"mse": mse, "rmse": rmse, "mae": mae})
+
+        wandb.finish()
+
+        # Plotting
+        # visual.plot_ml_features_line('PyTorch LR', y_test, y_pred)
+
+
+class NeuralNet(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(NeuralNet, self).__init__()
+        self.input_size = input_size
+        self.l1 = nn.Linear(input_size, hidden_size)
+        self.relu = nn.ReLU()
+        self.l2 = nn.Linear(hidden_size, output_size)
+
+    def forward(self, x):
+        out = self.l1(x)
+        out = self.relu(out)
+        out = self.l2(out)
+        return out
+
+
+def torch_neural_net(X_train, y_train, X_test, y_test, feat):
+    device = torch.device(f'cuda:{torch.cuda.current_device()}' if torch.cuda.is_available() else 'cpu')
+    torch.set_default_device(device)
+
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.fit_transform(X_test)
+
+    # Convert to PyTorch tensors
+    X_train = torch.from_numpy(X_train).float().to(device)
+    y_train = torch.from_numpy(y_train).float().view(-1, 1).to(device)
+    X_test = torch.from_numpy(X_test).float().to(device)
+    y_test = torch.from_numpy(y_test).float().view(-1, 1).to(device)
+
+    input_size = X_train.shape[1]
+    output_size = y_train.shape[1]
+    hidden_size = int((input_size + output_size) / 2)
+    learning_rate = 0.01
+
+    model = NeuralNet(input_size=input_size, hidden_size=hidden_size, output_size=1)
+    criterion = nn.MSELoss()
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+
+    # Training loop
+    num_epochs = 1000
+    for epoch in range(num_epochs):
+        # Forward pass and loss
+        y_predicted = model(X_train)
+        loss = criterion(y_predicted, y_train)
+
+        # Backward pass and optimization
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        wandb.log({"loss": loss})
+
+        if (epoch + 1) % 100 == 0:
+            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
+
+    with torch.no_grad():
+        # Testing
+        y_pred = model(X_test)
+
+        # Converting back to numpy
+        y_pred = y_pred.to('cpu').numpy()
+        X_test, y_test = X_test.to('cpu').numpy(), y_test.to('cpu').numpy()
+
+        # Evaluating and Logging
+        mse, mae, r2, bias, loa_l, loa_u = evaluate(y_test, y_pred)
+        rmse = np.sqrt(mse)
+        logging.info(f'PyTorch NN: learning_rate={learning_rate}, epochs={num_epochs} ({feat})\n'
+                     f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
+                     f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
+
+        wandb.log({"mse": mse, "rmse": rmse, "mae": mae})
+
+        wandb.finish()
+
+        # Plotting
+        # visual.plot_ml_features_line('PyTorch LR', y_test, y_pred)
+
+
+class CNN(nn.Module):
+    def __init__(self):
+        super(CNN, self).__init__()
+        self.conv1 = nn.Conv1d(1, 32, kernel_size=3)
+        self.relu = nn.ReLU()
+        self.pool = nn.MaxPool1d(kernel_size=2)
+        self.conv2 = nn.Conv1d(32, 64, kernel_size=3)
+        self.flatten = nn.Flatten()
+        self.fc1 = nn.Linear(64 * 15, 128)
+        self.fc2 = nn.Linear(128, 1)
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.relu(x)
+        x = self.pool(x)
+        x = self.conv2(x)
+        x = self.relu(x)
+        x = self.pool(x)
+        x = self.flatten(x)
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
+        return x
+
+
+def torch_conv_neural_net(X_train, y_train, X_test, y_test, feat):
+    device = torch.device(f'cuda:{torch.cuda.current_device()}' if torch.cuda.is_available() else 'cpu')
+    torch.set_default_device(device)
+
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.fit_transform(X_test)
+
+    # Convert to PyTorch tensors
+    X_train = torch.from_numpy(X_train).float().to(device)
+    y_train = torch.from_numpy(y_train).float().view(-1, 1).to(device)
+    X_test = torch.from_numpy(X_test).float().to(device)
+    y_test = torch.from_numpy(y_test).float().view(-1, 1).to(device)
+
+    learning_rate = 0.01
+
+    model = CNN().to(device)
+    criterion = nn.MSELoss()
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+
+    # Training loop
+    num_epochs = 1000
+    for epoch in range(num_epochs):
+        # Forward pass and loss
+        y_predicted = model(X_train)
+        loss = criterion(y_predicted, y_train)
+
+        # Backward pass and optimization
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        wandb.log({"loss": loss})
+
+        if (epoch + 1) % 100 == 0:
+            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
+
+    with torch.no_grad():
+        # Testing
+        y_pred = model(X_test)
+
+        # Converting back to numpy
+        y_pred = y_pred.to('cpu').numpy()
+        X_test, y_test = X_test.to('cpu').numpy(), y_test.to('cpu').numpy()
+
+        # Evaluating and Logging
+        mse, mae, r2, bias, loa_l, loa_u = evaluate(y_test, y_pred)
+        rmse = np.sqrt(mse)
+        logging.info(f'PyTorch CNN: learning_rate={learning_rate}, epochs={num_epochs} ({feat})\n'
                      f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
                      f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
 
@@ -225,7 +420,8 @@ def torch_regression(X_train, y_train, X_test, y_test, feat):
 
 
 def main():
-    run_model('sys')
+    run_model('/features/train_test/med_abp_feats7.csv',
+              '/features/train_test/med_ppg_feats7.csv')
 
 
 if __name__ == "__main__":
