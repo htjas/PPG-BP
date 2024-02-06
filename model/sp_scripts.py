@@ -125,8 +125,11 @@ def process_data(fs, folder, goal, median_window):
     tot_med_abp_sys, tot_med_abp_dia, tot_med_abp_map, tot_med_ppg_feats = (
         np.array([]), np.array([]), np.array([]), np.empty((0, 34)))
     for filename in filenames:
-        if i > 2000:
-            print('processed and saved features from first 2000 records')
+        if i <= 12000:
+            i += 1
+            continue
+        if i > 18000:
+            print('processed and saved features from further 6000 records')
             break
         try:
             # 1: Data Reading
@@ -370,7 +373,7 @@ def group_a_b(a_ts, b_ts):
 def save_split_features(goal, features):
     for feat in features:
         df = pd.DataFrame(data=feat[0])
-        df.to_csv(f"features/{goal}/{feat[1]}_1.csv", index=False)
+        df.to_csv(f"features/{goal}/{feat[1]}_3.csv", index=False)
 
     # for feat in features:
     #     mid = int(len(feat[0]) / 2)
