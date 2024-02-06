@@ -14,76 +14,43 @@ import visual
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torch.nn.functional as F
 import wandb
 
 
-def run_model(abp_path, ppg_path):
+def run_model(abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path):
     # Get Logger
-    # logger = init_logger('ml_logs')
-    # logger.info("----------------------------")
-    # logger.info("Starting ML model (Linear Regression using PyTorch)")
-    # wandb.init(
-    #     project="ppg-bp"
-    # )
+    logger = init_logger('ml_logs')
+    logger.info("----------------------------")
+    logger.info("Starting ML model")
+    wandb.init(
+        project="ppg-bp"
+    )
 
     # All Data
-    abp = read_multiple_feature_data(abp_path)
-    ppg = read_multiple_feature_data(ppg_path)
-    abp_sys, abp_dia, abp_map = abp[:, 0], abp[:, 1], abp[:, 2]
+    abp_tot = read_multiple_feature_data(abp_tot_path)
+    ppg_tot = read_multiple_feature_data(ppg_tot_path)
+    abp = read_multiple_feature_data(abp_med_path)
+    ppg = read_multiple_feature_data(ppg_med_path)
+    # abp_sys, abp_dia, abp_map = abp[:, 0], abp[:, 1], abp[:, 2]
 
+    # Linear Regression (PyTorch)
+    # ppg_train, ppg_test, abp_train, abp_test = train_test_split(
+    #     ppg, abp, test_size=0.2)  # random_state=42, shuffle=False, stratify=None)
+    # torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'SYS, DIA, MAP from 34 Median PPG Features')
+
+    # Neural Network / MLP (PyTorch)
     ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_sys, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'SYS from 34 Median PPG Features')
+        ppg, abp, test_size=0.2)  # random_state=42, shuffle=False, stratify=None)
+    torch_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'SYS, DIA, MAP from 34 Median PPG Features')
 
-    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_dia, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'DIA from 34 Median PPG Features')
+    # LSTM and GRU (PyTorch)
 
-    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_map, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_regression(ppg_train, abp_train, ppg_test, abp_test, 'MAP from 34 Median PPG Features')
+    #  Support Vector Machine
 
-    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_sys, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'SYS from 34 Median PPG Features')
+    # Random Forest
 
-    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_dia, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'DIA from 34 Median PPG Features')
-
-    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_map, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'MAP from 34 Median PPG Features')
-
-    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_sys, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_conv_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'SYS from 34 Median PPG Features')
-
-    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_dia, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_conv_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'DIA from 34 Median PPG Features')
-
-    ppg_train, ppg_test, abp_train, abp_test = train_test_split(
-        ppg, abp_map, test_size=0.2, random_state=42)  # shuffle=False, stratify=None)
-    torch_conv_neural_net(ppg_train, abp_train, ppg_test, abp_test, 'MAP from 34 Median PPG Features')
-
-    # run_multi_linear_regression('SYS from 34 PPG Features', ppg_train, abp_train, ppg_test, abp_test)
-
-    # run_linear_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
-    # run_linear_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
-
-    # ppg_train = np.column_stack((ppg_sys_train, ppg_dia_train))
-    # ppg_test = np.column_stack((ppg_sys_test, ppg_dia_test))
-    # run_multi_linear_regression('SYS from SYS+DIA', ppg_train, abp_sys_train, ppg_test, abp_sys_test)
-    #
-    # run_sv_regression('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
-    # run_sv_regression('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
-    #
-    # run_random_forest('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
-    # run_random_forest('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
-
-    # run_ann('SYS', ppg_sys_train, abp_sys_train, ppg_sys_test, abp_sys_test)
-    # run_ann('DIA', ppg_dia_train, abp_dia_train, ppg_dia_test, abp_dia_test)
+    wandb.finish()
 
     # TODO: RNN models : Feedforward/MLPs, LSTMs, GRUs
 
@@ -203,9 +170,11 @@ def torch_regression(X_train, y_train, X_test, y_test, feat):
 
     # Convert to PyTorch tensors
     X_train = torch.from_numpy(X_train).float().to(device)
-    y_train = torch.from_numpy(y_train).float().view(-1, 1).to(device)
+    y_train = torch.from_numpy(y_train).float().to(device)
+    # y_train = torch.from_numpy(y_train).float().view(-1, 1).to(device)
     X_test = torch.from_numpy(X_test).float().to(device)
-    y_test = torch.from_numpy(y_test).float().view(-1, 1).to(device)
+    y_test = torch.from_numpy(y_test).float().to(device)
+    # y_test = torch.from_numpy(y_test).float().view(-1, 1).to(device)
 
     input_size = X_train.shape[1]
     output_size = y_train.shape[1]
@@ -232,7 +201,7 @@ def torch_regression(X_train, y_train, X_test, y_test, feat):
 
         if (epoch + 1) % 100 == 0:
             print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
-
+    print('--------')
     with torch.no_grad():
         # Testing
         y_pred = model(X_test)
@@ -250,7 +219,7 @@ def torch_regression(X_train, y_train, X_test, y_test, feat):
 
         wandb.log({"mse": mse, "rmse": rmse, "mae": mae})
 
-        wandb.finish()
+        # wandb.finish()
 
         # Plotting
         # visual.plot_ml_features_line('PyTorch LR', y_test, y_pred)
@@ -281,16 +250,18 @@ def torch_neural_net(X_train, y_train, X_test, y_test, feat):
 
     # Convert to PyTorch tensors
     X_train = torch.from_numpy(X_train).float().to(device)
-    y_train = torch.from_numpy(y_train).float().view(-1, 1).to(device)
+    y_train = torch.from_numpy(y_train).float().to(device)
+    # y_train = torch.from_numpy(y_train).float().view(-1, 1).to(device)
     X_test = torch.from_numpy(X_test).float().to(device)
-    y_test = torch.from_numpy(y_test).float().view(-1, 1).to(device)
+    y_test = torch.from_numpy(y_test).float().to(device)
+    # y_test = torch.from_numpy(y_test).float().view(-1, 1).to(device)
 
     input_size = X_train.shape[1]
     output_size = y_train.shape[1]
     hidden_size = int((input_size + output_size) / 2)
     learning_rate = 0.01
 
-    model = NeuralNet(input_size=input_size, hidden_size=hidden_size, output_size=1)
+    model = NeuralNet(input_size=input_size, hidden_size=hidden_size, output_size=output_size)
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -310,7 +281,7 @@ def torch_neural_net(X_train, y_train, X_test, y_test, feat):
 
         if (epoch + 1) % 100 == 0:
             print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
-
+    print('--------')
     with torch.no_grad():
         # Testing
         y_pred = model(X_test)
@@ -328,99 +299,16 @@ def torch_neural_net(X_train, y_train, X_test, y_test, feat):
 
         wandb.log({"mse": mse, "rmse": rmse, "mae": mae})
 
-        wandb.finish()
-
-        # Plotting
-        # visual.plot_ml_features_line('PyTorch LR', y_test, y_pred)
-
-
-class CNN(nn.Module):
-    def __init__(self):
-        super(CNN, self).__init__()
-        self.conv1 = nn.Conv1d(1, 32, kernel_size=3)
-        self.relu = nn.ReLU()
-        self.pool = nn.MaxPool1d(kernel_size=2)
-        self.conv2 = nn.Conv1d(32, 64, kernel_size=3)
-        self.flatten = nn.Flatten()
-        self.fc1 = nn.Linear(64 * 15, 128)
-        self.fc2 = nn.Linear(128, 1)
-
-    def forward(self, x):
-        x = self.conv1(x)
-        x = self.relu(x)
-        x = self.pool(x)
-        x = self.conv2(x)
-        x = self.relu(x)
-        x = self.pool(x)
-        x = self.flatten(x)
-        x = self.fc1(x)
-        x = self.relu(x)
-        x = self.fc2(x)
-        return x
-
-
-def torch_conv_neural_net(X_train, y_train, X_test, y_test, feat):
-    device = torch.device(f'cuda:{torch.cuda.current_device()}' if torch.cuda.is_available() else 'cpu')
-    torch.set_default_device(device)
-
-    scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_test = scaler.fit_transform(X_test)
-
-    # Convert to PyTorch tensors
-    X_train = torch.from_numpy(X_train).float().to(device)
-    y_train = torch.from_numpy(y_train).float().view(-1, 1).to(device)
-    X_test = torch.from_numpy(X_test).float().to(device)
-    y_test = torch.from_numpy(y_test).float().view(-1, 1).to(device)
-
-    learning_rate = 0.01
-
-    model = CNN().to(device)
-    criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-
-    # Training loop
-    num_epochs = 1000
-    for epoch in range(num_epochs):
-        # Forward pass and loss
-        y_predicted = model(X_train)
-        loss = criterion(y_predicted, y_train)
-
-        # Backward pass and optimization
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-
-        wandb.log({"loss": loss})
-
-        if (epoch + 1) % 100 == 0:
-            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
-
-    with torch.no_grad():
-        # Testing
-        y_pred = model(X_test)
-
-        # Converting back to numpy
-        y_pred = y_pred.to('cpu').numpy()
-        X_test, y_test = X_test.to('cpu').numpy(), y_test.to('cpu').numpy()
-
-        # Evaluating and Logging
-        mse, mae, r2, bias, loa_l, loa_u = evaluate(y_test, y_pred)
-        rmse = np.sqrt(mse)
-        logging.info(f'PyTorch CNN: learning_rate={learning_rate}, epochs={num_epochs} ({feat})\n'
-                     f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
-                     f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
-
-        wandb.log({"mse": mse, "rmse": rmse, "mae": mae})
-
-        wandb.finish()
+        # wandb.finish()
 
         # Plotting
         # visual.plot_ml_features_line('PyTorch LR', y_test, y_pred)
 
 
 def main():
-    run_model('/features/train_test/med_abp_feats7.csv',
+    run_model('/features/train_test/tot_abp_feats.csv',
+              '/features/train_test/tot_ppg_feats.csv',
+              '/features/train_test/med_abp_feats7.csv',
               '/features/train_test/med_ppg_feats7.csv')
 
 
