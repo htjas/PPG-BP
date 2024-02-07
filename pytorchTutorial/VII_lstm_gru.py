@@ -38,6 +38,34 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
                                           shuffle=False)
 
 
+class LSTM(nn.Module):
+    def __init__(self, input_size, output_size, n_hidden=51):
+        super(LSTM, self).__init__()
+        self.n_hidden = n_hidden
+        self.lstm1 = nn.LSTMCell(1, self.n_hidden)
+        self.lstm2 = nn.LSTMCell(self.n_hidden, self.n_hidden)
+        self.linear = nn.Linear(self.n_hidden, output_size)
+
+    def forward(self, x):  # future = 0
+        outputs = []
+        n_samples = x.size(0)
+
+        h_t = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+        c_t = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+
+        h_t2 = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+        c_t2 = torch.zeros(n_samples, self.n_hidden, dtype=torch.float32)
+
+        for input_t in x.split(1, dim=1):
+            h_t, c_t = self.lstm1(input_t, (h_t, c_t))
+            h_t2, c_t2 = self.lstm2(h_t, (h_t2, c_t2))
+            output = self.linear(h_t2)
+            outputs.append(output)
+
+        outputs = torch.cat(outputs, dim=1)
+        return outputs
+
+
 # Fully connected neural network with one hidden layer
 class RNN(nn.Module):
     def __init__(self, input_size, hidden_size, num_layers, num_classes):

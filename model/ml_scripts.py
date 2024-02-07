@@ -28,11 +28,12 @@ def run_model(abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path):
     )
 
     # Data reading and Train/Test splitting
-    abp_tot = read_multiple_feature_data(abp_tot_path)
-    ppg_tot = read_multiple_feature_data(ppg_tot_path)
+    # abp_tot = read_multiple_feature_data(abp_tot_path)
+    # ppg_tot = read_multiple_feature_data(ppg_tot_path)
     abp = read_multiple_feature_data(abp_med_path)
     ppg = read_multiple_feature_data(ppg_med_path)
     # abp_sys, abp_dia, abp_map = abp[:, 0], abp[:, 1], abp[:, 2]
+    # abp, ppg = abp[:1000], ppg[:1000]
     X_train, X_test, y_train, y_test = train_test_split(
         ppg, abp, test_size=0.2)  # random_state=42, shuffle=False, stratify=None)
 
@@ -53,6 +54,8 @@ def run_model(abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path):
     y_test = torch.from_numpy(y_test).float().to(device)
     # y_test = torch.from_numpy(y_test).float().view(-1, 1).to(device)
 
+    # print(torch.cuda.memory_summary(device=None, abbreviated=False))
+
     # Linear Regression (PyTorch)
     torch_regression(X_train, y_train, X_test, y_test, 0.01, 1000,
                      'SYS, DIA, MAP from 34 Median PPG Features')
@@ -62,7 +65,7 @@ def run_model(abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path):
                      'SYS, DIA, MAP from 34 Median PPG Features')
 
     # LSTM (PyTorch)
-    torch_lstm(X_train, y_train, X_test, y_test, 0.01, 1000,
+    torch_lstm(X_train, y_train, X_test, y_test, 0.1, 100,
                'SYS, DIA, MAP from 34 Median PPG Features')
 
     # GRU (PyTorch)
@@ -174,7 +177,7 @@ def calculate_limits_of_agreement(pred, est):
     return lower_limit, upper_limit
 
 
-def training_loop(model, criterion, optimizer, num_epochs, X_train, y_train):
+def training_loop(model_name, model, criterion, optimizer, num_epochs, X_train, y_train):
     for epoch in range(num_epochs):
         # Forward pass and loss
         y_predicted = model(X_train)
@@ -185,14 +188,14 @@ def training_loop(model, criterion, optimizer, num_epochs, X_train, y_train):
         loss.backward()
         optimizer.step()
 
-        wandb.log({"loss": loss})
+        wandb.log({f"{model_name} train loss (MSE)": loss})
 
         if (epoch + 1) % 100 == 0:
             print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
     print('--------')
 
 
-def testing_evaluating(model, X_test, y_test, learning_rate, num_epochs, feat, plot=False):
+def testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epochs, feat, plot=False):
     with torch.no_grad():
         # Testing
         y_pred = model(X_test)
@@ -208,7 +211,9 @@ def testing_evaluating(model, X_test, y_test, learning_rate, num_epochs, feat, p
                      f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
                      f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
 
-        wandb.log({"mse": mse, "rmse": rmse, "mae": mae})
+        wandb.log({f"{model_name} test mse": mse,
+                   f"{model_name} test rmse": rmse,
+                   f"{model_name} test mae": mae})
 
         # Plotting
         if plot:
@@ -235,10 +240,10 @@ def torch_regression(X_train, y_train, X_test, y_test, learning_rate, num_epochs
     optimizer = optim.SGD(model.parameters(), lr=learning_rate)
 
     # Training
-    training_loop(model, criterion, optimizer, num_epochs, X_train, y_train)
+    training_loop('LR', model, criterion, optimizer, num_epochs, X_train, y_train)
 
     # Testing and Evaluating
-    testing_evaluating(model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
+    testing_evaluating('LR', model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
 
 
 class NeuralNet(nn.Module):
@@ -266,64 +271,63 @@ def torch_neural_net(X_train, y_train, X_test, y_test, learning_rate, num_epochs
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
     # Training loop
-    training_loop(model, criterion, optimizer, num_epochs, X_train, y_train)
+    training_loop('MLP', model, criterion, optimizer, num_epochs, X_train, y_train)
 
     # Testing and Evaluating
-    testing_evaluating(model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
+    testing_evaluating('MLP', model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
 
 
 class LSTM(nn.Module):
-    def __init__(self, input_size, hidden_size, num_layers):
+    def __init__(self, input_size, hidden_size, out_features):
         super(LSTM, self).__init__()
-        self.num_layers = num_layers
         self.hidden_size = hidden_size
-        # self.rnn = nn.RNN(input_size, hidden_size, num_layers, batch_first=True)
-        # self.gru = nn.GRU(input_size, hidden_size, num_layers, batch_first=True)
-        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
-        # self.fc = nn.Linear(hidden_size, num_classes)
+        self.lstm1 = nn.LSTMCell(input_size, hidden_size)
+        self.lstm2 = nn.LSTMCell(hidden_size, hidden_size)
+        self.linear = nn.Linear(hidden_size, out_features)
 
     def forward(self, x):
-        # Set initial hidden states (and cell states for LSTM)
-        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size)
-        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size)
-
-        # Forward propagate RNN
-        # out, _ = self.rnn(x, h0)
-        out, _ = self.lstm(x, (h0, c0))
-
-        # out: tensor of shape (batch_size, seq_length, hidden_size)
-        # out: (n, 28, 128)
-
-        # Decode the hidden state of the last time step
-        out = out[:, -1, :]
-        # out: (n, 128)
-
-        out = self.fc(out)
-        # out: (n, 10)
-        return out
+        h_t = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
+        c_t = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
+        h_t2 = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
+        c_t2 = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
+        h_t, c_t = self.lstm1(x, (h_t, c_t))
+        h_t2, c_t2 = self.lstm2(h_t, (h_t2, c_t2))
+        output = self.linear(h_t2)
+        return output
 
 
 def torch_lstm(X_train, y_train, X_test, y_test, learning_rate, num_epochs, feat):
     input_size = X_train.shape[1]
     output_size = y_train.shape[1]
-    hidden_size = int((input_size + output_size) / 2)
+    hidden_size = 64  # int((input_size + output_size) / 2)
 
-    model = LSTM(input_size=input_size, hidden_size=hidden_size, output_size=output_size)
+    model = LSTM(input_size, hidden_size, output_size)
     criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    optimizer = optim.LBFGS(model.parameters(), lr=learning_rate)
 
     # Training loop
-    training_loop(model, criterion, optimizer, num_epochs, X_train, y_train)
+    for epoch in range(num_epochs):
+        def closure():
+            optimizer.zero_grad()
+            y_predicted = model(X_train)
+            loss = criterion(y_predicted, y_train)
+            loss.backward()
+            wandb.log({"LSTM train loss (MSE)": loss})
+            return loss
+
+        optimizer.step(closure)
+        if (epoch + 1) % 10 == 0:
+            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {closure().item():.4f}')
 
     # Testing and Evaluating
-    testing_evaluating(model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
+    testing_evaluating('LSTM', model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
 
 
 def main():
-    run_model('/features/train_test/tot_abp_feats.csv',
-              '/features/train_test/tot_ppg_feats.csv',
-              '/features/train_test/med_abp_feats7.csv',
-              '/features/train_test/med_ppg_feats7.csv')
+    run_model('/features/train_test/tot_abp.csv',
+              '/features/train_test/tot_ppg.csv',
+              '/features/train_test/med_abp_feats7_1.csv',
+              '/features/train_test/med_ppg_feats7_1.csv')
 
 
 if __name__ == "__main__":
