@@ -207,7 +207,7 @@ def testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epo
         # Evaluating and Logging
         mse, mae, r2, bias, loa_l, loa_u = evaluate(y_test, y_pred)
         rmse = np.sqrt(mse)
-        logging.info(f'PyTorch LR: learning_rate={learning_rate}, epochs={num_epochs} ({feat})\n'
+        logging.info(f'PyTorch {model_name}: learning_rate={learning_rate}, epochs={num_epochs} ({feat})\n'
                      f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
                      f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
 
