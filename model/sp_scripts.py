@@ -125,12 +125,12 @@ def process_data(fs, folder, goal, median_window):
     tot_med_abp_sys, tot_med_abp_dia, tot_med_abp_map, tot_med_ppg_feats = (
         np.array([]), np.array([]), np.array([]), np.empty((0, 34)))
     for filename in filenames:
-        if i <= 12000:
+        if i <= 18000:
             i += 1
             continue
-        if i > 18000:
-            print('processed and saved features from further 6000 records')
-            break
+        # if i > 18000:
+        #     print('processed and saved features from further 6000 records')
+        #     break
         try:
             # 1: Data Reading
             seg_name, raw_abp, raw_ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -373,7 +373,7 @@ def group_a_b(a_ts, b_ts):
 def save_split_features(goal, features):
     for feat in features:
         df = pd.DataFrame(data=feat[0])
-        df.to_csv(f"features/{goal}/{feat[1]}_3.csv", index=False)
+        df.to_csv(f"features/{goal}/{feat[1]}_4.csv", index=False)
 
     # for feat in features:
     #     mid = int(len(feat[0]) / 2)
@@ -1271,10 +1271,43 @@ def split_filename(filename):
     return sig, seg_name, end
 
 
+def merge_features():
+    tot_abp, tot_ppg, med7_abp, med7_ppg = np.empty((0, 3)), np.empty((0, 34)), np.empty((0, 3)), np.empty((0, 34))
+    for i in range(1, 5):
+        print(f'Batch {i}')
+        abs_path = os.path.abspath(os.getcwd())
+        tot_abp_path = f'/features/train_test/tot_abp_feats_{i}.csv'
+        print('- reading tot abp data')
+        ta = pd.read_csv(abs_path + tot_abp_path).values
+        tot_abp = np.concatenate((tot_abp, ta))
+        tot_ppg_path = f'/features/train_test/tot_ppg_feats_{i}.csv'
+        print('- reading tot ppg data')
+        tp = pd.read_csv(abs_path + tot_ppg_path).values
+        tot_ppg = np.concatenate((tot_ppg, tp))
+        med7_abp_path = f'/features/train_test/med_abp_feats7_{i}.csv'
+        print('- reading med abp data')
+        ma = pd.read_csv(abs_path + med7_abp_path).values
+        med7_abp = np.concatenate((med7_abp, ma))
+        med7_ppg_path = f'/features/train_test/med_ppg_feats7_{i}.csv'
+        print('- reading med ppg data')
+        mp = pd.read_csv(abs_path + med7_ppg_path).values
+        med7_ppg = np.concatenate((med7_ppg, mp))
+
+    df_ta = pd.DataFrame(data=tot_abp)
+    df_ta.to_csv(f"features/train_test/tot_abp.csv", index=False)
+    df_tp = pd.DataFrame(data=tot_ppg)
+    df_tp.to_csv(f"features/train_test/tot_ppg.csv", index=False)
+    df_ma = pd.DataFrame(data=med7_abp)
+    df_ma.to_csv(f"features/train_test/med7_abp.csv", index=False)
+    df_mp = pd.DataFrame(data=med7_ppg)
+    df_mp.to_csv(f"features/train_test/med7_ppg.csv", index=False)
+
+
 def main(fs=125):
     # manual_filter_data('usable_ppg_data_2')
     # process_data(fs, '/mimic3/', 'train_test_1', 7)
     process_data(125, '/mimic3/', 'train_test', 7)
+    # merge_features()
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)
 

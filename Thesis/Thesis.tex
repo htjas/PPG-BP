@@ -158,7 +158,7 @@ Machine Learning Approach}
     5508 records each containing 37795 values corresponding to ~605 seconds (fs=64.4725);
 
     Data for Training/Testing from MIMIC3 (1st Iteration):
-    306 records each containing 75625 values corresponding to 605 seconds (fs=125);
+    22083 (~4*MIMIC4) records each containing 75625 values corresponding to 605 seconds (fs=125);
 
     \subsection{Data Processing}
     \label{subsec:data_processing}
@@ -175,14 +175,14 @@ Machine Learning Approach}
     - For target reference Systolic, Diastolic and MAP values were extracted from the waveform data.
     - For Machine Learning, 34 features were extracted from the PPG waveform
     A total of \textbf{1,309,265} values were extracted, resulting in a 34 x 1,309,265 matrix.
-    Total of \textbf{183,140} median values were extracted
+    Total of \textbf{183,140} median values were extracted.
 
-    FE 1st iteration from MIMIC3:
+    FE from MIMIC3 for Training/Testing:
 
-    - For target reference ABP Systolic and Diastolic values were extracted from the waveform data.
+    - For target reference ABP Systolic, Diastolic and MAP values were extracted from the waveform data.
     - For Machine Learning, 34 features were extracted from the PPG waveform
-    A total of 161,269 values were extracted, resulting in a 34 x 161269 matrix.
-    Total of 14,958 median values were extracted
+    A total of \textbf{13,659,375} values were extracted, resulting in a 34 x 13659375 matrix.
+    Total of \textbf{1,918,623} median values were extracted.
 
     The summarized results are displayed in Figure~\ref{fig:data_flow}.
 
@@ -212,10 +212,13 @@ Machine Learning Approach}
     - use further signal processing approaches
     - manually filter waveform graphics (e.g.\ faulty PPG signal)
     - expand on machine learning algorithms
+    - experiment with different median intervals
 
 
     \section{Conclusion}
     \label{sec:conclusion}
+
+    \newpage
 
     \bibliographystyle{plain}
     \bibliography{literature}
