@@ -18,16 +18,20 @@ import torch.nn.functional as F
 import wandb
 
 
-def run_model(abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path):
+def run_model(model_name):
     # Get Logger
     logger = init_logger('ml_logs')
     logger.info("----------------------------")
     logger.info("Starting ML model")
-    wandb.init(
-        project="ppg-bp"
-    )
+    # wandb.init(
+    #     project="ppg-bp"
+    # )
 
     # Data reading and Train/Test splitting
+    abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path = ('/features/train_test/tot_abp.csv',
+                                                              '/features/train_test/tot_ppg.csv',
+                                                              '/features/train_test/med_abp_feats7_1.csv',
+                                                              '/features/train_test/med_ppg_feats7_1.csv')
     # abp_tot = read_multiple_feature_data(abp_tot_path)
     # ppg_tot = read_multiple_feature_data(ppg_tot_path)
     abp = read_multiple_feature_data(abp_med_path)
@@ -56,30 +60,29 @@ def run_model(abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path):
 
     # print(torch.cuda.memory_summary(device=None, abbreviated=False))
 
-    # Linear Regression (PyTorch)
-    torch_regression(X_train, y_train, X_test, y_test, 0.01, 1000,
-                     'SYS, DIA, MAP from 34 Median PPG Features')
+    feat = 'SYS, DIA, MAP from 34 Median PPG Features'
 
-    # Neural Network / MLP (PyTorch)
-    torch_neural_net(X_train, y_train, X_test, y_test, 0.01, 1000,
-                     'SYS, DIA, MAP from 34 Median PPG Features')
+    match model_name:
+        case 'LR':
+            # Linear Regression (PyTorch)
+            torch_regression(X_train, y_train, X_test, y_test, 0.01, 1000, feat)
+        case 'MLP':
+            # Neural Network / MLP (PyTorch)
+            torch_neural_net(X_train, y_train, X_test, y_test, 0.01, 1000, feat)
+        case 'LSTM':
+            # LSTM (PyTorch)
+            torch_rnn_lstm_gru(model_name, X_train, y_train, X_test, y_test, 0.1, 100, feat)
+        case 'GRU':
+            # GRU (PyTorch)
+            torch_rnn_lstm_gru(model_name, X_train, y_train, X_test, y_test, 0.1, 100, feat)
+        # case 'AM':
+        #     # RNN with Attention Mechanism
+        # case 'SVM':
+        #     # Support Vector Machine
+        # case 'RF':
+        #     # Random Forest
 
-    # LSTM (PyTorch)
-    torch_lstm(X_train, y_train, X_test, y_test, 0.1, 100,
-               'SYS, DIA, MAP from 34 Median PPG Features')
-
-    # GRU (PyTorch)
-    # torch_gru()
-
-    # RNN with Attention Mechanism
-
-    # Support Vector Machine
-
-    # Random Forest
-
-    wandb.finish()
-
-    # TODO: RNN models : Feedforward/MLPs, LSTMs, GRUs
+    # wandb.finish()
 
 
 def read_single_feature_data(path):
@@ -211,9 +214,9 @@ def testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epo
                      f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
                      f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
 
-        wandb.log({f"{model_name} test mse": mse,
-                   f"{model_name} test rmse": rmse,
-                   f"{model_name} test mae": mae})
+        # wandb.log({f"{model_name} test mse": mse,
+        #            f"{model_name} test rmse": rmse,
+        #            f"{model_name} test mae": mae})
 
         # Plotting
         if plot:
@@ -296,38 +299,77 @@ class LSTM(nn.Module):
         return output
 
 
-def torch_lstm(X_train, y_train, X_test, y_test, learning_rate, num_epochs, feat):
+class GRU(nn.Module):
+    def __init__(self, input_size, hidden_size, out_features):
+        super(GRU, self).__init__()
+        self.hidden_size = hidden_size
+        self.gru1 = nn.GRUCell(input_size, hidden_size)
+        self.gru2 = nn.GRUCell(hidden_size, hidden_size)
+        self.linear = nn.Linear(hidden_size, out_features)
+
+    def forward(self, x):
+        h_t = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
+        h_t2 = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
+        h_t = self.gru1(x, h_t)
+        h_t2 = self.gru2(h_t, h_t2)
+        output = self.linear(h_t2)
+        return output
+
+
+def torch_rnn_lstm_gru(model_name, X_train, y_train, X_test, y_test, learning_rate, num_epochs, feat):
     input_size = X_train.shape[1]
     output_size = y_train.shape[1]
     hidden_size = 64  # int((input_size + output_size) / 2)
 
-    model = LSTM(input_size, hidden_size, output_size)
+    if model_name == 'GRU':
+        model = GRU(input_size, hidden_size, output_size)
+    else:
+        model = LSTM(input_size, hidden_size, output_size)
+
     criterion = nn.MSELoss()
     optimizer = optim.LBFGS(model.parameters(), lr=learning_rate)
 
     # Training loop
+    best_loss = float('inf')
+    patience, counter = 3, 0
+    print(model_name)
     for epoch in range(num_epochs):
         def closure():
             optimizer.zero_grad()
-            y_predicted = model(X_train)
-            loss = criterion(y_predicted, y_train)
+            y_train_pred = model(X_train)
+            loss = criterion(y_train_pred, y_train)
             loss.backward()
-            wandb.log({"LSTM train loss (MSE)": loss})
+            # wandb.log({"Training loss (MSE)": loss})
             return loss
 
         optimizer.step(closure)
+
+        # Intermittent testing
+        with torch.no_grad():
+            y_test_pred = model(X_test)
+            test_loss = criterion(y_test_pred, y_test)
+
         if (epoch + 1) % 10 == 0:
-            print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {closure().item():.4f}')
+            print(f'Epoch [{epoch + 1}/{num_epochs}], '
+                  f'Training Loss: {closure().item():.4f},'
+                  f' Testing Loss: {test_loss:.4f}')
+
+        # Check for early stopping
+        if test_loss < best_loss:
+            best_loss = test_loss
+            counter = 0
+        else:
+            counter += 1
+            if counter >= patience:
+                print(f'Early stopping at epoch {epoch + 1} as training loss starts increasing')
+                break
 
     # Testing and Evaluating
-    testing_evaluating('LSTM', model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
+    testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
 
 
 def main():
-    run_model('/features/train_test/tot_abp.csv',
-              '/features/train_test/tot_ppg.csv',
-              '/features/train_test/med_abp_feats7_1.csv',
-              '/features/train_test/med_ppg_feats7_1.csv')
+    run_model('GRU')
 
 
 if __name__ == "__main__":
