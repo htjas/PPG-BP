@@ -221,4 +221,4 @@ def plot_feature_importances(weights, model_name, iteration):
     plt.ylabel('Feature Labels')
     plt.title(f'Feature Importance {model_name} (Iteration - {iteration})')
     plt.tight_layout()
-    plt.savefig(f'./relevant_plots/feature_importance_plot_{model_name}_{iteration}.png')
+    plt.savefig(f'./relevant_plots/ml_plots/feature_importance/feature_importance_plot_{model_name}_{iteration}.png')

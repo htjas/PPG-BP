@@ -19,12 +19,12 @@ import torch.nn.functional as F
 import wandb
 
 
-def run_model(model_name, f_indexes_names, iteration):
+def train_test_model(model_name, f_indexes_names, iteration):
     # Get Logger
     logger = init_logger('ml_logs')
     logger.info("----------------------------")
     logger.info("Starting ML model")
-    # wandb.init(project="ppg-bp", name=model_name)
+    wandb.init(project="ppg-bp", name=model_name)
 
     # Data reading
     abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path = ('/features/train_test/tot_abp.csv',
@@ -53,39 +53,43 @@ def run_model(model_name, f_indexes_names, iteration):
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.fit_transform(X_test)
 
-    # Splitting data to shorter arrays, to avoid GPU overclocking
-    no_segments = 3
-    X_train_segments = split_into_segments(X_train, no_segments)
-    # X_test_segments = split_into_segments(X_test, no_segments)
-    y_train_segments = split_into_segments(y_train, no_segments)
-    # y_test_segments = split_into_segments(y_test, no_segments)
-
     feat = 'SYS, DIA, MAP from 34 Median PPG Features'
 
     match model_name:
         case 'LR':
             # Linear Regression (PyTorch)
-            torch_regression(model_name, X_train, y_train, X_test, y_test, 0.01, 1000, feat)
+            torch_regression(model_name, device, X_train, y_train, X_test, y_test, 0.01, 1000, feat)
         case 'MLP':
             # Neural Network / MLP (PyTorch)
-            torch_neural_net(model_name, X_train, y_train, X_test, y_test, 0.01, 1000, feat)
+            torch_neural_net(model_name, device, X_train, y_train, X_test, y_test, 0.01, 1000, feat)
         case 'LSTM':
-            # LSTM (PyTorch)
-            print()
+            # Splitting data to shorter arrays, to avoid GPU overclocking
+            no_segments = 3
+            X_train_segments = split_into_segments(X_train, no_segments)
+            # X_test_segments = split_into_segments(X_test, no_segments)
+            y_train_segments = split_into_segments(y_train, no_segments)
+            # y_test_segments = split_into_segments(y_test, no_segments)
+
             f_indexes_names = torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_train_segments,
-                                              X_test, y_test, 0.8, 10,
-                                              feat, f_indexes_names, iteration)
+                                                 X_test, y_test, 0.1, 100,
+                                                 feat, f_indexes_names, iteration)
         case 'GRU':
-            # GRU (PyTorch)
+            # Splitting data to shorter arrays, to avoid GPU overclocking
+            no_segments = 2
+            X_train_segments = split_into_segments(X_train, no_segments)
+            # X_test_segments = split_into_segments(X_test, no_segments)
+            y_train_segments = split_into_segments(y_train, no_segments)
+            # y_test_segments = split_into_segments(y_test, no_segments)
+
             f_indexes_names = torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_train_segments,
-                                              X_test, y_test, 0.8, 1, feat,
-                                              f_indexes_names, iteration)
+                                                 X_test, y_test, 0.1, 100, feat,
+                                                 f_indexes_names, iteration)
         # case 'SVM':
         #     # Support Vector Machine
-        # case 'RF':
-        #     # Random Forest
+        case 'RF':
+            run_random_forest(feat, X_train, y_train, X_test, y_test)
 
-    # wandb.finish()
+    wandb.finish()
 
     return f_indexes_names
 
@@ -171,8 +175,8 @@ def run_random_forest(feat, ppg_train, abp_train, ppg_test, abp_test):
 
 
 def fit_predict_evaluate(model, model_name, ppg_train, abp_train, ppg_test, abp_test):
-    model.fit(ppg_train.reshape(-1, 1), abp_train)
-    predictions = model.predict(ppg_test.reshape(-1, 1))
+    model.fit(ppg_train, abp_train)
+    predictions = model.predict(ppg_test)
     visual.plot_ml_features(model_name, ppg_test, abp_test, ppg_test, predictions)
     mse, mae, r2, bias, loa_l, loa_u = evaluate(abp_test, predictions)
     return mse, mae, r2, bias, [loa_u, loa_u]
@@ -207,7 +211,7 @@ def training_loop(model_name, model, criterion, optimizer, num_epochs, X_train, 
         loss.backward()
         optimizer.step()
 
-        wandb.log({f"{model_name} Train loss (MSE)": loss})
+        wandb.log({f"{model_name} train loss (MSE)": loss})
 
         if (epoch + 1) % 100 == 0:
             print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
@@ -230,7 +234,7 @@ def testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epo
                      f'\t\t\t\t\t  MSE: {mse:.4f}, RMSE: {rmse:.4f}, MAE: {mae:.3f}, R^2: {r2:.3f}, '
                      f'Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f})')
 
-        # wandb.log({"Test RMSE": rmse, "Test MAE": mae})
+        wandb.log({"test RMSE": rmse, "test MAE": mae})
 
         # Plotting
         if plot:
@@ -248,7 +252,7 @@ def feature_importance_permutation(model, X_test, y_test, no_features, feature_i
         # Calculate performance with permuted feature
         permuted_performance = calculate_performance(model, X_permuted, y_test)
         # Calculate feature importance as the decrease in performance
-        feature_importances = np.append(feature_importances, np.abs(baseline_performance - permuted_performance))
+        feature_importances = np.append(feature_importances, -(baseline_performance - permuted_performance))
     feature_weights = [(index, name, importance)
                        for index, name, importance
                        in zip(feature_indexes, feature_names, feature_importances)]
@@ -262,6 +266,14 @@ def calculate_performance(model, X, y_true):
     return mean_squared_error(y_true.cpu(), y_pred.cpu())
 
 
+def convert_to_tensors(device, X_train, y_train, X_test, y_test):
+    X_train = torch.from_numpy(X_train).float().to(device)
+    y_train = torch.from_numpy(y_train).float().to(device)
+    X_test = torch.from_numpy(X_test).float().to(device)
+    y_test = torch.from_numpy(y_test).float().to(device)
+    return X_train, y_train, X_test, y_test
+
+
 class LinearRegression(nn.Module):
     def __init__(self, input_size, output_size):
         super(LinearRegression, self).__init__()
@@ -271,9 +283,11 @@ class LinearRegression(nn.Module):
         return self.linear(x)
 
 
-def torch_regression(model_name, X_train, y_train, X_test, y_test, learning_rate, num_epochs, feat):
+def torch_regression(model_name, device, X_train, y_train, X_test, y_test, learning_rate, num_epochs, feat):
     input_size = X_train.shape[1]
     output_size = y_train.shape[1]
+
+    X_train, y_train, X_test, y_test = convert_to_tensors(device, X_train, y_train, X_test, y_test)
 
     # Instantiate the model, loss function, and optimizer
     model = LinearRegression(input_size=input_size, output_size=output_size)
@@ -302,10 +316,12 @@ class NeuralNet(nn.Module):
         return out
 
 
-def torch_neural_net(model_name, X_train, y_train, X_test, y_test, learning_rate, num_epochs, feat):
+def torch_neural_net(model_name, device, X_train, y_train, X_test, y_test, learning_rate, num_epochs, feat):
     input_size = X_train.shape[1]
     output_size = y_train.shape[1]
     hidden_size = int((input_size + output_size) / 2)
+
+    X_train, y_train, X_test, y_test = convert_to_tensors(device, X_train, y_train, X_test, y_test)
 
     model = NeuralNet(input_size=input_size, hidden_size=hidden_size, output_size=output_size)
     criterion = nn.MSELoss()
@@ -374,7 +390,7 @@ def torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_trai
     # Training loop
     best_loss = float('inf')
     patience, counter = 3, 0
-    print(model_name)
+    print(model_name, iteration)
     for epoch in range(num_epochs):
         train_loss = float('inf')
         for i in range(no_segments):
@@ -393,13 +409,13 @@ def torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_trai
 
         # Clearing Tensors
         X_train, y_train = None, None
-        # wandb.log({"Training loss (MSE)": train_loss}, step=epoch)
+        wandb.log({"training loss (MSE)": train_loss}, step=epoch)
 
         # Intermittent testing
         with torch.no_grad():
             y_test_pred = model(X_test)
             test_loss = criterion(y_test_pred, y_test)
-            # wandb.log({"Testing loss (MSE)": test_loss}, step=epoch)
+            wandb.log({"testing loss (MSE)": test_loss}, step=epoch)
 
         if (epoch + 1) % 1 == 0:
             print(f'Epoch [{epoch + 1}/{num_epochs}], '
@@ -415,6 +431,9 @@ def torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_trai
             if counter >= patience:
                 print(f'Early stopping at epoch {epoch + 1} as training loss starts increasing')
                 break
+
+    # Model Saving
+    torch.save(model, f'models/{model_name}_{iteration}')
 
     # Testing and Evaluating
     testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
@@ -440,11 +459,14 @@ def torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_trai
 def main():
     feature_names = pd.read_csv('./features/feature_indexes_names.csv', header=None).values.tolist()
     f_indexes_names = np.array(feature_names)
-    for iteration in range(4):
-        run_model('GRU', f_indexes_names, iteration)
-        # run_model('LR')
-        # run_model('MLP')
-        # run_model('LSTM', feature_names)
+    for iteration in range(1):
+        train_test_model('RF', f_indexes_names, iteration)
+        # run_model('LR', f_indexes_names, iteration)
+        # run_model('MLP', f_indexes_names, iteration)
+        # f_indexes_names = run_model('LSTM', f_indexes_names, iteration)
+        # f_indexes_names = run_model('GRU', f_indexes_names, iteration)
+
+    # validate_model()
 
 
 if __name__ == "__main__":

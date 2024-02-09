@@ -1,6 +1,6 @@
 from init_scripts import load_filter_and_save_records
 from sp_scripts import process_data
-from ml_scripts import run_model
+from ml_scripts import train_test_model
 from jproperties import Properties
 import pandas as pd
 import os
