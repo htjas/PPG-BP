@@ -208,3 +208,17 @@ def plot_ml_features_line(title, y1, y2):
     # plt.xlim([0, 200])
     plt.legend()
     plt.show()
+
+
+def plot_feature_importances(weights, model_name, iteration):
+    fig = plt.figure(figsize=(10, 20))
+    for i in range(len(weights) - 1, -1, -1):
+        name = weights[i, 1]
+        value = float(weights[i, 2])
+        plt.barh(name, value, color='maroon')
+        plt.text(value, name, f'{value:.2f}', va='center')
+    plt.xlabel('Importance')
+    plt.ylabel('Feature Labels')
+    plt.title(f'Feature Importance {model_name} (Iteration - {iteration})')
+    plt.tight_layout()
+    plt.savefig(f'./relevant_plots/feature_importance_plot_{model_name}_{iteration}.png')

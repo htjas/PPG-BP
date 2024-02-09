@@ -1,4 +1,5 @@
 import logging
+from operator import itemgetter
 import numpy as np
 from matplotlib import pyplot as plt
 # from sklearn.linear_model import LinearRegression
@@ -18,14 +19,14 @@ import torch.nn.functional as F
 import wandb
 
 
-def run_model(model_name):
+def run_model(model_name, f_indexes_names, iteration):
     # Get Logger
     logger = init_logger('ml_logs')
     logger.info("----------------------------")
     logger.info("Starting ML model")
     # wandb.init(project="ppg-bp", name=model_name)
 
-    # Data reading and Train/Test splitting
+    # Data reading
     abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path = ('/features/train_test/tot_abp.csv',
                                                               '/features/train_test/tot_ppg.csv',
                                                               '/features/train_test/med7_abp.csv',
@@ -34,8 +35,12 @@ def run_model(model_name):
     # ppg_tot = read_multiple_feature_data(ppg_tot_path)
     abp = read_multiple_feature_data(abp_med_path)
     ppg = read_multiple_feature_data(ppg_med_path)
-    # abp_sys, abp_dia, abp_map = abp[:, 0], abp[:, 1], abp[:, 2]
-    # abp, ppg = abp[:100000], ppg[:100000]
+
+    # Feature Splicing
+    f_indexes = f_indexes_names[:, 0].astype(int)
+    ppg = ppg[:, f_indexes]
+
+    # Train/Test splitting
     X_train, X_test, y_train, y_test = train_test_split(
         ppg, abp, test_size=0.2)  # random_state=42, shuffle=False, stratify=None)
 
@@ -49,19 +54,11 @@ def run_model(model_name):
     X_test = scaler.fit_transform(X_test)
 
     # Splitting data to shorter arrays, to avoid GPU overclocking
-    no_arrays = 16
-    X_train_segments = split_into_segments(X_train, no_arrays)
-    X_test_segments = split_into_segments(X_test, no_arrays)
-    y_train_segments = split_into_segments(y_train, no_arrays)
-    y_test_segments = split_into_segments(y_test, no_arrays)
-
-    # Convert to PyTorch tensors and accelerate by GPU
-    # X_train = torch.from_numpy(X_train).float().to(device)
-    # y_train = torch.from_numpy(y_train).float().to(device)
-    # X_test = torch.from_numpy(X_test).float().to(device)
-    # y_test = torch.from_numpy(y_test).float().to(device)
-
-    # print(torch.cuda.memory_summary(device=None, abbreviated=False))
+    no_segments = 3
+    X_train_segments = split_into_segments(X_train, no_segments)
+    # X_test_segments = split_into_segments(X_test, no_segments)
+    y_train_segments = split_into_segments(y_train, no_segments)
+    # y_test_segments = split_into_segments(y_test, no_segments)
 
     feat = 'SYS, DIA, MAP from 34 Median PPG Features'
 
@@ -74,11 +71,15 @@ def run_model(model_name):
             torch_neural_net(model_name, X_train, y_train, X_test, y_test, 0.01, 1000, feat)
         case 'LSTM':
             # LSTM (PyTorch)
-            torch_rnn_lstm_gru(model_name, device, X_train_segments, y_train_segments, X_test_segments, y_test_segments,
-                               0.8, 10, feat)
+            print()
+            f_indexes_names = torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_train_segments,
+                                              X_test, y_test, 0.8, 10,
+                                              feat, f_indexes_names, iteration)
         case 'GRU':
             # GRU (PyTorch)
-            torch_rnn_lstm_gru(model_name, X_train, y_train, X_test, y_test, 0.1, 100, feat)
+            f_indexes_names = torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_train_segments,
+                                              X_test, y_test, 0.8, 1, feat,
+                                              f_indexes_names, iteration)
         # case 'SVM':
         #     # Support Vector Machine
         # case 'RF':
@@ -86,11 +87,13 @@ def run_model(model_name):
 
     # wandb.finish()
 
+    return f_indexes_names
+
 
 def split_into_segments(data, no_arrays):
     segment_length = len(data) // no_arrays
     data_splits = []
-    for i in range(16):
+    for i in range(no_arrays):
         start_index = i * segment_length
         end_index = (i + 1) * segment_length
         data_split = data[start_index:end_index]
@@ -231,7 +234,32 @@ def testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epo
 
         # Plotting
         if plot:
-            visual.plot_ml_features_line('PyTorch LR', y_test, y_pred)
+            visual.plot_ml_features_line(f'PyTorch {model_name}', y_test, y_pred)
+
+
+def feature_importance_permutation(model, X_test, y_test, no_features, feature_indexes, feature_names):
+    baseline_performance = calculate_performance(model, X_test, y_test)
+    feature_importances = np.array([], dtype=np.float32)
+    for j in range(no_features):
+        # Copy original data
+        X_permuted = X_test.clone()
+        # Shuffle the values of the j-th feature
+        X_permuted[:, j] = torch.rand(X_permuted.shape[0])
+        # Calculate performance with permuted feature
+        permuted_performance = calculate_performance(model, X_permuted, y_test)
+        # Calculate feature importance as the decrease in performance
+        feature_importances = np.append(feature_importances, np.abs(baseline_performance - permuted_performance))
+    feature_weights = [(index, name, importance)
+                       for index, name, importance
+                       in zip(feature_indexes, feature_names, feature_importances)]
+    sorted_feature_weights = sorted(feature_weights, key=lambda x: x[2], reverse=True)
+    return np.array(sorted_feature_weights)
+
+
+def calculate_performance(model, X, y_true):
+    with torch.no_grad():
+        y_pred = model(X)
+    return mean_squared_error(y_true.cpu(), y_pred.cpu())
 
 
 class LinearRegression(nn.Module):
@@ -326,11 +354,14 @@ class GRU(nn.Module):
         return output
 
 
-def torch_rnn_lstm_gru(model_name, device, X_train_segments, y_train_segments,
-                       X_test_segments, y_test_segments, learning_rate, num_epochs, feat):
+def torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_train_segments,
+                       X_test, y_test, learning_rate, num_epochs, feat, feature_names, iteration):
     input_size = X_train_segments[0].shape[1]
     output_size = y_train_segments[0].shape[1]
-    hidden_size = 64  # int((input_size + output_size) / 2)
+    hidden_size = input_size * 2
+
+    X_test = torch.from_numpy(X_test).float().to(device)
+    y_test = torch.from_numpy(y_test).float().to(device)
 
     if model_name == 'GRU':
         model = GRU(input_size, hidden_size, output_size)
@@ -345,33 +376,35 @@ def torch_rnn_lstm_gru(model_name, device, X_train_segments, y_train_segments,
     patience, counter = 3, 0
     print(model_name)
     for epoch in range(num_epochs):
-
-        for i in range(16):
+        train_loss = float('inf')
+        for i in range(no_segments):
             X_train = torch.from_numpy(X_train_segments[i]).float().to(device)
             y_train = torch.from_numpy(y_train_segments[i]).float().to(device)
-            X_test = torch.from_numpy(X_test_segments[i]).float().to(device)
-            y_test = torch.from_numpy(y_test_segments[i]).float().to(device)
 
             def closure():
                 optimizer.zero_grad()
                 y_train_pred = model(X_train)
                 loss = criterion(y_train_pred, y_train)
                 loss.backward()
-                # wandb.log({"Training loss (MSE)": loss}, step=epoch)
                 return loss
 
             optimizer.step(closure)
+            train_loss = closure().item()
 
-            # Intermittent testing
-            with torch.no_grad():
-                y_test_pred = model(X_test)
-                test_loss = criterion(y_test_pred, y_test)
-                # wandb.log({"Testing loss (MSE)": test_loss}, step=epoch)
+        # Clearing Tensors
+        X_train, y_train = None, None
+        # wandb.log({"Training loss (MSE)": train_loss}, step=epoch)
 
-            if (epoch + 1) % 1 == 0 and i == 15:
-                print(f'Epoch [{epoch + 1}/{num_epochs}], '
-                      f'Training Loss: {closure().item():.4f},'
-                      f' Testing Loss: {test_loss:.4f}')
+        # Intermittent testing
+        with torch.no_grad():
+            y_test_pred = model(X_test)
+            test_loss = criterion(y_test_pred, y_test)
+            # wandb.log({"Testing loss (MSE)": test_loss}, step=epoch)
+
+        if (epoch + 1) % 1 == 0:
+            print(f'Epoch [{epoch + 1}/{num_epochs}], '
+                  f'Training Loss: {train_loss:.4f},'
+                  f' Testing Loss: {test_loss:.4f}')
 
         # Check for early stopping
         if test_loss < best_loss:
@@ -383,21 +416,35 @@ def torch_rnn_lstm_gru(model_name, device, X_train_segments, y_train_segments,
                 print(f'Early stopping at epoch {epoch + 1} as training loss starts increasing')
                 break
 
-    # Feature Weighing
-    learned_weights = model.linear.weight.squeeze().cpu().detach().numpy()
-    abs_sum_weights = np.sum(np.abs(learned_weights), axis=0)
-    sorted_indices = np.argsort(abs_sum_weights)[::-1]
-    print(sorted_indices)
-
     # Testing and Evaluating
-    # testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
+    testing_evaluating(model_name, model, X_test, y_test, learning_rate, num_epochs, feat, plot=False)
+
+    # Feature Importance Permutation
+    f_indexes = feature_names[:, 0]
+    f_names = feature_names[:, 1]
+    weights = feature_importance_permutation(model, X_test, y_test, X_train_segments[0].shape[1], f_indexes, f_names)
+    visual.plot_feature_importances(weights, model_name, iteration)
+
+    # Feature Reduction
+    new_features = None
+    if iteration == 0:
+        new_features = weights[:25, :2]
+    if iteration == 1:
+        new_features = weights[:15, :2]
+    if iteration == 2:
+        new_features = weights[:7, :2]
+
+    return new_features
 
 
 def main():
-    # run_model('LR')
-    # run_model('MLP')
-    run_model('LSTM')
-    # run_model('GRU')
+    feature_names = pd.read_csv('./features/feature_indexes_names.csv', header=None).values.tolist()
+    f_indexes_names = np.array(feature_names)
+    for iteration in range(4):
+        run_model('GRU', f_indexes_names, iteration)
+        # run_model('LR')
+        # run_model('MLP')
+        # run_model('LSTM', feature_names)
 
 
 if __name__ == "__main__":
