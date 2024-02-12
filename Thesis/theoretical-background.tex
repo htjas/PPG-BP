@@ -195,7 +195,7 @@ Multiparameter Intelligent Monitoring in Intensive Care IV (MIMIC-IV)~\cite{john
 \begin{enumerate}
     \item How is the database structured?
     \item Which patients and how many of them have both PPG and BP data?
-    \item Arterial Blood Pressue (ABP)
+    \item Arterial Blood Pressure (ABP)
 \end{enumerate}
 
 How does it differ from MIMIC3?
@@ -259,19 +259,20 @@ Liu et al. \cite{liuIntegratedNavigationTethered2017}, added 14 features extract
 A \textbf{support vector machine (SVM)} was then applied for estimating SBP and DBP\@.
 The authors reported that these 14 features further improved the estimation.\newline
 
-The relationship between BP and PPG features is not always linear.
-Therefore, linear models are inappropriate and often fail to model the relationship between BP and PPG when tested on a large dataset collected from a diverse population.
-Other classical machine learning models, such as \textbf{SVM}, and \textbf{random forest}, provide better precision.
+The connection between blood pressure (BP) and photoplethysmography (PPG) characteristics doesn't consistently follow a linear pattern.
+Consequently, linear models are unsuitable and frequently unable to accurately depict the correlation between BP and PPG when evaluated using extensive data gathered from various demographics.
+Alternative traditional machine learning models like Support Vector Machines (SVM) and Random Forest tend to yield higher levels of accuracy.
 Estimation using these models requires establishing one model per objective, hence, SBP and DBP are estimated separately.
 However, DBP strongly correlates with SBP and improve its estimation [49], thus should be modelled simultaneously using one model architecture.
-This can be achieved using neural networks. \textbf{Neural network} models can leverage large amount of data faster and more accurately compared to classical machine learning models.
+This can be achieved using neural networks.
+Neural network models have the capability to utilize vast amounts of data more swiftly and with greater precision when contrasted with traditional machine learning models.
 
 El-Hajj and Kyriacou proposed using \textbf{Bidirectional Long Short-term memory (Bi-LSTM) and Bidirectional Gated Recurrent Units (Bi-GRU) with attention mechanisms}~\cite{el-hajjDeepLearningModels2021}.
 
 In Su et al.~\cite{suLongtermBloodPressure2018}, a four layers \textbf{LSTM} with bidirectional structure and residual connections has been employed for BP estimation using the PTT approach.
-The reported results outperform other PTT based BP regression models.
+The findings surpass those of other BP regression models based on PTT\@.
 
-A study by Joung et al.~\cite{joungContinuousCufflessBlood2023} was conducted to evaluate a learning-based cuffless BP estimation system with calibration in challenging circumstances.
+Joung et al.~\cite{joungContinuousCufflessBlood2023} conducted a study to assess a learning-driven cuffless BP estimation system under challenging conditions, incorporating calibration.
 A one dimensional CNN-based network was designed, that could efficiently extract BP from PPG signals using a comparative paired 1D-CNN structure with calibration.
 
 To precisely design a learning-based BP estimation model such that its estimation accuracy obtained during the test is sustained after being built upon a practical cuffless BP monitoring system, the following delicate yet realistic experimental principles are applicable:

@@ -549,3 +549,7 @@
 2024-02-12 19:17:53 - INFO - ----------------------------
 2024-02-12 19:17:53 - INFO - Starting ML model
 2024-02-12 19:17:53 - INFO - Starting ML model
+2024-02-12 19:28:54 - INFO - PyTorch GRU: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 90.9402, RMSE: 9.5363, MAE: 6.727, R^2: 0.599, Bias: -0.011, LoA: (-18.703, 18.682)
+2024-02-12 19:28:54 - INFO - PyTorch GRU: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 90.9402, RMSE: 9.5363, MAE: 6.727, R^2: 0.599, Bias: -0.011, LoA: (-18.703, 18.682)
