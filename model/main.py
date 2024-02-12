@@ -1,10 +1,10 @@
 from init_scripts import load_filter_and_save_records
 from sp_scripts import process_data
-from ml_scripts import train_test_model
+from ml_scripts import train_test_model, validate_model
+import ml_scripts
 from jproperties import Properties
 import pandas as pd
 import os
-
 
 # Load project details
 configs = Properties()
@@ -45,7 +45,7 @@ path_mm3 = configs.get('path_of_mimic3_data').data
 # Loading, Filtering and Saving Records
 # load_filter_and_save_records(db_mm3, path_mm3, records_to_load=22032, single_record_arrays=100)
 # Signal processing
-process_data(fs_mm3, path_mm3, goal_mm3, median_interval)
+# process_data(fs_mm3, path_mm3, goal_mm3, median_interval)
 
 #
 # # Machine Learning\
@@ -55,4 +55,6 @@ process_data(fs_mm3, path_mm3, goal_mm3, median_interval)
 #
 # run_model(path_med_abp_feats, path_med_ppg_feats)  # training-testing
 #
-# validate_model() - validation
+abs_path = os.path.abspath(os.getcwd())
+ml_scripts.main()
+validate_model(f'{abs_path}/models/LSTM_0', 'LSTM')

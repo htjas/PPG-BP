@@ -15,16 +15,61 @@ import visual
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torch.nn.functional as F
 import wandb
+import time
+import joblib
 
 
-def train_test_model(model_name, f_indexes_names, iteration):
+def validate_model(model, model_name):
+    wandb.init(project="ppg-bp", name=f'{model_name} Validation')
+    # model = torch.load(model_path)
+    torch.cuda.empty_cache()
+    device = torch.device(f'cuda:{torch.cuda.current_device()}' if torch.cuda.is_available() else 'cpu')
+    torch.set_default_device(device)
+    model.to(device)
+    abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path = ('/features/validate/tot_abp_feats.csv',
+                                                              '/features/validate/tot_ppg_feats.csv',
+                                                              '/features/validate/med_abp_feats7.csv',
+                                                              '/features/validate/med_ppg_feats7.csv')
+    abp = read_multiple_feature_data(abp_med_path)
+    ppg = read_multiple_feature_data(ppg_med_path)
+    scaler = StandardScaler()
+    ppg_test = scaler.fit_transform(ppg)
+
+    ppg_test = torch.from_numpy(ppg_test).float().to(device)
+
+    abp_pred = model(ppg_test)
+
+    abp_pred = abp_pred.detach().to('cpu').numpy()
+    sys_test = abp[:, 0]
+    sys_pred = abp_pred[:, 0]
+    dia_test = abp[:, 1]
+    dia_pred = abp_pred[:, 1]
+    map_test = abp[:, 2]
+    map_pred = abp_pred[:, 2]
+
+    mse = mean_squared_error(abp, abp_pred)
+    mae = mean_absolute_error(abp, abp_pred)
+    wandb.log({"validate mse": mse, "validate mae": mae})
+    sys_mse = mean_squared_error(sys_test, sys_pred)
+    sys_mae = mean_absolute_error(sys_test, sys_pred)
+    wandb.log({"validate mse sys": sys_mse, "validate mae sys": sys_mae})
+    dia_mse = mean_squared_error(dia_test, dia_pred)
+    dia_mae = mean_absolute_error(dia_test, dia_pred)
+    wandb.log({"validate mse dia": dia_mse, "validate mae dia": dia_mae})
+    map_mse = mean_squared_error(map_test, map_pred)
+    map_mae = mean_absolute_error(map_test, map_pred)
+    wandb.log({"validate mse map": map_mse, "validate mae map": map_mae})
+
+    wandb.finish()
+
+
+def train_test_model(model_name, f_indexes_names_weights, iteration, kernel='sigmoid'):
     # Get Logger
     logger = init_logger('ml_logs')
     logger.info("----------------------------")
     logger.info("Starting ML model")
-    wandb.init(project="ppg-bp", name=model_name)
+    wandb.init(project="ppg-bp", name=f'{model_name}{iteration}')
 
     # Data reading
     abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path = ('/features/train_test/tot_abp.csv',
@@ -37,7 +82,7 @@ def train_test_model(model_name, f_indexes_names, iteration):
     ppg = read_multiple_feature_data(ppg_med_path)
 
     # Feature Splicing
-    f_indexes = f_indexes_names[:, 0].astype(int)
+    f_indexes = f_indexes_names_weights[:, 0].astype(int)
     ppg = ppg[:, f_indexes]
 
     # Train/Test splitting
@@ -45,6 +90,7 @@ def train_test_model(model_name, f_indexes_names, iteration):
         ppg, abp, test_size=0.2)  # random_state=42, shuffle=False, stratify=None)
 
     # PyTorch GPU activation
+    torch.cuda.empty_cache()
     device = torch.device(f'cuda:{torch.cuda.current_device()}' if torch.cuda.is_available() else 'cpu')
     torch.set_default_device(device)
 
@@ -54,7 +100,7 @@ def train_test_model(model_name, f_indexes_names, iteration):
     X_test = scaler.fit_transform(X_test)
 
     feat = 'SYS, DIA, MAP from 34 Median PPG Features'
-
+    model = None
     match model_name:
         case 'LR':
             # Linear Regression (PyTorch)
@@ -70,9 +116,10 @@ def train_test_model(model_name, f_indexes_names, iteration):
             y_train_segments = split_into_segments(y_train, no_segments)
             # y_test_segments = split_into_segments(y_test, no_segments)
 
-            f_indexes_names = torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_train_segments,
-                                                 X_test, y_test, 0.1, 100,
-                                                 feat, f_indexes_names, iteration)
+            f_indexes_names_weights, model = torch_rnn_lstm_gru(model_name, device, no_segments,
+                                                                X_train_segments, y_train_segments,
+                                                                X_test, y_test, 0.1, 100,
+                                                                feat, f_indexes_names_weights, iteration)
         case 'GRU':
             # Splitting data to shorter arrays, to avoid GPU overclocking
             no_segments = 2
@@ -81,17 +128,18 @@ def train_test_model(model_name, f_indexes_names, iteration):
             y_train_segments = split_into_segments(y_train, no_segments)
             # y_test_segments = split_into_segments(y_test, no_segments)
 
-            f_indexes_names = torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_train_segments,
-                                                 X_test, y_test, 0.1, 100, feat,
-                                                 f_indexes_names, iteration)
-        # case 'SVM':
-        #     # Support Vector Machine
+            f_indexes_names_weights, model = torch_rnn_lstm_gru(model_name, device, no_segments,
+                                                                X_train_segments, y_train_segments,
+                                                                X_test, y_test, 0.1, 100, feat,
+                                                                f_indexes_names_weights, iteration)
+        case 'SVR':
+            run_sv_regression(feat, kernel, X_train, y_train, X_test, y_test)
         case 'RF':
             run_random_forest(feat, X_train, y_train, X_test, y_test)
 
     wandb.finish()
 
-    return f_indexes_names
+    return f_indexes_names_weights, model
 
 
 def split_into_segments(data, no_arrays):
@@ -158,26 +206,40 @@ def run_multi_linear_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
                  f'\t\t\t\t\t  Bias: {bias:.3f}, LoA: ({loa_l:.3f}, {loa_u:.3f}) ({feat})')
 
 
-def run_sv_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
+def run_sv_regression(feat, kernel, ppg_train, abp_train, ppg_test, abp_test):
     svr_model = sklearn.svm.SVR(kernel='sigmoid')
-    mse, mae, r2, bias, loa = fit_predict_evaluate(svr_model, 'SVR - total ' + feat,
+    match kernel:
+        case 'polynomial':
+            svr_model = sklearn.svm.SVR(kernel='poly', degree=3, C=100, epsilon=0.1)
+        case 'rbf':
+            svr_model = sklearn.svm.SVR(kernel='rbf', C=100, gamma=0.1, epsilon=0.1)
+
+    mse, mae, r2, bias, loa = fit_predict_evaluate(svr_model, f'SVR {kernel}',
                                                    ppg_train, abp_train, ppg_test, abp_test)
     logging.info(f'SVR (sigmoid) - MSE: {mse:.3f}, MAE: {mae:.3f}, R^2: {r2:.3f},'
                  f'\t\t\t\t\t  Bias: {bias:.3f}, LoA: {loa} ({feat})')
+    wandb.log({"test RMSE": np.sqrt(mse), "test MAE": mae})
 
 
 def run_random_forest(feat, ppg_train, abp_train, ppg_test, abp_test):
-    rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
-    mse, mae, r2, bias, loa = fit_predict_evaluate(rf_model, 'Random Forest - total ' + feat,
+    rf_model = RandomForestRegressor(n_estimators=15, random_state=42)
+    mse, mae, r2, bias, loa = fit_predict_evaluate(rf_model, 'RF',
                                                    ppg_train, abp_train, ppg_test, abp_test)
     logging.info(f'RF - MSE: {mse:.3f}, MAE: {mae:.3f}, R^2: {r2:.3f},'
                  f'\t\t\t\t\t  Bias: {bias:.3f}, LoA: {loa} ({feat})')
+    wandb.log({"test RMSE": np.sqrt(mse), "test MAE": mae})
 
 
 def fit_predict_evaluate(model, model_name, ppg_train, abp_train, ppg_test, abp_test):
+    if 'SVR' in model_name:
+        abp_train, abp_test = abp_train[:, 0], abp_test[:, 0]
+    print(f'{model_name} model fitting', time.strftime('%H:%M:%S'))
     model.fit(ppg_train, abp_train)
+    joblib.dump(model, f'models/{model_name}.pkl')
+    print(f'{model_name} model prediction', time.strftime('%H:%M:%S'))
     predictions = model.predict(ppg_test)
-    visual.plot_ml_features(model_name, ppg_test, abp_test, ppg_test, predictions)
+    print(f'{model_name} model prediction done', time.strftime('%H:%M:%S'))
+    # visual.plot_ml_features(model_name, ppg_test, abp_test, ppg_test, predictions)
     mse, mae, r2, bias, loa_l, loa_u = evaluate(abp_test, predictions)
     return mse, mae, r2, bias, [loa_u, loa_u]
 
@@ -256,8 +318,8 @@ def feature_importance_permutation(model, X_test, y_test, no_features, feature_i
     feature_weights = [(index, name, importance)
                        for index, name, importance
                        in zip(feature_indexes, feature_names, feature_importances)]
-    sorted_feature_weights = sorted(feature_weights, key=lambda x: x[2], reverse=True)
-    return np.array(sorted_feature_weights)
+    # sorted_feature_weights = sorted(feature_weights, key=lambda x: x[2], reverse=True)
+    return np.array(feature_weights)
 
 
 def calculate_performance(model, X, y_true):
@@ -335,19 +397,21 @@ def torch_neural_net(model_name, device, X_train, y_train, X_test, y_test, learn
 
 
 class LSTM(nn.Module):
-    def __init__(self, input_size, hidden_size, out_features):
+    def __init__(self, input_size, hidden_size, out_features, feature_importances):
         super(LSTM, self).__init__()
         self.hidden_size = hidden_size
         self.lstm1 = nn.LSTMCell(input_size, hidden_size)
         self.lstm2 = nn.LSTMCell(hidden_size, hidden_size)
         self.linear = nn.Linear(hidden_size, out_features)
+        self.feature_importances = feature_importances
 
     def forward(self, x):
         h_t = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
         c_t = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
         h_t2 = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
         c_t2 = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
-        h_t, c_t = self.lstm1(x, (h_t, c_t))
+        adjusted_input = x * self.feature_importances.unsqueeze(0)
+        h_t, c_t = self.lstm1(adjusted_input, (h_t, c_t))
         h_t2, c_t2 = self.lstm2(h_t, (h_t2, c_t2))
         output = self.linear(h_t2)
         return output
@@ -375,14 +439,16 @@ def torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_trai
     input_size = X_train_segments[0].shape[1]
     output_size = y_train_segments[0].shape[1]
     hidden_size = input_size * 2
+    feature_importances = torch.from_numpy(feature_names[:, 2].astype(np.float32)).float().to(device)
 
     X_test = torch.from_numpy(X_test).float().to(device)
+    X_train = torch.randn(32, 100, input_size)
     y_test = torch.from_numpy(y_test).float().to(device)
 
     if model_name == 'GRU':
         model = GRU(input_size, hidden_size, output_size)
     else:
-        model = LSTM(input_size, hidden_size, output_size)
+        model = LSTM(input_size, hidden_size, output_size, feature_importances)
 
     criterion = nn.MSELoss()
     optimizer = optim.LBFGS(model.parameters(), lr=learning_rate)
@@ -445,28 +511,35 @@ def torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_trai
     visual.plot_feature_importances(weights, model_name, iteration)
 
     # Feature Reduction
-    new_features = None
-    if iteration == 0:
-        new_features = weights[:25, :2]
-    if iteration == 1:
-        new_features = weights[:15, :2]
-    if iteration == 2:
-        new_features = weights[:7, :2]
+    f_weights = weights[:, 2].astype(np.float32)
+    total_importance = sum(f_weights)
+    normalized_importances = [w / total_importance + 1 for w in f_weights]
+    f_indexes_names_weights = np.column_stack((weights[:, 0], weights[:, 1], normalized_importances))
 
-    return new_features
+    return f_indexes_names_weights, model
 
 
 def main():
     feature_names = pd.read_csv('./features/feature_indexes_names.csv', header=None).values.tolist()
     f_indexes_names = np.array(feature_names)
-    for iteration in range(1):
-        train_test_model('RF', f_indexes_names, iteration)
-        # run_model('LR', f_indexes_names, iteration)
-        # run_model('MLP', f_indexes_names, iteration)
-        # f_indexes_names = run_model('LSTM', f_indexes_names, iteration)
-        # f_indexes_names = run_model('GRU', f_indexes_names, iteration)
+    f_weights = np.ones(34)
+    f_inw_lstm = np.column_stack((f_indexes_names, f_weights))
+    f_inw_gru = f_inw_lstm
+    # f_inw_lstm, lstm_model1 = train_test_model('LSTM', f_inw_lstm, 0)
+    # f_inw_lstm, lstm_model2 = train_test_model('LSTM', f_inw_lstm, 1)
+    f_inw_gru, gru_model1 = train_test_model('GRU', f_inw_gru, 0)
+    f_inw_gru, gru_model2 = train_test_model('GRU', f_inw_gru, 1)
+    # train_test_model('SVR', f_indexes_names, iteration, kernel='sigmoid')
+    # train_test_model('SVR', f_indexes_names, iteration, kernel='poly')
+    # train_test_model('SVR', f_indexes_names, iteration, kernel='rbf')
+    # train_test_model('RF', f_indexes_names, iteration)
+    # train_test_model('LR', f_indexes_names, iteration)
+    # train_test_model('MLP', f_indexes_names, iteration)
 
-    # validate_model()
+    # validate_model(lstm_model1, 'LSTM')
+    # validate_model(lstm_model2, 'LSTM (weight adjusted)')
+    validate_model(gru_model1, 'GRU')
+    validate_model(gru_model2, 'GRU (weight adjusted)')
 
 
 if __name__ == "__main__":

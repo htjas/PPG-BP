@@ -503,3 +503,49 @@
 2024-02-09 17:40:19 - INFO - Starting ML model
 2024-02-09 17:43:13 - INFO - ----------------------------
 2024-02-09 17:43:13 - INFO - Starting ML model
+2024-02-12 17:45:19 - INFO - ----------------------------
+2024-02-12 17:45:19 - INFO - Starting ML model
+2024-02-12 17:47:58 - INFO - ----------------------------
+2024-02-12 17:47:58 - INFO - Starting ML model
+2024-02-12 17:48:18 - INFO - ----------------------------
+2024-02-12 17:48:18 - INFO - Starting ML model
+2024-02-12 17:55:27 - INFO - PyTorch LSTM: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 101.5223, RMSE: 10.0758, MAE: 7.125, R^2: 0.554, Bias: -0.121, LoA: (-19.870, 19.627)
+2024-02-12 17:55:36 - INFO - ----------------------------
+2024-02-12 17:55:36 - INFO - ----------------------------
+2024-02-12 17:55:36 - INFO - Starting ML model
+2024-02-12 17:55:36 - INFO - Starting ML model
+2024-02-12 18:02:11 - INFO - ----------------------------
+2024-02-12 18:02:11 - INFO - Starting ML model
+2024-02-12 18:12:56 - INFO - PyTorch LSTM: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 100.8263, RMSE: 10.0412, MAE: 7.105, R^2: 0.558, Bias: -0.007, LoA: (-19.689, 19.675)
+2024-02-12 18:13:08 - INFO - ----------------------------
+2024-02-12 18:13:08 - INFO - ----------------------------
+2024-02-12 18:13:08 - INFO - Starting ML model
+2024-02-12 18:13:08 - INFO - Starting ML model
+2024-02-12 18:21:21 - INFO - PyTorch LSTM: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 142.8982, RMSE: 11.9540, MAE: 8.673, R^2: 0.374, Bias: -0.001, LoA: (-23.432, 23.431)
+2024-02-12 18:21:21 - INFO - PyTorch LSTM: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 142.8982, RMSE: 11.9540, MAE: 8.673, R^2: 0.374, Bias: -0.001, LoA: (-23.432, 23.431)
+2024-02-12 18:32:12 - INFO - ----------------------------
+2024-02-12 18:32:12 - INFO - Starting ML model
+2024-02-12 18:35:19 - INFO - ----------------------------
+2024-02-12 18:35:19 - INFO - Starting ML model
+2024-02-12 18:46:20 - INFO - PyTorch LSTM: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 97.3436, RMSE: 9.8663, MAE: 6.953, R^2: 0.573, Bias: -0.008, LoA: (-19.347, 19.332)
+2024-02-12 18:46:30 - INFO - ----------------------------
+2024-02-12 18:46:30 - INFO - ----------------------------
+2024-02-12 18:46:30 - INFO - Starting ML model
+2024-02-12 18:46:30 - INFO - Starting ML model
+2024-02-12 18:55:12 - INFO - PyTorch LSTM: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 100.4832, RMSE: 10.0241, MAE: 7.085, R^2: 0.558, Bias: -0.016, LoA: (-19.664, 19.633)
+2024-02-12 18:55:12 - INFO - PyTorch LSTM: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 100.4832, RMSE: 10.0241, MAE: 7.085, R^2: 0.558, Bias: -0.016, LoA: (-19.664, 19.633)
+2024-02-12 19:06:41 - INFO - ----------------------------
+2024-02-12 19:06:41 - INFO - Starting ML model
+2024-02-12 19:17:45 - INFO - PyTorch GRU: learning_rate=0.1, epochs=100 (SYS, DIA, MAP from 34 Median PPG Features)
+					  MSE: 92.1268, RMSE: 9.5983, MAE: 6.759, R^2: 0.596, Bias: -0.012, LoA: (-18.826, 18.802)
+2024-02-12 19:17:53 - INFO - ----------------------------
+2024-02-12 19:17:53 - INFO - ----------------------------
+2024-02-12 19:17:53 - INFO - Starting ML model
+2024-02-12 19:17:53 - INFO - Starting ML model
