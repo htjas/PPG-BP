@@ -24,26 +24,48 @@ BP serves as a key indicator of the risk for heart attacks, strokes, and heart f
 \textit{Various Types of Measurement}
 \vspace{0.2cm}
 
-% cuff BP measuring TODO: add images of sphygmanometer, ABP cathether etc.
-One of the most common BP measurement methods is one using a sphygmomanometer, also known as non-invasive blood pressure (NIBP), is typically recorded as numeric values at specific time intervals.
+% cuff BP measuring
+One of the most common BP measurement methods is one using a sphygmomanometer (see manual~\ref{fig:sphyg} and automatic~\ref{fig:auto_sphyg} devices), also known as non-invasive blood pressure (NIBP), is typically recorded as numeric values at specific time intervals.
 The process involves inflating the cuff to temporarily stop blood flow and then gradually releasing the pressure to detect the sounds associated with the flow of blood through the brachial artery.
+Manually, the measurement entails one individual conducting the procedure on another, typically involving a healthcare professional administering the assessment to a patient.
+Conversely, automatic measurement allows the patient to independently measure their blood pressure without external assistance.
+Both approaches yield comparable measurements of the same nature.
 The two primary values obtained are systolic pressure (maximum pressure during heartbeats) and diastolic pressure (minimum pressure between heartbeats).
 During the process of cuff inflation and deflation, each heartbeat generates characteristic sounds (Korotkoff sounds) that are detected by a stethoscope placed over the brachial artery.
 Systolic pressure is recorded when the first tapping sounds are heard, and diastolic pressure is recorded when the sounds disappear or change character.
 This beat-to-beat approach provides information about individual fluctuations in blood pressure~\cite{betts20BloodFlow2022}.
 
-While measuring blood pressure with a cuff using a sphygmomanometer is a common and convenient method, it has its limitations as it cannot be done continuously.
-This intermittent approach provides valuable insights into systolic and diastolic pressures at specific time intervals, but it may not capture the nuanced changes that occur between measurements.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{images/abp/sphyg}
+    \caption{Standard Sphygmanometer \cite{StandardSphygmomanometer}}
+    \label{fig:sphyg}
+    \includegraphics[scale=0.2]{images/abp/auto_sphyg}
+    \caption{Automatic Digital Sphygmanometer \cite{AutomaticDigitalBlood}}
+    \label{fig:auto_sphyg}
+\end{figure}
+
+Although measuring blood pressure with a cuff using a sphygmomanometer is widely adopted as a common and convenient method, it is not without its constraints.
+Studies, such as those by Leung et al.\ and Sebo et al.\ , have highlighted the inability of home blood pressure monitoring devices to consistently and accurately detect hypertension~\cite{leungHypertensionCanada20162016, seboBloodPressureMeasurements2014}.
+Furthermore, a significant limitation lies in its inability to provide continuous and consistent monitoring, necessitating patients to actively remember and engage in the effort to measure their blood pressure.
+This intermittent approach using a cuff provides valuable insights into systolic and diastolic pressures at specific time intervals, but it may not capture the nuanced changes that occur between measurements.
 To address the need for continuous monitoring, other methods, such as arterial catheterization, are employed.
 
 % arterial BP
-Arterial catheterization is commonly employed in critical patient care, serving dual purposes: continuous blood pressure monitoring and obtaining frequent blood gas measurements.
+Arterial catheterization (illustrated in Figure~\ref{fig:catheter}) is commonly employed in critical patient care, serving dual purposes: continuous blood pressure monitoring and obtaining frequent blood gas measurements.
 Typically conducted at bedside, the procedure utilizes percutaneous methods like the Seldinger technique to cannulate arteries~\cite{clarkArterialCatheterization1992}.
 The resulting arterial blood pressure (ABP) is a dynamic parameter that can change with each heartbeat, and it is typically represented as a waveform rather than a single numeric value.
 The ABP waveform consists of two main components: systolic pressure and diastolic pressure.
 Such continuous monitoring of ABP is usually done in clinical settings, using an arterial line connected to a pressure transducer.
 The resulting waveform is displayed on a monitor in real-time.
 However, for ease of interpretation and documentation, numeric values are commonly extracted from the waveform at specific time intervals~\cite{hillImputationContinuousArterial2021}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{images/abp/catheter}
+    \caption{Arterial Catheterization and Stationary BP Monitoring~\cite{contributorEssentialCriticalCare2021}}
+    \label{fig:catheter}
+\end{figure}
 
 In situations where high temporal resolution is crucial, ABP can be recorded beat-to-beat, providing a value for each heartbeat.
 This is particularly important in situations where rapid changes in blood pressure need to be closely monitored, such as during certain medical procedures or in critically ill patients~\cite{lehmanMethodsBloodPressure2013}.
@@ -127,11 +149,11 @@ Especially when the wrist serves as the designated measurement site, PPG sensors
 \textit{Working Principle}
 \vspace{0.2cm}
 
-The PPG signal consists of pulsatile (AC) and superimposed (DC) components (see Figure~\ref{fig:acdc}).
+The PPG signal consists of pulsate (AC) and superimposed (DC) components (see Figure~\ref{fig:acdc}).
 The AC component originates from variations in blood volume associated with heartbeats,
 while the DC component is influenced by factors such as respiration, sympathetic nervous system activity, and temperature regulation~\cite{allenPhotoplethysmographyItsApplication2007a}.
 The AC component specifically illustrates changes in blood volume during phasic cardiac activity, representing both the systolic and diastolic phases.
-The systolic phase, also known as the \enquote{rise time}, initiates with a valley and concludes at the pulse wave systolic peak.
+The systolic phase, also known as the \enquote{rise time} initiates with a valley and concludes at the pulse wave systolic peak.
 The pulse wave concludes with another valley at the end of the diastolic phase~\cite{weisslerSystolicTimeIntervals1968}.
 In most PPG waveform analyses including this one, the AC component in the form of a waveform signal is used.
 
@@ -180,25 +202,42 @@ Utilizing characteristic PPG features, machine learning functions can estimate S
 However, establishing a simple, clear, and continuous relationship between these features and BP remains elusive.
 This method heavily relies on signal pre-processing, feature extraction, and the application of machine learning algorithms for BP estimation based on these features.
 
-\subsubsection{MIMIC-III}
-\label{subsubsec:mimic3}
+\subsubsection{MIMIC Databases}
+\label{subsubsec:mimic}
 
-origin of MIMIC\@.
-When was it created?
-How is it structured?
+Patient records and documentation are crucial for maintaining a comprehensive overview of medical history, aiding in accurate diagnosis, treatment planning, and ensuring continuity of care.
+They also serve as legal documents, providing evidence of the care provided and facilitating communication among healthcare professionals.
+Collecting digital data during routine clinical practice has become widespread across hospitals.
+Over time, a pattern has emerged in the collection and storage of patient data for subsequent utilization in future research endeavors.
 
-\subsubsection{MIMIC-IV}
-\label{subsubsec:mimic4}
+% History and Origin
+In 1996, two researchers at the Massachusetts Institute of Technology, George B. Moody and Roger G. Mark, introduced the MIMIC (Multiparameter Intelligent Monitoring in Intensive Care) Database.
+The database was derived from patient monitors in the medical, surgical, and cardiac intensive care units of Boston’s Beth Israel Hospital~\cite{moodyDatabaseSupportDevelopment1996}.
+The first instance of the database included 100 patient records, each typically containing between 24 and 48 hours of continuous recorded data.
+The second version of the database (MIMIC-II) was introduced in 2011 boasting a notably larger sample size and a wider scope of information sourced entirely from diverse digital information systems~\cite{saeedMultiparameterIntelligentMonitoring2011}.
+MIMIC-III~\cite{johnsonMIMICIIIFreelyAccessible2016} was finalized in 2016, marking a significant expansion from MIMIC-II, with data available from over 40,000 patients.
+The fourth and latest MIMIC Database was publicly released in 2023 spanning a decade of admissions from 2008 to 2019.
+MIMIC-IV was announced to enhance the realm of publicly accessible critical care datasets, by integrating precise digital sources like the electronic medicine administration record and featuring a modular structure enabling seamless integration with external departments and diverse data modalities~\cite{johnsonMIMICIVFreelyAccessible2023}.
 
-Multiparameter Intelligent Monitoring in Intensive Care IV (MIMIC-IV)~\cite{johnsonMIMICIVFreelyAccessible2023}.
+% Structure of MIMIC DB
 
-\begin{enumerate}
-    \item How is the database structured?
-    \item Which patients and how many of them have both PPG and BP data?
-    \item Arterial Blood Pressure (ABP)
-\end{enumerate}
+Both the MIMIC-III and MIMIC-IV Databases are cited and employed in this investigation, exhibiting comparable structures (depicted in Figure~\ref{fig:mimic_structure}), encompassing diverse data categories.
+However, the primary emphasis of this inquiry lies in the Waveform Section of the Database (highlighted by a red rectangle in Figure~\ref{fig:mimic_structure}).
 
-How does it differ from MIMIC3?
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/mimic/mimic_structure}
+    \caption{General Structure of the MIMIC-III Database~\cite{johnsonMIMICIIIFreelyAccessible2016}}
+    \label{fig:mimic_structure}
+\end{figure}
+
+The Waveform data from both the MIMIC-III and MIMIC-IV Databases is publicly available on the Physionet internet website~\cite{moodyMIMICIIIWaveformDatabase2017, moodyMIMICIVWaveformDatabase}.
+In both databases recorded waveforms typically encompass one or more ECG signals, often feature continuous ABP waveforms and fingertip PPG signals.
+Numeric data typically includes heart and respiration rates, SpO2, and systolic, mean, and diastolic blood pressure, among other metrics when accessible.
+Recording durations also vary, with most lasting a few days, although some are shorter and other might even extend over several weeks.
+Both projects consist of two types of data: waveform data, comprising high-resolution, regularly sampled time series obtained directly from measuring devices, and numeric data, including digitally derived values or irregularly sampled data (like NIBP).
+
+% Differences MIMIC3 and MIMIC4
 
 \subsection{Computing Background}
 \label{subsec:computing_background}
@@ -223,7 +262,7 @@ How does it differ from MIMIC3?
 
     Savitzky-Golay (SG) filter~\cite{savitzkySmoothingDifferentiationData1964}
 
-    Second derivative \& Age analysis~\cite{takazawaAssessmentVasoactiveAgents1998a}
+    Second derivative \& Age analysis~\cite{takazawaAssessmentVasoactiveAgents1998}
 
     Hemodynamics and vascular age~\cite{charltonAssessingHemodynamicsPhotoplethysmogram2022}
 
