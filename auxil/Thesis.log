@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  14 FEB 2024 11:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  14 FEB 2024 17:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -267,62 +267,163 @@ Package csquotes Info: ... configuration file loaded successfully.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.cfg
 File: csquotes.cfg 
+)) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip64
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks26
+\ex@=\dimen161
 ))
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen162
+)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count274
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count275
+\leftroot@=\count276
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count277
+\DOTSCASE@=\count278
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box58
+\strutbox@=\box59
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen163
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count279
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count280
+\dotsspace@=\muskip17
+\c@parentequation=\count281
+\dspbrk@lvl=\count282
+\tag@help=\toks27
+\row@=\count283
+\column@=\count284
+\maxfields@=\count285
+\andhelp@=\toks28
+\eqnshift@=\dimen164
+\alignsep@=\dimen165
+\tagshift@=\dimen166
+\tagwidth@=\dimen167
+\totwidth@=\dimen168
+\lineht@=\dimen169
+\@envbody=\toks29
+\multlinegap=\skip65
+\multlinetaggap=\skip66
+\mathdisplay@stack=\toks30
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count274
-\l__pdf_internal_box=\box58
+\l__color_backend_stack_int=\count286
+\l__pdf_internal_box=\box60
 ) (Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-Package scrbase Info: activating english \abstractname on input line 15.
-Package scrbase Info: activating english \partname on input line 15.
-Package scrbase Info: activating english \figurename on input line 15.
-Package scrbase Info: activating english \tablename on input line 15.
-Package scrbase Info: activating english \contentsname on input line 15.
-Package scrbase Info: activating english \listfigurename on input line 15.
-Package scrbase Info: activating english \listtablename on input line 15.
-Package scrbase Info: activating english \refname on input line 15.
-Package scrbase Info: activating english \indexname on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+Package scrbase Info: activating english \abstractname on input line 16.
+Package scrbase Info: activating english \partname on input line 16.
+Package scrbase Info: activating english \figurename on input line 16.
+Package scrbase Info: activating english \tablename on input line 16.
+Package scrbase Info: activating english \contentsname on input line 16.
+Package scrbase Info: activating english \listfigurename on input line 16.
+Package scrbase Info: activating english \listtablename on input line 16.
+Package scrbase Info: activating english \refname on input line 16.
+Package scrbase Info: activating english \indexname on input line 16.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count275
-\scratchdimen=\dimen161
-\scratchbox=\box59
-\nofMPsegments=\count276
-\nofMParguments=\count277
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count278
-\MPscratchDim=\dimen162
-\MPnumerator=\count279
-\makeMPintoPDFobject=\count280
-\everyMPtoPDFconversion=\toks27
+\scratchcounter=\count287
+\scratchdimen=\dimen170
+\scratchbox=\box61
+\nofMPsegments=\count288
+\nofMParguments=\count289
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count290
+\MPscratchDim=\dimen171
+\MPnumerator=\count291
+\makeMPintoPDFobject=\count292
+\everyMPtoPDFconversion=\toks32
 )
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.s
+ty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefine
+keys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+))
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+))
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds
+.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+ (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
 fg
@@ -331,256 +432,65 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 <images/hs/hd.png, id=1, 144.54pt x 75.8835pt>
 File: images/hs/hd.png Graphic file (type png)
 <use images/hs/hd.png>
-Package pdftex.def Info: images/hs/hd.png  used on input line 22.
+Package pdftex.def Info: images/hs/hd.png  used on input line 23.
 (pdftex.def)             Requested size: 86.72466pt x 45.53044pt.
 <images/hs/hhn.png, id=3, 115.18031pt x 44.41594pt>
 File: images/hs/hhn.png Graphic file (type png)
 <use images/hs/hhn.png>
-Package pdftex.def Info: images/hs/hhn.png  used on input line 23.
+Package pdftex.def Info: images/hs/hhn.png  used on input line 24.
 (pdftex.def)             Requested size: 115.18001pt x 44.41582pt.
 <images/hs/tmu.png, id=4, 1204.5pt x 664.4825pt>
 File: images/hs/tmu.png Graphic file (type png)
 <use images/hs/tmu.png>
-Package pdftex.def Info: images/hs/tmu.png  used on input line 24.
+Package pdftex.def Info: images/hs/tmu.png  used on input line 25.
 (pdftex.def)             Requested size: 72.26688pt x 39.86722pt.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <17.28> on input line 58.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 58.
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
+Underfull \hbox (badness 10000) in paragraph at lines 63--64
 
  []
 
 [1
 
 {C:/Users/htjas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/hs/
-hd.png> <./images/hs/hhn.png> <./images/hs/tmu.png>]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 84.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 84.
- [2] (Thesis.toc)
+hd.png> <./images/hs/hhn.png> <./images/hs/tmu.png>] [2] (Thesis.toc)
 \tf@toc=\write3
 \openout3 = `Thesis.toc'.
 
 
-[3] (introduction.tex
-
-LaTeX Warning: Citation `seboBloodPressureMeasurements2014' on page 4 undefined
- on input line 16.
-
-[4]
-
-LaTeX Warning: Reference `sec:background' on page 5 undefined on input line 53.
-
-
-
-LaTeX Warning: Reference `subsec:med_background' on page 5 undefined on input l
-ine 54.
-
-
-LaTeX Warning: Reference `subsubsec:bp' on page 5 undefined on input line 54.
-
-
-LaTeX Warning: Reference `subsubsec:ppg' on page 5 undefined on input line 54.
-
-
-LaTeX Warning: Reference `subsubsec:mimic3' on page 5 undefined on input line 5
-5.
-
-
-LaTeX Warning: Reference `subsubsec:mimic4' on page 5 undefined on input line 5
-5.
-
-
-LaTeX Warning: Reference `subsec:computing_background' on page 5 undefined on i
-nput line 55.
-
-
-LaTeX Warning: Reference `sec:methods' on page 5 undefined on input line 57.
-
-
-LaTeX Warning: Reference `sec:results' on page 5 undefined on input line 59.
-
-
-LaTeX Warning: Reference `sec:discussion' on page 5 undefined on input line 61.
-
-
-
-LaTeX Warning: Reference `sec:conclusion' on page 5 undefined on input line 61.
-
-
-) [5] (theoretical-background.tex
-
-LaTeX Warning: Reference `fig:sphyg' on page 6 undefined on input line 28.
-
-
-LaTeX Warning: Reference `fig:auto_sphyg' on page 6 undefined on input line 28.
-
-
-[6]
+[3] (introduction.tex [4]) [5] (theoretical-background.tex [6]
 <images/abp/sphyg.png, id=31, 702.625pt x 702.625pt>
 File: images/abp/sphyg.png Graphic file (type png)
 <use images/abp/sphyg.png>
 Package pdftex.def Info: images/abp/sphyg.png  used on input line 40.
 (pdftex.def)             Requested size: 140.5225pt x 140.5225pt.
-
-
-LaTeX Warning: Citation `StandardSphygmomanometer' on page 7 undefined on input
- line 41.
-
-
-LaTeX Warning: Citation `StandardSphygmomanometer' on page 7 undefined on input
- line 41.
-
 <images/abp/auto_sphyg.png, id=32, 602.25pt x 602.25pt>
 File: images/abp/auto_sphyg.png Graphic file (type png)
 <use images/abp/auto_sphyg.png>
 Package pdftex.def Info: images/abp/auto_sphyg.png  used on input line 43.
 (pdftex.def)             Requested size: 120.44786pt x 120.44786pt.
-
-LaTeX Warning: Citation `AutomaticDigitalBlood' on page 7 undefined on input li
-ne 44.
-
-
-LaTeX Warning: Citation `AutomaticDigitalBlood' on page 7 undefined on input li
-ne 44.
-
-
-LaTeX Warning: Citation `seboBloodPressureMeasurements2014' on page 7 undefined
- on input line 49.
-
-[7 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
-
-LaTeX Warning: Reference `fig:catheter' on page 8 undefined on input line 55.
-
+ [7 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
 <images/abp/catheter.png, id=37, 751.30687pt x 492.33937pt>
 File: images/abp/catheter.png Graphic file (type png)
 <use images/abp/catheter.png>
 Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
 (pdftex.def)             Requested size: 300.51741pt x 196.93225pt.
-
-LaTeX Warning: Citation `contributorEssentialCriticalCare2021' on page 8 undefi
-ned on input line 66.
-
-
-LaTeX Warning: Citation `contributorEssentialCriticalCare2021' on page 8 undefi
-ned on input line 66.
-
-[8 <./images/abp/catheter.png>]
-
-LaTeX Warning: Citation `challonerPhotoelectricPlethysmographMeasurement1974' o
-n page 9 undefined on input line 99.
-
-[9]
-
-LaTeX Warning: Citation `molitorNewBloodlessMethod1936' on page 10 undefined on
- input line 108.
-
-
-LaTeX Warning: Citation `hertzmanPhotoelectricPlethysmographyFingers1937' on pa
-ge 10 undefined on input line 110.
-
-
-LaTeX Warning: Citation `srivastavValsalvaManeuver2024' on page 10 undefined on
- input line 113.
-
-
-LaTeX Warning: Citation `hertzmanPhotoelectricPlethysmographyFingers1937' on pa
-ge 10 undefined on input line 116.
-
-
-LaTeX Warning: Citation `yoshiyaSpectrophotometricMonitoringArterial1980' on pa
-ge 10 undefined on input line 121.
-
-
-LaTeX Warning: Citation `aoyagiPulseOximetryIts2002' on page 10 undefined on in
-put line 124.
-
-
-LaTeX Warning: Citation `wieringaContactlessMultipleWavelength2005b' on page 10
- undefined on input line 128.
-
-
-LaTeX Warning: Citation `rheeArtifactresistantPowerefficientDesign2001' on page
- 10 undefined on input line 132.
-
-
-LaTeX Warning: Citation `zhengRingtypeDeviceNoninvasive2003' on page 10 undefin
-ed on input line 132.
-
-[10]
-
-LaTeX Warning: Reference `fig:reflection' on page 11 undefined on input line 13
-4.
-
-
-LaTeX Warning: Citation `leeReflectancePulseOximetry2016' on page 11 undefined 
-on input line 135.
-
+ [8 <./images/abp/catheter.png>]
+[9] [10]
 <images/ppg/reflection.png, id=48, 853.1875pt x 316.18124pt>
 File: images/ppg/reflection.png Graphic file (type png)
 <use images/ppg/reflection.png>
 Package pdftex.def Info: images/ppg/reflection.png  used on input line 142.
 (pdftex.def)             Requested size: 341.26895pt x 126.47025pt.
-
-LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 11 undefined on
- input line 143.
-
-
-LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 11 undefined on
- input line 143.
-
-
-LaTeX Warning: Reference `fig:acdc' on page 11 undefined on input line 152.
-
-
-LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
-11 undefined on input line 154.
-
-
-LaTeX Warning: Citation `weisslerSystolicTimeIntervals1968' on page 11 undefine
-d on input line 157.
-
 <images/ppg/ac+dc.png, id=49, 853.1875pt x 588.1975pt>
 File: images/ppg/ac+dc.png Graphic file (type png)
 <use images/ppg/ac+dc.png>
 Package pdftex.def Info: images/ppg/ac+dc.png  used on input line 162.
 (pdftex.def)             Requested size: 426.59271pt x 294.09802pt.
 
-LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 11 undefined on
- input line 163.
-
-
-LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 11 undefined on
- input line 163.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[11 <./images/ppg/reflection.png>]
-
-LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
-12 undefined on input line 172.
-
-
-LaTeX Warning: Citation `sviridovaHumanPhotoplethysmogramNew2015' on page 12 un
-defined on input line 173.
-
-
-LaTeX Warning: Citation `castanedaReviewWearablePhotoplethysmography2018' on pa
-ge 12 undefined on input line 174.
-
-
-LaTeX Warning: Citation `ponnadaTechnologicalConsiderationsSensorassisted2019' 
-on page 12 undefined on input line 180.
-
-
-LaTeX Warning: Reference `fig:ppg-devices' on page 12 undefined on input line 1
-82.
-
-[12 <./images/ppg/ac+dc.png>]
+[11 <./images/ppg/reflection.png>] [12 <./images/ppg/ac+dc.png>]
 <images/ppg/ppg-devices.png, id=58, 1284.8pt x 722.7pt>
 File: images/ppg/ppg-devices.png Graphic file (type png)
 <use images/ppg/ppg-devices.png>
@@ -591,72 +501,112 @@ Overfull \hbox (1.55579pt too wide) in paragraph at lines 186--187
  [][] 
  []
 
-
-LaTeX Warning: Citation `zanelliPotentialAIBased2023' on page 13 undefined on i
-nput line 187.
-
-
-LaTeX Warning: Citation `zanelliPotentialAIBased2023' on page 13 undefined on i
-nput line 187.
-
-
-LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
-13 undefined on input line 197.
-
 [13 <./images/ppg/ppg-devices.png>]
+<images/mimic/mimic_structure.png, id=64, 1580.90625pt x 1188.69093pt>
+File: images/mimic/mimic_structure.png Graphic file (type png)
+<use images/mimic/mimic_structure.png>
+Package pdftex.def Info: images/mimic/mimic_structure.png  used on input line 2
+36.
+(pdftex.def)             Requested size: 474.27554pt x 356.61003pt.
 
-LaTeX Warning: Citation `johnsonMIMICIVFreelyAccessible2023' on page 14 undefin
-ed on input line 215.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 234--235
-
- []
-
-
-LaTeX Warning: Citation `takazawaAssessmentVasoactiveAgents1998a' on page 14 un
-defined on input line 248.
-
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 263--265
-
- []
-
-
-LaTeX Warning: Citation `ruiz-rodriguezInnovativeContinuousNoninvasive2013' on 
-page 15 undefined on input line 270.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 280--283
-
- []
-
-[15]) [16] [17]
-
-LaTeX Warning: Reference `fig:data_flow' on page 18 undefined on input line 187
-.
-
-<images/flow_diagrams/flow_diagram.png, id=77, 761.84625pt x 473.77pt>
-File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
-<use images/flow_diagrams/flow_diagram.png>
-Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
-ine 191.
-(pdftex.def)             Requested size: 457.11128pt x 284.26419pt.
-
-Overfull \hbox (8.98033pt too wide) in paragraph at lines 191--192
+Overfull \hbox (26.14459pt too wide) in paragraph at lines 236--237
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[18] [19 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [20] [21]
-[22]) [23] (Thesis.aux)
+[14] [15 <./images/mimic/mimic_structure.png>]
+<images/sp/ptt.png, id=71, 639.89063pt x 489.32813pt>
+File: images/sp/ptt.png Graphic file (type png)
+<use images/sp/ptt.png>
+Package pdftex.def Info: images/sp/ptt.png  used on input line 295.
+(pdftex.def)             Requested size: 255.9517pt x 195.72777pt.
+ [16]
+<images/sp/pat.png, id=75, 687.56876pt x 584.1825pt>
+File: images/sp/pat.png Graphic file (type png)
+<use images/sp/pat.png>
+Package pdftex.def Info: images/sp/pat.png  used on input line 307.
+(pdftex.def)             Requested size: 275.02263pt x 233.66885pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/sp/pww.jpg, id=76, 853.1875pt x 702.625pt>
+File: images/sp/pww.jpg Graphic file (type jpg)
+<use images/sp/pww.jpg>
+Package pdftex.def Info: images/sp/pww.jpg  used on input line 321.
+(pdftex.def)             Requested size: 341.26895pt x 281.04501pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[17 <./images/sp/ptt.png>]
+
+LaTeX Warning: Reference `fig:pwa' on page 18 undefined on input line 335.
+
+<images/sp/pwa.png, id=82, 266.32834pt x 106.73209pt>
+File: images/sp/pwa.png Graphic file (type png)
+<use images/sp/pwa.png>
+Package pdftex.def Info: images/sp/pwa.png  used on input line 341.
+(pdftex.def)             Requested size: 479.39064pt x 192.11758pt.
+
+Overfull \hbox (31.25969pt too wide) in paragraph at lines 341--342
+ [][] 
+ []
+
+
+LaTeX Warning: Citation `bikiaLeveragingPotentialMachine2021' on page 18 undefi
+ned on input line 342.
+
+
+LaTeX Warning: Citation `bikiaLeveragingPotentialMachine2021' on page 18 undefi
+ned on input line 342.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[18 <./images/sp/pat.png (PNG copy)>]
+
+LaTeX Warning: Citation `chatterjeePPGBasedHeart2018' on page 19 undefined on i
+nput line 358.
+
+[19 <./images/sp/pww.jpg>]
+
+LaTeX Warning: Citation `antoniouDigitalFiltersAnalysis2018' on page 20 undefin
+ed on input line 370.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 387--388
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--391
+
+ []
+
+[20 <./images/sp/pwa.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 406--409
+
+ []
+
+[21]) [22] [23]
+<images/flow_diagrams/flow_diagram.png, id=104, 761.84625pt x 473.77pt>
+File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
+<use images/flow_diagrams/flow_diagram.png>
+Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
+ine 192.
+(pdftex.def)             Requested size: 457.11128pt x 284.26419pt.
+
+Overfull \hbox (8.98033pt too wide) in paragraph at lines 192--193
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[24] (Thesis.bbl [25 <./images/flow_diagrams/flow_diagram.png>] [26] [27]
+[28] [29] [30] [31]) [32] (Thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -667,24 +617,26 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 6857 strings out of 474541
- 141081 string characters out of 5744425
- 1932978 words of memory out of 5000000
- 29017 multiletter control sequences out of 15000+600000
- 564337 words of font info for 57 fonts, out of 8000000 for 9000
+ 8230 strings out of 474541
+ 164243 string characters out of 5744425
+ 1931978 words of memory out of 5000000
+ 30340 multiletter control sequences out of 15000+600000
+ 565235 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,8n,107p,10998b,362s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,8n,107p,10998b,366s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmr12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmr17.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/htjas/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on C:/Users\htjas\PycharmProjects\PPG-BP\out\Thesis.pdf (23 page
-s, 2567080 bytes).
+fonts/cm/cmmi12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmmi8.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/htjas/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/htjas/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/htjas
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on C:/Users\htjas\PycharmProjects\PPG-BP\out\Thesis.pdf (32 page
+s, 3427691 bytes).
 PDF statistics:
- 124 PDF objects out of 1000 (max. 8388607)
+ 169 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

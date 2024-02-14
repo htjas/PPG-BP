@@ -125,7 +125,7 @@ A significant leap in the clinical application of PPG-based technology occurred 
 This device revolutionized non-invasive monitoring of patients' arterial oxygen saturation, marking a major advancement in the field.
 
 Other emerging technologies encompass PPG imaging technology, telemedicine, and remote monitoring.
-In 2005, Wieringa et al.\ detailed a contactless multiple-wavelength PPG imaging system designed primarily for remotely imaging the distribution of arterial oxygen saturation (SpO2) within tissue~\cite{wieringaContactlessMultipleWavelength2005b}.
+In 2005, Wieringa et al.\ detailed a contactless multiple-wavelength PPG imaging system designed primarily for remotely imaging the distribution of arterial oxygen saturation (SpO2) within tissue~\cite{wieringaContactlessMultipleWavelength2005}.
 The system captures movies of two-dimensional matrix spatially resolved PPG signals at different wavelengths during respiratory changes.
 PPG was found to have substantial potential in telemedicine, particularly for remote/home health monitoring of patients.
 Miniaturization, user-friendliness, and robustness stand as pivotal design criteria for such systems.
@@ -211,6 +211,10 @@ Collecting digital data during routine clinical practice has become widespread a
 Over time, a pattern has emerged in the collection and storage of patient data for subsequent utilization in future research endeavors.
 
 % History and Origin
+\vspace{0.2cm}
+\textit{Origin}
+\vspace{0.2cm}
+
 In 1996, two researchers at the Massachusetts Institute of Technology, George B. Moody and Roger G. Mark, introduced the MIMIC (Multiparameter Intelligent Monitoring in Intensive Care) Database.
 The database was derived from patient monitors in the medical, surgical, and cardiac intensive care units of Boston’s Beth Israel Hospital~\cite{moodyDatabaseSupportDevelopment1996}.
 The first instance of the database included 100 patient records, each typically containing between 24 and 48 hours of continuous recorded data.
@@ -220,24 +224,50 @@ The fourth and latest MIMIC Database was publicly released in 2023 spanning a de
 MIMIC-IV was announced to enhance the realm of publicly accessible critical care datasets, by integrating precise digital sources like the electronic medicine administration record and featuring a modular structure enabling seamless integration with external departments and diverse data modalities~\cite{johnsonMIMICIVFreelyAccessible2023}.
 
 % Structure of MIMIC DB
+\vspace{0.2cm}
+\textit{Structure}
+\vspace{0.2cm}
 
 Both the MIMIC-III and MIMIC-IV Databases are cited and employed in this investigation, exhibiting comparable structures (depicted in Figure~\ref{fig:mimic_structure}), encompassing diverse data categories.
 However, the primary emphasis of this inquiry lies in the Waveform Section of the Database (highlighted by a red rectangle in Figure~\ref{fig:mimic_structure}).
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.5]{images/mimic/mimic_structure}
+    \includegraphics[scale=0.3]{images/mimic/mimic_structure}
     \caption{General Structure of the MIMIC-III Database~\cite{johnsonMIMICIIIFreelyAccessible2016}}
     \label{fig:mimic_structure}
 \end{figure}
 
 The Waveform data from both the MIMIC-III and MIMIC-IV Databases is publicly available on the Physionet internet website~\cite{moodyMIMICIIIWaveformDatabase2017, moodyMIMICIVWaveformDatabase}.
-In both databases recorded waveforms typically encompass one or more ECG signals, often feature continuous ABP waveforms and fingertip PPG signals.
+In both databases recorded waveforms typically encompass one or more electrocardiogram(ECG) signals, often feature continuous ABP waveforms and fingertip PPG signals.
 Numeric data typically includes heart and respiration rates, SpO2, and systolic, mean, and diastolic blood pressure, among other metrics when accessible.
 Recording durations also vary, with most lasting a few days, although some are shorter and other might even extend over several weeks.
 Both projects consist of two types of data: waveform data, comprising high-resolution, regularly sampled time series obtained directly from measuring devices, and numeric data, including digitally derived values or irregularly sampled data (like NIBP).
 
 % Differences MIMIC3 and MIMIC4
+\vspace{0.2cm}
+\textit{Differences and Similarities between MIMIC-III and MIMIC-IV}
+\vspace{0.2cm}
+
+In MIMIC-III, waveforms were collected in a largely automated manner from selected adult and neonatal ICUs, resulting in a random sample of patients.
+The data archiving process was not continuous, and the recorded waveforms and numerics varied based on ICU staff choices.
+The individual patient consent waived due to de-identification.
+On the other hand, MIMIC-IV collected data from intensive care units where bedside monitors were linked to a local area network, allowing continuous monitoring and data transfer to a proprietary relational database.
+Data was stored for several weeks before being retrieved and archived daily.
+The de-identification process for MIMIC-IV followed the same method as MIMIC-III, removing or replacing protected health information with non-identifying information.
+
+Both the MIMIC-III and MIMIC-IV databases encompass waveform and numeric datasets sourced from intensive care units.
+While both datasets feature detailed waveform records and numerical values, their storage and acquisition methods differ.
+MIMIC-III organizes its records within a directory structure with segmented waveform data, while MIMIC-IV adopts WFDB format for waveforms and compressed CSV files for numerics.
+However, MIMIC-IV incorporates enhancements like automated record partitioning and optimized storage formats to enhance data management efficiency.
+
+% Conclusion parahraph
+\vspace{0.2cm}
+
+Clinical Research Databases such as MIMIC play a pivotal role in facilitating global access to critical patient data, thereby supporting scientific endeavors across various medical domains.
+By ensuring the anonymity and de-identification of patient information, these databases uphold stringent standards of data privacy and ethics, thereby avoiding any infringement upon patient rights or privacy regulations.
+Such databases serve as invaluable resources for conducting comprehensive studies spanning diverse medical disciplines, including but not limited to the detection and treatment of various cancers, cardiovascular diseases, and even neonatal care in stationary settings.
+Their expansive datasets offer researchers an extensive pool of information to draw insights from, ultimately advancing the overall understanding and management of complex medical conditions.
 
 \subsection{Computing Background}
 \label{subsec:computing_background}
@@ -245,28 +275,107 @@ Both projects consist of two types of data: waveform data, comprising high-resol
 \subsubsection{Signal Processing}
 \label{subsubsec:signal_processing}
 
-\begin{enumerate}
-    \item What are the methods of signal processing for reading PPG?
+This section explores various techniques and methods employed in the analysis of PPG signals and their correlation to BP measurements.
+PPG-based BP estimation has emerged as a promising non-invasive approach, utilizing waveform observations from signals like PPG signals from different anatomical sites or their combination with ECG signals.
+This section delves into the diverse methodologies and algorithms utilized for processing PPG signals to derive meaningful insights into BP dynamics.
 
-    Approaches for processing the given PPG data in correlation to BP:\newline
+% What are the methods of signal processing for reading PPG?
+% Approaches for processing the given PPG data in correlation to BP
+\vspace{0.2cm}
+\textit{PPG Signal Processing Methods}
+\vspace{0.2cm}
 
-    \textbf{Time (PTT) based on PPG \& ECG - Inverse correlation between BP and PTT.} PTT is the time delay for the pressure wave to travel between to sites on the body. It can be calculated as the time difference between proximal and distal waveforms indicative of the arterial pulse.
+% PTT
+Previous research has documented an inverse relationship BP and pulse transit time (PTT)~\cite{mukkamalaUbiquitousBloodPressure2015}.
+Extensive investigation over past decades has focused on the PTT-based approach, revealing growing support for its potential in offering non-invasive BP measurements without the need for cuffs.
+PTT refers to the delay in time for the pressure waveform to traverse between two arterial locations (see Figure~\ref{fig:ptt}).
+It can be calculated as the time difference between proximal and distal waveforms indicative of the arterial pulse.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{images/sp/ptt}
+    \caption{Calculation of PTT from ECG, PPG and first PPG derivative waveforms~\cite{luiNovelCalibrationProcedure2018}}
+    \label{fig:ptt}
+\end{figure}
 
-    \textbf{Pulse Arrival Time (PAT) = PTT + pre-ejection period.} It is defined as the time that takes the pulse wave to travel from the heart to a peripheral site e.g. finger, toe, etc. It can simply be estimated as the time delay between the R peak of the ECG waveform and a point on the rising edge of a distal PPG waveform.
+% PAT
+Pulse arrival time (PAT) represents another widely employed technique~\cite{sharmaCuffLessContinuousBlood2017}.
+It is defined as the time that takes the pulse wave to travel from the heart to a peripheral site e.g.\ finger, toe, etc.
+It denotes the temporal discrepancy between the R-peak of the ECG signal and the peak of the PPG signal, measured within the same cardiac cycle (see Figure~\ref{fig:pat}).
+Both PTT and PAT require simultaneous measurement at two different sites on the body, hence two measurement sensors (ECG and PPG) are needed for recording the signals in order to estimate these parameters.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{images/sp/pat}
+    \caption{Calculation of PAT from ECG and PPG waveforms~\cite{dhillonPulseArrivalTime2019}}
+    \label{fig:pat}
+\end{figure}
 
-    These methods require simultaneous measurement at two different sites on the body, hence two measurement sensors (ECG and PPG) are needed for recording the signals in order to estimate these parameters.
+% PWV
+Pulse wave velocity (PWV) is another alternative method for estimating BP~\cite{mccombieAdaptiveBloodPressure2006}.
+PWV determines the speed of the pulse wave by utilizing two PPG sensors positioned along the same arterial branch, separated by a known distance (see Figure~\ref{fig:pww}), portrayed by the following formula
+\begin{math}
+PWW = \frac{D}{PTT}
+\end{math}
+where D is the distance between two known body parts.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{images/sp/pww}
+    \caption{Calculation of PWW from two PPG signals at different body parts~\cite{urbanUnderstandingArterialBiomechanics2023}}
+    \label{fig:pww}
+\end{figure}
 
-    \item What are the different types of filters for processing the PPG signal?
+% summarize PTT,PAT,PWV
+Estimating BP through PTT, PAT, or PWV parameters involves mathematical models, but implementing these models faces challenges, and none of these techniques has become a reliable clinical tool for BP measurement.
+Challenges include the need for synchronized sensors, varying sampling rates, and reliance on complex arterial wave propagation models, making continuous BP measurement inconvenient and requiring constant calibration.
+Despite per-person calibration, these models offer only short-term BP estimation and remain unreliable for beat-to-beat BP measurement.
 
-    Signal filtering types include: Chebyshev filter, Butterworth filter~\cite{liangOptimalFilterShort2018}.
+% PWA
+Pulse wave analysis (PWA) offers a multifaceted solution to the previously mentioned issues.
+It serves as an umbrella term encompassing signal processing and feature extraction of certain PPG waveform characteristics.
+PWA offers a novel method for cuffless, continuous, and calibration-free BP measurement by extracting temporal features from the PPG waveform, which demonstrate a strong correlation with individual BP levels~\cite{elgendiAnalysisFingertipPhotoplethysmogram2012}.
+Utilizing only one PPG sensor, PWA presents several advantages over previous methods, including simplicity, affordability, straightforward signal acquisition, and a resemblance between BP pulse waveform and PPG blood volume pulse (example in Figure~\ref{fig:pwa}).
+This data-driven approach to BP estimation provides optical BP measurement with promising potential for practical applications.
+Advancements in computational technology and data analysis software have simplified the preprocessing and analysis of physiological signals.
+Techniques such as filtering and feature extraction are commonly utilized in the analysis of PPG pulse waves, often integrated into machine learning and deep neural network models for blood pressure estimation.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=1.8]{images/sp/pwa}
+    \caption{Example of a PWA used to extract features from the PPG waveform~\cite{bikiaLeveragingPotentialMachine2021}}
+    \label{fig:pwa}
+\end{figure}
 
-    Savitzky-Golay (SG) filter~\cite{savitzkySmoothingDifferentiationData1964}
+% Different types of filters for processing the PPG signal
+\vspace{0.2cm}
+\textit{Signal Pre-Processing}
+\vspace{0.2cm}
 
-    Second derivative \& Age analysis~\cite{takazawaAssessmentVasoactiveAgents1998}
+The preprocessing of physiological signals, crucial for accurate BP estimation, involves a variety of signal filtering techniques.
+Techniques like Chebyshev, Butterworth, and Savitzky-Golay filtering, along with methods such as second derivative analysis, play pivotal roles in enhancing signal quality.
+These preprocessing steps, facilitated by advancements in computational technology, pave the way for more refined analysis and interpretation of PPG pulse waves.
 
-    Hemodynamics and vascular age~\cite{charltonAssessingHemodynamicsPhotoplethysmogram2022}
+% Butterworth
+An investigation into various signal pre-processing techniques necessitates an examination of different types of filters.
+One prominent representative is the Butterworth filter, characterized by its flat frequency response within the passband.
+Belonging to the Infinite Impulse Response (IIR) category, Butterworth filters offer efficiency in processing low-frequency signals and exhibit rapid computational capabilities, as demonstrated by Chatterjee et al.\ in their PPG-based heart rate analysis~\cite{chatterjeePPGBasedHeart2018}.
+The filter order directly correlates with the number of energy storage components present in the analogous analog circuit, such as inductors and capacitors.
 
-\end{enumerate}
+% SavGol
+Another noteworthy filter type is the Savitzky-Golay filter, introduced by Savitzky and Golay~\cite{savitzkySmoothingDifferentiationData1964}.
+Falling under the Finite Impulse Response (FIR) category, this filter effectively smooths data while removing unwanted frequencies.
+Its inherent stability ensures a finite output for any finite input.
+Additionally, the linear phase property guarantees the absence of frequency-dependent time shifts.
+
+% Chebyshev
+Furthermore, the Chebyshev filter offers a steeper roll-off compared to other filters, leading to sharper distinctions between desired and unwanted frequencies.
+While this advantage comes at the cost of controlled passband ripples, these filters remain valuable tools for applications requiring precise frequency separation.
+Beyond digital signal improvement, they find applications in audio crossovers, image noise reduction, and data communication, as discussed by Antoniou~\cite{antoniouDigitalFiltersAnalysis2018}.
+
+% Optimal finding
+In their 2018 study, Liang et al.\ investigated nine different digital signal filters to identify the optimal approach for short PPG signals (2.1s)~\cite{liangOptimalFilterShort2018}.
+Their performance-based ranking revealed the Chebyshev II filter as the most effective in enhancing PPG signal quality, with the optimal order at 4th.
+
+Second derivative \& Age analysis~\cite{takazawaAssessmentVasoactiveAgents1998}
+
+Hemodynamics and vascular age~\cite{charltonAssessingHemodynamicsPhotoplethysmogram2022}
 
 \subsubsection{Machine Learning}
 \label{subsubsec:machine_learning}
@@ -282,9 +391,9 @@ Several studies attempted to fit regression models, such as \textbf{multilinear 
 
 Teng and Zhang~\cite{tengContinuousNoninvasiveEstimation2003} tried to fit a \textbf{linear regression} model to study the relationship between four PPG features and BP. It was reported that the diastolic time has higher correlation with SBP and DBP than the other features.
 
-Suzuki and Oguri~\cite{suzukiCufflessBloodPressure2009} used \textbf{AdaBoost} classifier for the estimation of BP. In this technique, SBP values were classified according to a threshold and afterwards the nonlinear machine learning model was employed for estimating SBP\@.
+Suzuki and Oguri~\cite{suzukiCufflessBloodPressure2009} used \textbf{AdaBoost} classifier for the estimation of BP. In this technique, SBP values were classified according to a threshold and afterward the nonlinear machine learning model was employed for estimating SBP\@.
 
-Ruiz-Rodriguez et al.~\cite{ruiz-rodriguezInnovativeContinuousNoninvasive2013} employed a probabilistic generative model, \textbf{Deep Belief Network Restricted Boltzmann Machine}, for predicting SBP, DBP and mean arterial pressure simultaneously.
+Ruiz-Rodriguez et al.~\cite{ruiz-rodriguezInnovativeContinuousNoninvasive2013a} employed a probabilistic generative model, \textbf{Deep Belief Network Restricted Boltzmann Machine}, for predicting SBP, DBP and mean arterial pressure simultaneously.
 The results of this study were highly variable, and therefore was not reliable.
 
 Kurylyak et al. \cite{kurylyakNeuralNetworkbasedMethod2013} extracted 21 characteristic features from the PPG waveform.
