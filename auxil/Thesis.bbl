@@ -1,7 +1,13 @@
 \begin{thebibliography}{10}
 
+\bibitem{AdaBoostAlgorithmMachine}
+{{AdaBoost Algorithm}} in {{Machine Learning}}.
+
 \bibitem{AutomaticDigitalBlood}
 Automatic {{Digital Blood Pressure Monitor}}.
+
+\bibitem{FeedforwardNeuralNetworks}
+Feedforward {{Neural Networks}} | {{Brilliant Math}} \& {{Science Wiki}}.
 
 \bibitem{StandardSphygmomanometer}
 Standard {{Sphygmomanometer}}.
@@ -16,6 +22,11 @@ John Allen.
 \newblock Photoplethysmography and its application in clinical physiological
   measurement.
 \newblock 28(3):R1.
+
+\bibitem{anishnamaUnderstandingBidirectionalLSTM2023}
+Anishnama.
+\newblock Understanding {{Bidirectional LSTM}} for {{Sequential Data
+  Processing}}.
 
 \bibitem{antoniouDigitalFiltersAnalysis2018}
 Andreas Antoniou.
@@ -103,6 +114,12 @@ Marshal~S. Dhillon and Matthew~J. Banet.
   {{Handbook}} of {{Cuffless Blood Pressure Monitoring}}: {{A Practical Guide}}
   for {{Clinicians}}, {{Researchers}}, and {{Engineers}}}, pages 43--59.
   {Springer International Publishing}.
+
+\bibitem{djeldjliImagingPhotoplethysmographySignal2019}
+Djamaleddine Djeldjli, Frédéric Bousefsaf, Choubeila Maaoui, and Fethi
+  Reguig.
+\newblock Imaging {{Photoplethysmography}}: {{Signal Waveform Analysis}}.
+\newblock pages 830--834.
 
 \bibitem{el-hajjDeepLearningModels2021}
 C~El-Hajj and given-i=PA family=Kyriacou, given=PA.
@@ -253,6 +270,12 @@ Hin~Wai Lui and King Chow.
   {{Blood Pressure}} measurement with {{Heart Rate}} and {{Respiratory Rate}}.
 \newblock volume 2018.
 
+\bibitem{marulandaHybridModelBased2023}
+Geovanny Marulanda, Jenny Cifuentes, Antonio Bello, and Javier Reneses.
+\newblock A hybrid model based on {{LSTM}} neural networks with attention
+  mechanism for short-term wind power forecasting.
+\newblock page 0309524X231191163.
+
 \bibitem{mccombieAdaptiveBloodPressure2006}
 Devin~B. McCombie, Andrew~T. Reisner, and H.~Harry Asada.
 \newblock Adaptive blood pressure estimation from wearable {{PPG}} sensors
@@ -307,6 +330,13 @@ World~Health Organization.
 \newblock {\em World Health Statistics 2023: Monitoring Health for the
   {{SDGs}}, {{Sustainable Development Goals}}}.
 \newblock {World Health Organization}.
+
+\bibitem{ouIntegratingCellularAutomata2019}
+Cong Ou, Jianyu Yang, Zhenrong Du, Xin Zhang, and Dehai Zhu.
+\newblock Integrating {{Cellular Automata}} with {{Unsupervised Deep-Learning
+  Algorithms}}: {{A Case Study}} of {{Urban-Sprawl Simulation}} in the
+  {{Jingjintang Urban Agglomeration}}, {{China}}.
+\newblock 11.
 
 \bibitem{peterReviewMethodsNoninvasive2014}
 L.~Peter, N.~Noury, and M.~Cerny.
@@ -400,6 +430,12 @@ K.~Takazawa, N.~Tanaka, M.~Fujita, O.~Matsuoka, T.~Saiki, M.~Aikawa, S.~Tamura,
   derivative of photoplethysmogram waveform.
 \newblock 32(2):365--370.
 
+\bibitem{tanveerCufflessBloodPressure2019}
+Md.~Sayed Tanveer and Md.~Kamrul Hasan.
+\newblock Cuffless blood pressure estimation from electrocardiogram and
+  photoplethysmogram using waveform based {{ANN-LSTM}} network.
+\newblock 51:382--392.
+
 \bibitem{tengContinuousNoninvasiveEstimation2003}
 X.F. Teng and Y.T. Zhang.
 \newblock Continuous and noninvasive estimation of arterial blood pressure
@@ -449,6 +485,11 @@ I.~Yoshiya, Y.~Shimada, and K.~Tanaka.
 Serena Zanelli, Mounim El~Yacoubi, Magid Hallab, and Mehdi Ammi.
 \newblock On the potential of {{AI}} based health assessment from
   photopletysmographic signals.
+
+\bibitem{zhangEffectLocalCold2005}
+Xin-Yu Zhang and Yuan-Ting Zhang.
+\newblock The effect of local cold exposure on pulse transit time.
+\newblock 2005:3522--3525.
 
 \bibitem{zhengRingtypeDeviceNoninvasive2003}
 D.C. Zheng and Y.T. Zhang.

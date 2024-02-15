@@ -5,23 +5,31 @@ Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: literature.bib
+Warning--entry type for "AdaBoostAlgorithmMachine" isn't style-file defined
+--line 1 of file literature.bib
+Warning--entry type for "anishnamaUnderstandingBidirectionalLSTM2023" isn't style-file defined
+--line 28 of file literature.bib
 Warning--entry type for "AutomaticDigitalBlood" isn't style-file defined
---line 50 of file literature.bib
+--line 72 of file literature.bib
 Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
---line 60 of file literature.bib
+--line 82 of file literature.bib
 Warning--entry type for "contributorEssentialCriticalCare2021" isn't style-file defined
---line 194 of file literature.bib
+--line 216 of file literature.bib
+Warning--entry type for "FeedforwardNeuralNetworks" isn't style-file defined
+--line 368 of file literature.bib
 Warning--entry type for "moodyMIMICIIIWaveformDatabase2017" isn't style-file defined
---line 771 of file literature.bib
+--line 827 of file literature.bib
 Warning--entry type for "moodyMIMICIVWaveformDatabase" isn't style-file defined
---line 783 of file literature.bib
+--line 839 of file literature.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 868 of file literature.bib
+--line 937 of file literature.bib
 Warning--entry type for "StandardSphygmomanometer" isn't style-file defined
---line 1045 of file literature.bib
+--line 1114 of file literature.bib
 Warning--to sort, need author or key in WhatBloodPressure2019
 Warning--to sort, need author or key in StandardSphygmomanometer
 Warning--to sort, need author or key in AutomaticDigitalBlood
+Warning--to sort, need author or key in AdaBoostAlgorithmMachine
+Warning--to sort, need author or key in FeedforwardNeuralNetworks
 Warning--empty author in WhatBloodPressure2019
 Warning--empty year in WhatBloodPressure2019
 Warning--empty journal in allenPhotoplethysmographyItsApplication2007a
@@ -44,6 +52,8 @@ Warning--empty journal in clarkArterialCatheterization1992
 Warning--empty year in clarkArterialCatheterization1992
 Warning--empty year in demersPhysiologyMeanArterial2024
 Warning--empty year in dhillonPulseArrivalTime2019
+Warning--empty booktitle in djeldjliImagingPhotoplethysmographySignal2019
+Warning--empty year in djeldjliImagingPhotoplethysmographySignal2019
 Warning--empty journal in el-hajjDeepLearningModels2021
 Warning--empty year in el-hajjDeepLearningModels2021
 Warning--empty journal in elgendiAnalysisFingertipPhotoplethysmogram2012
@@ -85,6 +95,8 @@ Warning--empty booktitle in liuIntegratedNavigationTethered2017
 Warning--empty year in liuIntegratedNavigationTethered2017
 Warning--empty booktitle in luiNovelCalibrationProcedure2018
 Warning--empty year in luiNovelCalibrationProcedure2018
+Warning--empty journal in marulandaHybridModelBased2023
+Warning--empty year in marulandaHybridModelBased2023
 Warning--empty journal in mccombieAdaptiveBloodPressure2006
 Warning--empty year in mccombieAdaptiveBloodPressure2006
 Warning--empty journal in mohanSpotMeasurementHeart2016
@@ -97,6 +109,8 @@ Warning--empty year in mukkamalaUbiquitousBloodPressure2015
 Warning--empty journal in naylorArterialCathetersEarly2020
 Warning--empty year in naylorArterialCathetersEarly2020
 Warning--empty year in organizationWorldHealthStatistics2023
+Warning--empty journal in ouIntegratingCellularAutomata2019
+Warning--empty year in ouIntegratingCellularAutomata2019
 Warning--empty journal in peterReviewMethodsNoninvasive2014
 Warning--empty year in peterReviewMethodsNoninvasive2014
 Warning--empty year in poonCufflessNoninvasiveMeasurements2005
@@ -118,6 +132,8 @@ Warning--empty journal in sviridovaHumanPhotoplethysmogramNew2015
 Warning--empty year in sviridovaHumanPhotoplethysmogramNew2015
 Warning--empty journal in takazawaAssessmentVasoactiveAgents1998
 Warning--empty year in takazawaAssessmentVasoactiveAgents1998
+Warning--empty journal in tanveerCufflessBloodPressure2019
+Warning--empty year in tanveerCufflessBloodPressure2019
 Warning--empty year in tengContinuousNoninvasiveEstimation2003
 Warning--empty journal in urbanUnderstandingArterialBiomechanics2023
 Warning--empty year in urbanUnderstandingArterialBiomechanics2023
@@ -132,46 +148,48 @@ Warning--empty journal in yoshiyaSpectrophotometricMonitoringArterial1980
 Warning--empty year in yoshiyaSpectrophotometricMonitoringArterial1980
 Warning--empty booktitle in zanelliPotentialAIBased2023
 Warning--empty year in zanelliPotentialAIBased2023
+Warning--empty journal in zhangEffectLocalCold2005
+Warning--empty year in zhangEffectLocalCold2005
 Warning--empty year in zhengRingtypeDeviceNoninvasive2003
-You've used 70 entries,
+You've used 78 entries,
             2118 wiz_defined-function locations,
-            894 strings with 24625 characters,
-and the built_in function-call counts, 30742 in all, are:
-= -- 2705
-> -- 2129
-< -- 17
-+ -- 852
-- -- 772
-* -- 2694
-:= -- 5048
-add.period$ -- 203
-call.type$ -- 70
-change.case$ -- 594
+            932 strings with 26248 characters,
+and the built_in function-call counts, 33419 in all, are:
+= -- 2967
+> -- 2238
+< -- 19
++ -- 898
+- -- 808
+* -- 2849
+:= -- 5423
+add.period$ -- 222
+call.type$ -- 78
+change.case$ -- 636
 chr.to.int$ -- 0
-cite$ -- 184
-duplicate$ -- 906
-empty$ -- 1975
-format.name$ -- 772
-if$ -- 6051
+cite$ -- 204
+duplicate$ -- 1027
+empty$ -- 2190
+format.name$ -- 808
+if$ -- 6641
 int.to.chr$ -- 0
-int.to.str$ -- 70
-missing$ -- 65
-newline$ -- 341
-num.names$ -- 136
-pop$ -- 814
+int.to.str$ -- 78
+missing$ -- 70
+newline$ -- 376
+num.names$ -- 148
+pop$ -- 887
 preamble$ -- 1
-purify$ -- 525
+purify$ -- 559
 quote$ -- 0
-skip$ -- 622
+skip$ -- 748
 stack$ -- 0
-substring$ -- 1694
-swap$ -- 153
-text.length$ -- 17
+substring$ -- 1858
+swap$ -- 201
+text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 276
-warning$ -- 114
-while$ -- 241
-width$ -- 72
-write$ -- 629
-(There were 121 warnings)
+type$ -- 308
+warning$ -- 126
+while$ -- 261
+width$ -- 80
+write$ -- 691
+(There were 136 warnings)
