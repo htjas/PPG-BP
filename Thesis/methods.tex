@@ -1,0 +1,82 @@
+\subsection{Data Fetching}
+\label{subsec:data-fetching}
+
+- WFDB methods for data fetching
+
+wfdb.rdrecord()
+wfdb.rdheader()
+
+elaborate record filtering criteria
+
+\subsection{Signal Processing}
+\label{subsec:signal-processing}
+
+\subsubsection{Filtering Aproaches}
+
+butter + savgol optimal, because PPG shapes best (show pic)
+
+\subsubsection{Beat Finding Algorithms}
+
+3 beat findings algos from wfdb methods, 1 novel for reference
+
+Beat grouping and synchronization
+
+Mention that no manual selection was done, due to large size of samples
+
+\subsubsection{Fiducial Point detection}
+
+wfdb default algos
+
+cave for dic notch
+
+\subsubsection{Feature Extraction}
+
+graphics for all 34 features
+
+explain each significance
+
+FFT formula
+
+\subsection{Machine Learning}\label{subsec:ml_methods}
+
+LR, MLP, LSTM, GRU models tried
+
+elaborate splitting approach
+
+\begin{enumerate}
+
+    \item Data fetching and reading using WFDB and NumPy libraries.
+
+    \subitem Get all available data from MIMIC-IV DB.\
+    \subitem This data is used as the validation dataset, since it is the one that's most up-to-date,
+    most modern, and supposedly most reliable
+    \subitem There are 198 subjects and 200 total studies in the DB (two subjects have two separate studies)
+    \subitem The studies contain records with various signals (ECG, ABP, Pleth etc.) and are of different lengths
+    \subitem A single record can contain various segments also of different lengths and signals
+    \subitem Segments contain continuous values, that are used in this research
+    \subitem Only segments with at least 10 minutes of length are considered
+    \subitem These segments must also not contain \enquote{faulty} values
+    \subitem Faulty values: NaN, inf, negative values, for ABP values not below 30 and not above 250,
+    for PPG only between 0 and 1
+    \subitem If a 10-minute part of the segment matches these criteria, it is saved to the ./validation directory,
+    as 2 separate and synchronous ABP and PPG files
+    \subitem If a segment is longer than 10 minutes, then more 10 minute segments may be extracted
+    (marked by a \_ and a number representing the sequence)
+    \subitem Example of the files: \texttt{abp\_80057524\_0005\_0}, \texttt{ppg\_80057524\_0020\_18}
+
+    For MIMIC-IV data fetching, no limits on the total records and single study records are given.
+    For MIMIC-III - 4 times the records of MIMIC-IV are fetched and a maximum of 100 segments per study is set,
+    to avoid over-representation of single person or study data in the ML part of the research.
+
+    \item Digital signal filtering using Savitzky-Golay and Butterworth Lowpass filters.
+
+    \item Beat detection algorithms from MIMIC WFDB Tutorial used for primary estimation.
+    Beat detection improved with manual implementation of SciPy library.
+
+    \item Fiducial Point calculation based on the algorithm provided in the MIMIC WFDB Tutorial.
+
+    \item Feature extraction with personally created code to extract time domain features, and NumPy library to extract frequency domain features (FFT). Median value calculation using NumPy library.
+
+    \item Machine Learning Model creation using PyTorch and Scikit-Learn libraries.
+
+\end{enumerate}

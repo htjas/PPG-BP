@@ -215,31 +215,39 @@ Over time, a pattern has emerged in the collection and storage of patient data f
 \textit{Origin}
 \vspace{0.2cm}
 
-In 1996, two researchers at the Massachusetts Institute of Technology, George B. Moody and Roger G. Mark, introduced the MIMIC (Multiparameter Intelligent Monitoring in Intensive Care) Database.
-The database was derived from patient monitors in the medical, surgical, and cardiac intensive care units of Boston’s Beth Israel Hospital~\cite{moodyDatabaseSupportDevelopment1996}.
-The first instance of the database included 100 patient records, each typically containing between 24 and 48 hours of continuous recorded data.
-The second version of the database (MIMIC-II) was introduced in 2011 boasting a notably larger sample size and a wider scope of information sourced entirely from diverse digital information systems~\cite{saeedMultiparameterIntelligentMonitoring2011}.
+In 1996, two researchers at the Massachusetts Institute of Technology, George B. Moody and Roger G. Mark, introduced the Multiparameter Intelligent Monitoring in Intensive Care (MIMIC) Database (DB).
+The DB was derived from patient monitors in the medical, surgical, and cardiac intensive care units of Boston’s Beth Israel Hospital~\cite{moodyDatabaseSupportDevelopment1996}.
+The first instance of the DB included 100 patient records, each typically containing between 24 and 48 hours of continuous recorded data.
+The second version of the DB (MIMIC-II) was introduced in 2011 boasting a notably larger sample size and a wider scope of information sourced entirely from diverse digital information systems~\cite{saeedMultiparameterIntelligentMonitoring2011}.
 MIMIC-III~\cite{johnsonMIMICIIIFreelyAccessible2016} was finalized in 2016, marking a significant expansion from MIMIC-II, with data available from over 40,000 patients.
-The fourth and latest MIMIC Database was publicly released in 2023 spanning a decade of admissions from 2008 to 2019.
+The fourth and latest MIMIC DB was publicly released in 2023 spanning a decade of admissions from 2008 to 2019.
 MIMIC-IV was announced to enhance the realm of publicly accessible critical care datasets, by integrating precise digital sources like the electronic medicine administration record and featuring a modular structure enabling seamless integration with external departments and diverse data modalities~\cite{johnsonMIMICIVFreelyAccessible2023}.
+The diagram in Figure~\ref{fig:mimic_workflow} depicts the component interaction for data and information delivery to the publicly available DB\@.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.6]{images/mimic/mimic_workflow}
+    \caption{Workflow between Beth Israel Deaconess Medical Center (BIDMC), Protected Health Information (PHI) DB ~\cite{charltonMIMICWFDBTutorials2022}}
+    \label{fig:mimic_workflow}
+\end{figure}
 
 % Structure of MIMIC DB
 \vspace{0.2cm}
 \textit{Structure}
 \vspace{0.2cm}
 
-Both the MIMIC-III and MIMIC-IV Databases are cited and employed in this investigation, exhibiting comparable structures (depicted in Figure~\ref{fig:mimic_structure}), encompassing diverse data categories.
-However, the primary emphasis of this inquiry lies in the Waveform Section of the Database (highlighted by a red rectangle in Figure~\ref{fig:mimic_structure}).
+Both the MIMIC-III and MIMIC-IV DBs are cited and employed in this investigation, exhibiting comparable structures (depicted in Figure~\ref{fig:mimic_structure}), encompassing diverse data categories.
+However, the primary emphasis of this inquiry lies in the Waveform Section of the DB (highlighted by a red rectangle in Figure~\ref{fig:mimic_structure}).
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.3]{images/mimic/mimic_structure}
-    \caption{General Structure of the MIMIC-III Database~\cite{johnsonMIMICIIIFreelyAccessible2016}}
+    \caption{General Structure of the MIMIC-III DB~\cite{johnsonMIMICIIIFreelyAccessible2016}}
     \label{fig:mimic_structure}
 \end{figure}
 
-The Waveform data from both the MIMIC-III and MIMIC-IV Databases is publicly available on the Physionet internet website~\cite{moodyMIMICIIIWaveformDatabase2017, moodyMIMICIVWaveformDatabase}.
-In both databases recorded waveforms typically encompass one or more electrocardiogram(ECG) signals, often feature continuous ABP waveforms and fingertip PPG signals.
+The Waveform data from both the MIMIC-III and MIMIC-IV DBs is publicly available on the Physionet internet website~\cite{moodyMIMICIIIWaveformDatabase2017, moodyMIMICIVWaveformDatabase}.
+In both DBs recorded waveforms typically encompass one or more electrocardiogram(ECG) signals, often feature continuous ABP waveforms and fingertip PPG signals.
 Numeric data typically includes heart and respiration rates, SpO2, and systolic, mean, and diastolic blood pressure, among other metrics when accessible.
 Recording durations also vary, with most lasting a few days, although some are shorter and other might even extend over several weeks.
 Both projects consist of two types of data: waveform data, comprising high-resolution, regularly sampled time series obtained directly from measuring devices, and numeric data, including digitally derived values or irregularly sampled data (like NIBP).
@@ -252,11 +260,11 @@ Both projects consist of two types of data: waveform data, comprising high-resol
 In MIMIC-III, waveforms were collected in a largely automated manner from selected adult and neonatal ICUs, resulting in a random sample of patients.
 The data archiving process was not continuous, and the recorded waveforms and numerics varied based on ICU staff choices.
 The individual patient consent waived due to de-identification.
-On the other hand, MIMIC-IV collected data from intensive care units where bedside monitors were linked to a local area network, allowing continuous monitoring and data transfer to a proprietary relational database.
+On the other hand, MIMIC-IV collected data from intensive care units where bedside monitors were linked to a local area network, allowing continuous monitoring and data transfer to a proprietary relational DB.
 Data was stored for several weeks before being retrieved and archived daily.
 The de-identification process for MIMIC-IV followed the same method as MIMIC-III, removing or replacing protected health information with non-identifying information.
 
-Both the MIMIC-III and MIMIC-IV databases encompass waveform and numeric datasets sourced from intensive care units.
+Both the MIMIC-III and MIMIC-IV DBs encompass waveform and numeric datasets sourced from intensive care units.
 While both datasets feature detailed waveform records and numerical values, their storage and acquisition methods differ.
 MIMIC-III organizes its records within a directory structure with segmented waveform data, while MIMIC-IV adopts WFDB format for waveforms and compressed CSV files for numerics.
 However, MIMIC-IV incorporates enhancements like automated record partitioning and optimized storage formats to enhance data management efficiency.
@@ -264,9 +272,9 @@ However, MIMIC-IV incorporates enhancements like automated record partitioning a
 % Conclusion parahraph
 \vspace{0.2cm}
 
-Clinical Research Databases such as MIMIC play a pivotal role in facilitating global access to critical patient data, thereby supporting scientific endeavors across various medical domains.
-By ensuring the anonymity and de-identification of patient information, these databases uphold stringent standards of data privacy and ethics, thereby avoiding any infringement upon patient rights or privacy regulations.
-Such databases serve as invaluable resources for conducting comprehensive studies spanning diverse medical disciplines, including but not limited to the detection and treatment of various cancers, cardiovascular diseases, and even neonatal care in stationary settings.
+Clinical Research DBs such as MIMIC play a pivotal role in facilitating global access to critical patient data, thereby supporting scientific endeavors across various medical domains.
+By ensuring the anonymity and de-identification of patient information, these DBs uphold stringent standards of data privacy and ethics, thereby avoiding any infringement upon patient rights or privacy regulations.
+Such DBs serve as invaluable resources for conducting comprehensive studies spanning diverse medical disciplines, including but not limited to the detection and treatment of various cancers, cardiovascular diseases, and even neonatal care in stationary settings.
 Their expansive datasets offer researchers an extensive pool of information to draw insights from, ultimately advancing the overall understanding and management of complex medical conditions.
 
 \subsection{Computing Background}
@@ -380,9 +388,7 @@ The relationship can be expressed by the following formula:~
 \Large
 \begin{center}
     \begin{math}
-        y[n] = \sum_{i=-\frac{M}{2}}^{\frac{M}{2}} W_i \cdot x_{n+i} \qquad
-        \normalsize
-        \text{where:} \\
+        y[n]~=~\sum_{i=-\frac{M}{2}}^{\frac{M}{2}} W_i~\cdot~x_{n+i} \\
         \normalsize
         \begin{array}{ll}
             M       & : \text{Window size (odd number greater than or equal to N+1)} \\
@@ -560,13 +566,13 @@ They also found, that DBP is strongly associated with SBP and can enhance its es
 Focusing on long term estimation, El-Hajj and Kyriacou (2021) proposed leveraging advanced deep learning techniques like Bidirectional-LSTMs and Bidirectional Gated Recurrent Units (GRU) with attention mechanisms (example of attention mechanism implementation in LSTM in Figure~\ref{fig:attention}) for BP estimation~\cite{el-hajjDeepLearningModels2021}.
 
 \begin{figure}
-  \begin{minipage}[c]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{images/ml/attention}
-  \end{minipage}\hfill
-  \begin{minipage}[c]{0.5\textwidth}
-    \caption{The attention mechanism in LSTM allows the model to focus on specific parts of the input sequence, dynamically adjusting the importance of each input element during the prediction process~\cite{marulandaHybridModelBased2023}}
-    \label{fig:attention}
-  \end{minipage}
+    \begin{minipage}[c]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{images/ml/attention}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.5\textwidth}
+        \caption{The attention mechanism in LSTM allows the model to focus on specific parts of the input sequence, dynamically adjusting the importance of each input element during the prediction process~\cite{marulandaHybridModelBased2023}}
+        \label{fig:attention}
+    \end{minipage}
 \end{figure}
 
 %\begin{figure}

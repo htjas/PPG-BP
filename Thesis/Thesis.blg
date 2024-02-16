@@ -13,18 +13,20 @@ Warning--entry type for "AutomaticDigitalBlood" isn't style-file defined
 --line 72 of file literature.bib
 Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
 --line 82 of file literature.bib
+Warning--entry type for "charltonMIMICWFDBTutorials2022" isn't style-file defined
+--line 184 of file literature.bib
 Warning--entry type for "contributorEssentialCriticalCare2021" isn't style-file defined
---line 216 of file literature.bib
+--line 226 of file literature.bib
 Warning--entry type for "FeedforwardNeuralNetworks" isn't style-file defined
---line 368 of file literature.bib
+--line 378 of file literature.bib
 Warning--entry type for "moodyMIMICIIIWaveformDatabase2017" isn't style-file defined
---line 827 of file literature.bib
+--line 837 of file literature.bib
 Warning--entry type for "moodyMIMICIVWaveformDatabase" isn't style-file defined
---line 839 of file literature.bib
+--line 849 of file literature.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 937 of file literature.bib
+--line 947 of file literature.bib
 Warning--entry type for "StandardSphygmomanometer" isn't style-file defined
---line 1114 of file literature.bib
+--line 1124 of file literature.bib
 Warning--to sort, need author or key in WhatBloodPressure2019
 Warning--to sort, need author or key in StandardSphygmomanometer
 Warning--to sort, need author or key in AutomaticDigitalBlood
@@ -151,45 +153,45 @@ Warning--empty year in zanelliPotentialAIBased2023
 Warning--empty journal in zhangEffectLocalCold2005
 Warning--empty year in zhangEffectLocalCold2005
 Warning--empty year in zhengRingtypeDeviceNoninvasive2003
-You've used 78 entries,
+You've used 79 entries,
             2118 wiz_defined-function locations,
-            932 strings with 26248 characters,
-and the built_in function-call counts, 33419 in all, are:
-= -- 2967
-> -- 2238
+            936 strings with 26350 characters,
+and the built_in function-call counts, 33612 in all, are:
+= -- 2983
+> -- 2245
 < -- 19
-+ -- 898
-- -- 808
-* -- 2849
-:= -- 5423
-add.period$ -- 222
-call.type$ -- 78
-change.case$ -- 636
++ -- 901
+- -- 810
+* -- 2854
+:= -- 5454
+add.period$ -- 224
+call.type$ -- 79
+change.case$ -- 640
 chr.to.int$ -- 0
-cite$ -- 204
-duplicate$ -- 1027
-empty$ -- 2190
-format.name$ -- 808
-if$ -- 6641
+cite$ -- 205
+duplicate$ -- 1034
+empty$ -- 2212
+format.name$ -- 810
+if$ -- 6683
 int.to.chr$ -- 0
-int.to.str$ -- 78
+int.to.str$ -- 79
 missing$ -- 70
-newline$ -- 376
-num.names$ -- 148
-pop$ -- 887
+newline$ -- 380
+num.names$ -- 150
+pop$ -- 895
 preamble$ -- 1
-purify$ -- 559
+purify$ -- 562
 quote$ -- 0
-skip$ -- 748
+skip$ -- 758
 stack$ -- 0
-substring$ -- 1858
-swap$ -- 201
+substring$ -- 1863
+swap$ -- 202
 text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 308
+type$ -- 312
 warning$ -- 126
-while$ -- 261
-width$ -- 80
-write$ -- 691
-(There were 136 warnings)
+while$ -- 263
+width$ -- 81
+write$ -- 698
+(There were 137 warnings)
