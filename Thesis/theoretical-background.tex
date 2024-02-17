@@ -216,7 +216,7 @@ Over time, a pattern has emerged in the collection and storage of patient data f
 \vspace{0.2cm}
 
 In 1996, two researchers at the Massachusetts Institute of Technology, George B. Moody and Roger G. Mark, introduced the Multiparameter Intelligent Monitoring in Intensive Care (MIMIC) Database (DB).
-The DB was derived from patient monitors in the medical, surgical, and cardiac intensive care units of Boston’s Beth Israel Hospital~\cite{moodyDatabaseSupportDevelopment1996}.
+The DB was derived from patient monitors in the medical, surgical, and cardiac ICUs of Boston’s Beth Israel Hospital~\cite{moodyDatabaseSupportDevelopment1996}.
 The first instance of the DB included 100 patient records, each typically containing between 24 and 48 hours of continuous recorded data.
 The second version of the DB (MIMIC-II) was introduced in 2011 boasting a notably larger sample size and a wider scope of information sourced entirely from diverse digital information systems~\cite{saeedMultiparameterIntelligentMonitoring2011}.
 MIMIC-III~\cite{johnsonMIMICIIIFreelyAccessible2016} was finalized in 2016, marking a significant expansion from MIMIC-II, with data available from over 40,000 patients.
@@ -238,6 +238,11 @@ The diagram in Figure~\ref{fig:mimic_workflow} depicts the component interaction
 
 Both the MIMIC-III and MIMIC-IV DBs are cited and employed in this investigation, exhibiting comparable structures (depicted in Figure~\ref{fig:mimic_structure}), encompassing diverse data categories.
 However, the primary emphasis of this inquiry lies in the Waveform Section of the DB (highlighted by a red rectangle in Figure~\ref{fig:mimic_structure}).
+The waveform DB comprises individual records, each representing a patient's ICU stay and stored in a distinct subdirectory.
+These records lack specific date or time data to ensure patient anonymity, relying instead on elapsed time from the record's start.
+Supplemented by surrogate date and time information for cross-referencing with other DB modules.
+Waveforms denote regularly sampled, high-resolution measurements stored in a signal specific numerical format.
+To optimize storage and processing, these waveforms are segmented into intervals, maintaining continuous sampling within each segment despite potential signal unavailability throughout a patient's ICU stay.
 
 \begin{figure}[h]
     \centering
@@ -260,11 +265,11 @@ Both projects consist of two types of data: waveform data, comprising high-resol
 In MIMIC-III, waveforms were collected in a largely automated manner from selected adult and neonatal ICUs, resulting in a random sample of patients.
 The data archiving process was not continuous, and the recorded waveforms and numerics varied based on ICU staff choices.
 The individual patient consent waived due to de-identification.
-On the other hand, MIMIC-IV collected data from intensive care units where bedside monitors were linked to a local area network, allowing continuous monitoring and data transfer to a proprietary relational DB.
+On the other hand, MIMIC-IV collected data from ICUs where bedside monitors were linked to a local area network, allowing continuous monitoring and data transfer to a proprietary relational DB.
 Data was stored for several weeks before being retrieved and archived daily.
 The de-identification process for MIMIC-IV followed the same method as MIMIC-III, removing or replacing protected health information with non-identifying information.
 
-Both the MIMIC-III and MIMIC-IV DBs encompass waveform and numeric datasets sourced from intensive care units.
+Both the MIMIC-III and MIMIC-IV DBs encompass waveform and numeric datasets sourced from ICUs.
 While both datasets feature detailed waveform records and numerical values, their storage and acquisition methods differ.
 MIMIC-III organizes its records within a directory structure with segmented waveform data, while MIMIC-IV adopts WFDB format for waveforms and compressed CSV files for numerics.
 However, MIMIC-IV incorporates enhancements like automated record partitioning and optimized storage formats to enhance data management efficiency.
@@ -324,11 +329,16 @@ PWV determines the speed of the pulse wave by utilizing two PPG sensors position
     PWW = \frac{D}{PTT}
 \end{math}
 where D is the distance between two known body parts.
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.4]{images/sp/pww}
-    \caption{Calculation of PWW from two PPG signals at different body parts~\cite{urbanUnderstandingArterialBiomechanics2023}}
-    \label{fig:pww}
+
+\begin{figure}
+    \begin{minipage}[c]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{images/sp/pww}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.5\textwidth}
+        \centering % TODO Center the side caption
+        \caption{Calculation of PWW from two PPG signals at different body parts~\cite{urbanUnderstandingArterialBiomechanics2023}}
+        \label{fig:pww}
+    \end{minipage}
 \end{figure}
 
 % summarize PTT,PAT,PWV

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  16 FEB 2024 20:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  17 FEB 2024 15:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -404,55 +404,79 @@ Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
 \colbreak@box=\box105
 \mc@col@check@num=\count295
 )
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count296
+\lst@gtempboxa=\box106
+\lst@token=\toks31
+\lst@length=\count297
+\lst@currlwidth=\dimen179
+\lst@column=\count298
+\lst@pos=\count299
+\lst@lostspace=\dimen180
+\lst@width=\dimen181
+\lst@newlines=\count300
+\lst@lineno=\count301
+\lst@maxwidth=\dimen182
+
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count302
+\lst@skipnumbers=\count303
+\lst@framebox=\box107
+)
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count296
-\l__pdf_internal_box=\box106
+\l__color_backend_stack_int=\count304
+\l__pdf_internal_box=\box108
 ) (Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-Package scrbase Info: activating english \abstractname on input line 17.
-Package scrbase Info: activating english \partname on input line 17.
-Package scrbase Info: activating english \figurename on input line 17.
-Package scrbase Info: activating english \tablename on input line 17.
-Package scrbase Info: activating english \contentsname on input line 17.
-Package scrbase Info: activating english \listfigurename on input line 17.
-Package scrbase Info: activating english \listtablename on input line 17.
-Package scrbase Info: activating english \refname on input line 17.
-Package scrbase Info: activating english \indexname on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+Package scrbase Info: activating english \abstractname on input line 18.
+Package scrbase Info: activating english \partname on input line 18.
+Package scrbase Info: activating english \figurename on input line 18.
+Package scrbase Info: activating english \tablename on input line 18.
+Package scrbase Info: activating english \contentsname on input line 18.
+Package scrbase Info: activating english \listfigurename on input line 18.
+Package scrbase Info: activating english \listtablename on input line 18.
+Package scrbase Info: activating english \refname on input line 18.
+Package scrbase Info: activating english \indexname on input line 18.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count297
-\scratchdimen=\dimen179
-\scratchbox=\box107
-\nofMPsegments=\count298
-\nofMParguments=\count299
-\everyMPshowfont=\toks31
-\MPscratchCnt=\count300
-\MPscratchDim=\dimen180
-\MPnumerator=\count301
-\makeMPintoPDFobject=\count302
-\everyMPtoPDFconversion=\toks32
+\scratchcounter=\count305
+\scratchdimen=\dimen183
+\scratchbox=\box109
+\nofMPsegments=\count306
+\nofMParguments=\count307
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count308
+\MPscratchDim=\dimen184
+\MPnumerator=\count309
+\makeMPintoPDFobject=\count310
+\everyMPtoPDFconversion=\toks33
 )
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -464,23 +488,24 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
+\c@lstlisting=\count311
 <images/hs/hd.png, id=1, 144.54pt x 75.8835pt>
 File: images/hs/hd.png Graphic file (type png)
 <use images/hs/hd.png>
-Package pdftex.def Info: images/hs/hd.png  used on input line 24.
+Package pdftex.def Info: images/hs/hd.png  used on input line 25.
 (pdftex.def)             Requested size: 86.72466pt x 45.53044pt.
 <images/hs/hhn.png, id=3, 115.18031pt x 44.41594pt>
 File: images/hs/hhn.png Graphic file (type png)
 <use images/hs/hhn.png>
-Package pdftex.def Info: images/hs/hhn.png  used on input line 25.
+Package pdftex.def Info: images/hs/hhn.png  used on input line 26.
 (pdftex.def)             Requested size: 115.18001pt x 44.41582pt.
 <images/hs/tmu.png, id=4, 1204.5pt x 664.4825pt>
 File: images/hs/tmu.png Graphic file (type png)
 <use images/hs/tmu.png>
-Package pdftex.def Info: images/hs/tmu.png  used on input line 26.
+Package pdftex.def Info: images/hs/tmu.png  used on input line 27.
 (pdftex.def)             Requested size: 72.26688pt x 39.86722pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 65--66
 
  []
 
@@ -540,108 +565,161 @@ Overfull \hbox (1.55579pt too wide) in paragraph at lines 186--187
 <images/mimic/mimic_workflow.png, id=64, 515.82712pt x 169.38281pt>
 File: images/mimic/mimic_workflow.png Graphic file (type png)
 <use images/mimic/mimic_workflow.png>
-Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 21
-5.
-(pdftex.def)             Requested size: 154.74933pt x 50.81523pt.
-<images/mimic/mimic_structure.png, id=65, 1580.90625pt x 1188.69093pt>
+Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
+9.
+(pdftex.def)             Requested size: 309.49866pt x 101.63046pt.
+ [14 <./images/mimic/mimic_workflow.png>]
+<images/mimic/mimic_structure.png, id=69, 1580.90625pt x 1188.69093pt>
 File: images/mimic/mimic_structure.png Graphic file (type png)
 <use images/mimic/mimic_structure.png>
 Package pdftex.def Info: images/mimic/mimic_structure.png  used on input line 2
-43.
+44.
 (pdftex.def)             Requested size: 474.27554pt x 356.61003pt.
 
-Overfull \hbox (26.14459pt too wide) in paragraph at lines 243--244
+Overfull \hbox (26.14459pt too wide) in paragraph at lines 244--245
  [][] 
  []
 
-[14 <./images/mimic/mimic_workflow.png>] [15 <./images/mimic/mimic_structure.pn
-g>] [16]
+[15 <./images/mimic/mimic_structure.png>] [16]
 <images/sp/ptt.png, id=76, 639.89063pt x 489.32813pt>
 File: images/sp/ptt.png Graphic file (type png)
 <use images/sp/ptt.png>
-Package pdftex.def Info: images/sp/ptt.png  used on input line 302.
+Package pdftex.def Info: images/sp/ptt.png  used on input line 303.
 (pdftex.def)             Requested size: 255.9517pt x 195.72777pt.
 <images/sp/pat.png, id=77, 687.56876pt x 584.1825pt>
 File: images/sp/pat.png Graphic file (type png)
 <use images/sp/pat.png>
-Package pdftex.def Info: images/sp/pat.png  used on input line 314.
+Package pdftex.def Info: images/sp/pat.png  used on input line 315.
 (pdftex.def)             Requested size: 275.02263pt x 233.66885pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/sp/pww.jpg, id=78, 853.1875pt x 702.625pt>
+ [17 <./images/sp/ptt.png>]
+<images/sp/pww.jpg, id=81, 853.1875pt x 702.625pt>
 File: images/sp/pww.jpg Graphic file (type jpg)
 <use images/sp/pww.jpg>
-Package pdftex.def Info: images/sp/pww.jpg  used on input line 328.
-(pdftex.def)             Requested size: 341.26895pt x 281.04501pt.
-[17 <./images/sp/ptt.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+Package pdftex.def Info: images/sp/pww.jpg  used on input line 330.
+(pdftex.def)             Requested size: 224.06548pt x 184.52223pt.
 <images/sp/pwa.png, id=82, 266.32834pt x 106.73209pt>
 File: images/sp/pwa.png Graphic file (type png)
 <use images/sp/pwa.png>
-Package pdftex.def Info: images/sp/pwa.png  used on input line 348.
+Package pdftex.def Info: images/sp/pwa.png  used on input line 354.
 (pdftex.def)             Requested size: 479.39064pt x 192.11758pt.
 
-Overfull \hbox (31.25969pt too wide) in paragraph at lines 348--349
+Overfull \hbox (31.25969pt too wide) in paragraph at lines 354--355
  [][] 
  []
 
-[18 <./images/sp/pat.png (PNG copy)>]
+[18 <./images/sp/pat.png (PNG copy)>] [19 <./images/sp/pww.jpg> <./images/sp/pw
+a.png>] [20]
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! LaTeX Error: There's no line here to end.
 
-[19 <./images/sp/pww.jpg>] [20 <./images/sp/pwa.png>]
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.396 ...M}{2}}^{\frac{M}{2}} W_i~\cdot~x_{n+i} \\
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 391.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.396 ...M}{2}}^{\frac{M}{2}} W_i~\cdot~x_{n+i} \\
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.396 ...M}{2}}^{\frac{M}{2}} W_i~\cdot~x_{n+i} \\
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten \endgroup.
+\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
+                                                  \fi 
+l.396 ...M}{2}}^{\frac{M}{2}} W_i~\cdot~x_{n+i} \\
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.398         \begin{array}{ll}
+                               
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.404         \end{array}
+                         
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
 
+! LaTeX Error: Bad math environment delimiter.
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 393.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.405     \end{math}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-
-Overfull \hbox (17.71764pt too wide) in paragraph at lines 434--444
+Overfull \hbox (17.71764pt too wide) in paragraph at lines 438--448
  [] 
  []
-
-
-Overfull \vbox (11.69469pt too high) has occurred while \output is active []
-
 
 [21]
 <images/sp/dic_notch.png, id=107, 650.43pt x 330.23375pt>
 File: images/sp/dic_notch.png Graphic file (type png)
 <use images/sp/dic_notch.png>
-Package pdftex.def Info: images/sp/dic_notch.png  used on input line 464.
+Package pdftex.def Info: images/sp/dic_notch.png  used on input line 468.
 (pdftex.def)             Requested size: 390.261pt x 198.14177pt.
  [22 <./images/sp/dic_notch.png>]
 <images/sp/fiducials.png, id=112, 526.21594pt x 350.81062pt>
 File: images/sp/fiducials.png Graphic file (type png)
 <use images/sp/fiducials.png>
-Package pdftex.def Info: images/sp/fiducials.png  used on input line 478.
+Package pdftex.def Info: images/sp/fiducials.png  used on input line 482.
 (pdftex.def)             Requested size: 420.97333pt x 280.64886pt.
 
-Overfull \hbox (17.1706pt too wide) in paragraph at lines 488--489
+Overfull \hbox (17.1706pt too wide) in paragraph at lines 492--493
 []\OT1/cmr/m/n/12 Second Deriva-tive Fea-tures (ag-ing in-dex: de-fined as am-p
 li-tude val-ues of [] 
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-489.
+493.
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmtt.fd
 File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-Overfull \hbox (4.71902pt too wide) in paragraph at lines 489--490
+Overfull \hbox (4.71902pt too wide) in paragraph at lines 493--494
 []\OT1/cmr/m/n/12 Combination of Fea-tures (min-i-mum rise time: \OT1/cmtt/m/n/
 12 [1/x0(ms)]\TS1/cmtt/m/n/12 ·\OT1/cmtt/m/n/12 [x(sys) - x(onset)]\OT1/cmr/m/n
 /12 ) 
  []
 
 [23 <./images/sp/fiducials.png>]
-Overfull \hbox (4.81723pt too wide) in paragraph at lines 503--505
+Overfull \hbox (4.81723pt too wide) in paragraph at lines 507--509
 \OT1/cmr/m/n/12 Building upon the foun-da-tion laid by tra-di-tional sig-nal pr
 o-cess-ing tech-niques, ML emerges
  []
@@ -649,22 +727,22 @@ o-cess-ing tech-niques, ML emerges
 <images/ml/adaboost.png, id=116, 5781.6pt x 3252.15pt>
 File: images/ml/adaboost.png Graphic file (type png)
 <use images/ml/adaboost.png>
-Package pdftex.def Info: images/ml/adaboost.png  used on input line 508.
+Package pdftex.def Info: images/ml/adaboost.png  used on input line 512.
 (pdftex.def)             Requested size: 346.88104pt x 195.12057pt.
 [24 <./images/ml/adaboost.png>]
 <images/ml/RBM.png, id=122, 853.1875pt x 404.51125pt>
 File: images/ml/RBM.png Graphic file (type png)
 <use images/ml/RBM.png>
-Package pdftex.def Info: images/ml/RBM.png  used on input line 534.
+Package pdftex.def Info: images/ml/RBM.png  used on input line 538.
 (pdftex.def)             Requested size: 426.59271pt x 202.25513pt.
  [25 <./images/ml/RBM.png>]
 <images/ml/ffnn.png, id=128, 454.69875pt x 366.36874pt>
 File: images/ml/ffnn.png Graphic file (type png)
 <use images/ml/ffnn.png>
-Package pdftex.def Info: images/ml/ffnn.png  used on input line 544.
+Package pdftex.def Info: images/ml/ffnn.png  used on input line 548.
 (pdftex.def)             Requested size: 227.34882pt x 183.18391pt.
 
-Overfull \hbox (1.97975pt too wide) in paragraph at lines 554--556
+Overfull \hbox (1.97975pt too wide) in paragraph at lines 558--560
 \OT1/cmr/m/n/12 Short-term mem-ory (LSTM) model with resid-ual con-nec-tions, d
 emon-strat-ing the promise
  []
@@ -672,7 +750,7 @@ emon-strat-ing the promise
 <images/ml/lstm.png, id=129, 682.55pt x 370.38374pt>
 File: images/ml/lstm.png Graphic file (type png)
 <use images/ml/lstm.png>
-Package pdftex.def Info: images/ml/lstm.png  used on input line 559.
+Package pdftex.def Info: images/ml/lstm.png  used on input line 563.
 (pdftex.def)             Requested size: 341.27417pt x 185.1914pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -681,41 +759,57 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <images/ml/attention.jpeg, id=133, 207.6558pt x 188.8656pt>
 File: images/ml/attention.jpeg Graphic file (type jpg)
 <use images/ml/attention.jpeg>
-Package pdftex.def Info: images/ml/attention.jpeg  used on input line 571.
+Package pdftex.def Info: images/ml/attention.jpeg  used on input line 575.
 (pdftex.def)             Requested size: 224.06548pt x 203.80464pt.
 
-Underfull \hbox (badness 6078) in paragraph at lines 574--574
+Underfull \hbox (badness 6078) in paragraph at lines 578--578
 []\OT1/cmr/m/n/12 The at-ten-tion mech-a-nism in
  []
 
-) [27 <./images/ml/lstm.png>] (methods.tex [28 <./images/ml/attention.jpeg>])
-[29]
-<images/flow_diagrams/flow_diagram.png, id=144, 761.84625pt x 473.77pt>
+) [27 <./images/ml/lstm.png>] (methods.tex
+
+LaTeX Warning: Citation `jasinskasHtjasPPGBP2024' on page 28 undefined on input
+ line 6.
+
+[28 <./images/ml/attention.jpeg>]
+
+LaTeX Warning: Citation `MITLCPWfdbpython2024' on page 29 undefined on input li
+ne 23.
+
+
+Overfull \hbox (26.60327pt too wide) in paragraph at lines 26--47
+\OT1/cmtt/m/n/12 record[]data = wfdb.rdheader(subject.name, pn[]dir=record[]dir
+, rd[]segments=True)
+ []
+
+[29] [30] [31])
+<images/flow_diagrams/flow_diagram.png, id=151, 761.84625pt x 473.77pt>
 File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
 <use images/flow_diagrams/flow_diagram.png>
 Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
-ine 155.
+ine 156.
 (pdftex.def)             Requested size: 457.11128pt x 284.26419pt.
 
-Overfull \hbox (8.98033pt too wide) in paragraph at lines 155--156
+Overfull \hbox (8.98033pt too wide) in paragraph at lines 156--157
  [][] 
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[30] [31 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [32] [33]
-[34] [35] [36] [37] [38]) [39] (Thesis.aux)
+[32] [33 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [34] [35]
+[36] [37] [38] [39] [40]) [41] (Thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 7953 strings out of 474541
- 159576 string characters out of 5744425
+ 9311 strings out of 474541
+ 179340 string characters out of 5744425
  1934978 words of memory out of 5000000
- 30086 multiletter control sequences out of 15000+600000
+ 31435 multiletter control sequences out of 15000+600000
  567196 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,9n,107p,10998b,366s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -737,9 +831,9 @@ blic/amsfonts/cm/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fon
 ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/htjas/AppData/Local/Programs/M
 iKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/htjas/AppData/Local/P
 rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Thesis.pdf (39 pages, 4027345 bytes).
+Output written on Thesis.pdf (41 pages, 4036347 bytes).
 PDF statistics:
- 246 PDF objects out of 1000 (max. 8388607)
+ 252 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  116 words of extra memory for PDF output out of 10000 (max. 10000000)
 

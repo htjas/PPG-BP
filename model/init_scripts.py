@@ -37,7 +37,7 @@ def load_filter_and_save_records(db_name, path, records_to_load, single_record_a
             print(f" - (already in saved or checked records, skipping)")
             continue
         studies = wfdb.get_record_list(f'{db_name}/{subject}')
-        # for study in studies:
+        # for study in studies:  # necessary only for MIMIC4
         study = studies[0]
         p = Path(f"{subject}/{study}")
         res = filter_and_save_single_subject(p, db_name, path, single_record_arrays)
@@ -60,9 +60,9 @@ def filter_and_save_single_subject(subject, database_name, path, no_records):
         - PPG values are between 0 and 1
     """
     if database_name == 'mimic4wdb/0.1.0':
-        required_sigs = ['ABP', 'Pleth']  # 'Pleth' for MIMIC4 'PLETH' for MIMIC3
+        required_sigs = ['ABP', 'Pleth']  # 'Pleth' for MIMIC4
     else:
-        required_sigs = ['ABP', 'PLETH']
+        required_sigs = ['ABP', 'PLETH']  # 'PLETH' for MIMIC3
     req_seg_duration = 10 * 60 + 5
 
     try:
