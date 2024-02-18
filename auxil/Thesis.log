@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  18 FEB 2024 15:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  18 FEB 2024 20:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -741,6 +741,11 @@ Package pdftex.def Info: images/ml/attention.jpeg  used on input line 579.
 LaTeX Warning: Reference `fig:segments, fig:values' on page 30 undefined on inp
 ut line 112.
 
+
+Underfull \hbox (badness 1448) in paragraph at lines 110--113
+[][]\OT1/cmr/m/n/12 If a 10-minute con-tin-u-ous part of the seg-ment
+ []
+
 <images/methods/segments.png, id=140, 308.65312pt x 194.22563pt>
 File: images/methods/segments.png Graphic file (type png)
 <use images/methods/segments.png>
@@ -751,8 +756,39 @@ File: images/methods/values.png Graphic file (type png)
 <use images/methods/values.png>
 Package pdftex.def Info: images/methods/values.png  used on input line 133.
 (pdftex.def)             Requested size: 134.44064pt x 171.71481pt.
-[30 <./images/methods/segments.png> <./images/methods/values.png>] [31])
-<images/flow_diagrams/flow_diagram.png, id=150, 761.84625pt x 473.77pt>
+[30 <./images/methods/segments.png> <./images/methods/values.png>]
+Overfull \hbox (19.98358pt too wide) in paragraph at lines 167--169
+\OT1/cmtt/m/n/10.95 abp,ppg,abp[]beats,ppg[]beats = signal[]processing(seg[]nam
+e,abp[]filt,ppg[]filt,fs) 
+ []
+
+
+Overfull \hbox (59.53455pt too wide) in paragraph at lines 173--175
+\OT1/cmtt/m/n/10.95 save[]split[]features(tot[]abp[]values,median[]abp[]values,
+tot[]ppg[]values,median[]ppg[]values) 
+ []
+
+
+LaTeX Warning: Citation `PandasPythonData' on page 31 undefined on input line 1
+77.
+
+
+Overfull \hbox (7.98654pt too wide) in paragraph at lines 183--185
+\OT1/cmr/m/n/12 As pre-vi-ously de-lin-eated in the the-o-ret-i-cal back-ground
+ sec-tion on Sig-nal Pro-cess-ing( 3.2.1[]),
+ []
+
+
+LaTeX Warning: Reference `fig:filters' on page 31 undefined on input line 186.
+
+[31]
+<images/methods/filters.png, id=151, 1734.48pt x 1734.48pt>
+File: images/methods/filters.png Graphic file (type png)
+<use images/methods/filters.png>
+Package pdftex.def Info: images/methods/filters.png  used on input line 195.
+(pdftex.def)             Requested size: 448.13095pt x 448.1223pt.
+ [32 <./images/methods/filters.png>]) [33]
+<images/flow_diagrams/flow_diagram.png, id=158, 761.84625pt x 473.77pt>
 File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
 <use images/flow_diagrams/flow_diagram.png>
 Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
@@ -766,7 +802,7 @@ Overfull \hbox (8.98033pt too wide) in paragraph at lines 159--160
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[32] [33 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [34] [35]
+[34] [35 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [36] [37]
 
 Thesis.bbl:115: LaTeX Error: Invalid UTF-8 byte sequence (Ã.).
 
@@ -789,7 +825,7 @@ Underfull \hbox (badness 1681) in paragraph at lines 132--136
 Hahn,
  []
 
-[36] [37] [38] [39] [40]) [41] (Thesis.aux)
+[38] [39] [40] [41] [42]) [43] (Thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -800,11 +836,11 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 10742 strings out of 474541
- 207701 string characters out of 5744425
+ 10756 strings out of 474541
+ 208088 string characters out of 5744425
  1933978 words of memory out of 5000000
- 32852 multiletter control sequences out of 15000+600000
- 565832 words of font info for 63 fonts, out of 8000000 for 9000
+ 32865 multiletter control sequences out of 15000+600000
+ 566000 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,8n,117p,10998b,570s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt
@@ -820,11 +856,12 @@ jas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><
 C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cms
 y10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmti12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmtt12.pfb>
-Output written on C:/Users\htjas\PycharmProjects\PPG-BP\out\Thesis.pdf (41 page
-s, 4020765 bytes).
+ic/amsfonts/cm/cmtt10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmtt12.pfb>
+Output written on C:/Users\htjas\PycharmProjects\PPG-BP\out\Thesis.pdf (43 page
+s, 4505542 bytes).
 PDF statistics:
- 235 PDF objects out of 1000 (max. 8388607)
+ 248 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 126 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 131 words of extra memory for PDF output out of 10000 (max. 10000000)
 

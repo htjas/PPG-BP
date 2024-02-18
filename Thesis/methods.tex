@@ -107,7 +107,7 @@ These exclusion criteria are summarized in Table~\ref{tab:faulty}.
     \label{tab:faulty}
 \end{wraptable}
 
-If a 10-minute part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
+If a 10-minute continuous part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
 If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by a \_ and a number representing the \textit{n-th} 10 minute part of a segment)
 Examples of the file names and their values are illustrated in Figures~\ref{fig:segments, fig:values}.
 
@@ -156,11 +156,55 @@ Details on achieving the actual proportions are provided in the subsequent secti
 \subsection{Signal Processing}
 \label{subsec:sp_methods}
 
-\subsubsection{Filtering Aproaches}
+After the initial Data Preparation phase, the Signal Processing follows.
+Its code is written in the \texttt{sp\_scripts.py} file.
+The main \texttt{process\_data()} method is made up of these 6 steps (description and corresponding Python code):
+\begin{enumerate}
+    \item reading the fetched waveform data, \newline
+    \small \texttt{seg\_name,raw\_abp,raw\_ppg = read\_seg\_data(filename,bp\_path,ppg\_path,fs)}
+    \item \normalsize preprocessing the data, \newline
+    \small \texttt{abp\_filt,ppg\_filt = pre\_process\_data(raw\_abp,raw\_ppg,fs,seg\_name)}
+    \item \normalsize determining beats and heart rate (HR), \newline
+    \small \texttt{abp,ppg,abp\_beats,ppg\_beats = signal\_processing(seg\_name,abp\_filt,ppg\_filt,fs)}
+    \item \normalsize identifying fiducial points, \newline
+    \small \texttt{abp\_fidp = fiducial\_points(abp,abp\_beats, fs) \newline ppg\_fidp = fiducial\_points(ppg, ppg\_beats, fs)}
+    \item \normalsize extracting relevant features, \newline
+    \small \texttt{features = extract\_features(abp\_fidp,ppg\_fidp,abp,ppg,fs,median\_window)}
+    \item \normalsize saving extracted features. \newline
+    \small \texttt{save\_split\_features(tot\_abp\_values,median\_abp\_values,tot\_ppg\_values,median\_ppg\_values)}
+\end{enumerate}
 
+The first and last steps simply involve the reading and writing of data utilizing the \textit{pandas} library~\cite{PandasPythonData}, hence they will not be expounded upon further.
+The following subsections delve into a comprehensive description of each subsequent step.
+
+\subsubsection{Pre-Processing}
+\label{subsubsec:filtering}
+
+As previously delineated in the theoretical background section on Signal Processing(~\ref{subsubsec:signal_processing}), Data Pre-Processing or Filtering is a key component for ensuring a coherent projection of PPG and BP waveforms, as well as for their subsequent utilization.
+A total of 9 filtering methodologies were experimented with to identify the optimal approach for this project, such as \textit{Gaussian}, \textit{Savitzky-Golay}, \textit{Butterworth} (\& lowpass), \textit{Chebyshev II} (\& lowpass) and a manually created \textit{Whiskers} filter were implemented.
+
+In Figure~\ref{fig:filters}, effects of the named filtering techniques are displayed.
+
+In order to identify the optimal filtering approach, several objective criteria had to be made.
+For one, the amplitudes of the waveform should not be distorted, so that meaningful and rational values may still be extracted.
+Secondly, the shape of both the ABP and the PPG waveform has to resemble a realistic pulse waveform (as for example shown in Figure~\ref{fig:acdc}), showing both the peak and the dip of the pulse wave.
+Thirdly and ideally, the shape of a dicrotic notch should be visible in both the ABP and the PPG waveform.
+
+% \newpage
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{images/methods/filters}
+    \caption{9 different filters applied to the same ABP and PPG segment}
+    \label{fig:filters}
+\end{figure}
+
+After a careful assessment of a larger sample of filtered waveforms the following approach was chosen as optimal:
 butter + savgol optimal, because PPG shapes best (show pic)
 
 \subsubsection{Beat Finding Algorithms}
+\label{subsubsec:beats}
+
+Beat detection algorithms from MIMIC WFDB Tutorial used for primary estimation.
+Beat detection improved with manual implementation of SciPy library.
 
 3 beat findings algos from wfdb methods, 1 novel for reference
 
@@ -169,12 +213,18 @@ Beat grouping and synchronization
 Mention that no manual selection was done, due to large size of samples
 
 \subsubsection{Fiducial Point detection}
+\label{subsubsec:fidp}
 
 wfdb default algos
+
+Fiducial Point calculation based on the algorithm provided in the MIMIC WFDB Tutorial.
 
 cave for dic notch
 
 \subsubsection{Feature Extraction}
+\label{subsubsec:features}
+
+Feature extraction with personally created code to extract time domain features, and NumPy library to extract frequency domain features (FFT). Median value calculation using NumPy library.
 
 graphics for all 34 features
 
@@ -185,21 +235,8 @@ FFT formula
 \subsection{Machine Learning}
 \label{subsec:ml_methods}
 
+Machine Learning Model creation using PyTorch and Scikit-Learn libraries
+
 LR, MLP, LSTM, GRU models tried
 
 elaborate splitting approach
-
-\begin{enumerate}
-
-    \item Digital signal filtering using Savitzky-Golay and Butterworth Lowpass filters.
-
-    \item Beat detection algorithms from MIMIC WFDB Tutorial used for primary estimation.
-    Beat detection improved with manual implementation of SciPy library.
-
-    \item Fiducial Point calculation based on the algorithm provided in the MIMIC WFDB Tutorial.
-
-    \item Feature extraction with personally created code to extract time domain features, and NumPy library to extract frequency domain features (FFT). Median value calculation using NumPy library.
-
-    \item Machine Learning Model creation using PyTorch and Scikit-Learn libraries.
-
-\end{enumerate}
