@@ -1,27 +1,28 @@
-In the Methods section are summarized the methods of this project.
-The project is named \texttt{PPG-BP} having a couple of sub-directories, such as the MIMIC, or PyTorch tutorials, but the main code can be found in the \texttt{model} Python Package.
-In the \texttt{model}, there are several other sub-packages, mostly containing relevant data used for further parts of the project, but the main code is written in 5 \texttt{.py} classes:
-\texttt{init\_scripts.py} (Initialization / Data Fetching), \texttt{sp\_scripts.py} (Signal Processing), \texttt{ml\_scripts.py} (Machine Learning), \texttt{visual.py} (Visualization) and \texttt{main.py} - Integrating all the before mentioned components.
-
+The Methods section provides an overview of the methodologies employed in the \texttt{PPG-BP} project.
+It encompasses various sub-directories such as MIMIC and PyTorch tutorials, with the primary code located within the \texttt{model} Python Package.
+Within the \texttt{model}, there exist several sub-packages containing relevant data for subsequent project components,
+while the core code is distributed across five \texttt{.py} classes: \texttt{init\_scripts.py} (Initialization / Data Fetching), \texttt{sp\_scripts.py} (Signal Processing),
+\texttt{ml\_scripts.py} (Machine Learning), \texttt{visual.py} (Visualization), and \texttt{main.py}, which integrates all the aforementioned components.
 The whole repository can be found on the author's \textit{GitHub} page~\cite{jasinskasHtjasPPGBP2024}.
 
 \subsection{Data Fetching}
 \label{subsec:data-fetching}
 
-The first step in virtually all Data Science projects is the Data Preparation.
-The \texttt{init\_scripts.py} class will be looked at in this section.
-In this project the data was gathered from the MIMIC-III and MIMIC-IV DBs.
-They were used for different purposes, more to be seen in later chapters.
-However the fetching of the data involved identical approaches from both the newer and the older waveform datasets.
+The initial phase in virtually all Data Science endeavors involves Data Preparation.
+This section will examine the \texttt{init\_scripts.py} class.
+For this project, data was sourced from the MIMIC-III and MIMIC-IV DBs, each serving distinct purposes.
+Data from the MIMIC-IV DB was employed as the validation dataset (detailed further in the ML methods section~\ref{subsec:ml_methods}), since it is regarded as the most modern and most reliable MIMIC DB currently available.
+In contrast, data from the MIMIC-III database was utilized for training and testing ML models due to its significantly larger size.
+Nevertheless, the data retrieval process employed similar methods for both the older and newer waveform datasets.
 
 % Libraries
 \vspace{0.2cm}
 \textit{Tools and Approaches}
 \vspace{0.2cm}
 
-Researchers at the MIT Laboratory for Computational Physiology have develop a native Python library for convenient handling of MIMIC datasets, called the waveform-database (WFDB) package.
-A library of tools for reading, writing, and processing WFDB signals and annotations~\cite{MITLCPWfdbpython2024}.
-A compilation of pre-written WFDB library and self-written methods were used for efficient and consistent data fetching.
+Researchers at the MIT Laboratory for Computational Physiology have developed a native Python library named the waveform-database (WFDB) package, facilitating the convenient handling of MIMIC datasets.
+This library comprises tools for reading, writing, and processing WFDB signals and annotations~\cite{MITLCPWfdbpython2024}.
+Efficient and consistent data retrieval was achieved through a combination of pre-existing WFDB library functions and custom-written methods.
 
 First of all, a list of all of the records from the selected DB were fetched utilizing the
 
@@ -31,37 +32,35 @@ First of all, a list of all of the records from the selected DB were fetched uti
 
 \noindent method.
 Then an iterative process followed, going through all of the subjects from the loaded records list.
-When assessing a single subject, the method
+When assessing a single subject, the same method, but with more specific parameters
 
 \vspace{0.1cm}
 {\centering \texttt{wfdb.get\_record\_list((f'{db\_name}/{subject}')}\par}
 \vspace{0.1cm}
 
-\noindent was called, in this instance to load all of the studies from a single subject.
-Another loop was formed in order to go through every study of the subject.
-These studies are made up of records, each one representing a single ICU \enquote{session}, when the patient was linked up to at least one monitoring device, therefore they highly differ in time length.
-Due to the diversity of monitoring devices, these records contain various signals, such as \textit{ECG}, \textit{ABP}, \textit{Pleth} (the equivalent of PPG).
-To check whether the record contains all required signals (in the case of this research the signals \textit{ABP} and \textit{Pleth} were the necessary condition),
-the method
+\noindent was called, in this instance to load all studies from a single subject.
+Another loop was formed to iterate through each study within the subject.
+These studies consist of records, each representing a single ICU \enquote{session}, during which the patient was connected to at least one monitoring device, therefore they highly differ in time length.
+Given the diversity of monitoring devices, these records encompass various signals, including ECG, ABP, and Pleth (equivalent to PPG).
+To verify if the record includes all the required signals (ABP and Pleth for this study), the method
 
 \vspace{0.1cm}
 {\centering \texttt{record\_data = wfdb.rdheader(subject.name, record\_dir, rd\_segments=True)}\par}
 \vspace{0.1cm}
 
-\noindent was called, providing the header data of a single record,
-which was then used to fetch all present signals
+\noindent was invoked, providing the header data of a single record, which is then used to fetch all present signals
 
 \vspace{0.1cm}
 {\centering \texttt{signal\_names = record\_data.sig\_name}.\par}
 \vspace{0.1cm}
 
-\noindent If the record did not contain both \textit{ABP} and \textit{Pleth} signals, then it was skipped.
-However, even a single record contains various segments, that may also differ in lengths and recorded signals.
-For the selection of the usable segments, in addition to the required signals, another time-based requirement was added, namely that only those segments with at least 10 minutes of length were considered.
-This decision was made, in order to account for data reliability and variability.
-A longer duration allows for capturing sufficient data points to represent various physiological states accurately, reducing the influence of short-term fluctuations.
-Secondly, longer segments mitigate the impact of noise and artifacts, providing a more reliable and stable signal for analysis.
-The length of a segment is calculated by the following function:
+\noindent If the record lacks either the \textit{ABP} or \textit{Pleth} signals, it is excluded from further processing.
+However, even a single record comprises multiple segments, varying in duration and the signals they capture.
+If a record lacks either the ABP or Pleth signals, it is excluded from further processing.
+Each record comprises multiple segments, varying in duration and the signals they capture.
+In addition to signal requirements, segments must also have a minimum length of 10 minutes to be considered usable.
+This criterion aims to ensure data reliability and variability, as longer segments offer more data points to represent physiological states accurately, reducing the impact of short-term fluctuations and noise.
+The segment duration length is determined by the following function:
 
 \vspace{0.1cm}
 \qquad\qquad\qquad \texttt{segment\_metadata = wfdb.rdheader(segment, record\_dir)}
@@ -73,11 +72,11 @@ The length of a segment is calculated by the following function:
 \qquad\qquad\qquad \texttt{seg\_duration = tot\_seg\_length / fs}
 \vspace{0.1cm}
 
-Precisely these segments are the smallest data samples, that are used in this research, since they contain continuous numeric values at a specific sampling rate.
-The abstraction level of data points stored in MIMIC DBs can be visualized by this chart from left to right in descending order:
+\noindent Precisely these segments represent the smallest data samples utilized in this study, containing continuous numeric values sampled at a specific frequency rate.
+The data abstraction levels in MIMIC DBs can be depicted by the chart, showing a descending order from left to right:
 
 \vspace{0.1cm}
-{\centering \textit{Subject} \rightarrow Study \rightarrow Record \rightarrow Segment\par}
+{\centering \textit{Subject} $\rightarrow$ Study $\rightarrow$ Record $\rightarrow$ Segment\par}
 \vspace{0.1cm}
 
 An iterative process is likewise applied to every segment of a record, by fetching all values from a single segment:
@@ -86,34 +85,64 @@ An iterative process is likewise applied to every segment of a record, by fetchi
 {\centering \texttt{segment\_data = wfdb.rdrecord(segment, record\_dir)}.\par}
 \vspace{0.1cm}
 
-\noindent These segments must also not contain any \enquote{faulty} values.
-As faulty are regarded such values: \texttt{NaN}, \texttt{inf}, for ABP - values not below 30 and not above 250 (accounting for extreme and most likely wrongly measured values), for Pleth only between 0 and 1 (precise valid PPG range).
-The exclusion criteria are summarized in the following table.
+\noindent These segments should also be devoid of any \enquote{faulty} values, identified as NumPy values \texttt{NaN} and \texttt{inf}.
+For ABP segments values outside the range of 30 to 250 (accounting for extreme and likely erroneous measurements) are omitted, and for Pleth values must strictly fall between 0 and 1 (representing the valid PPG range).
+These exclusion criteria are summarized in Table~\ref{tab:faulty}.
 
-\begin{center}
-    \begin{tabular}{ |c|c| }
-        \hline
-        ABP              & Pleth         \\
-        \hline
-        30 $<$ x $<$ 250 & 0 $<$ x $<$ 1 \\
-        \hline
-        \multicolumn{2}{|c|}{NaN, inf} \\
-        \hline
-    \end{tabular}
-\end{center}
+\begin{wraptable}{r}{0.35\textwidth}
+    \begin{center}
+        \begin{tabular}{ |c|c| }
+            \hline
+            ABP              & Pleth         \\
+            \hline
+            30 $<$ x $<$ 250 & 0 $<$ x $<$ 1 \\
+            \hline
+            \multicolumn{2}{|c|}{not \texttt{NaN}, \texttt{inf}} \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \vspace*{-7mm}
+    \captionsetup{format=plain, justification=centering}
+    \caption{\small Criteria for non-faulty values in data fetching}
+    \label{tab:faulty}
+\end{wraptable}
 
-If a 10-minute part of the segment matches these criteria, it is saved to the ./validation directory, as 2 separate and synchronous ABP and PPG files
-If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by a \_ and a number representing the sequence)
-Example of the files: \texttt{abp\_80057524\_0005\_0}, \texttt{ppg\_80057524\_0020\_18}
+If a 10-minute part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
+If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by a \_ and a number representing the \textit{n-th} 10 minute part of a segment)
+Examples of the file names and their values are illustrated in Figures~\ref{fig:segments, fig:values}.
 
-For MIMIC-IV data fetching, no limits on the total records and single study records are given.
-For MIMIC-III - 4 times the records of MIMIC-IV are fetched and a maximum of 100 segments per study is set, to avoid over-representation of single person or study data in the ML part of the research.
+\begin{wrapfigure}{r}{0.35\textwidth}
+    \vspace*{-10mm}
+    \begin{center}
+        \includegraphics[width=0.3\textwidth]{images/methods/segments}
+    \end{center}
+    \vspace*{-7mm}
+    \captionsetup{format=plain, justification=centering}
+    \caption{\small Examples of extracted segment files}
+    \label{fig:segments}
+\end{wrapfigure}
 
-\begin{verbatim}
-    wfdb.get_record_list(db_name)
-    wfdb.rdheader()
-    wfdb.rdrecord()
-\end{verbatim}
+As noted earlier, each subject in the database may encompass multiple studies, records, and segments.
+To prevent disproportionate representation of individual patient data, a limit of 100 segments, each spanning 10 minutes, was imposed per subject.
+This is specifically important for data retrieval from the MIMIC-III database, which is intended for training and testing purposes.
+However, this restriction was not applied to data retrieval from the MIMIC-IV database, which is designated for validation purposes and aims to encompass all available 10-minute segments, thus simulating real-world data where over-representation is not a concern.
+
+\begin{wrapfigure}{r}{0.35\textwidth}
+    \vspace*{-5mm}
+    \begin{center}
+        \includegraphics[width=0.3\textwidth]{images/methods/values}
+    \end{center}
+    \vspace*{-7mm}
+    \captionsetup{format=plain, justification=centering}
+    \caption{\small Example raw ABP and PPG values}
+    \label{fig:values}
+\end{wrapfigure}
+
+Additionally, the primary objective was to achieve a dataset split ratio of 60/20/20 for training, testing, and validation, where 80\% of the data comprises the MIMIC-III dataset for training and testing (60/20), and the remaining 20\% consists of the MIMIC-IV dataset for validation purposes.
+To facilitate this, an initial set of x segments was retrieved from the MIMIC-IV database, followed by obtaining four times the number of x segments from the MIMIC-III database.
+However, it is important to acknowledge that the quantity of segments obtained from each database doesn't directly correspond to the number of features utilized in the ML phase, as signal processing (SP) tasks are performed in between.
+Thus, the 60/20/20 split ratio for training, testing, and validation serves more as a guideline than an absolute target for the number of segments retrieved.
+Details on achieving the actual proportions are provided in the subsequent section~\ref{subsec:sp_methods}.
 
 % CODE in LATEX EXAMPLE
 %\begin{lstlisting}[language=Python,label={lst:python}]
@@ -124,11 +153,8 @@ For MIMIC-III - 4 times the records of MIMIC-IV are fetched and a maximum of 100
 %    wfdb.rdheader()
 %\end{lstlisting}
 
-
-elaborate record filtering criteria
-
 \subsection{Signal Processing}
-\label{subsec:signal-processing}
+\label{subsec:sp_methods}
 
 \subsubsection{Filtering Aproaches}
 
@@ -156,36 +182,14 @@ explain each significance
 
 FFT formula
 
-\subsection{Machine Learning}\label{subsec:ml_methods}
+\subsection{Machine Learning}
+\label{subsec:ml_methods}
 
 LR, MLP, LSTM, GRU models tried
 
 elaborate splitting approach
 
 \begin{enumerate}
-
-    \item Data fetching and reading using WFDB and NumPy libraries.
-
-    \subitem Get all available data from MIMIC-IV DB.\
-    \subitem This data is used as the validation dataset, since it is the one that's most up-to-date,
-    most modern, and supposedly most reliable
-    \subitem There are 198 subjects and 200 total studies in the DB (two subjects have two separate studies)
-    \subitem The studies contain records with various signals (ECG, ABP, Pleth etc.) and are of different lengths
-    \subitem A single record can contain various segments also of different lengths and signals
-    \subitem Segments contain continuous values, that are used in this research
-    \subitem Only segments with at least 10 minutes of length are considered
-    \subitem These segments must also not contain \enquote{faulty} values
-    \subitem Faulty values: NaN, inf, negative values, for ABP values not below 30 and not above 250,
-    for PPG only between 0 and 1
-    \subitem If a 10-minute part of the segment matches these criteria, it is saved to the ./validation directory,
-    as 2 separate and synchronous ABP and PPG files
-    \subitem If a segment is longer than 10 minutes, then more 10 minute segments may be extracted
-    (marked by a \_ and a number representing the sequence)
-    \subitem Example of the files: \texttt{abp\_80057524\_0005\_0}, \texttt{ppg\_80057524\_0020\_18}
-
-    For MIMIC-IV data fetching, no limits on the total records and single study records are given.
-    For MIMIC-III - 4 times the records of MIMIC-IV are fetched and a maximum of 100 segments per study is set,
-    to avoid over-representation of single person or study data in the ML part of the research.
 
     \item Digital signal filtering using Savitzky-Golay and Butterworth Lowpass filters.
 
