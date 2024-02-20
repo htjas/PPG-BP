@@ -1,0 +1,833 @@
+\subsection{Filters}\label{subsec:code_filters}
+
+\begin{lstlisting}[language=Python,label={lst:filters.py}, basicstyle=\scriptsize]
+
+from scipy.ndimage import gaussian_filter1d
+import scipy as sp
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+def pre_process_data(abp, ppg, fs):
+    # Gaussian filter
+    g_abp = gaussian_filter1d(abp, sigma=2)
+    g_ppg = gaussian_filter1d(ppg, sigma=2)
+
+    # Gaussian Median filter
+    med_a = np.median(abp)
+    std_a = np.std(abp)
+    sigma_a = med_a / std_a * 0.5
+    gm_abp = gaussian_filter1d(abp, sigma=sigma_a)
+    med_p = np.median(ppg)
+    std_p = np.std(ppg)
+    sigma_p = med_p / std_p * 0.3
+    gm_ppg = gaussian_filter1d(ppg, sigma=sigma_p)
+
+    # Savitzky-Golay filter
+    sg_abp = filter_savgol(abp)
+    sg_ppg = filter_savgol(ppg)
+
+    # Butterworth Lowpass filter
+    bl_abp = butter_lowpass_filter(abp, 5, fs, 4)
+    bl_ppg = butter_lowpass_filter(ppg, 5, fs, 4)
+
+    # Butterworth filter
+    b_abp = filter_butterworth(abp, fs)
+    b_ppg = filter_butterworth(ppg, fs)
+
+    # Chebyshev Lowpass filter
+    cl_abp = chebyshev2_lowpass_filter(abp, 2, fs)
+    cl_ppg = chebyshev2_lowpass_filter(ppg, 2, fs)
+
+    # Chebyshev filter
+    c_abp = filter_chebyshev(abp, fs)
+    c_ppg = filter_chebyshev(ppg, fs)
+
+    # Whiskers filter
+    w_abp = whiskers_filter(abp)
+    w_ppg = whiskers_filter(ppg)
+
+
+def filter_savgol(x):
+    x_f = sp.savgol_filter(x, 51, 4)
+    return x_f
+
+
+def butter_lowpass_filter(data, cutoff_frequency, fs, order):
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff_frequency / nyquist
+    b, a = sp.butter(order, normal_cutoff, btype='low', analog=False, output='ba')
+
+    filtered_data = sp.lfilter(b, a, data)
+    return filtered_data
+
+
+def chebyshev2_lowpass_filter(data, cutoff_freq, fs):
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff_freq / nyquist
+    b, a = sp.cheby2(4, 2, normal_cutoff, btype='low', analog=False)
+    y = sp.lfilter(b, a, data)
+    return y
+
+
+def filter_butterworth(data, fs):
+    lpf_cutoff = 1.25  # Hz
+    hpf_cutoff = 31  # Hz
+    sos_butt = sp.butter(10,
+                         [lpf_cutoff, hpf_cutoff],
+                         btype='bp',
+                         analog=False,
+                         output='sos',
+                         fs=fs)
+    w, h = sp.sosfreqz(sos_butt,
+                       2000,
+                       fs=fs)
+    sos = sos_butt, w, h
+    return sp.sosfiltfilt(sos[0], data)
+
+
+def filter_chebyshev(data, fs):
+    lpf_cutoff = 1.2  # Hz
+    hpf_cutoff = 60  # Hz
+    sos_cheb = sp.cheby2(4,
+                         20,
+                         [lpf_cutoff, hpf_cutoff],
+                         btype='bp',
+                         analog=False,
+                         output='sos',
+                         fs=fs)
+    w, h = sp.sosfreqz(sos_cheb,
+                       2000,
+                       fs=fs)
+    sos = sos_cheb, w, h
+    return sp.sosfiltfilt(sos[0], data)
+
+
+def whiskers_filter(data):
+    bp = plt.boxplot(data)
+    plt.close()
+
+    # get lower and upper amplitude thresholds
+    whiskers = [whiskers.get_ydata() for whiskers in bp['whiskers']]
+    lower_amp = whiskers[0][1]
+    upper_amp = whiskers[1][1]
+
+    # get all indexes of outliers, outside the amplitude thresholds
+    ind_outliers = []
+    for i in range(len(data)):
+        if data[i] < lower_amp or data[i] > upper_amp:
+            ind_outliers.append(i)
+
+    if len(ind_outliers) != 0:
+        # get all grouped arrays with values not within the whiskers range
+        ind_consecutives = []
+        current_group = [ind_outliers[0]]
+        for i in range(1, len(ind_outliers)):
+            if ind_outliers[i] == ind_outliers[i - 1] + 1:
+                current_group.append(ind_outliers[i])
+            else:
+                ind_consecutives.append(current_group)
+                current_group = [ind_outliers[i]]
+        ind_consecutives.append(current_group)
+
+        for array_indexes in ind_consecutives:
+            array_values = data[array_indexes]
+            # get top (min or max) value of each consecutive group
+            if array_values[0] < lower_amp:
+                top_val = min(array_values)
+                top_ind = array_indexes[np.argmin(array_values)]
+                coef = top_val / lower_amp
+            else:
+                top_val = max(array_values)
+                top_ind = array_indexes[np.argmax(array_values)]
+                coef = top_val / upper_amp
+            # calculate and (not) assign the top value according to attenuating coefficient
+            adj_top_val = top_val / coef * 1.01
+            if lower_amp > top_val > adj_top_val:
+                continue
+            if upper_amp < top_val < adj_top_val:
+                continue
+            data[top_ind] = adj_top_val
+            # check if first group index is also first overall index
+            if array_indexes[0] == 0:
+                one_minus_threshold_val = data[array_indexes[0]]
+                one_minus_threshold_ind = array_indexes[0]
+            else:
+                one_minus_threshold_val = data[array_indexes[0] - 1]
+                one_minus_threshold_ind = array_indexes[0] - 1
+            # check if last group index is also last overall index
+            if array_indexes[-1] == len(data) - 1:
+                one_plus_threshold_val = data[array_indexes[-1]]
+                one_plus_threshold_ind = array_indexes[-1]
+            else:
+                one_plus_threshold_val = data[array_indexes[-1] + 1]
+                one_plus_threshold_ind = array_indexes[-1] + 1
+            # create function for calculation of other new values
+            distance_to_top = top_ind - one_minus_threshold_ind
+            if distance_to_top == 0:
+                distance_to_top = 1
+            distance_to_bottom = one_plus_threshold_ind - top_ind
+            if distance_to_bottom == 0:
+                distance_to_bottom = 1
+            f1 = (adj_top_val - one_minus_threshold_val) / distance_to_top
+            f2 = (one_plus_threshold_val - adj_top_val) / distance_to_bottom
+            # assign new values
+            x1, x2 = 1, 1
+            for ind in array_indexes:
+                if ind < top_ind:
+                    data[ind] = (f1 * x1) + one_minus_threshold_val
+                    x1 += 1
+                elif ind > top_ind:
+                    data[ind] = (f2 * x2) + adj_top_val
+                    x2 += 1
+
+    return data
+
+\end{lstlisting}
+
+\subsection{Beats}
+\label{subsec:code_beats}
+
+\begin{lstlisting}[language=Python,label={lst:beats.py}, basicstyle=\scriptsize]
+import scipy as sp
+import numpy as np
+
+
+def get_optimal_beats_lists(abp, ppg, fs):
+    """
+    Signal processing script for examining which default beat detection algorithm is the most efficient
+    :param abp: List of ABP data
+    :param ppg: List of PPG data
+    :param fs: Sampling frequency
+    :return: Lists of optimally detected ABP and PPG pulses
+    """
+    abp_beats1 = pulse_detection(abp, 'd2max', len(abp) / fs, 'abp')
+    ppg_beats1 = pulse_detection(ppg, 'd2max', len(ppg) / fs, 'ppg')
+    abp_beats2 = pulse_detection(abp, 'upslopes', len(abp) / fs, 'abp')
+    ppg_beats2 = pulse_detection(ppg, 'upslopes', len(ppg) / fs, 'ppg')
+    abp_beats3 = pulse_detection(abp, 'delineator', len(abp) / fs, 'abp')
+    ppg_beats3 = pulse_detection(ppg, 'delineator', len(ppg) / fs, 'ppg')
+
+    avg1 = (len(abp_beats1) + len(ppg_beats1)) / 2
+    avg2 = (len(abp_beats2) + len(ppg_beats2)) / 2
+    avg3 = (len(abp_beats3) + len(ppg_beats3)) / 2
+
+    sorted_avg = sorted([avg1, avg2, avg3])
+    diff_avg12 = sorted_avg[1] - sorted_avg[0]
+    diff_avg23 = sorted_avg[2] - sorted_avg[1]
+
+    outlier = None
+    if diff_avg23 > diff_avg12 * 2:
+        outlier = sorted_avg[2]
+    elif diff_avg12 > diff_avg23 * 2:
+        outlier = sorted_avg[0]
+
+    diff1 = abs(len(abp_beats1) - len(ppg_beats1))
+    diff2 = abs(len(abp_beats2) - len(ppg_beats2))
+    diff3 = abs(len(abp_beats3) - len(ppg_beats3))
+
+    diffper1 = diff1 / avg1 * 100
+    diffper2 = diff2 / avg2 * 100
+    diffper3 = diff3 / avg3 * 100
+
+    if outlier is None:
+        abp_opt, ppg_opt = get_best_beats_from_diffper(diffper1, diffper2, diffper3,
+                                                       abp_beats1, abp_beats2, abp_beats3,
+                                                       ppg_beats1, ppg_beats2, ppg_beats3)
+    else:
+        if outlier == avg1:
+            diffper1 = 100
+        elif outlier == avg2:
+            diffper2 = 100
+        elif outlier == avg3:
+            diffper3 = 100
+        abp_opt, ppg_opt = get_best_beats_from_diffper(diffper1, diffper2, diffper3,
+                                                   abp_beats1, abp_beats2, abp_beats3,
+                                                   ppg_beats1, ppg_beats2, ppg_beats3)
+    return abp_opt, ppg_opt
+
+
+def pulse_detection(data, algorithm, duration):
+    temp_fs = 125
+    beats = pulse_detect(data, temp_fs, 5, algorithm, duration)
+    return beats
+
+
+def get_best_beats_from_diffper(diffper1, diffper2, diffper3,
+                                abp_beats1, abp_beats2, abp_beats3,
+                                ppg_beats1, ppg_beats2, ppg_beats3):
+    smallest_diffper = min(diffper1, diffper2, diffper3)
+
+    abp_opt = []
+    ppg_opt = []
+
+    if smallest_diffper == diffper1:
+        abp_opt = abp_beats1
+        ppg_opt = ppg_beats1
+    elif smallest_diffper == diffper2:
+        abp_opt = abp_beats2
+        ppg_opt = ppg_beats2
+    elif smallest_diffper == diffper3:
+        abp_opt = abp_beats3
+        ppg_opt = ppg_beats3
+
+    return abp_opt, ppg_opt
+
+def pulse_detect(x, fs, w, alg, dur):
+    """
+    Description: Pulse detection and correction from pulsatile signals
+    Developed by: Elisa Mejia-Mejia
+                   City, University of London
+    Full code available at:
+    https://wfdb.io/mimic_wfdb_tutorials/tutorial/notebooks/beat-detection.html
+    """
+
+
+def get_beats_from_mean_crossings(abp, ppg):
+    mean_value = np.mean(abp)
+    above_mean = abp > mean_value
+    count_a = np.count_nonzero(np.diff(above_mean.astype(int)) == -1)
+    mean_value = np.mean(ppg)
+    above_mean = ppg > mean_value
+    count_p = np.count_nonzero(np.diff(above_mean.astype(int)) == -1)
+    abp_beat_interval = len(abp) / ((count_a + count_p) / 2)
+    ppg_beat_interval = abp_beat_interval
+
+    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval, prominence=5)
+    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval, prominence=0.01)
+
+    return abp_beats, ppg_beats
+
+\end{lstlisting}
+
+\subsection{Signal Processing}
+\label{subsec:code_sp}
+
+\begin{lstlisting}[language=Python,label={lst:sp.py}, basicstyle=\scriptsize]
+import numpy as np
+import scipy as sp
+
+
+def signal_processing(seg_name, abp, ppg, fs):
+    # First iteration of beat finding (MIMIC default methods)
+    abp_beats, ppg_beats = get_optimal_beats_lists(abp, ppg, seg_name)
+
+    # For comparison: beat detection from mean crossing
+    beats_a, beats_p = get_beats_from_mean_crossings(abp, ppg)
+    is_larger = len(beats_a) + len(beats_p) > len(abp_beats) + len(beats_p)
+    is_closer = abs(len(beats_a) - len(beats_p)) < abs(len(abp_beats) - len(ppg_beats))
+    if is_larger and is_closer:
+        abp_beats = beats_a
+        ppg_beats = beats_p
+
+    # Second iteration: Peak finding (SP manual methods)
+    abp_beat_interval = len(abp) / len(abp_beats)
+    ppg_beat_interval = len(ppg) / len(ppg_beats)
+    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
+    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
+    if len(abp_beats) < 100 or len(ppg_beats) < 100:
+        raise Exception('Signal Processing failed: a substantial amount of beats not found')
+
+    # Signal synchronization : delay approx = 18 (288 ms)
+    abp, ppg = synchronization(abp, ppg, abp_beats, ppg_beats)
+
+    # Third iteration: Peak finding
+    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval * .75, prominence=0.5)
+    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval * .75, prominence=0.01)
+    normal_length_a, normal_length_p = len(abp_beats), len(ppg_beats)
+
+    # Beat grouping
+    abp_beats, ppg_beats = group_beats(abp_beats, ppg_beats)
+
+    if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
+        raise Exception(f"too big of a difference after grouping -"
+                        f"{max(normal_length_a, normal_length_p) - max(len(abp_beats), len(ppg_beats))}")
+
+    abp_hr = round(len(abp_beats) / (len(abp) / fs) * 60, 1)
+    ppg_hr = round(len(ppg_beats) / (len(ppg) / fs) * 60, 1)
+    print(f"\tABP beats - {len(abp_beats)}, Heart Rate - {abp_hr}")
+    print(f"\tPPG beats - {len(ppg_beats)}, Heart Rate - {ppg_hr}")
+
+    return {
+        'abp': abp,
+        'ppg': ppg,
+        'abp_beats': abp_beats,
+        'ppg_beats': ppg_beats,
+        'abp_hr': abp_hr,
+        'ppg_hr': ppg_hr
+    }
+
+
+def synchronization(abp, ppg, abp_beats, ppg_beats):
+    # Find closest PPG beat to first ABP beat
+    first_ppg_ind, first_abp = None, None
+    for i in range(0, len(abp_beats)):
+        first_abp = abp_beats[i]
+        differences = ppg_beats - first_abp
+        arr = [num for num in differences if num > 0]
+        if len(arr) == 0:
+            raise Exception("Beat synchronisation failed: no proximal beats found")
+        smallest_diff = min(arr)
+        if smallest_diff < 50:
+            first_ppg_ind, = np.argwhere(differences == smallest_diff)[0]
+            break
+    first_ppg = ppg_beats[first_ppg_ind]
+
+    # Find closest ABP beat to last PPG beat
+    last_ppg_ind = len(ppg_beats) - 1
+    last_ppg = ppg_beats[last_ppg_ind]
+    differences = abs(abp_beats - last_ppg)
+    last_abp_ind = np.argmin(differences)
+    last_abp = abp_beats[last_abp_ind]
+
+    # Splice original ABP and PPG arrays
+    new_abp = abp[first_abp:last_abp]
+    new_ppg = ppg[first_ppg:last_ppg]
+
+    return new_abp, new_ppg
+
+
+def group_beats(abp_beats, ppg_beats):
+    i = 0
+    while i < min(len(abp_beats), len(ppg_beats)):
+        a = abp_beats[i]
+        p = ppg_beats[i]
+        if p - 40 <= a <= p + 40:
+            i += 1
+        else:
+            if a < p:
+                abp_beats = abp_beats[abp_beats != a]
+            elif a > p:
+                ppg_beats = ppg_beats[ppg_beats != p]
+    abp_beats, ppg_beats = equal_out_by_shortening(abp_beats, ppg_beats)
+    return abp_beats, ppg_beats
+
+
+def equal_out_by_shortening(a_ts, p_ts):
+    if len(a_ts) > len(p_ts):
+        diff = len(a_ts) - len(p_ts)
+        a_ts = a_ts[:-diff]
+    elif len(a_ts) < len(p_ts):
+        diff = len(p_ts) - len(a_ts)
+        p_ts = p_ts[:-diff]
+    return a_ts, p_ts
+\end{lstlisting}
+
+\subsection{Fiducial Points}
+\label{subsec:code_fidp}
+
+\begin{lstlisting}[language=Python,label={lst:fidp.py}, basicstyle=\scriptsize]
+import numpy as np
+import scipy as sp
+
+
+def fiducial_points(x, pks, fs, vis, header):
+    """
+    Description: Pulse detection and correction from pulsatile signals
+    Inputs:  x, array with pulsatile signal [user defined units]
+             pks, array with the position of the peaks [number of samples]
+             fs, sampling rate of signal [Hz]
+             vis, visualisation option [True, False]
+    Outputs: fidp, dictionary with the positions of several fiducial points for the cardiac cycles [number of samples]
+
+    Fiducial points:  1: Systolic peak (pks)
+                      2: Onset, as the minimum before the systolic peak (ons)
+                      3: Onset, using the tangent intersection method (ti)
+                      4: Diastolic peak (dpk)
+                      5: Maximum slope (m1d)
+                      6: a point from second derivative PPG (a2d)
+                      7: b point from second derivative PPG (b2d)
+                      8: c point from second derivative PPG (c2d)
+                      9: d point from second derivative PPG (d2d)
+                      10: e point from second derivative PPG (e2d)
+                      11: p1 from the third derivative PPG (p1)
+                      12: p2 from the third derivative PPG (p2)
+
+    Libraries: NumPy (as np), SciPy (Signal, as sp), Matplotlib (PyPlot, as plt)
+
+    Version: 1.0 - June 2022
+
+    Developed by: Elisa Mejía-Mejía
+                   City, University of London
+
+    Edited by: Peter Charlton (see "Added by PC")
+
+    """
+    # First, second and third derivatives
+    d1x = sp.savgol_filter(x, 9, 5, deriv=1)
+    d2x = sp.savgol_filter(x, 9, 5, deriv=2)
+    d3x = sp.savgol_filter(x, 9, 5, deriv=3)
+
+    # Search in time series: Onsets between consecutive peaks
+    ons = np.empty(0)
+    for i in range(len(pks) - 1):
+        start = pks[i]
+        stop = pks[i + 1]
+        ibi = x[start:stop]
+        aux_ons, = np.where(ibi == np.min(ibi))
+        if len(aux_ons) > 1:
+            aux_ons = aux_ons[0]
+        ind_ons = aux_ons.astype(int)
+        ons = np.append(ons, ind_ons + start)
+    ons = ons.astype(int)
+
+    # Search in time series: Diastolic peak and dicrotic notch between consecutive onsets
+    dia = np.empty(0)
+    dic = np.empty(0)
+    for i in range(len(ons) - 1):
+        start = ons[i]
+        stop = ons[i + 1]
+        ind_pks, = np.intersect1d(np.where(pks < stop), np.where(pks > start))
+        ind_pks = pks[ind_pks]
+        ibi_portion = x[ind_pks:stop]
+        ibi_2d_portion = d2x[ind_pks:stop]
+        aux_dic, _ = sp.find_peaks(ibi_2d_portion)
+        aux_dic = aux_dic.astype(int)
+        aux_dia, _ = sp.find_peaks(-ibi_2d_portion)
+        aux_dia = aux_dia.astype(int)
+        if len(aux_dic) != 0:
+            ind_max, = np.where(ibi_2d_portion[aux_dic] == np.max(ibi_2d_portion[aux_dic]))
+            aux_dic_max = aux_dic[ind_max][0]  # Adjusted by HJ
+            if len(aux_dia) != 0:
+                nearest = aux_dia - aux_dic_max
+                aux_dic = aux_dic_max
+                dic = np.append(dic, (aux_dic + ind_pks).astype(int))
+                ind_dia, = np.where(nearest > 0)
+                aux_dia = aux_dia[ind_dia]
+                nearest = nearest[ind_dia]
+                if len(nearest) != 0:
+                    ind_nearest, = np.where(nearest == np.min(nearest))
+                    aux_dia = aux_dia[ind_nearest]
+                    dia = np.append(dia, (aux_dia + ind_pks).astype(int))
+            else:
+                dic = np.append(dic, (aux_dic_max + ind_pks).astype(int))
+    dia = dia.astype(int)
+    dic = dic.astype(int)
+
+    # Search in D1: Maximum slope point
+    m1d = np.empty(0)
+    for i in range(len(ons) - 1):
+        start = ons[i]
+        stop = ons[i + 1]
+        ind_pks, = np.intersect1d(np.where(pks < stop), np.where(pks > start))
+        ind_pks = pks[ind_pks]
+        ibi_portion = x[start:ind_pks]
+        ibi_1d_portion = d1x[start:ind_pks]
+        aux_m1d, _ = sp.find_peaks(ibi_1d_portion)
+        aux_m1d = aux_m1d.astype(int)
+        if len(aux_m1d) != 0:
+            ind_max, = np.where(ibi_1d_portion[aux_m1d] == np.max(ibi_1d_portion[aux_m1d]))
+            aux_m1d_max = aux_m1d[ind_max]
+            if len(aux_m1d_max) > 1:
+                aux_m1d_max = aux_m1d_max[0]
+            m1d = np.append(m1d, (aux_m1d_max + start).astype(int))
+    m1d = m1d.astype(int)
+
+    # Search in time series: Tangent intersection points
+    tip = np.empty(0)
+    for i in range(len(ons) - 1):
+        start = ons[i]
+        stop = ons[i + 1]
+        ibi_portion = x[start:stop]
+        ibi_1d_portion = d1x[start:stop]
+        low_stop = np.where(m1d < stop)  # Adjusted by HJ   ↓
+        high_start = np.where(m1d > start)
+        if np.intersect1d(low_stop, high_start).size == 0:
+            continue
+        ind_m1d, = np.intersect1d(low_stop, high_start)  #  ↑
+        ind_m1d = m1d[ind_m1d] - start
+        aux_tip = np.round(((ibi_portion[0] - ibi_portion[ind_m1d]) / ibi_1d_portion[ind_m1d]) + ind_m1d)
+        aux_tip = aux_tip.astype(int)
+        tip = np.append(tip, (aux_tip + start).astype(int))
+    tip = tip.astype(int)
+
+    # Search in D2: A, B, C, D and E points
+    a2d = np.empty(0)
+    b2d = np.empty(0)
+    c2d = np.empty(0)
+    d2d = np.empty(0)
+    e2d = np.empty(0)
+    for i in range(len(ons) - 1):
+        start = ons[i]
+        stop = ons[i + 1]
+        ibi_portion = x[start:stop]
+        ibi_1d_portion = d1x[start:stop]
+        ibi_2d_portion = d2x[start:stop]
+        ind_m1d = np.intersect1d(np.where(m1d > start), np.where(m1d < stop))
+        ind_m1d = m1d[ind_m1d]
+        aux_m2d_pks, _ = sp.find_peaks(ibi_2d_portion)
+        aux_m2d_ons, _ = sp.find_peaks(-ibi_2d_portion)
+        if len(aux_m2d_pks) == 0 or len(aux_m2d_ons) == 0:  # Augmented by HJ
+            continue
+        # a point:
+        ind_a, = np.where(ibi_2d_portion[aux_m2d_pks] == np.max(ibi_2d_portion[aux_m2d_pks]))
+        ind_a = aux_m2d_pks[ind_a]
+        ind_a = ind_a[0]  # Adjusted by HJ
+        if (ind_a < ind_m1d):
+            a2d = np.append(a2d, ind_a + start)
+            # b point:
+            ind_b = np.where(ibi_2d_portion[aux_m2d_ons] == np.min(ibi_2d_portion[aux_m2d_ons]))
+            ind_b = aux_m2d_ons[ind_b]
+            ind_b = ind_b[0]  # Adjusted by HJ
+            if (ind_b > ind_a) and (ind_b < len(ibi_2d_portion)):
+                b2d = np.append(b2d, ind_b + start)
+        # e point:
+        if len(ind_m1d) == 0: # Augmented by HJ
+            continue
+        ind_e, = np.where(aux_m2d_pks > ind_m1d - start)
+        aux_m2d_pks = aux_m2d_pks[ind_e]
+        ind_e, = np.where(aux_m2d_pks < 0.6 * len(ibi_2d_portion))
+        ind_e = aux_m2d_pks[ind_e]
+        if len(ind_e) >= 1:
+            if len(ind_e) >= 2:
+                ind_e = ind_e[1]
+            e2d = np.append(e2d, ind_e + start)
+            # c point:
+            ind_c, = np.where(aux_m2d_pks < ind_e)
+            if len(ind_c) != 0:
+                ind_c_aux = aux_m2d_pks[ind_c]
+                ind_c, = np.where(ibi_2d_portion[ind_c_aux] == np.max(ibi_2d_portion[ind_c_aux]))
+                ind_c = ind_c_aux[ind_c]
+                if len(ind_c) != 0:
+                    c2d = np.append(c2d, ind_c + start)
+            else:
+                aux_m1d_ons, _ = sp.find_peaks(-ibi_1d_portion)
+                ind_c, = np.where(aux_m1d_ons < ind_e)
+                ind_c_aux = aux_m1d_ons[ind_c]
+                if len(ind_c) != 0:
+                    ind_c, = np.where(ind_c_aux > ind_b)
+                    ind_c = ind_c_aux[ind_c]
+                    if len(ind_c) > 1:
+                        ind_c = [ind_c[0]]  # Adjusted by HJ
+                    c2d = np.append(c2d, ind_c + start)
+            # d point:
+            if len(ind_c) != 0:
+                ind_d = np.intersect1d(np.where(aux_m2d_ons < ind_e), np.where(aux_m2d_ons > ind_c))
+                if len(ind_d) != 0:
+                    ind_d_aux = aux_m2d_ons[ind_d]
+                    ind_d, = np.where(ibi_2d_portion[ind_d_aux] == np.min(ibi_2d_portion[ind_d_aux]))
+                    ind_d = ind_d_aux[ind_d]
+                    if len(ind_d) != 0:
+                        d2d = np.append(d2d, ind_d + start)
+                else:
+                    ind_d = ind_c
+                    d2d = np.append(d2d, ind_d + start)
+    a2d = a2d.astype(int)
+    b2d = b2d.astype(int)
+    c2d = c2d.astype(int)
+    d2d = d2d.astype(int)
+    e2d = e2d.astype(int)
+
+    # Search in D3: P1 and P2 points
+    p1p = np.empty(0)
+    p2p = np.empty(0)
+    for i in range(len(ons) - 1):
+        start = ons[i]
+        stop = ons[i + 1]
+        ibi_portion = x[start:stop]
+        ibi_1d_portion = d1x[start:stop]
+        ibi_2d_portion = d2x[start:stop]
+        ibi_3d_portion = d3x[start:stop]
+        ind_b = np.intersect1d(np.where(b2d > start), np.where(b2d < stop))
+        ind_b = b2d[ind_b]
+        ind_c = np.intersect1d(np.where(c2d > start), np.where(c2d < stop))
+        ind_c = c2d[ind_c]
+        ind_d = np.intersect1d(np.where(d2d > start), np.where(d2d < stop))
+        ind_d = d2d[ind_d]
+        ind_dic = np.intersect1d(np.where(dic > start), np.where(dic < stop))
+        ind_dic = dic[ind_dic]
+        aux_p3d_pks, _ = sp.find_peaks(ibi_3d_portion)
+        aux_p3d_ons, _ = sp.find_peaks(-ibi_3d_portion)
+        # P1:
+        if (len(aux_p3d_pks) != 0 and len(ind_b) != 0):
+            ind_p1, = np.where(aux_p3d_pks > ind_b - start)
+            if len(ind_p1) != 0:
+                ind_p1 = aux_p3d_pks[ind_p1[0]]
+                p1p = np.append(p1p, ind_p1 + start)
+        # P2:
+        if (len(aux_p3d_ons) != 0 and len(ind_c) != 0 and len(ind_d) != 0):
+            if ind_c == ind_d:
+                ind_p2, = np.where(aux_p3d_ons > ind_d - start)
+                if len(ind_p2) == 0:  # Augmented by HJ
+                    continue
+                ind_p2 = aux_p3d_ons[ind_p2[0]]
+            else:
+                ind_p2, = np.where(aux_p3d_ons < ind_d - start)
+                if len(ind_p2) == 0: # Augmented by HJ
+                    continue
+                ind_p2 = aux_p3d_ons[ind_p2[-1]]
+            if len(ind_dic) != 0:
+                aux_x_pks, _ = sp.find_peaks(ibi_portion)
+                if ind_p2 > ind_dic - start:
+                    ind_between = np.intersect1d(np.where(aux_x_pks < ind_p2), np.where(aux_x_pks > ind_dic - start))
+                else:
+                    ind_between = np.intersect1d(np.where(aux_x_pks > ind_p2), np.where(aux_x_pks < ind_dic - start))
+                if len(ind_between) != 0:
+                    ind_p2 = aux_x_pks[ind_between[0]]
+            p2p = np.append(p2p, ind_p2 + start)
+    p1p = p1p.astype(int)
+    p2p = p2p.astype(int)
+
+    off = ons[1:]
+    ons = ons[:-1]
+    if pks[0] < ons[0]:
+        pks = pks[1:]
+    if pks[-1] > off[-1]:
+        pks = pks[:-1]
+
+    # Creation of dictionary
+    fidp = {'pks': pks.astype(int),
+            'ons': ons.astype(int),
+            'off': off.astype(int),
+            'tip': tip.astype(int),
+            'dia': dia.astype(int),
+            'dic': dic.astype(int),
+            'm1d': m1d.astype(int),
+            'a2d': a2d.astype(int),
+            'b2d': b2d.astype(int),
+            'c2d': c2d.astype(int),
+            'd2d': d2d.astype(int),
+            'e2d': e2d.astype(int),
+            'p1p': p1p.astype(int),
+            'p2p': p2p.astype(int)
+            }
+
+    return fidp
+
+\end{lstlisting}
+
+\subsection{Feature Extraction}
+\label{subsec:code_fe}
+
+\begin{lstlisting}[language=Python,label={lst:fe.py}, basicstyle=\scriptsize]
+import numpy as np
+from scipy.integrate import simps
+
+
+def sys_dia_detection(fidp, data):
+    # (From filtered data) Systolic BP = pks; Diastolic BP = dia
+    sys = fidp['pks']
+    dia = fidp['off']
+    sys, dia = group_sys_dia(sys, dia)
+    length = min(len(sys), len(dia))
+    tss = np.zeros(length, dtype=int)
+    tsd = np.zeros(length, dtype=int)
+    sysv = np.zeros(length, dtype=float)
+    diav = np.zeros(length, dtype=float)
+    beat_no, adj_beat_no = 0, 0
+    while beat_no < len(tss):
+        sys_beat = data[sys[beat_no + adj_beat_no]]
+        dia_beat = data[dia[beat_no + adj_beat_no]]
+        if sys_beat >= dia_beat:
+            tss[beat_no] = sys[beat_no + adj_beat_no]
+            sysv[beat_no] = sys_beat
+            tsd[beat_no] = dia[beat_no + adj_beat_no]
+            diav[beat_no] = dia_beat
+            beat_no += 1
+        else:
+            tss = np.delete(tss, beat_no)
+            sysv = np.delete(sysv, beat_no)
+            tsd = np.delete(tsd, beat_no)
+            diav = np.delete(diav, beat_no)
+            adj_beat_no += 1
+    sys = np.column_stack((tss, sysv))
+    dia = np.column_stack((tsd, diav))
+    return sys, dia, tss, sysv, tsd, diav
+
+
+def systolic_time_detection(f_pks, f_ons, pk_index, data, fs):
+    # Systolic Time = Systolic peak - Onset
+    value = (f_pks[pk_index] - f_ons[pk_index]) / fs
+    # Systolic Area = Integral of PPG with limits [ons:pks]
+    time_interval_start, time_interval_end = f_ons[pk_index], f_pks[pk_index]
+    time_interval = np.arange(time_interval_start, time_interval_end)
+    signal_interval = data[time_interval_start:time_interval_end]
+    area = simps(signal_interval, time_interval)
+    return value, area
+
+
+def diastolic_time_detection(f_off, f_pks, pk_index, data, fs):
+    # Diastolic Time = Offset - Systolic peak
+    value = (f_off[pk_index] - f_pks[pk_index]) / fs
+    # Diastolic Area = Integral of PPG with limits [pks:off]
+    time_interval_start, time_interval_end = f_pks[pk_index], f_off[pk_index]
+    time_interval = np.arange(time_interval_start, time_interval_end)
+    signal_interval = data[time_interval_start:time_interval_end]
+    area = simps(signal_interval, time_interval)
+    return value, area
+
+
+def delta_t_detection(f_dia, f_pks, pk_index, data, fs):
+    # delta T = Dicrotic notch - Systolic peak
+    value = (f_dia[pk_index] - f_pks[pk_index]) / fs
+    # Delta Area = Integral of PPG with limits [pks:dia]
+    time_interval_start, time_interval_end = f_pks[pk_index], f_dia[pk_index]
+    time_interval = np.arange(time_interval_start, time_interval_end)
+    signal_interval = data[time_interval_start:time_interval_end]
+    abs_time_interval = np.arange(0, len(signal_interval))
+    area = simps(signal_interval, abs_time_interval)
+    return value, area
+
+
+def pulse_area_detection(f_ons, f_off, pk_index, data):
+    # Pulse Area = Integral of PPG with limits [ons:off]
+    time_interval_start, time_interval_end = f_ons[pk_index], f_off[pk_index]
+    time_interval = np.arange(time_interval_start, time_interval_end)
+    signal_interval = data[time_interval_start:time_interval_end]
+    value = simps(signal_interval, time_interval)
+    return value
+
+
+def resistive_index_detection(f_dia, f_pks, f_off, pk_index, data):
+    # RI = (data[dia] - data[off]) / (data[pks] - data[off])
+    h1 = data[f_dia[pk_index]] - data[f_off[pk_index]]
+    h2 = data[f_pks[pk_index]] - data[f_off[pk_index]]
+    value = h1 / h2
+    return value
+
+
+def vessel_volume_index_detection(f_pks, f_off, pk_index, data):
+    # Vessel Volume Fill-Up (systolic) Index = data[pks] / max(data[all_systoles])
+    max_v = max(data[f_pks[f_pks != 0]])
+    v1 = data[f_pks[pk_index]] / max_v
+    # Vessel Volume Drained (diastolic) Index = max(data[all_systoles]) / data[off]
+    min_v = min(data[f_off[f_off != 0]])
+    v2 = min_v / data[f_off[pk_index]]
+    return v1, v2
+
+
+def systolic_diastolic_width_detection(f_ons, f_pks, f_off, pk_index, data, fs, p):
+    # Systolic width = data[(data[pks]-data[ons])*p/100]
+    ind_ons, ind_pk, ind_off = f_ons[pk_index], f_pks[pk_index], f_off[pk_index]
+    val_ons, val_pk, val_off = data[ind_ons], data[ind_pk], data[ind_off]
+    threshold = p / 100 * (val_pk - val_ons) + val_ons
+    sys_arr = np.abs(np.array(data[ind_ons:ind_pk]) - threshold)
+    ind_sw = np.argmin(sys_arr)
+    sw = (len(sys_arr) - 1 - ind_sw) / fs
+    dia_arr = np.abs(np.array(data[ind_pk:ind_off]) - threshold)
+    ind_dw = np.argmin(dia_arr)
+    dw = (ind_dw - 0) / fs
+    return sw, dw
+
+
+def frequency_domain_features(signal, fs):
+    # Compute the Fast Fourier Transform (FFT)
+    fft_result = np.fft.fft(signal)
+    # Compute the frequencies corresponding to the FFT result
+    frequencies = np.fft.fftfreq(len(fft_result), 1 / fs)
+    # Only consider positive frequencies
+    positive_frequencies = frequencies[:len(frequencies) // 2]
+    # Magnitude spectrum (absolute values of FFT result)
+    magnitude_spectrum = np.abs(fft_result[:len(fft_result) // 2])
+    # Find the index corresponding to the maximum magnitude
+    peak_frequency_index = np.argmax(magnitude_spectrum)
+    # Other frequency domain features
+    mean_frequency = np.sum(positive_frequencies * magnitude_spectrum) / np.sum(magnitude_spectrum)
+    total_power = np.sum(magnitude_spectrum)
+    normalized_power_at_peak = magnitude_spectrum[peak_frequency_index] / total_power
+    return {
+        'mean_frequency': mean_frequency,
+        'total_power': total_power,
+        'normalized_power_at_peak': normalized_power_at_peak
+    }
+\end{lstlisting}

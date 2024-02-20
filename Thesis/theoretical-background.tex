@@ -394,21 +394,21 @@ The filter fits a low-degree polynomial to a window of data points around each p
 The smoothed value is then the value of the fitted polynomial at the center point.
 Different polynomial degrees and window sizes lead to different filtering effects.
 The relationship can be expressed by the following formula:
-%\Large
-%\begin{center}
-%    \begin{math}
-%        y[n]~=~\sum_{i=-\frac{M}{2}}^{\frac{M}{2}} W_i~\cdot~x_{n+i} \\
-%        \normalsize
-%        \begin{array}{ll}
-%            M       & : \text{Window size (odd number greater than or equal to N+1)} \\
-%            N       & : \text{Polynomial degree}                                     \\
-%            W_i     & : \text{Filter coefficients (length M)}                        \\
-%            x_{n+i} & : \text{Signal data point}                                     \\
-%            y[n]    & : \text{Smoothed data point}
-%        \end{array}
-%    \end{math}
-%\end{center}
-%\normalsize
+\Large
+\begin{center}
+    \begin{math}
+        y[n]~=~\sum_{i=-\frac{M}{2}}^{\frac{M}{2}} W_i~\cdot~x_{n+i} \\
+        \normalsize
+        \begin{array}{ll}
+            M       & : \text{Window size (odd number greater than or equal to N+1)} \\
+            N       & : \text{Polynomial degree}                                     \\
+            W_i     & : \text{Filter coefficients (length M)}                        \\
+            x_{n+i} & : \text{Signal data point}                                     \\
+            y[n]    & : \text{Smoothed data point}
+        \end{array}
+    \end{math}
+\end{center}
+\normalsize
 
 % Chebyshev
 Furthermore, the Chebyshev filter offers a steeper roll-off compared to other filters, leading to sharper distinctions between desired and unwanted frequencies.
@@ -418,39 +418,39 @@ While the Chebyshev filter has a transfer function like the Butterworth filter, 
 Unlike the Savitzky-Golay filter, its coefficients depend on the desired ripple level and order, making a single, universal formula impractical.
 The general form of the Chebyshev filter transfer function depends on whether it's Type I (equiripple in both passband and stopband) or Type II (equiripple only in the stopband).
 The corresponding functions are presented by the following formulas:~
-%\begin{multicols}{2}
-%    \begin{center}
-%        Chebyshev I \\
-%        \vspace{0.2cm}
-%        \large
-%        \begin{math}
-%            H(z) = K \prod_{n=1}^{N} \left[ 1 - \frac{\varepsilon}{(T_n(z))^2} \right]
-%        \end{math}
-%        \normalsize
-%        \begin{tabular}{ll}
-%            $K$           & : Gain factor                 \\
-%            $\varepsilon$ & : Normalized passband         \\           & \;\, ripple level (dB)                \\
-%            $N$      & : Filter order \\
-%            $T_n(z)$      & : Chebyshev polynomial of the \\      & \;\, first kind, evaluated at $z$ \\
-%        \end{tabular}
-%    \end{center}
-%    \columnbreak
-%    \begin{center}
-%        Chebyshev II \\
-%        \vspace{0.2cm}
-%        \large
-%        \begin{math}
-%            H(z) = K \cdot \frac{z^N - 1}{\prod_{n=1}^{N} \left[ z^2 - 2 \zeta z \cos(\omega_n) + 1 \right]}
-%        \end{math}
-%        \normalsize
-%        \begin{tabular}{ll}
-%            $K$        & : Gain factor                        \\
-%            $N$        & : Filter order                       \\
-%            $\zeta$    & : Normalized stopband damping factor \\
-%            $\omega_n$ & : Normalized cutoff frequency        \\
-%        \end{tabular}
-%    \end{center}
-%\end{multicols}
+\begin{multicols}{2}
+    \begin{center}
+        Chebyshev I \\
+        \vspace{0.2cm}
+        \large
+        \begin{math}
+            H(z) = K \prod_{n=1}^{N} \left[ 1 - \frac{\varepsilon}{(T_n(z))^2} \right]
+        \end{math}
+        \normalsize
+        \begin{tabular}{ll}
+            $K$           & : Gain factor                 \\
+            $\varepsilon$ & : Normalized passband         \\           & \;\, ripple level (dB)                \\
+            $N$      & : Filter order \\
+            $T_n(z)$      & : Chebyshev polynomial of the \\      & \;\, first kind, evaluated at $z$ \\
+        \end{tabular}
+    \end{center}
+    \columnbreak
+    \begin{center}
+        Chebyshev II \\
+        \vspace{0.2cm}
+        \large
+        \begin{math}
+            H(z) = K \cdot \frac{z^N - 1}{\prod_{n=1}^{N} \left[ z^2 - 2 \zeta z \cos(\omega_n) + 1 \right]}
+        \end{math}
+        \normalsize
+        \begin{tabular}{ll}
+            $K$        & : Gain factor                        \\
+            $N$        & : Filter order                       \\
+            $\zeta$    & : Normalized stopband damping factor \\
+            $\omega_n$ & : Normalized cutoff frequency        \\
+        \end{tabular}
+    \end{center}
+\end{multicols}
 
 % Optimal finding
 In their 2018 study, Liang et al.\ investigated nine different digital signal filters to identify the optimal approach for short PPG signals (2.1s)~\cite{liangOptimalFilterShort2018}.
@@ -495,7 +495,7 @@ This section provides a summary of the implemented methods and corresponding exa
     \item First Derivative Features (minimum rise time: amplitude of pulse wave divided by amplitude of \texttt{ms})
     \item Second Derivative Features (aging index: defined as amplitude values of \mbox{\texttt{(b-c-d-e)/a)}}
     \item Combination of Features (minimum rise time: \texttt{[1/x0(ms)]·[x(sys) - x(onset)]})
-    \item Frequency Domain Analysis (Fast Fourier Transform (FFT) analysis: Use of FFT to extract amplitude and phase information from the PPG signal)
+    \item Frequency Domain Analysis (Fast Fourier Transform (FFT)) analysis: Use of FFT to extract amplitude and phase information from the PPG signal)
     \item Features From Multiple Beats (pulse rate variability parameters)
 \end{enumerate}
 
@@ -554,7 +554,7 @@ Their promising results demonstrated the potential of NN-based approaches.
     \label{fig:ffnn}
 \end{figure}
 
-Xing and Sun (2016) ventured into the frequency domain, applying Fast Fourier Transformation to select features followed by a feedforward NN for BP estimation~\cite{xingOpticalBloodPressure2016}.
+Xing and Sun (2016) ventured into the frequency domain, applying FFT to select features followed by a feedforward NN for BP estimation~\cite{xingOpticalBloodPressure2016}.
 While initial results were encouraging, the authors recognized the need for broader feature space exploration.
 
 Building upon Kurylyak et al.'s work, Liu et al.\ (2017) incorporated 14 second derivative features and employed an SVM for BP estimation, highlighting the value of diverse feature extraction techniques~\cite{liuIntegratedNavigationTethered2017}.
