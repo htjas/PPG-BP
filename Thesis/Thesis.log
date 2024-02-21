@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  19 FEB 2024 11:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  21 FEB 2024 11:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -557,248 +557,219 @@ hd.png> <./images/hs/hhn.png> <./images/hs/tmu.png>] [2] (Thesis.toc)
 \openout3 = `Thesis.toc'.
 
 
-[3] (introduction.tex [4]) [5] (theoretical-background.tex [6]
-<images/abp/sphyg.png, id=31, 702.625pt x 702.625pt>
-File: images/abp/sphyg.png Graphic file (type png)
-<use images/abp/sphyg.png>
-Package pdftex.def Info: images/abp/sphyg.png  used on input line 40.
-(pdftex.def)             Requested size: 140.5225pt x 140.5225pt.
-<images/abp/auto_sphyg.png, id=32, 602.25pt x 602.25pt>
-File: images/abp/auto_sphyg.png Graphic file (type png)
-<use images/abp/auto_sphyg.png>
-Package pdftex.def Info: images/abp/auto_sphyg.png  used on input line 43.
-(pdftex.def)             Requested size: 120.44786pt x 120.44786pt.
- [7 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
-<images/abp/catheter.png, id=37, 751.30687pt x 492.33937pt>
-File: images/abp/catheter.png Graphic file (type png)
-<use images/abp/catheter.png>
-Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
-(pdftex.def)             Requested size: 300.51741pt x 196.93225pt.
- [8 <./images/abp/catheter.png>]
-[9] [10]
-<images/ppg/reflection.png, id=48, 853.1875pt x 316.18124pt>
-File: images/ppg/reflection.png Graphic file (type png)
-<use images/ppg/reflection.png>
-Package pdftex.def Info: images/ppg/reflection.png  used on input line 142.
-(pdftex.def)             Requested size: 341.26895pt x 126.47025pt.
-<images/ppg/ac+dc.png, id=49, 853.1875pt x 588.1975pt>
-File: images/ppg/ac+dc.png Graphic file (type png)
-<use images/ppg/ac+dc.png>
-Package pdftex.def Info: images/ppg/ac+dc.png  used on input line 162.
-(pdftex.def)             Requested size: 426.59271pt x 294.09802pt.
+[3] (introduction.tex [4]
+
+LaTeX Warning: Reference `sec:background' on page 5 undefined on input line 53.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
 
-[11 <./images/ppg/reflection.png>] [12 <./images/ppg/ac+dc.png>]
-<images/ppg/ppg-devices.png, id=58, 1284.8pt x 722.7pt>
-File: images/ppg/ppg-devices.png Graphic file (type png)
-<use images/ppg/ppg-devices.png>
-Package pdftex.def Info: images/ppg/ppg-devices.png  used on input line 186.
-(pdftex.def)             Requested size: 449.68674pt x 252.94878pt.
-
-Overfull \hbox (1.55579pt too wide) in paragraph at lines 186--187
- [][] 
- []
-
-[13 <./images/ppg/ppg-devices.png>]
-<images/mimic/mimic_workflow.png, id=64, 515.82712pt x 169.38281pt>
-File: images/mimic/mimic_workflow.png Graphic file (type png)
-<use images/mimic/mimic_workflow.png>
-Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
-9.
-(pdftex.def)             Requested size: 309.49866pt x 101.63046pt.
- [14 <./images/mimic/mimic_workflow.png>]
-<images/mimic/mimic_structure.png, id=69, 1580.90625pt x 1188.69093pt>
-File: images/mimic/mimic_structure.png Graphic file (type png)
-<use images/mimic/mimic_structure.png>
-Package pdftex.def Info: images/mimic/mimic_structure.png  used on input line 2
-49.
-(pdftex.def)             Requested size: 474.27554pt x 356.61003pt.
-
-Overfull \hbox (26.14459pt too wide) in paragraph at lines 249--250
- [][] 
- []
-
-[15 <./images/mimic/mimic_structure.png>] [16]
-<images/sp/ptt.png, id=76, 639.89063pt x 489.32813pt>
-File: images/sp/ptt.png Graphic file (type png)
-<use images/sp/ptt.png>
-Package pdftex.def Info: images/sp/ptt.png  used on input line 308.
-(pdftex.def)             Requested size: 255.9517pt x 195.72777pt.
-<images/sp/pat.png, id=77, 687.56876pt x 584.1825pt>
-File: images/sp/pat.png Graphic file (type png)
-<use images/sp/pat.png>
-Package pdftex.def Info: images/sp/pat.png  used on input line 320.
-(pdftex.def)             Requested size: 275.02263pt x 233.66885pt.
- [17 <./images/sp/ptt.png>]
-<images/sp/pww.jpg, id=81, 853.1875pt x 702.625pt>
-File: images/sp/pww.jpg Graphic file (type jpg)
-<use images/sp/pww.jpg>
-Package pdftex.def Info: images/sp/pww.jpg  used on input line 335.
-(pdftex.def)             Requested size: 224.06548pt x 184.52223pt.
-<images/sp/pwa.png, id=82, 266.32834pt x 106.73209pt>
-File: images/sp/pwa.png Graphic file (type png)
-<use images/sp/pwa.png>
-Package pdftex.def Info: images/sp/pwa.png  used on input line 358.
-(pdftex.def)             Requested size: 448.13095pt x 179.60017pt.
-
-[18 <./images/sp/pat.png (PNG copy)>] [19 <./images/sp/pww.jpg> <./images/sp/pw
-a.png>] [20]
-<images/sp/dic_notch.png, id=100, 650.43pt x 330.23375pt>
-File: images/sp/dic_notch.png Graphic file (type png)
-<use images/sp/dic_notch.png>
-Package pdftex.def Info: images/sp/dic_notch.png  used on input line 472.
-(pdftex.def)             Requested size: 390.261pt x 198.14177pt.
+LaTeX Warning: Reference `subsec:med_background' on page 5 undefined on input l
+ine 54.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[21]
-<images/sp/fiducials.png, id=104, 526.21594pt x 350.81062pt>
-File: images/sp/fiducials.png Graphic file (type png)
-<use images/sp/fiducials.png>
-Package pdftex.def Info: images/sp/fiducials.png  used on input line 486.
-(pdftex.def)             Requested size: 420.97333pt x 280.64886pt.
+LaTeX Warning: Reference `subsubsec:bp' on page 5 undefined on input line 54.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Reference `subsubsec:ppg' on page 5 undefined on input line 54.
 
 
-Overfull \hbox (17.1706pt too wide) in paragraph at lines 496--497
-[]\OT1/cmr/m/n/12 Second Deriva-tive Fea-tures (ag-ing in-dex: de-fined as am-p
-li-tude val-ues of [] 
- []
-
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-497.
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmtt.fd
-File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-Overfull \hbox (4.71902pt too wide) in paragraph at lines 497--498
-[]\OT1/cmr/m/n/12 Combination of Fea-tures (min-i-mum rise time: \OT1/cmtt/m/n/
-12 [1/x0(ms)]\TS1/cmtt/m/n/12 ·\OT1/cmtt/m/n/12 [x(sys) - x(onset)]\OT1/cmr/m/n
-/12 ) 
- []
-
-[22 <./images/sp/dic_notch.png>]
-Overfull \hbox (4.81723pt too wide) in paragraph at lines 511--513
-\OT1/cmr/m/n/12 Building upon the foun-da-tion laid by tra-di-tional sig-nal pr
-o-cess-ing tech-niques, ML emerges
- []
-
-<images/ml/adaboost.png, id=110, 5781.6pt x 3252.15pt>
-File: images/ml/adaboost.png Graphic file (type png)
-<use images/ml/adaboost.png>
-Package pdftex.def Info: images/ml/adaboost.png  used on input line 516.
-(pdftex.def)             Requested size: 346.88104pt x 195.12057pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[23 <./images/sp/fiducials.png>]
-<images/ml/RBM.png, id=114, 853.1875pt x 404.51125pt>
-File: images/ml/RBM.png Graphic file (type png)
-<use images/ml/RBM.png>
-Package pdftex.def Info: images/ml/RBM.png  used on input line 542.
-(pdftex.def)             Requested size: 426.59271pt x 202.25513pt.
+LaTeX Warning: Reference `subsubsec:mimic' on page 5 undefined on input line 55
+.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Reference `subsec:computing_background' on page 5 undefined on i
+nput line 56.
 
-[24 <./images/ml/adaboost.png>]
-<images/ml/ffnn.png, id=119, 454.69875pt x 366.36874pt>
-File: images/ml/ffnn.png Graphic file (type png)
-<use images/ml/ffnn.png>
-Package pdftex.def Info: images/ml/ffnn.png  used on input line 552.
-(pdftex.def)             Requested size: 227.34882pt x 183.18391pt.
+) [5] (methods.tex [6] [7]
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (1.97975pt too wide) in paragraph at lines 562--564
-\OT1/cmr/m/n/12 Short-term mem-ory (LSTM) model with resid-ual con-nec-tions, d
-emon-strat-ing the promise
- []
-
-<images/ml/lstm.png, id=120, 682.55pt x 370.38374pt>
-File: images/ml/lstm.png Graphic file (type png)
-<use images/ml/lstm.png>
-Package pdftex.def Info: images/ml/lstm.png  used on input line 567.
-(pdftex.def)             Requested size: 341.27417pt x 185.1914pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/ml/attention.jpeg, id=121, 207.6558pt x 188.8656pt>
-File: images/ml/attention.jpeg Graphic file (type jpg)
-<use images/ml/attention.jpeg>
-Package pdftex.def Info: images/ml/attention.jpeg  used on input line 579.
-(pdftex.def)             Requested size: 224.06548pt x 203.80464pt.
-[25 <./images/ml/RBM.png>]) [26 <./images/ml/ffnn.png (PNG copy)>] (methods.tex
-[27 <./images/ml/lstm.png>] [28 <./images/ml/attention.jpeg>] [29]
-
-LaTeX Warning: Reference `fig:segments, fig:values' on page 30 undefined on inp
-ut line 112.
+LaTeX Warning: Reference `fig:segments, fig:values' on page 8 undefined on inpu
+t line 112.
 
 
 Underfull \hbox (badness 1448) in paragraph at lines 110--113
 [][]\OT1/cmr/m/n/12 If a 10-minute con-tin-u-ous part of the seg-ment
  []
 
-<images/methods/segments.png, id=140, 308.65312pt x 194.22563pt>
+<images/methods/segments.png, id=37, 308.65312pt x 194.22563pt>
 File: images/methods/segments.png Graphic file (type png)
 <use images/methods/segments.png>
 Package pdftex.def Info: images/methods/segments.png  used on input line 117.
 (pdftex.def)             Requested size: 134.44064pt x 84.60007pt.
-<images/methods/values.png, id=141, 228.10219pt x 291.33844pt>
+<images/methods/values.png, id=38, 228.10219pt x 291.33844pt>
 File: images/methods/values.png Graphic file (type png)
 <use images/methods/values.png>
 Package pdftex.def Info: images/methods/values.png  used on input line 133.
 (pdftex.def)             Requested size: 134.44064pt x 171.71481pt.
-[30 <./images/methods/segments.png> <./images/methods/values.png>]
-Overfull \hbox (19.98358pt too wide) in paragraph at lines 167--169
+[8 <./images/methods/segments.png> <./images/methods/values.png>]
+Overfull \hbox (19.98358pt too wide) in paragraph at lines 158--160
 \OT1/cmtt/m/n/10.95 abp,ppg,abp[]beats,ppg[]beats = signal[]processing(seg[]nam
 e,abp[]filt,ppg[]filt,fs) 
  []
 
 
-Overfull \hbox (59.53455pt too wide) in paragraph at lines 173--175
+Overfull \hbox (59.53455pt too wide) in paragraph at lines 164--166
 \OT1/cmtt/m/n/10.95 save[]split[]features(tot[]abp[]values,median[]abp[]values,
 tot[]ppg[]values,median[]ppg[]values) 
  []
 
 
-LaTeX Warning: Citation `PandasPythonData' on page 31 undefined on input line 1
-77.
+LaTeX Warning: Citation `PandasPythonData' on page 9 undefined on input line 16
+8.
 
 
-Overfull \hbox (7.98654pt too wide) in paragraph at lines 183--185
-\OT1/cmr/m/n/12 As pre-vi-ously de-lin-eated in the the-o-ret-i-cal back-ground
- sec-tion on Sig-nal Pro-cess-ing( 3.2.1[]),
- []
+LaTeX Warning: Citation `NumPy' on page 9 undefined on input line 169.
 
-[31]
-<images/methods/filters.png, id=151, 1734.48pt x 1734.48pt>
+
+LaTeX Warning: Citation `MatplotlibVisualizationPython' on page 9 undefined on 
+input line 169.
+
+
+LaTeX Warning: Citation `SciPy' on page 9 undefined on input line 169.
+
+
+LaTeX Warning: Reference `subsubsec:signal_processing' on page 9 undefined on i
+nput line 175.
+
+
+LaTeX Warning: Reference `subsec:code_filters' on page 9 undefined on input lin
+e 179.
+
+[9]
+
+LaTeX Warning: Reference `fig:acdc' on page 10 undefined on input line 185.
+
+<images/methods/filters.png, id=49, 1734.48pt x 1734.48pt>
 File: images/methods/filters.png Graphic file (type png)
 <use images/methods/filters.png>
-Package pdftex.def Info: images/methods/filters.png  used on input line 195.
-(pdftex.def)             Requested size: 448.13095pt x 448.1223pt.
- [32 <./images/methods/filters.png>]) [33]
-<images/flow_diagrams/flow_diagram.png, id=158, 761.84625pt x 473.77pt>
+Package pdftex.def Info: images/methods/filters.png  used on input line 190.
+(pdftex.def)             Requested size: 403.31511pt x 403.31537pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `vangentHeartPyNovelHeart2019' on page 10 undefined on 
+input line 207.
+
+
+LaTeX Warning: Citation `elgendiSystolicPeakDetection2013' on page 10 undefined
+ on input line 207.
+
+
+LaTeX Warning: Citation `arguellopradaNovelLowcomplexityPeak2018' on page 10 un
+defined on input line 208.
+
+
+LaTeX Warning: Citation `aboyAutomaticBeatDetection2005' on page 10 undefined o
+n input line 208.
+
+
+LaTeX Warning: Reference `subsec:code_beats' on page 10 undefined on input line
+ 215.
+
+[10] [11 <./images/methods/filters.png>]
+<images/methods/beat_algos.png, id=56, 1606.0pt x 1606.0pt>
+File: images/methods/beat_algos.png Graphic file (type png)
+<use images/methods/beat_algos.png>
+Package pdftex.def Info: images/methods/beat_algos.png  used on input line 252.
+
+(pdftex.def)             Requested size: 403.31511pt x 403.31242pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[12]
+Overfull \hbox (12.52426pt too wide) in paragraph at lines 271--274
+\OT1/cmtt/m/n/12 abp[]beats,[]=sp.find[]peaks(abp,distance=abp[]beat[]interval*
+.75,prominence=0.5) 
+ []
+
+
+Overfull \hbox (18.69926pt too wide) in paragraph at lines 271--274
+\OT1/cmtt/m/n/12 ppg[]beats,[]=sp.find[]peaks(ppg,distance=ppg[]beat[]interval*
+.75,prominence=0.01) 
+ []
+
+[13 <./images/methods/beat_algos.png>]
+<images/methods/sp_beats.png, id=64, 1606.0pt x 1606.0pt>
+File: images/methods/sp_beats.png Graphic file (type png)
+<use images/methods/sp_beats.png>
+Package pdftex.def Info: images/methods/sp_beats.png  used on input line 276.
+(pdftex.def)             Requested size: 403.31511pt x 403.31242pt.
+ [14 <./images/methods/sp_beats.png>]
+<images/methods/synchronised.png, id=68, 1606.0pt x 803.0pt>
+File: images/methods/synchronised.png Graphic file (type png)
+<use images/methods/synchronised.png>
+Package pdftex.def Info: images/methods/synchronised.png  used on input line 30
+1.
+(pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
+<images/methods/cringe_signals.png, id=69, 1606.0pt x 803.0pt>
+File: images/methods/cringe_signals.png Graphic file (type png)
+<use images/methods/cringe_signals.png>
+Package pdftex.def Info: images/methods/cringe_signals.png  used on input line 
+315.
+(pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[15 <./images/methods/synchronised.png>]
+
+LaTeX Warning: Reference `subsec:computing_background' on page 16 undefined on 
+input line 346.
+
+[16 <./images/methods/cringe_signals.png>]
+<images/methods/fidps.png, id=76, 1606.0pt x 803.0pt>
+File: images/methods/fidps.png Graphic file (type png)
+<use images/methods/fidps.png>
+Package pdftex.def Info: images/methods/fidps.png  used on input line 355.
+(pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
+
+
+LaTeX Warning: Reference `subsec:code_fidp' on page 17 undefined on input line 
+361.
+
+
+LaTeX Warning: Citation `maqsoodSurveyShallowDeep2022' on page 17 undefined on 
+input line 374.
+
+[17 <./images/methods/fidps.png>] [18]
+
+LaTeX Warning: Reference `subsec:code_fe' on page 19 undefined on input line 43
+8.
+
+<images/methods/feats.png, id=84, 722.7pt x 542.025pt>
+File: images/methods/feats.png Graphic file (type png)
+<use images/methods/feats.png>
+Package pdftex.def Info: images/methods/feats.png  used on input line 442.
+(pdftex.def)             Requested size: 403.31511pt x 302.48982pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/methods/median_fft.png, id=85, 1284.8pt x 481.8pt>
+File: images/methods/median_fft.png Graphic file (type png)
+<use images/methods/median_fft.png>
+Package pdftex.def Info: images/methods/median_fft.png  used on input line 448.
+
+(pdftex.def)             Requested size: 403.31511pt x 151.23848pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[19] [20 <./images/methods/feats.png>]) [21 <./images/methods/median_fft.png>]
+<images/flow_diagrams/flow_diagram.png, id=101, 761.84625pt x 473.77pt>
 File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
 <use images/flow_diagrams/flow_diagram.png>
 Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
-ine 159.
+ine 160.
 (pdftex.def)             Requested size: 457.11128pt x 284.26419pt.
 
-Overfull \hbox (8.98033pt too wide) in paragraph at lines 159--160
+Overfull \hbox (8.98033pt too wide) in paragraph at lines 160--161
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[34] [35 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [36] [37]
+[22] [23 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [24] [25]
 
 ! LaTeX Error: Invalid UTF-8 byte sequence (Ã.).
 
@@ -821,7 +792,7 @@ Underfull \hbox (badness 1681) in paragraph at lines 132--136
 Hahn,
  []
 
-[38] [39] [40] [41] [42]) [43] (Thesis.aux)
+[26] [27] [28] [29] [30]) [31] [32] (Thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -830,33 +801,39 @@ L3 programming layer <2024-01-22>
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 10758 strings out of 474541
- 207990 string characters out of 5744425
- 1933978 words of memory out of 5000000
- 32869 multiletter control sequences out of 15000+600000
- 566000 words of font info for 64 fonts, out of 8000000 for 9000
+ 10596 strings out of 474541
+ 203882 string characters out of 5744425
+ 1935978 words of memory out of 5000000
+ 32713 multiletter control sequences out of 15000+600000
+ 566880 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,8n,117p,10998b,570s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt
+ 108i,8n,117p,10998b,443s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1200.pk><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmmi10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmmi12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/htjas/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/htjas/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/htjas/AppD
-ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/ht
-jas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><
-C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cms
-y10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmti12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmtt10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Thesis.pdf (43 pages, 4505326 bytes).
+ic/amsfonts/cm/cmex10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmmi10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/htjas/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/htjas/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/htjas/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/h
+tjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:
+/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.
+pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmsy8.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/htjas/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/htjas/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Thesis.pdf (32 pages, 2099048 bytes).
 PDF statistics:
- 248 PDF objects out of 1000 (max. 8388607)
+ 204 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 131 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

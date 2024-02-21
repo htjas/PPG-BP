@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  20 FEB 2024 20:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  21 FEB 2024 15:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -558,7 +558,38 @@ hd.png> <./images/hs/hhn.png> <./images/hs/tmu.png>] [2] (Thesis.toc)
 \openout3 = `Thesis.toc'.
 
 
-[3] (introduction.tex [4]) [5] (theoretical-background.tex [6]
+[3] (introduction.tex [4]
+
+LaTeX Warning: Reference `sec:background' on page 5 undefined on input line 53.
+
+
+
+LaTeX Warning: Reference `subsec:med_background' on page 5 undefined on input l
+ine 54.
+
+
+LaTeX Warning: Reference `subsubsec:bp' on page 5 undefined on input line 54.
+
+
+LaTeX Warning: Reference `subsubsec:ppg' on page 5 undefined on input line 54.
+
+
+LaTeX Warning: Reference `subsubsec:mimic' on page 5 undefined on input line 55
+.
+
+
+LaTeX Warning: Reference `subsec:computing_background' on page 5 undefined on i
+nput line 56.
+
+) [5] (theoretical-background.tex
+
+LaTeX Warning: Reference `fig:sphyg' on page 6 undefined on input line 28.
+
+
+LaTeX Warning: Reference `fig:auto_sphyg' on page 6 undefined on input line 28.
+
+
+[6]
 <images/abp/sphyg.png, id=31, 702.625pt x 702.625pt>
 File: images/abp/sphyg.png Graphic file (type png)
 <use images/abp/sphyg.png>
@@ -570,26 +601,38 @@ File: images/abp/auto_sphyg.png Graphic file (type png)
 Package pdftex.def Info: images/abp/auto_sphyg.png  used on input line 43.
 (pdftex.def)             Requested size: 120.44786pt x 120.44786pt.
  [7 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
+
+LaTeX Warning: Reference `fig:catheter' on page 8 undefined on input line 55.
+
 <images/abp/catheter.png, id=37, 751.30687pt x 492.33937pt>
 File: images/abp/catheter.png Graphic file (type png)
 <use images/abp/catheter.png>
 Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
 (pdftex.def)             Requested size: 300.51741pt x 196.93225pt.
- [8 <./images/abp/catheter.png>]
-[9] [10]
+[8 <./images/abp/catheter.png>] [9] [10]
+
+LaTeX Warning: Reference `fig:reflection' on page 11 undefined on input line 13
+4.
+
 <images/ppg/reflection.png, id=48, 853.1875pt x 316.18124pt>
 File: images/ppg/reflection.png Graphic file (type png)
 <use images/ppg/reflection.png>
 Package pdftex.def Info: images/ppg/reflection.png  used on input line 142.
 (pdftex.def)             Requested size: 341.26895pt x 126.47025pt.
+
+LaTeX Warning: Reference `fig:acdc' on page 11 undefined on input line 152.
+
 <images/ppg/ac+dc.png, id=49, 853.1875pt x 588.1975pt>
 File: images/ppg/ac+dc.png Graphic file (type png)
 <use images/ppg/ac+dc.png>
 Package pdftex.def Info: images/ppg/ac+dc.png  used on input line 162.
 (pdftex.def)             Requested size: 426.59271pt x 294.09802pt.
 
-
 LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `fig:ppg-devices' on page 11 undefined on input line 1
+82.
 
 [11 <./images/ppg/reflection.png>] [12 <./images/ppg/ac+dc.png>]
 <images/ppg/ppg-devices.png, id=58, 1284.8pt x 722.7pt>
@@ -603,13 +646,25 @@ Overfull \hbox (1.55579pt too wide) in paragraph at lines 186--187
  []
 
 [13 <./images/ppg/ppg-devices.png>]
+
+LaTeX Warning: Reference `fig:mimic_workflow' on page 14 undefined on input lin
+e 225.
+
 <images/mimic/mimic_workflow.png, id=64, 515.82712pt x 169.38281pt>
 File: images/mimic/mimic_workflow.png Graphic file (type png)
 <use images/mimic/mimic_workflow.png>
 Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
 9.
 (pdftex.def)             Requested size: 309.49866pt x 101.63046pt.
- [14 <./images/mimic/mimic_workflow.png>]
+
+LaTeX Warning: Reference `fig:mimic_structure' on page 14 undefined on input li
+ne 239.
+
+
+LaTeX Warning: Reference `fig:mimic_structure' on page 14 undefined on input li
+ne 240.
+
+[14 <./images/mimic/mimic_workflow.png>]
 <images/mimic/mimic_structure.png, id=69, 1580.90625pt x 1188.69093pt>
 File: images/mimic/mimic_structure.png Graphic file (type png)
 <use images/mimic/mimic_structure.png>
@@ -622,28 +677,39 @@ Overfull \hbox (26.14459pt too wide) in paragraph at lines 249--250
  []
 
 [15 <./images/mimic/mimic_structure.png>] [16]
+
+LaTeX Warning: Reference `fig:ptt' on page 17 undefined on input line 304.
+
 <images/sp/ptt.png, id=76, 639.89063pt x 489.32813pt>
 File: images/sp/ptt.png Graphic file (type png)
 <use images/sp/ptt.png>
 Package pdftex.def Info: images/sp/ptt.png  used on input line 308.
 (pdftex.def)             Requested size: 255.9517pt x 195.72777pt.
+
+LaTeX Warning: Reference `fig:pat' on page 17 undefined on input line 316.
+
 <images/sp/pat.png, id=77, 687.56876pt x 584.1825pt>
 File: images/sp/pat.png Graphic file (type png)
 <use images/sp/pat.png>
 Package pdftex.def Info: images/sp/pat.png  used on input line 320.
 (pdftex.def)             Requested size: 275.02263pt x 233.66885pt.
- [17 <./images/sp/ptt.png>]
+[17 <./images/sp/ptt.png>]
+
+LaTeX Warning: Reference `fig:pww' on page 18 undefined on input line 327.
+
 <images/sp/pww.jpg, id=81, 853.1875pt x 702.625pt>
 File: images/sp/pww.jpg Graphic file (type jpg)
 <use images/sp/pww.jpg>
 Package pdftex.def Info: images/sp/pww.jpg  used on input line 335.
 (pdftex.def)             Requested size: 224.06548pt x 184.52223pt.
+
+LaTeX Warning: Reference `fig:pwa' on page 18 undefined on input line 353.
+
 <images/sp/pwa.png, id=82, 266.32834pt x 106.73209pt>
 File: images/sp/pwa.png Graphic file (type png)
 <use images/sp/pwa.png>
 Package pdftex.def Info: images/sp/pwa.png  used on input line 358.
 (pdftex.def)             Requested size: 448.13095pt x 179.60017pt.
-
 [18 <./images/sp/pat.png (PNG copy)>] [19 <./images/sp/pww.jpg> <./images/sp/pw
 a.png>] [20]
 
@@ -727,17 +793,30 @@ Overfull \hbox (17.71764pt too wide) in paragraph at lines 442--452
  []
 
 [21]
+
+LaTeX Warning: Reference `fig:dic_notch' on page 22 undefined on input line 468
+.
+
 <images/sp/dic_notch.png, id=107, 650.43pt x 330.23375pt>
 File: images/sp/dic_notch.png Graphic file (type png)
 <use images/sp/dic_notch.png>
 Package pdftex.def Info: images/sp/dic_notch.png  used on input line 472.
 (pdftex.def)             Requested size: 390.261pt x 198.14177pt.
- [22 <./images/sp/dic_notch.png>]
+
+LaTeX Warning: Reference `fig:fiducials' on page 22 undefined on input line 482
+.
+
+[22 <./images/sp/dic_notch.png>]
 <images/sp/fiducials.png, id=112, 526.21594pt x 350.81062pt>
 File: images/sp/fiducials.png Graphic file (type png)
 <use images/sp/fiducials.png>
 Package pdftex.def Info: images/sp/fiducials.png  used on input line 486.
 (pdftex.def)             Requested size: 420.97333pt x 280.64886pt.
+
+
+LaTeX Warning: Reference `fig:fiducials' on page 23 undefined on input line 491
+.
+
 
 Overfull \hbox (17.1706pt too wide) in paragraph at lines 496--497
 []\OT1/cmr/m/n/12 Second Deriva-tive Fea-tures (ag-ing in-dex: de-fined as am-p
@@ -767,17 +846,31 @@ File: images/ml/adaboost.png Graphic file (type png)
 Package pdftex.def Info: images/ml/adaboost.png  used on input line 516.
 (pdftex.def)             Requested size: 346.88104pt x 195.12057pt.
 [24 <./images/ml/adaboost.png>]
+
+LaTeX Warning: Reference `fig:adaboost' on page 25 undefined on input line 533.
+
+
+
+LaTeX Warning: Reference `fig:rbm' on page 25 undefined on input line 537.
+
 <images/ml/RBM.png, id=122, 853.1875pt x 404.51125pt>
 File: images/ml/RBM.png Graphic file (type png)
 <use images/ml/RBM.png>
 Package pdftex.def Info: images/ml/RBM.png  used on input line 542.
 (pdftex.def)             Requested size: 426.59271pt x 202.25513pt.
- [25 <./images/ml/RBM.png>]
+
+LaTeX Warning: Reference `fig:ffnn' on page 25 undefined on input line 547.
+
+[25 <./images/ml/RBM.png>]
 <images/ml/ffnn.png, id=128, 454.69875pt x 366.36874pt>
 File: images/ml/ffnn.png Graphic file (type png)
 <use images/ml/ffnn.png>
 Package pdftex.def Info: images/ml/ffnn.png  used on input line 552.
 (pdftex.def)             Requested size: 227.34882pt x 183.18391pt.
+
+
+LaTeX Warning: Reference `fig:lstm' on page 26 undefined on input line 563.
+
 
 Overfull \hbox (1.97975pt too wide) in paragraph at lines 562--564
 \OT1/cmr/m/n/12 Short-term mem-ory (LSTM) model with resid-ual con-nec-tions, d
@@ -791,6 +884,10 @@ Package pdftex.def Info: images/ml/lstm.png  used on input line 567.
 (pdftex.def)             Requested size: 341.27417pt x 185.1914pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `fig:attention' on page 26 undefined on input line 575
+.
 
 [26 <./images/ml/ffnn.png (PNG copy)>]
 <images/ml/attention.jpeg, id=133, 207.6558pt x 188.8656pt>
@@ -847,14 +944,15 @@ LaTeX Warning: Citation `MatplotlibVisualizationPython' on page 32 undefined on
 LaTeX Warning: Citation `SciPy' on page 32 undefined on input line 169.
 
 
+LaTeX Warning: Reference `subsubsec:signal_processing' on page 32 undefined on 
+input line 175.
+
+
 LaTeX Warning: Reference `subsec:code_filters' on page 32 undefined on input li
 ne 179.
 
 
-Overfull \hbox (7.98654pt too wide) in paragraph at lines 175--180
-\OT1/cmr/m/n/12 As pre-vi-ously de-lin-eated in the the-o-ret-i-cal back-ground
- sec-tion on Sig-nal Pro-cess-ing( 3.2.1[]),
- []
+LaTeX Warning: Reference `fig:acdc' on page 32 undefined on input line 185.
 
 <images/methods/filters.png, id=155, 1734.48pt x 1734.48pt>
 File: images/methods/filters.png Graphic file (type png)
@@ -887,10 +985,6 @@ LaTeX Warning: Reference `subsec:code_beats' on page 34 undefined on input line
  215.
 
 [34]
-
-LaTeX Warning: Reference `fig:beat_algos' on page 35 undefined on input line 24
-9.
-
 <images/methods/beat_algos.png, id=165, 1606.0pt x 1606.0pt>
 File: images/methods/beat_algos.png Graphic file (type png)
 <use images/methods/beat_algos.png>
@@ -898,11 +992,8 @@ Package pdftex.def Info: images/methods/beat_algos.png  used on input line 252.
 
 (pdftex.def)             Requested size: 403.31511pt x 403.31242pt.
 
+
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Reference `fig:sp_beats' on page 35 undefined on input line 273.
-
 
 
 Overfull \hbox (12.52426pt too wide) in paragraph at lines 271--274
@@ -922,34 +1013,18 @@ File: images/methods/sp_beats.png Graphic file (type png)
 Package pdftex.def Info: images/methods/sp_beats.png  used on input line 276.
 (pdftex.def)             Requested size: 403.31511pt x 403.31242pt.
 
-LaTeX Warning: Reference `fig:beat_algos' on page 35 undefined on input line 27
-7.
-
-
-LaTeX Warning: Reference `fig:beat_algos' on page 35 undefined on input line 27
-7.
-
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [35]
-
-LaTeX Warning: Reference `fig:synchronized' on page 36 undefined on input line 
-298.
-
 <images/methods/synchronised.png, id=170, 1606.0pt x 803.0pt>
 File: images/methods/synchronised.png Graphic file (type png)
 <use images/methods/synchronised.png>
 Package pdftex.def Info: images/methods/synchronised.png  used on input line 30
 1.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
-[36 <./images/methods/beat_algos.png>]
+ [36 <./images/methods/beat_algos.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Reference `fig:distorted' on page 37 undefined on input line 311
-.
 
 <images/methods/cringe_signals.png, id=174, 1606.0pt x 803.0pt>
 File: images/methods/cringe_signals.png Graphic file (type png)
@@ -962,8 +1037,8 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [37 <./images/methods/sp_beats.png>]
 
-LaTeX Warning: Reference `fig:wfdb_fidp' on page 38 undefined on input line 352
-.
+LaTeX Warning: Reference `subsec:computing_background' on page 38 undefined on 
+input line 346.
 
 [38 <./images/methods/synchronised.png>]
 <images/methods/fidps.png, id=182, 1606.0pt x 803.0pt>
@@ -989,14 +1064,6 @@ input line 374.
 LaTeX Warning: Reference `subsec:code_fe' on page 42 undefined on input line 43
 8.
 
-
-LaTeX Warning: Reference `fig:td_feats' on page 42 undefined on input line 439.
-
-
-
-LaTeX Warning: Reference `fig:fd_feats' on page 42 undefined on input line 439.
-
-
 <images/methods/feats.png, id=193, 722.7pt x 542.025pt>
 File: images/methods/feats.png Graphic file (type png)
 <use images/methods/feats.png>
@@ -1011,8 +1078,79 @@ Package pdftex.def Info: images/methods/median_fft.png  used on input line 448.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[42 <./images/methods/feats.png>] [43 <./images/methods/median_fft.png>])
-<images/flow_diagrams/flow_diagram.png, id=203, 761.84625pt x 473.77pt>
+[42 <./images/methods/feats.png>]
+methods.tex:463: Missing $ inserted.
+<inserted text> 
+                $
+l.463 ...\large \texttt{MAP} = \texttt{DP} + \left
+                                                  (\frac{\texttt{SP} - \text...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+methods.tex:463: Missing delimiter (. inserted).
+<to be read again> 
+                   \tex_par:D 
+l.463 ...texttt{SP} - \texttt{DP}}{3}).\right \par
+                                                  }
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+methods.tex:463: Missing $ inserted.
+<inserted text> 
+                $
+l.463 ...texttt{SP} - \texttt{DP}}{3}).\right \par
+                                                  }
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+[43 <./images/methods/median_fft.png>]
+
+LaTeX Warning: Reference `subsubsec:machine_learning' on page 44 undefined on i
+nput line 488.
+
+
+Overfull \hbox (0.93245pt too wide) in paragraph at lines 487--490
+\OT1/cmr/m/n/12 In this con-clud-ing sec-tion de-tail-ing meth-ods, the uti-liz
+a-tion of Ma-chine Learn-ing method-
+ []
+
+
+LaTeX Warning: Citation `ScikitlearnMachineLearning' on page 44 undefined on in
+put line 491.
+
+
+LaTeX Warning: Citation `PyTorch' on page 44 undefined on input line 492.
+
+
+LaTeX Warning: Citation `Wandb' on page 44 undefined on input line 493.
+
+
+LaTeX Warning: Reference `subsec:code_ml' on page 44 undefined on input line 51
+3.
+
+[44]
+
+LaTeX Warning: Reference `subsec:code_ml' on page 45 undefined on input line 51
+6.
+
+
+LaTeX Warning: Citation `SGDPyTorchDocumentation' on page 45 undefined on input
+ line 518.
+
+
+LaTeX Warning: Citation `AdamPyTorchDocumentation' on page 45 undefined on inpu
+t line 518.
+
+
+LaTeX Warning: Citation `LBFGSPyTorchDocumentation' on page 45 undefined on inp
+ut line 519.
+
+) [45]
+<images/flow_diagrams/flow_diagram.png, id=209, 761.84625pt x 473.77pt>
 File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
 <use images/flow_diagrams/flow_diagram.png>
 Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
@@ -1026,7 +1164,7 @@ Overfull \hbox (8.98033pt too wide) in paragraph at lines 160--161
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[44] [45 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [46] [47]
+[46] [47 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [48] [49]
 
 Thesis.bbl:115: LaTeX Error: Invalid UTF-8 byte sequence (Ã.).
 
@@ -1049,11 +1187,11 @@ Underfull \hbox (badness 1681) in paragraph at lines 132--136
 Hahn,
  []
 
-[48] [49] [50] [51] [52]) [53] (code.tex
+[50] [51] [52] [53] [54]) [55] (code.tex
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-[54] [55]
+[56] [57]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
 18.
 
@@ -1067,12 +1205,12 @@ Overfull \hbox (15.97932pt too wide) in paragraph at lines 144--145
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[56]
+[58]
 Overfull \hbox (77.18068pt too wide) in paragraph at lines 198--199
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[57]
+[59]
 Overfull \hbox (10.87921pt too wide) in paragraph at lines 235--236
 [][][][][][][][][][][] 
  []
@@ -1082,7 +1220,7 @@ Overfull \hbox (10.87921pt too wide) in paragraph at lines 236--237
 [][][][][][][][][][][] 
  []
 
-[58] [59]
+[60] [61]
 Overfull \hbox (0.67899pt too wide) in paragraph at lines 327--328
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1114,13 +1252,13 @@ Overfull \hbox (87.3809pt too wide) in paragraph at lines 344--346
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[60]
+[62]
 Overfull \hbox (153.68237pt too wide) in paragraph at lines 431--433
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ] 
  []
 
-[61]
+[63]
 
 code.tex:450: LaTeX Error: Invalid UTF-8 byte sequence (Ã\expandafter).
 
@@ -1186,7 +1324,7 @@ Overfull \hbox (5.7791pt too wide) in paragraph at lines 474--475
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[62]
+[64]
 Overfull \hbox (15.97932pt too wide) in paragraph at lines 489--490
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1258,7 +1396,7 @@ or specify an encoding such as \usepackage [latin1]{inputenc}
 in the document preamble.
 Alternatively, save the file in UTF-8 using your editor or another tool
 
-[63]
+[65]
 Overfull \hbox (87.3809pt too wide) in paragraph at lines 539--540
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1278,7 +1416,7 @@ Overfull \hbox (46.58pt too wide) in paragraph at lines 589--590
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[64]
+[66]
 Overfull \hbox (61.88034pt too wide) in paragraph at lines 605--606
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1288,7 +1426,7 @@ Overfull \hbox (66.98045pt too wide) in paragraph at lines 608--609
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[65]
+[67]
 Overfull \hbox (148.58226pt too wide) in paragraph at lines 662--663
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1298,12 +1436,17 @@ Overfull \hbox (148.58226pt too wide) in paragraph at lines 664--665
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[66] [67] [68]
+[68] [69] [70]
 Overfull \hbox (56.78023pt too wide) in paragraph at lines 825--826
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [69] (Thesis.aux)
+[71]
+Overfull \hbox (72.08057pt too wide) in paragraph at lines 909--910
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [72] (Thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1314,11 +1457,11 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 11675 strings out of 474541
- 220663 string characters out of 5744425
+ 11729 strings out of 474541
+ 221322 string characters out of 5744425
  2009978 words of memory out of 5000000
- 33767 multiletter control sequences out of 15000+600000
- 569915 words of font info for 77 fonts, out of 8000000 for 9000
+ 33820 multiletter control sequences out of 15000+600000
+ 570420 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,9n,117p,10998b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcti
@@ -1347,10 +1490,10 @@ fb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmti8.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmtt12.pfb>
-Output written on C:/Users\htjas\PycharmProjects\PPG-BP\out\Thesis.pdf (69 page
-s, 5809640 bytes).
+Output written on C:/Users\htjas\PycharmProjects\PPG-BP\out\Thesis.pdf (72 page
+s, 5826378 bytes).
 PDF statistics:
- 389 PDF objects out of 1000 (max. 8388607)
+ 398 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  166 words of extra memory for PDF output out of 10000 (max. 10000000)
 
