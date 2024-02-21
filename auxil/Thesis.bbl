@@ -15,6 +15,7 @@ V.~Burt, P.~Whelton, E.~Roccella, C.~Brown, J.~Cutler, M.~Higgins, M.~Horan,
   and D.~Labarthe, ``Prevalence of hypertension in the {{US}} adult population:
   {{Results}} from the third {{National Health}} and {{Nutrition Examination
   Survey}}, 1988-1991,'' vol.~25, no.~3, pp.~305--313.
+\newblock Cited By :2738.
 
 \bibitem{poonCufflessNoninvasiveMeasurements2005}
 C.~Poon and Y.~Zhang, ``Cuff-less and {{Noninvasive Measurements}} of
@@ -26,6 +27,7 @@ C.~Poon and Y.~Zhang, ``Cuff-less and {{Noninvasive Measurements}} of
 C.~El-Hajj and g.-i. family=Kyriacou, given=PA, ``Deep learning models for
   cuffless blood pressure monitoring from {{PPG}} signals using attention
   mechanism,'' vol.~65, p.~102301.
+\newblock Kseniia’s approach.
 
 \bibitem{sharmaCuffLessContinuousBlood2017}
 M.~Sharma, K.~Barbosa, V.~Ho, D.~Griggs, T.~Ghirmai, S.~K. Krishnan, T.~K.
@@ -75,6 +77,7 @@ G.~Yoon, J.~Y. Lee, K.~J. Jeon, K.-K. Park, H.~S. Yeo, H.~T. Hwang, H.~S. Kim,
 S.~Knight, J.~Lipoth, M.~Namvari, C.~Gu, M.~Hedayati~Ch, S.~Syed-Abdul, and
   R.~J. Spiteri, ``The {{Accuracy}} of {{Wearable Photoplethysmography
   Sensors}} for {{Telehealth Monitoring}}: {{A Scoping Review}},''
+\newblock Shabbir’s paper.
 
 \bibitem{WhatBloodPressure2019}
 ``What is blood pressure and how is it measured?,'' in {\em
@@ -106,13 +109,15 @@ D.~Ettehad, C.~A. Emdin, A.~Kiran, S.~G. Anderson, T.~Callender, J.~Emberson,
 
 \bibitem{AutomaticDigitalBlood}
 ``Automatic {{Digital Blood Pressure Monitor}}.''
+\newblock
+  http://www.ncmedical.com/products/automatic-digital-blood-pressure-monitor\_4040.html.
 
 \bibitem{clarkArterialCatheterization1992}
 V.~L. Clark and J.~A. Kruse, ``Arterial catheterization,'' vol.~8, no.~4,
   pp.~687--697.
 
 \bibitem{hillImputationContinuousArterial2021}
-B.~L. Hill, N.~Rakocz, �.~Rudas, J.~N. Chiang, S.~Wang, I.~Hofer, M.~Cannesson,
+B.~L. Hill, N.~Rakocz, A.~Rudas, J.~N. Chiang, S.~Wang, I.~Hofer, M.~Cannesson,
   and E.~Halperin, ``Imputation of the continuous arterial line blood pressure
   waveform from non-invasive measurements using deep learning,'' vol.~11,
   p.~15755.
@@ -138,6 +143,7 @@ C.-S. Kim, A.~M. Carek, O.~T. Inan, R.~Mukkamala, and J.-O. Hahn,
 B.~Imholz, W.~Wieling, G.~Van~Montfrans, and K.~Wesseling, ``Fifteen years
   experience with finger arterial pressure monitoring: {{Assessment}} of the
   technology,'' vol.~38, no.~3, pp.~605--616.
+\newblock Cited By :684.
 
 \bibitem{peterReviewMethodsNoninvasive2014}
 L.~Peter, N.~Noury, and M.~Cerny, ``A review of methods for non-invasive and
@@ -223,6 +229,7 @@ S.~Zanelli, M.~El~Yacoubi, M.~Hallab, and M.~Ammi, ``On the potential of {{AI}}
 G.~Langewouters, A.~Zwart, R.~Busse, and K.~Wesseling, ``Pressure-diameter
   relationships of segments of human finger arteries,'' vol.~7, no.~1,
   pp.~43--55.
+\newblock Cited By :81.
 
 \bibitem{moodyDatabaseSupportDevelopment1996}
 G.~Moody and R.~Mark, ``A database to support development and evaluation of
@@ -373,11 +380,14 @@ Y.~Kurylyak, F.~Lamonaca, and D.~Grimaldi, ``A {{Neural Network-based}} method
 
 \bibitem{FeedforwardNeuralNetworks}
 ``Feedforward {{Neural Networks}} | {{Brilliant Math}} \& {{Science Wiki}}.''
+\newblock
+  \href{https://brilliant.org/wiki/feedforward-neural-networks/}{https://brilliant.org/wiki/feedforward-neural-networks/}.
 
 \bibitem{xingOpticalBloodPressure2016}
 X.~Xing and M.~Sun, ``Optical blood pressure estimation with
   photoplethysmography and fft-based neural networks,'' vol.~7, no.~8,
   pp.~3007--3020.
+\newblock Cited By :177.
 
 \bibitem{liuIntegratedNavigationTethered2017}
 M.~Liu, X.~Zhan, J.~Tu, B.~Liu, and Z.~Zhu, ``Integrated navigation for
@@ -410,10 +420,78 @@ J.~Joung, C.-W. Jung, H.-C. Lee, M.-J. Chae, H.-S. Kim, J.~Park, W.-Y. Shin,
   using photoplethysmography-based {{PPG2BP-net}} for high intrasubject blood
   pressure variations,'' vol.~13, p.~8605.
 
-\bibitem{jasinskasHtjasPPGBP2024}
-H.~Jasinskas, ``Htjas/{{PPG-BP}}.''
+\bibitem{jasinskasHtjasPPGBPProject2024}
+H.~Jasinskas, ``Htjas/{{PPG-BP Project}}.''
+\newblock Available at
+  \href{https://github.com/htjas/PPG-BP}{https://github.com/htjas/PPG-BP}.
 
 \bibitem{MITLCPWfdbpython2024}
 ``{{MIT-LCP}}/wfdb-python.''
+\newblock Availa.
+
+\bibitem{PandasPythonData}
+``Pandas - {{Python Data Analysis Library}}.''
+\newblock https://pandas.pydata.org/.
+
+\bibitem{NumPy}
+``{{NumPy}}.''
+
+\bibitem{MatplotlibVisualizationPython}
+``Matplotlib — {{Visualization}} with {{Python}}.''
+\newblock https://matplotlib.org/.
+
+\bibitem{SciPy}
+``{{SciPy}}.''
+\newblock https://scipy.org/.
+
+\bibitem{vangentHeartPyNovelHeart2019}
+p.~u. family=Gent, given=Paul, H.~Farah, p.~u. family=Nes, given=Nicole, and
+  p.~u. family=Arem, given=Bart, ``{{HeartPy}}: {{A}} novel heart rate
+  algorithm for the analysis of noisy signals,'' vol.~66, pp.~368--378.
+
+\bibitem{elgendiSystolicPeakDetection2013}
+M.~Elgendi, I.~Norton, M.~Brearley, D.~Abbott, and D.~Schuurmans, ``Systolic
+  peak detection in acceleration photoplethysmograms measured from emergency
+  responders in tropical conditions,'' vol.~8, no.~10, p.~e76585.
+
+\bibitem{arguellopradaNovelLowcomplexityPeak2018}
+E.~J. Argüello~Prada and R.~D. Serna~Maldonado, ``A novel and low-complexity
+  peak detection algorithm for heart rate estimation from low-amplitude
+  photoplethysmographic ({{PPG}}) signals,'' vol.~42, no.~8, pp.~569--577.
+
+\bibitem{aboyAutomaticBeatDetection2005}
+M.~Aboy, J.~McNames, T.~Thong, D.~Tsunami, M.~S. Ellenby, and B.~Goldstein,
+  ``An automatic beat detection algorithm for pressure signals,'' vol.~52,
+  no.~10, pp.~1662--1670.
+
+\bibitem{maqsoodSurveyShallowDeep2022}
+S.~Maqsood, S.~Xu, S.~Tran, S.~Garg, M.~Springer, M.~Karunanithi, and
+  R.~Mohawesh, ``A survey: {{From}} shallow to deep machine learning approaches
+  for blood pressure estimation using biosensors,'' vol.~197, p.~116788.
+
+\bibitem{ScikitlearnMachineLearning}
+``Scikit-learn: Machine learning in {{Python}} — scikit-learn 1.4.1
+  documentation.''
+\newblock https://scikit-learn.org/stable/.
+
+\bibitem{PyTorch}
+``{{PyTorch}}.''
+\newblock https://pytorch.org/.
+
+\bibitem{Wandb}
+``Wandb.''
+\newblock https://wandb.ai/site.
+
+\bibitem{SGDPyTorchDocumentation}
+``{{SGD}} — {{PyTorch}} 2.2 documentation.''
+\newblock Available at
+  \href{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}.
+
+\bibitem{AdamPyTorchDocumentation}
+``Adam — {{PyTorch}} 2.2 documentation.''
+
+\bibitem{LBFGSPyTorchDocumentation}
+``{{LBFGS}} — {{PyTorch}} 2.2 documentation.''
+\newblock https://pytorch.org/docs/stable/generated/torch.optim.LBFGS.html.
 
 \end{thebibliography}

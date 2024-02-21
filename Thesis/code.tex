@@ -447,7 +447,7 @@ def fiducial_points(x, pks, fs, vis, header):
 
     Version: 1.0 - June 2022
 
-    Developed by: Elisa Mejía-Mejía
+    Developed by: Elisa Mejia-Mejia
                    City, University of London
 
     Edited by: Peter Charlton (see "Added by PC")
@@ -530,11 +530,11 @@ def fiducial_points(x, pks, fs, vis, header):
         stop = ons[i + 1]
         ibi_portion = x[start:stop]
         ibi_1d_portion = d1x[start:stop]
-        low_stop = np.where(m1d < stop)  # Adjusted by HJ   ↓
+        low_stop = np.where(m1d < stop)  # Adjusted by HJ from here
         high_start = np.where(m1d > start)
         if np.intersect1d(low_stop, high_start).size == 0:
             continue
-        ind_m1d, = np.intersect1d(low_stop, high_start)  #  ↑
+        ind_m1d, = np.intersect1d(low_stop, high_start)  # to here
         ind_m1d = m1d[ind_m1d] - start
         aux_tip = np.round(((ibi_portion[0] - ibi_portion[ind_m1d]) / ibi_1d_portion[ind_m1d]) + ind_m1d)
         aux_tip = aux_tip.astype(int)

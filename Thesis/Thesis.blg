@@ -6,31 +6,51 @@ The style file: ieeetr.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: literature.bib
 Warning--entry type for "AdaBoostAlgorithmMachine" isn't style-file defined
---line 1 of file literature.bib
+--line 19 of file literature.bib
+Warning--entry type for "AdamPyTorchDocumentation" isn't style-file defined
+--line 29 of file literature.bib
 Warning--entry type for "anishnamaUnderstandingBidirectionalLSTM2023" isn't style-file defined
---line 28 of file literature.bib
+--line 53 of file literature.bib
 Warning--entry type for "AutomaticDigitalBlood" isn't style-file defined
---line 72 of file literature.bib
+--line 115 of file literature.bib
 Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
---line 82 of file literature.bib
+--line 125 of file literature.bib
 Warning--entry type for "charltonMIMICWFDBTutorials2022" isn't style-file defined
---line 184 of file literature.bib
+--line 227 of file literature.bib
 Warning--entry type for "contributorEssentialCriticalCare2021" isn't style-file defined
---line 226 of file literature.bib
+--line 269 of file literature.bib
 Warning--entry type for "FeedforwardNeuralNetworks" isn't style-file defined
---line 378 of file literature.bib
-Warning--entry type for "jasinskasHtjasPPGBP2024" isn't style-file defined
 --line 459 of file literature.bib
+Warning--entry type for "jasinskasHtjasPPGBPProject2024" isn't style-file defined
+--line 540 of file literature.bib
+Warning--entry type for "LBFGSPyTorchDocumentation" isn't style-file defined
+--line 692 of file literature.bib
+Warning--entry type for "MatplotlibVisualizationPython" isn't style-file defined
+--line 856 of file literature.bib
 Warning--entry type for "MITLCPWfdbpython2024" isn't style-file defined
---line 801 of file literature.bib
+--line 896 of file literature.bib
 Warning--entry type for "moodyMIMICIIIWaveformDatabase2017" isn't style-file defined
---line 858 of file literature.bib
+--line 953 of file literature.bib
 Warning--entry type for "moodyMIMICIVWaveformDatabase" isn't style-file defined
---line 870 of file literature.bib
+--line 965 of file literature.bib
+Warning--entry type for "NumPy" isn't style-file defined
+--line 1016 of file literature.bib
+Warning--entry type for "PandasPythonData" isn't style-file defined
+--line 1051 of file literature.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 968 of file literature.bib
+--line 1077 of file literature.bib
+Warning--entry type for "PyTorch" isn't style-file defined
+--line 1100 of file literature.bib
+Warning--entry type for "ScikitlearnMachineLearning" isn't style-file defined
+--line 1198 of file literature.bib
+Warning--entry type for "SciPy" isn't style-file defined
+--line 1205 of file literature.bib
+Warning--entry type for "SGDPyTorchDocumentation" isn't style-file defined
+--line 1230 of file literature.bib
 Warning--entry type for "StandardSphygmomanometer" isn't style-file defined
---line 1145 of file literature.bib
+--line 1284 of file literature.bib
+Warning--entry type for "Wandb" isn't style-file defined
+--line 1441 of file literature.bib
 Warning--empty year in organizationWorldHealthStatistics2023
 Warning--empty journal in ezzatiSelectedMajorRisk2002
 Warning--empty year in ezzatiSelectedMajorRisk2002
@@ -152,45 +172,61 @@ Warning--empty journal in marulandaHybridModelBased2023
 Warning--empty year in marulandaHybridModelBased2023
 Warning--empty journal in joungContinuousCufflessBlood2023
 Warning--empty year in joungContinuousCufflessBlood2023
-You've used 81 entries,
+Too many commas in name 1 of "family=Gent, given=Paul, prefix=van, useprefix=true and Farah, Haneen and family=Nes, given=Nicole, prefix=van, useprefix=true and family=Arem, given=Bart, prefix=van, useprefix=true" for entry vangentHeartPyNovelHeart2019
+while executing---line 969 of file ieeetr.bst
+Too many commas in name 3 of "family=Gent, given=Paul, prefix=van, useprefix=true and Farah, Haneen and family=Nes, given=Nicole, prefix=van, useprefix=true and family=Arem, given=Bart, prefix=van, useprefix=true" for entry vangentHeartPyNovelHeart2019
+while executing---line 969 of file ieeetr.bst
+Too many commas in name 4 of "family=Gent, given=Paul, prefix=van, useprefix=true and Farah, Haneen and family=Nes, given=Nicole, prefix=van, useprefix=true and family=Arem, given=Bart, prefix=van, useprefix=true" for entry vangentHeartPyNovelHeart2019
+while executing---line 969 of file ieeetr.bst
+Warning--empty journal in vangentHeartPyNovelHeart2019
+Warning--empty year in vangentHeartPyNovelHeart2019
+Warning--empty journal in elgendiSystolicPeakDetection2013
+Warning--empty year in elgendiSystolicPeakDetection2013
+Warning--empty journal in arguellopradaNovelLowcomplexityPeak2018
+Warning--empty year in arguellopradaNovelLowcomplexityPeak2018
+Warning--empty journal in aboyAutomaticBeatDetection2005
+Warning--empty year in aboyAutomaticBeatDetection2005
+Warning--empty journal in maqsoodSurveyShallowDeep2022
+Warning--empty year in maqsoodSurveyShallowDeep2022
+You've used 96 entries,
             1876 wiz_defined-function locations,
-            923 strings with 26012 characters,
-and the built_in function-call counts, 25414 in all, are:
-= -- 2203
-> -- 1368
+            983 strings with 28145 characters,
+and the built_in function-call counts, 28146 in all, are:
+= -- 2446
+> -- 1460
 < -- 0
-+ -- 488
-- -- 407
-* -- 2059
-:= -- 3484
-add.period$ -- 68
-call.type$ -- 81
-change.case$ -- 80
++ -- 527
+- -- 431
+* -- 2218
+:= -- 3788
+add.period$ -- 73
+call.type$ -- 96
+change.case$ -- 95
 chr.to.int$ -- 0
-cite$ -- 202
-duplicate$ -- 1213
-empty$ -- 2222
-format.name$ -- 407
-if$ -- 5975
+cite$ -- 227
+duplicate$ -- 1348
+empty$ -- 2543
+format.name$ -- 431
+if$ -- 6676
 int.to.chr$ -- 0
-int.to.str$ -- 81
-missing$ -- 70
-newline$ -- 248
-num.names$ -- 77
-pop$ -- 445
+int.to.str$ -- 96
+missing$ -- 75
+newline$ -- 293
+num.names$ -- 82
+pop$ -- 529
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 993
+skip$ -- 1157
 stack$ -- 0
-substring$ -- 1659
-swap$ -- 506
+substring$ -- 1787
+swap$ -- 556
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 121
-while$ -- 224
-width$ -- 83
-write$ -- 649
-(There were 134 warnings)
+warning$ -- 131
+while$ -- 240
+width$ -- 98
+write$ -- 742
+(There were 3 error messages)

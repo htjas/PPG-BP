@@ -3,7 +3,7 @@ It encompasses various subdirectories such as MIMIC and PyTorch tutorials, with 
 Within the \texttt{model}, there exist several sub-packages containing relevant data for subsequent project components,
 while the core code is distributed across five \texttt{.py} classes: \texttt{init\_scripts.py} (Initialization / Data Fetching), \texttt{sp\_scripts.py} (Signal Processing),
 \texttt{ml\_scripts.py} (Machine Learning), \texttt{visual.py} (Visualization), and \texttt{main.py}, which integrates all the aforementioned components.
-The whole repository can be found on the author's \textit{GitHub} page~\cite{jasinskasHtjasPPGBP2024}.
+The whole repository can be found on the author's \textit{GitHub} page~\cite{jasinskasHtjasPPGBPProject2024}.
 
 \subsection{Data Fetching}
 \label{subsec:data-fetching}
@@ -192,9 +192,16 @@ Thirdly and ideally, the shape of a dicrotic notch should be visible in both the
     \label{fig:filters}
 \end{figure}
 
-After a careful assessment of a larger sample of filtered waveforms the following approach was chosen as optimal:
-%TODO add optimal filtering approach
-butter + savgol optimal, because PPG shapes best (show pic)
+After a thorough evaluation of an extended set of filtered waveforms, the most effective strategy was determined:
+The \textit{Savitzky-Golay} filter was selected to enhance the pulse wave shape, emphasizing the visualization of the dicrotic notch.
+This was followed by the application of a \textit{Butterworth} lowpass filter to eliminate undesired frequencies and achieve noise reduction.
+The impact of this filtering methodology is depicted in Figure~\ref{fig:opt_filtering}.
+
+\begin{figure}[h]
+    \includegraphics[width=0.9\textwidth]{images/methods/opt_filtering}
+    \caption{Comparison of raw and optimally filtered PPG signals}
+    \label{fig:opt_filtering}
+\end{figure}
 
 \subsubsection{Beat Finding Algorithms}
 \label{subsubsec:beats}
@@ -338,7 +345,7 @@ This is exemplified by the following exception raised:
 \indent\indent\indent\indent\indent\indent too big of a difference after grouping')}}
 \vspace{0.1cm}
 
-\subsubsection{Fiducial Point detection}
+\subsubsection{Fiducial Point Detection}
 \label{subsubsec:fidp}
 
 The fourth phase within the signal processing phase encompasses the detection of Fiducial Points (FIDPs), which is directly linked to feature extraction.
@@ -511,9 +518,6 @@ A total of 8 regression models were implemented:
 \end{itemize}
 
 The code of the listed ML models can be found in appendix~\ref{subsec:code_ml}.
-
-
-The ML models' code can be located in appendix~\ref{subsec:code_ml}.
 
 In LR and MLP models, the utilized optimizers were \enquote{Stochastic Gradient Descent} (SGD)\cite{SGDPyTorchDocumentation} and \enquote{Adaptive Moment Estimation} (Adam)\cite{AdamPyTorchDocumentation} respectively.
 The optimizer for LSTM and GRU models was \enquote{Limited-memory Broyden–Fletcher–Goldfarb–Shanno} (LBFGS) algorithm~\cite{LBFGSPyTorchDocumentation}, each running for 100 epochs with a learning rate set to 0.1.

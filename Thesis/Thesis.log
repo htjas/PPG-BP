@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  21 FEB 2024 11:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  21 FEB 2024 19:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -552,55 +552,591 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--69
 [1
 
 {C:/Users/htjas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/hs/
-hd.png> <./images/hs/hhn.png> <./images/hs/tmu.png>] [2] (Thesis.toc)
+hd.png> <./images/hs/hhn.png> <./images/hs/tmu.png>] [2] (Thesis.toc [3])
 \tf@toc=\write3
 \openout3 = `Thesis.toc'.
 
 
-[3] (introduction.tex [4]
+[4] (introduction.tex [5]) [6] (theoretical-background.tex
 
-LaTeX Warning: Reference `sec:background' on page 5 undefined on input line 53.
-
-
-
-LaTeX Warning: Reference `subsec:med_background' on page 5 undefined on input l
-ine 54.
+LaTeX Warning: Citation `WhatBloodPressure2019' on page 7 undefined on input li
+ne 8.
 
 
-LaTeX Warning: Reference `subsubsec:bp' on page 5 undefined on input line 54.
+LaTeX Warning: Citation `betts20BloodFlow2022' on page 7 undefined on input lin
+e 16.
 
 
-LaTeX Warning: Reference `subsubsec:ppg' on page 5 undefined on input line 54.
+LaTeX Warning: Citation `naylorArterialCathetersEarly2020' on page 7 undefined 
+on input line 20.
 
 
-LaTeX Warning: Reference `subsubsec:mimic' on page 5 undefined on input line 55
-.
+LaTeX Warning: Citation `ettehadBloodPressureLowering2016' on page 7 undefined 
+on input line 21.
 
 
-LaTeX Warning: Reference `subsec:computing_background' on page 5 undefined on i
-nput line 56.
+LaTeX Warning: Citation `betts20BloodFlow2022' on page 7 undefined on input lin
+e 36.
 
-) [5] (methods.tex [6] [7]
+[7]
+<images/abp/sphyg.png, id=35, 702.625pt x 702.625pt>
+File: images/abp/sphyg.png Graphic file (type png)
+<use images/abp/sphyg.png>
+Package pdftex.def Info: images/abp/sphyg.png  used on input line 40.
+(pdftex.def)             Requested size: 140.5225pt x 140.5225pt.
 
-LaTeX Warning: Reference `fig:segments, fig:values' on page 8 undefined on inpu
-t line 112.
+
+LaTeX Warning: Citation `StandardSphygmomanometer' on page 8 undefined on input
+ line 41.
+
+
+LaTeX Warning: Citation `StandardSphygmomanometer' on page 8 undefined on input
+ line 41.
+
+<images/abp/auto_sphyg.png, id=36, 602.25pt x 602.25pt>
+File: images/abp/auto_sphyg.png Graphic file (type png)
+<use images/abp/auto_sphyg.png>
+Package pdftex.def Info: images/abp/auto_sphyg.png  used on input line 43.
+(pdftex.def)             Requested size: 120.44786pt x 120.44786pt.
+
+LaTeX Warning: Citation `AutomaticDigitalBlood' on page 8 undefined on input li
+ne 44.
+
+
+LaTeX Warning: Citation `AutomaticDigitalBlood' on page 8 undefined on input li
+ne 44.
+
+[8 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
+
+LaTeX Warning: Citation `clarkArterialCatheterization1992' on page 9 undefined 
+on input line 56.
+
+
+LaTeX Warning: Citation `hillImputationContinuousArterial2021' on page 9 undefi
+ned on input line 61.
+
+<images/abp/catheter.png, id=40, 751.30687pt x 492.33937pt>
+File: images/abp/catheter.png Graphic file (type png)
+<use images/abp/catheter.png>
+Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
+(pdftex.def)             Requested size: 300.51741pt x 196.93225pt.
+
+LaTeX Warning: Citation `contributorEssentialCriticalCare2021' on page 9 undefi
+ned on input line 66.
+
+
+LaTeX Warning: Citation `contributorEssentialCriticalCare2021' on page 9 undefi
+ned on input line 66.
+
+
+LaTeX Warning: Citation `lehmanMethodsBloodPressure2013' on page 9 undefined on
+ input line 71.
+
+
+LaTeX Warning: Citation `demersPhysiologyMeanArterial2024' on page 9 undefined 
+on input line 74.
+
+[9 <./images/abp/catheter.png>]
+
+LaTeX Warning: Citation `kimBallistocardiogramBasedApproachCuffless2018' on pag
+e 10 undefined on input line 78.
+
+
+LaTeX Warning: Citation `imholzFifteenYearsExperience1998' on page 10 undefined
+ on input line 78.
+
+
+LaTeX Warning: Citation `peterReviewMethodsNoninvasive2014' on page 10 undefine
+d on input line 85.
+
+
+LaTeX Warning: Citation `challonerPhotoelectricPlethysmographMeasurement1974' o
+n page 10 undefined on input line 99.
+
+[10]
+
+LaTeX Warning: Citation `molitorNewBloodlessMethod1936' on page 11 undefined on
+ input line 108.
+
+
+LaTeX Warning: Citation `hertzmanPhotoelectricPlethysmographyFingers1937' on pa
+ge 11 undefined on input line 110.
+
+
+LaTeX Warning: Citation `srivastavValsalvaManeuver2024' on page 11 undefined on
+ input line 113.
+
+
+LaTeX Warning: Citation `hertzmanPhotoelectricPlethysmographyFingers1937' on pa
+ge 11 undefined on input line 116.
+
+
+LaTeX Warning: Citation `yoshiyaSpectrophotometricMonitoringArterial1980' on pa
+ge 11 undefined on input line 121.
+
+
+LaTeX Warning: Citation `aoyagiPulseOximetryIts2002' on page 11 undefined on in
+put line 124.
+
+
+LaTeX Warning: Citation `wieringaContactlessMultipleWavelength2005' on page 11 
+undefined on input line 128.
+
+
+LaTeX Warning: Citation `rheeArtifactresistantPowerefficientDesign2001' on page
+ 11 undefined on input line 132.
+
+
+LaTeX Warning: Citation `zhengRingtypeDeviceNoninvasive2003' on page 11 undefin
+ed on input line 132.
+
+[11]
+
+LaTeX Warning: Citation `leeReflectancePulseOximetry2016' on page 12 undefined 
+on input line 135.
+
+<images/ppg/reflection.png, id=51, 853.1875pt x 316.18124pt>
+File: images/ppg/reflection.png Graphic file (type png)
+<use images/ppg/reflection.png>
+Package pdftex.def Info: images/ppg/reflection.png  used on input line 142.
+(pdftex.def)             Requested size: 341.26895pt x 126.47025pt.
+
+LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 12 undefined on
+ input line 143.
+
+
+LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 12 undefined on
+ input line 143.
+
+
+LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
+12 undefined on input line 154.
+
+
+LaTeX Warning: Citation `weisslerSystolicTimeIntervals1968' on page 12 undefine
+d on input line 157.
+
+<images/ppg/ac+dc.png, id=52, 853.1875pt x 588.1975pt>
+File: images/ppg/ac+dc.png Graphic file (type png)
+<use images/ppg/ac+dc.png>
+Package pdftex.def Info: images/ppg/ac+dc.png  used on input line 162.
+(pdftex.def)             Requested size: 426.59271pt x 294.09802pt.
+
+LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 12 undefined on
+ input line 163.
+
+
+LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 12 undefined on
+ input line 163.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
+12 undefined on input line 172.
+
+
+LaTeX Warning: Citation `sviridovaHumanPhotoplethysmogramNew2015' on page 12 un
+defined on input line 173.
+
+
+LaTeX Warning: Citation `castanedaReviewWearablePhotoplethysmography2018' on pa
+ge 12 undefined on input line 174.
+
+
+LaTeX Warning: Citation `ponnadaTechnologicalConsiderationsSensorassisted2019' 
+on page 12 undefined on input line 180.
+
+[12 <./images/ppg/reflection.png>] [13 <./images/ppg/ac+dc.png>]
+<images/ppg/ppg-devices.png, id=62, 1284.8pt x 722.7pt>
+File: images/ppg/ppg-devices.png Graphic file (type png)
+<use images/ppg/ppg-devices.png>
+Package pdftex.def Info: images/ppg/ppg-devices.png  used on input line 186.
+(pdftex.def)             Requested size: 449.68674pt x 252.94878pt.
+
+Overfull \hbox (1.55579pt too wide) in paragraph at lines 186--187
+ [][] 
+ []
+
+
+LaTeX Warning: Citation `zanelliPotentialAIBased2023' on page 14 undefined on i
+nput line 187.
+
+
+LaTeX Warning: Citation `zanelliPotentialAIBased2023' on page 14 undefined on i
+nput line 187.
+
+
+LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
+14 undefined on input line 197.
+
+
+LaTeX Warning: Citation `langewoutersPressurediameterRelationshipsSegments1986'
+ on page 14 undefined on input line 200.
+
+[14 <./images/ppg/ppg-devices.png>]
+
+LaTeX Warning: Citation `moodyDatabaseSupportDevelopment1996' on page 15 undefi
+ned on input line 219.
+
+
+LaTeX Warning: Citation `saeedMultiparameterIntelligentMonitoring2011' on page 
+15 undefined on input line 221.
+
+
+LaTeX Warning: Citation `johnsonMIMICIIIFreelyAccessible2016' on page 15 undefi
+ned on input line 222.
+
+
+LaTeX Warning: Citation `johnsonMIMICIVFreelyAccessible2023' on page 15 undefin
+ed on input line 224.
+
+<images/mimic/mimic_workflow.png, id=67, 515.82712pt x 169.38281pt>
+File: images/mimic/mimic_workflow.png Graphic file (type png)
+<use images/mimic/mimic_workflow.png>
+Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
+9.
+(pdftex.def)             Requested size: 309.49866pt x 101.63046pt.
+
+LaTeX Warning: Citation `charltonMIMICWFDBTutorials2022' on page 15 undefined o
+n input line 230.
+
+
+LaTeX Warning: Citation `charltonMIMICWFDBTutorials2022' on page 15 undefined o
+n input line 230.
+
+[15 <./images/mimic/mimic_workflow.png>]
+<images/mimic/mimic_structure.png, id=72, 1580.90625pt x 1188.69093pt>
+File: images/mimic/mimic_structure.png Graphic file (type png)
+<use images/mimic/mimic_structure.png>
+Package pdftex.def Info: images/mimic/mimic_structure.png  used on input line 2
+49.
+(pdftex.def)             Requested size: 474.27554pt x 356.61003pt.
+
+Overfull \hbox (26.14459pt too wide) in paragraph at lines 249--250
+ [][] 
+ []
+
+
+LaTeX Warning: Citation `johnsonMIMICIIIFreelyAccessible2016' on page 16 undefi
+ned on input line 250.
+
+
+LaTeX Warning: Citation `johnsonMIMICIIIFreelyAccessible2016' on page 16 undefi
+ned on input line 250.
+
+
+LaTeX Warning: Citation `moodyMIMICIIIWaveformDatabase2017' on page 16 undefine
+d on input line 254.
+
+
+LaTeX Warning: Citation `moodyMIMICIVWaveformDatabase' on page 16 undefined on 
+input line 254.
+
+[16 <./images/mimic/mimic_structure.png>] [17]
+
+LaTeX Warning: Citation `mukkamalaUbiquitousBloodPressure2015' on page 18 undef
+ined on input line 302.
+
+<images/sp/ptt.png, id=79, 639.89063pt x 489.32813pt>
+File: images/sp/ptt.png Graphic file (type png)
+<use images/sp/ptt.png>
+Package pdftex.def Info: images/sp/ptt.png  used on input line 308.
+(pdftex.def)             Requested size: 255.9517pt x 195.72777pt.
+
+LaTeX Warning: Citation `luiNovelCalibrationProcedure2018' on page 18 undefined
+ on input line 309.
+
+
+LaTeX Warning: Citation `luiNovelCalibrationProcedure2018' on page 18 undefined
+ on input line 309.
+
+<images/sp/pat.png, id=80, 687.56876pt x 584.1825pt>
+File: images/sp/pat.png Graphic file (type png)
+<use images/sp/pat.png>
+Package pdftex.def Info: images/sp/pat.png  used on input line 320.
+(pdftex.def)             Requested size: 275.02263pt x 233.66885pt.
+
+LaTeX Warning: Citation `dhillonPulseArrivalTime2019' on page 18 undefined on i
+nput line 321.
+
+
+LaTeX Warning: Citation `dhillonPulseArrivalTime2019' on page 18 undefined on i
+nput line 321.
+
+[18 <./images/sp/ptt.png>]
+
+LaTeX Warning: Citation `mccombieAdaptiveBloodPressure2006' on page 19 undefine
+d on input line 326.
+
+<images/sp/pww.jpg, id=84, 853.1875pt x 702.625pt>
+File: images/sp/pww.jpg Graphic file (type jpg)
+<use images/sp/pww.jpg>
+Package pdftex.def Info: images/sp/pww.jpg  used on input line 335.
+(pdftex.def)             Requested size: 224.06548pt x 184.52223pt.
+
+LaTeX Warning: Citation `urbanUnderstandingArterialBiomechanics2023' on page 19
+ undefined on input line 339.
+
+
+LaTeX Warning: Citation `urbanUnderstandingArterialBiomechanics2023' on page 19
+ undefined on input line 339.
+
+
+LaTeX Warning: Citation `elgendiAnalysisFingertipPhotoplethysmogram2012' on pag
+e 19 undefined on input line 352.
+
+<images/sp/pwa.png, id=85, 266.32834pt x 106.73209pt>
+File: images/sp/pwa.png Graphic file (type png)
+<use images/sp/pwa.png>
+Package pdftex.def Info: images/sp/pwa.png  used on input line 358.
+(pdftex.def)             Requested size: 448.13095pt x 179.60017pt.
+
+LaTeX Warning: Citation `bikiaLeveragingPotentialMachine2021' on page 19 undefi
+ned on input line 359.
+
+
+LaTeX Warning: Citation `bikiaLeveragingPotentialMachine2021' on page 19 undefi
+ned on input line 359.
+
+[19 <./images/sp/pat.png (PNG copy)>] [20 <./images/sp/pww.jpg> <./images/sp/pw
+a.png>]
+
+LaTeX Warning: Citation `chatterjeePPGBasedHeart2018' on page 21 undefined on i
+nput line 375.
+
+
+LaTeX Warning: Citation `savitzkySmoothingDifferentiationData1964' on page 21 u
+ndefined on input line 387.
+
+
+LaTeX Warning: Citation `antoniouDigitalFiltersAnalysis2018' on page 21 undefin
+ed on input line 416.
+
+[21]
+
+LaTeX Warning: Citation `liangOptimalFilterShort2018' on page 22 undefined on i
+nput line 456.
+
+
+LaTeX Warning: Citation `takazawaAssessmentVasoactiveAgents1998' on page 22 und
+efined on input line 465.
+
+<images/sp/dic_notch.png, id=103, 650.43pt x 330.23375pt>
+File: images/sp/dic_notch.png Graphic file (type png)
+<use images/sp/dic_notch.png>
+Package pdftex.def Info: images/sp/dic_notch.png  used on input line 472.
+(pdftex.def)             Requested size: 390.261pt x 198.14177pt.
+
+LaTeX Warning: Citation `djeldjliImagingPhotoplethysmographySignal2019' on page
+ 22 undefined on input line 473.
+
+
+LaTeX Warning: Citation `djeldjliImagingPhotoplethysmographySignal2019' on page
+ 22 undefined on input line 473.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `charltonAssessingHemodynamicsPhotoplethysmogram2022' o
+n page 22 undefined on input line 477.
+
+
+LaTeX Warning: Citation `zhangEffectLocalCold2005' on page 22 undefined on inpu
+t line 481.
+
+[22]
+<images/sp/fiducials.png, id=107, 526.21594pt x 350.81062pt>
+File: images/sp/fiducials.png Graphic file (type png)
+<use images/sp/fiducials.png>
+Package pdftex.def Info: images/sp/fiducials.png  used on input line 486.
+(pdftex.def)             Requested size: 420.97333pt x 280.64886pt.
+
+
+LaTeX Warning: Citation `charltonAssessingHemodynamicsPhotoplethysmogram2022' o
+n page 23 undefined on input line 487.
+
+
+LaTeX Warning: Citation `charltonAssessingHemodynamicsPhotoplethysmogram2022' o
+n page 23 undefined on input line 487.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (17.1706pt too wide) in paragraph at lines 496--497
+[]\OT1/cmr/m/n/12 Second Deriva-tive Fea-tures (ag-ing in-dex: de-fined as am-p
+li-tude val-ues of [] 
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
+497.
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmtt.fd
+File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+Overfull \hbox (4.71902pt too wide) in paragraph at lines 497--498
+[]\OT1/cmr/m/n/12 Combination of Fea-tures (min-i-mum rise time: \OT1/cmtt/m/n/
+12 [1/x0(ms)]\TS1/cmtt/m/n/12 ·\OT1/cmtt/m/n/12 [x(sys) - x(onset)]\OT1/cmr/m/n
+/12 ) 
+ []
+
+[23 <./images/sp/dic_notch.png>]
+Overfull \hbox (4.81723pt too wide) in paragraph at lines 511--513
+\OT1/cmr/m/n/12 Building upon the foun-da-tion laid by tra-di-tional sig-nal pr
+o-cess-ing tech-niques, ML emerges
+ []
+
+<images/ml/adaboost.png, id=113, 5781.6pt x 3252.15pt>
+File: images/ml/adaboost.png Graphic file (type png)
+<use images/ml/adaboost.png>
+Package pdftex.def Info: images/ml/adaboost.png  used on input line 516.
+(pdftex.def)             Requested size: 346.88104pt x 195.12057pt.
+
+LaTeX Warning: Citation `AdaBoostAlgorithmMachine' on page 24 undefined on inpu
+t line 517.
+
+
+LaTeX Warning: Citation `AdaBoostAlgorithmMachine' on page 24 undefined on inpu
+t line 517.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[24 <./images/sp/fiducials.png>]
+
+LaTeX Warning: Citation `tengContinuousNoninvasiveEstimation2003' on page 25 un
+defined on input line 529.
+
+
+LaTeX Warning: Citation `suzukiCufflessBloodPressure2009' on page 25 undefined 
+on input line 533.
+
+
+LaTeX Warning: Citation `ruiz-rodriguezInnovativeContinuousNoninvasive2013a' on
+ page 25 undefined on input line 536.
+
+<images/ml/RBM.png, id=117, 853.1875pt x 404.51125pt>
+File: images/ml/RBM.png Graphic file (type png)
+<use images/ml/RBM.png>
+Package pdftex.def Info: images/ml/RBM.png  used on input line 542.
+(pdftex.def)             Requested size: 426.59271pt x 202.25513pt.
+
+LaTeX Warning: Citation `ouIntegratingCellularAutomata2019' on page 25 undefine
+d on input line 543.
+
+
+LaTeX Warning: Citation `ouIntegratingCellularAutomata2019' on page 25 undefine
+d on input line 543.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `kurylyakNeuralNetworkbasedMethod2013' on page 25 undef
+ined on input line 547.
+
+[25 <./images/ml/adaboost.png>]
+<images/ml/ffnn.png, id=124, 454.69875pt x 366.36874pt>
+File: images/ml/ffnn.png Graphic file (type png)
+<use images/ml/ffnn.png>
+Package pdftex.def Info: images/ml/ffnn.png  used on input line 552.
+(pdftex.def)             Requested size: 227.34882pt x 183.18391pt.
+
+
+LaTeX Warning: Citation `FeedforwardNeuralNetworks' on page 26 undefined on inp
+ut line 553.
+
+
+LaTeX Warning: Citation `FeedforwardNeuralNetworks' on page 26 undefined on inp
+ut line 553.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `xingOpticalBloodPressure2016' on page 26 undefined on 
+input line 557.
+
+
+LaTeX Warning: Citation `liuIntegratedNavigationTethered2017' on page 26 undefi
+ned on input line 560.
+
+
+LaTeX Warning: Citation `suLongtermBloodPressure2018' on page 26 undefined on i
+nput line 562.
+
+
+Overfull \hbox (1.97975pt too wide) in paragraph at lines 562--564
+\OT1/cmr/m/n/12 Short-term mem-ory (LSTM) model with resid-ual con-nec-tions, d
+emon-strat-ing the promise
+ []
+
+<images/ml/lstm.png, id=125, 682.55pt x 370.38374pt>
+File: images/ml/lstm.png Graphic file (type png)
+<use images/ml/lstm.png>
+Package pdftex.def Info: images/ml/lstm.png  used on input line 567.
+(pdftex.def)             Requested size: 341.27417pt x 185.1914pt.
+
+LaTeX Warning: Citation `anishnamaUnderstandingBidirectionalLSTM2023' on page 2
+6 undefined on input line 568.
+
+
+LaTeX Warning: Citation `anishnamaUnderstandingBidirectionalLSTM2023' on page 2
+6 undefined on input line 568.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `tanveerCufflessBloodPressure2019' on page 26 undefined
+ on input line 572.
+
+<images/ml/attention.jpeg, id=126, 207.6558pt x 188.8656pt>
+File: images/ml/attention.jpeg Graphic file (type jpg)
+<use images/ml/attention.jpeg>
+Package pdftex.def Info: images/ml/attention.jpeg  used on input line 579.
+(pdftex.def)             Requested size: 224.06548pt x 203.80464pt.
+
+LaTeX Warning: Citation `marulandaHybridModelBased2023' on page 26 undefined on
+ input line 583.
+
+
+LaTeX Warning: Citation `marulandaHybridModelBased2023' on page 26 undefined on
+ input line 583.
+
+
+LaTeX Warning: Citation `joungContinuousCufflessBlood2023' on page 26 undefined
+ on input line 594.
+
+[26 <./images/ml/RBM.png>]) [27 <./images/ml/ffnn.png (PNG copy)>] (methods.tex
+[28 <./images/ml/lstm.png>]
+
+LaTeX Warning: Citation `MITLCPWfdbpython2024' on page 29 undefined on input li
+ne 24.
+
+[29 <./images/ml/attention.jpeg>] [30]
+
+LaTeX Warning: Reference `fig:segments, fig:values' on page 31 undefined on inp
+ut line 112.
 
 
 Underfull \hbox (badness 1448) in paragraph at lines 110--113
 [][]\OT1/cmr/m/n/12 If a 10-minute con-tin-u-ous part of the seg-ment
  []
 
-<images/methods/segments.png, id=37, 308.65312pt x 194.22563pt>
+<images/methods/segments.png, id=144, 308.65312pt x 194.22563pt>
 File: images/methods/segments.png Graphic file (type png)
 <use images/methods/segments.png>
 Package pdftex.def Info: images/methods/segments.png  used on input line 117.
 (pdftex.def)             Requested size: 134.44064pt x 84.60007pt.
-<images/methods/values.png, id=38, 228.10219pt x 291.33844pt>
+<images/methods/values.png, id=145, 228.10219pt x 291.33844pt>
 File: images/methods/values.png Graphic file (type png)
 <use images/methods/values.png>
 Package pdftex.def Info: images/methods/values.png  used on input line 133.
 (pdftex.def)             Requested size: 134.44064pt x 171.71481pt.
-[8 <./images/methods/segments.png> <./images/methods/values.png>]
+[31 <./images/methods/segments.png> <./images/methods/values.png>]
 Overfull \hbox (19.98358pt too wide) in paragraph at lines 158--160
 \OT1/cmtt/m/n/10.95 abp,ppg,abp[]beats,ppg[]beats = signal[]processing(seg[]nam
 e,abp[]filt,ppg[]filt,fs) 
@@ -613,149 +1149,176 @@ tot[]ppg[]values,median[]ppg[]values)
  []
 
 
-LaTeX Warning: Citation `PandasPythonData' on page 9 undefined on input line 16
-8.
+LaTeX Warning: Citation `PandasPythonData' on page 32 undefined on input line 1
+68.
 
 
-LaTeX Warning: Citation `NumPy' on page 9 undefined on input line 169.
+LaTeX Warning: Citation `NumPy' on page 32 undefined on input line 169.
 
 
-LaTeX Warning: Citation `MatplotlibVisualizationPython' on page 9 undefined on 
-input line 169.
+LaTeX Warning: Citation `MatplotlibVisualizationPython' on page 32 undefined on
+ input line 169.
 
 
-LaTeX Warning: Citation `SciPy' on page 9 undefined on input line 169.
+LaTeX Warning: Citation `SciPy' on page 32 undefined on input line 169.
 
 
-LaTeX Warning: Reference `subsubsec:signal_processing' on page 9 undefined on i
-nput line 175.
+Overfull \hbox (7.98654pt too wide) in paragraph at lines 175--180
+\OT1/cmr/m/n/12 As pre-vi-ously de-lin-eated in the the-o-ret-i-cal back-ground
+ sec-tion on Sig-nal Pro-cess-ing( 3.2.1[]),
+ []
 
-
-LaTeX Warning: Reference `subsec:code_filters' on page 9 undefined on input lin
-e 179.
-
-[9]
-
-LaTeX Warning: Reference `fig:acdc' on page 10 undefined on input line 185.
-
-<images/methods/filters.png, id=49, 1734.48pt x 1734.48pt>
+[32]
+<images/methods/filters.png, id=155, 1734.48pt x 1734.48pt>
 File: images/methods/filters.png Graphic file (type png)
 <use images/methods/filters.png>
 Package pdftex.def Info: images/methods/filters.png  used on input line 190.
 (pdftex.def)             Requested size: 403.31511pt x 403.31537pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Citation `vangentHeartPyNovelHeart2019' on page 10 undefined on 
-input line 207.
-
-
-LaTeX Warning: Citation `elgendiSystolicPeakDetection2013' on page 10 undefined
- on input line 207.
+ [33 <./images/methods/filters.png>]
+<images/methods/opt_filtering.png, id=159, 1606.0pt x 803.0pt>
+File: images/methods/opt_filtering.png Graphic file (type png)
+<use images/methods/opt_filtering.png>
+Package pdftex.def Info: images/methods/opt_filtering.png  used on input line 2
+01.
+(pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
 
 
-LaTeX Warning: Citation `arguellopradaNovelLowcomplexityPeak2018' on page 10 un
-defined on input line 208.
+LaTeX Warning: Citation `charltonMIMICWFDBTutorials2022' on page 34 undefined o
+n input line 212.
 
 
-LaTeX Warning: Citation `aboyAutomaticBeatDetection2005' on page 10 undefined o
-n input line 208.
+LaTeX Warning: Citation `vangentHeartPyNovelHeart2019' on page 34 undefined on 
+input line 214.
 
 
-LaTeX Warning: Reference `subsec:code_beats' on page 10 undefined on input line
- 215.
+LaTeX Warning: Citation `elgendiSystolicPeakDetection2013' on page 34 undefined
+ on input line 214.
 
-[10] [11 <./images/methods/filters.png>]
-<images/methods/beat_algos.png, id=56, 1606.0pt x 1606.0pt>
+
+LaTeX Warning: Citation `arguellopradaNovelLowcomplexityPeak2018' on page 34 un
+defined on input line 215.
+
+
+LaTeX Warning: Citation `aboyAutomaticBeatDetection2005' on page 34 undefined o
+n input line 215.
+
+[34 <./images/methods/opt_filtering.png>] [35]
+<images/methods/beat_algos.png, id=166, 1606.0pt x 1606.0pt>
 File: images/methods/beat_algos.png Graphic file (type png)
 <use images/methods/beat_algos.png>
-Package pdftex.def Info: images/methods/beat_algos.png  used on input line 252.
+Package pdftex.def Info: images/methods/beat_algos.png  used on input line 259.
 
 (pdftex.def)             Requested size: 403.31511pt x 403.31242pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[12]
-Overfull \hbox (12.52426pt too wide) in paragraph at lines 271--274
+ [36 <./images/methods/beat_algos.png>]
+Overfull \hbox (12.52426pt too wide) in paragraph at lines 278--281
 \OT1/cmtt/m/n/12 abp[]beats,[]=sp.find[]peaks(abp,distance=abp[]beat[]interval*
 .75,prominence=0.5) 
  []
 
 
-Overfull \hbox (18.69926pt too wide) in paragraph at lines 271--274
+Overfull \hbox (18.69926pt too wide) in paragraph at lines 278--281
 \OT1/cmtt/m/n/12 ppg[]beats,[]=sp.find[]peaks(ppg,distance=ppg[]beat[]interval*
 .75,prominence=0.01) 
  []
 
-[13 <./images/methods/beat_algos.png>]
-<images/methods/sp_beats.png, id=64, 1606.0pt x 1606.0pt>
+<images/methods/sp_beats.png, id=170, 1606.0pt x 1606.0pt>
 File: images/methods/sp_beats.png Graphic file (type png)
 <use images/methods/sp_beats.png>
-Package pdftex.def Info: images/methods/sp_beats.png  used on input line 276.
+Package pdftex.def Info: images/methods/sp_beats.png  used on input line 283.
 (pdftex.def)             Requested size: 403.31511pt x 403.31242pt.
- [14 <./images/methods/sp_beats.png>]
-<images/methods/synchronised.png, id=68, 1606.0pt x 803.0pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/methods/synchronised.png, id=171, 1606.0pt x 803.0pt>
 File: images/methods/synchronised.png Graphic file (type png)
 <use images/methods/synchronised.png>
 Package pdftex.def Info: images/methods/synchronised.png  used on input line 30
-1.
+8.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
-<images/methods/cringe_signals.png, id=69, 1606.0pt x 803.0pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/methods/cringe_signals.png, id=172, 1606.0pt x 803.0pt>
 File: images/methods/cringe_signals.png Graphic file (type png)
 <use images/methods/cringe_signals.png>
 Package pdftex.def Info: images/methods/cringe_signals.png  used on input line 
-315.
+322.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[15 <./images/methods/synchronised.png>]
+[37] [38 <./images/methods/sp_beats.png>]
 
-LaTeX Warning: Reference `subsec:computing_background' on page 16 undefined on 
-input line 346.
+LaTeX Warning: Citation `charltonMIMICWFDBTutorials2022' on page 39 undefined o
+n input line 354.
 
-[16 <./images/methods/cringe_signals.png>]
-<images/methods/fidps.png, id=76, 1606.0pt x 803.0pt>
+[39 <./images/methods/synchronised.png>]
+<images/methods/fidps.png, id=183, 1606.0pt x 803.0pt>
 File: images/methods/fidps.png Graphic file (type png)
 <use images/methods/fidps.png>
-Package pdftex.def Info: images/methods/fidps.png  used on input line 355.
+Package pdftex.def Info: images/methods/fidps.png  used on input line 362.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
+ [40 <./images/methods/cringe_signals.png> <./images/methods/fidps.png>]
+
+LaTeX Warning: Citation `charltonAssessingHemodynamicsPhotoplethysmogram2022' o
+n page 41 undefined on input line 381.
 
 
-LaTeX Warning: Reference `subsec:code_fidp' on page 17 undefined on input line 
-361.
+LaTeX Warning: Citation `maqsoodSurveyShallowDeep2022' on page 41 undefined on 
+input line 381.
 
-
-LaTeX Warning: Citation `maqsoodSurveyShallowDeep2022' on page 17 undefined on 
-input line 374.
-
-[17 <./images/methods/fidps.png>] [18]
-
-LaTeX Warning: Reference `subsec:code_fe' on page 19 undefined on input line 43
-8.
-
-<images/methods/feats.png, id=84, 722.7pt x 542.025pt>
+[41]
+<images/methods/feats.png, id=191, 722.7pt x 542.025pt>
 File: images/methods/feats.png Graphic file (type png)
 <use images/methods/feats.png>
-Package pdftex.def Info: images/methods/feats.png  used on input line 442.
+Package pdftex.def Info: images/methods/feats.png  used on input line 449.
 (pdftex.def)             Requested size: 403.31511pt x 302.48982pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/methods/median_fft.png, id=85, 1284.8pt x 481.8pt>
+ [42]
+<images/methods/median_fft.png, id=195, 1284.8pt x 481.8pt>
 File: images/methods/median_fft.png Graphic file (type png)
 <use images/methods/median_fft.png>
-Package pdftex.def Info: images/methods/median_fft.png  used on input line 448.
+Package pdftex.def Info: images/methods/median_fft.png  used on input line 455.
 
 (pdftex.def)             Requested size: 403.31511pt x 151.23848pt.
 
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[19] [20 <./images/methods/feats.png>]) [21 <./images/methods/median_fft.png>]
-<images/flow_diagrams/flow_diagram.png, id=101, 761.84625pt x 473.77pt>
+
+LaTeX Warning: Citation `demersPhysiologyMeanArterial2024' on page 43 undefined
+ on input line 467.
+
+[43 <./images/methods/feats.png>]
+Overfull \hbox (0.93245pt too wide) in paragraph at lines 494--497
+\OT1/cmr/m/n/12 In this con-clud-ing sec-tion de-tail-ing meth-ods, the uti-liz
+a-tion of Ma-chine Learn-ing method-
+ []
+
+
+LaTeX Warning: Citation `ScikitlearnMachineLearning' on page 44 undefined on in
+put line 498.
+
+
+LaTeX Warning: Citation `PyTorch' on page 44 undefined on input line 499.
+
+
+LaTeX Warning: Citation `Wandb' on page 44 undefined on input line 500.
+
+[44 <./images/methods/median_fft.png>]
+
+LaTeX Warning: Citation `SGDPyTorchDocumentation' on page 45 undefined on input
+ line 522.
+
+
+LaTeX Warning: Citation `AdamPyTorchDocumentation' on page 45 undefined on inpu
+t line 522.
+
+
+LaTeX Warning: Citation `LBFGSPyTorchDocumentation' on page 45 undefined on inp
+ut line 523.
+
+[45]) [46]
+<images/flow_diagrams/flow_diagram.png, id=210, 761.84625pt x 473.77pt>
 File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
 <use images/flow_diagrams/flow_diagram.png>
 Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
@@ -766,33 +1329,149 @@ Overfull \hbox (8.98033pt too wide) in paragraph at lines 160--161
  [][] 
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[22] [23 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [24] [25]
-
-! LaTeX Error: Invalid UTF-8 byte sequence (Ã.).
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.115 B.~L. Hill, N.~Rakocz, Ã.
-                               ~Rudas, J.~N. Chiang, S.~Wang, I.~Hofer, M.~C...
-
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
+[47 <./images/flow_diagrams/flow_diagram.png>] [48] (Thesis.bbl [49] [50]
 Underfull \hbox (badness 1681) in paragraph at lines 132--136
 []\OT1/cmr/m/n/12 C.-S. Kim, A. M. Carek, O. T. Inan, R. Mukka-mala, and J.-O. 
 Hahn,
  []
 
-[26] [27] [28] [29] [30]) [31] [32] (Thesis.aux)
+[51] [52] [53] [54] [55] [56]) [57] (code.tex
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+[58] [59]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
+18.
+
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
+File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 118.
+
+Overfull \hbox (15.97932pt too wide) in paragraph at lines 144--145
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[60]
+Overfull \hbox (77.18068pt too wide) in paragraph at lines 198--199
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[61]
+Overfull \hbox (10.87921pt too wide) in paragraph at lines 235--236
+[][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (10.87921pt too wide) in paragraph at lines 236--237
+[][][][][][][][][][][] 
+ []
+
+[62] [63]
+Overfull \hbox (0.67899pt too wide) in paragraph at lines 327--328
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (21.07944pt too wide) in paragraph at lines 329--331
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (0.67899pt too wide) in paragraph at lines 336--337
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (10.87921pt too wide) in paragraph at lines 342--343
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
+44.
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 344.
+
+Overfull \hbox (87.3809pt too wide) in paragraph at lines 344--346
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[64]
+Overfull \hbox (153.68237pt too wide) in paragraph at lines 431--433
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+] 
+ []
+
+[65]
+Overfull \hbox (5.7791pt too wide) in paragraph at lines 474--475
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[66]
+Overfull \hbox (15.97932pt too wide) in paragraph at lines 489--490
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (15.97932pt too wide) in paragraph at lines 519--520
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[67]
+Overfull \hbox (87.3809pt too wide) in paragraph at lines 539--540
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (26.17955pt too wide) in paragraph at lines 563--564
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (41.47989pt too wide) in paragraph at lines 569--570
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.58pt too wide) in paragraph at lines 589--590
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[68]
+Overfull \hbox (61.88034pt too wide) in paragraph at lines 605--606
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (66.98045pt too wide) in paragraph at lines 608--609
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[69]
+Overfull \hbox (148.58226pt too wide) in paragraph at lines 662--663
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (148.58226pt too wide) in paragraph at lines 664--665
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[70] [71] [72]
+Overfull \hbox (56.78023pt too wide) in paragraph at lines 825--826
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[73]
+Overfull \hbox (72.08057pt too wide) in paragraph at lines 909--910
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [74] (Thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -806,34 +1485,40 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 10596 strings out of 474541
- 203882 string characters out of 5744425
- 1935978 words of memory out of 5000000
- 32713 multiletter control sequences out of 15000+600000
- 566880 words of font info for 67 fonts, out of 8000000 for 9000
+ 11750 strings out of 474541
+ 221834 string characters out of 5744425
+ 2009978 words of memory out of 5000000
+ 33843 multiletter control sequences out of 15000+600000
+ 568859 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,8n,117p,10998b,443s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
-1200.pk><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmbx12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmex10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmmi10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/htjas/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/htjas/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/htjas/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/h
-tjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:
-/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.
-pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
-m/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmsy8.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/htjas/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/htjas/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Thesis.pdf (32 pages, 2099048 bytes).
+ 108i,8n,117p,10998b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcti
+0800.pk> <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
+0\tcrm0800.pk> <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\tcrm1200.pk> <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\tctt1200.pk><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmbx10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/htjas/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/htjas/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/htjas/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users
+/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
+C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr
+10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmr17.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmr8.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/htjas/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/htjas/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/ht
+jas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/
+Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10
+.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmtt12.pfb>
+Output written on Thesis.pdf (74 pages, 5913862 bytes).
 PDF statistics:
- 204 PDF objects out of 1000 (max. 8388607)
+ 397 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 71 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 171 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,18 +1,18 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  19 FEB 2024 11:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  21 FEB 2024 18:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**literature.tex
+**literature_with_notes.tex
 
 ! Emergency stop.
-<*> literature.tex
-                  
+<*> literature_with_notes.tex
+                             
 *** (job aborted, file error in nonstop mode)
 
  
 Here is how much of TeX's memory you used:
  2 strings out of 474541
- 20 string characters out of 5744425
+ 31 string characters out of 5744425
  1922978 words of memory out of 5000000
  22338 multiletter control sequences out of 15000+600000
  558069 words of font info for 36 fonts, out of 8000000 for 9000

@@ -112,7 +112,7 @@ V.~L. Clark and J.~A. Kruse, ``Arterial catheterization,'' vol.~8, no.~4,
   pp.~687--697.
 
 \bibitem{hillImputationContinuousArterial2021}
-B.~L. Hill, N.~Rakocz, �.~Rudas, J.~N. Chiang, S.~Wang, I.~Hofer, M.~Cannesson,
+B.~L. Hill, N.~Rakocz, A.~Rudas, J.~N. Chiang, S.~Wang, I.~Hofer, M.~Cannesson,
   and E.~Halperin, ``Imputation of the continuous arterial line blood pressure
   waveform from non-invasive measurements using deep learning,'' vol.~11,
   p.~15755.
@@ -410,10 +410,66 @@ J.~Joung, C.-W. Jung, H.-C. Lee, M.-J. Chae, H.-S. Kim, J.~Park, W.-Y. Shin,
   using photoplethysmography-based {{PPG2BP-net}} for high intrasubject blood
   pressure variations,'' vol.~13, p.~8605.
 
-\bibitem{jasinskasHtjasPPGBP2024}
-H.~Jasinskas, ``Htjas/{{PPG-BP}}.''
+\bibitem{jasinskasHtjasPPGBPProject2024}
+H.~Jasinskas, ``Htjas/{{PPG-BP Project}}.''
 
 \bibitem{MITLCPWfdbpython2024}
 ``{{MIT-LCP}}/wfdb-python.''
+
+\bibitem{PandasPythonData}
+``Pandas - {{Python Data Analysis Library}}.''
+
+\bibitem{NumPy}
+``{{NumPy}}.''
+
+\bibitem{MatplotlibVisualizationPython}
+``Matplotlib — {{Visualization}} with {{Python}}.''
+
+\bibitem{SciPy}
+``{{SciPy}}.''
+
+\bibitem{vangentHeartPyNovelHeart2019}
+p.~u. family=Gent, given=Paul, H.~Farah, p.~u. family=Nes, given=Nicole, and
+  p.~u. family=Arem, given=Bart, ``{{HeartPy}}: {{A}} novel heart rate
+  algorithm for the analysis of noisy signals,'' vol.~66, pp.~368--378.
+
+\bibitem{elgendiSystolicPeakDetection2013}
+M.~Elgendi, I.~Norton, M.~Brearley, D.~Abbott, and D.~Schuurmans, ``Systolic
+  peak detection in acceleration photoplethysmograms measured from emergency
+  responders in tropical conditions,'' vol.~8, no.~10, p.~e76585.
+
+\bibitem{arguellopradaNovelLowcomplexityPeak2018}
+E.~J. Argüello~Prada and R.~D. Serna~Maldonado, ``A novel and low-complexity
+  peak detection algorithm for heart rate estimation from low-amplitude
+  photoplethysmographic ({{PPG}}) signals,'' vol.~42, no.~8, pp.~569--577.
+
+\bibitem{aboyAutomaticBeatDetection2005}
+M.~Aboy, J.~McNames, T.~Thong, D.~Tsunami, M.~S. Ellenby, and B.~Goldstein,
+  ``An automatic beat detection algorithm for pressure signals,'' vol.~52,
+  no.~10, pp.~1662--1670.
+
+\bibitem{maqsoodSurveyShallowDeep2022}
+S.~Maqsood, S.~Xu, S.~Tran, S.~Garg, M.~Springer, M.~Karunanithi, and
+  R.~Mohawesh, ``A survey: {{From}} shallow to deep machine learning approaches
+  for blood pressure estimation using biosensors,'' vol.~197, p.~116788.
+
+\bibitem{ScikitlearnMachineLearning}
+``Scikit-learn: Machine learning in {{Python}} — scikit-learn 1.4.1
+  documentation.''
+
+\bibitem{PyTorch}
+``{{PyTorch}}.''
+
+\bibitem{Wandb}
+``Wandb.''
+
+\bibitem{SGDPyTorchDocumentation}
+``{{SGD}} — {{PyTorch}} 2.2 documentation.''
+
+\bibitem{AdamPyTorchDocumentation}
+``Adam — {{PyTorch}} 2.2 documentation.''
+
+\bibitem{LBFGSPyTorchDocumentation}
+``{{LBFGS}} — {{PyTorch}} 2.2 documentation.''
 
 \end{thebibliography}
