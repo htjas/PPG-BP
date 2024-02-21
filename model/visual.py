@@ -98,13 +98,16 @@ def plot_abp_ppg(segment_name, abp, ppg, fs):
     # ax2.set_ylim([-0.3, 1.1])
 
     # plt.title(segment_name)
-    plt.savefig(f'./relevant_plots/sp_plots/comparisons/all_filters/{segment_name}')
+    # plt.savefig(f'./relevant_plots/sp_plots/comparisons/all_filters/{segment_name}')
     plt.show()
 
     # t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
     #
     # plt.plot(t, ppg, color='black', label='PPG')
-    # plt.xlim([50, 55])
+    # plt.xlim([52.2, 53])
+    # plt.ylim([0.4, 0.65])
+    # plt.xlabel('Time (s)')
+    # plt.title('PPG Signal')
     # plt.show()
 
 
@@ -138,7 +141,7 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     # y_limits = ax1.get_ylim()
     # for beat in abp_beats:
     #     ax1.plot([t[beat], t[beat]], [y_limits[0], abp[beat]], color='red', linestyle='--')
-    ax1.set_xlim([49, 55])
+    ax1.set_xlim([420, 423])
     ax1.set_title('ABP with IBIS')
 
     t = np.arange(0, (len(ppg) / fs), 1.0 / fs)
@@ -154,44 +157,31 @@ def plot_abp_ppg_with_pulse(segment_name, abp, abp_beats, ppg, ppg_beats, fs):
     # y_limits = ax2.get_ylim()
     # for beat in ppg_beats:
     #     ax2.plot([t[beat], t[beat]], [y_limits[1], ppg[beat]], color='green', linestyle='--')
-    ax2.set_xlim([49, 55])
+    ax2.set_xlim([420, 423])
     ax2.set_title('PPG with IBIS')
 
-    plt.savefig(f'./relevant_plots/sp_plots/comparisons/all_filters/{segment_name}')
+    # plt.savefig(f'./relevant_plots/sp_plots/comparisons/all_filters/{segment_name}')
     plt.show()
 
 
-def plot_fft_features(ppg_signal, abp_signal, ppg_frequencies, abp_frequencies,
-                      ppg_magnitude_spectrum, abp_magnitude_spectrum, fs):
+def plot_fft_features(ppg_signal, ppg_frequencies, ppg_magnitude_spectrum, fs):
     t = np.arange(0, (len(ppg_signal) / fs), 1.0 / fs)
 
-    plt.figure(figsize=(12, 6))
-
-    plt.subplot(2, 2, 1)
-    plt.plot(t, ppg_signal)
-    plt.title('PPG Signal')
-    plt.xlabel('Time (s)')
-
-    plt.subplot(2, 2, 2)
-    plt.plot(ppg_frequencies, ppg_magnitude_spectrum)
-    plt.title('PPG Frequency Spectrum')
+    # plt.figure(figsize=(12, 6))
+    #
+    # plt.subplot(2, 2, 1)
+    # plt.plot(t, ppg_signal)
+    # plt.title('PPG Signal')
+    # plt.xlabel('Time (s)')
+    #
+    # plt.subplot(2, 2, 2)
+    plt.plot(ppg_frequencies, ppg_magnitude_spectrum, color='blue')
+    plt.title('PPG Signal Frequency Spectrum')
     plt.xlabel('Frequency (Hz)')
-    plt.ylim([0, 100])
+    plt.ylabel('Magnitude')
+    # plt.ylim([0, 100])
 
-    t = np.arange(0, (len(abp_signal) / fs), 1.0 / fs)
-
-    plt.subplot(2, 2, 3)
-    plt.plot(t, abp_signal)
-    plt.title('ABP Signal')
-    plt.xlabel('Time (s)')
-
-    plt.subplot(2, 2, 4)
-    plt.plot(abp_frequencies, abp_magnitude_spectrum)
-    plt.title('AP Frequency Spectrum')
-    plt.xlabel('Frequency (Hz)')
-    plt.ylim([0, 20000])
-
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.show()
 
 

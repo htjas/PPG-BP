@@ -125,12 +125,12 @@ def process_data(fs, folder, goal, median_window):
     tot_med_abp_sys, tot_med_abp_dia, tot_med_abp_map, tot_med_ppg_feats = (
         np.array([]), np.array([]), np.array([]), np.empty((0, 34)))
     for filename in filenames:
-        if i <= 18000:
+        # if '3020438_0010_7' not in filename:
+        #     i += 1
+        #     continue
+        if i != 77:
             i += 1
             continue
-        # if i > 18000:
-        #     print('processed and saved features from further 6000 records')
-        #     break
         try:
             # 1: Data Reading
             seg_name, raw_abp, raw_ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -755,7 +755,7 @@ def agi_detection(fidp, peaks, fs):
 
 
 def sys_dia_detection(fidp, data):
-    # (From filtered data) Systolic BP = pks; Diastolic BP = dia
+    # (From filtered data) Systolic BP = pks; Diastolic BP = off
     sys = fidp['pks']
     dia = fidp['off']
     sys, dia = group_sys_dia(sys, dia)
@@ -842,7 +842,7 @@ def pre_process_data(abp, ppg, fs, seg_name):
     ppg = ppg[starting_cutoff:]
     # abp = filter_butterworth(abp, fs)
     # ppg = filter_butterworth(ppg, fs)
-    # plot_abp_ppg(seg_name + ' butt filtered', abp, ppg, fs)
+    # plot_abp_ppg(seg_name + ' Savitzky-Golay + Butterworth Lowpass filtered', abp, ppg, fs)
 
     # Chebyshev filter
     # abp = chebyshev2_lowpass_filter(abp, 2, fs)
@@ -1170,8 +1170,8 @@ def get_beats_from_mean_crossings(abp, ppg):
     abp_beat_interval = len(abp) / ((count_a + count_p) / 2)
     ppg_beat_interval = abp_beat_interval
 
-    abp_beats, _ = sp.find_peaks(-abp, distance=abp_beat_interval, prominence=5)
-    ppg_beats, _ = sp.find_peaks(-ppg, distance=ppg_beat_interval, prominence=0.01)
+    abp_beats, _ = sp.find_peaks(abp, distance=abp_beat_interval, prominence=5)
+    ppg_beats, _ = sp.find_peaks(ppg, distance=ppg_beat_interval, prominence=0.01)
 
     return abp_beats, ppg_beats
 
