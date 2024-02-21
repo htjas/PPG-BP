@@ -48,18 +48,18 @@ def validate_model(model, model_name):
     map_test = abp[:, 2]
     map_pred = abp_pred[:, 2]
 
-    mse = mean_squared_error(abp, abp_pred)
+    rmse = np.sqrt(mean_squared_error(abp, abp_pred))
     mae = mean_absolute_error(abp, abp_pred)
-    wandb.log({"validate mse": mse, "validate mae": mae})
-    sys_mse = mean_squared_error(sys_test, sys_pred)
+    wandb.log({"validate rmse": rmse, "validate mae": mae})
+    sys_rmse = np.sqrt(mean_squared_error(sys_test, sys_pred))
     sys_mae = mean_absolute_error(sys_test, sys_pred)
-    wandb.log({"validate mse sys": sys_mse, "validate mae sys": sys_mae})
-    dia_mse = mean_squared_error(dia_test, dia_pred)
+    wandb.log({"validate rmse sys": sys_rmse, "validate mae sys": sys_mae})
+    dia_rmse = np.sqrt(mean_squared_error(dia_test, dia_pred))
     dia_mae = mean_absolute_error(dia_test, dia_pred)
-    wandb.log({"validate mse dia": dia_mse, "validate mae dia": dia_mae})
-    map_mse = mean_squared_error(map_test, map_pred)
+    wandb.log({"validate rmse dia": dia_rmse, "validate mae dia": dia_mae})
+    map_rmse = np.sqrt(mean_squared_error(map_test, map_pred))
     map_mae = mean_absolute_error(map_test, map_pred)
-    wandb.log({"validate mse map": map_mse, "validate mae map": map_mae})
+    wandb.log({"validate rmse map": map_rmse, "validate mae map": map_mae})
 
     wandb.finish()
 
@@ -207,7 +207,7 @@ def run_multi_linear_regression(feat, ppg_train, abp_train, ppg_test, abp_test):
 
 
 def run_sv_regression(feat, kernel, ppg_train, abp_train, ppg_test, abp_test):
-    svr_model = sklearn.svm.SVR(kernel='sigmoid')
+    svr_model = sklearn.svm.SVR(kernel='linear', C=100, epsilon=0.1)  # sigmoid
     match kernel:
         case 'polynomial':
             svr_model = sklearn.svm.SVR(kernel='poly', degree=3, C=100, epsilon=0.1)
@@ -222,6 +222,7 @@ def run_sv_regression(feat, kernel, ppg_train, abp_train, ppg_test, abp_test):
 
 
 def run_random_forest(feat, ppg_train, abp_train, ppg_test, abp_test):
+    # rf_model = RandomForestRegressor(n_estimators=100, max_depth=10, min_samples_split=2)
     rf_model = RandomForestRegressor(n_estimators=15, random_state=42)
     mse, mae, r2, bias, loa = fit_predict_evaluate(rf_model, 'RF',
                                                    ppg_train, abp_train, ppg_test, abp_test)
@@ -417,6 +418,23 @@ class LSTM(nn.Module):
         return output
 
 
+class BiLSTM(nn.Module):
+    def __init__(self, input_size, hidden_size, out_features, feature_importances):
+        super(BiLSTM, self).__init__()
+        self.hidden_size = hidden_size
+        self.lstm = nn.LSTM(input_size, hidden_size, bidirectional=True)
+        self.linear = nn.Linear(hidden_size * 2, out_features)
+        self.feature_importances = feature_importances
+
+    def forward(self, x):
+        h_0 = torch.zeros(2, x.size(0), self.hidden_size, dtype=torch.float32)
+        c_0 = torch.zeros(2, x.size(0), self.hidden_size, dtype=torch.float32)
+        adjusted_input = x.unsqueeze(0) * self.feature_importances.unsqueeze(0)
+        lstm_out, _ = self.lstm(adjusted_input, (h_0, c_0))
+        output = self.linear(lstm_out[-1])
+        return output
+
+
 class GRU(nn.Module):
     def __init__(self, input_size, hidden_size, out_features):
         super(GRU, self).__init__()
@@ -432,6 +450,22 @@ class GRU(nn.Module):
         h_t2 = self.gru2(h_t, h_t2)
         output = self.linear(h_t2)
         return output
+
+
+class BiGRU(nn.Module):
+    def __init__(self, input_size, hidden_size, out_features):
+        super(BiGRU, self).__init__()
+        self.hidden_size = hidden_size
+        self.gru_forward = nn.GRU(input_size, hidden_size, batch_first=True, bidirectional=True)
+        self.linear = nn.Linear(hidden_size * 2, out_features)
+
+    def forward(self, x):
+        h0 = torch.zeros(2, x.size(0), self.hidden_size).to(x.device)
+        out, _ = self.gru_forward(x, h0)
+        out = torch.cat((out[:, -1, :self.hidden_size], out[:, 0, self.hidden_size:]), dim=1)
+        out = self.linear(out)
+        return out
+
 
 
 def torch_rnn_lstm_gru(model_name, device, no_segments, X_train_segments, y_train_segments,
