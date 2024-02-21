@@ -17,6 +17,7 @@ Machine Learning Approach}
 \usepackage{lstmisc}
 \usepackage{array}
 \usepackage{caption}
+\usepackage{subcaption}
 
 \begin{document}
 
@@ -119,58 +120,14 @@ Machine Learning Approach}
 
     \section{Results}
     \label{sec:results}
-
-    \subsection{Data Fetching}
-    \label{subsec:data_fetching}
-
-    Data for Validation from MIMIC4:
-    5508 records each containing 37795 values corresponding to ~605 seconds (fs=64.4725);
-
-    Data for Training/Testing from MIMIC3 (1st Iteration):
-    22083 (~4*MIMIC4) records each containing 75625 values corresponding to 605 seconds (fs=125);
-
-    \subsection{Data Processing}
-    \label{subsec:data_processing}
-
-    Same Signaling processing approaches were included (see 4.2) for both the MIMIC4 and MIMIC3 data.
-
-    \subsection{Feature Extraction}
-    \label{subsec:feature_extraction}
-
-    CAVE: out of the 34 features, 2 (delta T and resistive index) depend on the accurate detection of the dicrotic notch.
-    Significantly more values can be extracted if finding the dicrotic notch would not be necessary
-
-    FE from MIMIC4 for Validation:
-    - For target reference Systolic, Diastolic and MAP values were extracted from the waveform data.
-    - For Machine Learning, 34 features were extracted from the PPG waveform
-    A total of \textbf{1,309,265} values were extracted, resulting in a 34 x 1,309,265 matrix.
-    Total of \textbf{183,140} median values were extracted.
-
-    FE from MIMIC3 for Training/Testing:
-
-    - For target reference ABP Systolic, Diastolic and MAP values were extracted from the waveform data.
-    - For Machine Learning, 34 features were extracted from the PPG waveform
-    A total of \textbf{13,659,375} values were extracted, resulting in a 34 x 13659375 matrix.
-    Total of \textbf{1,918,623} median values were extracted.
-
-    The summarized results are displayed in Figure~\ref{fig:data_flow}.
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[scale=0.6]{images/flow_diagrams/flow_diagram}
-        \caption{Flow Diagram presenting the Data Fetching and Processing}
-        \label{fig:data_flow}
-    \end{figure}
-
-    \subsection{Machine Learning}
-    \label{subsec:machine_learning}
-
+    \input{results}
 
     \section{Discussion}
     \label{sec:discussion}
 
-    CAVES:
-    - DICROTIC NOTCH (further insights into potential enhancements are provided in the discussion section)
+    Caveats:
+    - Out of the 34 features, 3 (delta\_t, delta\_area and res\_index) depend on the accurate detection of the dicrotic notch.
+    Significantly more values could be extracted if finding the dicrotic notch would not be necessary.
 
     Limitations:
     - not knowing what devices were used

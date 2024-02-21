@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  21 FEB 2024 19:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  21 FEB 2024 20:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -467,54 +467,61 @@ Package caption Info: KOMA-Script scrextend package detected.
 \caption@addmargin@linewidth=\dimen194
 Package caption Info: wrapfig package is loaded.
 )
+(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count306
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count307
+)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count306
+\l__color_backend_stack_int=\count308
 \l__pdf_internal_box=\box110
 ) (Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-Package scrbase Info: activating english \abstractname on input line 21.
-Package scrbase Info: activating english \partname on input line 21.
-Package scrbase Info: activating english \figurename on input line 21.
-Package scrbase Info: activating english \tablename on input line 21.
-Package scrbase Info: activating english \contentsname on input line 21.
-Package scrbase Info: activating english \listfigurename on input line 21.
-Package scrbase Info: activating english \listtablename on input line 21.
-Package scrbase Info: activating english \refname on input line 21.
-Package scrbase Info: activating english \indexname on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+Package scrbase Info: activating english \abstractname on input line 22.
+Package scrbase Info: activating english \partname on input line 22.
+Package scrbase Info: activating english \figurename on input line 22.
+Package scrbase Info: activating english \tablename on input line 22.
+Package scrbase Info: activating english \contentsname on input line 22.
+Package scrbase Info: activating english \listfigurename on input line 22.
+Package scrbase Info: activating english \listtablename on input line 22.
+Package scrbase Info: activating english \refname on input line 22.
+Package scrbase Info: activating english \indexname on input line 22.
 
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count307
+\scratchcounter=\count309
 \scratchdimen=\dimen195
 \scratchbox=\box111
-\nofMPsegments=\count308
-\nofMParguments=\count309
+\nofMPsegments=\count310
+\nofMParguments=\count311
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count310
+\MPscratchCnt=\count312
 \MPscratchDim=\dimen196
-\MPnumerator=\count311
-\makeMPintoPDFobject=\count312
+\MPnumerator=\count313
+\makeMPintoPDFobject=\count314
 \everyMPtoPDFconversion=\toks34
 )
 (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
@@ -527,26 +534,26 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count313
+\c@lstlisting=\count315
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 <images/hs/hd.png, id=1, 144.54pt x 75.8835pt>
 File: images/hs/hd.png Graphic file (type png)
 <use images/hs/hd.png>
-Package pdftex.def Info: images/hs/hd.png  used on input line 28.
+Package pdftex.def Info: images/hs/hd.png  used on input line 29.
 (pdftex.def)             Requested size: 86.72466pt x 45.53044pt.
 <images/hs/hhn.png, id=3, 115.18031pt x 44.41594pt>
 File: images/hs/hhn.png Graphic file (type png)
 <use images/hs/hhn.png>
-Package pdftex.def Info: images/hs/hhn.png  used on input line 29.
+Package pdftex.def Info: images/hs/hhn.png  used on input line 30.
 (pdftex.def)             Requested size: 115.18001pt x 44.41582pt.
 <images/hs/tmu.png, id=4, 1204.5pt x 664.4825pt>
 File: images/hs/tmu.png Graphic file (type png)
 <use images/hs/tmu.png>
-Package pdftex.def Info: images/hs/tmu.png  used on input line 30.
+Package pdftex.def Info: images/hs/tmu.png  used on input line 31.
 (pdftex.def)             Requested size: 72.26688pt x 39.86722pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--69
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
 
  []
 
@@ -964,22 +971,68 @@ Overfull \hbox (0.93245pt too wide) in paragraph at lines 494--497
 a-tion of Ma-chine Learn-ing method-
  []
 
-[45 <./images/methods/median_fft.png>]) [46]
-<images/flow_diagrams/flow_diagram.png, id=213, 761.84625pt x 473.77pt>
-File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
-<use images/flow_diagrams/flow_diagram.png>
-Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
-ine 160.
-(pdftex.def)             Requested size: 457.11128pt x 284.26419pt.
+[45 <./images/methods/median_fft.png>]) [46] (results.tex
 
-Overfull \hbox (8.98033pt too wide) in paragraph at lines 160--161
- [][] 
- []
+LaTeX Warning: Reference `tab:records' on page 47 undefined on input line 26.
+
+results.tex:29: Missing number, treated as zero.
+<to be read again> 
+                   }
+l.29 \begin{table}{\textwidth}
+                              
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+results.tex:29: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   }
+l.29 \begin{table}{\textwidth}
+                              
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+<images/results/flow_diagram.png, id=213, 761.84625pt x 473.77pt>
+File: images/results/flow_diagram.png Graphic file (type png)
+<use images/results/flow_diagram.png>
+Package pdftex.def Info: images/results/flow_diagram.png  used on input line 52
+.
+(pdftex.def)             Requested size: 403.31511pt x 250.80774pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/results/LSTM_GRU_Train_mse.png, id=214, 2537.48pt x 1332.98pt>
+File: images/results/LSTM_GRU_Train_mse.png Graphic file (type png)
+<use images/results/LSTM_GRU_Train_mse.png>
+Package pdftex.def Info: images/results/LSTM_GRU_Train_mse.png  used on input l
+ine 77.
+(pdftex.def)             Requested size: 179.24963pt x 94.15205pt.
+[47]
+<images/results/LSTM_GRU_Test_mse.png, id=218, 2537.48pt x 1332.98pt>
+File: images/results/LSTM_GRU_Test_mse.png Graphic file (type png)
+<use images/results/LSTM_GRU_Test_mse.png>
+Package pdftex.def Info: images/results/LSTM_GRU_Test_mse.png  used on input li
+ne 84.
+(pdftex.def)             Requested size: 179.24963pt x 94.15205pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[47] [48 <./images/flow_diagrams/flow_diagram.png>] (Thesis.bbl [49] [50]
+<images/results/feature_importance_plot_GRU_0.png, id=219, 722.7pt x 1445.4pt>
+File: images/results/feature_importance_plot_GRU_0.png Graphic file (type png)
+<use images/results/feature_importance_plot_GRU_0.png>
+Package pdftex.def Info: images/results/feature_importance_plot_GRU_0.png  used
+ on input line 91.
+(pdftex.def)             Requested size: 224.06548pt x 448.13554pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [48 <./images/results/flow_diagram.png> <./images/results/LSTM_GRU_Train_mse.
+png>] (Thesis.bbl [49 <./images/results/LSTM_GRU_Test_mse.png>] [50]
 Underfull \hbox (badness 1681) in paragraph at lines 132--136
 []\OT1/cmr/m/n/12 C.-S. Kim, A. M. Carek, O. T. Inan, R. Mukka-mala, and J.-O. 
 Hahn,
@@ -1121,7 +1174,7 @@ Overfull \hbox (72.08057pt too wide) in paragraph at lines 909--910
 [][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [74] (Thesis.aux)
+) [74] [75 <./images/results/feature_importance_plot_GRU_0.png>] (Thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1132,10 +1185,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 11761 strings out of 474541
- 222168 string characters out of 5744425
- 2009978 words of memory out of 5000000
- 33852 multiletter control sequences out of 15000+600000
+ 11910 strings out of 474541
+ 225859 string characters out of 5744425
+ 2010978 words of memory out of 5000000
+ 33996 multiletter control sequences out of 15000+600000
  570420 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,9n,117p,10998b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1165,10 +1218,10 @@ fb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmti8.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmtt12.pfb>
-Output written on C:/Users\htjas\PycharmProjects\PPG-BP\out\Thesis.pdf (74 page
-s, 5941448 bytes).
+Output written on C:/Users\htjas\PycharmProjects\PPG-BP\out\Thesis.pdf (75 page
+s, 6243295 bytes).
 PDF statistics:
- 407 PDF objects out of 1000 (max. 8388607)
+ 416 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 171 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
 
