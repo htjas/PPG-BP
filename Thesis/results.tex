@@ -10,25 +10,9 @@ Data for Training/Testing from MIMIC3:
 \subsection{Feature Extraction}
 \label{subsec:feature_extraction}
 
-FE from MIMIC4 for Validation:
-- For target reference Systolic, Diastolic and MAP values were extracted from the waveform data.
-- For Machine Learning, 34 features were extracted from the PPG waveform
-A total of \textbf{1,309,265} values were extracted, resulting in a 34 x 1,309,265 matrix.
-Total of \textbf{183,140} median values were extracted.
-
-FE from MIMIC3 for Training/Testing:
-
-- For target reference ABP Systolic, Diastolic and MAP values were extracted from the waveform data.
-- For Machine Learning, 34 features were extracted from the PPG waveform
-A total of \textbf{13,659,375} values were extracted, resulting in a 34 x 13659375 matrix.
-Total of \textbf{1,918,623} median values were extracted.
-
-The summarized results are displayed in Table~\ref{tab:records}.
-Data Flow is visualized in Figure~\ref{fig:data_flow}.
-
 \begin{table}{\textwidth}
-    \renewcommand{\arraystretch}{1.5} % Increase vertical spacing
-    \setlength{\tabcolsep}{12pt} % Increase horizontal spacing
+    \renewcommand{\arraystretch}{1.5}
+    \setlength{\tabcolsep}{12pt}
     \begin{center}
         \begin{tabular}{ |c|c|c| }
             \hline
@@ -47,6 +31,22 @@ Data Flow is visualized in Figure~\ref{fig:data_flow}.
     \label{tab:records}
 \end{table}
 
+FE from MIMIC4 for Validation:
+- For target reference Systolic, Diastolic and MAP values were extracted from the waveform data.
+- For Machine Learning, 34 features were extracted from the PPG waveform
+A total of \textbf{1,309,265} values were extracted, resulting in a 34 x 1,309,265 matrix.
+Total of \textbf{183,140} median values were extracted.
+
+FE from MIMIC3 for Training/Testing:
+
+- For target reference ABP Systolic, Diastolic and MAP values were extracted from the waveform data.
+- For Machine Learning, 34 features were extracted from the PPG waveform
+A total of \textbf{13,659,375} values were extracted, resulting in a 34 x 13659375 matrix.
+Total of \textbf{1,918,623} median values were extracted.
+
+The summarized results are displayed in Table~\ref{tab:records}.
+Data Flow is visualized in Figure~\ref{fig:data_flow}.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{images/results/flow_diagram}
@@ -56,6 +56,66 @@ Data Flow is visualized in Figure~\ref{fig:data_flow}.
 
 \subsection{Machine Learning}
 \label{subsec:machine_learning}
+
+\begin{center}
+    \begin{tabular}{ |c|c|c|c| }
+        \hline
+        & Training Loss (MSE) & Testing Loss (MSE) & Testing MAE \\
+        \hline
+        LR                     & 218.443             & -                  & 11.097      \\
+        \hline
+        MLP                    & 208.343             & -                  & 10.866      \\
+        \hline
+        LSTM                   & 93.81               & 97.358             & 6.953       \\
+        \hline
+        LSTM (weight adjusted) & 97.615              & 100.498            & 7.085       \\
+        \hline
+        Bi-LSTM                & -                   & -                  & -           \\
+        \hline
+        GRU                    & 88.34               & 92.142             & 6.759       \\
+        \hline
+        GRU (weight adjusted)  & 88.167              & 90.955             & 6.727       \\
+        \hline
+        Bi-GRU                 & -                   & -                  & -           \\
+        \hline
+        SVR                    & -                   & -                  & -           \\
+        \hline
+        RF                     & -                   & -                  & -           \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{ |c|c|c|c| }
+        \hline
+        & Testing RMSE & Validation RMSE & Validation MAE \\
+        \hline
+        LR                     & 14.777       &                 &                \\
+        \hline
+        MLP                    & 14.446       &                 &                \\
+        \hline
+        LSTM                   & 9.866        & -               & 14.597         \\
+        \hline
+        LSTM (weight adjusted) & 10.024       & -               & 14.646         \\
+        \hline
+        Bi-LSTM                & -            & -               & -              \\
+        \hline
+        GRU                    & 9.598        & -               & 14.951         \\
+        \hline
+        GRU (weight adjusted)  & 9.536        & -               & 15.205         \\
+        \hline
+        Bi-GRU                 & -            & -               & -              \\
+        \hline
+        SVR                    & -            & -               & -              \\
+        \hline
+        RF                     & -            & -               & -              \\
+        \hline
+    \end{tabular}
+\end{center}
+
+LSTM \& GRU training and testing loss charts (32 \& 33) % (\ref{fig:train_mse} \& \ref{fig:test_mse}).
+
+Feature Importance chart in Figure~34 (at the end of the document) % \ref{fig:feat_importance} (at end of document).
 
 %\begin{figure}
 %    \centering

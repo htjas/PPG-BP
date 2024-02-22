@@ -18,6 +18,7 @@ Machine Learning Approach}
 \usepackage{array}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{rotating}
 
 \begin{document}
 
@@ -88,9 +89,9 @@ Machine Learning Approach}
 
     \vfill
 
-    \rule{4cm}{0.5mm} \tab \rule{4cm}{0.5mm}
+    \rule{4cm}{0.5mm} \tab \qquad \qquad \rule{4cm}{0.5mm}
 
-    Date \tab Signature
+    Date \tab \qquad \qquad Signature
 
     \newpage
     \doublespacing
@@ -121,27 +122,32 @@ Machine Learning Approach}
     \section{Results}
     \label{sec:results}
     \input{results}
-
     \section{Discussion}
     \label{sec:discussion}
 
     Caveats:
-    - Out of the 34 features, 3 (delta\_t, delta\_area and res\_index) depend on the accurate detection of the dicrotic notch.
-    Significantly more values could be extracted if finding the dicrotic notch would not be necessary.
+    \begin{itemize}
+        \item Out of the 34 features, 3 (delta\_t, delta\_area and res\_index) depend on the accurate detection of the dicrotic notch.
+        \item Significantly more values could be extracted if finding the dicrotic notch would not be necessary.
+    \end{itemize}
 
     Limitations:
-    - not knowing what devices were used
-    - how they were calibrated
-    - how accurate they are
-    - pulse oximeter and arterial catheter parameters
-    - sampling rates are different for every device (even between MIMIC 3 and 4)
+    \begin{itemize}
+        \item Not knowing what devices were used.
+        \item How they were calibrated.
+        \item How accurate they are.
+        \item Pulse oximeter and arterial catheter parameters.
+        \item Sampling rates are different for every device (even between MIMIC 3 and 4).
+    \end{itemize}
 
     Possible Improvements:
-    - integrate both the ECG and PPG graphs for a more precise prediction
-    - use further signal processing approaches
-    - manually filter waveform graphics (e.g.\ faulty PPG signal)
-    - expand on machine learning algorithms
-    - experiment with different median intervals
+    \begin{itemize}
+        \item Integrate both the ECG and PPG graphs for a more precise prediction.
+        \item Use further signal processing approaches.
+        \item Manually filter waveform graphics (e.g., faulty PPG signal).
+        \item Expand on machine learning algorithms.
+        \item Experiment with different median intervals.
+    \end{itemize}
 
 
     \section{Conclusion}
@@ -154,6 +160,7 @@ Machine Learning Approach}
 
     \newpage
     \appendix
+
 
     \section{Code}\label{sec:code}
     \input{code}
