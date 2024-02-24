@@ -842,24 +842,28 @@ import sklearn
 
 
 class LinearRegression(nn.Module):
-    def __init__(self, input_size, output_size):
+    def __init__(self, input_size, output_size, feature_importances):
         super(LinearRegression, self).__init__()
         self.linear = nn.Linear(input_size, output_size)
+        self.feature_importances = feature_importances
 
     def forward(self, x):
-        return self.linear(x)
+        adjusted_input = x * self.feature_importances.unsqueeze(0)
+        return self.linear(adjusted_input)
 
 
 class NeuralNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size, hidden_size, output_size, feature_importances):
         super(NeuralNet, self).__init__()
         self.input_size = input_size
         self.l1 = nn.Linear(input_size, hidden_size)
         self.relu = nn.ReLU()
         self.l2 = nn.Linear(hidden_size, output_size)
+        self.feature_importances = feature_importances
 
     def forward(self, x):
-        out = self.l1(x)
+        adjusted_input = x * self.feature_importances.unsqueeze(0)
+        out = self.l1(adjusted_input)
         out = self.relu(out)
         out = self.l2(out)
         return out
@@ -886,25 +890,58 @@ class LSTM(nn.Module):
         return output
 
 
+class BiLSTM(nn.Module):
+    def __init__(self, input_size, hidden_size, out_features, feature_importances):
+        super(BiLSTM, self).__init__()
+        self.hidden_size = hidden_size
+        self.lstm = nn.LSTM(input_size, hidden_size, bidirectional=True)
+        self.linear = nn.Linear(hidden_size * 2, out_features)
+        self.feature_importances = feature_importances
+
+    def forward(self, x):
+        h_0 = torch.zeros(2, x.size(0), self.hidden_size, dtype=torch.float32)
+        c_0 = torch.zeros(2, x.size(0), self.hidden_size, dtype=torch.float32)
+        adjusted_input = x.unsqueeze(0) * self.feature_importances.unsqueeze(0)
+        lstm_out, _ = self.lstm(adjusted_input, (h_0, c_0))
+        output = self.linear(lstm_out[-1])
+        return output
+
+
 class GRU(nn.Module):
-    def __init__(self, input_size, hidden_size, out_features):
+    def __init__(self, input_size, hidden_size, out_features, feature_importances):
         super(GRU, self).__init__()
         self.hidden_size = hidden_size
         self.gru1 = nn.GRUCell(input_size, hidden_size)
         self.gru2 = nn.GRUCell(hidden_size, hidden_size)
         self.linear = nn.Linear(hidden_size, out_features)
+        self.feature_importances = feature_importances
 
     def forward(self, x):
         h_t = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
         h_t2 = torch.zeros(x.size(0), self.hidden_size, dtype=torch.float32)
-        h_t = self.gru1(x, h_t)
+        adjusted_input = x * self.feature_importances.unsqueeze(0)
+        h_t = self.gru1(adjusted_input, h_t)
         h_t2 = self.gru2(h_t, h_t2)
         output = self.linear(h_t2)
         return output
 
-# Support Vector Regression
-svr_model = sklearn.svm.SVR(kernel='linear', C=100, epsilon=0.1)
+
+class BiGRU(nn.Module):
+    def __init__(self, input_size, hidden_size, out_features, feature_importances):
+        super(BiGRU, self).__init__()
+        self.hidden_size = hidden_size
+        self.gru = nn.GRU(input_size, hidden_size, bidirectional=True)
+        self.linear = nn.Linear(hidden_size * 2, out_features)
+        self.feature_importances = feature_importances
+
+    def forward(self, x):
+        h0 = torch.zeros(2, x.size(0), self.hidden_size, dtype=torch.float32)
+        adjusted_input = x.unsqueeze(0) * self.feature_importances.unsqueeze(0)
+        out, _ = self.gru(adjusted_input, h0)
+        out = out.squeeze(0)
+        out = self.linear(out)
+        return out
 
 # Random Forest Regressor
-rf_model = sklearn.ensemble.RandomForestRegressor(n_estimators=100, max_depth=10, min_samples_split=2)
+rf_model = sklearn.ensemble.RandomForestRegressor(n_estimators=15)
 \end{lstlisting}

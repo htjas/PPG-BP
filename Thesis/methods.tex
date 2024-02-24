@@ -499,8 +499,8 @@ In this concluding section detailing methods, the utilization of Machine Learnin
 drawing from a range of studies as referenced in the background section~\ref{subsubsec:machine_learning}.
 This study employed diverse models, distinct strategies for data splitting, and methods for training and validation.
 
-The use of \textit{Scikit-Learn}~\cite{ScikitlearnMachineLearning} (version 1.4) was employed for simpler regression models within this study.
 Utilizing version 2.2 of \textit{PyTorch}~\cite{PyTorch}, the library was enhanced with the CUDA toolkit for GPU acceleration in the context of NN processes.
+The use of \textit{Scikit-Learn}~\cite{ScikitlearnMachineLearning} (version 1.4) was employed for simpler reference regression models within this study.
 The library \textit{wandb}~\cite{Wandb} was employed for the purpose of monitoring and visualizing the model's performance.
 
 Initially, the PPG and ABP data were delineated as \texttt{X} and \texttt{y} correspondingly.
@@ -509,32 +509,59 @@ Following this, all data underwent normalization utilizing the \texttt{sklearn.p
 This step was implemented to accommodate variations in feature scales and to guarantee an equal contribution of each feature to the analysis.
 
 After this initial phase, the training of the models commenced.
-A total of 8 regression models were implemented:
+A total of 7 regression models were implemented:
 \begin{itemize}
-    \item Linear Regression (\textit{PyTorch}),
-    \item Multi-Layer Perceptron (\textit{PyTorch}),
-    \item Long Short-term memory model (\textit{PyTorch}),
-    \item bi-directional LSTM (\textit{PyTorch}),
-    \item Gated Recurrent Unit (\textit{PyTorch}),
-    \item bi-directional GRU (\textit{PyTorch}),
-    \item Random Forest Regressor (\textit{Scikit-Lear})
-    \item Support Vector Regressor (\textit{Scikit-Learn})
+    \item Linear Regression (LR, \textit{PyTorch}),
+    \item Multi-Layer Perceptron (MLP, \textit{PyTorch}),
+    \item long short-term memory (LSTM, \textit{PyTorch}),
+    \item bidirectional LSTM (Bi-LSTM, \textit{PyTorch}),
+    \item Gated Recurrent Unit (GRU, \textit{PyTorch}),
+    \item bidirectional GRU (Bi-GRU, \textit{PyTorch}),
+    \item Random Forest Regressor (RF, \textit{Scikit-Learn})
 \end{itemize}
 
-The code of the listed ML models can be found in appendix~\ref{subsec:code_ml}.
+The LR model was set up with a simple linear layer, determined by specific input and output dimensions.
+In its \texttt{forward} method, this model executes a linear transformation on the input data.
 
-In LR and MLP models, the utilized optimizers were \enquote{Stochastic Gradient Descent} (SGD)\cite{SGDPyTorchDocumentation} and \enquote{Adaptive Moment Estimation} (Adam)\cite{AdamPyTorchDocumentationa} respectively.
-The optimizer for LSTM and GRU models was \enquote{Limited-memory Broyden–Fletcher–Goldfarb–Shanno} (LBFGS) algorithm~\cite{LBFGSPyTorchDocumentation}, each running for 100 epochs with a learning rate set to 0.1.
+The MLP, referenced as \texttt{NeuralNet}, was constructed with an initial linear layer based on specified input and hidden layer sizes.
+This was followed by a \texttt{ReLU} activation function and another linear layer for the output size, allowing the \texttt{forward} method to carry out this sequence of operations on the input data.
 
-The SVR model was initialized with the \texttt{linear} kernel, a regularization parameter \texttt{C} set to 100, and with an \texttt{epsilon} of 0.1.
-The \enquote{RandomForestRegressor} model was configured with 100 decision trees, each restricted to a maximum depth of 10 nodes, and a minimum of 2 samples required to split an internal node.
+Moving on to the LSTM model, it was designed with two LSTM cells, where the first cell processes the input data, and the second cell works on the output from the first.
+The final output size is determined by a linear layer, and during the forward pass, the input data flows through the LSTM cells to produce the output.
+
+For the Bi-LSTM model, a bidirectional LSTM layer captures contextual information by processing the input in both forward and backward directions simultaneously.
+The output size is determined by a linear layer, applied to the final hidden state of the bidirectional LSTM\@.
+
+The GRU model comprises two GRU cell layers, each processing the input sequentially to generate the final output.
+A linear layer is then applied to the final hidden state of the second GRU cell to determine the output size.
+
+In the case of the Bi-GRU model, a bidirectional GRU layer was implemented, with the input data passing through it to generate the final output.
+The final output is obtained by applying a linear layer to the concatenated output of both directions.
+
+Two regression techniques, Support Vector Regressor (SVR) and RF, were implemented as standard reference to the PyTorch models.
+The SVR model, initiated with a \texttt{linear} kernel and \texttt{C} set to 100, was excluded from further analysis due to its significant computational demands and training time constraints.
+Consequently, no outcomes were provided for SVR in the final comparison segment.
+However, the \enquote{RandomForestRegressor} model, configured with 15 decision trees, requiring a minimum of 2 samples for node splitting, remained part of the analysis.
+
+The code for these ML models is available in appendix~\ref{subsec:code_ml}.
+
+\vspace{0.2cm}
+\textit{Parameters and Approaches}
+\vspace{0.2cm}
+
+In the LR and MLP models, the optimizers used were \enquote{Stochastic Gradient Descent} (SGD)~\cite{SGDPyTorchDocumentation} and \enquote{Adaptive Moment Estimation} (Adam)~\cite{AdamPyTorchDocumentationa} respectively,
+each trained for 10000 epochs with a learning rate of 0.01.
+
+As for the LSTM and GRU models, the optimizer chosen was the \enquote{Limited-memory Broyden–Fletcher–Goldfarb–Shanno} (LBFGS) algorithm~\cite{LBFGSPyTorchDocumentation},
+with both models trained for 100 epochs and a learning rate set to 0.1.
 
 During the training phase, the \enquote{Mean-Squared-Error} (MSE) loss was computed and used as the performance reference.
 MSE is generally favoured in continuous value regression endeavors, because it gives more weight to larger errors, especially outliers.
+
 For \textit{PyTorch} models, an \enquote{early-stopping} strategy was implemented, halting training if the testing loss did not improve for 3 consecutive epochs.
 
 After the training step, an evaluation of feature importance was conducted, employing a method that assesses each feature's significance by permuting their values and observing the resulting impact on model performance.
-This was followed by a subsequent identical iteration of the model, differing only by the incorporation of added weights to the most crucial features.
+This was followed by a subsequent identical iteration of the model, differing only by the incorporation of added weights to all features.
 
 For the testing evaluation in both iterations, the chosen metrics included \textit{Root Mean-Squared-Error} (RMSE), \textit{Mean Absolute Error} (MAE), \textit{$R^2$} measure, \textit{Bias}, and \textit{Limits-of-Agreement} (LoA).
 
@@ -542,4 +569,4 @@ Finally, the dataset from the MIMIC-IV DB was utilized for model validation.
 The same data normalization techniques were applied as in the training stage.
 Following the prediction of ABP, the resulting dataset was split into three, encompassing the predicted values of SP, DP, and MAP\@.
 RMSE and MAE values were calculated for the entire prediction dataset, as well as for each of the three separate predicted value arrays.
-Precisely these metrics effectively portrayed the ultimate accuracy of the model in predicting ABP (SP, DP and MAP).
+Precisely these metrics effectively portrayed the ultimate accuracy of the model in predicting ABP (SBP, DBP and MAP).

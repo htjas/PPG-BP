@@ -470,14 +470,14 @@ S.~Maqsood, S.~Xu, S.~Tran, S.~Garg, M.~Springer, M.~Karunanithi, and
   R.~Mohawesh, ``A survey: {{From}} shallow to deep machine learning approaches
   for blood pressure estimation using biosensors,'' vol.~197, p.~116788.
 
+\bibitem{PyTorch}
+``{{PyTorch}}.''
+\newblock https://pytorch.org/.
+
 \bibitem{ScikitlearnMachineLearning}
 ``Scikit-learn: Machine learning in {{Python}} — scikit-learn 1.4.1
   documentation.''
 \newblock https://scikit-learn.org/stable/.
-
-\bibitem{PyTorch}
-``{{PyTorch}}.''
-\newblock https://pytorch.org/.
 
 \bibitem{Wandb}
 ``Wandb.''
