@@ -19,6 +19,7 @@ Machine Learning Approach}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{rotating}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -122,6 +123,8 @@ Machine Learning Approach}
     \section{Results}
     \label{sec:results}
     \input{results}
+
+
     \section{Discussion}
     \label{sec:discussion}
 
@@ -153,10 +156,31 @@ Machine Learning Approach}
     \section{Conclusion}
     \label{sec:conclusion}
 
+    Summary of findings:
+
+    As per the joint 2018 statement by the American National Standards of the Association for the Advancement of Medical Instrumentation (AAMI), European Society of Hypertension (ESH)
+    and International Organization for Standardization (ISO), the average variation and its standard deviation in NIBP measurements should ideally fall within 5 ± 8 mmHg compared to a reference BP,
+    based on a minimum of 85 patient evaluations~\cite{stergiouUniversalStandardValidation2018}.
+
+    The number of patient evaluations done in this study greatly exceed 85.
+    The average variation and standard deviation of given models was: -||-
+
+    Pretty bad performance on a huge number of data.
+    Very important though, that no overfitting was done.
+    Also, real-world data was simulated through MIMIC-IV (completely different data source), which is key.
+
+    Advanced NN models performed well but not extraordinarily great.
+    RF had a promising test loss, but validation loss was even worse than of LSTMs and GRUs.
+
+    This study focused on ICU patient data, but it can prospectively be expanded on also ambulatory patients or even real-time healthy patient monitoring.
+
     \newpage
 
+    \singlespacing
+    \small
     \bibliographystyle{ieeetr}  % ieeetr
-    \bibliography{literature}
+    \bibliography{literature_final_with_notes}
+    \normalsize
 
     \newpage
     \appendix

@@ -1,57 +1,56 @@
-This is BibTeX, Version 0.99d
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Thesis.aux
-Reallocating 'name_of_file' (item size: 1) to 7 items.
 The style file: ieeetr.bst
-Reallocating 'name_of_file' (item size: 1) to 11 items.
-Database file #1: literature.bib
+Database file #1: literature_final_with_notes.bib
 Warning--entry type for "AdaBoostAlgorithmMachine" isn't style-file defined
---line 19 of file literature.bib
-Warning--entry type for "AdamPyTorchDocumentation" isn't style-file defined
---line 29 of file literature.bib
+--line 19 of file literature_final_with_notes.bib
+Warning--entry type for "AdamPyTorchDocumentationa" isn't style-file defined
+--line 30 of file literature_final_with_notes.bib
 Warning--entry type for "anishnamaUnderstandingBidirectionalLSTM2023" isn't style-file defined
---line 53 of file literature.bib
+--line 55 of file literature_final_with_notes.bib
 Warning--entry type for "AutomaticDigitalBlood" isn't style-file defined
---line 115 of file literature.bib
+--line 117 of file literature_final_with_notes.bib
 Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
---line 125 of file literature.bib
+--line 128 of file literature_final_with_notes.bib
 Warning--entry type for "charltonMIMICWFDBTutorials2022" isn't style-file defined
---line 227 of file literature.bib
+--line 231 of file literature_final_with_notes.bib
 Warning--entry type for "contributorEssentialCriticalCare2021" isn't style-file defined
---line 269 of file literature.bib
+--line 273 of file literature_final_with_notes.bib
 Warning--entry type for "FeedforwardNeuralNetworks" isn't style-file defined
---line 459 of file literature.bib
+--line 463 of file literature_final_with_notes.bib
 Warning--entry type for "jasinskasHtjasPPGBPProject2024" isn't style-file defined
---line 540 of file literature.bib
+--line 546 of file literature_final_with_notes.bib
 Warning--entry type for "LBFGSPyTorchDocumentation" isn't style-file defined
---line 692 of file literature.bib
+--line 700 of file literature_final_with_notes.bib
 Warning--entry type for "MatplotlibVisualizationPython" isn't style-file defined
---line 856 of file literature.bib
+--line 865 of file literature_final_with_notes.bib
 Warning--entry type for "MITLCPWfdbpython2024" isn't style-file defined
---line 896 of file literature.bib
+--line 907 of file literature_final_with_notes.bib
 Warning--entry type for "moodyMIMICIIIWaveformDatabase2017" isn't style-file defined
---line 953 of file literature.bib
+--line 965 of file literature_final_with_notes.bib
 Warning--entry type for "moodyMIMICIVWaveformDatabase" isn't style-file defined
---line 965 of file literature.bib
+--line 977 of file literature_final_with_notes.bib
 Warning--entry type for "NumPy" isn't style-file defined
---line 1016 of file literature.bib
+--line 1028 of file literature_final_with_notes.bib
 Warning--entry type for "PandasPythonData" isn't style-file defined
---line 1051 of file literature.bib
+--line 1049 of file literature_final_with_notes.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 1077 of file literature.bib
+--line 1076 of file literature_final_with_notes.bib
 Warning--entry type for "PyTorch" isn't style-file defined
---line 1100 of file literature.bib
+--line 1099 of file literature_final_with_notes.bib
 Warning--entry type for "ScikitlearnMachineLearning" isn't style-file defined
---line 1198 of file literature.bib
+--line 1198 of file literature_final_with_notes.bib
 Warning--entry type for "SciPy" isn't style-file defined
---line 1205 of file literature.bib
+--line 1206 of file literature_final_with_notes.bib
 Warning--entry type for "SGDPyTorchDocumentation" isn't style-file defined
---line 1230 of file literature.bib
+--line 1232 of file literature_final_with_notes.bib
 Warning--entry type for "StandardSphygmomanometer" isn't style-file defined
---line 1284 of file literature.bib
+--line 1288 of file literature_final_with_notes.bib
 Warning--entry type for "Wandb" isn't style-file defined
---line 1441 of file literature.bib
-Warning--empty year in organizationWorldHealthStatistics2023
+--line 1468 of file literature_final_with_notes.bib
+Warning--empty author and editor in WorldHealthStatistics2023
+Warning--empty year in WorldHealthStatistics2023
 Warning--empty journal in ezzatiSelectedMajorRisk2002
 Warning--empty year in ezzatiSelectedMajorRisk2002
 Warning--empty journal in burtPrevalenceHypertensionUS1995
@@ -69,6 +68,8 @@ Warning--empty year in reyesWirelessPhotoplethysmographicDevice2012
 Warning--empty year in yoonMultipleDiagnosisBased2002
 Warning--empty journal in knightAccuracyWearablePhotoplethysmography2022
 Warning--empty year in knightAccuracyWearablePhotoplethysmography2022
+Warning--empty journal in aoyagiPulseOximetryIts2002
+Warning--empty year in aoyagiPulseOximetryIts2002
 Warning--empty author in WhatBloodPressure2019
 Warning--empty year in WhatBloodPressure2019
 Warning--empty journal in naylorArterialCathetersEarly2020
@@ -97,10 +98,8 @@ Warning--empty year in hertzmanPhotoelectricPlethysmographyFingers1937
 Warning--empty year in srivastavValsalvaManeuver2024
 Warning--empty journal in yoshiyaSpectrophotometricMonitoringArterial1980
 Warning--empty year in yoshiyaSpectrophotometricMonitoringArterial1980
-Warning--empty journal in aoyagiPulseOximetryIts2002
-Warning--empty year in aoyagiPulseOximetryIts2002
-Warning--empty journal in wieringaContactlessMultipleWavelength2005
-Warning--empty year in wieringaContactlessMultipleWavelength2005
+Warning--empty journal in wieringaContactlessMultipleWavelength2005b
+Warning--empty year in wieringaContactlessMultipleWavelength2005b
 Warning--empty journal in rheeArtifactresistantPowerefficientDesign2001
 Warning--empty year in rheeArtifactresistantPowerefficientDesign2001
 Warning--empty year in zhengRingtypeDeviceNoninvasive2003
@@ -146,8 +145,8 @@ Warning--empty year in savitzkySmoothingDifferentiationData1964
 Warning--empty year in antoniouDigitalFiltersAnalysis2018
 Warning--empty journal in liangOptimalFilterShort2018
 Warning--empty year in liangOptimalFilterShort2018
-Warning--empty journal in takazawaAssessmentVasoactiveAgents1998
-Warning--empty year in takazawaAssessmentVasoactiveAgents1998
+Warning--empty journal in takazawaAssessmentVasoactiveAgents1998a
+Warning--empty year in takazawaAssessmentVasoactiveAgents1998a
 Warning--empty booktitle in djeldjliImagingPhotoplethysmographySignal2019
 Warning--empty year in djeldjliImagingPhotoplethysmographySignal2019
 Warning--empty journal in charltonAssessingHemodynamicsPhotoplethysmogram2022
@@ -156,8 +155,8 @@ Warning--empty journal in zhangEffectLocalCold2005
 Warning--empty year in zhangEffectLocalCold2005
 Warning--empty year in tengContinuousNoninvasiveEstimation2003
 Warning--empty year in suzukiCufflessBloodPressure2009
-Warning--empty journal in ruiz-rodriguezInnovativeContinuousNoninvasive2013a
-Warning--empty year in ruiz-rodriguezInnovativeContinuousNoninvasive2013a
+Warning--empty journal in ruiz-rodriguezInnovativeContinuousNoninvasive2013
+Warning--empty year in ruiz-rodriguezInnovativeContinuousNoninvasive2013
 Warning--empty journal in ouIntegratingCellularAutomata2019
 Warning--empty year in ouIntegratingCellularAutomata2019
 Warning--empty year in kurylyakNeuralNetworkbasedMethod2013
@@ -172,12 +171,6 @@ Warning--empty journal in marulandaHybridModelBased2023
 Warning--empty year in marulandaHybridModelBased2023
 Warning--empty journal in joungContinuousCufflessBlood2023
 Warning--empty year in joungContinuousCufflessBlood2023
-Too many commas in name 1 of "family=Gent, given=Paul, prefix=van, useprefix=true and Farah, Haneen and family=Nes, given=Nicole, prefix=van, useprefix=true and family=Arem, given=Bart, prefix=van, useprefix=true" for entry vangentHeartPyNovelHeart2019
-while executing---line 969 of file ieeetr.bst
-Too many commas in name 3 of "family=Gent, given=Paul, prefix=van, useprefix=true and Farah, Haneen and family=Nes, given=Nicole, prefix=van, useprefix=true and family=Arem, given=Bart, prefix=van, useprefix=true" for entry vangentHeartPyNovelHeart2019
-while executing---line 969 of file ieeetr.bst
-Too many commas in name 4 of "family=Gent, given=Paul, prefix=van, useprefix=true and Farah, Haneen and family=Nes, given=Nicole, prefix=van, useprefix=true and family=Arem, given=Bart, prefix=van, useprefix=true" for entry vangentHeartPyNovelHeart2019
-while executing---line 969 of file ieeetr.bst
 Warning--empty journal in vangentHeartPyNovelHeart2019
 Warning--empty year in vangentHeartPyNovelHeart2019
 Warning--empty journal in elgendiSystolicPeakDetection2013
@@ -188,45 +181,47 @@ Warning--empty journal in aboyAutomaticBeatDetection2005
 Warning--empty year in aboyAutomaticBeatDetection2005
 Warning--empty journal in maqsoodSurveyShallowDeep2022
 Warning--empty year in maqsoodSurveyShallowDeep2022
-You've used 96 entries,
+Warning--empty journal in stergiouUniversalStandardValidation2018
+Warning--empty year in stergiouUniversalStandardValidation2018
+You've used 97 entries,
             1876 wiz_defined-function locations,
-            983 strings with 28145 characters,
-and the built_in function-call counts, 28146 in all, are:
-= -- 2446
-> -- 1460
+            1008 strings with 29739 characters,
+and the built_in function-call counts, 29027 in all, are:
+= -- 2576
+> -- 1531
 < -- 0
-+ -- 527
-- -- 431
-* -- 2218
-:= -- 3788
-add.period$ -- 73
-call.type$ -- 96
-change.case$ -- 95
++ -- 551
+- -- 454
+* -- 2290
+:= -- 3930
+add.period$ -- 95
+call.type$ -- 97
+change.case$ -- 96
 chr.to.int$ -- 0
-cite$ -- 227
-duplicate$ -- 1348
-empty$ -- 2543
-format.name$ -- 431
-if$ -- 6676
+cite$ -- 231
+duplicate$ -- 1366
+empty$ -- 2573
+format.name$ -- 454
+if$ -- 6893
 int.to.chr$ -- 0
-int.to.str$ -- 96
+int.to.str$ -- 97
 missing$ -- 75
-newline$ -- 293
+newline$ -- 317
 num.names$ -- 82
-pop$ -- 529
+pop$ -- 576
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1157
+skip$ -- 1091
 stack$ -- 0
-substring$ -- 1787
-swap$ -- 556
+substring$ -- 1819
+swap$ -- 564
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 131
-while$ -- 240
-width$ -- 98
-write$ -- 742
-(There were 3 error messages)
+warning$ -- 134
+while$ -- 243
+width$ -- 99
+write$ -- 792
+(There were 157 warnings)

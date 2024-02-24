@@ -1,53 +1,46 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.14)  21 FEB 2024 19:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  24 FEB 2024 18:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./Thesis.tex
-(Thesis.tex
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-01-22>
-
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrartcl.cl
-s
-Document Class: scrartcl 2023/07/07 v3.41 KOMA-Script document class (article)
-
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrkbase.st
-y
-Package: scrkbase 2023/07/07 v3.41 KOMA-Script package (KOMA-Script-dependent b
+**Thesis.tex
+(./Thesis.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21>
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
+Document Class: scrartcl 2021/11/13 v3.35 KOMA-Script document class (article)
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2021/11/13 v3.35 KOMA-Script package (KOMA-Script-dependent b
 asics and keyval usage)
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.sty
-Package: scrbase 2023/07/07 v3.41 KOMA-Script package (KOMA-Script-independent 
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2021/11/13 v3.35 KOMA-Script package (KOMA-Script-independent 
 basics and keyval usage)
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile.st
-y
-Package: scrlfile 2023/07/07 v3.41 KOMA-Script package (file load hooks)
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2021/11/13 v3.35 KOMA-Script package (file load hooks)
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile-ho
-ok.sty
-Package: scrlfile-hook 2023/07/07 v3.41 KOMA-Script package (using LaTeX hooks)
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2021/11/13 v3.35 KOMA-Script package (using LaTeX hooks)
 
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.sty
-Package: scrlogo 2023/07/07 v3.41 KOMA-Script package (logo)
-))) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2021/11/13 v3.35 KOMA-Script package (logo)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
 )
 Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
 Already applied: [0000/00/00] Usage of raw or classic option list on input line
  368.
 ))
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\tocbasic.st
-y
-Package: tocbasic 2023/07/07 v3.41 KOMA-Script package (handling toc-files)
-\scr@dte@tocline@numberwidth=\skip48
-\scr@dte@tocline@numbox=\box51
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2021/11/13 v3.35 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip47
+\scr@dte@tocline@numbox=\box50
 )
-Package tocbasic Info: omitting babel extension for `toc'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `toc' on input line 133.
+Package tocbasic Info: babel extension for `toc' omitted
+(tocbasic)             because of missing \bbl@set@language on input line 135.
 Package scrartcl Info: You've used standard option `12pt'.
 (scrartcl)             This is correct!
 (scrartcl)             Internally I'm using `fontsize=12pt'.
@@ -55,22 +48,20 @@ Package scrartcl Info: You've used standard option `12pt'.
 (scrartcl)             you'd have to use `fontsize=12pt' there
 (scrartcl)             instead of `12pt', too.
 Class scrartcl Info: File `scrsize12pt.clo' used to setup font sizes on input l
-ine 2441.
+ine 2242.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrsize12pt
-.clo
-File: scrsize12pt.clo 2023/07/07 v3.41 KOMA-Script font size class option (12pt
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrsize12pt.clo
+File: scrsize12pt.clo 2021/11/13 v3.35 KOMA-Script font size class option (12pt
 )
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\typearea.st
-y
-Package: typearea 2023/07/07 v3.41 KOMA-Script package (type area)
-\ta@bcor=\skip49
-\ta@div=\count187
-\ta@hblk=\skip50
-\ta@vblk=\skip51
-\ta@temp=\skip52
-\footheight=\skip53
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2021/11/13 v3.35 KOMA-Script package (type area)
+\ta@bcor=\skip48
+\ta@div=\count185
+\ta@hblk=\skip49
+\ta@vblk=\skip50
+\ta@temp=\skip51
+\footheight=\skip52
 Package typearea Info: These are the values describing the layout:
 (typearea)             DIV  = 12
 (typearea)             BCOR = 0.0pt
@@ -87,276 +78,272 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 12.0pt
 (typearea)              \footskip       = 50.75pt
 (typearea)              \baselineskip   = 14.5pt
-(typearea)              on input line 1799.
+(typearea)              on input line 1743.
 )
-\c@part=\count188
-\c@section=\count189
-\c@subsection=\count190
-\c@subsubsection=\count191
-\c@paragraph=\count192
-\c@subparagraph=\count193
-\scr@dte@section@maxnumwidth=\skip54
+\c@part=\count186
+\c@section=\count187
+\c@subsection=\count188
+\c@subsubsection=\count189
+\c@paragraph=\count190
+\c@subparagraph=\count191
+\scr@dte@section@maxnumwidth=\skip53
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\section on input line 5082.
+(scrartcl)           for `\section on input line 4852.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\section on input line 5082.
-\scr@dte@part@maxnumwidth=\skip55
+(scrartcl)           for `\section on input line 4852.
+\scr@dte@part@maxnumwidth=\skip54
 Class scrartcl Info: using compatibility default `afterindent=false'
-(scrartcl)           for `\part on input line 5090.
-\scr@dte@subsection@maxnumwidth=\skip56
+(scrartcl)           for `\part on input line 4860.
+\scr@dte@subsection@maxnumwidth=\skip55
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subsection on input line 5100.
+(scrartcl)           for `\subsection on input line 4870.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subsection on input line 5100.
-\scr@dte@subsubsection@maxnumwidth=\skip57
+(scrartcl)           for `\subsection on input line 4870.
+\scr@dte@subsubsection@maxnumwidth=\skip56
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subsubsection on input line 5110.
+(scrartcl)           for `\subsubsection on input line 4880.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subsubsection on input line 5110.
-\scr@dte@paragraph@maxnumwidth=\skip58
+(scrartcl)           for `\subsubsection on input line 4880.
+\scr@dte@paragraph@maxnumwidth=\skip57
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\paragraph on input line 5121.
+(scrartcl)           for `\paragraph on input line 4891.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\paragraph on input line 5121.
-\scr@dte@subparagraph@maxnumwidth=\skip59
+(scrartcl)           for `\paragraph on input line 4891.
+\scr@dte@subparagraph@maxnumwidth=\skip58
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subparagraph on input line 5131.
+(scrartcl)           for `\subparagraph on input line 4901.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subparagraph on input line 5131.
-\abovecaptionskip=\skip60
-\belowcaptionskip=\skip61
-\c@pti@nb@sid@b@x=\box52
-Package tocbasic Info: omitting babel extension for `lof'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lof' on input line 6309.
-\scr@dte@figure@maxnumwidth=\skip62
-\c@figure=\count194
-Package tocbasic Info: omitting babel extension for `lot'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lot' on input line 6325.
-\scr@dte@table@maxnumwidth=\skip63
-\c@table=\count195
-Class scrartcl Info: Redefining `\numberline' on input line 6495.
-\bibindent=\dimen140
-) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
-Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks18
-\inpenc@posthook=\toks19
+(scrartcl)           for `\subparagraph on input line 4901.
+\abovecaptionskip=\skip59
+\belowcaptionskip=\skip60
+\c@pti@nb@sid@b@x=\box51
+Package tocbasic Info: babel extension for `lof' omitted
+(tocbasic)             because of missing \bbl@set@language on input line 6076.
+
+\scr@dte@figure@maxnumwidth=\skip61
+\c@figure=\count192
+Package tocbasic Info: babel extension for `lot' omitted
+(tocbasic)             because of missing \bbl@set@language on input line 6091.
+
+\scr@dte@table@maxnumwidth=\skip62
+\c@table=\count193
+Class scrartcl Info: Redefining `\numberline' on input line 6258.
+\bibindent=\dimen138
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
-Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
-fg
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
-File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen141
-\Gin@req@width=\dimen142
-) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
-\wrapoverhang=\dimen143
-\WF@size=\dimen144
-\c@WF@wrappedlines=\count196
-\WF@box=\box53
-\WF@everypar=\toks20
+\Gin@req@height=\dimen139
+\Gin@req@width=\dimen140
+)
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen141
+\WF@size=\dimen142
+\c@WF@wrappedlines=\count194
+\WF@box=\box52
+\WF@everypar=\toks19
 Package: wrapfig 2003/01/31  v 3.6
-) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
-Package: setspace 2022/12/04 v6.7b set line spacing
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/tabto-ltx\tabto.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tabto-ltx/tabto.sty
 Package: tabto 2018/12/28  v 1.4  Another tabbing mechanism
-\CurrentLineWidth=\dimen145
-\TabPrevPos=\dimen146
+\CurrentLineWidth=\dimen143
+\TabPrevPos=\dimen144
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjustbox.sty
-Package: adjustbox 2022/10/17 v1.3a Adjusting TeX boxes (trim, clip, ...)
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
-Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2020/08/19 v1.3 Adjusting TeX boxes (trim, clip, ...)
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
-\XKV@toks=\toks21
-\XKV@tempa@toks=\toks22
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks20
+\XKV@tempa@toks=\toks21
 )
-\XKV@depth=\count197
+\XKV@depth=\count195
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjcalc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
 -ends (calc, etex, pgfmath)
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\trimclip.sty
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
 Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/collectbox\collectbox.s
-ty
-Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
-\collectedbox=\box54
+(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box53
 )
-\tc@llx=\dimen147
-\tc@lly=\dimen148
-\tc@urx=\dimen149
-\tc@ury=\dimen150
+\tc@llx=\dimen145
+\tc@lly=\dimen146
+\tc@urx=\dimen147
+\tc@ury=\dimen148
 Package trimclip Info: Using driver 'tc-pdftex.def'.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\tc-pdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
 File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
 ))
-\adjbox@Width=\dimen151
-\adjbox@Height=\dimen152
-\adjbox@Depth=\dimen153
-\adjbox@Totalheight=\dimen154
-\adjbox@pwidth=\dimen155
-\adjbox@pheight=\dimen156
-\adjbox@pdepth=\dimen157
-\adjbox@ptotalheight=\dimen158
+\adjbox@Width=\dimen149
+\adjbox@Height=\dimen150
+\adjbox@Depth=\dimen151
+\adjbox@Totalheight=\dimen152
+\adjbox@pwidth=\dimen153
+\adjbox@pheight=\dimen154
+\adjbox@pdepth=\dimen155
+\adjbox@ptotalheight=\dimen156
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
-Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count198
-) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/varwidth\varwidth.sty
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count196
+)
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box55
-\sift@deathcycles=\count199
-\@vwid@loff=\dimen159
-\@vwid@roff=\dimen160
-)) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+\@vwid@box=\box54
+\sift@deathcycles=\count197
+\@vwid@loff=\dimen157
+\@vwid@roff=\dimen158
+))
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count266
-\float@exts=\toks23
-\float@box=\box56
-\@float@everytoks=\toks24
-\@floatcapt=\box57
+\c@float@type=\count198
+\float@exts=\toks22
+\float@box=\box55
+\@float@everytoks=\toks23
+\@floatcapt=\box56
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.sty
-Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2021-02-22 v5.2l context-sensitive quotations (JAW)
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count267
+\etb@tempcnta=\count199
 )
-\csq@reset=\count268
-\csq@gtype=\count269
-\csq@glevel=\count270
-\csq@qlevel=\count271
-\csq@maxlvl=\count272
-\csq@tshold=\count273
-\csq@ltx@everypar=\toks25
+\csq@reset=\count266
+\csq@gtype=\count267
+\csq@glevel=\count268
+\csq@qlevel=\count269
+\csq@maxlvl=\count270
+\csq@tshold=\count271
+\csq@ltx@everypar=\toks24
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.def
-File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2021-02-22 v5.2l csquotes generic definitions (JAW)
 )
 Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
-)) (C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
-Package: amsmath 2023/05/13 v2.17o AMS math features
-\@mathmargin=\skip64
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2021/10/15 v2.17l AMS math features
+\@mathmargin=\skip63
 
 For additional information on amsmath, use the `?' option.
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks26
-\ex@=\dimen161
+\@emptytoks=\toks25
+\ex@=\dimen159
 ))
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen162
+\pmbraise@=\dimen160
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
-Package: amsopn 2022/04/08 v2.04 operator names
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2021/08/26 v2.02 operator names
 )
-\inf@bad=\count274
+\inf@bad=\count272
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count275
-\leftroot@=\count276
+\uproot@=\count273
+\leftroot@=\count274
 LaTeX Info: Redefining \overline on input line 399.
-LaTeX Info: Redefining \colon on input line 410.
-\classnum@=\count277
-\DOTSCASE@=\count278
+\classnum@=\count275
+\DOTSCASE@=\count276
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box58
-\strutbox@=\box59
-LaTeX Info: Redefining \big on input line 722.
-LaTeX Info: Redefining \Big on input line 723.
-LaTeX Info: Redefining \bigg on input line 724.
-LaTeX Info: Redefining \Bigg on input line 725.
-\big@size=\dimen163
+\Mathstrutbox@=\box57
+\strutbox@=\box58
+\big@size=\dimen161
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count279
-LaTeX Info: Redefining \bmod on input line 905.
-LaTeX Info: Redefining \pmod on input line 910.
-LaTeX Info: Redefining \smash on input line 940.
-LaTeX Info: Redefining \relbar on input line 970.
-LaTeX Info: Redefining \Relbar on input line 971.
-\c@MaxMatrixCols=\count280
+\macc@depth=\count277
+\c@MaxMatrixCols=\count278
 \dotsspace@=\muskip17
-\c@parentequation=\count281
-\dspbrk@lvl=\count282
-\tag@help=\toks27
-\row@=\count283
-\column@=\count284
-\maxfields@=\count285
-\andhelp@=\toks28
-\eqnshift@=\dimen164
-\alignsep@=\dimen165
-\tagshift@=\dimen166
-\tagwidth@=\dimen167
-\totwidth@=\dimen168
-\lineht@=\dimen169
-\@envbody=\toks29
-\multlinegap=\skip65
-\multlinetaggap=\skip66
-\mathdisplay@stack=\toks30
-LaTeX Info: Redefining \[ on input line 2953.
-LaTeX Info: Redefining \] on input line 2954.
+\c@parentequation=\count279
+\dspbrk@lvl=\count280
+\tag@help=\toks26
+\row@=\count281
+\column@=\count282
+\maxfields@=\count283
+\andhelp@=\toks27
+\eqnshift@=\dimen162
+\alignsep@=\dimen163
+\tagshift@=\dimen164
+\tagwidth@=\dimen165
+\totwidth@=\dimen166
+\lineht@=\dimen167
+\@envbody=\toks28
+\multlinegap=\skip64
+\multlinetaggap=\skip65
+\mathdisplay@stack=\toks29
+LaTeX Info: Redefining \[ on input line 2938.
+LaTeX Info: Redefining \] on input line 2939.
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
-Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
-\c@tracingmulticols=\count286
-\mult@box=\box60
-\multicol@leftmargin=\dimen170
-\c@unbalance=\count287
-\c@collectmore=\count288
-\doublecol@number=\count289
-\multicoltolerance=\count290
-\multicolpretolerance=\count291
-\full@width=\dimen171
-\page@free=\dimen172
-\premulticols=\dimen173
-\postmulticols=\dimen174
-\multicolsep=\skip67
-\multicolbaselineskip=\skip68
-\partial@page=\box61
-\last@line=\box62
-\mc@boxedresult=\box63
-\maxbalancingoverflow=\dimen175
-\mult@rightbox=\box64
-\mult@grightbox=\box65
-\mult@firstbox=\box66
-\mult@gfirstbox=\box67
+(/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2021/10/28 v1.9b multicolumn formatting (FMi)
+\c@tracingmulticols=\count284
+\mult@box=\box59
+\multicol@leftmargin=\dimen168
+\c@unbalance=\count285
+\c@collectmore=\count286
+\doublecol@number=\count287
+\multicoltolerance=\count288
+\multicolpretolerance=\count289
+\full@width=\dimen169
+\page@free=\dimen170
+\premulticols=\dimen171
+\postmulticols=\dimen172
+\multicolsep=\skip66
+\multicolbaselineskip=\skip67
+\partial@page=\box60
+\last@line=\box61
+\maxbalancingoverflow=\dimen173
+\mult@rightbox=\box62
+\mult@grightbox=\box63
+\mult@firstbox=\box64
+\mult@gfirstbox=\box65
+\@tempa=\box66
+\@tempa=\box67
 \@tempa=\box68
 \@tempa=\box69
 \@tempa=\box70
@@ -391,365 +378,211 @@ Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
 \@tempa=\box99
 \@tempa=\box100
 \@tempa=\box101
-\@tempa=\box102
-\@tempa=\box103
-\c@minrows=\count292
-\c@columnbadness=\count293
-\c@finalcolumnbadness=\count294
-\last@try=\dimen176
-\multicolovershoot=\dimen177
-\multicolundershoot=\dimen178
-\mult@nat@firstbox=\box104
-\colbreak@box=\box105
-\mc@col@check@num=\count295
+\c@minrows=\count290
+\c@columnbadness=\count291
+\c@finalcolumnbadness=\count292
+\last@try=\dimen174
+\multicolovershoot=\dimen175
+\multicolundershoot=\dimen176
+\mult@nat@firstbox=\box102
+\colbreak@box=\box103
+\mc@col@check@num=\count293
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
-\lst@mode=\count296
-\lst@gtempboxa=\box106
-\lst@token=\toks31
-\lst@length=\count297
-\lst@currlwidth=\dimen179
-\lst@column=\count298
-\lst@pos=\count299
-\lst@lostspace=\dimen180
-\lst@width=\dimen181
-\lst@newlines=\count300
-\lst@lineno=\count301
-\lst@maxwidth=\dimen182
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count294
+\lst@gtempboxa=\box104
+\lst@token=\toks30
+\lst@length=\count295
+\lst@currlwidth=\dimen177
+\lst@column=\count296
+\lst@pos=\count297
+\lst@lostspace=\dimen178
+\lst@width=\dimen179
+\lst@newlines=\count298
+\lst@lineno=\count299
+\lst@maxwidth=\dimen180
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
-File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count302
-\lst@skipnumbers=\count303
-\lst@framebox=\box107
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count300
+\lst@skipnumbers=\count301
+\lst@framebox=\box105
 )
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
-File: listings.cfg 2023/02/27 1.9 listings configuration
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
-Package: listings 2023/02/27 1.9 (Carsten Heinz)
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
-Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
-\col@sep=\dimen183
-\ar@mcellbox=\box108
-\extrarowheight=\dimen184
-\NC@list=\toks32
-\extratabsurround=\skip69
-\backup@length=\skip70
-\ar@cellbox=\box109
-)
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
-Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
-Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen185
-\captionmargin=\dimen186
-\caption@leftmargin=\dimen187
-\caption@rightmargin=\dimen188
-\caption@width=\dimen189
-\caption@indent=\dimen190
-\caption@parindent=\dimen191
-\caption@hangindent=\dimen192
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen181
+\ar@mcellbox=\box106
+\extrarowheight=\dimen182
+\NC@list=\toks31
+\extratabsurround=\skip68
+\backup@length=\skip69
+\ar@cellbox=\box107
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen183
+\captionmargin@=\dimen184
+\captionwidth=\dimen185
+\caption@tempdima=\dimen186
+\caption@indent=\dimen187
+\caption@parindent=\dimen188
+\caption@hangindent=\dimen189
 Package caption Info: KOMA-Script document class detected.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption-koma.st
-o
-File: caption-koma.sto 2023/09/08 v2.0e Adaption of the caption package to the 
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption-koma.sto
+File: caption-koma.sto 2020/09/21 v2.0b Adaption of the caption package to the 
 KOMA-Script document classes (AR)
 ))
-\c@caption@flags=\count304
-\c@continuedfloat=\count305
+\c@caption@flags=\count302
+\c@continuedfloat=\count303
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
-Package caption Info: KOMA-Script scrextend package detected.
-\caption@addmargin@hsize=\dimen193
-\caption@addmargin@linewidth=\dimen194
 Package caption Info: wrapfig package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
+\c@subfigure=\count304
+\c@subtable=\count305
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count306
+\rotFPtop=\skip70
+\rotFPbot=\skip71
+\rot@float@box=\box108
+\rot@mess@toks=\toks32
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
-tex.def
-File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count306
-\l__pdf_internal_box=\box110
-) (Thesis.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count307
+\l__pdf_internal_box=\box109
+)
+(./Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-Package scrbase Info: activating english \abstractname on input line 21.
-Package scrbase Info: activating english \partname on input line 21.
-Package scrbase Info: activating english \figurename on input line 21.
-Package scrbase Info: activating english \tablename on input line 21.
-Package scrbase Info: activating english \contentsname on input line 21.
-Package scrbase Info: activating english \listfigurename on input line 21.
-Package scrbase Info: activating english \listtablename on input line 21.
-Package scrbase Info: activating english \refname on input line 21.
-Package scrbase Info: activating english \indexname on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+Package scrbase Info: activating english \contentsname on input line 23.
+Package scrbase Info: activating english \listfigurename on input line 23.
+Package scrbase Info: activating english \listtablename on input line 23.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
-ii
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count307
-\scratchdimen=\dimen195
-\scratchbox=\box111
-\nofMPsegments=\count308
-\nofMParguments=\count309
+\scratchcounter=\count308
+\scratchdimen=\dimen190
+\scratchbox=\box110
+\nofMPsegments=\count309
+\nofMParguments=\count310
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count310
-\MPscratchDim=\dimen196
-\MPnumerator=\count311
-\makeMPintoPDFobject=\count312
+\MPscratchCnt=\count311
+\MPscratchDim=\dimen191
+\MPnumerator=\count312
+\makeMPintoPDFobject=\count313
 \everyMPtoPDFconversion=\toks34
-)
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
-ase.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
-fg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 ))
-\c@lstlisting=\count313
+\c@lstlisting=\count314
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 <images/hs/hd.png, id=1, 144.54pt x 75.8835pt>
 File: images/hs/hd.png Graphic file (type png)
 <use images/hs/hd.png>
-Package pdftex.def Info: images/hs/hd.png  used on input line 28.
+Package pdftex.def Info: images/hs/hd.png  used on input line 30.
 (pdftex.def)             Requested size: 86.72466pt x 45.53044pt.
 <images/hs/hhn.png, id=3, 115.18031pt x 44.41594pt>
 File: images/hs/hhn.png Graphic file (type png)
 <use images/hs/hhn.png>
-Package pdftex.def Info: images/hs/hhn.png  used on input line 29.
+Package pdftex.def Info: images/hs/hhn.png  used on input line 31.
 (pdftex.def)             Requested size: 115.18001pt x 44.41582pt.
 <images/hs/tmu.png, id=4, 1204.5pt x 664.4825pt>
 File: images/hs/tmu.png Graphic file (type png)
 <use images/hs/tmu.png>
-Package pdftex.def Info: images/hs/tmu.png  used on input line 30.
+Package pdftex.def Info: images/hs/tmu.png  used on input line 32.
 (pdftex.def)             Requested size: 72.26688pt x 39.86722pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--69
+Underfull \hbox (badness 10000) in paragraph at lines 70--71
 
  []
 
 [1
 
-{C:/Users/htjas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/hs/
-hd.png> <./images/hs/hhn.png> <./images/hs/tmu.png>] [2] (Thesis.toc [3])
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/hs/hd.png> <./ima
+ges/hs/hhn.png> <./images/hs/tmu.png>] [2] (./Thesis.toc [3])
 \tf@toc=\write3
 \openout3 = `Thesis.toc'.
 
-
-[4] (introduction.tex [5]) [6] (theoretical-background.tex
-
-LaTeX Warning: Citation `WhatBloodPressure2019' on page 7 undefined on input li
-ne 8.
-
-
-LaTeX Warning: Citation `betts20BloodFlow2022' on page 7 undefined on input lin
-e 16.
-
-
-LaTeX Warning: Citation `naylorArterialCathetersEarly2020' on page 7 undefined 
-on input line 20.
-
-
-LaTeX Warning: Citation `ettehadBloodPressureLowering2016' on page 7 undefined 
-on input line 21.
-
-
-LaTeX Warning: Citation `betts20BloodFlow2022' on page 7 undefined on input lin
-e 36.
-
-[7]
-<images/abp/sphyg.png, id=35, 702.625pt x 702.625pt>
+ [4]
+(./introduction.tex [5] [6]) (./theoretical-background.tex [7]
+<images/abp/sphyg.png, id=37, 702.625pt x 702.625pt>
 File: images/abp/sphyg.png Graphic file (type png)
 <use images/abp/sphyg.png>
 Package pdftex.def Info: images/abp/sphyg.png  used on input line 40.
 (pdftex.def)             Requested size: 140.5225pt x 140.5225pt.
-
-
-LaTeX Warning: Citation `StandardSphygmomanometer' on page 8 undefined on input
- line 41.
-
-
-LaTeX Warning: Citation `StandardSphygmomanometer' on page 8 undefined on input
- line 41.
-
-<images/abp/auto_sphyg.png, id=36, 602.25pt x 602.25pt>
+<images/abp/auto_sphyg.png, id=38, 602.25pt x 602.25pt>
 File: images/abp/auto_sphyg.png Graphic file (type png)
 <use images/abp/auto_sphyg.png>
 Package pdftex.def Info: images/abp/auto_sphyg.png  used on input line 43.
 (pdftex.def)             Requested size: 120.44786pt x 120.44786pt.
-
-LaTeX Warning: Citation `AutomaticDigitalBlood' on page 8 undefined on input li
-ne 44.
-
-
-LaTeX Warning: Citation `AutomaticDigitalBlood' on page 8 undefined on input li
-ne 44.
-
-[8 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
-
-LaTeX Warning: Citation `clarkArterialCatheterization1992' on page 9 undefined 
-on input line 56.
-
-
-LaTeX Warning: Citation `hillImputationContinuousArterial2021' on page 9 undefi
-ned on input line 61.
-
-<images/abp/catheter.png, id=40, 751.30687pt x 492.33937pt>
+ [8 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
+<images/abp/catheter.png, id=42, 751.30687pt x 492.33937pt>
 File: images/abp/catheter.png Graphic file (type png)
 <use images/abp/catheter.png>
 Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
 (pdftex.def)             Requested size: 300.51741pt x 196.93225pt.
 
-LaTeX Warning: Citation `contributorEssentialCriticalCare2021' on page 9 undefi
-ned on input line 66.
 
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Warning: Citation `contributorEssentialCriticalCare2021' on page 9 undefi
-ned on input line 66.
-
-
-LaTeX Warning: Citation `lehmanMethodsBloodPressure2013' on page 9 undefined on
- input line 71.
-
-
-LaTeX Warning: Citation `demersPhysiologyMeanArterial2024' on page 9 undefined 
-on input line 74.
-
-[9 <./images/abp/catheter.png>]
-
-LaTeX Warning: Citation `kimBallistocardiogramBasedApproachCuffless2018' on pag
-e 10 undefined on input line 78.
-
-
-LaTeX Warning: Citation `imholzFifteenYearsExperience1998' on page 10 undefined
- on input line 78.
-
-
-LaTeX Warning: Citation `peterReviewMethodsNoninvasive2014' on page 10 undefine
-d on input line 85.
-
-
-LaTeX Warning: Citation `challonerPhotoelectricPlethysmographMeasurement1974' o
-n page 10 undefined on input line 99.
-
-[10]
-
-LaTeX Warning: Citation `molitorNewBloodlessMethod1936' on page 11 undefined on
- input line 108.
-
-
-LaTeX Warning: Citation `hertzmanPhotoelectricPlethysmographyFingers1937' on pa
-ge 11 undefined on input line 110.
-
-
-LaTeX Warning: Citation `srivastavValsalvaManeuver2024' on page 11 undefined on
- input line 113.
-
-
-LaTeX Warning: Citation `hertzmanPhotoelectricPlethysmographyFingers1937' on pa
-ge 11 undefined on input line 116.
-
-
-LaTeX Warning: Citation `yoshiyaSpectrophotometricMonitoringArterial1980' on pa
-ge 11 undefined on input line 121.
-
-
-LaTeX Warning: Citation `aoyagiPulseOximetryIts2002' on page 11 undefined on in
-put line 124.
-
-
-LaTeX Warning: Citation `wieringaContactlessMultipleWavelength2005' on page 11 
-undefined on input line 128.
-
-
-LaTeX Warning: Citation `rheeArtifactresistantPowerefficientDesign2001' on page
- 11 undefined on input line 132.
-
-
-LaTeX Warning: Citation `zhengRingtypeDeviceNoninvasive2003' on page 11 undefin
-ed on input line 132.
-
-[11]
-
-LaTeX Warning: Citation `leeReflectancePulseOximetry2016' on page 12 undefined 
-on input line 135.
-
-<images/ppg/reflection.png, id=51, 853.1875pt x 316.18124pt>
+[9] [10 <./images/abp/catheter.png>] [11]
+<images/ppg/reflection.png, id=53, 853.1875pt x 316.18124pt>
 File: images/ppg/reflection.png Graphic file (type png)
 <use images/ppg/reflection.png>
 Package pdftex.def Info: images/ppg/reflection.png  used on input line 142.
 (pdftex.def)             Requested size: 341.26895pt x 126.47025pt.
-
-LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 12 undefined on
- input line 143.
-
-
-LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 12 undefined on
- input line 143.
-
-
-LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
-12 undefined on input line 154.
-
-
-LaTeX Warning: Citation `weisslerSystolicTimeIntervals1968' on page 12 undefine
-d on input line 157.
-
-<images/ppg/ac+dc.png, id=52, 853.1875pt x 588.1975pt>
+ [12 <./images/ppg/reflection.png>]
+<images/ppg/ac+dc.png, id=58, 853.1875pt x 588.1975pt>
 File: images/ppg/ac+dc.png Graphic file (type png)
 <use images/ppg/ac+dc.png>
 Package pdftex.def Info: images/ppg/ac+dc.png  used on input line 162.
 (pdftex.def)             Requested size: 426.59271pt x 294.09802pt.
 
-LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 12 undefined on
- input line 163.
-
-
-LaTeX Warning: Citation `mohanSpotMeasurementHeart2016' on page 12 undefined on
- input line 163.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
-12 undefined on input line 172.
-
-
-LaTeX Warning: Citation `sviridovaHumanPhotoplethysmogramNew2015' on page 12 un
-defined on input line 173.
-
-
-LaTeX Warning: Citation `castanedaReviewWearablePhotoplethysmography2018' on pa
-ge 12 undefined on input line 174.
-
-
-LaTeX Warning: Citation `ponnadaTechnologicalConsiderationsSensorassisted2019' 
-on page 12 undefined on input line 180.
-
-[12 <./images/ppg/reflection.png>] [13 <./images/ppg/ac+dc.png>]
-<images/ppg/ppg-devices.png, id=62, 1284.8pt x 722.7pt>
+[13 <./images/ppg/ac+dc.png>]
+<images/ppg/ppg-devices.png, id=64, 1284.8pt x 722.7pt>
 File: images/ppg/ppg-devices.png Graphic file (type png)
 <use images/ppg/ppg-devices.png>
 Package pdftex.def Info: images/ppg/ppg-devices.png  used on input line 186.
@@ -759,55 +592,19 @@ Overfull \hbox (1.55579pt too wide) in paragraph at lines 186--187
  [][] 
  []
 
-
-LaTeX Warning: Citation `zanelliPotentialAIBased2023' on page 14 undefined on i
-nput line 187.
-
-
-LaTeX Warning: Citation `zanelliPotentialAIBased2023' on page 14 undefined on i
-nput line 187.
-
-
-LaTeX Warning: Citation `allenPhotoplethysmographyItsApplication2007a' on page 
-14 undefined on input line 197.
-
-
-LaTeX Warning: Citation `langewoutersPressurediameterRelationshipsSegments1986'
- on page 14 undefined on input line 200.
-
 [14 <./images/ppg/ppg-devices.png>]
-
-LaTeX Warning: Citation `moodyDatabaseSupportDevelopment1996' on page 15 undefi
-ned on input line 219.
-
-
-LaTeX Warning: Citation `saeedMultiparameterIntelligentMonitoring2011' on page 
-15 undefined on input line 221.
-
-
-LaTeX Warning: Citation `johnsonMIMICIIIFreelyAccessible2016' on page 15 undefi
-ned on input line 222.
-
-
-LaTeX Warning: Citation `johnsonMIMICIVFreelyAccessible2023' on page 15 undefin
-ed on input line 224.
-
-<images/mimic/mimic_workflow.png, id=67, 515.82712pt x 169.38281pt>
+<images/mimic/mimic_workflow.png, id=69, 515.82712pt x 169.38281pt>
 File: images/mimic/mimic_workflow.png Graphic file (type png)
 <use images/mimic/mimic_workflow.png>
 Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
 9.
 (pdftex.def)             Requested size: 309.49866pt x 101.63046pt.
 
-LaTeX Warning: Citation `charltonMIMICWFDBTutorials2022' on page 15 undefined o
-n input line 230.
 
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Warning: Citation `charltonMIMICWFDBTutorials2022' on page 15 undefined o
-n input line 230.
-
-[15 <./images/mimic/mimic_workflow.png>]
-<images/mimic/mimic_structure.png, id=72, 1580.90625pt x 1188.69093pt>
+[15]
+<images/mimic/mimic_structure.png, id=73, 1580.90625pt x 1188.69093pt>
 File: images/mimic/mimic_structure.png Graphic file (type png)
 <use images/mimic/mimic_structure.png>
 Package pdftex.def Info: images/mimic/mimic_structure.png  used on input line 2
@@ -819,348 +616,148 @@ Overfull \hbox (26.14459pt too wide) in paragraph at lines 249--250
  []
 
 
-LaTeX Warning: Citation `johnsonMIMICIIIFreelyAccessible2016' on page 16 undefi
-ned on input line 250.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Citation `johnsonMIMICIIIFreelyAccessible2016' on page 16 undefi
-ned on input line 250.
-
-
-LaTeX Warning: Citation `moodyMIMICIIIWaveformDatabase2017' on page 16 undefine
-d on input line 254.
-
-
-LaTeX Warning: Citation `moodyMIMICIVWaveformDatabase' on page 16 undefined on 
-input line 254.
-
-[16 <./images/mimic/mimic_structure.png>] [17]
-
-LaTeX Warning: Citation `mukkamalaUbiquitousBloodPressure2015' on page 18 undef
-ined on input line 302.
-
-<images/sp/ptt.png, id=79, 639.89063pt x 489.32813pt>
+[16 <./images/mimic/mimic_workflow.png>] [17 <./images/mimic/mimic_structure.pn
+g>]
+<images/sp/ptt.png, id=81, 639.89063pt x 489.32813pt>
 File: images/sp/ptt.png Graphic file (type png)
 <use images/sp/ptt.png>
 Package pdftex.def Info: images/sp/ptt.png  used on input line 308.
 (pdftex.def)             Requested size: 255.9517pt x 195.72777pt.
 
-LaTeX Warning: Citation `luiNovelCalibrationProcedure2018' on page 18 undefined
- on input line 309.
 
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Warning: Citation `luiNovelCalibrationProcedure2018' on page 18 undefined
- on input line 309.
-
-<images/sp/pat.png, id=80, 687.56876pt x 584.1825pt>
+<images/sp/pat.png, id=82, 687.56876pt x 584.1825pt>
 File: images/sp/pat.png Graphic file (type png)
 <use images/sp/pat.png>
 Package pdftex.def Info: images/sp/pat.png  used on input line 320.
 (pdftex.def)             Requested size: 275.02263pt x 233.66885pt.
 
-LaTeX Warning: Citation `dhillonPulseArrivalTime2019' on page 18 undefined on i
-nput line 321.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Citation `dhillonPulseArrivalTime2019' on page 18 undefined on i
-nput line 321.
-
-[18 <./images/sp/ptt.png>]
-
-LaTeX Warning: Citation `mccombieAdaptiveBloodPressure2006' on page 19 undefine
-d on input line 326.
-
-<images/sp/pww.jpg, id=84, 853.1875pt x 702.625pt>
+[18]
+<images/sp/pww.jpg, id=86, 853.1875pt x 702.625pt>
 File: images/sp/pww.jpg Graphic file (type jpg)
 <use images/sp/pww.jpg>
 Package pdftex.def Info: images/sp/pww.jpg  used on input line 335.
 (pdftex.def)             Requested size: 224.06548pt x 184.52223pt.
-
-LaTeX Warning: Citation `urbanUnderstandingArterialBiomechanics2023' on page 19
- undefined on input line 339.
-
-
-LaTeX Warning: Citation `urbanUnderstandingArterialBiomechanics2023' on page 19
- undefined on input line 339.
-
-
-LaTeX Warning: Citation `elgendiAnalysisFingertipPhotoplethysmogram2012' on pag
-e 19 undefined on input line 352.
-
-<images/sp/pwa.png, id=85, 266.32834pt x 106.73209pt>
+<images/sp/pwa.png, id=87, 266.32834pt x 106.73209pt>
 File: images/sp/pwa.png Graphic file (type png)
 <use images/sp/pwa.png>
 Package pdftex.def Info: images/sp/pwa.png  used on input line 358.
 (pdftex.def)             Requested size: 448.13095pt x 179.60017pt.
-
-LaTeX Warning: Citation `bikiaLeveragingPotentialMachine2021' on page 19 undefi
-ned on input line 359.
-
-
-LaTeX Warning: Citation `bikiaLeveragingPotentialMachine2021' on page 19 undefi
-ned on input line 359.
-
-[19 <./images/sp/pat.png (PNG copy)>] [20 <./images/sp/pww.jpg> <./images/sp/pw
-a.png>]
-
-LaTeX Warning: Citation `chatterjeePPGBasedHeart2018' on page 21 undefined on i
-nput line 375.
-
-
-LaTeX Warning: Citation `savitzkySmoothingDifferentiationData1964' on page 21 u
-ndefined on input line 387.
-
-
-LaTeX Warning: Citation `antoniouDigitalFiltersAnalysis2018' on page 21 undefin
-ed on input line 416.
-
-[21]
-
-LaTeX Warning: Citation `liangOptimalFilterShort2018' on page 22 undefined on i
-nput line 456.
-
-
-LaTeX Warning: Citation `takazawaAssessmentVasoactiveAgents1998' on page 22 und
-efined on input line 465.
-
-<images/sp/dic_notch.png, id=103, 650.43pt x 330.23375pt>
-File: images/sp/dic_notch.png Graphic file (type png)
-<use images/sp/dic_notch.png>
-Package pdftex.def Info: images/sp/dic_notch.png  used on input line 472.
-(pdftex.def)             Requested size: 390.261pt x 198.14177pt.
-
-LaTeX Warning: Citation `djeldjliImagingPhotoplethysmographySignal2019' on page
- 22 undefined on input line 473.
-
-
-LaTeX Warning: Citation `djeldjliImagingPhotoplethysmographySignal2019' on page
- 22 undefined on input line 473.
-
+ [19 <./images/sp/ptt.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Citation `charltonAssessingHemodynamicsPhotoplethysmogram2022' o
-n page 22 undefined on input line 477.
-
-
-LaTeX Warning: Citation `zhangEffectLocalCold2005' on page 22 undefined on inpu
-t line 481.
+[20 <./images/sp/pat.png (PNG copy)> <./images/sp/pww.jpg>] [21 <./images/sp/pw
+a.png>]
+Overfull \hbox (17.71764pt too wide) in paragraph at lines 444--454
+ [] 
+ []
 
 [22]
-<images/sp/fiducials.png, id=107, 526.21594pt x 350.81062pt>
+<images/sp/dic_notch.png, id=112, 650.43pt x 330.23375pt>
+File: images/sp/dic_notch.png Graphic file (type png)
+<use images/sp/dic_notch.png>
+Package pdftex.def Info: images/sp/dic_notch.png  used on input line 474.
+(pdftex.def)             Requested size: 390.261pt x 198.14177pt.
+ [23 <./images/sp/dic_notch.png>]
+<images/sp/fiducials.png, id=117, 526.21594pt x 350.81062pt>
 File: images/sp/fiducials.png Graphic file (type png)
 <use images/sp/fiducials.png>
-Package pdftex.def Info: images/sp/fiducials.png  used on input line 486.
+Package pdftex.def Info: images/sp/fiducials.png  used on input line 489.
 (pdftex.def)             Requested size: 420.97333pt x 280.64886pt.
 
-
-LaTeX Warning: Citation `charltonAssessingHemodynamicsPhotoplethysmogram2022' o
-n page 23 undefined on input line 487.
-
-
-LaTeX Warning: Citation `charltonAssessingHemodynamicsPhotoplethysmogram2022' o
-n page 23 undefined on input line 487.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (17.1706pt too wide) in paragraph at lines 496--497
+Overfull \hbox (17.1706pt too wide) in paragraph at lines 499--500
 []\OT1/cmr/m/n/12 Second Deriva-tive Fea-tures (ag-ing in-dex: de-fined as am-p
 li-tude val-ues of [] 
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-497.
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmtt.fd
-File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+500.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-Overfull \hbox (4.71902pt too wide) in paragraph at lines 497--498
+Overfull \hbox (4.71902pt too wide) in paragraph at lines 500--501
 []\OT1/cmr/m/n/12 Combination of Fea-tures (min-i-mum rise time: \OT1/cmtt/m/n/
 12 [1/x0(ms)]\TS1/cmtt/m/n/12 ·\OT1/cmtt/m/n/12 [x(sys) - x(onset)]\OT1/cmr/m/n
 /12 ) 
  []
 
-[23 <./images/sp/dic_notch.png>]
-Overfull \hbox (4.81723pt too wide) in paragraph at lines 511--513
+[24 <./images/sp/fiducials.png>]
+Overfull \hbox (4.81723pt too wide) in paragraph at lines 514--516
 \OT1/cmr/m/n/12 Building upon the foun-da-tion laid by tra-di-tional sig-nal pr
 o-cess-ing tech-niques, ML emerges
  []
 
-<images/ml/adaboost.png, id=113, 5781.6pt x 3252.15pt>
+<images/ml/adaboost.png, id=122, 5781.6pt x 3252.15pt>
 File: images/ml/adaboost.png Graphic file (type png)
 <use images/ml/adaboost.png>
-Package pdftex.def Info: images/ml/adaboost.png  used on input line 516.
+Package pdftex.def Info: images/ml/adaboost.png  used on input line 519.
 (pdftex.def)             Requested size: 346.88104pt x 195.12057pt.
-
-LaTeX Warning: Citation `AdaBoostAlgorithmMachine' on page 24 undefined on inpu
-t line 517.
-
-
-LaTeX Warning: Citation `AdaBoostAlgorithmMachine' on page 24 undefined on inpu
-t line 517.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[24 <./images/sp/fiducials.png>]
-
-LaTeX Warning: Citation `tengContinuousNoninvasiveEstimation2003' on page 25 un
-defined on input line 529.
-
-
-LaTeX Warning: Citation `suzukiCufflessBloodPressure2009' on page 25 undefined 
-on input line 533.
-
-
-LaTeX Warning: Citation `ruiz-rodriguezInnovativeContinuousNoninvasive2013a' on
- page 25 undefined on input line 536.
-
-<images/ml/RBM.png, id=117, 853.1875pt x 404.51125pt>
+[25 <./images/ml/adaboost.png>]
+<images/ml/RBM.png, id=128, 853.1875pt x 404.51125pt>
 File: images/ml/RBM.png Graphic file (type png)
 <use images/ml/RBM.png>
-Package pdftex.def Info: images/ml/RBM.png  used on input line 542.
+Package pdftex.def Info: images/ml/RBM.png  used on input line 545.
 (pdftex.def)             Requested size: 426.59271pt x 202.25513pt.
-
-LaTeX Warning: Citation `ouIntegratingCellularAutomata2019' on page 25 undefine
-d on input line 543.
-
-
-LaTeX Warning: Citation `ouIntegratingCellularAutomata2019' on page 25 undefine
-d on input line 543.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Citation `kurylyakNeuralNetworkbasedMethod2013' on page 25 undef
-ined on input line 547.
-
-[25 <./images/ml/adaboost.png>]
-<images/ml/ffnn.png, id=124, 454.69875pt x 366.36874pt>
+ [26 <./images/ml/RBM.png>]
+<images/ml/ffnn.png, id=133, 454.69875pt x 366.36874pt>
 File: images/ml/ffnn.png Graphic file (type png)
 <use images/ml/ffnn.png>
-Package pdftex.def Info: images/ml/ffnn.png  used on input line 552.
+Package pdftex.def Info: images/ml/ffnn.png  used on input line 555.
 (pdftex.def)             Requested size: 227.34882pt x 183.18391pt.
 
-
-LaTeX Warning: Citation `FeedforwardNeuralNetworks' on page 26 undefined on inp
-ut line 553.
-
-
-LaTeX Warning: Citation `FeedforwardNeuralNetworks' on page 26 undefined on inp
-ut line 553.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Citation `xingOpticalBloodPressure2016' on page 26 undefined on 
-input line 557.
-
-
-LaTeX Warning: Citation `liuIntegratedNavigationTethered2017' on page 26 undefi
-ned on input line 560.
-
-
-LaTeX Warning: Citation `suLongtermBloodPressure2018' on page 26 undefined on i
-nput line 562.
-
-
-Overfull \hbox (1.97975pt too wide) in paragraph at lines 562--564
+Overfull \hbox (1.97975pt too wide) in paragraph at lines 565--567
 \OT1/cmr/m/n/12 Short-term mem-ory (LSTM) model with resid-ual con-nec-tions, d
 emon-strat-ing the promise
  []
 
-<images/ml/lstm.png, id=125, 682.55pt x 370.38374pt>
+<images/ml/lstm.png, id=134, 682.55pt x 370.38374pt>
 File: images/ml/lstm.png Graphic file (type png)
 <use images/ml/lstm.png>
-Package pdftex.def Info: images/ml/lstm.png  used on input line 567.
+Package pdftex.def Info: images/ml/lstm.png  used on input line 570.
 (pdftex.def)             Requested size: 341.27417pt x 185.1914pt.
-
-LaTeX Warning: Citation `anishnamaUnderstandingBidirectionalLSTM2023' on page 2
-6 undefined on input line 568.
-
-
-LaTeX Warning: Citation `anishnamaUnderstandingBidirectionalLSTM2023' on page 2
-6 undefined on input line 568.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Citation `tanveerCufflessBloodPressure2019' on page 26 undefined
- on input line 572.
-
-<images/ml/attention.jpeg, id=126, 207.6558pt x 188.8656pt>
+[27 <./images/ml/ffnn.png (PNG copy)>]
+<images/ml/attention.jpeg, id=138, 207.6558pt x 188.8656pt>
 File: images/ml/attention.jpeg Graphic file (type jpg)
 <use images/ml/attention.jpeg>
-Package pdftex.def Info: images/ml/attention.jpeg  used on input line 579.
+Package pdftex.def Info: images/ml/attention.jpeg  used on input line 582.
 (pdftex.def)             Requested size: 224.06548pt x 203.80464pt.
-
-LaTeX Warning: Citation `marulandaHybridModelBased2023' on page 26 undefined on
- input line 583.
-
-
-LaTeX Warning: Citation `marulandaHybridModelBased2023' on page 26 undefined on
- input line 583.
-
-
-LaTeX Warning: Citation `joungContinuousCufflessBlood2023' on page 26 undefined
- on input line 594.
-
-[26 <./images/ml/RBM.png>]) [27 <./images/ml/ffnn.png (PNG copy)>] (methods.tex
-[28 <./images/ml/lstm.png>]
-
-LaTeX Warning: Citation `MITLCPWfdbpython2024' on page 29 undefined on input li
-ne 24.
-
-[29 <./images/ml/attention.jpeg>] [30]
-
-LaTeX Warning: Reference `fig:segments, fig:values' on page 31 undefined on inp
-ut line 112.
-
-
+) [28 <./images/ml/lstm.png>]
+(./methods.tex [29 <./images/ml/attention.jpeg>] [30]
 Underfull \hbox (badness 1448) in paragraph at lines 110--113
 [][]\OT1/cmr/m/n/12 If a 10-minute con-tin-u-ous part of the seg-ment
  []
 
-<images/methods/segments.png, id=144, 308.65312pt x 194.22563pt>
+<images/methods/segments.png, id=149, 308.65312pt x 194.22563pt>
 File: images/methods/segments.png Graphic file (type png)
 <use images/methods/segments.png>
 Package pdftex.def Info: images/methods/segments.png  used on input line 117.
 (pdftex.def)             Requested size: 134.44064pt x 84.60007pt.
-<images/methods/values.png, id=145, 228.10219pt x 291.33844pt>
+[31 <./images/methods/segments.png>]
+<images/methods/values.png, id=155, 228.10219pt x 291.33844pt>
 File: images/methods/values.png Graphic file (type png)
 <use images/methods/values.png>
 Package pdftex.def Info: images/methods/values.png  used on input line 133.
 (pdftex.def)             Requested size: 134.44064pt x 171.71481pt.
-[31 <./images/methods/segments.png> <./images/methods/values.png>]
+
 Overfull \hbox (19.98358pt too wide) in paragraph at lines 158--160
 \OT1/cmtt/m/n/10.95 abp,ppg,abp[]beats,ppg[]beats = signal[]processing(seg[]nam
 e,abp[]filt,ppg[]filt,fs) 
  []
 
-
+[32 <./images/methods/values.png>]
 Overfull \hbox (59.53455pt too wide) in paragraph at lines 164--166
 \OT1/cmtt/m/n/10.95 save[]split[]features(tot[]abp[]values,median[]abp[]values,
 tot[]ppg[]values,median[]ppg[]values) 
  []
-
-
-LaTeX Warning: Citation `PandasPythonData' on page 32 undefined on input line 1
-68.
-
-
-LaTeX Warning: Citation `NumPy' on page 32 undefined on input line 169.
-
-
-LaTeX Warning: Citation `MatplotlibVisualizationPython' on page 32 undefined on
- input line 169.
-
-
-LaTeX Warning: Citation `SciPy' on page 32 undefined on input line 169.
 
 
 Overfull \hbox (7.98654pt too wide) in paragraph at lines 175--180
@@ -1168,48 +765,36 @@ Overfull \hbox (7.98654pt too wide) in paragraph at lines 175--180
  sec-tion on Sig-nal Pro-cess-ing( 3.2.1[]),
  []
 
-[32]
-<images/methods/filters.png, id=155, 1734.48pt x 1734.48pt>
+<images/methods/filters.png, id=160, 1734.48pt x 1734.48pt>
 File: images/methods/filters.png Graphic file (type png)
 <use images/methods/filters.png>
 Package pdftex.def Info: images/methods/filters.png  used on input line 190.
 (pdftex.def)             Requested size: 403.31511pt x 403.31537pt.
- [33 <./images/methods/filters.png>]
-<images/methods/opt_filtering.png, id=159, 1606.0pt x 803.0pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/methods/opt_filtering.png, id=161, 1606.0pt x 803.0pt>
 File: images/methods/opt_filtering.png Graphic file (type png)
 <use images/methods/opt_filtering.png>
 Package pdftex.def Info: images/methods/opt_filtering.png  used on input line 2
 01.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
 
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Warning: Citation `charltonMIMICWFDBTutorials2022' on page 34 undefined o
-n input line 212.
-
-
-LaTeX Warning: Citation `vangentHeartPyNovelHeart2019' on page 34 undefined on 
-input line 214.
-
-
-LaTeX Warning: Citation `elgendiSystolicPeakDetection2013' on page 34 undefined
- on input line 214.
-
-
-LaTeX Warning: Citation `arguellopradaNovelLowcomplexityPeak2018' on page 34 un
-defined on input line 215.
-
-
-LaTeX Warning: Citation `aboyAutomaticBeatDetection2005' on page 34 undefined o
-n input line 215.
-
-[34 <./images/methods/opt_filtering.png>] [35]
-<images/methods/beat_algos.png, id=166, 1606.0pt x 1606.0pt>
+[33] [34 <./images/methods/filters.png>] [35 <./images/methods/opt_filtering.pn
+g>]
+<images/methods/beat_algos.png, id=171, 1606.0pt x 1606.0pt>
 File: images/methods/beat_algos.png Graphic file (type png)
 <use images/methods/beat_algos.png>
 Package pdftex.def Info: images/methods/beat_algos.png  used on input line 259.
 
 (pdftex.def)             Requested size: 403.31511pt x 403.31242pt.
- [36 <./images/methods/beat_algos.png>]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[36]
 Overfull \hbox (12.52426pt too wide) in paragraph at lines 278--281
 \OT1/cmtt/m/n/12 abp[]beats,[]=sp.find[]peaks(abp,distance=abp[]beat[]interval*
 .75,prominence=0.5) 
@@ -1221,7 +806,7 @@ Overfull \hbox (18.69926pt too wide) in paragraph at lines 278--281
 .75,prominence=0.01) 
  []
 
-<images/methods/sp_beats.png, id=170, 1606.0pt x 1606.0pt>
+<images/methods/sp_beats.png, id=175, 1606.0pt x 1606.0pt>
 File: images/methods/sp_beats.png Graphic file (type png)
 <use images/methods/sp_beats.png>
 Package pdftex.def Info: images/methods/sp_beats.png  used on input line 283.
@@ -1229,122 +814,157 @@ Package pdftex.def Info: images/methods/sp_beats.png  used on input line 283.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/methods/synchronised.png, id=171, 1606.0pt x 803.0pt>
+[37 <./images/methods/beat_algos.png>] [38 <./images/methods/sp_beats.png>]
+<images/methods/synchronised.png, id=183, 1606.0pt x 803.0pt>
 File: images/methods/synchronised.png Graphic file (type png)
 <use images/methods/synchronised.png>
 Package pdftex.def Info: images/methods/synchronised.png  used on input line 30
 8.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/methods/cringe_signals.png, id=172, 1606.0pt x 803.0pt>
+<images/methods/cringe_signals.png, id=184, 1606.0pt x 803.0pt>
 File: images/methods/cringe_signals.png Graphic file (type png)
 <use images/methods/cringe_signals.png>
 Package pdftex.def Info: images/methods/cringe_signals.png  used on input line 
 322.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
 
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[37] [38 <./images/methods/sp_beats.png>]
-
-LaTeX Warning: Citation `charltonMIMICWFDBTutorials2022' on page 39 undefined o
-n input line 354.
-
-[39 <./images/methods/synchronised.png>]
-<images/methods/fidps.png, id=183, 1606.0pt x 803.0pt>
+[39 <./images/methods/synchronised.png>] [40 <./images/methods/cringe_signals.p
+ng>]
+<images/methods/fidps.png, id=191, 1606.0pt x 803.0pt>
 File: images/methods/fidps.png Graphic file (type png)
 <use images/methods/fidps.png>
 Package pdftex.def Info: images/methods/fidps.png  used on input line 362.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
- [40 <./images/methods/cringe_signals.png> <./images/methods/fidps.png>]
-
-LaTeX Warning: Citation `charltonAssessingHemodynamicsPhotoplethysmogram2022' o
-n page 41 undefined on input line 381.
-
-
-LaTeX Warning: Citation `maqsoodSurveyShallowDeep2022' on page 41 undefined on 
-input line 381.
-
-[41]
-<images/methods/feats.png, id=191, 722.7pt x 542.025pt>
+ [41 <./images/methods/fidps.png>] [42]
+<images/methods/feats.png, id=198, 722.7pt x 542.025pt>
 File: images/methods/feats.png Graphic file (type png)
 <use images/methods/feats.png>
 Package pdftex.def Info: images/methods/feats.png  used on input line 449.
 (pdftex.def)             Requested size: 403.31511pt x 302.48982pt.
- [42]
-<images/methods/median_fft.png, id=195, 1284.8pt x 481.8pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/methods/median_fft.png, id=199, 1284.8pt x 481.8pt>
 File: images/methods/median_fft.png Graphic file (type png)
 <use images/methods/median_fft.png>
 Package pdftex.def Info: images/methods/median_fft.png  used on input line 455.
 
 (pdftex.def)             Requested size: 403.31511pt x 151.23848pt.
 
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Citation `demersPhysiologyMeanArterial2024' on page 43 undefined
- on input line 467.
-
-[43 <./images/methods/feats.png>]
-Overfull \hbox (0.93245pt too wide) in paragraph at lines 494--497
+[43] [44 <./images/methods/feats.png>]
+Overfull \hbox (0.93245pt too wide) in paragraph at lines 498--501
 \OT1/cmr/m/n/12 In this con-clud-ing sec-tion de-tail-ing meth-ods, the uti-liz
 a-tion of Ma-chine Learn-ing method-
  []
 
-
-LaTeX Warning: Citation `ScikitlearnMachineLearning' on page 44 undefined on in
-put line 498.
-
-
-LaTeX Warning: Citation `PyTorch' on page 44 undefined on input line 499.
-
-
-LaTeX Warning: Citation `Wandb' on page 44 undefined on input line 500.
-
-[44 <./images/methods/median_fft.png>]
-
-LaTeX Warning: Citation `SGDPyTorchDocumentation' on page 45 undefined on input
- line 522.
+[45 <./images/methods/median_fft.png>]) [46] (./results.tex
+<images/results/flow_diagram.png, id=214, 761.84625pt x 473.77pt>
+File: images/results/flow_diagram.png Graphic file (type png)
+<use images/results/flow_diagram.png>
+Package pdftex.def Info: images/results/flow_diagram.png  used on input line 52
+.
+(pdftex.def)             Requested size: 403.31511pt x 250.80774pt.
 
 
-LaTeX Warning: Citation `AdamPyTorchDocumentation' on page 45 undefined on inpu
-t line 522.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Citation `LBFGSPyTorchDocumentation' on page 45 undefined on inp
-ut line 523.
-
-[45]) [46]
-<images/flow_diagrams/flow_diagram.png, id=210, 761.84625pt x 473.77pt>
-File: images/flow_diagrams/flow_diagram.png Graphic file (type png)
-<use images/flow_diagrams/flow_diagram.png>
-Package pdftex.def Info: images/flow_diagrams/flow_diagram.png  used on input l
-ine 160.
-(pdftex.def)             Requested size: 457.11128pt x 284.26419pt.
-
-Overfull \hbox (8.98033pt too wide) in paragraph at lines 160--161
- [][] 
+[47]
+Overfull \hbox (8.3163pt too wide) in paragraph at lines 71--96
+ [] 
  []
 
-[47 <./images/flow_diagrams/flow_diagram.png>] [48] (Thesis.bbl [49] [50]
-Underfull \hbox (badness 1681) in paragraph at lines 132--136
+[48 <./images/results/flow_diagram.png>]
+<images/results/LSTM_GRU_Train_mse.png, id=222, 2537.48pt x 1332.98pt>
+File: images/results/LSTM_GRU_Train_mse.png Graphic file (type png)
+<use images/results/LSTM_GRU_Train_mse.png>
+Package pdftex.def Info: images/results/LSTM_GRU_Train_mse.png  used on input l
+ine 148.
+(pdftex.def)             Requested size: 179.24963pt x 94.15205pt.
+<images/results/LSTM_GRU_Test_mse.png, id=223, 2537.48pt x 1332.98pt>
+File: images/results/LSTM_GRU_Test_mse.png Graphic file (type png)
+<use images/results/LSTM_GRU_Test_mse.png>
+Package pdftex.def Info: images/results/LSTM_GRU_Test_mse.png  used on input li
+ne 155.
+(pdftex.def)             Requested size: 179.24963pt x 94.15205pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/results/feature_importance_plot_GRU_0.png, id=224, 722.7pt x 1445.4pt>
+File: images/results/feature_importance_plot_GRU_0.png Graphic file (type png)
+<use images/results/feature_importance_plot_GRU_0.png>
+Package pdftex.def Info: images/results/feature_importance_plot_GRU_0.png  used
+ on input line 162.
+(pdftex.def)             Requested size: 224.06548pt x 448.13554pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [49 <./images/results/LSTM_GRU_Train_mse.png>] [50 <./images/results/LSTM_GRU
+_Test_mse.png>] [51] (./Thesis.bbl [52] [53]
+Overfull \hbox (62.17119pt too wide) in paragraph at lines 115--118
+[]\OT1/cmr/m/n/12 ``Automatic Dig-i-tal Blood Pres-sure Mon-i-tor.''  http://ww
+w.ncmedical.com/products/automatic-
+ []
+
+
+Underfull \hbox (badness 1681) in paragraph at lines 141--145
 []\OT1/cmr/m/n/12 C.-S. Kim, A. M. Carek, O. T. Inan, R. Mukka-mala, and J.-O. 
 Hahn,
  []
 
-[51] [52] [53] [54] [55] [56]) [57] (code.tex
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-[58] [59]
+[54] [55] [56] [57]
+Underfull \hbox (badness 10000) in paragraph at lines 348--351
+[]\OT1/cmr/m/n/12 ``AdaBoost Al-go-rithm in Ma-chine Learn-ing.''  Avail-able a
+t
+ []
+
+[58]
+Underfull \hbox (badness 10000) in paragraph at lines 384--386
+[]\OT1/cmr/m/n/12 ``Feedforward Neu-ral Net-works | Bril-liant Math & Sci-ence 
+Wiki.''
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 425--427
+[]\OT1/cmr/m/n/12 H. Jasin-skas, ``Htjas/PPG-BP Project.''  Avail-able at
+ []
+
+
+Underfull \hbox (badness 1701) in paragraph at lines 429--431
+[]\OT1/cmr/m/n/12 ``MIT-LCP/wfdb-python.''  Avail-able at https://github.com/MI
+T-LCP/wfdb-
+ []
+
+[59]
+Underfull \hbox (badness 10000) in paragraph at lines 487--490
+[]\OT1/cmr/m/n/12 ``SGD | Py-Torch 2.2 doc-u-men-ta-tion.''  Avail-able at
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--495
+[]\OT1/cmr/m/n/12 ``Adam | Py-Torch 2.2 doc-u-men-ta-tion.''  Avail-able at
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--500
+[]\OT1/cmr/m/n/12 ``LBFGS | Py-Torch 2.2 doc-u-men-ta-tion.''  Avail-able at
+ []
+
+[60]) [61] (./code.tex
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) [62] [63]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
 18.
 
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
-File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 118.
@@ -1353,12 +973,12 @@ Overfull \hbox (15.97932pt too wide) in paragraph at lines 144--145
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[60]
+[64]
 Overfull \hbox (77.18068pt too wide) in paragraph at lines 198--199
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[61]
+[65]
 Overfull \hbox (10.87921pt too wide) in paragraph at lines 235--236
 [][][][][][][][][][][] 
  []
@@ -1368,7 +988,7 @@ Overfull \hbox (10.87921pt too wide) in paragraph at lines 236--237
 [][][][][][][][][][][] 
  []
 
-[62] [63]
+[66] [67]
 Overfull \hbox (0.67899pt too wide) in paragraph at lines 327--328
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1390,8 +1010,8 @@ Overfull \hbox (10.87921pt too wide) in paragraph at lines 342--343
 
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
 44.
-(C:\Users\htjas\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
-File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 344.
@@ -1400,18 +1020,18 @@ Overfull \hbox (87.3809pt too wide) in paragraph at lines 344--346
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[64]
+[68]
 Overfull \hbox (153.68237pt too wide) in paragraph at lines 431--433
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ] 
  []
 
-[65]
+[69]
 Overfull \hbox (5.7791pt too wide) in paragraph at lines 474--475
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[66]
+[70]
 Overfull \hbox (15.97932pt too wide) in paragraph at lines 489--490
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1421,7 +1041,7 @@ Overfull \hbox (15.97932pt too wide) in paragraph at lines 519--520
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[67]
+[71]
 Overfull \hbox (87.3809pt too wide) in paragraph at lines 539--540
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1441,7 +1061,7 @@ Overfull \hbox (46.58pt too wide) in paragraph at lines 589--590
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[68]
+[72]
 Overfull \hbox (61.88034pt too wide) in paragraph at lines 605--606
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1451,7 +1071,7 @@ Overfull \hbox (66.98045pt too wide) in paragraph at lines 608--609
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[69]
+[73]
 Overfull \hbox (148.58226pt too wide) in paragraph at lines 662--663
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1461,64 +1081,52 @@ Overfull \hbox (148.58226pt too wide) in paragraph at lines 664--665
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[70] [71] [72]
+[74] [75] [76]
 Overfull \hbox (56.78023pt too wide) in paragraph at lines 825--826
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[73]
+[77]
 Overfull \hbox (72.08057pt too wide) in paragraph at lines 909--910
 [][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [74] (Thesis.aux)
- ***********
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-01-22>
- ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+) [78] [79 <./images/results/feature_importance_plot_GRU_0.png>] (./Thesis.aux)
  ) 
 Here is how much of TeX's memory you used:
- 11750 strings out of 474541
- 221834 string characters out of 5744425
- 2009978 words of memory out of 5000000
- 33843 multiletter control sequences out of 15000+600000
- 568859 words of font info for 73 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 108i,8n,117p,10998b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcti
-0800.pk> <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\tcrm0800.pk> <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\tcrm1200.pk> <C:\Users\htjas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\tctt1200.pk><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmbx10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/htjas/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/htjas/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/htjas/Ap
-pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users
-/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
-C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr
-10.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmr12.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmr17.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmr8.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/htjas/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/htjas/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/htjas/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/ht
-jas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/
-Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10
-.pfb><C:/Users/htjas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmtt12.pfb>
-Output written on Thesis.pdf (74 pages, 5913862 bytes).
+ 11840 strings out of 480204
+ 221893 string characters out of 5895010
+ 869684 words of memory out of 5000000
+ 29589 multiletter control sequences out of 15000+600000
+ 481610 words of font info for 72 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 108i,8n,117p,10696b,1835s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/hugasj/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti0800.60
+0pk> </home/hugasj/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.
+600pk> </home/hugasj/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt120
+0.600pk> </home/hugasj/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1
+200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Thesis.pdf (79 pages, 6211161 bytes).
 PDF statistics:
- 397 PDF objects out of 1000 (max. 8388607)
+ 434 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 171 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
 

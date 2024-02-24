@@ -109,7 +109,7 @@ These exclusion criteria are summarized in Table~\ref{tab:faulty}.
 
 If a 10-minute continuous part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
 If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by a \_ and a number representing the \textit{n-th} 10 minute part of a segment)
-Examples of the file names and their values are illustrated in Figures~\ref{fig:segments, fig:values}.
+Examples of the file names and their values are illustrated in Figures~\ref{fig:segments} and~\ref{fig:values}.
 
 \begin{wrapfigure}{r}{0.35\textwidth}
     \vspace*{-10mm}
@@ -435,10 +435,10 @@ The last three features are regarded as frequency domain features, since the val
 \begin{flushleft}
     \small
     \begin{tabular}{ll}
-        $X(k)$      & : Discrete Fourier Transform (DFT) coefficients at frequency index $k$ \\
-        $x(n)$      & : Input signal data point at time index $n$                            \\
-        $N$         & : Total number of samples in the input signal                            \\
-        $k$         & : Frequency index ranging from $0$ to $N-1$                               \\
+        $X(k)$ & : Discrete Fourier Transform (DFT) coefficients at frequency index $k$ \\
+        $x(n)$ & : Input signal data point at time index $n$                            \\
+        $N$    & : Total number of samples in the input signal                          \\
+        $k$    & : Frequency index ranging from $0$ to $N-1$                            \\
     \end{tabular}
 \end{flushleft}
 
@@ -467,8 +467,12 @@ The determination of the SP and DP involved a straightforward method of extracti
 Lastly, the calculation method employed for the MAP values was based on the formula provided by DeMers and Wachs~\cite{demersPhysiologyMeanArterial2024}:
 
 \vspace{0.1cm}
-{\centering  \large \texttt{MAP} = \texttt{DP} + \left(\frac{\texttt{SP} - \texttt{DP}}{3}).\right \par}
-\vspace{0.1cm}
+\large
+\begin{center}
+    \begin{math}
+        \texttt{MAP} = \texttt{DP} + \left(\frac{\texttt{SP} - \texttt{DP}}{3}\right).
+    \end{math}
+\end{center}
 \normalsize
 
 \vspace{0.2cm}
@@ -519,7 +523,7 @@ A total of 8 regression models were implemented:
 
 The code of the listed ML models can be found in appendix~\ref{subsec:code_ml}.
 
-In LR and MLP models, the utilized optimizers were \enquote{Stochastic Gradient Descent} (SGD)\cite{SGDPyTorchDocumentation} and \enquote{Adaptive Moment Estimation} (Adam)\cite{AdamPyTorchDocumentation} respectively.
+In LR and MLP models, the utilized optimizers were \enquote{Stochastic Gradient Descent} (SGD)\cite{SGDPyTorchDocumentation} and \enquote{Adaptive Moment Estimation} (Adam)\cite{AdamPyTorchDocumentationa} respectively.
 The optimizer for LSTM and GRU models was \enquote{Limited-memory Broyden–Fletcher–Goldfarb–Shanno} (LBFGS) algorithm~\cite{LBFGSPyTorchDocumentation}, each running for 100 epochs with a learning rate set to 0.1.
 
 The SVR model was initialized with the \texttt{linear} kernel, a regularization parameter \texttt{C} set to 100, and with an \texttt{epsilon} of 0.1.

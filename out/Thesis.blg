@@ -1,141 +1,227 @@
 This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Thesis.aux
-The style file: plain.bst
-Database file #1: literature.bib
+The style file: ieeetr.bst
+Database file #1: literature_final_with_notes.bib
+Warning--entry type for "AdaBoostAlgorithmMachine" isn't style-file defined
+--line 19 of file literature_final_with_notes.bib
+Warning--entry type for "AdamPyTorchDocumentationa" isn't style-file defined
+--line 30 of file literature_final_with_notes.bib
+Warning--entry type for "anishnamaUnderstandingBidirectionalLSTM2023" isn't style-file defined
+--line 55 of file literature_final_with_notes.bib
+Warning--entry type for "AutomaticDigitalBlood" isn't style-file defined
+--line 117 of file literature_final_with_notes.bib
 Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
---line 33 of file literature.bib
+--line 128 of file literature_final_with_notes.bib
+Warning--entry type for "charltonMIMICWFDBTutorials2022" isn't style-file defined
+--line 231 of file literature_final_with_notes.bib
+Warning--entry type for "contributorEssentialCriticalCare2021" isn't style-file defined
+--line 273 of file literature_final_with_notes.bib
+Warning--entry type for "FeedforwardNeuralNetworks" isn't style-file defined
+--line 463 of file literature_final_with_notes.bib
+Warning--entry type for "jasinskasHtjasPPGBPProject2024" isn't style-file defined
+--line 546 of file literature_final_with_notes.bib
+Warning--entry type for "LBFGSPyTorchDocumentation" isn't style-file defined
+--line 700 of file literature_final_with_notes.bib
+Warning--entry type for "MatplotlibVisualizationPython" isn't style-file defined
+--line 865 of file literature_final_with_notes.bib
+Warning--entry type for "MITLCPWfdbpython2024" isn't style-file defined
+--line 907 of file literature_final_with_notes.bib
+Warning--entry type for "moodyMIMICIIIWaveformDatabase2017" isn't style-file defined
+--line 965 of file literature_final_with_notes.bib
+Warning--entry type for "moodyMIMICIVWaveformDatabase" isn't style-file defined
+--line 977 of file literature_final_with_notes.bib
+Warning--entry type for "NumPy" isn't style-file defined
+--line 1028 of file literature_final_with_notes.bib
+Warning--entry type for "PandasPythonData" isn't style-file defined
+--line 1049 of file literature_final_with_notes.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 629 of file literature.bib
-Warning--to sort, need author or key in WhatBloodPressure2019
-Warning--empty author in WhatBloodPressure2019
-Warning--empty year in WhatBloodPressure2019
-Warning--empty journal in allenPhotoplethysmographyItsApplication2007a
-Warning--empty year in allenPhotoplethysmographyItsApplication2007a
-Warning--empty journal in aoyagiPulseOximetryIts2002
-Warning--empty year in aoyagiPulseOximetryIts2002
-Warning--empty journal in burtPrevalenceHypertensionUS1995
-Warning--empty year in burtPrevalenceHypertensionUS1995
-Warning--empty journal in castanedaReviewWearablePhotoplethysmography2018
-Warning--empty year in castanedaReviewWearablePhotoplethysmography2018
-Warning--empty journal in challonerPhotoelectricPlethysmographMeasurement1974
-Warning--empty year in challonerPhotoelectricPlethysmographMeasurement1974
-Warning--empty journal in charltonAssessingHemodynamicsPhotoplethysmogram2022
-Warning--empty year in charltonAssessingHemodynamicsPhotoplethysmogram2022
-Warning--empty journal in clarkArterialCatheterization1992
-Warning--empty year in clarkArterialCatheterization1992
-Warning--empty year in demersPhysiologyMeanArterial2024
-Warning--empty journal in el-hajjDeepLearningModels2021
-Warning--empty year in el-hajjDeepLearningModels2021
-Warning--empty journal in ettehadBloodPressureLowering2016
-Warning--empty year in ettehadBloodPressureLowering2016
+--line 1076 of file literature_final_with_notes.bib
+Warning--entry type for "PyTorch" isn't style-file defined
+--line 1099 of file literature_final_with_notes.bib
+Warning--entry type for "ScikitlearnMachineLearning" isn't style-file defined
+--line 1198 of file literature_final_with_notes.bib
+Warning--entry type for "SciPy" isn't style-file defined
+--line 1206 of file literature_final_with_notes.bib
+Warning--entry type for "SGDPyTorchDocumentation" isn't style-file defined
+--line 1232 of file literature_final_with_notes.bib
+Warning--entry type for "StandardSphygmomanometer" isn't style-file defined
+--line 1288 of file literature_final_with_notes.bib
+Warning--entry type for "Wandb" isn't style-file defined
+--line 1468 of file literature_final_with_notes.bib
+Warning--empty author and editor in WorldHealthStatistics2023
+Warning--empty year in WorldHealthStatistics2023
 Warning--empty journal in ezzatiSelectedMajorRisk2002
 Warning--empty year in ezzatiSelectedMajorRisk2002
-Warning--empty journal in savitzkySmoothingDifferentiationData1964
-Warning--empty year in savitzkySmoothingDifferentiationData1964
-Warning--empty journal in hertzmanPhotoelectricPlethysmographyFingers1937
-Warning--empty year in hertzmanPhotoelectricPlethysmographyFingers1937
-Warning--empty journal in hillImputationContinuousArterial2021
-Warning--empty year in hillImputationContinuousArterial2021
-Warning--empty journal in imholzFifteenYearsExperience1998
-Warning--empty year in imholzFifteenYearsExperience1998
-Warning--empty journal in johnsonMIMICIVFreelyAccessible2023
-Warning--empty year in johnsonMIMICIVFreelyAccessible2023
-Warning--empty journal in joungContinuousCufflessBlood2023
-Warning--empty year in joungContinuousCufflessBlood2023
-Warning--empty journal in kimBallistocardiogramBasedApproachCuffless2018
-Warning--empty year in kimBallistocardiogramBasedApproachCuffless2018
-Warning--empty journal in knightAccuracyWearablePhotoplethysmography2022
-Warning--empty year in knightAccuracyWearablePhotoplethysmography2022
-Warning--empty year in kurylyakNeuralNetworkbasedMethod2013
-Warning--empty journal in langewoutersPressurediameterRelationshipsSegments1986
-Warning--empty year in langewoutersPressurediameterRelationshipsSegments1986
-Warning--empty journal in leeReflectancePulseOximetry2016
-Warning--empty year in leeReflectancePulseOximetry2016
-Warning--empty journal in lehmanMethodsBloodPressure2013
-Warning--empty year in lehmanMethodsBloodPressure2013
-Warning--empty journal in leungHypertensionCanada20162016
-Warning--empty year in leungHypertensionCanada20162016
-Warning--empty journal in liangOptimalFilterShort2018
-Warning--empty year in liangOptimalFilterShort2018
-Warning--empty booktitle in liuIntegratedNavigationTethered2017
-Warning--empty year in liuIntegratedNavigationTethered2017
-Warning--empty journal in mohanSpotMeasurementHeart2016
-Warning--empty year in mohanSpotMeasurementHeart2016
-Warning--empty journal in molitorNewBloodlessMethod1936
-Warning--empty year in molitorNewBloodlessMethod1936
-Warning--empty journal in naylorArterialCathetersEarly2020
-Warning--empty year in naylorArterialCathetersEarly2020
-Warning--empty year in organizationWorldHealthStatistics2023
-Warning--empty journal in peterReviewMethodsNoninvasive2014
-Warning--empty year in peterReviewMethodsNoninvasive2014
+Warning--empty journal in burtPrevalenceHypertensionUS1995
+Warning--empty year in burtPrevalenceHypertensionUS1995
 Warning--empty year in poonCufflessNoninvasiveMeasurements2005
-Warning--empty year in reyesWirelessPhotoplethysmographicDevice2012
-Warning--empty journal in rheeArtifactresistantPowerefficientDesign2001
-Warning--empty year in rheeArtifactresistantPowerefficientDesign2001
-Warning--empty journal in ruiz-rodriguezInnovativeContinuousNoninvasive2013
-Warning--empty year in ruiz-rodriguezInnovativeContinuousNoninvasive2013
+Warning--empty journal in el-hajjDeepLearningModels2021
+Warning--empty year in el-hajjDeepLearningModels2021
 Warning--empty journal in sharmaCuffLessContinuousBlood2017
 Warning--empty year in sharmaCuffLessContinuousBlood2017
-Warning--empty year in srivastavValsalvaManeuver2024
-Warning--empty year in suLongtermBloodPressure2018
-Warning--empty year in suzukiCufflessBloodPressure2009
-Warning--empty journal in sviridovaHumanPhotoplethysmogramNew2015
-Warning--empty year in sviridovaHumanPhotoplethysmogramNew2015
-Warning--empty journal in takazawaAssessmentVasoactiveAgents1998a
-Warning--empty year in takazawaAssessmentVasoactiveAgents1998a
-Warning--empty year in tengContinuousNoninvasiveEstimation2003
-Warning--empty journal in weisslerSystolicTimeIntervals1968
-Warning--empty year in weisslerSystolicTimeIntervals1968
-Warning--empty journal in wieringaContactlessMultipleWavelength2005b
-Warning--empty year in wieringaContactlessMultipleWavelength2005b
-Warning--empty journal in xingOpticalBloodPressure2016
-Warning--empty year in xingOpticalBloodPressure2016
+Warning--empty journal in leungHypertensionCanada20162016
+Warning--empty year in leungHypertensionCanada20162016
+Warning--empty journal in seboBloodPressureMeasurements2014
+Warning--empty year in seboBloodPressureMeasurements2014
+Warning--empty year in reyesWirelessPhotoplethysmographicDevice2012
 Warning--empty year in yoonMultipleDiagnosisBased2002
+Warning--empty journal in knightAccuracyWearablePhotoplethysmography2022
+Warning--empty year in knightAccuracyWearablePhotoplethysmography2022
+Warning--empty journal in aoyagiPulseOximetryIts2002
+Warning--empty year in aoyagiPulseOximetryIts2002
+Warning--empty author in WhatBloodPressure2019
+Warning--empty year in WhatBloodPressure2019
+Warning--empty journal in naylorArterialCathetersEarly2020
+Warning--empty year in naylorArterialCathetersEarly2020
+Warning--empty journal in ettehadBloodPressureLowering2016
+Warning--empty year in ettehadBloodPressureLowering2016
+Warning--empty journal in clarkArterialCatheterization1992
+Warning--empty year in clarkArterialCatheterization1992
+Warning--empty journal in hillImputationContinuousArterial2021
+Warning--empty year in hillImputationContinuousArterial2021
+Warning--empty journal in lehmanMethodsBloodPressure2013
+Warning--empty year in lehmanMethodsBloodPressure2013
+Warning--empty year in demersPhysiologyMeanArterial2024
+Warning--empty journal in kimBallistocardiogramBasedApproachCuffless2018
+Warning--empty year in kimBallistocardiogramBasedApproachCuffless2018
+Warning--empty journal in imholzFifteenYearsExperience1998
+Warning--empty year in imholzFifteenYearsExperience1998
+Warning--empty journal in peterReviewMethodsNoninvasive2014
+Warning--empty year in peterReviewMethodsNoninvasive2014
+Warning--empty journal in challonerPhotoelectricPlethysmographMeasurement1974
+Warning--empty year in challonerPhotoelectricPlethysmographMeasurement1974
+Warning--empty journal in molitorNewBloodlessMethod1936
+Warning--empty year in molitorNewBloodlessMethod1936
+Warning--empty journal in hertzmanPhotoelectricPlethysmographyFingers1937
+Warning--empty year in hertzmanPhotoelectricPlethysmographyFingers1937
+Warning--empty year in srivastavValsalvaManeuver2024
 Warning--empty journal in yoshiyaSpectrophotometricMonitoringArterial1980
 Warning--empty year in yoshiyaSpectrophotometricMonitoringArterial1980
+Warning--empty journal in wieringaContactlessMultipleWavelength2005b
+Warning--empty year in wieringaContactlessMultipleWavelength2005b
+Warning--empty journal in rheeArtifactresistantPowerefficientDesign2001
+Warning--empty year in rheeArtifactresistantPowerefficientDesign2001
+Warning--empty year in zhengRingtypeDeviceNoninvasive2003
+Warning--empty journal in leeReflectancePulseOximetry2016
+Warning--empty year in leeReflectancePulseOximetry2016
+Warning--empty journal in mohanSpotMeasurementHeart2016
+Warning--empty year in mohanSpotMeasurementHeart2016
+Warning--empty journal in allenPhotoplethysmographyItsApplication2007a
+Warning--empty year in allenPhotoplethysmographyItsApplication2007a
+Warning--empty journal in weisslerSystolicTimeIntervals1968
+Warning--empty year in weisslerSystolicTimeIntervals1968
+Warning--empty journal in sviridovaHumanPhotoplethysmogramNew2015
+Warning--empty year in sviridovaHumanPhotoplethysmogramNew2015
+Warning--empty journal in castanedaReviewWearablePhotoplethysmography2018
+Warning--empty year in castanedaReviewWearablePhotoplethysmography2018
 Warning--empty booktitle in zanelliPotentialAIBased2023
 Warning--empty year in zanelliPotentialAIBased2023
-Warning--empty year in zhengRingtypeDeviceNoninvasive2003
-You've used 52 entries,
-            2118 wiz_defined-function locations,
-            801 strings with 20181 characters,
-and the built_in function-call counts, 24383 in all, are:
-= -- 2145
-> -- 1745
-< -- 13
-+ -- 698
-- -- 638
-* -- 2203
-:= -- 4023
-add.period$ -- 155
-call.type$ -- 52
-change.case$ -- 474
+Warning--empty journal in langewoutersPressurediameterRelationshipsSegments1986
+Warning--empty year in langewoutersPressurediameterRelationshipsSegments1986
+Warning--empty year in moodyDatabaseSupportDevelopment1996
+Warning--empty journal in saeedMultiparameterIntelligentMonitoring2011
+Warning--empty year in saeedMultiparameterIntelligentMonitoring2011
+Warning--empty journal in johnsonMIMICIIIFreelyAccessible2016
+Warning--empty year in johnsonMIMICIIIFreelyAccessible2016
+Warning--empty journal in johnsonMIMICIVFreelyAccessible2023
+Warning--empty year in johnsonMIMICIVFreelyAccessible2023
+Warning--empty journal in mukkamalaUbiquitousBloodPressure2015
+Warning--empty year in mukkamalaUbiquitousBloodPressure2015
+Warning--empty booktitle in luiNovelCalibrationProcedure2018
+Warning--empty year in luiNovelCalibrationProcedure2018
+Warning--empty year in dhillonPulseArrivalTime2019
+Warning--empty journal in mccombieAdaptiveBloodPressure2006
+Warning--empty year in mccombieAdaptiveBloodPressure2006
+Warning--empty journal in urbanUnderstandingArterialBiomechanics2023
+Warning--empty year in urbanUnderstandingArterialBiomechanics2023
+Warning--empty journal in elgendiAnalysisFingertipPhotoplethysmogram2012
+Warning--empty year in elgendiAnalysisFingertipPhotoplethysmogram2012
+Warning--empty journal in bikiaLeveragingPotentialMachine2021
+Warning--empty year in bikiaLeveragingPotentialMachine2021
+Warning--empty year in chatterjeePPGBasedHeart2018
+Warning--empty journal in savitzkySmoothingDifferentiationData1964
+Warning--empty year in savitzkySmoothingDifferentiationData1964
+Warning--empty year in antoniouDigitalFiltersAnalysis2018
+Warning--empty journal in liangOptimalFilterShort2018
+Warning--empty year in liangOptimalFilterShort2018
+Warning--empty journal in takazawaAssessmentVasoactiveAgents1998a
+Warning--empty year in takazawaAssessmentVasoactiveAgents1998a
+Warning--empty booktitle in djeldjliImagingPhotoplethysmographySignal2019
+Warning--empty year in djeldjliImagingPhotoplethysmographySignal2019
+Warning--empty journal in charltonAssessingHemodynamicsPhotoplethysmogram2022
+Warning--empty year in charltonAssessingHemodynamicsPhotoplethysmogram2022
+Warning--empty journal in zhangEffectLocalCold2005
+Warning--empty year in zhangEffectLocalCold2005
+Warning--empty year in tengContinuousNoninvasiveEstimation2003
+Warning--empty year in suzukiCufflessBloodPressure2009
+Warning--empty journal in ruiz-rodriguezInnovativeContinuousNoninvasive2013
+Warning--empty year in ruiz-rodriguezInnovativeContinuousNoninvasive2013
+Warning--empty journal in ouIntegratingCellularAutomata2019
+Warning--empty year in ouIntegratingCellularAutomata2019
+Warning--empty year in kurylyakNeuralNetworkbasedMethod2013
+Warning--empty journal in xingOpticalBloodPressure2016
+Warning--empty year in xingOpticalBloodPressure2016
+Warning--empty booktitle in liuIntegratedNavigationTethered2017
+Warning--empty year in liuIntegratedNavigationTethered2017
+Warning--empty year in suLongtermBloodPressure2018
+Warning--empty journal in tanveerCufflessBloodPressure2019
+Warning--empty year in tanveerCufflessBloodPressure2019
+Warning--empty journal in marulandaHybridModelBased2023
+Warning--empty year in marulandaHybridModelBased2023
+Warning--empty journal in joungContinuousCufflessBlood2023
+Warning--empty year in joungContinuousCufflessBlood2023
+Warning--empty journal in vangentHeartPyNovelHeart2019
+Warning--empty year in vangentHeartPyNovelHeart2019
+Warning--empty journal in elgendiSystolicPeakDetection2013
+Warning--empty year in elgendiSystolicPeakDetection2013
+Warning--empty journal in arguellopradaNovelLowcomplexityPeak2018
+Warning--empty year in arguellopradaNovelLowcomplexityPeak2018
+Warning--empty journal in aboyAutomaticBeatDetection2005
+Warning--empty year in aboyAutomaticBeatDetection2005
+Warning--empty journal in maqsoodSurveyShallowDeep2022
+Warning--empty year in maqsoodSurveyShallowDeep2022
+Warning--empty journal in stergiouUniversalStandardValidation2018
+Warning--empty year in stergiouUniversalStandardValidation2018
+You've used 97 entries,
+            1876 wiz_defined-function locations,
+            1008 strings with 29739 characters,
+and the built_in function-call counts, 29027 in all, are:
+= -- 2576
+> -- 1531
+< -- 0
++ -- 551
+- -- 454
+* -- 2290
+:= -- 3930
+add.period$ -- 95
+call.type$ -- 97
+change.case$ -- 96
 chr.to.int$ -- 0
-cite$ -- 142
-duplicate$ -- 695
-empty$ -- 1500
-format.name$ -- 638
-if$ -- 4765
+cite$ -- 231
+duplicate$ -- 1366
+empty$ -- 2573
+format.name$ -- 454
+if$ -- 6893
 int.to.chr$ -- 0
-int.to.str$ -- 52
-missing$ -- 51
-newline$ -- 258
-num.names$ -- 102
-pop$ -- 630
+int.to.str$ -- 97
+missing$ -- 75
+newline$ -- 317
+num.names$ -- 82
+pop$ -- 576
 preamble$ -- 1
-purify$ -- 423
+purify$ -- 0
 quote$ -- 0
-skip$ -- 460
+skip$ -- 1091
 stack$ -- 0
-substring$ -- 1375
-swap$ -- 119
-text.length$ -- 13
+substring$ -- 1819
+swap$ -- 564
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 206
-warning$ -- 90
-while$ -- 187
-width$ -- 54
-write$ -- 476
-(There were 92 warnings)
+type$ -- 0
+warning$ -- 134
+while$ -- 243
+width$ -- 99
+write$ -- 792
+(There were 157 warnings)

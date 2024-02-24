@@ -10,7 +10,7 @@ Data for Training/Testing from MIMIC3:
 \subsection{Feature Extraction}
 \label{subsec:feature_extraction}
 
-\begin{table}{\textwidth}
+\begin{table}
     \renewcommand{\arraystretch}{1.5}
     \setlength{\tabcolsep}{12pt}
     \begin{center}
@@ -56,6 +56,16 @@ Data Flow is visualized in Figure~\ref{fig:data_flow}.
 
 \subsection{Machine Learning}
 \label{subsec:machine_learning}
+
+As mentioned in previous chapters, an ideal ratio of 60/20/20 train/test/validate was aimed for.
+However in the end having 1,918,623 values from MIMIC-III and 183,140 values from MIMIC-IV, a different approach was taken.
+the MIMIC-III data was used for training/testing, and it was split into 80/20 train/test, resulting in 1,534,898 training and 383,725 testing datapoints.
+Therefore final train/test/validate proportions were 1,534,898 / 383,725 / 183,140 - 73 / 18 / 9.
+% possibly discussion
+All this means is that the signal processing algorithms worked better and extracted more values from the MIMIC-III DB.
+It is also possible a hint at the fact, that the quality of the signal was better in MIMIC-III.
+This is also logical however, since there was no limit on the fetching of records from a single study or subject from MIMIC-IV,
+so huge number of segments might have been discarded, if they didn't showcase a comprehensible signal.
 
 \begin{center}
     \begin{tabular}{ |c|c|c|c| }
@@ -115,6 +125,7 @@ Data Flow is visualized in Figure~\ref{fig:data_flow}.
 
 LSTM \& GRU training and testing loss charts (32 \& 33) % (\ref{fig:train_mse} \& \ref{fig:test_mse}).
 
+It was found, that every feature contributes positively, therefore feature reduction was not applied.
 Feature Importance chart in Figure~34 (at the end of the document) % \ref{fig:feat_importance} (at end of document).
 
 %\begin{figure}

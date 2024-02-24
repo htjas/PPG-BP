@@ -6,32 +6,31 @@
 \contentsline {section}{\numberline {3}Theoretical Background}{7}{}%
 \contentsline {subsection}{\numberline {3.1}Medical Background}{7}{}%
 \contentsline {subsubsection}{\numberline {3.1.1}Blood Pressure}{7}{}%
-\contentsline {subsubsection}{\numberline {3.1.2}Photoplethysmography}{10}{}%
-\contentsline {subsubsection}{\numberline {3.1.3}MIMIC Databases}{14}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Photoplethysmography}{11}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}MIMIC Databases}{15}{}%
 \contentsline {subsection}{\numberline {3.2}Computing Background}{18}{}%
 \contentsline {subsubsection}{\numberline {3.2.1}Signal Processing}{18}{}%
-\contentsline {subsubsection}{\numberline {3.2.2}Machine Learning}{24}{}%
-\contentsline {section}{\numberline {4}Methods}{28}{}%
-\contentsline {subsection}{\numberline {4.1}Data Fetching}{28}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Machine Learning}{25}{}%
+\contentsline {section}{\numberline {4}Methods}{29}{}%
+\contentsline {subsection}{\numberline {4.1}Data Fetching}{29}{}%
 \contentsline {subsection}{\numberline {4.2}Signal Processing}{32}{}%
-\contentsline {subsubsection}{\numberline {4.2.1}Pre-Processing}{32}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}Pre-Processing}{33}{}%
 \contentsline {subsubsection}{\numberline {4.2.2}Beat Finding Algorithms}{34}{}%
-\contentsline {subsubsection}{\numberline {4.2.3}Fiducial Point Detection}{39}{}%
+\contentsline {subsubsection}{\numberline {4.2.3}Fiducial Point Detection}{40}{}%
 \contentsline {subsubsection}{\numberline {4.2.4}Feature Extraction}{41}{}%
-\contentsline {subsection}{\numberline {4.3}Machine Learning}{44}{}%
-\contentsline {section}{\numberline {5}Results}{46}{}%
-\contentsline {subsection}{\numberline {5.1}Data Fetching}{46}{}%
-\contentsline {subsection}{\numberline {5.2}Data Processing}{46}{}%
-\contentsline {subsection}{\numberline {5.3}Feature Extraction}{46}{}%
-\contentsline {subsection}{\numberline {5.4}Machine Learning}{48}{}%
-\contentsline {section}{\numberline {6}Discussion}{48}{}%
-\contentsline {section}{\numberline {7}Conclusion}{48}{}%
-\contentsline {section}{\nonumberline References}{49}{}%
-\contentsline {section}{\numberline {A}Code}{58}{}%
-\contentsline {subsection}{\numberline {A.1}Filters}{58}{}%
-\contentsline {subsection}{\numberline {A.2}Beats}{61}{}%
-\contentsline {subsection}{\numberline {A.3}Signal Processing}{63}{}%
-\contentsline {subsection}{\numberline {A.4}Fiducial Points}{65}{}%
-\contentsline {subsection}{\numberline {A.5}Feature Extraction}{71}{}%
-\contentsline {subsection}{\numberline {A.6}Machine Learning}{73}{}%
+\contentsline {subsection}{\numberline {4.3}Machine Learning}{45}{}%
+\contentsline {section}{\numberline {5}Results}{47}{}%
+\contentsline {subsection}{\numberline {5.1}Data Fetching}{47}{}%
+\contentsline {subsection}{\numberline {5.2}Feature Extraction}{47}{}%
+\contentsline {subsection}{\numberline {5.3}Machine Learning}{48}{}%
+\contentsline {section}{\numberline {6}Discussion}{50}{}%
+\contentsline {section}{\numberline {7}Conclusion}{51}{}%
+\contentsline {section}{\nonumberline References}{52}{}%
+\contentsline {section}{\numberline {A}Code}{62}{}%
+\contentsline {subsection}{\numberline {A.1}Filters}{62}{}%
+\contentsline {subsection}{\numberline {A.2}Beats}{65}{}%
+\contentsline {subsection}{\numberline {A.3}Signal Processing}{67}{}%
+\contentsline {subsection}{\numberline {A.4}Fiducial Points}{69}{}%
+\contentsline {subsection}{\numberline {A.5}Feature Extraction}{75}{}%
+\contentsline {subsection}{\numberline {A.6}Machine Learning}{77}{}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

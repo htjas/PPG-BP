@@ -125,7 +125,7 @@ A significant leap in the clinical application of PPG-based technology occurred 
 This device revolutionized non-invasive monitoring of patients' arterial oxygen saturation, marking a major advancement in the field.
 
 Other emerging technologies encompass PPG imaging technology, telemedicine, and remote monitoring.
-In 2005, Wieringa et al.\ detailed a contactless multiple-wavelength PPG imaging system designed primarily for remotely imaging the distribution of arterial oxygen saturation (SpO2) within tissue~\cite{wieringaContactlessMultipleWavelength2005}.
+In 2005, Wieringa et al.\ detailed a contactless multiple-wavelength PPG imaging system designed primarily for remotely imaging the distribution of arterial oxygen saturation (SpO2) within tissue~\cite{wieringaContactlessMultipleWavelength2005b}.
 The system captures movies of two-dimensional matrix spatially resolved PPG signals at different wavelengths during respiratory changes.
 PPG was found to have substantial potential in telemedicine, particularly for remote/home health monitoring of patients.
 Miniaturization, user-friendliness, and robustness stand as pivotal design criteria for such systems.
@@ -396,21 +396,21 @@ The smoothed value is then the value of the fitted polynomial at the center poin
 Different polynomial degrees and window sizes lead to different filtering effects.
 The relationship can be expressed by the following formula:
 
-\Large
 \begin{center}
+    \Large
     \begin{math}
-        y[n]~=~\sum_{i=-\frac{M}{2}}^{\frac{M}{2}} W_i~\cdot~x_{n+i} \\
-        \normalsize
-        \begin{array}{ll}
-            M       & : \text{Window size (odd number greater than or equal to N+1)} \\
-            N       & : \text{Polynomial degree}                                     \\
-            W_i     & : \text{Filter coefficients (length M)}                        \\
-            x_{n+i} & : \text{Signal data point}                                     \\
-            y[n]    & : \text{Smoothed data point}
-        \end{array}
+        y[n] = \sum_{i=-\frac{M}{2}}^{\frac{M}{2}} W_i \cdot x_{n+i}
     \end{math}
+
+    \normalsize
+    \begin{tabular}{ll}
+        $M$       & : Window size (odd number greater than or equal to $N+1$) \\
+        $N$       & : Polynomial degree                                     \\
+        $W_i$     & : Filter coefficients (length $M$)                        \\
+        $x_{n+i}$ & : Signal data point                                     \\
+        $y[n]$    & : Smoothed data point
+    \end{tabular}
 \end{center}
-\normalsize
 
 % Chebyshev
 Furthermore, the Chebyshev filter offers a steeper roll-off compared to other filters, leading to sharper distinctions between desired and unwanted frequencies.
@@ -464,7 +464,7 @@ Their performance-based ranking revealed the Chebyshev II filter as the most eff
 \textit{Miscellaneous Signal Processing Approaches}
 \vspace{0.2cm}
 
-A study conducted by Takazawa et al.\ investigated the utilization of the second derivative of the fingertip PPG waveform within clinical contexts~\cite{takazawaAssessmentVasoactiveAgents1998}.
+A study conducted by Takazawa et al.\ investigated the utilization of the second derivative of the fingertip PPG waveform within clinical contexts~\cite{takazawaAssessmentVasoactiveAgents1998a}.
 The research analysed changes in patients' pressure, wave ratios, age-related variations, and correlations with health conditions.
 Collectively, the results indicate the potential value of the second derivative in appraising the impacts of specific medications and assessing vascular health and aging, offering potential avenues in arteriosclerotic disease screening.
 Subsequent research has demonstrated the effective application of the second derivative of the PPG waveform in identifying the dicrotic notch within a single pulse wave (see Figure~\ref{fig:dic_notch}), a critical landmark in PWA\@.
@@ -476,7 +476,8 @@ Subsequent research has demonstrated the effective application of the second der
     \label{fig:dic_notch}
 \end{figure}
 
-In 2022, Charlton et al.\ conducted a collaborative study to investigate the hemodynamic characteristics of photoplethysmogram (PPG) waveforms for the purpose of vascular age assessment~\cite{charltonAssessingHemodynamicsPhotoplethysmogram2022}. A key outcome of their work was the identification of a comprehensive set of features, termed "fiducial points," which could be extracted from the PPG waveform to achieve accurate vascular age estimation.
+In 2022, Charlton et al.\ conducted a collaborative study to investigate the hemodynamic characteristics of photoplethysmogram (PPG) waveforms for the purpose of vascular age assessment~\cite{charltonAssessingHemodynamicsPhotoplethysmogram2022}.
+A key outcome of their work was the identification of a comprehensive set of features, termed \enquote{fiducial points}, which could be extracted from the PPG waveform to achieve accurate vascular age estimation.
 
 The term \enquote{fiducial} originates from the Latin \textit{fiducialis}, meaning \enquote{reliable}.
 In the context of signal processing, it refers to reference points employed for precise measurements.
@@ -535,7 +536,7 @@ While diastolic time exhibited the strongest correlation with both SBP and DBP, 
 Recognizing these limitations, Suzuki and Oguri (2009) introduced AdaBoost (example in Figure~\ref{fig:adaboost}), a classifier, for SBP estimation~\cite{suzukiCufflessBloodPressure2009}.
 This methodology segmented SBP values using a threshold before employing a nonlinear ML model, showcasing the need for more complex techniques.
 
-Seeking a different approach, Ruiz-Rodriguez et al.\ (2013) utilized a Deep Belief Network Restricted Boltzmann Machine (RBM) for simultaneous prediction of SBP, DBP, and MAP~\cite{ruiz-rodriguezInnovativeContinuousNoninvasive2013a}.
+Seeking a different approach, Ruiz-Rodriguez et al.\ (2013) utilized a Deep Belief Network Restricted Boltzmann Machine (RBM) for simultaneous prediction of SBP, DBP, and MAP~\cite{ruiz-rodriguezInnovativeContinuousNoninvasive2013}.
 An example DBN and RBM with custom input and output sizes is illustrated in Figure~\ref{fig:rbm}
 However, the study yielded highly variable results, raising concerns about its reliability.
 
