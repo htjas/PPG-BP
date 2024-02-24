@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  24 FEB 2024 20:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  24 FEB 2024 21:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -723,18 +723,18 @@ ges/hs/hhn.png> <./images/hs/tmu.png>] [2]
 
  [4]
 (./introduction.tex [5] [6]) (./theoretical-background.tex [7]
-<images/abp/sphyg.png, id=178, 702.625pt x 702.625pt>
+<images/abp/sphyg.png, id=175, 702.625pt x 702.625pt>
 File: images/abp/sphyg.png Graphic file (type png)
 <use images/abp/sphyg.png>
 Package pdftex.def Info: images/abp/sphyg.png  used on input line 40.
 (pdftex.def)             Requested size: 140.5225pt x 140.5225pt.
-<images/abp/auto_sphyg.png, id=181, 602.25pt x 602.25pt>
+<images/abp/auto_sphyg.png, id=178, 602.25pt x 602.25pt>
 File: images/abp/auto_sphyg.png Graphic file (type png)
 <use images/abp/auto_sphyg.png>
 Package pdftex.def Info: images/abp/auto_sphyg.png  used on input line 43.
 (pdftex.def)             Requested size: 120.44786pt x 120.44786pt.
  [8 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
-<images/abp/catheter.png, id=196, 751.30687pt x 492.33937pt>
+<images/abp/catheter.png, id=193, 751.30687pt x 492.33937pt>
 File: images/abp/catheter.png Graphic file (type png)
 <use images/abp/catheter.png>
 Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
@@ -744,20 +744,20 @@ Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [9] [10 <./images/abp/catheter.png>] [11]
-<images/ppg/reflection.png, id=243, 853.1875pt x 316.18124pt>
+<images/ppg/reflection.png, id=240, 853.1875pt x 316.18124pt>
 File: images/ppg/reflection.png Graphic file (type png)
 <use images/ppg/reflection.png>
 Package pdftex.def Info: images/ppg/reflection.png  used on input line 142.
 (pdftex.def)             Requested size: 341.26895pt x 126.47025pt.
  [12 <./images/ppg/reflection.png>]
-<images/ppg/ac+dc.png, id=261, 853.1875pt x 588.1975pt>
+<images/ppg/ac+dc.png, id=258, 853.1875pt x 588.1975pt>
 File: images/ppg/ac+dc.png Graphic file (type png)
 <use images/ppg/ac+dc.png>
 Package pdftex.def Info: images/ppg/ac+dc.png  used on input line 162.
 (pdftex.def)             Requested size: 426.59271pt x 294.09802pt.
 
 [13 <./images/ppg/ac+dc.png>]
-<images/ppg/ppg-devices.png, id=279, 1284.8pt x 722.7pt>
+<images/ppg/ppg-devices.png, id=276, 1284.8pt x 722.7pt>
 File: images/ppg/ppg-devices.png Graphic file (type png)
 <use images/ppg/ppg-devices.png>
 Package pdftex.def Info: images/ppg/ppg-devices.png  used on input line 186.
@@ -768,7 +768,7 @@ Overfull \hbox (1.55579pt too wide) in paragraph at lines 186--187
  []
 
 [14 <./images/ppg/ppg-devices.png>]
-<images/mimic/mimic_workflow.png, id=298, 515.82712pt x 169.38281pt>
+<images/mimic/mimic_workflow.png, id=295, 515.82712pt x 169.38281pt>
 File: images/mimic/mimic_workflow.png Graphic file (type png)
 <use images/mimic/mimic_workflow.png>
 Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
@@ -779,7 +779,7 @@ Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [15]
-<images/mimic/mimic_structure.png, id=313, 1580.90625pt x 1188.69093pt>
+<images/mimic/mimic_structure.png, id=310, 1580.90625pt x 1188.69093pt>
 File: images/mimic/mimic_structure.png Graphic file (type png)
 <use images/mimic/mimic_structure.png>
 Package pdftex.def Info: images/mimic/mimic_structure.png  used on input line 2
@@ -795,7 +795,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [16 <./images/mimic/mimic_workflow.png>] [17 <./images/mimic/mimic_structure.pn
 g>]
-<images/sp/ptt.png, id=332, 639.89063pt x 489.32813pt>
+<images/sp/ptt.png, id=329, 639.89063pt x 489.32813pt>
 File: images/sp/ptt.png Graphic file (type png)
 <use images/sp/ptt.png>
 Package pdftex.def Info: images/sp/ptt.png  used on input line 308.
@@ -804,7 +804,7 @@ Package pdftex.def Info: images/sp/ptt.png  used on input line 308.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/sp/pat.png, id=337, 687.56876pt x 584.1825pt>
+<images/sp/pat.png, id=334, 687.56876pt x 584.1825pt>
 File: images/sp/pat.png Graphic file (type png)
 <use images/sp/pat.png>
 Package pdftex.def Info: images/sp/pat.png  used on input line 320.
@@ -813,12 +813,12 @@ Package pdftex.def Info: images/sp/pat.png  used on input line 320.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [18]
-<images/sp/pww.jpg, id=351, 853.1875pt x 702.625pt>
+<images/sp/pww.jpg, id=348, 853.1875pt x 702.625pt>
 File: images/sp/pww.jpg Graphic file (type jpg)
 <use images/sp/pww.jpg>
 Package pdftex.def Info: images/sp/pww.jpg  used on input line 335.
 (pdftex.def)             Requested size: 224.06548pt x 184.52223pt.
-<images/sp/pwa.png, id=356, 266.32834pt x 106.73209pt>
+<images/sp/pwa.png, id=353, 266.32834pt x 106.73209pt>
 File: images/sp/pwa.png Graphic file (type png)
 <use images/sp/pwa.png>
 Package pdftex.def Info: images/sp/pwa.png  used on input line 358.
@@ -834,13 +834,13 @@ Overfull \hbox (17.71764pt too wide) in paragraph at lines 444--454
  []
 
 [22]
-<images/sp/dic_notch.png, id=404, 650.43pt x 330.23375pt>
+<images/sp/dic_notch.png, id=401, 650.43pt x 330.23375pt>
 File: images/sp/dic_notch.png Graphic file (type png)
 <use images/sp/dic_notch.png>
 Package pdftex.def Info: images/sp/dic_notch.png  used on input line 474.
 (pdftex.def)             Requested size: 390.261pt x 198.14177pt.
  [23 <./images/sp/dic_notch.png>]
-<images/sp/fiducials.png, id=419, 526.21594pt x 350.81062pt>
+<images/sp/fiducials.png, id=416, 526.21594pt x 350.81062pt>
 File: images/sp/fiducials.png Graphic file (type png)
 <use images/sp/fiducials.png>
 Package pdftex.def Info: images/sp/fiducials.png  used on input line 489.
@@ -868,19 +868,19 @@ Overfull \hbox (4.81723pt too wide) in paragraph at lines 514--516
 o-cess-ing tech-niques, ML emerges
  []
 
-<images/ml/adaboost.png, id=434, 5781.6pt x 3252.15pt>
+<images/ml/adaboost.png, id=431, 5781.6pt x 3252.15pt>
 File: images/ml/adaboost.png Graphic file (type png)
 <use images/ml/adaboost.png>
 Package pdftex.def Info: images/ml/adaboost.png  used on input line 519.
 (pdftex.def)             Requested size: 346.88104pt x 195.12057pt.
 [25 <./images/ml/adaboost.png>]
-<images/ml/RBM.png, id=452, 853.1875pt x 404.51125pt>
+<images/ml/RBM.png, id=449, 853.1875pt x 404.51125pt>
 File: images/ml/RBM.png Graphic file (type png)
 <use images/ml/RBM.png>
 Package pdftex.def Info: images/ml/RBM.png  used on input line 545.
 (pdftex.def)             Requested size: 426.59271pt x 202.25513pt.
  [26 <./images/ml/RBM.png>]
-<images/ml/ffnn.png, id=467, 454.69875pt x 366.36874pt>
+<images/ml/ffnn.png, id=464, 454.69875pt x 366.36874pt>
 File: images/ml/ffnn.png Graphic file (type png)
 <use images/ml/ffnn.png>
 Package pdftex.def Info: images/ml/ffnn.png  used on input line 555.
@@ -891,7 +891,7 @@ Overfull \hbox (1.97975pt too wide) in paragraph at lines 565--567
 emon-strat-ing the promise
  []
 
-<images/ml/lstm.png, id=474, 682.55pt x 370.38374pt>
+<images/ml/lstm.png, id=471, 682.55pt x 370.38374pt>
 File: images/ml/lstm.png Graphic file (type png)
 <use images/ml/lstm.png>
 Package pdftex.def Info: images/ml/lstm.png  used on input line 570.
@@ -900,7 +900,7 @@ Package pdftex.def Info: images/ml/lstm.png  used on input line 570.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [27 <./images/ml/ffnn.png (PNG copy)>]
-<images/ml/attention.jpeg, id=492, 207.6558pt x 188.8656pt>
+<images/ml/attention.jpeg, id=489, 207.6558pt x 188.8656pt>
 File: images/ml/attention.jpeg Graphic file (type jpg)
 <use images/ml/attention.jpeg>
 Package pdftex.def Info: images/ml/attention.jpeg  used on input line 582.
@@ -911,13 +911,13 @@ Underfull \hbox (badness 1448) in paragraph at lines 110--113
 [][]\OT1/cmr/m/n/12 If a 10-minute con-tin-u-ous part of the seg-ment
  []
 
-<images/methods/segments.png, id=522, 308.65312pt x 194.22563pt>
+<images/methods/segments.png, id=519, 308.65312pt x 194.22563pt>
 File: images/methods/segments.png Graphic file (type png)
 <use images/methods/segments.png>
 Package pdftex.def Info: images/methods/segments.png  used on input line 117.
 (pdftex.def)             Requested size: 134.44064pt x 84.60007pt.
 [31 <./images/methods/segments.png>]
-<images/methods/values.png, id=532, 228.10219pt x 291.33844pt>
+<images/methods/values.png, id=529, 228.10219pt x 291.33844pt>
 File: images/methods/values.png Graphic file (type png)
 <use images/methods/values.png>
 Package pdftex.def Info: images/methods/values.png  used on input line 133.
@@ -940,7 +940,7 @@ Overfull \hbox (7.98654pt too wide) in paragraph at lines 175--180
  sec-tion on Sig-nal Pro-cess-ing( []3.2.1[]),
  []
 
-<images/methods/filters.png, id=550, 1734.48pt x 1734.48pt>
+<images/methods/filters.png, id=547, 1734.48pt x 1734.48pt>
 File: images/methods/filters.png Graphic file (type png)
 <use images/methods/filters.png>
 Package pdftex.def Info: images/methods/filters.png  used on input line 190.
@@ -948,7 +948,7 @@ Package pdftex.def Info: images/methods/filters.png  used on input line 190.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/methods/opt_filtering.png, id=552, 1606.0pt x 803.0pt>
+<images/methods/opt_filtering.png, id=549, 1606.0pt x 803.0pt>
 File: images/methods/opt_filtering.png Graphic file (type png)
 <use images/methods/opt_filtering.png>
 Package pdftex.def Info: images/methods/opt_filtering.png  used on input line 2
@@ -959,7 +959,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [33] [34 <./images/methods/filters.png>] [35 <./images/methods/opt_filtering.pn
 g>]
-<images/methods/beat_algos.png, id=585, 1606.0pt x 1606.0pt>
+<images/methods/beat_algos.png, id=582, 1606.0pt x 1606.0pt>
 File: images/methods/beat_algos.png Graphic file (type png)
 <use images/methods/beat_algos.png>
 Package pdftex.def Info: images/methods/beat_algos.png  used on input line 259.
@@ -981,7 +981,7 @@ Overfull \hbox (18.69926pt too wide) in paragraph at lines 278--281
 .75,prominence=0.01) 
  []
 
-<images/methods/sp_beats.png, id=592, 1606.0pt x 1606.0pt>
+<images/methods/sp_beats.png, id=589, 1606.0pt x 1606.0pt>
 File: images/methods/sp_beats.png Graphic file (type png)
 <use images/methods/sp_beats.png>
 Package pdftex.def Info: images/methods/sp_beats.png  used on input line 283.
@@ -990,13 +990,13 @@ Package pdftex.def Info: images/methods/sp_beats.png  used on input line 283.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [37 <./images/methods/beat_algos.png>] [38 <./images/methods/sp_beats.png>]
-<images/methods/synchronised.png, id=606, 1606.0pt x 803.0pt>
+<images/methods/synchronised.png, id=603, 1606.0pt x 803.0pt>
 File: images/methods/synchronised.png Graphic file (type png)
 <use images/methods/synchronised.png>
 Package pdftex.def Info: images/methods/synchronised.png  used on input line 30
 8.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
-<images/methods/cringe_signals.png, id=608, 1606.0pt x 803.0pt>
+<images/methods/cringe_signals.png, id=605, 1606.0pt x 803.0pt>
 File: images/methods/cringe_signals.png Graphic file (type png)
 <use images/methods/cringe_signals.png>
 Package pdftex.def Info: images/methods/cringe_signals.png  used on input line 
@@ -1008,13 +1008,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [39 <./images/methods/synchronised.png>] [40 <./images/methods/cringe_signals.p
 ng>]
-<images/methods/fidps.png, id=622, 1606.0pt x 803.0pt>
+<images/methods/fidps.png, id=619, 1606.0pt x 803.0pt>
 File: images/methods/fidps.png Graphic file (type png)
 <use images/methods/fidps.png>
 Package pdftex.def Info: images/methods/fidps.png  used on input line 362.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
  [41 <./images/methods/fidps.png>] [42]
-<images/methods/feats.png, id=641, 722.7pt x 542.025pt>
+<images/methods/feats.png, id=638, 722.7pt x 542.025pt>
 File: images/methods/feats.png Graphic file (type png)
 <use images/methods/feats.png>
 Package pdftex.def Info: images/methods/feats.png  used on input line 449.
@@ -1023,7 +1023,7 @@ Package pdftex.def Info: images/methods/feats.png  used on input line 449.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/methods/median_fft.png, id=642, 1284.8pt x 481.8pt>
+<images/methods/median_fft.png, id=639, 1284.8pt x 481.8pt>
 File: images/methods/median_fft.png Graphic file (type png)
 <use images/methods/median_fft.png>
 Package pdftex.def Info: images/methods/median_fft.png  used on input line 455.
@@ -1039,46 +1039,46 @@ a-tion of Ma-chine Learn-ing method-
  []
 
 [45 <./images/methods/median_fft.png>] [46]) (./results.tex [47]
-<images/results/flow_diagram.png, id=687, 761.84625pt x 473.77pt>
+<images/results/flow_diagram.png, id=684, 761.84625pt x 473.77pt>
 File: images/results/flow_diagram.png Graphic file (type png)
 <use images/results/flow_diagram.png>
-Package pdftex.def Info: images/results/flow_diagram.png  used on input line 52
+Package pdftex.def Info: images/results/flow_diagram.png  used on input line 49
 .
 (pdftex.def)             Requested size: 403.31511pt x 250.80774pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[48]
-Overfull \hbox (8.3163pt too wide) in paragraph at lines 71--96
+ [48] [49 <./images/results/flow_diagram.png>]
+Overfull \hbox (8.3163pt too wide) in paragraph at lines 90--115
  [] 
  []
 
-[49 <./images/results/flow_diagram.png>]
-<images/results/LSTM_GRU_Train_mse.png, id=700, 2537.48pt x 1332.98pt>
+<images/results/LSTM_GRU_Train_mse.png, id=697, 2537.48pt x 1332.98pt>
 File: images/results/LSTM_GRU_Train_mse.png Graphic file (type png)
 <use images/results/LSTM_GRU_Train_mse.png>
 Package pdftex.def Info: images/results/LSTM_GRU_Train_mse.png  used on input l
-ine 148.
+ine 167.
 (pdftex.def)             Requested size: 179.24963pt x 94.15205pt.
-<images/results/LSTM_GRU_Test_mse.png, id=701, 2537.48pt x 1332.98pt>
-File: images/results/LSTM_GRU_Test_mse.png Graphic file (type png)
-<use images/results/LSTM_GRU_Test_mse.png>
-Package pdftex.def Info: images/results/LSTM_GRU_Test_mse.png  used on input li
-ne 155.
-(pdftex.def)             Requested size: 179.24963pt x 94.15205pt.
-<images/results/feature_importance_plot_GRU_0.png, id=702, 722.7pt x 1445.4pt>
-File: images/results/feature_importance_plot_GRU_0.png Graphic file (type png)
-<use images/results/feature_importance_plot_GRU_0.png>
-Package pdftex.def Info: images/results/feature_importance_plot_GRU_0.png  used
- on input line 162.
-(pdftex.def)             Requested size: 224.06548pt x 448.13554pt.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [50 <./images/results/LSTM_GRU_Train_mse.png> <./images/results/LSTM_GRU_Test
-_mse.png>] [51] [52] (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.bbl
+<images/results/LSTM_GRU_Test_mse.png, id=698, 2537.48pt x 1332.98pt>
+File: images/results/LSTM_GRU_Test_mse.png Graphic file (type png)
+<use images/results/LSTM_GRU_Test_mse.png>
+Package pdftex.def Info: images/results/LSTM_GRU_Test_mse.png  used on input li
+ne 174.
+(pdftex.def)             Requested size: 179.24963pt x 94.15205pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/results/feature_importance_plot_GRU_0.png, id=699, 722.7pt x 1445.4pt>
+File: images/results/feature_importance_plot_GRU_0.png Graphic file (type png)
+<use images/results/feature_importance_plot_GRU_0.png>
+Package pdftex.def Info: images/results/feature_importance_plot_GRU_0.png  used
+ on input line 181.
+(pdftex.def)             Requested size: 224.06548pt x 448.13554pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [50] [51 <./images/results/LSTM_GRU_Train_mse.png> <./images/results/LSTM_GRU
+_Test_mse.png>] [52] (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.bbl
 [53]
 Underfull \hbox (badness 10000) in paragraph at lines 111--113
 []\OT1/cmr/m/n/10.95 ``Standard Sphyg-mo-manome-ter.''  https://www.performance
@@ -1261,10 +1261,10 @@ Package rerunfilecheck Info: File `Thesis.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 19966 strings out of 480204
- 351011 string characters out of 5895010
- 997111 words of memory out of 5000000
- 36424 multiletter control sequences out of 15000+600000
+ 19963 strings out of 480204
+ 350963 string characters out of 5895010
+ 997075 words of memory out of 5000000
+ 36422 multiletter control sequences out of 15000+600000
  482555 words of font info for 75 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  108i,8n,117p,10696b,2089s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1292,10 +1292,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmtt12.pfb>
 Output written on /home/hugasj/PycharmProjects/pythonProject/out/Thesis.pdf (75
- pages, 6279422 bytes).
+ pages, 6278340 bytes).
 PDF statistics:
- 2205 PDF objects out of 2487 (max. 8388607)
- 1987 compressed objects within 20 object streams
- 1177 named destinations out of 1200 (max. 500000)
- 466 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2198 PDF objects out of 2487 (max. 8388607)
+ 1980 compressed objects within 20 object streams
+ 1176 named destinations out of 1200 (max. 500000)
+ 458 words of extra memory for PDF output out of 10000 (max. 10000000)
 

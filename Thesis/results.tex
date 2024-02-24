@@ -1,14 +1,8 @@
-\subsection{Data Fetching}
-\label{subsec:data_fetching}
+\subsection{Data Fetching and Feature Extraction}
+\label{subsec:results_data}
 
-Data for Validation from MIMIC4:
-5508 records each containing 37795 values corresponding to ~605 seconds (fs=64.4725);
-
-Data for Training/Testing from MIMIC3:
-22083 (~4*MIMIC4) records each containing 75625 values corresponding to 605 seconds (fs=125);
-
-\subsection{Feature Extraction}
-\label{subsec:feature_extraction}
+The results section commences with the presentation of Table~\ref{tab:records}, which summarizes the data retrieval phase.
+Displayed within are the total records obtained from both databases, along with the corresponding total and median values extracted.
 
 \begin{table}
     \renewcommand{\arraystretch}{1.5}
@@ -31,21 +25,24 @@ Data for Training/Testing from MIMIC3:
     \label{tab:records}
 \end{table}
 
-FE from MIMIC4 for Validation:
-- For target reference Systolic, Diastolic and MAP values were extracted from the waveform data.
-- For Machine Learning, 34 features were extracted from the PPG waveform
-A total of \textbf{1,309,265} values were extracted, resulting in a 34 x 1,309,265 matrix.
-Total of \textbf{183,140} median values were extracted.
+In a brief summary of the table data, 5,508 records were retrieved from the MIMIC-IV database, each encompassing 37,795 values, equating to approximately 605 seconds of data (at a sampling rate of 64.4725).
+Conversely, a total of 22,083 records were obtained from the MIMIC-IV dataset, representing four times the number of records in comparison to MIMIC-IV\@.
+Each of these records consisted of 75,625 values, likewise corresponding to an approximate duration of 10 minutes (with a sampling rate of 125).
 
-FE from MIMIC3 for Training/Testing:
+Conversely, 4 times the records of MIMIC-IV were fetched, namely 22,083, each containing 75625 values also corresponding to approx.\ 10 minutes (sampling rate of 125).
 
-- For target reference ABP Systolic, Diastolic and MAP values were extracted from the waveform data.
-- For Machine Learning, 34 features were extracted from the PPG waveform
-A total of \textbf{13,659,375} values were extracted, resulting in a 34 x 13659375 matrix.
-Total of \textbf{1,918,623} median values were extracted.
+Subsequently, the process of Feature Extraction from both DBs commenced, involving the extraction of 34 training features along with their corresponding values from the PPG waveforms,
+as well as the target reference values for SBP, DBP, and MAP from the ABP signal.
 
-The summarized results are displayed in Table~\ref{tab:records}.
-Data Flow is visualized in Figure~\ref{fig:data_flow}.
+From the MIMIC-IV dataset, a total of 1,309,265 values were extracted, leading to the creation of 34 x 1,309,265 PPG and 3 x 1,309,265 ABP data matrices.
+Additionally, 183,140 median values were derived from these matrices, forming datasets of the same X-axis dimensions.
+This set of data was utilized for the validation phase.
+
+In the case of the MIMIC-III dataset, a total of 13,659,375 values were extracted, resulting in 34 x 13,659,375 PPG and 3 x 13,659,375 ABP data matrices.
+Similarly, 1,918,623 median values were obtained from these matrices, creating datasets with identical X-axis structures.
+These datasets were employed for the purposes of training and testing.
+
+The data flow is visualized in Figure~\ref{fig:data_flow}.
 
 \begin{figure}[h]
     \centering
@@ -57,10 +54,25 @@ Data Flow is visualized in Figure~\ref{fig:data_flow}.
 \subsection{Machine Learning}
 \label{subsec:machine_learning}
 
+Moving on to the results from the ML phase, firstly the feature data preparation is elaborated.
+
 As mentioned in previous chapters, an ideal ratio of 60/20/20 train/test/validate was aimed for.
-However in the end having 1,918,623 values from MIMIC-III and 183,140 values from MIMIC-IV, a different approach was taken.
-the MIMIC-III data was used for training/testing, and it was split into 80/20 train/test, resulting in 1,534,898 training and 383,725 testing datapoints.
-Therefore final train/test/validate proportions were 1,534,898 / 383,725 / 183,140 - 73 / 18 / 9.
+However in the end having 1,918,623 values from MIMIC-III and 183,140 values from MIMIC-IV, we had to settle for a different splitting ratio.
+As mentioned, the MIMIC-III data was used for training/testing, and it was split into 80/20 train/test, resulting in 1,534,898 training and 383,725 testing datapoints.
+Therefore final train/test/validate proportions were:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Training  & Testing & Validation \\
+        \hline
+        1,534,898 & 383,725 & 183,140    \\
+        \hline
+        73\%      & 18\%    & 9\%        \\
+        \hline
+    \end{tabular}
+\end{center}
+
 % possibly discussion
 All this means is that the signal processing algorithms worked better and extracted more values from the MIMIC-III DB.
 It is also possible a hint at the fact, that the quality of the signal was better in MIMIC-III.
