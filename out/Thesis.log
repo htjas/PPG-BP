@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  25 FEB 2024 16:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.20)  25 FEB 2024 22:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -619,52 +619,432 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks34
+\pgfutil@tempdima=\dimen194
+\pgfutil@tempdimb=\dimen195
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box109
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
+))
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks35
+\pgfkeys@temptoks=\toks36
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex
+\pgfkeys@tmptoks=\toks37
+))
+\pgf@x=\dimen196
+\pgf@y=\dimen197
+\pgf@xa=\dimen198
+\pgf@ya=\dimen199
+\pgf@xb=\dimen256
+\pgf@yb=\dimen257
+\pgf@xc=\dimen258
+\pgf@yc=\dimen259
+\pgf@xd=\dimen260
+\pgf@yd=\dimen261
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count318
+\c@pgf@countb=\count319
+\c@pgf@countc=\count320
+\c@pgf@countd=\count321
+\t@pgf@toka=\toks38
+\t@pgf@tokb=\toks39
+\t@pgf@tokc=\toks40
+\pgf@sys@id@count=\count322
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfsyssoftpath@smallbuffer@items=\count323
+\pgfsyssoftpath@bigbuffer@items=\count324
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen262
+\pgfmath@count=\count325
+\pgfmath@box=\box110
+\pgfmath@toks=\toks41
+\pgfmath@stack@operand=\toks42
+\pgfmath@stack@operation=\toks43
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count326
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@picminx=\dimen263
+\pgf@picmaxx=\dimen264
+\pgf@picminy=\dimen265
+\pgf@picmaxy=\dimen266
+\pgf@pathminx=\dimen267
+\pgf@pathmaxx=\dimen268
+\pgf@pathminy=\dimen269
+\pgf@pathmaxy=\dimen270
+\pgf@xx=\dimen271
+\pgf@xy=\dimen272
+\pgf@yx=\dimen273
+\pgf@yy=\dimen274
+\pgf@zx=\dimen275
+\pgf@zy=\dimen276
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@path@lastx=\dimen277
+\pgf@path@lasty=\dimen278
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@shorten@end@additional=\dimen279
+\pgf@shorten@start@additional=\dimen280
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfpic=\box111
+\pgf@hbox=\box112
+\pgf@layerbox@main=\box113
+\pgf@picture@serial@count=\count327
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgflinewidth=\dimen281
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@pt@x=\dimen282
+\pgf@pt@y=\dimen283
+\pgf@pt@temp=\dimen284
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowsep=\dimen285
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@max=\dimen286
+\pgf@sys@shading@range@num=\count328
+\pgf@shadingcount=\count329
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfexternal@startupbox=\box114
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box115
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen287
+\pgf@nodesepend=\dimen288
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen289
+\pgffor@skip=\dimen290
+\pgffor@stack=\toks44
+\pgffor@toks=\toks45
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count330
+\pgfplotmarksize=\dimen291
+)
+\tikz@lastx=\dimen292
+\tikz@lasty=\dimen293
+\tikz@lastxsaved=\dimen294
+\tikz@lastysaved=\dimen295
+\tikz@lastmovetox=\dimen296
+\tikz@lastmovetoy=\dimen297
+\tikzleveldistance=\dimen298
+\tikzsiblingdistance=\dimen299
+\tikz@figbox=\box116
+\tikz@figbox@bg=\box117
+\tikz@tempbox=\box118
+\tikz@tempbox@bg=\box119
+\tikztreelevel=\count331
+\tikznumberofchildren=\count332
+\tikznumberofcurrentchild=\count333
+\tikz@fig@count=\count334
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count335
+\pgfmatrixcurrentcolumn=\count336
+\pgf@matrix@numberofcolumns=\count337
+)
+\tikz@expandcount=\count338
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks46
+\t@pgfplots@tokb=\toks47
+\t@pgfplots@tokc=\toks48
+\pgfplots@tmpa=\dimen300
+\c@pgfplots@coordindex=\count339
+\c@pgfplots@scanlineindex=\count340
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code
+.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.t
+ex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldp
+gfsupp_loader.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotslists
+tructure.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotslists
+tructureext.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray
+.code.tex
+\c@pgfplotsarray@tmp=\count341
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatri
+x.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshare
+d.code.tex
+\c@pgfplotstable@counta=\count342
+\t@pgfplotstable@a=\toks49
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.code.te
+x
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.data.co
+de.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.sur
+fshading.code.tex
+\c@pgfplotslibrarysurf@no=\count343
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surf
+shading.pgfsys-pdftex.def)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.
+tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.t
+ex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.t
+ex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.cod
+e.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.
+tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex
+) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex
+) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.cod
+e.tex
+\pgfdecoratedcompleteddistance=\dimen301
+\pgfdecoratedremainingdistance=\dimen302
+\pgfdecoratedinputsegmentcompleteddistance=\dimen303
+\pgfdecoratedinputsegmentremainingdistance=\dimen304
+\pgf@decorate@distancetomove=\dimen305
+\pgf@decorate@repeatstate=\count344
+\pgfdecorationsegmentamplitude=\dimen306
+\pgfdecorationsegmentlength=\dimen307
+)
+\tikz@lib@dec@box=\box120
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.pathmorphing.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
+decorations.pathmorphing.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.pathreplacing.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
+decorations.pathreplacing.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.co
+ntourlua.code.tex)
+\pgfplots@numplots=\count345
+\pgfplots@xmin@reg=\dimen308
+\pgfplots@xmax@reg=\dimen309
+\pgfplots@ymin@reg=\dimen310
+\pgfplots@ymax@reg=\dimen311
+\pgfplots@zmin@reg=\dimen312
+\pgfplots@zmax@reg=\dimen313
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.co
+de.tex
+File: pgflibraryplotmarks.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count318
-\l__pdf_internal_box=\box109
+\l__color_backend_stack_int=\count346
+\l__pdf_internal_box=\box121
 )
 (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-Package scrbase Info: activating english \contentsname on input line 25.
-Package scrbase Info: activating english \listfigurename on input line 25.
-Package scrbase Info: activating english \listtablename on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+Package scrbase Info: activating english \contentsname on input line 26.
+Package scrbase Info: activating english \listfigurename on input line 26.
+Package scrbase Info: activating english \listtablename on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count319
-\scratchdimen=\dimen194
-\scratchbox=\box110
-\nofMPsegments=\count320
-\nofMParguments=\count321
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count322
-\MPscratchDim=\dimen195
-\MPnumerator=\count323
-\makeMPintoPDFobject=\count324
-\everyMPtoPDFconversion=\toks35
+\scratchcounter=\count347
+\scratchdimen=\dimen314
+\scratchbox=\box122
+\nofMPsegments=\count348
+\nofMParguments=\count349
+\everyMPshowfont=\toks50
+\MPscratchCnt=\count350
+\MPscratchDim=\dimen315
+\MPnumerator=\count351
+\makeMPintoPDFobject=\count352
+\everyMPtoPDFconversion=\toks51
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -674,12 +1054,12 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count325
+\c@lstlisting=\count353
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 25.
+Package hyperref Info: Link coloring OFF on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -690,16 +1070,16 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count326
+\c@section@level=\count354
 )
-LaTeX Info: Redefining \ref on input line 25.
-LaTeX Info: Redefining \pageref on input line 25.
-LaTeX Info: Redefining \nameref on input line 25.
+LaTeX Info: Redefining \ref on input line 26.
+LaTeX Info: Redefining \pageref on input line 26.
+LaTeX Info: Redefining \nameref on input line 26.
 
 (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.out)
 (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.out)
-\@outlinefile=\write3
-\openout3 = `Thesis.out'.
+\@outlinefile=\write4
+\openout4 = `Thesis.out'.
 
 Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           Using `bookmark' together with `hyperref' is recommended,
@@ -708,32 +1088,38 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
 (scrartcl)           you can avoid this message adding:
 (scrartcl)             \usepackage{bookmark}
-(scrartcl)           before \begin{document} on input line 25.
+(scrartcl)           before \begin{document} on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
 
 (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
-\BKM@id=\count327
+\BKM@id=\count355
 ))
-<images/hs/hd.png, id=4, 144.54pt x 75.8835pt>
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
+ick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into 
+your preamble.
+ on input line 26.
+
+<images/hs/hd.png, id=7, 144.54pt x 75.8835pt>
 File: images/hs/hd.png Graphic file (type png)
 <use images/hs/hd.png>
-Package pdftex.def Info: images/hs/hd.png  used on input line 32.
+Package pdftex.def Info: images/hs/hd.png  used on input line 33.
 (pdftex.def)             Requested size: 86.72466pt x 45.53044pt.
-<images/hs/hhn.png, id=6, 115.18031pt x 44.41594pt>
+<images/hs/hhn.png, id=9, 115.18031pt x 44.41594pt>
 File: images/hs/hhn.png Graphic file (type png)
 <use images/hs/hhn.png>
-Package pdftex.def Info: images/hs/hhn.png  used on input line 33.
+Package pdftex.def Info: images/hs/hhn.png  used on input line 34.
 (pdftex.def)             Requested size: 115.18001pt x 44.41582pt.
-<images/hs/tmu.png, id=7, 1204.5pt x 664.4825pt>
+<images/hs/tmu.png, id=10, 1204.5pt x 664.4825pt>
 File: images/hs/tmu.png Graphic file (type png)
 <use images/hs/tmu.png>
-Package pdftex.def Info: images/hs/tmu.png  used on input line 34.
+Package pdftex.def Info: images/hs/tmu.png  used on input line 35.
 (pdftex.def)             Requested size: 72.26688pt x 39.86722pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
 
  []
 
@@ -742,23 +1128,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 72--73
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/hs/hd.png> <./ima
 ges/hs/hhn.png> <./images/hs/tmu.png>] [2]
 (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.toc [3])
-\tf@toc=\write4
-\openout4 = `Thesis.toc'.
+\tf@toc=\write5
+\openout5 = `Thesis.toc'.
 
  [4]
 (./introduction.tex [5] [6]) (./theoretical-background.tex [7]
-<images/abp/sphyg.png, id=181, 702.625pt x 702.625pt>
+<images/abp/sphyg.png, id=190, 702.625pt x 702.625pt>
 File: images/abp/sphyg.png Graphic file (type png)
 <use images/abp/sphyg.png>
 Package pdftex.def Info: images/abp/sphyg.png  used on input line 40.
 (pdftex.def)             Requested size: 140.5225pt x 140.5225pt.
-<images/abp/auto_sphyg.png, id=184, 602.25pt x 602.25pt>
+<images/abp/auto_sphyg.png, id=193, 602.25pt x 602.25pt>
 File: images/abp/auto_sphyg.png Graphic file (type png)
 <use images/abp/auto_sphyg.png>
 Package pdftex.def Info: images/abp/auto_sphyg.png  used on input line 43.
 (pdftex.def)             Requested size: 120.44786pt x 120.44786pt.
  [8 <./images/abp/sphyg.png> <./images/abp/auto_sphyg.png>]
-<images/abp/catheter.png, id=199, 751.30687pt x 492.33937pt>
+<images/abp/catheter.png, id=208, 751.30687pt x 492.33937pt>
 File: images/abp/catheter.png Graphic file (type png)
 <use images/abp/catheter.png>
 Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
@@ -768,20 +1154,20 @@ Package pdftex.def Info: images/abp/catheter.png  used on input line 65.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [9] [10 <./images/abp/catheter.png>] [11]
-<images/ppg/reflection.png, id=246, 853.1875pt x 316.18124pt>
+<images/ppg/reflection.png, id=255, 853.1875pt x 316.18124pt>
 File: images/ppg/reflection.png Graphic file (type png)
 <use images/ppg/reflection.png>
 Package pdftex.def Info: images/ppg/reflection.png  used on input line 142.
 (pdftex.def)             Requested size: 341.26895pt x 126.47025pt.
  [12 <./images/ppg/reflection.png>]
-<images/ppg/ac+dc.png, id=264, 853.1875pt x 588.1975pt>
+<images/ppg/ac+dc.png, id=273, 853.1875pt x 588.1975pt>
 File: images/ppg/ac+dc.png Graphic file (type png)
 <use images/ppg/ac+dc.png>
 Package pdftex.def Info: images/ppg/ac+dc.png  used on input line 162.
 (pdftex.def)             Requested size: 426.59271pt x 294.09802pt.
 
 [13 <./images/ppg/ac+dc.png>]
-<images/ppg/ppg-devices.png, id=282, 1284.8pt x 722.7pt>
+<images/ppg/ppg-devices.png, id=291, 1284.8pt x 722.7pt>
 File: images/ppg/ppg-devices.png Graphic file (type png)
 <use images/ppg/ppg-devices.png>
 Package pdftex.def Info: images/ppg/ppg-devices.png  used on input line 186.
@@ -792,7 +1178,7 @@ Overfull \hbox (1.55579pt too wide) in paragraph at lines 186--187
  []
 
 [14 <./images/ppg/ppg-devices.png>]
-<images/mimic/mimic_workflow.png, id=301, 515.82712pt x 169.38281pt>
+<images/mimic/mimic_workflow.png, id=310, 515.82712pt x 169.38281pt>
 File: images/mimic/mimic_workflow.png Graphic file (type png)
 <use images/mimic/mimic_workflow.png>
 Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
@@ -803,7 +1189,7 @@ Package pdftex.def Info: images/mimic/mimic_workflow.png  used on input line 22
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [15]
-<images/mimic/mimic_structure.png, id=316, 1580.90625pt x 1188.69093pt>
+<images/mimic/mimic_structure.png, id=325, 1580.90625pt x 1188.69093pt>
 File: images/mimic/mimic_structure.png Graphic file (type png)
 <use images/mimic/mimic_structure.png>
 Package pdftex.def Info: images/mimic/mimic_structure.png  used on input line 2
@@ -819,7 +1205,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [16 <./images/mimic/mimic_workflow.png>] [17 <./images/mimic/mimic_structure.pn
 g>]
-<images/sp/ptt.png, id=336, 639.89063pt x 489.32813pt>
+<images/sp/ptt.png, id=345, 639.89063pt x 489.32813pt>
 File: images/sp/ptt.png Graphic file (type png)
 <use images/sp/ptt.png>
 Package pdftex.def Info: images/sp/ptt.png  used on input line 308.
@@ -828,7 +1214,7 @@ Package pdftex.def Info: images/sp/ptt.png  used on input line 308.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/sp/pat.png, id=341, 687.56876pt x 584.1825pt>
+<images/sp/pat.png, id=350, 687.56876pt x 584.1825pt>
 File: images/sp/pat.png Graphic file (type png)
 <use images/sp/pat.png>
 Package pdftex.def Info: images/sp/pat.png  used on input line 320.
@@ -837,12 +1223,12 @@ Package pdftex.def Info: images/sp/pat.png  used on input line 320.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [18]
-<images/sp/pww.jpg, id=354, 853.1875pt x 702.625pt>
+<images/sp/pww.jpg, id=363, 853.1875pt x 702.625pt>
 File: images/sp/pww.jpg Graphic file (type jpg)
 <use images/sp/pww.jpg>
 Package pdftex.def Info: images/sp/pww.jpg  used on input line 335.
 (pdftex.def)             Requested size: 224.06548pt x 184.52223pt.
-<images/sp/pwa.png, id=359, 266.32834pt x 106.73209pt>
+<images/sp/pwa.png, id=368, 266.32834pt x 106.73209pt>
 File: images/sp/pwa.png Graphic file (type png)
 <use images/sp/pwa.png>
 Package pdftex.def Info: images/sp/pwa.png  used on input line 358.
@@ -858,13 +1244,13 @@ Overfull \hbox (17.7176pt too wide) in paragraph at lines 444--454
  []
 
 [22]
-<images/sp/dic_notch.png, id=407, 650.43pt x 330.23375pt>
+<images/sp/dic_notch.png, id=416, 650.43pt x 330.23375pt>
 File: images/sp/dic_notch.png Graphic file (type png)
 <use images/sp/dic_notch.png>
 Package pdftex.def Info: images/sp/dic_notch.png  used on input line 474.
 (pdftex.def)             Requested size: 390.261pt x 198.14177pt.
  [23 <./images/sp/dic_notch.png>]
-<images/sp/fiducials.png, id=422, 526.21594pt x 350.81062pt>
+<images/sp/fiducials.png, id=431, 526.21594pt x 350.81062pt>
 File: images/sp/fiducials.png Graphic file (type png)
 <use images/sp/fiducials.png>
 Package pdftex.def Info: images/sp/fiducials.png  used on input line 489.
@@ -892,19 +1278,19 @@ Overfull \hbox (4.81723pt too wide) in paragraph at lines 514--516
 o-cess-ing tech-niques, ML emerges
  []
 
-<images/ml/adaboost.png, id=437, 5781.6pt x 3252.15pt>
+<images/ml/adaboost.png, id=446, 5781.6pt x 3252.15pt>
 File: images/ml/adaboost.png Graphic file (type png)
 <use images/ml/adaboost.png>
 Package pdftex.def Info: images/ml/adaboost.png  used on input line 519.
 (pdftex.def)             Requested size: 346.88104pt x 195.12057pt.
 [25 <./images/ml/adaboost.png>]
-<images/ml/RBM.png, id=455, 853.1875pt x 404.51125pt>
+<images/ml/RBM.png, id=464, 853.1875pt x 404.51125pt>
 File: images/ml/RBM.png Graphic file (type png)
 <use images/ml/RBM.png>
 Package pdftex.def Info: images/ml/RBM.png  used on input line 545.
 (pdftex.def)             Requested size: 426.59271pt x 202.25513pt.
  [26 <./images/ml/RBM.png>]
-<images/ml/ffnn.png, id=470, 454.69875pt x 366.36874pt>
+<images/ml/ffnn.png, id=479, 454.69875pt x 366.36874pt>
 File: images/ml/ffnn.png Graphic file (type png)
 <use images/ml/ffnn.png>
 Package pdftex.def Info: images/ml/ffnn.png  used on input line 555.
@@ -915,7 +1301,7 @@ Overfull \hbox (1.97975pt too wide) in paragraph at lines 565--567
 emon-strat-ing the promise
  []
 
-<images/ml/lstm.png, id=477, 682.55pt x 370.38374pt>
+<images/ml/lstm.png, id=486, 682.55pt x 370.38374pt>
 File: images/ml/lstm.png Graphic file (type png)
 <use images/ml/lstm.png>
 Package pdftex.def Info: images/ml/lstm.png  used on input line 570.
@@ -924,7 +1310,7 @@ Package pdftex.def Info: images/ml/lstm.png  used on input line 570.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [27 <./images/ml/ffnn.png (PNG copy)>]
-<images/ml/attention.jpeg, id=495, 207.6558pt x 188.8656pt>
+<images/ml/attention.jpeg, id=504, 207.6558pt x 188.8656pt>
 File: images/ml/attention.jpeg Graphic file (type jpg)
 <use images/ml/attention.jpeg>
 Package pdftex.def Info: images/ml/attention.jpeg  used on input line 582.
@@ -935,13 +1321,13 @@ Underfull \hbox (badness 1448) in paragraph at lines 110--113
 [][]\OT1/cmr/m/n/12 If a 10-minute con-tin-u-ous part of the seg-ment
  []
 
-<images/methods/segments.png, id=525, 308.65312pt x 194.22563pt>
+<images/methods/segments.png, id=534, 308.65312pt x 194.22563pt>
 File: images/methods/segments.png Graphic file (type png)
 <use images/methods/segments.png>
 Package pdftex.def Info: images/methods/segments.png  used on input line 117.
 (pdftex.def)             Requested size: 134.44064pt x 84.60007pt.
 [31 <./images/methods/segments.png>]
-<images/methods/values.png, id=535, 228.10219pt x 291.33844pt>
+<images/methods/values.png, id=544, 228.10219pt x 291.33844pt>
 File: images/methods/values.png Graphic file (type png)
 <use images/methods/values.png>
 Package pdftex.def Info: images/methods/values.png  used on input line 133.
@@ -964,7 +1350,7 @@ Overfull \hbox (7.98654pt too wide) in paragraph at lines 175--180
  sec-tion on Sig-nal Pro-cess-ing( []3.2.1[]),
  []
 
-<images/methods/filters.png, id=553, 1734.48pt x 1734.48pt>
+<images/methods/filters.png, id=562, 1734.48pt x 1734.48pt>
 File: images/methods/filters.png Graphic file (type png)
 <use images/methods/filters.png>
 Package pdftex.def Info: images/methods/filters.png  used on input line 190.
@@ -972,7 +1358,7 @@ Package pdftex.def Info: images/methods/filters.png  used on input line 190.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/methods/opt_filtering.png, id=555, 1606.0pt x 803.0pt>
+<images/methods/opt_filtering.png, id=564, 1606.0pt x 803.0pt>
 File: images/methods/opt_filtering.png Graphic file (type png)
 <use images/methods/opt_filtering.png>
 Package pdftex.def Info: images/methods/opt_filtering.png  used on input line 2
@@ -983,7 +1369,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [33] [34 <./images/methods/filters.png>] [35 <./images/methods/opt_filtering.pn
 g>]
-<images/methods/beat_algos.png, id=588, 1606.0pt x 1606.0pt>
+<images/methods/beat_algos.png, id=597, 1606.0pt x 1606.0pt>
 File: images/methods/beat_algos.png Graphic file (type png)
 <use images/methods/beat_algos.png>
 Package pdftex.def Info: images/methods/beat_algos.png  used on input line 259.
@@ -1005,7 +1391,7 @@ Overfull \hbox (18.69926pt too wide) in paragraph at lines 278--281
 .75,prominence=0.01) 
  []
 
-<images/methods/sp_beats.png, id=595, 1606.0pt x 1606.0pt>
+<images/methods/sp_beats.png, id=604, 1606.0pt x 1606.0pt>
 File: images/methods/sp_beats.png Graphic file (type png)
 <use images/methods/sp_beats.png>
 Package pdftex.def Info: images/methods/sp_beats.png  used on input line 283.
@@ -1014,13 +1400,13 @@ Package pdftex.def Info: images/methods/sp_beats.png  used on input line 283.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [37 <./images/methods/beat_algos.png>] [38 <./images/methods/sp_beats.png>]
-<images/methods/synchronised.png, id=609, 1606.0pt x 803.0pt>
+<images/methods/synchronised.png, id=618, 1606.0pt x 803.0pt>
 File: images/methods/synchronised.png Graphic file (type png)
 <use images/methods/synchronised.png>
 Package pdftex.def Info: images/methods/synchronised.png  used on input line 30
 8.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
-<images/methods/cringe_signals.png, id=611, 1606.0pt x 803.0pt>
+<images/methods/cringe_signals.png, id=620, 1606.0pt x 803.0pt>
 File: images/methods/cringe_signals.png Graphic file (type png)
 <use images/methods/cringe_signals.png>
 Package pdftex.def Info: images/methods/cringe_signals.png  used on input line 
@@ -1032,13 +1418,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [39 <./images/methods/synchronised.png>] [40 <./images/methods/cringe_signals.p
 ng>]
-<images/methods/fidps.png, id=625, 1606.0pt x 803.0pt>
+<images/methods/fidps.png, id=634, 1606.0pt x 803.0pt>
 File: images/methods/fidps.png Graphic file (type png)
 <use images/methods/fidps.png>
 Package pdftex.def Info: images/methods/fidps.png  used on input line 362.
 (pdftex.def)             Requested size: 403.31511pt x 201.6562pt.
  [41 <./images/methods/fidps.png>] [42]
-<images/methods/feats.png, id=644, 722.7pt x 542.025pt>
+<images/methods/feats.png, id=654, 722.7pt x 542.025pt>
 File: images/methods/feats.png Graphic file (type png)
 <use images/methods/feats.png>
 Package pdftex.def Info: images/methods/feats.png  used on input line 449.
@@ -1047,7 +1433,7 @@ Package pdftex.def Info: images/methods/feats.png  used on input line 449.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/methods/median_fft.png, id=645, 1284.8pt x 481.8pt>
+<images/methods/median_fft.png, id=655, 1284.8pt x 481.8pt>
 File: images/methods/median_fft.png Graphic file (type png)
 <use images/methods/median_fft.png>
 Package pdftex.def Info: images/methods/median_fft.png  used on input line 455.
@@ -1063,48 +1449,32 @@ a-tion of Ma-chine Learn-ing method-
  []
 
 [45 <./images/methods/median_fft.png>] [46]) (./results.tex [47]
-<images/results/flow_diagram.png, id=690, 761.84625pt x 473.77pt>
+<images/results/flow_diagram.png, id=699, 761.84625pt x 473.77pt>
 File: images/results/flow_diagram.png Graphic file (type png)
 <use images/results/flow_diagram.png>
 Package pdftex.def Info: images/results/flow_diagram.png  used on input line 49
 .
 (pdftex.def)             Requested size: 403.31511pt x 250.80774pt.
- [48] [49 <./images/results/flow_diagram.png>] [50] [51] [52]
-<images/results/training_loss_mse.png, id=728, 3340.48pt x 3340.48pt>
+ [48] [49 <./images/results/flow_diagram.png>] [50] [51] [52] [53]
+<images/results/training_loss_mse.png, id=743, 3340.48pt x 3340.48pt>
 File: images/results/training_loss_mse.png Graphic file (type png)
 <use images/results/training_loss_mse.png>
 Package pdftex.def Info: images/results/training_loss_mse.png  used on input li
-ne 216.
+ne 287.
 (pdftex.def)             Requested size: 313.69029pt x 313.67896pt.
-<images/results/testing_loss_mse.png, id=729, 3340.48pt x 3340.48pt>
+<images/results/testing_loss_mse.png, id=744, 3340.48pt x 3340.48pt>
 File: images/results/testing_loss_mse.png Graphic file (type png)
 <use images/results/testing_loss_mse.png>
 Package pdftex.def Info: images/results/testing_loss_mse.png  used on input lin
-e 218.
+e 289.
 (pdftex.def)             Requested size: 313.69029pt x 313.67896pt.
 
 
-LaTeX Warning: Float too large for page by 16.48654pt on input line 223.
+LaTeX Warning: Float too large for page by 16.48654pt on input line 294.
 
-<images/results/all_mae_bi_lstm.png, id=730, 3340.48pt x 1734.48pt>
-File: images/results/all_mae_bi_lstm.png Graphic file (type png)
-<use images/results/all_mae_bi_lstm.png>
-Package pdftex.def Info: images/results/all_mae_bi_lstm.png  used on input line
- 230.
-(pdftex.def)             Requested size: 224.06548pt x 116.31807pt.
-<images/results/all_mae_mlp.png, id=731, 3340.48pt x 1734.48pt>
-File: images/results/all_mae_mlp.png Graphic file (type png)
-<use images/results/all_mae_mlp.png>
-Package pdftex.def Info: images/results/all_mae_mlp.png  used on input line 234
-.
-(pdftex.def)             Requested size: 224.06548pt x 116.31807pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) [53] [54 <./images/results/training_loss_mse.png> <./images/results/testing_l
-oss_mse.png>] [55 <./images/results/all_mae_bi_lstm.png> <./images/results/all_
-mae_mlp.png>] (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.bbl
-[56]
+[54] [55 <./images/results/training_loss_mse.png> <./images/results/testing_los
+s_mse.png>]) [56] [57]
+(/home/hugasj/PycharmProjects/pythonProject/out/Thesis.bbl [58]
 Underfull \hbox (badness 10000) in paragraph at lines 111--113
 []\OT1/cmr/m/n/10.95 ``Standard Sphyg-mo-manome-ter.''  https://www.performance
 health.ca/standard-
@@ -1116,19 +1486,19 @@ Overfull \hbox (27.96797pt too wide) in paragraph at lines 115--118
 /www.ncmedical.com/products/automatic-
  []
 
-[57] [58] [59]
+[59] [60] [61]
 Underfull \hbox (badness 10000) in paragraph at lines 348--351
 []\OT1/cmr/m/n/10.95 ``AdaBoost Al-go-rithm in Ma-chine Learn-ing.''  Avail-abl
 e at
  []
 
-[60]
+[62]
 Underfull \hbox (badness 10000) in paragraph at lines 384--386
 []\OT1/cmr/m/n/10.95 ``Feedforward Neu-ral Net-works | Bril-liant Math & Sci-en
 ce Wiki.''
  []
 
-[61]
+[63]
 Underfull \hbox (badness 1810) in paragraph at lines 478--481
 []\OT1/cmr/m/n/10.95 ``Scikit-learn: Ma-chine learn-ing in Python | scikit-lear
 n 1.4.1 doc-u-men-ta-tion.''
@@ -1150,10 +1520,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 497--500
 
  []
 
-) [62] (./code.tex
+) [64] (./code.tex
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
-) [63]
+) [65]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
 18.
 
@@ -1162,7 +1532,7 @@ File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 118.
- [64]
+ [66]
 Overfull \hbox (15.97932pt too wide) in paragraph at lines 144--145
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1172,7 +1542,7 @@ Overfull \hbox (77.18068pt too wide) in paragraph at lines 198--199
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[65]
+[67]
 Overfull \hbox (10.87921pt too wide) in paragraph at lines 235--236
 [][][][][][][][][][][][] 
  []
@@ -1182,7 +1552,7 @@ Overfull \hbox (10.87921pt too wide) in paragraph at lines 236--237
 [][][][][][][][][][][][] 
  []
 
-[66]
+[68]
 Overfull \hbox (0.67899pt too wide) in paragraph at lines 327--328
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1192,7 +1562,7 @@ Overfull \hbox (21.07944pt too wide) in paragraph at lines 329--331
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[67]
+[69]
 Overfull \hbox (0.67899pt too wide) in paragraph at lines 336--337
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1214,13 +1584,13 @@ Overfull \hbox (87.3809pt too wide) in paragraph at lines 344--346
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[68]
+[70]
 Overfull \hbox (153.68237pt too wide) in paragraph at lines 431--433
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][] 
  []
 
-[69]
+[71]
 Overfull \hbox (5.7791pt too wide) in paragraph at lines 474--475
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1235,7 +1605,7 @@ Overfull \hbox (15.97932pt too wide) in paragraph at lines 519--520
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[70]
+[72]
 Overfull \hbox (87.3809pt too wide) in paragraph at lines 539--540
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1255,7 +1625,7 @@ Overfull \hbox (46.58pt too wide) in paragraph at lines 589--590
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[71]
+[73]
 Overfull \hbox (61.88034pt too wide) in paragraph at lines 605--606
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -1275,13 +1645,13 @@ Overfull \hbox (148.58226pt too wide) in paragraph at lines 664--665
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[72] [73] [74]
+[74] [75] [76]
 Overfull \hbox (56.78023pt too wide) in paragraph at lines 825--826
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[75] [76]) [77] (./ml_results.tex [78] [79]
-<images/results/feature_importance/feature_importance_plot_LR_0.png, id=1784, 7
+[77] [78]) [79] (./ml_results.tex [80] [81]
+<images/results/feature_importance/feature_importance_plot_LR_0.png, id=1799, 7
 22.7pt x 1084.05pt>
 File: images/results/feature_importance/feature_importance_plot_LR_0.png Graphi
 c file (type png)
@@ -1289,7 +1659,7 @@ c file (type png)
 Package pdftex.def Info: images/results/feature_importance/feature_importance_p
 lot_LR_0.png  used on input line 103.
 (pdftex.def)             Requested size: 367.47066pt x 551.20407pt.
-<images/results/feature_importance/feature_importance_plot_MLP_0.png, id=1785, 
+<images/results/feature_importance/feature_importance_plot_MLP_0.png, id=1800, 
 722.7pt x 1084.05pt>
 File: images/results/feature_importance/feature_importance_plot_MLP_0.png Graph
 ic file (type png)
@@ -1304,7 +1674,7 @@ LaTeX Warning: Float too large for page by 32.75055pt on input line 115.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/results/feature_importance/feature_importance_plot_LSTM_0.png, id=1786,
+<images/results/feature_importance/feature_importance_plot_LSTM_0.png, id=1801,
  722.7pt x 1084.05pt>
 File: images/results/feature_importance/feature_importance_plot_LSTM_0.png Grap
 hic file (type png)
@@ -1318,8 +1688,8 @@ LaTeX Warning: Float too large for page by 32.75055pt on input line 124.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/results/feature_importance/feature_importance_plot_Bi-LSTM_0.png, id=17
-87, 722.7pt x 1084.05pt>
+<images/results/feature_importance/feature_importance_plot_Bi-LSTM_0.png, id=18
+02, 722.7pt x 1084.05pt>
 File: images/results/feature_importance/feature_importance_plot_Bi-LSTM_0.png G
 raphic file (type png)
 <use images/results/feature_importance/feature_importance_plot_Bi-LSTM_0.png>
@@ -1332,7 +1702,7 @@ LaTeX Warning: Float too large for page by 32.75055pt on input line 133.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/results/feature_importance/feature_importance_plot_GRU_0.png, id=1788, 
+<images/results/feature_importance/feature_importance_plot_GRU_0.png, id=1803, 
 722.7pt x 1084.05pt>
 File: images/results/feature_importance/feature_importance_plot_GRU_0.png Graph
 ic file (type png)
@@ -1346,8 +1716,8 @@ LaTeX Warning: Float too large for page by 32.75055pt on input line 142.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/results/feature_importance/feature_importance_plot_Bi-GRU_0.png, id=178
-9, 722.7pt x 1084.05pt>
+<images/results/feature_importance/feature_importance_plot_Bi-GRU_0.png, id=180
+4, 722.7pt x 1084.05pt>
 File: images/results/feature_importance/feature_importance_plot_Bi-GRU_0.png Gr
 aphic file (type png)
 <use images/results/feature_importance/feature_importance_plot_Bi-GRU_0.png>
@@ -1360,24 +1730,24 @@ LaTeX Warning: Float too large for page by 32.75055pt on input line 151.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [80 <./images/results/feature_importance/feature_importance_plot_LR_0.png>]
-[81 <./images/results/feature_importance/feature_importance_plot_MLP_0.png>]
-[82 <./images/results/feature_importance/feature_importance_plot_LSTM_0.png>]
-[83 <./images/results/feature_importance/feature_importance_plot_Bi-LSTM_0.png>
-] [84 <./images/results/feature_importance/feature_importance_plot_GRU_0.png>]
-[85 <./images/results/feature_importance/feature_importance_plot_Bi-GRU_0.png>]
+) [82 <./images/results/feature_importance/feature_importance_plot_LR_0.png>]
+[83 <./images/results/feature_importance/feature_importance_plot_MLP_0.png>]
+[84 <./images/results/feature_importance/feature_importance_plot_LSTM_0.png>]
+[85 <./images/results/feature_importance/feature_importance_plot_Bi-LSTM_0.png>
+] [86 <./images/results/feature_importance/feature_importance_plot_GRU_0.png>]
+[87 <./images/results/feature_importance/feature_importance_plot_Bi-GRU_0.png>]
 (/home/hugasj/PycharmProjects/pythonProject/out/Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 20607 strings out of 480204
- 363052 string characters out of 5895010
- 1001480 words of memory out of 5000000
- 37025 multiletter control sequences out of 15000+600000
+ 40982 strings out of 480204
+ 933128 string characters out of 5895010
+ 1616356 words of memory out of 5000000
+ 57055 multiletter control sequences out of 15000+600000
  482782 words of font info for 76 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 108i,9n,117p,10696b,2090s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,11n,117p,10696b,2313s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/hugasj/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti0800.60
 0pk> </home/hugasj/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.
 600pk> </home/hugasj/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt120
@@ -1401,11 +1771,11 @@ ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /home/hugasj/PycharmProjects/pythonProject/out/Thesis.pdf (85
- pages, 7123612 bytes).
+Output written on /home/hugasj/PycharmProjects/pythonProject/out/Thesis.pdf (87
+ pages, 6919173 bytes).
 PDF statistics:
- 2290 PDF objects out of 2487 (max. 8388607)
- 2049 compressed objects within 21 object streams
- 1196 named destinations out of 1200 (max. 500000)
- 517 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2316 PDF objects out of 2487 (max. 8388607)
+ 2075 compressed objects within 21 object streams
+ 1201 named destinations out of 1440 (max. 500000)
+ 543 words of extra memory for PDF output out of 10000 (max. 10000000)
 
