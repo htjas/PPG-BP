@@ -51,15 +51,16 @@ The data flow is visualized in Figure~\ref{fig:data_flow}.
     \label{fig:data_flow}
 \end{figure}
 
+\newpage
+
 \subsection{Machine Learning}
 \label{subsec:machine_learning}
 
-Moving on to the results from the ML phase, firstly the feature data preparation is elaborated.
+Moving forward to the results stemming from the ML phase, the initial focus lies on the preparation of feature data.
 
-As mentioned in previous chapters, an ideal ratio of 60/20/20 train/test/validate was aimed for.
-However in the end having 1,918,623 values from MIMIC-III and 183,140 values from MIMIC-IV, we had to settle for a different splitting ratio.
-As mentioned, the MIMIC-III data was used for training/testing, and it was split into 80/20 train/test, resulting in 1,534,898 training and 383,725 testing datapoints.
-Therefore final train/test/validate proportions were:
+As outlined in previous chapters, the intended split ratio of 60/20/20 for train/test/validation could not be precisely achieved due to the final dataset sizes of 1,918,623 values from MIMIC-III and 183,140 values from MIMIC-IV\@.
+Consequently, the MIMIC-III dataset was utilized for training and testing, being split into an 80/20 ratio for train/test, resulting in 1,534,898 training datapoints and 383,725 testing datapoints.
+Thus, the ultimate distribution for train/test/validate proportions became:
 
 \begin{center}
     \begin{tabular}{|c|c|c|}
@@ -73,105 +74,166 @@ Therefore final train/test/validate proportions were:
     \end{tabular}
 \end{center}
 
-% possibly discussion
-All this means is that the signal processing algorithms worked better and extracted more values from the MIMIC-III DB.
-It is also possible a hint at the fact, that the quality of the signal was better in MIMIC-III.
-This is also logical however, since there was no limit on the fetching of records from a single study or subject from MIMIC-IV,
-so huge number of segments might have been discarded, if they didn't showcase a comprehensible signal.
+After implementing the 7 ML models outlined in the Methods section~\ref{subsec:ml_methods} and employing the described training method with an \enquote{early stopping} strategy,
+along with validation on \enquote{unseen} simulated \enquote{real-world} (MIMIC-IV) data, a comprehensive set of performance metrics was compiled.
+Firstly, the training and testing losses, measured through MSE at the conclusion of training epochs, were documented.
+Secondly, the overall testing accuracy was assessed using RMSE and MAE metrics.
+Lastly, the validation loss, also utilizing RMSE and MAE, was computed.
 
-\begin{center}
-    \begin{tabular}{ |c|c|c|c| }
-        \hline
-        & Training Loss (MSE) & Testing Loss (MSE) & Testing MAE \\
-        \hline
-        LR                     & 218.443             & -                  & 11.097      \\
-        \hline
-        MLP                    & 208.343             & -                  & 10.866      \\
-        \hline
-        LSTM                   & 93.81               & 97.358             & 6.953       \\
-        \hline
-        LSTM (weight adjusted) & 97.615              & 100.498            & 7.085       \\
-        \hline
-        Bi-LSTM                & -                   & -                  & -           \\
-        \hline
-        GRU                    & 88.34               & 92.142             & 6.759       \\
-        \hline
-        GRU (weight adjusted)  & 88.167              & 90.955             & 6.727       \\
-        \hline
-        Bi-GRU                 & -                   & -                  & -           \\
-        \hline
-        SVR                    & -                   & -                  & -           \\
-        \hline
-        RF                     & -                   & -                  & -           \\
-        \hline
-    \end{tabular}
-\end{center}
+All \textit{PyTorch} models were additionally executed alongside their \enquote{weight adjusted} (WA) counterparts, with the respective metrics recorded.
 
-\begin{center}
-    \begin{tabular}{ |c|c|c|c| }
-        \hline
-        & Testing RMSE & Validation RMSE & Validation MAE \\
-        \hline
-        LR                     & 14.777       &                 &                \\
-        \hline
-        MLP                    & 14.446       &                 &                \\
-        \hline
-        LSTM                   & 9.866        & -               & 14.597         \\
-        \hline
-        LSTM (weight adjusted) & 10.024       & -               & 14.646         \\
-        \hline
-        Bi-LSTM                & -            & -               & -              \\
-        \hline
-        GRU                    & 9.598        & -               & 14.951         \\
-        \hline
-        GRU (weight adjusted)  & 9.536        & -               & 15.205         \\
-        \hline
-        Bi-GRU                 & -            & -               & -              \\
-        \hline
-        SVR                    & -            & -               & -              \\
-        \hline
-        RF                     & -            & -               & -              \\
-        \hline
-    \end{tabular}
-\end{center}
+The relevant ML model testing logs and performance metrics, including RMSE, MAE, \textit{$R^2$}, Bias and LoA are documented in Appendix~\ref{subsec:misc_measures}.
 
-LSTM \& GRU training and testing loss charts (32 \& 33) % (\ref{fig:train_mse} \& \ref{fig:test_mse}).
+The plots depicting feature importance, along with their corresponding weight values from the second iteration of the ML models, are available in Appendix~\ref{subsec:plots_fi}.
 
-It was found, that every feature contributes positively, therefore feature reduction was not applied.
-Feature Importance chart in Figure~34 (at the end of the document) % \ref{fig:feat_importance} (at end of document).
+The final results of all ML models for predicting ABP (SBP, DBP and MAP) are available in the Tables~\ref{tab:train_test_mse} and~\ref{tab:test_validate_rmse_mae}.
 
-%\begin{figure}
-%    \centering
-%    \begin{subfigure}{0.5\textwidth}
-%        \centering
-%        \includegraphics[width=0.4\linewidth]{images/results/LSTM_GRU_Train_mse}
-%        \caption{LSTM \& GRU Train MSE}
-%        \label{fig:train_mse}
-%    \end{subfigure}
-%    \begin{subfigure}{0.5\textwidth}
-%        \includegraphics[width=0.4\linewidth]{images/results/LSTM_GRU_Test_mse}
-%        \caption{LSTM \& GRU Test MSE}
-%        \label{fig:test_mse}
-%    \end{subfigure}
-%\end{figure}
+% Training loop
+\begin{table}[p]
+    \renewcommand{\arraystretch}{1.5}
+    \begin{center}
+        \footnotesize
+        \begin{tabular}{ |c|c|c| }
+            \hline
+            & Training Loss (MSE)        & Testing Loss (MSE)          \\
+            \hline
+            LR           & \cellcolor{red!10}217.673  & \cellcolor{red!10}217.255   \\
+            \hline
+            LR (WA)      & \cellcolor{red!20}217.721  & \cellcolor{red!20}217.284   \\
+            \hline
+            MLP          & 196.448                    & 196.158                     \\
+            \hline
+            MLP (WA)     & \cellcolor{red!30}246.247  & \cellcolor{red!30}249.776   \\
+            \hline
+            LSTM         & \cellcolor{green!20}97.452 & \cellcolor{green!20}101.49  \\
+            \hline
+            LSTM (WA)    & 138.708                    & 143.316                     \\
+            \hline
+            Bi-LSTM      & \cellcolor{green!10}115.1  & 118.12                      \\
+            \hline
+            Bi-LSTM (WA) & 154.553                    & 159.745                     \\
+            \hline
+            GRU          & \cellcolor{green!30}89.809 & \cellcolor{green!30}93.605  \\
+            \hline
+            GRU (WA)     & 138.081                    & 142.129                     \\
+            \hline
+            Bi-GRU       & 115.506                    & \cellcolor{green!10}117.732 \\
+            \hline
+            Bi-GRU (WA)  & 117.547                    & 173.893                     \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \captionsetup{format=plain, justification=centering, font=small}
+    \caption{Training and Testing Losses of different ML models at the end of training}
+    \label{tab:train_test_mse}
+\end{table}
 
-\begin{figure}[h]
+The results of the Machine Learning models, as summarized in Table~\ref{tab:train_test_mse}, reveal varying levels of performance in terms of training and testing losses at the conclusion of training epochs.
+
+The LR model exhibited a training loss of 217.673 (MSE) and a testing loss of 217.255 (MSE), with marginal improvement seen in the \enquote{weight adjusted} (WA) version.
+Similarly, the MLP model showed a training loss of 196.448 (MSE) and a testing loss of 196.158 (MSE), with a notable increase in losses for the WA variant.
+
+On the other hand, the LSTM model demonstrated improved performance, showcasing a training loss of 97.452 (MSE) and a testing loss of 101.49 (MSE), while the Bi-LSTM and Bi-GRU models also exhibited relatively lower losses.
+The GRU model, in particular, displayed a training loss of 89.809 (MSE) and a testing loss of 93.605 (MSE), indicating promising results for this configuration.
+
+Overall, the models' performances varied, with some showing better generalization capabilities than others, as evident from their testing losses.
+
+% Test and Validation measures
+\begin{table}[p]
+    \renewcommand{\arraystretch}{1.5}
+    \begin{center}
+        \footnotesize
+        \begin{tabular}{ |c|c|c|c|c| }
+            \hline
+            & Test MAE                  & Test RMSE                  & Validation MAE             & Validation RMSE            \\
+            \hline
+            LR           & \cellcolor{red!10}11.091  & \cellcolor{red!10}14.739   & 13.171                     & \cellcolor{green!30}16.219 \\
+            \hline
+            LR (WA)      & \cellcolor{red!20}11.093  & \cellcolor{red!20}14.74    & 13.196                     & 16.257                     \\
+            \hline
+            MLP          & 10.567                    & 14.005                     & 14.096                     & 18.781                     \\
+            \hline
+            MLP (WA)     & \cellcolor{red!30}11.802  & \cellcolor{red!30}15.803   & \cellcolor{red!30}21.309   & \cellcolor{red!30}30.559   \\
+            \hline
+            LSTM         & \cellcolor{green!10}7.119 & \cellcolor{green!10}10.073 & 14.158                     & 18.005                     \\
+            \hline
+            LSTM (WA)    & 8.697                     & 11.971                     & 13.16                      & 16.311                     \\
+            \hline
+            Bi-LSTM      & 7.85                      & 10.868                     & 14.921                     & \cellcolor{red!10}18.892   \\
+            \hline
+            Bi-LSTM (WA) & 9.362                     & 12.638                     & \cellcolor{green!30}12.95  & \cellcolor{green!10}16.253 \\
+            \hline
+            GRU          & \cellcolor{green!20}6.823 & \cellcolor{green!20}9.674  & \cellcolor{red!20}15.304   & 19.5                       \\
+            \hline
+            GRU (WA)     & 8.658                     & 11.921                     & \cellcolor{green!10}13.106 & 16.358                     \\
+            \hline
+            Bi-GRU       & 7.844                     & 10.85                      & \cellcolor{red!10}15.222   & \cellcolor{red!20}19.141   \\
+            \hline
+            Bi-GRU (WA)  & 9.811                     & 13.186                     & \cellcolor{green!20}13.096 & \cellcolor{green!20}16.244 \\
+            \hline
+            RF           & \cellcolor{green!30}5.075 & \cellcolor{green!30}8.148  & 14.736                     & 18.105                     \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \captionsetup{format=plain, justification=centering, font=small}
+    \caption{Testing and Validation Performance Metrics of different ML models}
+    \label{tab:test_validate_rmse_mae}
+\end{table}
+
+The Table~\ref{tab:test_validate_rmse_mae} provides an overview of the testing and validation performance metrics for the Machine Learning models employed.
+
+For the LR model, the test MAE and RMSE were recorded as 11.091 and 14.739 respectively, with the validation MAE at 13.171 and RMSE at 16.219.
+Similarly, the LR WA model exhibited comparable metrics with slightly higher validation MAE and RMSE values.
+
+Moving to the MLP model, it displayed a test MAE of 10.567 and a test RMSE of 14.005, with the validation metrics showing an MAE of 14.096 and RMSE of 18.781.
+The MLP WA model significantly increased the validation losses MAE and RMSE to 21.309 and 30.559 respectively, displaying the worst performance of all models.
+
+In contrast, the LSTM model showed improved performance with a test MAE of 7.119 and a test RMSE of 10.073.
+The validation metrics for LSTM were recorded as an MAE of 14.158 and RMSE of 18.005.
+The Bi-LSTM model also exhibited relatively lower MAE and RMSE values for both test and validation sets.
+
+The GRU model displayed a test MAE of 6.823 and a test RMSE of 9.674, with the validation MAE at 15.304 and RMSE at 19.5.
+For the Bi-GRU model, the test MAE and RMSE were 7.844 and 10.85, while the validation MAE and RMSE were recorded as 15.222 and 19.141 respectively.
+The weight-adjusted versions of these models generally improved upon their validation metrics, with the Bi-LSTM WA model performing the most effectively with 12.95 validation MAE\@.
+
+Lastly, the RF model stood out with the lowest test MAE and RMSE of 5.075 and 8.148 respectively.
+The validation MAE for RF was 14.736 and RMSE was 18.105, showcasing its strong predictive capabilities across both test and validation datasets.
+
+The analysis reveals varying performances among the models, with the RF model demonstrating consistently strong predictive accuracy, especially notable in its lower MAE and RMSE values across both test and validation datasets.
+
+-----
+
+LSTM \& GRU training and testing loss charts (\ref{fig:train_test_mse}).
+
+Feature Importance chart in Figure~\ref{fig:fi_gru}.
+
+Best and worst ML model performance and separate y-value prediction is illustrated in Figure~\ref{fig:all_mae}.
+
+\begin{figure}[p]
     \centering
-    \includegraphics[width=0.4\linewidth]{images/results/LSTM_GRU_Train_mse}
-    \caption{LSTM \& GRU Train MSE}
-    \label{fig:train_mse}
+    \begin{minipage}{\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/results/training_loss_mse}
+        \vspace{0.001cm}
+        \includegraphics[width=0.7\textwidth]{images/results/testing_loss_mse}
+        \captionsetup{format=plain, justification=centering, font=small}
+        \caption{Training and Testing Losses of LSTM \& GRU Models}
+        \label{fig:train_test_mse}
+    \end{minipage}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.4\linewidth]{images/results/LSTM_GRU_Test_mse}
-    \caption{LSTM \& GRU Test MSE}
-    \label{fig:test_mse}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{images/results/feature_importance_plot_GRU_0}
-    \caption{Feature Importance Chart}
-    \label{fig:feat_importance}
+    \hspace{-1cm}
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/results/all_mae_bi_lstm}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/results/all_mae_mlp}
+    \end{minipage}
+    \captionsetup{format=plain, justification=centering, font=small}
+    \caption{Validation MAE of total, systolic, diastolic and mean arterial pressures predicted by the Bi-LSTM \& MLP}
+    \label{fig:all_mae}
 \end{figure}
