@@ -15,7 +15,6 @@ V.~Burt, P.~Whelton, E.~Roccella, C.~Brown, J.~Cutler, M.~Higgins, M.~Horan,
   and D.~Labarthe, ``Prevalence of hypertension in the {{US}} adult population:
   {{Results}} from the third {{National Health}} and {{Nutrition Examination
   Survey}}, 1988-1991,'' vol.~25, no.~3, pp.~305--313.
-\newblock Cited By :2738.
 
 \bibitem{poonCufflessNoninvasiveMeasurements2005}
 C.~Poon and Y.~Zhang, ``Cuff-less and {{Noninvasive Measurements}} of
@@ -24,9 +23,9 @@ C.~Poon and Y.~Zhang, ``Cuff-less and {{Noninvasive Measurements}} of
   pp.~5877--5880.
 
 \bibitem{el-hajjDeepLearningModels2021}
-C.~El-Hajj and g.-i. family=Kyriacou, given=PA, ``Deep learning models for
-  cuffless blood pressure monitoring from {{PPG}} signals using attention
-  mechanism,'' vol.~65, p.~102301.
+C.~El-Hajj and P.~Kyriacou, ``Deep learning models for cuffless blood pressure
+  monitoring from {{PPG}} signals using attention mechanism,'' vol.~65,
+  p.~102301.
 
 \bibitem{sharmaCuffLessContinuousBlood2017}
 M.~Sharma, K.~Barbosa, V.~Ho, D.~Griggs, T.~Ghirmai, S.~K. Krishnan, T.~K.
@@ -85,7 +84,7 @@ T.~Aoyagi and K.~Miyasaka, ``Pulse oximetry: Its invention, contribution to
 ``What is blood pressure and how is it measured?,'' in {\em
   {{InformedHealth}}.Org [{{Internet}}]}, {Institute for Quality and Efficiency
   in Health Care (IQWiG)}.
-\newblock Available at https://www.ncbi.nlm.nih.gov/books/NBK279251/.
+\newblock Available at \url{https://www.ncbi.nlm.nih.gov/books/NBK279251/}.
 
 \bibitem{betts20BloodFlow2022}
 J.~G. Betts, K.~A. Young, J.~A. Wise, E.~Johnson, B.~Poe, D.~H. Kruse,
@@ -109,12 +108,13 @@ D.~Ettehad, C.~A. Emdin, A.~Kiran, S.~G. Anderson, T.~Callender, J.~Emberson,
 
 \bibitem{StandardSphygmomanometer}
 ``Standard {{Sphygmomanometer}}.''
-\newblock https://www.performancehealth.ca/standard-sphygmomanometer-vital.
+\newblock
+  \url{https://www.performancehealth.ca/standard-sphygmomanometer-vital}.
 
 \bibitem{AutomaticDigitalBlood}
 ``Automatic {{Digital Blood Pressure Monitor}}.''
 \newblock
-  http://www.ncmedical.com/products/automatic-digital-blood-pressure-monitor\_4040.html.
+  \url{http://www.ncmedical.com/products/automatic-digital-blood-pressure-monitor\_4040.html}.
 
 \bibitem{clarkArterialCatheterization1992}
 V.~L. Clark and J.~A. Kruse, ``Arterial catheterization,'' vol.~8, no.~4,
@@ -147,7 +147,6 @@ C.-S. Kim, A.~M. Carek, O.~T. Inan, R.~Mukkamala, and J.-O. Hahn,
 B.~Imholz, W.~Wieling, G.~Van~Montfrans, and K.~Wesseling, ``Fifteen years
   experience with finger arterial pressure monitoring: {{Assessment}} of the
   technology,'' vol.~38, no.~3, pp.~605--616.
-\newblock Cited By :684.
 
 \bibitem{peterReviewMethodsNoninvasive2014}
 L.~Peter, N.~Noury, and M.~Cerny, ``A review of methods for non-invasive and
@@ -229,7 +228,6 @@ S.~Zanelli, M.~El~Yacoubi, M.~Hallab, and M.~Ammi, ``On the potential of {{AI}}
 G.~Langewouters, A.~Zwart, R.~Busse, and K.~Wesseling, ``Pressure-diameter
   relationships of segments of human finger arteries,'' vol.~7, no.~1,
   pp.~43--55.
-\newblock Cited By :81.
 
 \bibitem{moodyDatabaseSupportDevelopment1996}
 G.~Moody and R.~Mark, ``A database to support development and evaluation of
@@ -309,9 +307,9 @@ A.~Chatterjee and U.~K. Roy, ``{{PPG Based Heart Rate Algorithm Improvement}}
   Engineering}} \& {{Nano-Technology}} ({{IEMENTech}})}, pp.~1--6.
 
 \bibitem{savitzkySmoothingDifferentiationData1964}
-g.-i. family=Savitzky, given=Abraham. and M.~J.~E. Golay, ``Smoothing and
-  {{Differentiation}} of {{Data}} by {{Simplified Least Squares
-  Procedures}}.,'' vol.~36, no.~8, pp.~1627--1639.
+A.~Savitzky and M.~J.~E. Golay, ``Smoothing and {{Differentiation}} of {{Data}}
+  by {{Simplified Least Squares Procedures}}.,'' vol.~36, no.~8,
+  pp.~1627--1639.
 
 \bibitem{antoniouDigitalFiltersAnalysis2018}
 A.~Antoniou, {\em Digital {{Filters}}: {{Analysis}}, {{Design}}, and {{Signal
@@ -347,7 +345,7 @@ X.-Y. Zhang and Y.-T. Zhang, ``The effect of local cold exposure on pulse
 \bibitem{AdaBoostAlgorithmMachine}
 ``{{AdaBoost Algorithm}} in {{Machine Learning}}.''
 \newblock Available at
-  https://www.almabetter.com/bytes/tutorials/data-science/adaboost-algorithm.
+  \url{https://www.almabetter.com/bytes/tutorials/data-science/adaboost-algorithm}.
 
 \bibitem{tengContinuousNoninvasiveEstimation2003}
 X.~Teng and Y.~Zhang, ``Continuous and noninvasive estimation of arterial blood
@@ -382,13 +380,12 @@ Y.~Kurylyak, F.~Lamonaca, and D.~Grimaldi, ``A {{Neural Network-based}} method
 
 \bibitem{FeedforwardNeuralNetworks}
 ``Feedforward {{Neural Networks}} | {{Brilliant Math}} \& {{Science Wiki}}.''
-\newblock https://brilliant.org/wiki/feedforward-neural-networks/.
+\newblock \url{https://brilliant.org/wiki/feedforward-neural-networks/}.
 
 \bibitem{xingOpticalBloodPressure2016}
 X.~Xing and M.~Sun, ``Optical blood pressure estimation with
   photoplethysmography and fft-based neural networks,'' vol.~7, no.~8,
   pp.~3007--3020.
-\newblock Cited By :177.
 
 \bibitem{liuIntegratedNavigationTethered2017}
 M.~Liu, X.~Zhan, J.~Tu, B.~Liu, and Z.~Zhu, ``Integrated navigation for
@@ -423,27 +420,27 @@ J.~Joung, C.-W. Jung, H.-C. Lee, M.-J. Chae, H.-S. Kim, J.~Park, W.-Y. Shin,
 
 \bibitem{jasinskasHtjasPPGBPProject2024}
 H.~Jasinskas, ``Htjas/{{PPG-BP Project}}.''
-\newblock Available at https://github.com/htjas/PPG-BP.
+\newblock Available at \url{https://github.com/htjas/PPG-BP}.
 
 \bibitem{MITLCPWfdbpython2024}
 ``{{MIT-LCP}}/wfdb-python.''
-\newblock Available at https://github.com/MIT-LCP/wfdb-python.
+\newblock Available at \url{https://github.com/MIT-LCP/wfdb-python}.
 
 \bibitem{PandasPythonData}
 ``Pandas - {{Python Data Analysis Library}}.''
-\newblock https://pandas.pydata.org/.
+\newblock \url{https://pandas.pydata.org/}.
 
 \bibitem{NumPy}
 ``{{NumPy}}.''
-\newblock https://numpy.org/.
+\newblock \url{https://numpy.org/}.
 
 \bibitem{MatplotlibVisualizationPython}
 ``Matplotlib — {{Visualization}} with {{Python}}.''
-\newblock https://matplotlib.org/.
+\newblock \url{https://matplotlib.org/}.
 
 \bibitem{SciPy}
 ``{{SciPy}}.''
-\newblock https://scipy.org/.
+\newblock \url{https://scipy.org/}.
 
 \bibitem{vangentHeartPyNovelHeart2019}
 P.~van Gent, H.~Farah, N.~van Nes, and B.~van Arem, ``{{HeartPy}}: {{A}} novel
@@ -472,31 +469,31 @@ S.~Maqsood, S.~Xu, S.~Tran, S.~Garg, M.~Springer, M.~Karunanithi, and
 
 \bibitem{PyTorch}
 ``{{PyTorch}}.''
-\newblock https://pytorch.org/.
+\newblock \url{https://pytorch.org/}.
 
 \bibitem{ScikitlearnMachineLearning}
 ``Scikit-learn: Machine learning in {{Python}} — scikit-learn 1.4.1
   documentation.''
-\newblock https://scikit-learn.org/stable/.
+\newblock \url{https://scikit-learn.org/stable/}.
 
 \bibitem{Wandb}
 ``Wandb.''
-\newblock https://wandb.ai/site.
+\newblock \url{https://wandb.ai/site}.
 
 \bibitem{SGDPyTorchDocumentation}
 ``{{SGD}} — {{PyTorch}} 2.2 documentation.''
 \newblock Available at
-  https://pytorch.org/docs/stable/generated/torch.optim.SGD.html.
+  \url{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}.
 
 \bibitem{AdamPyTorchDocumentationa}
 ``Adam — {{PyTorch}} 2.2 documentation.''
 \newblock Available at
-  https://pytorch.org/docs/stable/generated/torch.optim.Adam.html.
+  \url{https://pytorch.org/docs/stable/generated/torch.optim.Adam.html}.
 
 \bibitem{LBFGSPyTorchDocumentation}
 ``{{LBFGS}} — {{PyTorch}} 2.2 documentation.''
 \newblock Available at
-  https://pytorch.org/docs/stable/generated/torch.optim.LBFGS.html.
+  \url{https://pytorch.org/docs/stable/generated/torch.optim.LBFGS.html}.
 
 \bibitem{stergiouUniversalStandardValidation2018}
 G.~Stergiou, B.~Alpert, S.~Mieke, R.~Asmar, N.~Atkins, S.~Eckert, G.~Frick,
