@@ -97,63 +97,18 @@ Machine Learning Approach}
     Date \tab \qquad \qquad Signature
 
     \newpage
+    \onehalfspacing
+
+    \section{Abstract}
+    \label{sec:abstract}
+    \input{abstract}
+
+    \newpage
     \doublespacing
     \tableofcontents
 
     \newpage
     \onehalfspacing
-
-
-    \section{Abstract}
-    \label{sec:abstract}
-
-    Cardiovascular diseases rank as the foremost cause of global mortality, with Hypertension as a significant contributing factor.
-    The need for continuous blood pressure (BP) monitoring is paramount, especially in resource-constrained settings.
-    This study explores utilizing Photoplethysmography (PPG) technology for BP estimation in ICU patients, delving into signal pre-processing techniques,
-    PPG feature extraction, and machine learning (ML) algorithms for precise BP monitoring.
-
-    Drawing upon ICU data from Multiparameter Intelligent Monitoring in Intensive Care (MIMIC) databases, comprising 22,083 10-minute segments from MIMIC-III and 5,508 identical length segments from MIMIC-IV,
-    rigorous signal processing and feature extraction procedures yielded a total of 1,918,623 and 183,140 median data points from MIMIC-III and MIMIC-IV respectively.
-    Each data point encompasses 34 independent (input) PPG features and 3 target (output) arterial blood pressure (ABP) features in synchrony.
-    The MIMIC-III dataset was utilized for model training and testing, while the MIMIC-IV dataset served for validation purposes.
-    Within the scope of this study, seven distinct ML models were developed and assessed.
-
-    The bidirectional LSTM model achieved the best overall ABP prediction accuracy, with a mean absolute error (MAE) of 12.95 ± 7.48 mmHg.
-    Notably, the highest accuracy in predicting Diastolic Blood Pressure (DBP) was observed, with an MAE of 9.946 ± 5.743 mmHg.
-    Key features such as Diastolic Time, Resistive Index, and Normalized Power at Peak exhibited significant correlation and impactful contributions to the models' predictive capabilities.
-    A crucial finding indicates that across all models, DBP can be predicted with greater precision than Systolic BP\@.
-
-    Despite not meeting international standards for acceptable accuracy in BP measurement, the recorded metrics offer valuable insights into cardiovascular dynamics captured through PPG technology.
-    Developing a universal BP prediction model solely from PPG technology poses a significant challenge, emphasizing the personalized nature of PPG waveforms
-    and the impact of individual physiological characteristics on BP predictions.
-    Future directions include implementing calibration techniques, utilizing verifiable patient data for model training, and deriving subject-specific parameters
-    for advancing nuanced and effective BP prediction models tailored to individual patients.
-
-%    Cardiovascular diseases rank as the foremost cause of global mortality, with Hypertension standing as a significant contributing factor.
-%    The need for continuous blood pressure (BP) monitoring is paramount, especially given the scarcity of accurate high BP detection methods, particularly in resource-constrained settings.
-%    This study explores the potential of utilizing Photoplethysmography (PPG) technology for BP estimation in ICU patients.
-%    The investigation delves into signal pre-processing techniques, PPG feature extraction, and machine learning (ML) algorithms to develop effective strategies for precise BP monitoring.
-%
-%    This study draws upon ICU data sourced from MIMIC databases, comprising 22,083 10-minute segments from the MIMIC-III and 5,508 identical length segments from MIMIC-IV database\@.
-%    Following rigorous signal processing and feature extraction procedures, a total of 1,918,623 and 183,140 median data points were obtained from MIMIC-III and MIMIC-IV respectively.
-%    Each data point encompasses 34 independent PPG features and 3 target arterial blood pressure (ABP) features in synchrony.
-%    The MIMIC-III dataset was utilized for model training and testing, while the MIMIC-IV dataset served for validation purposes.
-%    Within the scope of this study, seven distinct ML models were developed and assessed.
-%
-%    The best overall ABP prediction accuracy was achieved by a bidirectional LSTM model, yielding a mean absolute error (MAE) of 12.95 ± 7.48 mmHg.
-%    Notably, the highest accuracy in ABP prediction was observed for Diastolic Blood Pressure (DBP), with an MAE of 9.946 ± 5.743 mmHg.
-%    Key features demonstrating the most significant correlation and impactful contributions to the models' predictive capabilities were Diastolic Time, Resistive Index, and Normalized Power at Peak.
-%    A crucial finding indicates that across all models, DBP can be predicted with greater precision than Systolic BP\@.
-%
-%    The recorded prediction effectiveness metrics do not meet international standards set for acceptable accuracy in BP measurement.
-%    Nevertheless, these metrics provide valuable insights into the cardiovascular dynamics captured through PPG technology.
-%    A significant challenge is recognized in developing a universal BP prediction model solely from PPG technology,
-%    highlighting the personalized nature of PPG waveforms and the impact of individual physiological characteristics on BP predictions.
-%    To improve accuracy, future directions include the implementation of calibration techniques, utilization of verifiable patient data for model training,
-%    and the derivation of subject-specific parameters such as age, body weight, and height.
-%    These strategies are essential for advancing the development of nuanced and effective BP prediction models tailored to individual patients.
-
-    \newpage
 
 
     \section{Introduction}

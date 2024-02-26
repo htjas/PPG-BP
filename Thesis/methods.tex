@@ -1,5 +1,5 @@
-The Methods section provides an overview of the methodologies employed in the \texttt{PPG-BP} project.
-It encompasses various subdirectories such as MIMIC and PyTorch tutorials, with the primary code located within the \texttt{model} Python Package.
+The Methods section provides an overview of the methodologies employed in the author's \texttt{PPG-BP} project.
+It encompasses various subdirectories such as MIMIC and PyTorch tutorials, with the primary code located in the \texttt{model} Python Package.
 Within the \texttt{model}, there exist several sub-packages containing relevant data for subsequent project components,
 while the core code is distributed across five \texttt{.py} classes: \texttt{init\_scripts.py} (Initialization / Data Fetching), \texttt{sp\_scripts.py} (Signal Processing),
 \texttt{ml\_scripts.py} (Machine Learning), \texttt{visual.py} (Visualization), and \texttt{main.py}, which integrates all the aforementioned components.
@@ -8,7 +8,7 @@ The whole repository can be found on the author's \textit{GitHub} page~\cite{jas
 \subsection{Data Fetching}
 \label{subsec:data-fetching}
 
-The initial phase in virtually all Data Science endeavors involves Data Preparation.
+The initial phase in virtually all data science endeavors involves data preparation.
 This section will examine the \texttt{init\_scripts.py} class.
 For this project, data was sourced from the MIMIC-III and MIMIC-IV DBs, each serving distinct purposes.
 Data from the MIMIC-IV DB was employed as the validation dataset (detailed further in the ML methods section~\ref{subsec:ml_methods}), since it is regarded as the most modern and most reliable MIMIC DB currently available.
@@ -73,21 +73,19 @@ The segment duration length is determined by the following function:
 \vspace{0.1cm}
 
 \noindent Precisely these segments represent the smallest data samples utilized in this study, containing continuous numeric values sampled at a specific frequency rate.
-The data abstraction levels in MIMIC DBs can be depicted by the chart, showing a descending order from left to right:
+The data abstraction levels in MIMIC DBs can be depicted by the following chart, showing a descending order from left to right:
 
 \vspace{0.1cm}
-{\centering \textit{Subject} $\rightarrow$ Study $\rightarrow$ Record $\rightarrow$ Segment\par}
+{\centering Subject $\rightarrow$ Study $\rightarrow$ Record $\rightarrow$ Segment\par}
 \vspace{0.1cm}
+
+\newpage
 
 An iterative process is likewise applied to every segment of a record, by fetching all values from a single segment:
 
 \vspace{0.1cm}
 {\centering \texttt{segment\_data = wfdb.rdrecord(segment, record\_dir)}.\par}
 \vspace{0.1cm}
-
-\noindent These segments should also be devoid of any \enquote{faulty} values, identified as NumPy values \texttt{NaN} and \texttt{inf}.
-For ABP segments values outside the range of 30 to 250 (accounting for extreme and likely erroneous measurements) are omitted, and for Pleth values must strictly fall between 0 and 1 (representing the valid PPG range).
-These exclusion criteria are summarized in Table~\ref{tab:faulty}.
 
 \begin{wraptable}{r}{0.35\textwidth}
     \begin{center}
@@ -107,12 +105,11 @@ These exclusion criteria are summarized in Table~\ref{tab:faulty}.
     \label{tab:faulty}
 \end{wraptable}
 
-If a 10-minute continuous part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
-If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by a \_ and a number representing the \textit{n-th} 10 minute part of a segment)
-Examples of the file names and their values are illustrated in Figures~\ref{fig:segments} and~\ref{fig:values}.
+\noindent These segments should also be devoid of any \enquote{faulty} values, identified as NumPy values \texttt{NaN} and \texttt{inf}.
+For ABP segments values outside the range of 30 to 250 (accounting for extreme and likely erroneous measurements) are omitted, and for Pleth values must strictly fall between 0 and 1 (representing the valid PPG range).
+These exclusion criteria are summarized in Table~\ref{tab:faulty}.
 
 \begin{wrapfigure}{r}{0.35\textwidth}
-    \vspace*{-10mm}
     \begin{center}
         \includegraphics[width=0.3\textwidth]{images/methods/segments}
     \end{center}
@@ -122,13 +119,12 @@ Examples of the file names and their values are illustrated in Figures~\ref{fig:
     \label{fig:segments}
 \end{wrapfigure}
 
-As noted earlier, each subject in the database may encompass multiple studies, records, and segments.
-To prevent disproportionate representation of individual patient data, a limit of 100 segments, each spanning 10 minutes, was imposed per subject.
-This is specifically important for data retrieval from the MIMIC-III database, which is intended for training and testing purposes.
-However, this restriction was not applied to data retrieval from the MIMIC-IV database, which is designated for validation purposes and aims to encompass all available 10-minute segments, thus simulating real-world data where over-representation is not a concern.
+
+If a 10-minute continuous part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
+If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by an underscore and a number representing the \textit{n-th} 10 minute part of a segment)
+Examples of the file names and their values are illustrated in Figures~\ref{fig:segments} and~\ref{fig:values}.
 
 \begin{wrapfigure}{r}{0.35\textwidth}
-    \vspace*{-5mm}
     \begin{center}
         \includegraphics[width=0.3\textwidth]{images/methods/values}
     \end{center}
@@ -138,16 +134,21 @@ However, this restriction was not applied to data retrieval from the MIMIC-IV da
     \label{fig:values}
 \end{wrapfigure}
 
+As noted earlier, each subject in the database may encompass multiple studies, records, and segments.
+To prevent disproportionate representation of individual patient data, a limit of 100 segments, each spanning 10 minutes, was imposed per subject.
+This is specifically important for data retrieval from the MIMIC-III database, which is intended for training and testing purposes.
+However, this restriction was not applied to data retrieval from the MIMIC-IV database, which is designated for validation purposes and aims to encompass all available 10-minute segments, thus simulating real-world data where over-representation is not a concern.
+
 Additionally, the primary objective was to achieve a dataset split ratio of 60/20/20 for training, testing, and validation, where 80\% of the data comprises the MIMIC-III dataset for training and testing (60/20), and the remaining 20\% consists of the MIMIC-IV dataset for validation purposes.
 To facilitate this, an initial set of x segments was retrieved from the MIMIC-IV database, followed by obtaining four times the number of x segments from the MIMIC-III database.
-However, it is important to acknowledge that the quantity of segments obtained from each database doesn't directly correspond to the number of features utilized in the ML phase, as signal processing (SP) tasks are performed in between.
+However, it is important to acknowledge that the quantity of segments obtained from each database doesn't directly correspond to the number of features utilized in the ML phase, as signal processing tasks are performed in between.
 Thus, the 60/20/20 split ratio for training, testing, and validation serves more as a guideline than an absolute target for the number of segments retrieved.
-Details on achieving the actual proportions are provided in the subsequent section~\ref{subsec:sp_methods}.
+Details on achieving the actual proportions are provided in the results section~\ref{subsec:machine_learning}.
 
 \subsection{Signal Processing}
 \label{subsec:sp_methods}
 
-After the initial Data Preparation phase, the Signal Processing follows.
+After the initial data preparation phase, the signal processing follows.
 Its code is written in the \texttt{sp\_scripts.py} file.
 The main \texttt{process\_data()} method is made up of these 6 steps (description and corresponding Python code):
 \begin{enumerate}
@@ -155,7 +156,7 @@ The main \texttt{process\_data()} method is made up of these 6 steps (descriptio
     \small \texttt{seg\_name,raw\_abp,raw\_ppg = read\_seg\_data(filename,bp\_path,ppg\_path,fs)}
     \item \normalsize preprocessing the data, \newline
     \small \texttt{abp\_filt,ppg\_filt = pre\_process\_data(raw\_abp,raw\_ppg,fs,seg\_name)}
-    \item \normalsize determining beats and heart rate (HR), \newline
+    \item \normalsize determining beats and heart rate, \newline
     \small \texttt{abp,ppg,abp\_beats,ppg\_beats = signal\_processing(seg\_name,abp\_filt,ppg\_filt,fs)}
     \item \normalsize identifying fiducial points, \newline
     \small \texttt{abp\_fidp = fiducial\_points(abp,abp\_beats, fs) \newline ppg\_fidp = fiducial\_points(ppg, ppg\_beats, fs)}
@@ -172,7 +173,7 @@ The following subsections delve into a comprehensive description of each subsequ
 \subsubsection{Pre-Processing}
 \label{subsubsec:filtering}
 
-As previously delineated in the theoretical background section on Signal Processing(~\ref{subsubsec:signal_processing}), Data Pre-Processing or Filtering is a key component for ensuring a coherent projection of PPG and BP waveforms, as well as for their subsequent utilization.
+As previously delineated in the theoretical background section on signal processing(~\ref{subsubsec:signal_processing}), data pre-processing or \enquote{filtering} is a key component for ensuring a coherent projection of PPG and BP waveforms, as well as for their subsequent utilization.
 A total of 8 filtering methodologies were experimented with to identify the optimal approach for this project:
 \textit{Gaussian} and \textit{Gaussian Median}, \textit{Savitzky-Golay}, \textit{Butterworth} (\& lowpass),
 \textit{Chebyshev II} (\& lowpass) and a manually created \textit{Whiskers} filter.
@@ -188,7 +189,7 @@ Thirdly and ideally, the shape of a dicrotic notch should be visible in both the
 % \newpage
 \begin{figure}[h]
     \includegraphics[width=0.9\textwidth]{images/methods/filters}
-    \caption{9 different filters applied to the same ABP and PPG segment}
+    \caption{8 different filters applied to the same ABP and PPG segment}
     \label{fig:filters}
 \end{figure}
 
@@ -206,7 +207,7 @@ The impact of this filtering methodology is depicted in Figure~\ref{fig:opt_filt
 \subsubsection{Beat Finding Algorithms}
 \label{subsubsec:beats}
 
-The third stage of the signal processing phase involves Beat Detection, which is crucial for precisely identifying waveform peaks, facilitating the accurate extraction of fiducial points.
+The third stage of the signal processing phase involves beat detection, which is crucial for precisely identifying waveform peaks, facilitating the accurate extraction of fiducial points.
 Moreover, precise beat detection enables the segmentation of the waveform into individual pulse waves, extending from pulse onset to offset, which is essential for subsequent PWA procedures.
 
 The beat detection reference code was obtained from the openly available MIMIC WFDB Tutorial~\cite{charltonMIMICWFDBTutorials2022}.
@@ -325,7 +326,7 @@ The first plot exhibits a noticeable distortion in the PPG measurement, while th
 \end{figure}
 
 In the scope of this project, manual selection of waveform shapes was not conducted, mainly due to the extensive size of samples.
-Instead, the exclusion of irregular segments relied solely on programmed Exception Handling.
+Instead, the exclusion of irregular segments relied solely on programmed exception handling.
 As previously discussed in the beat finding section, the rare occurrence of not finding 100 beats in a waveform may indicate a pathological heart function, as ensured by the following code:
 
 \vspace{0.1cm}

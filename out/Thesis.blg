@@ -7,46 +7,42 @@ Warning--entry type for "AdamPyTorchDocumentationa" isn't style-file defined
 --line 30 of file literature_final_with_notes.bib
 Warning--entry type for "anishnamaUnderstandingBidirectionalLSTM2023" isn't style-file defined
 --line 55 of file literature_final_with_notes.bib
-Warning--entry type for "AutomaticDigitalBlood" isn't style-file defined
---line 117 of file literature_final_with_notes.bib
 Warning--entry type for "betts20BloodFlow2022" isn't style-file defined
 --line 128 of file literature_final_with_notes.bib
 Warning--entry type for "charltonMIMICWFDBTutorials2022" isn't style-file defined
 --line 230 of file literature_final_with_notes.bib
 Warning--entry type for "contributorEssentialCriticalCare2021" isn't style-file defined
---line 272 of file literature_final_with_notes.bib
+--line 273 of file literature_final_with_notes.bib
 Warning--entry type for "FeedforwardNeuralNetworks" isn't style-file defined
---line 462 of file literature_final_with_notes.bib
+--line 463 of file literature_final_with_notes.bib
 Warning--entry type for "jasinskasHtjasPPGBPProject2024" isn't style-file defined
---line 544 of file literature_final_with_notes.bib
+--line 545 of file literature_final_with_notes.bib
 Warning--entry type for "LBFGSPyTorchDocumentation" isn't style-file defined
---line 697 of file literature_final_with_notes.bib
+--line 698 of file literature_final_with_notes.bib
 Warning--entry type for "MatplotlibVisualizationPython" isn't style-file defined
---line 862 of file literature_final_with_notes.bib
+--line 863 of file literature_final_with_notes.bib
 Warning--entry type for "MITLCPWfdbpython2024" isn't style-file defined
---line 903 of file literature_final_with_notes.bib
+--line 904 of file literature_final_with_notes.bib
 Warning--entry type for "moodyMIMICIIIWaveformDatabase2017" isn't style-file defined
---line 961 of file literature_final_with_notes.bib
+--line 962 of file literature_final_with_notes.bib
 Warning--entry type for "moodyMIMICIVWaveformDatabase" isn't style-file defined
---line 973 of file literature_final_with_notes.bib
+--line 974 of file literature_final_with_notes.bib
 Warning--entry type for "NumPy" isn't style-file defined
---line 1024 of file literature_final_with_notes.bib
+--line 1025 of file literature_final_with_notes.bib
 Warning--entry type for "PandasPythonData" isn't style-file defined
---line 1045 of file literature_final_with_notes.bib
+--line 1046 of file literature_final_with_notes.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 1072 of file literature_final_with_notes.bib
+--line 1073 of file literature_final_with_notes.bib
 Warning--entry type for "PyTorch" isn't style-file defined
---line 1095 of file literature_final_with_notes.bib
+--line 1096 of file literature_final_with_notes.bib
 Warning--entry type for "ScikitlearnMachineLearning" isn't style-file defined
---line 1194 of file literature_final_with_notes.bib
+--line 1195 of file literature_final_with_notes.bib
 Warning--entry type for "SciPy" isn't style-file defined
---line 1202 of file literature_final_with_notes.bib
+--line 1203 of file literature_final_with_notes.bib
 Warning--entry type for "SGDPyTorchDocumentation" isn't style-file defined
---line 1228 of file literature_final_with_notes.bib
-Warning--entry type for "StandardSphygmomanometer" isn't style-file defined
---line 1284 of file literature_final_with_notes.bib
+--line 1229 of file literature_final_with_notes.bib
 Warning--entry type for "Wandb" isn't style-file defined
---line 1464 of file literature_final_with_notes.bib
+--line 1465 of file literature_final_with_notes.bib
 Warning--empty author and editor in WorldHealthStatistics2023
 Warning--empty year in WorldHealthStatistics2023
 Warning--empty journal in ezzatiSelectedMajorRisk2002
@@ -155,8 +151,6 @@ Warning--empty year in tengContinuousNoninvasiveEstimation2003
 Warning--empty year in suzukiCufflessBloodPressure2009
 Warning--empty journal in ruiz-rodriguezInnovativeContinuousNoninvasive2013
 Warning--empty year in ruiz-rodriguezInnovativeContinuousNoninvasive2013
-Warning--empty journal in ouIntegratingCellularAutomata2019
-Warning--empty year in ouIntegratingCellularAutomata2019
 Warning--empty year in kurylyakNeuralNetworkbasedMethod2013
 Warning--empty journal in xingOpticalBloodPressure2016
 Warning--empty year in xingOpticalBloodPressure2016
@@ -165,8 +159,6 @@ Warning--empty year in liuIntegratedNavigationTethered2017
 Warning--empty year in suLongtermBloodPressure2018
 Warning--empty journal in tanveerCufflessBloodPressure2019
 Warning--empty year in tanveerCufflessBloodPressure2019
-Warning--empty journal in marulandaHybridModelBased2023
-Warning--empty year in marulandaHybridModelBased2023
 Warning--empty journal in joungContinuousCufflessBlood2023
 Warning--empty year in joungContinuousCufflessBlood2023
 Warning--empty journal in vangentHeartPyNovelHeart2019
@@ -183,45 +175,45 @@ Warning--empty journal in yilmazNocturnalBloodPressure2023
 Warning--empty year in yilmazNocturnalBloodPressure2023
 Warning--empty journal in stergiouUniversalStandardValidation2018
 Warning--empty year in stergiouUniversalStandardValidation2018
-You've used 97 entries,
+You've used 93 entries,
             1876 wiz_defined-function locations,
-            1005 strings with 29819 characters,
-and the built_in function-call counts, 29193 in all, are:
-= -- 2577
-> -- 1553
+            988 strings with 28959 characters,
+and the built_in function-call counts, 28269 in all, are:
+= -- 2485
+> -- 1520
 < -- 0
-+ -- 558
-- -- 461
-* -- 2316
-:= -- 3960
-add.period$ -- 91
-call.type$ -- 97
-change.case$ -- 96
++ -- 545
+- -- 452
+* -- 2274
+:= -- 3862
+add.period$ -- 88
+call.type$ -- 93
+change.case$ -- 92
 chr.to.int$ -- 0
-cite$ -- 233
-duplicate$ -- 1379
-empty$ -- 2577
-format.name$ -- 461
-if$ -- 6923
+cite$ -- 225
+duplicate$ -- 1319
+empty$ -- 2489
+format.name$ -- 452
+if$ -- 6680
 int.to.chr$ -- 0
-int.to.str$ -- 97
-missing$ -- 76
-newline$ -- 312
-num.names$ -- 83
-pop$ -- 576
+int.to.str$ -- 93
+missing$ -- 74
+newline$ -- 299
+num.names$ -- 81
+pop$ -- 548
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1101
+skip$ -- 1037
 stack$ -- 0
-substring$ -- 1827
-swap$ -- 572
+substring$ -- 1793
+swap$ -- 538
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 136
-while$ -- 245
-width$ -- 99
-write$ -- 786
-(There were 158 warnings)
+warning$ -- 132
+while$ -- 242
+width$ -- 95
+write$ -- 760
+(There were 152 warnings)
