@@ -512,14 +512,7 @@ These approaches show promising results for cuffless, continuous BP estimation u
 \label{subsubsec:machine_learning}
 
 Building upon the foundation laid by traditional signal processing techniques, ML emerges as a transformative force in the pursuit of accurate and non-invasive BP estimation using PPG signals.
-This section delves into the diverse tapestry of ML methods currently employed, thoroughly exploring their individual approaches and their collective potential to improve cuffless BP monitoring.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.06]{images/ml/adaboost}
-    \caption{\small AdaBoost, or Adaptive Boosting, is an ensemble learning technique that iteratively combines weak classifiers to create a strong classifier by adjusting weights based on classification errors~\cite{AdaBoostAlgorithmMachine}}
-    \label{fig:adaboost}
-\end{figure}
+This section delves into the diverse range of ML methods currently employed, thoroughly exploring their individual approaches and their collective potential to improve cuffless BP monitoring.
 
 % ML Techniques
 \vspace{0.2cm}
@@ -533,7 +526,7 @@ As early as 2003, Teng and Zhang~\cite{tengContinuousNoninvasiveEstimation2003} 
 They explored the relationship between four PPG features and BP using a linear regression (LR) model.
 While diastolic time exhibited the strongest correlation with both SBP and DBP, the overall results suggested limitations in LR for accurate BP estimation.
 
-Recognizing these limitations, Suzuki and Oguri (2009) introduced AdaBoost (example in Figure~\ref{fig:adaboost}), a classifier, for SBP estimation~\cite{suzukiCufflessBloodPressure2009}.
+Recognizing these limitations, Suzuki and Oguri (2009) introduced AdaBoost, a classifier for SBP estimation~\cite{suzukiCufflessBloodPressure2009}.
 This methodology segmented SBP values using a threshold before employing a nonlinear ML model, showcasing the need for more complex techniques.
 
 Seeking a different approach, Ruiz-Rodriguez et al.\ (2013) utilized a Deep Belief Network Restricted Boltzmann Machine (RBM) for simultaneous prediction of SBP, DBP, and MAP~\cite{ruiz-rodriguezInnovativeContinuousNoninvasive2013}.

@@ -3,8 +3,6 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Thesis.aux
 The style file: ieeetr.bst
 Database file #1: literature_final_with_notes.bib
-Warning--entry type for "AdaBoostAlgorithmMachine" isn't style-file defined
---line 19 of file literature_final_with_notes.bib
 Warning--entry type for "AdamPyTorchDocumentationa" isn't style-file defined
 --line 30 of file literature_final_with_notes.bib
 Warning--entry type for "anishnamaUnderstandingBidirectionalLSTM2023" isn't style-file defined
@@ -185,36 +183,36 @@ Warning--empty journal in yilmazNocturnalBloodPressure2023
 Warning--empty year in yilmazNocturnalBloodPressure2023
 Warning--empty journal in stergiouUniversalStandardValidation2018
 Warning--empty year in stergiouUniversalStandardValidation2018
-You've used 98 entries,
+You've used 97 entries,
             1876 wiz_defined-function locations,
-            1010 strings with 30018 characters,
-and the built_in function-call counts, 29301 in all, are:
-= -- 2589
-> -- 1554
+            1005 strings with 29819 characters,
+and the built_in function-call counts, 29193 in all, are:
+= -- 2577
+> -- 1553
 < -- 0
-+ -- 559
++ -- 558
 - -- 461
-* -- 2318
-:= -- 3969
-add.period$ -- 92
-call.type$ -- 98
-change.case$ -- 97
+* -- 2316
+:= -- 3960
+add.period$ -- 91
+call.type$ -- 97
+change.case$ -- 96
 chr.to.int$ -- 0
-cite$ -- 234
-duplicate$ -- 1383
-empty$ -- 2595
+cite$ -- 233
+duplicate$ -- 1379
+empty$ -- 2577
 format.name$ -- 461
-if$ -- 6955
+if$ -- 6923
 int.to.chr$ -- 0
-int.to.str$ -- 98
+int.to.str$ -- 97
 missing$ -- 76
-newline$ -- 316
+newline$ -- 312
 num.names$ -- 83
-pop$ -- 585
+pop$ -- 576
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1104
+skip$ -- 1101
 stack$ -- 0
 substring$ -- 1827
 swap$ -- 572
@@ -224,6 +222,6 @@ top$ -- 0
 type$ -- 0
 warning$ -- 136
 while$ -- 245
-width$ -- 100
-write$ -- 793
-(There were 159 warnings)
+width$ -- 99
+write$ -- 786
+(There were 158 warnings)
