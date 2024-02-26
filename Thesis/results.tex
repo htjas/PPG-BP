@@ -4,7 +4,7 @@
 The results section commences with the presentation of Table~\ref{tab:records}, which summarizes the data retrieval phase.
 Displayed within are the total records obtained from both databases, along with the corresponding total and median values extracted.
 
-\begin{table}
+\begin{table}[h]
     \renewcommand{\arraystretch}{1.5}
     \setlength{\tabcolsep}{12pt}
     \begin{center}
@@ -43,6 +43,21 @@ Similarly, 1,918,623 median values were obtained from these matrices, creating d
 These datasets were employed for the purposes of training and testing.
 
 The data flow is visualized in Figure~\ref{fig:data_flow}.
+
+The performance metric for Data Fetching and Feature Extraction can be assessed by examining the average number of values extracted from each 10-minute record in the datasets.
+In the case of MIMIC-IV, the calculation reveals an average of 237.07 values per record, derived from a total of 1,309,265 values extracted across 5,508 records.
+
+\vspace{0.3cm}
+\texttt{1,309,265 (total values) / 5,508 (records) = 237.07 values/record}
+\vspace{0.3cm}
+
+In contrast, for MIMIC-III, the average number of values per record is notably higher at 618.55, computed from a total of 13,659,375 values obtained from 22,083 records.
+
+\vspace{0.3cm}
+\texttt{13,659,375 (total values) / 22,083 (records) = 618.55 values/record}
+\vspace{0.3cm}
+
+These figures provide a quantitative measure of the efficiency and scale of data extraction from each dataset, with MIMIC-III yielding a substantially larger average number of extracted values per record compared to MIMIC-IV\@.
 
 \begin{figure}[h]
     \centering
@@ -91,6 +106,7 @@ The final results of all ML models for predicting ABP (SBP, DBP and MAP) are ava
 The validated prediction accuracy of different BP measurements across all ML models is illustrated in Figure~\ref{fig:all_mae}.
 
 \subsubsection{Feature Importance}
+\label{subsubsec:feature_importance}
 
 Based on the iterative evaluation approach described in the methods section, the feature importance values were systematically analyzed, highlighting their impact on the model's performance.
 The plots, available in the Appendix~\ref{subsec:plots_fi}, showcase these values in a descending order, revealing the features' contributions to either enhancing or diminishing the model's predictive power.
@@ -124,6 +140,7 @@ Lastly, in the category of least influential features
 showed minimal impact on the models' performance.
 
 \subsubsection{Model Performance}
+\label{subsubsec:model_performance}
 
 % Training loop
 \begin{table}[p]
@@ -239,9 +256,11 @@ The weight-adjusted versions of these models generally improved upon their valid
 Lastly, the RF model stood out with the lowest test MAE and RMSE of 5.075 and 8.148 respectively.
 The validation MAE for RF was 14.736 and RMSE was 18.105, showcasing its strong predictive capabilities across both test and validation datasets.
 
-The analysis reveals varying performances among the models, with the RF model demonstrating consistently strong predictive accuracy, especially notable in its lower MAE and RMSE values across both test and validation datasets.
+The analysis reveals varying performances among the models, with the RF model demonstrating consistently strong predictive accuracy,
+especially notable in its lower test MAE and RMSE values, but only average metrics for the validation dataset.
 
 \subsubsection{Prediction Performance of different BP measurements}
+\label{subsubsec:bp_prediction_performance}
 
 \begin{figure}[h]
     \centering
@@ -251,15 +270,23 @@ The analysis reveals varying performances among the models, with the RF model de
             height=6cm,
             ybar,
             ymin=0,
-            ymax=22,
-            bar width=2cm,
+            ymax=31,
+            bar width=1cm,
             xtick=data,
             xticklabels={Total, SBP, DBP, MAP},
+            x tick label style={/pgf/number format/1000 sep=},
+            enlarge x limits=0.15,
             ylabel={Validation MAE},
             nodes near coords,
-            nodes near coords style={font=\small, anchor=north, /pgf/number format/.cd, fixed, precision=3},
+            nodes near coords style={font=\small, anchor=north, /pgf/number format/.cd, fixed, precision=2},
+            legend style={at={(0.5,-0.2)}, anchor=north, legend columns=-1},
         ]
             \addplot[fill=blue!30] coordinates {(1,14.648) (2,20.105) (3,11.032) (4,12.809)};
+            \addlegendentry{Average\:}
+            \addplot[fill=green!30] coordinates {(1,12.95) (2,17.634) (3,9.946) (4,11.271)};
+            \addlegendentry{Best (Bi-LSTM WA)\:}
+            \addplot[fill=red!30] coordinates {(1,21.309) (2,29.819) (3,15.001) (4,19.107)};
+            \addlegendentry{Worst (MLP WA)\:}
         \end{axis}
     \end{tikzpicture}
     \captionsetup{format=plain, justification=centering, font=small}
@@ -267,18 +294,15 @@ The analysis reveals varying performances among the models, with the RF model de
     \label{fig:all_mae}
 \end{figure}
 
-The bar chart depicted in Figure~\ref{fig:all_mae} showcases the average validation MAE for distinct BP measurements.
-Among the categories of Total, Systolic, Diastolic, and Mean Arterial Pressure, notable disparities in error levels were evident.
+This bar plot, depicted in Figure~\ref{fig:all_mae}, summarizes the average validation MAE for one overall and three distinct BP measurements.
+The plot compares the overall average MAE across all models, denoted in blue, showing a value of 14.648.
 
-The overall average validation MAE, calculated across all models, was 14.648.
-However, the individual measures displayed significant deviations.
+Additionally, it highlights the best-performing model in green, represented by the Best (Bi-LSTM WA) category, with MAE values of 12.95 for Total, 17.634 for SBP, 9.946 for DBP, and 11.271 for MAP\@.
 
-Particularly, the most considerable MAE was observed for SBP at 20.105, indicating a pronounced level of error.
-A substantial reduction in MAE was notable for DBP, nearly halving the error observed for SBP, with a recorded MAE of 11.032, marking the lowest among the measurements.
-Meanwhile, MAP exhibited the second lowest MAE, closely trailing DBP at 12.809.
+Conversely, the worst-performing model, indicated in red as Worst (MLP WA), exhibits higher MAE values across the board, with 21.309 for Total, 29.819 for SBP, 15.001 for DBP, and 19.107 for MAP\@.
 
-These findings offer valuable insights into the predictive performance of the model across distinct BP parameters,
-with SBP presenting the highest margin of error, while DBP and MAP indicating relatively lower levels of error.
+This visualization provides a comparative overview of the model performances, with the Best (Bi-LSTM WA) model demonstrating the lowest MAE across all BP measurements,
+followed by the overall average and the Worst (MLP WA) model with the highest MAE values.
 
 \begin{figure}[p]
     \centering

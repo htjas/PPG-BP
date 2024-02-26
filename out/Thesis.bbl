@@ -495,6 +495,11 @@ S.~Maqsood, S.~Xu, S.~Tran, S.~Garg, M.~Springer, M.~Karunanithi, and
 \newblock Available at
   \url{https://pytorch.org/docs/stable/generated/torch.optim.LBFGS.html}.
 
+\bibitem{yilmazNocturnalBloodPressure2023}
+G.~Yilmaz, X.~Lyu, J.~L. Ong, L.~H. Ling, T.~Penzel, B.~T.~T. Yeo, and M.~W.~L.
+  Chee, ``Nocturnal {{Blood Pressure Estimation}} from {{Sleep Plethysmography
+  Using Machine Learning}},'' vol.~23, no.~18, p.~7931.
+
 \bibitem{stergiouUniversalStandardValidation2018}
 G.~Stergiou, B.~Alpert, S.~Mieke, R.~Asmar, N.~Atkins, S.~Eckert, G.~Frick,
   B.~Friedman, T.~Graßl, T.~Ichikawa, J.~P. Ioannidis, P.~Lacy, R.~McManus,

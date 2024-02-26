@@ -26,16 +26,19 @@
 \contentsline {subsubsection}{\numberline {5.2.2}Model Performance}{52}{subsubsection.5.2.2}%
 \contentsline {subsubsection}{\numberline {5.2.3}Prediction Performance of different BP measurements}{54}{subsubsection.5.2.3}%
 \contentsline {section}{\numberline {6}Discussion}{56}{section.6}%
-\contentsline {section}{\numberline {7}Conclusion}{57}{section.7}%
-\contentsline {section}{\nonumberline References}{58}{section*.40}%
-\contentsline {section}{\numberline {A}Code}{65}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Filters}{65}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}Beats}{67}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Signal Processing}{69}{subsection.A.3}%
-\contentsline {subsection}{\numberline {A.4}Fiducial Points}{71}{subsection.A.4}%
-\contentsline {subsection}{\numberline {A.5}Feature Extraction}{75}{subsection.A.5}%
-\contentsline {subsection}{\numberline {A.6}Machine Learning}{77}{subsection.A.6}%
-\contentsline {section}{\numberline {B}ML Results}{80}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}ML Model Performance Measures}{80}{subsection.B.1}%
-\contentsline {subsection}{\numberline {B.2}Feature Importance Plots}{82}{subsection.B.2}%
+\contentsline {subsection}{\numberline {6.1}Data Fetching and Filtering}{56}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}PPG Feature Extraction}{56}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}ML Model Development and Testing}{58}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Conclusion}{59}{section.7}%
+\contentsline {section}{\nonumberline References}{61}{section*.40}%
+\contentsline {section}{\numberline {A}Code}{68}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Filters}{68}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Beats}{70}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Signal Processing}{72}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}Fiducial Points}{74}{subsection.A.4}%
+\contentsline {subsection}{\numberline {A.5}Feature Extraction}{78}{subsection.A.5}%
+\contentsline {subsection}{\numberline {A.6}Machine Learning}{80}{subsection.A.6}%
+\contentsline {section}{\numberline {B}ML Results}{83}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}ML Model Performance Measures}{83}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}Feature Importance Plots}{85}{subsection.B.2}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -1,0 +1,100 @@
+The overall goal of this study was to find out whether the PPG technology could be used to estimate BP of ICU patients.
+This examination target was achieved through executing the 3 main raised tasks, reflecting on the subsection~\ref{subsec:tasks_objectives}.
+
+% Task 1
+\subsection{Data Fetching and Filtering}
+\label{subsec:data-fetching-and-filtering}
+
+The first task of the study was to find an optimal data fetching and filtering approach from available ICU data sources.
+This was well achieved by employing publicly available MIMIC-III and MIMIC-IV data, and fetching and filtering it, to consistently produce a visually and physiologically satisfactory both ABP and PPG signals.
+This is documented in the methods section~\ref{subsubsec:filtering}.
+And even though the experimentation with different data processing approaches was done extensively, there's always room for more trial-and-error
+and finding even more optimal techniques to produce a discrete and optimally representing the physiological pulse waveform graphics.
+
+One possible improvement, which was not in the scope of this study, due to the immensely large number of samples assessed, would be to manually filter waveform graphics.
+The most straight-forward approach would be to go through all segments and check, whether they exhibit a healthy pulse wave.
+Segments not filling this criterion would be manually discarded from further processes.
+This would prove beneficial in for example finding faulty PPG signals, which might have passed even through the automatized exception handling processes.
+Thus contributing negatively to the general pool of datapoints.
+
+The study faced several limitations, specifically in the scope of this task, including the lack of information on the devices used, their calibration, accuracy,
+as well as the varying sampling rates across devices and datasets.
+The MIMIC-III dataset was recorded with a sampling rate of 125 Hz, and MIMIC-IV with 62.4725 Hz, which can directly lead to inconsistencies.
+Furthermore, the devices used for both PPG and ABP recording technology were not specified, so it is immensely difficult to reach any consistent conclusions about the accuracy and cleanness of the signals.
+
+% Task 2
+\subsection{PPG Feature Extraction}
+\label{subsec:ppg-feature-extraction}
+
+The second task creating a consistent algorithm for key PPG feature extraction was also executed well and the metric to prove this is the average number of datapoints extracted from a single array,
+as calculated in the results section~\ref{subsec:results_data}.
+The metric gathered from MIMIC-III was substantially greater than the one from MIMIC-IV\@.
+All this means is that the signal processing algorithms worked better and extracted more values from the MIMIC-III DB\@.
+The observed differences in signal processing efficacy between the MIMIC-III and MIMIC-IV databases raise questions about data quality.
+It is possible to a hint at the fact, that the quality of the signal was better in MIMIC-III, since it is an older and a more refined DB\@.
+This is furthermore logical, since there was no limit on the fetching of records from a single study or subject from MIMIC-IV,
+so huge number of segments might have been discarded in the signal processing exception handling phase (as documented in~\ref{subsubsec:beats}), if they didn't showcase a comprehensible signal.
+While the data fetching from MIMIC-III followed a pattern by setting a limit of 100 records from a single study, so the total quality of signals was less prone to decrease.
+
+One notable caveat lies in the dependence of three features, Delta Time, Delta Area, and Resistive Index, on the accurate detection of the dicrotic notch.
+This limitation significantly impacts the number of values that could be extracted, hindering the model's ability to fully leverage the dataset.
+
+Also, the feature importance plots provide a key insight and a key outcome of the study, showing which features correlate and provide the biggest impact on accurate BP prediction.
+Based on the iterative evaluation approach detailed in the methods section~\ref{subsubsec:feature_importance}, the feature importance values underwent systematic analysis, shedding light on their significant impact on the model's predictive performance.
+The plots available in the Appendix~\ref{subsec:plots_fi}, offer a visual representation of all PPG features used for BP prediction in descending order,
+elucidating the features' contributions to either enhancing or diminishing the model's predictive power.
+The results revealed a distinct categorization of features into three groups based on their average importance values.
+In the category of best performers, features such as Diastolic Time, Resistive Index and Normalized Power at Peak emerged prominently, showcasing substantial influence in bolstering the models' accuracy
+and displaying a higher correlation with BP than other features.
+Therefore, referencing the last paragraph, these \enquote{dicrotic-notch-dependant} features could not have been omitted, since the prediction performance would have suffered,
+because the Resistive Index was one of the top-scoring features in the importance scale.
+
+Another notable caveat is that no feature reduction was done, and the models were trained on a large scale of features, namely 34.
+The decision not to apply feature reduction was based on findings that every feature contributed positively to the model's performance, as seen in the feature importance plots (see~\ref{subsec:plots_fi}).
+For reference, other studies have used fewer features, ranging mostly from 20 to 5~\cite{el-hajjDeepLearningModels2021, yilmazNocturnalBloodPressure2023, charltonAssessingHemodynamicsPhotoplethysmogram2022}.
+The large size of training features might also lead to smaller predictive accuracy since the model could potentially encounter challenges in learning meaningful patterns or relationships within the data,
+especially if there are redundant or noisy features that could introduce unnecessary complexity into the learning process.
+
+% Task 3
+\subsection{ML Model Development and Testing}
+\label{subsec:ml-model-development-and-testing}
+
+Finally, the third task was to develop and test various ML models based on the extracted features, for reliable prediction of BP from PPG\@.
+As per the joint 2018 statement by the American National Standards of the Association for the Advancement of Medical Instrumentation (AAMI), European Society of Hypertension (ESH)
+and International Organization for Standardization (ISO), the average variation and its standard deviation in NIBP measurements should ideally fall within 5 ± 8 mmHg compared to a reference BP,
+based on a minimum of 85 patient evaluations~\cite{stergiouUniversalStandardValidation2018}.
+The number of patient evaluations done in this study greatly exceed 85, in both training/testing and validation datasets.
+
+While the performance of advanced NN models was acceptable, it did not exhibit exceptional results.
+The Random Forest model showed promise with a low test loss but faced challenges with a higher validation loss compared to LSTMs and GRUs.
+The Bi-LSTM (WA) model achieved the lowest average variation, with an MAE of 9.946 in estimating DBP\@.
+A key outcome of the analysis of the average validation MAE across distinct BP measurements revealed notable disparities, with SBP presenting the highest margin of error.
+In contrast, DBP showed a substantial reduction, almost halving the MAE, indicating comparatively lower error levels.
+MAP exhibited the second-lowest MAE, further highlighting the model's performance across different BP parameters.
+A key result is the finding, that DBP, also across all models, can be predicted more accurately than SBP.
+This is however also a disappointing result, since SBP is a more vital metric when detecting hypertension, one of the leading causes of death worldwide~\cite{WorldHealthStatistics2023}.
+
+An interesting outcome of the study was the finding that several models showcased worse testing performance after feature weight adjustment, but better validation performance (reference in Table~\ref{tab:test_validate_rmse_mae}).
+This can be seen for example in the Bi-GRU model, where the test MAE after feature weight adjustment increased by 1.967, but the validation MAE decreased by 2.126.
+This implies that the feature weight adjustments had a mixed impact on the models' generalization abilities.
+While the testing performance worsened for certain models, as evidenced by the increase in MAE, the validation performance,
+which is crucial for assessing the model's ability to generalize to distinctly different data, notably improved.
+This finding suggests that the feature weight adjustments might have helped in reducing overfitting, allowing the models to better capture underlying patterns in the data during validation.
+However, it also indicates a potential risk of these models performing less optimally on new, unseen data from the same distribution,
+highlighting the importance of careful model selection and tuning to achieve the desired balance between training and validation performance.
+Further investigation into the specific impact of feature weight adjustments on model generalization would be beneficial for refining the models' predictive capabilities.
+
+% Strengths
+The strength of this study lies in its robustness against overfitting despite the challenging task of predicting blood pressure from a vast amount of data.
+Despite the models showing suboptimal performance on the extensive datasets, the absence of overfitting indicates that the models were not merely memorizing the training data but were instead learning underlying patterns.
+This is crucial for ensuring the generalizability of the models to new, unseen data, a key factor in their utility in real-world applications.
+
+Moreover, the simulation of real-world data through the use of MIMIC-IV, a distinct and diverse data source, enhances the study's strength.
+By incorporating data from a different source, the models were exposed to varied patterns and distributions, which is essential for creating a more universal machine learning model.
+This approach helps in capturing the diverse range of scenarios and conditions that can be encountered in clinical settings, making the models more adaptable and reliable when deployed in practice.
+
+% Conclusion
+\vspace{1cm}
+
+The outcomes of this study on the application of various Signal Processing and Machine Learning approaches for BP prediction from PPG waveform data have yielded results that are not as encouraging as initially anticipated.
+Despite experimenting with various pre-processing and feature extraction techniques, also implementing various advanced ML architectures and applying feature weighing, the performance of our models fell short of achieving satisfactory accuracy levels.

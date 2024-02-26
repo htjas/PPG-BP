@@ -181,47 +181,49 @@ Warning--empty journal in aboyAutomaticBeatDetection2005
 Warning--empty year in aboyAutomaticBeatDetection2005
 Warning--empty journal in maqsoodSurveyShallowDeep2022
 Warning--empty year in maqsoodSurveyShallowDeep2022
+Warning--empty journal in yilmazNocturnalBloodPressure2023
+Warning--empty year in yilmazNocturnalBloodPressure2023
 Warning--empty journal in stergiouUniversalStandardValidation2018
 Warning--empty year in stergiouUniversalStandardValidation2018
-You've used 97 entries,
+You've used 98 entries,
             1876 wiz_defined-function locations,
-            1004 strings with 29724 characters,
-and the built_in function-call counts, 28983 in all, are:
-= -- 2564
-> -- 1531
+            1010 strings with 30018 characters,
+and the built_in function-call counts, 29301 in all, are:
+= -- 2589
+> -- 1554
 < -- 0
-+ -- 551
-- -- 454
-* -- 2290
-:= -- 3922
-add.period$ -- 91
-call.type$ -- 97
-change.case$ -- 96
++ -- 559
+- -- 461
+* -- 2318
+:= -- 3969
+add.period$ -- 92
+call.type$ -- 98
+change.case$ -- 97
 chr.to.int$ -- 0
-cite$ -- 231
-duplicate$ -- 1366
-empty$ -- 2573
-format.name$ -- 454
-if$ -- 6881
+cite$ -- 234
+duplicate$ -- 1383
+empty$ -- 2595
+format.name$ -- 461
+if$ -- 6955
 int.to.chr$ -- 0
-int.to.str$ -- 97
-missing$ -- 75
-newline$ -- 313
-num.names$ -- 82
-pop$ -- 580
+int.to.str$ -- 98
+missing$ -- 76
+newline$ -- 316
+num.names$ -- 83
+pop$ -- 585
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1091
+skip$ -- 1104
 stack$ -- 0
-substring$ -- 1819
-swap$ -- 564
+substring$ -- 1827
+swap$ -- 572
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 134
-while$ -- 243
-width$ -- 99
-write$ -- 784
-(There were 157 warnings)
+warning$ -- 136
+while$ -- 245
+width$ -- 100
+write$ -- 793
+(There were 159 warnings)

@@ -129,65 +129,15 @@ Machine Learning Approach}
 
     \section{Discussion}
     \label{sec:discussion}
-
-    Caveats:
-    \begin{itemize}
-        \item Out of the 34 features, 3 (delta\_t, delta\_area and res\_index) depend on the accurate detection of the dicrotic notch.
-        \item Significantly more values could be extracted if finding the dicrotic notch would not be necessary.
-    \end{itemize}
-
-    % more effi sp for mimic3
-    All this means is that the signal processing algorithms worked better and extracted more values from the MIMIC-III DB.
-    It is also possible a hint at the fact, that the quality of the signal was better in MIMIC-III.
-    This is also logical however, since there was no limit on the fetching of records from a single study or subject from MIMIC-IV,
-    so huge number of segments might have been discarded, if they didn't showcase a comprehensible signal.
-
-    % feature reduction
-    It was found, that every feature contributes positively, therefore feature reduction was not applied.
-
-    Limitations:
-    \begin{itemize}
-        \item Not knowing what devices were used.
-        \item How they were calibrated.
-        \item How accurate they are.
-        \item Pulse oximeter and arterial catheter parameters.
-        \item Sampling rates are different for every device (even between MIMIC 3 and 4).
-    \end{itemize}
-
-    Possible Improvements:
-    \begin{itemize}
-        \item Integrate both the ECG and PPG graphs for a more precise prediction.
-        \item Use further signal processing approaches.
-        \item Manually filter waveform graphics (e.g., faulty PPG signal).
-        \item Expand on machine learning algorithms.
-        \item Experiment with different median intervals.
-        \item Experiment with further data splitting approaches.
-    \end{itemize}
+    \input{discussion}
 
 
     \section{Conclusion}
     \label{sec:conclusion}
+    \input{conclusion}
 
-    Summary of findings:
-
-    As per the joint 2018 statement by the American National Standards of the Association for the Advancement of Medical Instrumentation (AAMI), European Society of Hypertension (ESH)
-    and International Organization for Standardization (ISO), the average variation and its standard deviation in NIBP measurements should ideally fall within 5 ± 8 mmHg compared to a reference BP,
-    based on a minimum of 85 patient evaluations~\cite{stergiouUniversalStandardValidation2018}.
-
-    The number of patient evaluations done in this study greatly exceed 85.
-    The average variation and standard deviation of given models was: -||-
-
-    Pretty bad performance on a huge number of data.
-    Very important though, that no overfitting was done.
-    Also, real-world data was simulated through MIMIC-IV (completely different data source), which is key.
-
-    Advanced NN models performed well but not extraordinarily great.
-    RF had a promising test loss, but validation loss was even worse than of LSTMs and GRUs.
-
-    This study focused on ICU patient data, but it can prospectively be expanded on also ambulatory patients or even real-time healthy patient monitoring.
 
     \newpage
-
     \singlespacing
     \small
     \bibliographystyle{ieeetr}  % ieeetr
@@ -200,8 +150,8 @@ Machine Learning Approach}
 
     \section{Code}\label{sec:code}
     \input{code}
-
     \newpage
+
 
     \section{ML Results}\label{sec:ml_results}
     \input{ml_results}
