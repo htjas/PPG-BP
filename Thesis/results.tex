@@ -25,24 +25,22 @@ Displayed within are the total records obtained from both databases, along with 
     \label{tab:records}
 \end{table}
 
-In a brief summary of the table data, 5,508 records were retrieved from the MIMIC-IV database, each encompassing 37,795 values, equating to approximately 605 seconds of data (at a sampling rate of 64.4725).
+In a brief summary of the table data, 5,508 records were retrieved from the MIMIC-IV database, each encompassing 37,795 values, equating to approximately 605 seconds of data (at a sampling rate of 64.4725 Hz).
 Conversely, a total of 22,083 records were obtained from the MIMIC-IV dataset, representing four times the number of records in comparison to MIMIC-IV\@.
-Each of these records consisted of 75,625 values, likewise corresponding to an approximate duration of 10 minutes (with a sampling rate of 125).
+Each of these records consisted of 75,625 values, likewise corresponding to an approximate duration of 10 minutes (with a sampling rate of 125 Hz).
 
-Conversely, 4 times the records of MIMIC-IV were fetched, namely 22,083, each containing 75625 values also corresponding to approx.\ 10 minutes (sampling rate of 125).
-
-Subsequently, the process of Feature Extraction from both DBs commenced, involving the extraction of 34 training features along with their corresponding values from the PPG waveforms,
+Subsequently, the process of feature extraction from both DBs commenced, involving the extraction of 34 training features along with their corresponding values from the PPG waveforms,
 as well as the target reference values for SBP, DBP, and MAP from the ABP signal.
 
 From the MIMIC-IV dataset, a total of 1,309,265 values were extracted, leading to the creation of 34 x 1,309,265 PPG and 3 x 1,309,265 ABP data matrices.
-Additionally, 183,140 median values were derived from these matrices, forming datasets of the same X-axis dimensions.
+Additionally, 183,140 median values were derived from these matrices, forming datasets of the same x-axis dimensions.
 This set of data was utilized for the validation phase.
 
 In the case of the MIMIC-III dataset, a total of 13,659,375 values were extracted, resulting in 34 x 13,659,375 PPG and 3 x 13,659,375 ABP data matrices.
 Similarly, 1,918,623 median values were obtained from these matrices, creating datasets with identical X-axis structures.
 These datasets were employed for the purposes of training and testing.
 
-The data flow is visualized in Figure~\ref{fig:data_flow}.
+The data flow encompassing retrieval, feature extraction and ML dataset creation is visualized in Figure~\ref{fig:data_flow}.
 
 The performance metric for Data Fetching and Feature Extraction can be assessed by examining the average number of values extracted from each 10-minute record in the datasets.
 In the case of MIMIC-IV, the calculation reveals an average of 237.07 values per record, derived from a total of 1,309,265 values extracted across 5,508 records.
@@ -57,12 +55,14 @@ In contrast, for MIMIC-III, the average number of values per record is notably h
 \texttt{13,659,375 (total values) / 22,083 (records) = 618.55 values/record}
 \vspace{0.3cm}
 
-These figures provide a quantitative measure of the efficiency and scale of data extraction from each dataset, with MIMIC-III yielding a substantially larger average number of extracted values per record compared to MIMIC-IV\@.
+These figures provide a quantitative measure of the efficiency and scale of data extraction from each dataset, with MIMIC-III yielding a substantially larger average number of extracted values per record
+compared to MIMIC-IV, further discussed in the discussion section~\ref{subsec:ppg-feature-extraction}.
 
+\vspace{1cm}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/results/flow_diagram}
-    \caption{Flow Diagram presenting the Data Fetching and Processing}
+    \includegraphics[width=\textwidth]{images/results/flow_diagram}
+    \caption{A flow diagram presenting the data fetching and processing}
     \label{fig:data_flow}
 \end{figure}
 
@@ -90,7 +90,7 @@ Thus, the ultimate distribution for train/test/validate proportions became:
 \end{center}
 
 After implementing the 7 ML models outlined in the Methods section~\ref{subsec:ml_methods} and employing the described training method with an \enquote{early stopping} strategy,
-along with validation on \enquote{unseen} simulated \enquote{real-world} (MIMIC-IV) data, a comprehensive set of performance metrics was compiled.
+along with validation on unseen simulated \enquote{real-world} (MIMIC-IV) data, a comprehensive set of performance metrics was compiled.
 Firstly, the training and testing losses, measured through MSE at the conclusion of training epochs, were documented.
 Secondly, the overall testing accuracy was assessed using RMSE and MAE metrics.
 Lastly, the validation loss, also utilizing RMSE and MAE, was computed.
@@ -105,47 +105,11 @@ The final results of all ML models for predicting ABP (SBP, DBP and MAP) are ava
 
 The validated prediction accuracy of different BP measurements across all ML models is illustrated in Figure~\ref{fig:all_mae}.
 
-\subsubsection{Feature Importance}
-\label{subsubsec:feature_importance}
-
-Based on the iterative evaluation approach described in the methods section, the feature importance values were systematically analyzed, highlighting their impact on the model's performance.
-The plots, available in the Appendix~\ref{subsec:plots_fi}, showcase these values in a descending order, revealing the features' contributions to either enhancing or diminishing the model's predictive power.
-From the obtained results, a portion of the features can be categorized into three groups based on their average importance values.
-
-In the category of best performers, features such as
-\begin{itemize}
-    \item Diastolic Time (86.89),
-    \item Resistive Index (67.31),
-    \item Diastolic + Systolic Width at 50\% (50.6) and
-    \item Normalized Power at Peak (46.72)
-\end{itemize}
-stood out prominently, demonstrating significant influence in improving the models' accuracy.
-
-In the medium-performing group, features like
-\begin{itemize}
-    \item Delta Area (37.12),
-    \item Vessel Volume Systolic Index (23.61),
-    \item Systolic Area and
-    \item Total Power (both with values of 20.79), also
-    \item Diastolic Width at 66\% (17.66) and
-    \item Vessel Volume Diastolic Index (14.27),
-\end{itemize}
-contributed moderately to the overall predictive capability.
-
-Lastly, in the category of least influential features
-\begin{itemize}
-    \item Mean Frequency (3.51)
-    \item and Ratio of Diastolic to Systolic Width at 75\% (2.12)
-\end{itemize}
-showed minimal impact on the models' performance.
-
-\subsubsection{Model Performance}
-\label{subsubsec:model_performance}
-
 % Training loop
-\begin{table}[p]
+\begin{table}[!]
     \renewcommand{\arraystretch}{1.5}
     \begin{center}
+        \vspace{-2cm}
         \footnotesize
         \begin{tabular}{ |c|c|c| }
             \hline
@@ -178,25 +142,16 @@ showed minimal impact on the models' performance.
         \end{tabular}
     \end{center}
     \captionsetup{format=plain, justification=centering, font=small}
+    \vspace{-0.5cm}
     \caption{Training and Testing Losses of different ML models at the end of training}
     \label{tab:train_test_mse}
 \end{table}
 
-The results of the Machine Learning models, as summarized in Table~\ref{tab:train_test_mse} , reveal varying levels of performance in terms of training and testing losses at the conclusion of training epochs.
-The intermediate training and testing losses are plotted in Figure~\ref{fig:train_test_mse}.
-
-The LR model exhibited a training loss of 217.673 (MSE) and a testing loss of 217.255 (MSE), with marginal improvement seen in the \enquote{weight adjusted} (WA) version.
-Similarly, the MLP model showed a training loss of 196.448 (MSE) and a testing loss of 196.158 (MSE), with a notable increase in losses for the WA variant.
-
-On the other hand, the LSTM model demonstrated improved performance, showcasing a training loss of 97.452 (MSE) and a testing loss of 101.49 (MSE), while the Bi-LSTM and Bi-GRU models also exhibited relatively lower losses.
-The GRU model, in particular, displayed a training loss of 89.809 (MSE) and a testing loss of 93.605 (MSE), indicating promising results for this configuration.
-
-Overall, the models' performances varied, with some showing better generalization capabilities than others, as evident from their testing losses.
-
-% Test and Validation measures
-\begin{table}[p]
+% Test and Validation 
+\begin{table}[!]
     \renewcommand{\arraystretch}{1.5}
     \begin{center}
+        \vspace{-0.5cm}
         \footnotesize
         \begin{tabular}{ |c|c|c|c|c| }
             \hline
@@ -231,9 +186,60 @@ Overall, the models' performances varied, with some showing better generalizatio
         \end{tabular}
     \end{center}
     \captionsetup{format=plain, justification=centering, font=small}
+    \vspace{-0.5cm}
     \caption{Testing and Validation Performance Metrics of different ML models}
     \label{tab:test_validate_rmse_mae}
 \end{table}
+
+\newpage
+
+\subsubsection{Feature Importance}
+\label{subsubsec:feature_importance}
+
+Based on the iterative evaluation approach described in the methods section, the feature importance values were systematically analyzed, highlighting their impact on the model's performance.
+The plots, available in the Appendix~\ref{subsec:plots_fi}, showcase these values in a descending order, revealing the features' contributions to either enhancing or diminishing the model's predictive power.
+From the obtained results, a portion of the features can be categorized into three groups based on their average importance values.
+
+In the category of best performers, features such as
+\begin{itemize}[itemsep=2pt]
+    \item Diastolic Time (86.89),
+    \item Resistive Index (67.31),
+    \item Diastolic + Systolic Width at 50\% (50.6) and
+    \item Normalized Power at Peak (46.72)
+\end{itemize}
+stood out prominently, demonstrating significant influence in improving the models' accuracy.
+
+In the medium-performing group, features like
+\begin{itemize}[itemsep=2pt]
+    \item Delta Area (37.12),
+    \item Vessel Volume Systolic Index (23.61),
+    \item Systolic Area and
+    \item Total Power (both with values of 20.79), also
+    \item Diastolic Width at 66\% (17.66) and
+    \item Vessel Volume Diastolic Index (14.27),
+\end{itemize}
+contributed moderately to the overall predictive capability.
+
+Lastly, in the category of least influential features
+\begin{itemize}[itemsep=2pt]
+    \item Mean Frequency (3.51)
+    \item and Ratio of Diastolic to Systolic Width at 75\% (2.12)
+\end{itemize}
+showed minimal impact on the models' performance.
+
+\subsubsection{Model Performance}
+\label{subsubsec:model_performance}
+
+The results of the Machine Learning models, as summarized in Table~\ref{tab:train_test_mse} , reveal varying levels of performance in terms of training and testing losses at the conclusion of training epochs.
+The intermediate training and testing losses are plotted in Figure~\ref{fig:train_test_mse}.
+
+The LR model exhibited a training loss of 217.673 (MSE) and a testing loss of 217.255 (MSE), with marginal improvement seen in the \enquote{weight adjusted} (WA) version.
+Similarly, the MLP model showed a training loss of 196.448 (MSE) and a testing loss of 196.158 (MSE), with a notable increase in losses for the WA variant.
+
+On the other hand, the LSTM model demonstrated improved performance, showcasing a training loss of 97.452 (MSE) and a testing loss of 101.49 (MSE), while the Bi-LSTM and Bi-GRU models also exhibited relatively lower losses.
+The GRU model, in particular, displayed a training loss of 89.809 (MSE) and a testing loss of 93.605 (MSE), indicating promising results for this configuration.
+
+Overall, the models' performances varied, with some showing better generalization capabilities than others, as evident from their testing losses.
 
 \vspace{0.2cm}
 

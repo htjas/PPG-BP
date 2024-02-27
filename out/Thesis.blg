@@ -13,36 +13,38 @@ Warning--entry type for "charltonMIMICWFDBTutorials2022" isn't style-file define
 --line 230 of file literature_final_with_notes.bib
 Warning--entry type for "contributorEssentialCriticalCare2021" isn't style-file defined
 --line 273 of file literature_final_with_notes.bib
+Warning--entry type for "CUDAToolkitFree" isn't style-file defined
+--line 304 of file literature_final_with_notes.bib
 Warning--entry type for "FeedforwardNeuralNetworks" isn't style-file defined
---line 463 of file literature_final_with_notes.bib
+--line 474 of file literature_final_with_notes.bib
 Warning--entry type for "jasinskasHtjasPPGBPProject2024" isn't style-file defined
---line 545 of file literature_final_with_notes.bib
+--line 556 of file literature_final_with_notes.bib
 Warning--entry type for "LBFGSPyTorchDocumentation" isn't style-file defined
---line 698 of file literature_final_with_notes.bib
+--line 709 of file literature_final_with_notes.bib
 Warning--entry type for "MatplotlibVisualizationPython" isn't style-file defined
---line 863 of file literature_final_with_notes.bib
+--line 874 of file literature_final_with_notes.bib
 Warning--entry type for "MITLCPWfdbpython2024" isn't style-file defined
---line 904 of file literature_final_with_notes.bib
+--line 915 of file literature_final_with_notes.bib
 Warning--entry type for "moodyMIMICIIIWaveformDatabase2017" isn't style-file defined
---line 962 of file literature_final_with_notes.bib
+--line 973 of file literature_final_with_notes.bib
 Warning--entry type for "moodyMIMICIVWaveformDatabase" isn't style-file defined
---line 974 of file literature_final_with_notes.bib
+--line 985 of file literature_final_with_notes.bib
 Warning--entry type for "NumPy" isn't style-file defined
---line 1025 of file literature_final_with_notes.bib
+--line 1036 of file literature_final_with_notes.bib
 Warning--entry type for "PandasPythonData" isn't style-file defined
---line 1046 of file literature_final_with_notes.bib
+--line 1057 of file literature_final_with_notes.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 1073 of file literature_final_with_notes.bib
+--line 1084 of file literature_final_with_notes.bib
 Warning--entry type for "PyTorch" isn't style-file defined
---line 1096 of file literature_final_with_notes.bib
+--line 1107 of file literature_final_with_notes.bib
 Warning--entry type for "ScikitlearnMachineLearning" isn't style-file defined
---line 1195 of file literature_final_with_notes.bib
+--line 1206 of file literature_final_with_notes.bib
 Warning--entry type for "SciPy" isn't style-file defined
---line 1203 of file literature_final_with_notes.bib
+--line 1214 of file literature_final_with_notes.bib
 Warning--entry type for "SGDPyTorchDocumentation" isn't style-file defined
---line 1229 of file literature_final_with_notes.bib
+--line 1240 of file literature_final_with_notes.bib
 Warning--entry type for "Wandb" isn't style-file defined
---line 1465 of file literature_final_with_notes.bib
+--line 1476 of file literature_final_with_notes.bib
 Warning--empty author and editor in WorldHealthStatistics2023
 Warning--empty year in WorldHealthStatistics2023
 Warning--empty journal in ezzatiSelectedMajorRisk2002
@@ -175,36 +177,36 @@ Warning--empty journal in yilmazNocturnalBloodPressure2023
 Warning--empty year in yilmazNocturnalBloodPressure2023
 Warning--empty journal in stergiouUniversalStandardValidation2018
 Warning--empty year in stergiouUniversalStandardValidation2018
-You've used 93 entries,
+You've used 94 entries,
             1876 wiz_defined-function locations,
-            988 strings with 28959 characters,
-and the built_in function-call counts, 28269 in all, are:
-= -- 2485
-> -- 1520
+            993 strings with 29104 characters,
+and the built_in function-call counts, 28377 in all, are:
+= -- 2497
+> -- 1521
 < -- 0
-+ -- 545
++ -- 546
 - -- 452
-* -- 2274
-:= -- 3862
-add.period$ -- 88
-call.type$ -- 93
-change.case$ -- 92
+* -- 2276
+:= -- 3871
+add.period$ -- 89
+call.type$ -- 94
+change.case$ -- 93
 chr.to.int$ -- 0
-cite$ -- 225
-duplicate$ -- 1319
-empty$ -- 2489
+cite$ -- 226
+duplicate$ -- 1323
+empty$ -- 2507
 format.name$ -- 452
-if$ -- 6680
+if$ -- 6712
 int.to.chr$ -- 0
-int.to.str$ -- 93
+int.to.str$ -- 94
 missing$ -- 74
-newline$ -- 299
+newline$ -- 303
 num.names$ -- 81
-pop$ -- 548
+pop$ -- 557
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1037
+skip$ -- 1040
 stack$ -- 0
 substring$ -- 1793
 swap$ -- 538
@@ -214,6 +216,6 @@ top$ -- 0
 type$ -- 0
 warning$ -- 132
 while$ -- 242
-width$ -- 95
-write$ -- 760
-(There were 152 warnings)
+width$ -- 96
+write$ -- 767
+(There were 153 warnings)

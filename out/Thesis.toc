@@ -15,30 +15,30 @@
 \contentsline {subsection}{\numberline {4.1}Data Fetching}{29}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Signal Processing}{32}{subsection.4.2}%
 \contentsline {subsubsection}{\numberline {4.2.1}Pre-Processing}{33}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Beat Finding Algorithms}{33}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Fiducial Point Detection}{39}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.2}Beat Finding Algorithms}{34}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Fiducial Point Detection}{40}{subsubsection.4.2.3}%
 \contentsline {subsubsection}{\numberline {4.2.4}Feature Extraction}{41}{subsubsection.4.2.4}%
 \contentsline {subsection}{\numberline {4.3}Machine Learning}{45}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Results}{47}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Data Fetching and Feature Extraction}{47}{subsection.5.1}%
+\contentsline {section}{\numberline {5}Results}{48}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Data Fetching and Feature Extraction}{48}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Machine Learning}{50}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Feature Importance}{50}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Model Performance}{52}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Feature Importance}{52}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Model Performance}{53}{subsubsection.5.2.2}%
 \contentsline {subsubsection}{\numberline {5.2.3}Prediction Performance of different BP measurements}{54}{subsubsection.5.2.3}%
 \contentsline {section}{\numberline {6}Discussion}{56}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Data Fetching and Filtering}{56}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}PPG Feature Extraction}{56}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}ML Model Development and Testing}{58}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Conclusion}{60}{section.7}%
-\contentsline {section}{\nonumberline References}{62}{section*.37}%
-\contentsline {section}{\numberline {A}Code}{69}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Filters}{69}{subsection.A.1}%
+\contentsline {section}{\numberline {7}Conclusion}{59}{section.7}%
+\contentsline {section}{\nonumberline References}{61}{section*.36}%
+\contentsline {section}{\numberline {A}Code}{68}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Filters}{68}{subsection.A.1}%
 \contentsline {subsection}{\numberline {A.2}Beats}{71}{subsection.A.2}%
 \contentsline {subsection}{\numberline {A.3}Signal Processing}{73}{subsection.A.3}%
 \contentsline {subsection}{\numberline {A.4}Fiducial Points}{75}{subsection.A.4}%
 \contentsline {subsection}{\numberline {A.5}Feature Extraction}{79}{subsection.A.5}%
 \contentsline {subsection}{\numberline {A.6}Machine Learning}{81}{subsection.A.6}%
-\contentsline {section}{\numberline {B}ML Results}{84}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}ML Model Performance Measures}{84}{subsection.B.1}%
-\contentsline {subsection}{\numberline {B.2}Feature Importance Plots}{86}{subsection.B.2}%
+\contentsline {section}{\numberline {B}ML Results}{83}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}ML Model Performance Measures}{83}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}Feature Importance Plots}{85}{subsection.B.2}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

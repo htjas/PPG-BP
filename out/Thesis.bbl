@@ -447,6 +447,10 @@ S.~Maqsood, S.~Xu, S.~Tran, S.~Garg, M.~Springer, M.~Karunanithi, and
 ``{{PyTorch}}.''
 \newblock \url{https://pytorch.org/}.
 
+\bibitem{CUDAToolkitFree}
+``{{CUDA Toolkit}} - {{Free Tools}} and {{Training}}.''
+\newblock \url{https://developer.nvidia.com/cuda-toolkit}.
+
 \bibitem{ScikitlearnMachineLearning}
 ``Scikit-learn: Machine learning in {{Python}} — scikit-learn 1.4.1
   documentation.''

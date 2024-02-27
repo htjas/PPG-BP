@@ -2,6 +2,7 @@ The general objective of this study was to ascertain the feasibility of employin
 This goal was realized by undertaking three main tasks outlined in subsection~\ref{subsec:tasks_objectives}.
 
 % Task 1
+\vspace{-0.5cm}
 \subsection{Data Fetching and Filtering}
 \label{subsec:data-fetching-and-filtering}
 
@@ -23,14 +24,15 @@ The MIMIC-III dataset was captured at a rate of 125 Hz, while MIMIC-IV was at 62
 Additionally, the specific devices employed for PPG and ABP recording were not specified, making it exceedingly challenging to draw consistent conclusions regarding the accuracy and fidelity of the signals.
 
 % Task 2
+\vspace{-0.5cm}
 \subsection{PPG Feature Extraction}
 \label{subsec:ppg-feature-extraction}
 
 The successful execution of the second task, which involved developing a consistent algorithm for extracting key features from PPG signals,
 is evidenced by the average number of data points extracted from each array, as detailed in the results section~\ref{subsec:results_data}.
 Notably, the metric obtained from the MIMIC-III dataset surpassed that of MIMIC-IV by a considerable margin.
-This indicates the efficacy of the signal processing algorithms in extracting a greater number of values from the MIMIC-III database.
-The differences observed in the efficiency of signal processing between the MIMIC-III and MIMIC-IV databases raise considerations about data quality.
+This indicates the efficacy of the signal processing algorithms in extracting a greater number of values from the MIMIC-III DB.
+The differences observed in the efficiency of signal processing between the MIMIC-III and MIMIC-IV DBs raise considerations about data quality.
 It is plausible to infer that the signal quality was superior in MIMIC-III, given its status as an older and more refined DB\@.
 This conjecture aligns with the methodology employed, as there was no limitation on the retrieval of records from a single study or subject in MIMIC-IV\@.
 Consequently, a substantial number of segments might have been discarded during the signal processing exception handling phase (as documented in~\ref{subsubsec:beats}) if they did not exhibit a coherent signal.
@@ -59,17 +61,19 @@ particularly if the model encounters difficulties in discerning meaningful patte
 This challenge may be exploited by the presence of redundant or noisy features, which might introduce unnecessary complexity into the learning process.
 
 % Task 3
+\vspace{-0.5cm}
 \subsection{ML Model Development and Testing}
 \label{subsec:ml-model-development-and-testing}
 
 Finally, the third objective entailed the development and evaluation of diverse ML models utilizing the extracted features to predict BP reliably from PPG signals.
 In accordance with the collaborative 2018 statement issued by the American National Standards of the Association for the Advancement of Medical Instrumentation (AAMI), the European Society of Hypertension (ESH), and the International Organization for Standardization (ISO),
-the recommended average deviation and its standard deviation in NIBP measurements should ideally range within 5 ± 8 mmHg compared to a reference BP, based on a minimum of 85 patient assessments~\cite{stergiouUniversalStandardValidation2018}.
-Notably, the number of patient assessments conducted in this investigation far exceeds the stipulated minimum of 85, encompassing both the training/testing and validation datasets.
+the recommended average deviation in NIBP measurements should ideally range within 5 mmHg compared to a reference BP, based on a minimum of 85 patient assessments~\cite{stergiouUniversalStandardValidation2018}.
+Evidently, the number of patient assessments conducted in this investigation far exceeds the stipulated minimum of 85, encompassing both the training/testing and validation datasets.
 
 While the performance of advanced NN models was acceptable, it did not exhibit exceptional results.
 The Random Forest model showed promise with a low test loss, but faced challenges evidenced by a higher validation loss compared to LSTMs and GRUs.
-Notably, the Bi-LSTM (WA) model emerged as the most effective in minimizing average variation, achieving an MAE of 9.946 ± 5.743 mmHg for estimating DBP\@.
+Notably, the Bi-LSTM (WA) model emerged as the most effective in minimizing average variation, achieving an MAE of 9.946 mmHg for estimating DBP\@.
+
 An analysis of the average validation MAE across distinct BP measurements revealed significant divergences, particularly with SBP displaying the highest margin of error.
 Conversely, DBP demonstrated a substantial decrease, nearly halving the MAE, indicating comparatively lower error levels.
 Similarly, MAP reflected the second-lowest MAE, underscoring the models' proficiency in handling diverse BP parameters.

@@ -181,17 +181,17 @@ All filters and their parameters can be found in the appendix section~\ref{subse
 
 In Figure~\ref{fig:filters}, effects of the named filtering techniques are displayed.
 
+\begin{figure}[ht]
+    \includegraphics[width=0.95\textwidth]{images/methods/filters}
+    \vspace{-0.2cm}
+    \caption{8 different filters applied to the same ABP and PPG segment}
+    \label{fig:filters}
+\end{figure}
+
 In order to identify the optimal filtering approach, several objective criteria had to be made.
 For one, the amplitudes of the waveform should not be distorted, so that meaningful and rational values may still be extracted.
 Secondly, the shape of both the ABP and the PPG waveform has to resemble a realistic pulse waveform (as for example shown in Figure~\ref{fig:acdc}), showing both the peak and the dip of the pulse wave.
 Thirdly and ideally, the shape of a dicrotic notch should be visible in both the ABP and the PPG waveform.
-
-% \newpage
-\begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/filters}
-    \caption{8 different filters applied to the same ABP and PPG segment}
-    \label{fig:filters}
-\end{figure}
 
 After a thorough evaluation of an extended set of filtered waveforms, the most effective strategy was determined:
 The \textit{Savitzky-Golay} filter was selected to enhance the pulse wave shape, emphasizing the visualization of the dicrotic notch.
@@ -199,7 +199,8 @@ This was followed by the application of a \textit{Butterworth} lowpass filter to
 The impact of this filtering methodology is depicted in Figure~\ref{fig:opt_filtering}.
 
 \begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/opt_filtering}
+    \includegraphics[width=\textwidth]{images/methods/opt_filtering}
+    \vspace{-1cm}
     \caption{Comparison of raw and optimally filtered PPG signals}
     \label{fig:opt_filtering}
 \end{figure}
@@ -254,13 +255,7 @@ This method involves computing the mean value of a signal, identifying crossings
 tallying their occurrences to determine a beat interval, and employing it as a variable for minimum distance to detect peaks in the signal.
 \enquote{Mean crossings} was considered optimal only when its resultant beat arrays were larger in size and exhibited smaller inter-signal differences.
 
-Examples for the results of each algorithm applied to different waveforms are illustrated in Figure~\ref{fig:beat_algos}, with black dots representing the detected pulse beats.
-
-\begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/beat_algos}
-    \caption{Application of 4 different beat finding algorithms}
-    \label{fig:beat_algos}
-\end{figure}
+Examples for the results of each algorithm applied to different waveforms are illustrated in the upper half of Figure~\ref{fig:sp_beat_algos}, with black dots representing the detected pulse beats.
 
 \vspace{0.2cm}
 \textit{Selected Approach}
@@ -278,17 +273,30 @@ ppg\_beat\_interval = len(ppg) / len(ppg\_beats) \newline
 abp\_beats,\_=sp.find\_peaks(abp,distance=abp\_beat\_interval*.75,prominence=0.5) \newline
 ppg\_beats,\_=sp.find\_peaks(ppg,distance=ppg\_beat\_interval*.75,prominence=0.01) \newline}}
 \vspace{0.1cm}
-\noindent and the improved accuracy of this approach is illustrated in Figure~\ref{fig:sp_beats}.
-
-\begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/sp_beats}
-    \caption{Application of the final beat finding approach on the same 4 waveforms as in Figure~\ref{fig:beat_algos}}
-    \label{fig:sp_beats}
-\end{figure}
+\noindent and the improved accuracy of this approach is illustrated in the lower half of Figure~\ref{fig:sp_beat_algos}.
 
 In the rare event that this method also failed and fewer than 100 beats were found in the entire segment, the segment would be discarded, and the process would proceed to the next one.
 
-\vspace{0.2cm}
+\begin{figure}[p]
+    \thisfloatpagestyle{empty}
+    \centering
+    \begin{minipage}{\textwidth}
+        \vspace{-2cm}
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/methods/beat_algos}
+
+        \vspace{-0.8cm}
+        \rule{2cm}{0.1mm} \: \rule{2cm}{0.1mm} \: \rule{2cm}{0.1mm} \: \rule{2cm}{0.1mm} \: \rule{2cm}{0.1mm}
+        \vspace{0.1cm}
+
+        \includegraphics[width=0.9\textwidth]{images/methods/sp_beats}
+        \captionsetup{format=plain, justification=centering, font=small}
+        \vspace{-0.5cm}
+        \caption{Application of 4 sample beat finding algorithms (top), and the selected approach on the same segments (bottom)}
+        \label{fig:sp_beat_algos}
+    \end{minipage}
+\end{figure}
+
 \textit{Beat synchronization and grouping}
 \vspace{0.2cm}
 
@@ -306,12 +314,12 @@ Consequently, the resulting beat arrays for both PPG and ABP waveforms possess i
 The effect of this final process is illustrated in Figure~\ref{fig:synchronized}.
 
 \begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/synchronised}
+    \includegraphics[width=\textwidth]{images/methods/synchronised}
+    \vspace{-1cm}
     \caption{Effect of beat synchronization and grouping}
     \label{fig:synchronized}
 \end{figure}
 
-\vspace{0.2cm}
 \textit{Dealing with distorted signals}
 \vspace{0.2cm}
 
@@ -320,7 +328,8 @@ Two instances are depicted graphically in Figure~\ref{fig:distorted}.
 The first plot exhibits a noticeable distortion in the PPG measurement, while the second plot likely portrays the waveform of a patient experiencing some form of arrhythmia.
 
 \begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/cringe_signals}
+    \includegraphics[width=\textwidth]{images/methods/cringe_signals}
+    \vspace{-0.75cm}
     \caption{Examples of distorted or irregular signals}
     \label{fig:distorted}
 \end{figure}
@@ -349,10 +358,10 @@ This is exemplified by the following exception raised:
 \subsubsection{Fiducial Point Detection}
 \label{subsubsec:fidp}
 
-The fourth phase within the signal processing phase encompasses the detection of Fiducial Points (FIDPs), which is directly linked to feature extraction.
+The fourth phase within the signal processing phase encompasses the detection of fiducial points (FIDPs), which is directly linked to feature extraction.
 
 As detailed in the background section~\ref{subsec:computing_background}, this approach focuses on identifying distinct landmarks within a single pulse waveform.
-Similarly to Pulse Detection, the framework for this segment was derived from the MIMIC WFDB Tutorial~\cite{charltonMIMICWFDBTutorials2022}, which is publicly accessible in the \enquote{Tutorials/Pulse Wave Analysis/Fiducial Point Functions} directory.
+Similarly to pulse detection, the framework for this segment was derived from the MIMIC WFDB Tutorial~\cite{charltonMIMICWFDBTutorials2022}, which is publicly accessible in the \enquote{Tutorials/Pulse Wave Analysis/Fiducial Point Functions} directory.
 The \texttt{fiducial\_points()} function is designed to identify and adjust pulse-related signals by recognizing various FIDPs within cardiac cycles,
 including systolic peaks, onsets, diastolic peaks, maximum slopes, and specific points derived from the second and third derivatives of the pulsatile signals.
 Leveraging signal processing methodologies from NumPy, SciPy, and Matplotlib libraries, it determines the positions of these FIDPs based on the input pulsatile signal, peak positions, and sampling rate.
@@ -360,7 +369,9 @@ Moreover, it provides visualization capabilities to examine the detected points 
 The visualization of this function is provided in Figure~\ref{fig:wfdb_fidp}.
 
 \begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/fidps}
+    \hspace{-1.75cm}
+    \includegraphics[width=1.275\textwidth]{images/methods/fidps}
+    \vspace{-0.7cm}
     \caption{Example FIDP detection}
     \label{fig:wfdb_fidp}
 \end{figure}
@@ -371,13 +382,13 @@ The details of these adjustments, along with the complete code, are available in
 An important caveat to note pertains to the detection of the dicrotic notch.
 As likewise discussed in the theoretical background section, the detectability of this fiducial point is greatly influenced by a patient's age and physical condition,
 diminishing in clarity with advancing age and declining health.
-Consequently, the extraction of fiducial points was constrained; not every waveform contained all the specified fiducial points (e.g., the dicrotic notch may have been absent).
-Further insights into potential enhancements are provided in the discussion section~\ref{sec:discussion}.
+Consequently, the extraction of fiducial points was constrained, since not every waveform contained all the specified fiducial points (e.g., the dicrotic notch may have been absent).
+Further insights into potential enhancements are provided in the discussion section~\ref{subsec:ppg-feature-extraction}.
 
 \subsubsection{Feature Extraction}
 \label{subsubsec:features}
 
-The fifth and result-providing step of the signal processing phase is Feature Extraction.
+The fifth and result-providing step of the signal processing phase is feature extraction.
 It, as the name already hints at, is the most important part that provides the data for the creation and validation of ML models.
 The methods of this section were created manually by selecting features on the basis of medical knowledge and past researches of this type~\cite{el-hajjDeepLearningModels2021, charltonAssessingHemodynamicsPhotoplethysmogram2022, maqsoodSurveyShallowDeep2022}.
 
@@ -403,17 +414,17 @@ The following is a list of all extracted features from a single PPG pulse wave:
     \item \texttt{dw10}: diastolic width at 10\% amplitude - time duration between systolic peak and offset at 10\% pulse amplitude,
     \item \texttt{dw+sw10}: sum of diastolic and systolic widths at 10\% amplitude (systolic width is time duration between onset at 10\% amplitude and systolic peak),
     \item \texttt{dw/sw10}: ratio of diastolic width to systolic width both at 10\% amplitude,
-    \begin{multicols}{6}
-        \item \texttt{dw25} \columnbreak
-        \item \texttt{dw+sw25} \columnbreak
-        \item \texttt{dw/sw25} \columnbreak
+    \item \texttt{dw25}: diastolic width at 25\% amplitude,
+    \item \texttt{dw+sw25}: sum of diastolic and systolic widths at 25\% amplitude,
+    \item \texttt{dw/sw25}: ratio of diastolic width to systolic width both at 10\% amplitude,
+    \begin{multicols}{5}
         \item \texttt{dw33} \columnbreak
         \item \texttt{dw+sw33} \columnbreak
         \item \texttt{dw/sw33} \columnbreak
-    \end{multicols}
-    \begin{multicols}{6}
         \item \texttt{dw50} \columnbreak
         \item \texttt{dw+sw50} \columnbreak
+    \end{multicols}
+    \begin{multicols}{5}
         \item \texttt{dw/sw50} \columnbreak
         \item \texttt{dw75} \columnbreak
         \item \texttt{dw+sw75} \columnbreak
@@ -424,10 +435,12 @@ The following is a list of all extracted features from a single PPG pulse wave:
     \item \texttt{normalized\_power\_at\_peak}: relative contribution of the peak frequency component to the total power of the signal computed through the FFT\@.
 \end{itemize}
 
-All features apart from the last 3 are extracted from the direct PPG pulse wave by calculating the values either from timestamps of the PPG amplitude values - all of them are regarded as time domain features.
-The last three features are regarded as frequency domain features, since the values are calculated from the FFT, which is represented in the following function:
+All features, apart from the last 3, are extracted from the direct PPG pulse wave by calculating the values either from timestamps or from the PPG amplitude values of FIDPs
+- all of them are regarded as \enquote{time domain features}.
+The last three features are regarded as \enquote{frequency domain features}, since the values are calculated from the FFT, which is represented in the following function:
 
 \begin{center}
+    \large
     \begin{math}
         X(k) = \sum_{n=0}^{N-1} x(n) e^{-i 2\pi kn/N}
     \end{math}
@@ -446,37 +459,39 @@ The last three features are regarded as frequency domain features, since the val
 The code for the extraction of each feature can be found in the appendix~\ref{subsec:code_fe}.
 The visualization of time and frequency domain features can be found in Figure~\ref{fig:td_feats} and~\ref{fig:fd_feats} respectively.
 
+\vspace{-0.5cm}
 \begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/feats}
+    \hspace{-1cm}
+    \includegraphics[width=1.1\textwidth]{images/methods/feats}
+    \vspace{-1.5cm}
     \caption{Time domain features}
     \label{fig:td_feats}
 \end{figure}
 
 \begin{figure}[h]
-    \includegraphics[width=0.9\textwidth]{images/methods/median_fft}
+    \hspace{-1cm}
+    \includegraphics[width=1.1\textwidth]{images/methods/median_fft}
     \caption{Frequency domain features}
     \label{fig:fd_feats}
 \end{figure}
 
-\vspace{0.2cm}
 \textit{ABP Features}
 \vspace{0.2cm}
 
 Three specific features were selected for extraction from the ABP waveform to serve as the target prediction values.
-These features encompassed the Systolic Pressure (SP), Diastolic Pressure (DP), and Mean Arterial Pressure (MAP).
-The determination of the SP and DP involved a straightforward method of extracting the values of the \texttt{sys} and \texttt{off} FIDPs (see Figure~\ref{fig:wfdb_fidp}).
+These features encompassed the SBP, DBP, and MAP\@.
+The determination of the SBP and DBP involved a straightforward method of extracting the amplitude values of the \texttt{sys} and \texttt{off} FIDPs (see Figure~\ref{fig:wfdb_fidp}).
 Lastly, the calculation method employed for the MAP values was based on the formula provided by DeMers and Wachs~\cite{demersPhysiologyMeanArterial2024}:
 
-\vspace{0.1cm}
+\vspace{-0.5cm}
 \large
 \begin{center}
     \begin{math}
-        \texttt{MAP} = \texttt{DP} + \left(\frac{\texttt{SP} - \texttt{DP}}{3}\right).
+        \texttt{MAP} = \texttt{DBP} + \left(\frac{\texttt{SBP} - \texttt{DBP}}{3}\right).
     \end{math}
 \end{center}
 \normalsize
 
-\vspace{0.2cm}
 \textit{Total and median values}
 \vspace{0.2cm}
 
@@ -493,24 +508,26 @@ for computing feature values from both PPG and ABP signals.
 Within this interval, the median values for all features were computed, with the exception of frequency domain features.
 For the frequency domain features, the FFT was applied to the entire 7-beat window, extracting values from the complete segment as illustrated in Figure~\ref{fig:fd_feats}.
 
+\vspace{-0.3cm}
 \subsection{Machine Learning}
 \label{subsec:ml_methods}
 
-In this concluding section detailing methods, the utilization of Machine Learning methodologies is elaborated upon,
+In this concluding section detailing methods, the utilization of machine learning methodologies is elaborated upon,
 drawing from a range of studies as referenced in the background section~\ref{subsubsec:machine_learning}.
 This study employed diverse models, distinct strategies for data splitting, and methods for training and validation.
 
-Utilizing version 2.2 of \textit{PyTorch}~\cite{PyTorch}, the library was enhanced with the CUDA toolkit for GPU acceleration in the context of NN processes.
+Utilizing version 2.2 of \textit{PyTorch}~\cite{PyTorch}, the library was enhanced with the \enquote{Compute Unified Device Architecture} (CUDA)~\cite{CUDAToolkitFree} toolkit for GPU acceleration in the context of NN processes.
 The use of \textit{Scikit-Learn}~\cite{ScikitlearnMachineLearning} (version 1.4) was employed for simpler reference regression models within this study.
 The library \textit{wandb}~\cite{Wandb} was employed for the purpose of monitoring and visualizing the model's performance.
 
-Initially, the PPG and ABP data were delineated as \texttt{X} and \texttt{y} correspondingly.
+Initially, the PPG and ABP data were delineated as \texttt{X} (input) and \texttt{y} (output) correspondingly.
 Then, data from the MIMIC-III DB was partitioned randomly adhering to the 80/20 training/testing proportions.
 Following this, all data underwent normalization utilizing the \texttt{sklearn.preprocessing.StandardScaler} class.
 This step was implemented to accommodate variations in feature scales and to guarantee an equal contribution of each feature to the analysis.
 
 After this initial phase, the training of the models commenced.
 A total of 7 regression models were implemented:
+\vspace{-0.2cm}
 \begin{itemize}
     \item Linear Regression (LR, \textit{PyTorch}),
     \item Multi-Layer Perceptron (MLP, \textit{PyTorch}),
@@ -539,7 +556,7 @@ A linear layer is then applied to the final hidden state of the second GRU cell 
 In the case of the Bi-GRU model, a bidirectional GRU layer was implemented, with the input data passing through it to generate the final output.
 The final output is obtained by applying a linear layer to the concatenated output of both directions.
 
-Two regression techniques, Support Vector Regressor (SVR) and RF, were implemented as standard reference to the PyTorch models.
+Two regression techniques, Support Vector Regressor (SVR) and RF, were implemented as standard reference to the \textit{PyTorch} models.
 The SVR model, initiated with a \texttt{linear} kernel and \texttt{C} set to 100, was excluded from further analysis due to its significant computational demands and training time constraints.
 Consequently, no outcomes were provided for SVR in the final comparison segment.
 However, the \enquote{RandomForestRegressor} model, configured with 15 decision trees, requiring a minimum of 2 samples for node splitting, remained part of the analysis.
@@ -564,10 +581,12 @@ For \textit{PyTorch} models, an \enquote{early-stopping} strategy was implemente
 After the training step, an evaluation of feature importance was conducted, employing a method that assesses each feature's significance by permuting their values and observing the resulting impact on model performance.
 This was followed by a subsequent identical iteration of the model, differing only by the incorporation of added weights to all features.
 
-For the testing evaluation in both iterations, the chosen metrics included \textit{Root Mean-Squared-Error} (RMSE), \textit{Mean Absolute Error} (MAE), \textit{$R^2$} measure, \textit{Bias}, and \textit{Limits-of-Agreement} (LoA).
+For the testing evaluation in both iterations, the chosen metrics to be measured and logged included \textit{Root Mean-Squared-Error} (RMSE), \textit{Mean Absolute Error} (MAE), \textit{$R^2$} measure, \textit{Bias}, and \textit{Limits-of-Agreement} (LoA).
 
 Finally, the dataset from the MIMIC-IV DB was utilized for model validation.
 The same data normalization techniques were applied as in the training stage.
 Following the prediction of ABP, the resulting dataset was split into three, encompassing the predicted values of SP, DP, and MAP\@.
 RMSE and MAE values were calculated for the entire prediction dataset, as well as for each of the three separate predicted value arrays.
 Precisely these metrics effectively portrayed the ultimate accuracy of the model in predicting ABP (SBP, DBP and MAP).
+
+\newpage

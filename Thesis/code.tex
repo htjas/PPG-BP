@@ -185,6 +185,8 @@ def whiskers_filter(data):
 
 \end{lstlisting}
 
+\newpage
+
 \subsection{Beats}
 \label{subsec:code_beats}
 
@@ -195,7 +197,8 @@ import numpy as np
 
 def get_optimal_beats_lists(abp, ppg, fs):
     """
-    Signal processing script for examining which default beat detection algorithm is the most efficient
+    Signal processing script for examining
+    which default beat detection algorithm is the most efficient
     :param abp: List of ABP data
     :param ppg: List of PPG data
     :param fs: Sampling frequency
@@ -300,6 +303,8 @@ def get_beats_from_mean_crossings(abp, ppg):
 
 \end{lstlisting}
 
+\newpage
+
 \subsection{Signal Processing}
 \label{subsec:code_sp}
 
@@ -341,7 +346,7 @@ def signal_processing(seg_name, abp, ppg, fs):
 
     if max(normal_length_a, normal_length_p) > max(len(abp_beats), len(ppg_beats)) * 1.05:
         raise Exception(f"too big of a difference after grouping -"
-                        f"{max(normal_length_a, normal_length_p) - max(len(abp_beats), len(ppg_beats))}")
+                        f"{max(normal_length_a,normal_length_p)-max(len(abp_beats),len(ppg_beats))}")
 
     abp_hr = round(len(abp_beats) / (len(abp) / fs) * 60, 1)
     ppg_hr = round(len(ppg_beats) / (len(ppg) / fs) * 60, 1)
@@ -413,6 +418,8 @@ def equal_out_by_shortening(a_ts, p_ts):
     return a_ts, p_ts
 \end{lstlisting}
 
+\newpage
+
 \subsection{Fiducial Points}
 \label{subsec:code_fidp}
 
@@ -428,7 +435,8 @@ def fiducial_points(x, pks, fs, vis, header):
              pks, array with the position of the peaks [number of samples]
              fs, sampling rate of signal [Hz]
              vis, visualisation option [True, False]
-    Outputs: fidp, dictionary with the positions of several fiducial points for the cardiac cycles [number of samples]
+    Outputs: fidp, dictionary with the positions of several fiducial points
+             for the cardiac cycles [number of samples]
 
     Fiducial points:  1: Systolic peak (pks)
                       2: Onset, as the minimum before the systolic peak (ons)
@@ -450,7 +458,7 @@ def fiducial_points(x, pks, fs, vis, header):
     Developed by: Elisa Mejia-Mejia
                    City, University of London
 
-    Edited by: Peter Charlton (see "Added by PC")
+    Edited by: Peter Charlton (see "Added by PC"), Hugas Jasinskas (see "Adjusted by HJ")
 
     """
     # First, second and third derivatives
@@ -536,7 +544,8 @@ def fiducial_points(x, pks, fs, vis, header):
             continue
         ind_m1d, = np.intersect1d(low_stop, high_start)  # to here
         ind_m1d = m1d[ind_m1d] - start
-        aux_tip = np.round(((ibi_portion[0] - ibi_portion[ind_m1d]) / ibi_1d_portion[ind_m1d]) + ind_m1d)
+        aux_tip = np.round(((ibi_portion[0] - ibi_portion[ind_m1d]) /
+                             ibi_1d_portion[ind_m1d]) + ind_m1d)
         aux_tip = aux_tip.astype(int)
         tip = np.append(tip, (aux_tip + start).astype(int))
     tip = tip.astype(int)
@@ -659,9 +668,11 @@ def fiducial_points(x, pks, fs, vis, header):
             if len(ind_dic) != 0:
                 aux_x_pks, _ = sp.find_peaks(ibi_portion)
                 if ind_p2 > ind_dic - start:
-                    ind_between = np.intersect1d(np.where(aux_x_pks < ind_p2), np.where(aux_x_pks > ind_dic - start))
+                    ind_between = np.intersect1d(np.where(aux_x_pks < ind_p2),
+                                                 np.where(aux_x_pks > ind_dic - start))
                 else:
-                    ind_between = np.intersect1d(np.where(aux_x_pks > ind_p2), np.where(aux_x_pks < ind_dic - start))
+                    ind_between = np.intersect1d(np.where(aux_x_pks > ind_p2),
+                                                 np.where(aux_x_pks < ind_dic - start))
                 if len(ind_between) != 0:
                     ind_p2 = aux_x_pks[ind_between[0]]
             p2p = np.append(p2p, ind_p2 + start)
@@ -696,6 +707,7 @@ def fiducial_points(x, pks, fs, vis, header):
 
 \end{lstlisting}
 
+\vspace{-0.3cm}
 \subsection{Feature Extraction}
 \label{subsec:code_fe}
 
@@ -825,11 +837,9 @@ def frequency_domain_features(signal, fs):
     mean_frequency = np.sum(positive_frequencies * magnitude_spectrum) / np.sum(magnitude_spectrum)
     total_power = np.sum(magnitude_spectrum)
     normalized_power_at_peak = magnitude_spectrum[peak_frequency_index] / total_power
-    return {
-        'mean_frequency': mean_frequency,
-        'total_power': total_power,
-        'normalized_power_at_peak': normalized_power_at_peak
-    }
+    return {'mean_frequency': mean_frequency,
+            'total_power': total_power,
+            'normalized_power_at_peak': normalized_power_at_peak }
 \end{lstlisting}
 
 \subsection{Machine Learning}
