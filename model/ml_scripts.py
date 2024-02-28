@@ -64,6 +64,8 @@ def validate_model(model, model_name):
     torch.cuda.empty_cache()
     device = torch.device(f'cuda:{torch.cuda.current_device()}' if torch.cuda.is_available() else 'cpu')
     torch.set_default_device(device)
+    model_path = f"/home/hugasj/PycharmProjects/pythonProject/model/models/{model_name}"
+    model = torch.load(model_path)
     model.to(device)
     abp_tot_path, ppg_tot_path, abp_med_path, ppg_med_path = ('/features/validate/tot_abp_feats.csv',
                                                               '/features/validate/tot_ppg_feats.csv',
@@ -88,16 +90,23 @@ def validate_model(model, model_name):
 
     rmse = np.sqrt(mean_squared_error(abp, abp_pred))
     mae = mean_absolute_error(abp, abp_pred)
-    wandb.log({"validate rmse": rmse, "validate mae": mae})
+    mae_std = np.std(np.abs(abp - abp_pred))
+    wandb.log({"validate rmse": rmse, "validate mae": mae, "validate mae std": mae_std})
+
     sys_rmse = np.sqrt(mean_squared_error(sys_test, sys_pred))
     sys_mae = mean_absolute_error(sys_test, sys_pred)
-    wandb.log({"validate rmse sys": sys_rmse, "validate mae sys": sys_mae})
+    sys_mae_std = np.std(np.abs(sys_test - sys_pred))
+    wandb.log({"validate rmse sys": sys_rmse, "validate mae sys": sys_mae, "validate mae std sys": sys_mae_std})
+
     dia_rmse = np.sqrt(mean_squared_error(dia_test, dia_pred))
     dia_mae = mean_absolute_error(dia_test, dia_pred)
-    wandb.log({"validate rmse dia": dia_rmse, "validate mae dia": dia_mae})
+    dia_mae_std = np.std(np.abs(dia_test - dia_pred))
+    wandb.log({"validate rmse dia": dia_rmse, "validate mae dia": dia_mae, "validate mae std dia": dia_mae_std})
+
     map_rmse = np.sqrt(mean_squared_error(map_test, map_pred))
     map_mae = mean_absolute_error(map_test, map_pred)
-    wandb.log({"validate rmse map": map_rmse, "validate mae map": map_mae})
+    map_mae_std = np.std(np.abs(map_test - map_pred))
+    wandb.log({"validate rmse map": map_rmse, "validate mae map": map_mae, "validate mae std map": map_mae_std})
 
     wandb.finish()
 
@@ -752,4 +761,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    validate_model(None, 'MLP_1')

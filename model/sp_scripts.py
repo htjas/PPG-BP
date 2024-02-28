@@ -128,9 +128,9 @@ def process_data(fs, folder, goal, median_window):
         # if '3020438_0010_7' not in filename:
         #     i += 1
         #     continue
-        if i != 77:
-            i += 1
-            continue
+        # if i != 77:
+        #     i += 1
+        #     continue
         try:
             # 1: Data Reading
             seg_name, raw_abp, raw_ppg = read_seg_data(i, len(filenames), filename, bp_path, ppg_path, fs)
@@ -373,7 +373,7 @@ def group_a_b(a_ts, b_ts):
 def save_split_features(goal, features):
     for feat in features:
         df = pd.DataFrame(data=feat[0])
-        df.to_csv(f"features/{goal}/{feat[1]}_4.csv", index=False)
+        df.to_csv(f"features/{goal}/{feat[1]}.csv", index=False)
 
     # for feat in features:
     #     mid = int(len(feat[0]) / 2)
@@ -1306,7 +1306,7 @@ def merge_features():
 def main(fs=125):
     # manual_filter_data('usable_ppg_data_2')
     # process_data(fs, '/mimic3/', 'train_test_1', 7)
-    process_data(125, '/mimic3/', 'train_test', 7)
+    process_data(125, '/mimic4/', 'validate', 7)
     # merge_features()
     # process_ppg_data('/usable_ppg_fidp_data/', 62.4725)
     # process_bp_data('/usable_bp_data/', 62.4725)

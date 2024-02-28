@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{100}
 
 \bibitem{WorldHealthStatistics2023}
 {\em World Health Statistics 2023: Monitoring Health for the {{SDGs}},
@@ -255,6 +255,60 @@ B.~Moody, G.~Moody, M.~Villarroel, G.~Clifford, and I.~Silva, ``{{MIMIC-III
 B.~Moody, S.~Hao, B.~Gow, T.~Pollard, W.~Zong, and R.~Mark, ``{{MIMIC-IV
   Waveform Database}}.''
 
+\bibitem{DataScientistGuide}
+A.~McKee, ``A {{Data Scientist}}’s {{Guide}} to {{Signal Processing}}.''
+\newblock
+  \url{https://www.datacamp.com/tutorial/a-data-scientists-guide-to-signal-processing}.
+
+\bibitem{liangOptimalFilterShort2018}
+Y.~Liang, M.~Elgendi, Z.~Chen, and R.~Ward, ``An optimal filter for short
+  photoplethysmogram signals,'' vol.~5, no.~1, p.~180076.
+
+\bibitem{SignalProcessingArtifacts}
+``Signal processing artifacts: {{Unmasking}} the {{Illusionary Waves}}.''
+\newblock
+  \url{https://fastercapital.com/content/Signal-processing-artifacts--Unmasking-the-Illusionary-Waves.html#Introduction-to-Signal-Processing-Artifacts}.
+
+\bibitem{maityPPGMotionModelbasedDetection2022}
+A.~K. Maity, A.~Veeraraghavan, and A.~Sabharwal, ``{{PPGMotion}}:
+  {{Model-based}} detection of motion artifacts in photoplethysmography
+  signals,'' vol.~75, p.~103632.
+
+\bibitem{rajivLowPassHigh2022}
+Rajiv, ``Low {{Pass}}, {{High Pass}} and {{Band Pass Filters}} - {{Simple
+  Explanation}}.''
+\newblock
+  \url{https://www.rfpage.com/low-pass-high-pass-and-band-pass-filters-simple-explanation/}.
+
+\bibitem{kanwalComparativeAnalysisPhotoplethysmography2023}
+K.~Kanwal, M.~Asif, S.~G. Khalid, S.~Wasi, F.~Zafar, I.~Kiran, and S.~Abdullah,
+  ``Comparative {{Analysis}} of {{Photoplethysmography Signal Quality}} from
+  {{Right}} and {{Left Index Fingers}},'' vol.~40, no.~5, pp.~2214--2199.
+
+\bibitem{storrButterworthFilterDesign2013}
+W.~Storr, ``Butterworth {{Filter Design}} and {{Low Pass Butterworth
+  Filters}}.''
+
+\bibitem{ChebyshevFilterOverview}
+``Chebyshev {{Filter}} - an overview | {{ScienceDirect Topics}}.''
+\newblock
+  \url{https://www.sciencedirect.com/topics/engineering/chebyshev-filter}.
+
+\bibitem{gallagherSavitzkyGolaySmoothingDifferentiation}
+N.~B. Gallagher, ``Savitzky-{{Golay Smoothing}} and {{Differentiation
+  Filter}},''
+
+\bibitem{chatterjeePPGBasedHeart2018}
+A.~Chatterjee and U.~K. Roy, ``{{PPG Based Heart Rate Algorithm Improvement}}
+  with {{Butterworth IIR Filter}} and {{Savitzky-Golay FIR Filter}},'' in {\em
+  2018 2nd {{International Conference}} on {{Electronics}}, {{Materials
+  Engineering}} \& {{Nano-Technology}} ({{IEMENTech}})}, pp.~1--6.
+
+\bibitem{savitzkySmoothingDifferentiationData1964}
+A.~Savitzky and M.~J.~E. Golay, ``Smoothing and {{Differentiation}} of {{Data}}
+  by {{Simplified Least Squares Procedures}}.,'' vol.~36, no.~8,
+  pp.~1627--1639.
+
 \bibitem{mukkamalaUbiquitousBloodPressure2015}
 R.~Mukkamala, J.-O. Hahn, O.~T. Inan, L.~K. Mestha, C.-S. Kim, H.~Töreyin, and
   S.~Kyal, ``Toward {{Ubiquitous Blood Pressure Monitoring}} via {{Pulse
@@ -292,26 +346,6 @@ V.~Bikia, T.~Fong, R.~Climie, R.~Bruno, B.~Hametner, C.~Mayer,
   learning for assessing vascular ageing: State-of-the-art and future
   research,'' vol.~2.
 
-\bibitem{chatterjeePPGBasedHeart2018}
-A.~Chatterjee and U.~K. Roy, ``{{PPG Based Heart Rate Algorithm Improvement}}
-  with {{Butterworth IIR Filter}} and {{Savitzky-Golay FIR Filter}},'' in {\em
-  2018 2nd {{International Conference}} on {{Electronics}}, {{Materials
-  Engineering}} \& {{Nano-Technology}} ({{IEMENTech}})}, pp.~1--6.
-
-\bibitem{savitzkySmoothingDifferentiationData1964}
-A.~Savitzky and M.~J.~E. Golay, ``Smoothing and {{Differentiation}} of {{Data}}
-  by {{Simplified Least Squares Procedures}}.,'' vol.~36, no.~8,
-  pp.~1627--1639.
-
-\bibitem{antoniouDigitalFiltersAnalysis2018}
-A.~Antoniou, {\em Digital {{Filters}}: {{Analysis}}, {{Design}}, and {{Signal
-  Processing Applications}}}.
-\newblock {McGraw-Hill Education}, 1st edition~ed.
-
-\bibitem{liangOptimalFilterShort2018}
-Y.~Liang, M.~Elgendi, Z.~Chen, and R.~Ward, ``An optimal filter for short
-  photoplethysmogram signals,'' vol.~5, no.~1, p.~180076.
-
 \bibitem{takazawaAssessmentVasoactiveAgents1998a}
 K.~Takazawa, N.~Tanaka, M.~Fujita, O.~Matsuoka, T.~Saiki, M.~Aikawa, S.~Tamura,
   and C.~Ibukiyama, ``Assessment of vasoactive agents and vascular aging by the
@@ -334,6 +368,14 @@ P.~H. Charlton, B.~Paliakaitė, K.~Pilt, M.~Bachler, S.~Zanelli, D.~Kulin,
 X.-Y. Zhang and Y.-T. Zhang, ``The effect of local cold exposure on pulse
   transit time,'' vol.~2005, pp.~3522--3525.
 
+\bibitem{WhatMachineLearning}
+``What is {{Machine Learning}}? | {{IBM}}.''
+\newblock Available at \url{https://www.ibm.com/topics/machine-learning}.
+
+\bibitem{deluaSupervisedVsUnsupervised2021}
+J.~Delua, ``Supervised vs. {{Unsupervised Learning}}: {{What}}’s the
+  {{Difference}}?.''
+
 \bibitem{tengContinuousNoninvasiveEstimation2003}
 X.~Teng and Y.~Zhang, ``Continuous and noninvasive estimation of arterial blood
   pressure using a photoplethysmographic approach,'' in {\em Proceedings of the
@@ -352,6 +394,12 @@ S.~Suzuki and K.~Oguri, ``Cuffless blood pressure estimation by
 J.~C. Ruiz-Rodríguez, A.~Ruiz-Sanmartín, V.~Ribas, and J.~Caballero,
   ``Innovative continuous non-invasive cuffless blood pressure monitoring based
   on photoplethysmography technology,'' vol.~39, no.~9, pp.~1618--1625.
+
+\bibitem{ouIntegratingCellularAutomata2019}
+C.~Ou, J.~Yang, Z.~Du, X.~Zhang, and D.~Zhu, ``Integrating {{Cellular
+  Automata}} with {{Unsupervised Deep-Learning Algorithms}}: {{A Case Study}}
+  of {{Urban-Sprawl Simulation}} in the {{Jingjintang Urban Agglomeration}},
+  {{China}},'' vol.~11.
 
 \bibitem{kurylyakNeuralNetworkbasedMethod2013}
 Y.~Kurylyak, F.~Lamonaca, and D.~Grimaldi, ``A {{Neural Network-based}} method
@@ -379,10 +427,6 @@ P.~Su, X.-R. Ding, Y.-T. Zhang, J.~Liu, F.~Miao, and N.~Zhao, ``Long-term blood
   {{IEEE EMBS International Conference}} on {{Biomedical}} \& {{Health
   Informatics}} ({{BHI}})}, pp.~323--328.
 
-\bibitem{anishnamaUnderstandingBidirectionalLSTM2023}
-Anishnama, ``Understanding {{Bidirectional LSTM}} for {{Sequential Data
-  Processing}}.''
-
 \bibitem{tanveerCufflessBloodPressure2019}
 M.~S. Tanveer and M.~K. Hasan, ``Cuffless blood pressure estimation from
   electrocardiogram and photoplethysmogram using waveform based {{ANN-LSTM}}
@@ -393,6 +437,10 @@ J.~Joung, C.-W. Jung, H.-C. Lee, M.-J. Chae, H.-S. Kim, J.~Park, W.-Y. Shin,
   C.~Kim, M.~Lee, and C.~Choi, ``Continuous cuffless blood pressure monitoring
   using photoplethysmography-based {{PPG2BP-net}} for high intrasubject blood
   pressure variations,'' vol.~13, p.~8605.
+
+\bibitem{anishnamaUnderstandingBidirectionalLSTM2023}
+Anishnama, ``Understanding {{Bidirectional LSTM}} for {{Sequential Data
+  Processing}}.''
 
 \bibitem{jasinskasHtjasPPGBPProject2024}
 H.~Jasinskas, ``Htjas/{{PPG-BP Project}}.''

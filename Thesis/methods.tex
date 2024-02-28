@@ -1,4 +1,13 @@
-The Methods section provides an overview of the methodologies employed in the author's \texttt{PPG-BP} project.
+The following methods section illustrates the effectiveness of estimating BP from PPG by employing a variety of established methods, utilizing data sourced from publicly accessible repositories within the MIMIC DBs.
+To address the research tasks listed in introduction chapter~\ref{subsec:tasks_objectives}, various methods resourced from the background chapter~\ref{sec:background} were utilized.
+Among the discussed strategies, the methodologies encompassing ICU data retrieval, digital signal filtration, fiducial point identification, feature extraction, as well as ML methodologies are expounded upon.
+Each approach is examined for its applicability within this study and further enhanced with the inclusion of several innovative methods.
+The subsections of this chapter roughly correspond to the three tasks listed in~\ref{subsec:tasks_objectives},
+namely ~\ref{subsec:data-fetching}-\ref{subsubsec:filtering} to Task 1,
+~\ref{subsubsec:beats}-\ref{subsubsec:features} to Task 2,
+and~\ref{subsec:ml_methods} to Task 3.
+
+This section provides an overview of the methodologies employed in the author's \texttt{PPG-BP} project.
 It encompasses various subdirectories such as MIMIC and PyTorch tutorials, with the primary code located in the \texttt{model} Python Package.
 Within the \texttt{model}, there exist several sub-packages containing relevant data for subsequent project components,
 while the core code is distributed across five \texttt{.py} classes: \texttt{init\_scripts.py} (Initialization / Data Fetching), \texttt{sp\_scripts.py} (Signal Processing),
@@ -20,7 +29,7 @@ Nevertheless, the data retrieval process employed similar methods for both the o
 \textit{Tools and Approaches}
 \vspace{0.2cm}
 
-Researchers at the MIT Laboratory for Computational Physiology have developed a native Python library named the waveform-database (WFDB) package, facilitating the convenient handling of MIMIC datasets.
+Researchers at the MIT Laboratory for Computational Physiology have developed a native Python library named the WFDB package, facilitating the convenient handling of MIMIC datasets.
 This library comprises tools for reading, writing, and processing WFDB signals and annotations~\cite{MITLCPWfdbpython2024}.
 Efficient and consistent data retrieval was achieved through a combination of pre-existing WFDB library functions and custom-written methods.
 
@@ -54,9 +63,7 @@ To verify if the record includes all the required signals (ABP and Pleth for thi
 {\centering \texttt{signal\_names = record\_data.sig\_name}.\par}
 \vspace{0.1cm}
 
-\noindent If the record lacks either the \textit{ABP} or \textit{Pleth} signals, it is excluded from further processing.
-However, even a single record comprises multiple segments, varying in duration and the signals they capture.
-If a record lacks either the ABP or Pleth signals, it is excluded from further processing.
+\noindent If a record lacks either the ABP or Pleth signals, it is excluded from further processing.
 Each record comprises multiple segments, varying in duration and the signals they capture.
 In addition to signal requirements, segments must also have a minimum length of 10 minutes to be considered usable.
 This criterion aims to ensure data reliability and variability, as longer segments offer more data points to represent physiological states accurately, reducing the impact of short-term fluctuations and noise.
@@ -70,24 +77,10 @@ The segment duration length is determined by the following function:
 \qquad\qquad\qquad \texttt{sampling\_rate = segment\_metadata.fs}
 
 \qquad\qquad\qquad \texttt{seg\_duration = tot\_seg\_length / fs}
-\vspace{0.1cm}
+% \vspace{0.1cm}
 
-\noindent Precisely these segments represent the smallest data samples utilized in this study, containing continuous numeric values sampled at a specific frequency rate.
-The data abstraction levels in MIMIC DBs can be depicted by the following chart, showing a descending order from left to right:
-
-\vspace{0.1cm}
-{\centering Subject $\rightarrow$ Study $\rightarrow$ Record $\rightarrow$ Segment\par}
-\vspace{0.1cm}
-
-\newpage
-
-An iterative process is likewise applied to every segment of a record, by fetching all values from a single segment:
-
-\vspace{0.1cm}
-{\centering \texttt{segment\_data = wfdb.rdrecord(segment, record\_dir)}.\par}
-\vspace{0.1cm}
-
-\begin{wraptable}{r}{0.35\textwidth}
+\begin{wraptable}[5]{r}{0.35\textwidth}
+    \vspace{-1cm}
     \begin{center}
         \begin{tabular}{ |c|c| }
             \hline
@@ -100,31 +93,41 @@ An iterative process is likewise applied to every segment of a record, by fetchi
         \end{tabular}
     \end{center}
     \vspace*{-7mm}
-    \captionsetup{format=plain, justification=centering}
-    \caption{\small Criteria for non-faulty values in data fetching}
+    \captionsetup{format=plain, justification=centering, font=small}
+    \caption{Criteria for non-faulty values in data fetching}
     \label{tab:faulty}
 \end{wraptable}
+
+\noindent Precisely these segments represent the smallest data samples utilized in this study, containing continuous numeric values sampled at a specific frequency rate.
+The data abstraction levels in MIMIC DBs can be depicted by the following chart, showing a descending order from left to right:
+
+\vspace{0.1cm}
+{\centering Subject $\rightarrow$ Study $\rightarrow$ Record $\rightarrow$ Segment\par}
+\vspace{0.1cm}
+
+An iterative process is likewise applied to every segment of a record, by fetching all values from a single segment:
+
+\vspace{0.1cm}
+{\centering \texttt{segment\_data = wfdb.rdrecord(segment, record\_dir)}.\par}
+\vspace{0.1cm}
+
+\begin{wrapfigure}[7]{r}{0.35\textwidth}
+    \vspace{-0.5cm}
+    \begin{center}
+        \includegraphics[width=0.3\textwidth]{images/methods/segments}
+    \end{center}
+    \vspace*{-7mm}
+    \captionsetup{format=plain, justification=centering, font=small}
+    \caption{Examples of extracted segment files}
+    \label{fig:segments}
+\end{wrapfigure}
 
 \noindent These segments should also be devoid of any \enquote{faulty} values, identified as NumPy values \texttt{NaN} and \texttt{inf}.
 For ABP segments values outside the range of 30 to 250 (accounting for extreme and likely erroneous measurements) are omitted, and for Pleth values must strictly fall between 0 and 1 (representing the valid PPG range).
 These exclusion criteria are summarized in Table~\ref{tab:faulty}.
 
-\begin{wrapfigure}{r}{0.35\textwidth}
-    \begin{center}
-        \includegraphics[width=0.3\textwidth]{images/methods/segments}
-    \end{center}
-    \vspace*{-7mm}
-    \captionsetup{format=plain, justification=centering}
-    \caption{\small Examples of extracted segment files}
-    \label{fig:segments}
-\end{wrapfigure}
-
-
-If a 10-minute continuous part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
-If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by an underscore and a number representing the \textit{n-th} 10 minute part of a segment)
-Examples of the file names and their values are illustrated in Figures~\ref{fig:segments} and~\ref{fig:values}.
-
-\begin{wrapfigure}{r}{0.35\textwidth}
+\begin{wrapfigure}[8]{r}{0.35\textwidth}
+    \vspace{-1cm}
     \begin{center}
         \includegraphics[width=0.3\textwidth]{images/methods/values}
     \end{center}
@@ -134,6 +137,11 @@ Examples of the file names and their values are illustrated in Figures~\ref{fig:
     \label{fig:values}
 \end{wrapfigure}
 
+If a 10-minute continuous part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
+If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by an underscore and a number representing the \textit{n-th} 10 minute part of a segment)
+Examples of the file names and their values are illustrated in Figures~\ref{fig:segments} and~\ref{fig:values}.
+
+\newpage
 As noted earlier, each subject in the database may encompass multiple studies, records, and segments.
 To prevent disproportionate representation of individual patient data, a limit of 100 segments, each spanning 10 minutes, was imposed per subject.
 This is specifically important for data retrieval from the MIMIC-III database, which is intended for training and testing purposes.
@@ -152,6 +160,7 @@ After the initial data preparation phase, the signal processing follows.
 Its code is written in the \texttt{sp\_scripts.py} file.
 The main \texttt{process\_data()} method is made up of these 6 steps (description and corresponding Python code):
 \begin{enumerate}
+    \setlength{\itemsep}{-0.2\parsep}
     \item reading the fetched waveform data, \newline
     \small \texttt{seg\_name,raw\_abp,raw\_ppg = read\_seg\_data(filename,bp\_path,ppg\_path,fs)}
     \item \normalsize preprocessing the data, \newline
@@ -173,24 +182,20 @@ The following subsections delve into a comprehensive description of each subsequ
 \subsubsection{Pre-Processing}
 \label{subsubsec:filtering}
 
-As previously delineated in the theoretical background section on signal processing(~\ref{subsubsec:signal_processing}), data pre-processing or \enquote{filtering} is a key component for ensuring a coherent projection of PPG and BP waveforms, as well as for their subsequent utilization.
+As previously delineated in the theoretical background section on signal processing(~\ref{subsubsec:signal_processing}),
+data filtering is a key component for ensuring a coherent projection of PPG and BP waveforms, as well as for their subsequent utilization.
+In order to remove unwanted noise and artifacts, described in chapter~\ref{subsubsec:signal_processing}, various types of filters were implemented and their effects were tested on PPG and ABP waveforms.
+
 A total of 8 filtering methodologies were experimented with to identify the optimal approach for this project:
 \textit{Gaussian} and \textit{Gaussian Median}, \textit{Savitzky-Golay}, \textit{Butterworth} (\& lowpass),
 \textit{Chebyshev II} (\& lowpass) and a manually created \textit{Whiskers} filter.
-All filters and their parameters can be found in the appendix section~\ref{subsec:code_filters}.
+All filter implementations and their parameters can be found in the appendix section~\ref{subsec:code_filters}.
 
 In Figure~\ref{fig:filters}, effects of the named filtering techniques are displayed.
 
-\begin{figure}[ht]
-    \includegraphics[width=0.95\textwidth]{images/methods/filters}
-    \vspace{-0.2cm}
-    \caption{8 different filters applied to the same ABP and PPG segment}
-    \label{fig:filters}
-\end{figure}
-
 In order to identify the optimal filtering approach, several objective criteria had to be made.
 For one, the amplitudes of the waveform should not be distorted, so that meaningful and rational values may still be extracted.
-Secondly, the shape of both the ABP and the PPG waveform has to resemble a realistic pulse waveform (as for example shown in Figure~\ref{fig:acdc}), showing both the peak and the dip of the pulse wave.
+Secondly, the shape of both the ABP and the PPG waveform has to resemble a realistic pulse waveform (example in Figure~\ref{fig:acdc}), showing both the peak and the dip of the pulse wave.
 Thirdly and ideally, the shape of a dicrotic notch should be visible in both the ABP and the PPG waveform.
 
 After a thorough evaluation of an extended set of filtered waveforms, the most effective strategy was determined:
@@ -198,11 +203,23 @@ The \textit{Savitzky-Golay} filter was selected to enhance the pulse wave shape,
 This was followed by the application of a \textit{Butterworth} lowpass filter to eliminate undesired frequencies and achieve noise reduction.
 The impact of this filtering methodology is depicted in Figure~\ref{fig:opt_filtering}.
 
-\begin{figure}[h]
-    \includegraphics[width=\textwidth]{images/methods/opt_filtering}
-    \vspace{-1cm}
-    \caption{Comparison of raw and optimally filtered PPG signals}
-    \label{fig:opt_filtering}
+\begin{figure}[!]
+    \thisfloatpagestyle{empty}
+    \begin{minipage}{\textwidth}
+        \vspace{-2cm}
+        \hspace{-1.5cm}
+        \includegraphics[width=1.2\textwidth]{images/methods/filters}
+        \vspace{-1cm}
+        \captionsetup{format=plain, justification=centering}
+        \caption{\small{8 different filters applied to the same ABP and PPG segment}}
+        \label{fig:filters}
+        \vspace{0.5cm}
+        \includegraphics[width=\textwidth]{images/methods/opt_filtering}
+        \vspace{-1cm}
+        \captionsetup{format=plain, justification=centering}
+        \caption{\small{Comparison of raw and optimally filtered PPG signals}}
+        \label{fig:opt_filtering}
+    \end{minipage}
 \end{figure}
 
 \subsubsection{Beat Finding Algorithms}
@@ -229,10 +246,10 @@ The algorithm exhibited poor performance with the provided MIMIC datasets, detec
 consequently rendering it unsuitable for further integration.
 
 The \textit{second derivative maxima} (also called the \textit{d2max}) algorithm applies a bandpass filter to the input pulsatile signal,
-squares the filtered signal, and then identifies blocks of interest (BOIs) based on thresholding.
+squares the filtered signal, and then identifies \ac{BOI} based on thresholding.
 Within each BOI, it searches for peaks and selects the highest peak as the position of the inter-beat interval.
 
-The shortest method \textit{upslopes} detects inter-beat intervals by analyzing upslopes in the input pulsatile signal.
+The shortest method \textit{upslopes} detects inter-beat intervals by analysing upslopes in the input pulsatile signal.
 It sets a threshold for identifying peaks based on the rate of upslope changes.
 Peaks are detected when the upslope exceeds a certain threshold, and the position of each peak is recorded as the starting point of an inter-beat interval.
 
@@ -257,9 +274,9 @@ tallying their occurrences to determine a beat interval, and employing it as a v
 
 Examples for the results of each algorithm applied to different waveforms are illustrated in the upper half of Figure~\ref{fig:sp_beat_algos}, with black dots representing the detected pulse beats.
 
-\vspace{0.2cm}
+\vspace{0.1cm}
 \textit{Selected Approach}
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 As already hinted in the description of the \enquote{mean crossings} algorithm, the optimal beat arrays were not utilized as the actual reference for beat timestamps, but solely for calculating the beat interval.
 This was carried out to obtain a single variable, namely the \texttt{distance} parameter in a SciPy peak-finding function.
@@ -272,10 +289,23 @@ This methodology is illustrated in the following code snippet:
 ppg\_beat\_interval = len(ppg) / len(ppg\_beats) \newline
 abp\_beats,\_=sp.find\_peaks(abp,distance=abp\_beat\_interval*.75,prominence=0.5) \newline
 ppg\_beats,\_=sp.find\_peaks(ppg,distance=ppg\_beat\_interval*.75,prominence=0.01) \newline}}
-\vspace{0.1cm}
-\noindent and the improved accuracy of this approach is illustrated in the lower half of Figure~\ref{fig:sp_beat_algos}.
+
+\vspace{-0.5cm}
+and the improved accuracy of this approach is illustrated in the lower half of \\ Figure~\ref{fig:sp_beat_algos}.
 
 In the rare event that this method also failed and fewer than 100 beats were found in the entire segment, the segment would be discarded, and the process would proceed to the next one.
+
+\begin{figure}[h]
+    \begin{minipage}[c]{0.70\textwidth}
+        \hspace{-1.5cm}
+        \includegraphics[width=1.25\textwidth]{images/methods/synchronised}
+    \end{minipage}\hspace{0.65cm}
+    \begin{minipage}[c]{0.25\textwidth}
+        \captionsetup{format=plain, justification=centering, font=small}
+        \caption{Effect of beat synchronization and grouping}
+        \label{fig:synchronized}
+    \end{minipage}
+\end{figure}
 
 \begin{figure}[p]
     \thisfloatpagestyle{empty}
@@ -298,7 +328,7 @@ In the rare event that this method also failed and fewer than 100 beats were fou
 \end{figure}
 
 \textit{Beat synchronization and grouping}
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 The final stage in generating an accurate beat timestamp array involves synchronization and grouping.
 
@@ -313,13 +343,7 @@ Consequently, the resulting beat arrays for both PPG and ABP waveforms possess i
 
 The effect of this final process is illustrated in Figure~\ref{fig:synchronized}.
 
-\begin{figure}[h]
-    \includegraphics[width=\textwidth]{images/methods/synchronised}
-    \vspace{-1cm}
-    \caption{Effect of beat synchronization and grouping}
-    \label{fig:synchronized}
-\end{figure}
-
+\vspace{0.2cm}
 \textit{Dealing with distorted signals}
 \vspace{0.2cm}
 
@@ -329,7 +353,8 @@ The first plot exhibits a noticeable distortion in the PPG measurement, while th
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{images/methods/cringe_signals}
-    \vspace{-0.75cm}
+    \vspace{-1.2cm}
+    \captionsetup{format=plain, justification=centering, font=small}
     \caption{Examples of distorted or irregular signals}
     \label{fig:distorted}
 \end{figure}
@@ -353,12 +378,11 @@ This is exemplified by the following exception raised:
 {\texttt{\small if (pre\_sync\_length) > (post\_sync\_length) * 1.05: \newline
 \indent\indent\indent raise Exception('Signal Processing failed: \newline
 \indent\indent\indent\indent\indent\indent too big of a difference after grouping')}}
-\vspace{0.1cm}
 
 \subsubsection{Fiducial Point Detection}
 \label{subsubsec:fidp}
 
-The fourth phase within the signal processing phase encompasses the detection of fiducial points (FIDPs), which is directly linked to feature extraction.
+The fourth phase within the signal processing phase encompasses the detection of \ac{FIDPs}, which is directly linked to feature extraction.
 
 As detailed in the background section~\ref{subsec:computing_background}, this approach focuses on identifying distinct landmarks within a single pulse waveform.
 Similarly to pulse detection, the framework for this segment was derived from the MIMIC WFDB Tutorial~\cite{charltonMIMICWFDBTutorials2022}, which is publicly accessible in the \enquote{Tutorials/Pulse Wave Analysis/Fiducial Point Functions} directory.
@@ -371,7 +395,8 @@ The visualization of this function is provided in Figure~\ref{fig:wfdb_fidp}.
 \begin{figure}[h]
     \hspace{-1.75cm}
     \includegraphics[width=1.275\textwidth]{images/methods/fidps}
-    \vspace{-0.7cm}
+    \vspace{-1.2cm}
+    \captionsetup{format=plain, justification=centering, font=small}
     \caption{Example FIDP detection}
     \label{fig:wfdb_fidp}
 \end{figure}
@@ -390,7 +415,8 @@ Further insights into potential enhancements are provided in the discussion sect
 
 The fifth and result-providing step of the signal processing phase is feature extraction.
 It, as the name already hints at, is the most important part that provides the data for the creation and validation of ML models.
-The methods of this section were created manually by selecting features on the basis of medical knowledge and past researches of this type~\cite{el-hajjDeepLearningModels2021, charltonAssessingHemodynamicsPhotoplethysmogram2022, maqsoodSurveyShallowDeep2022}.
+The methods of this section were created manually by selecting features on the basis of medical knowledge and past researches of this type~\cite{el-hajjDeepLearningModels2021, charltonAssessingHemodynamicsPhotoplethysmogram2022, maqsoodSurveyShallowDeep2022},
+also as documented in the literature review in the section~\ref{subsubsec:signal_processing}
 
 \vspace{0.2cm}
 \textit{PPG Features}
@@ -398,6 +424,7 @@ The methods of this section were created manually by selecting features on the b
 
 The following is a list of all extracted features from a single PPG pulse wave:
 \begin{itemize}
+    \setlength{\itemsep}{-0.1\parsep}
     \item \texttt{sys}: the systolic peak amplitude value,
     \item \texttt{dia}: the diastolic dip, or lowest amplitude value after the systolic peak,
     \item \texttt{sys\_t}: systolic time - time difference between the systolic peak and the onset,
@@ -414,17 +441,17 @@ The following is a list of all extracted features from a single PPG pulse wave:
     \item \texttt{dw10}: diastolic width at 10\% amplitude - time duration between systolic peak and offset at 10\% pulse amplitude,
     \item \texttt{dw+sw10}: sum of diastolic and systolic widths at 10\% amplitude (systolic width is time duration between onset at 10\% amplitude and systolic peak),
     \item \texttt{dw/sw10}: ratio of diastolic width to systolic width both at 10\% amplitude,
-    \item \texttt{dw25}: diastolic width at 25\% amplitude,
-    \item \texttt{dw+sw25}: sum of diastolic and systolic widths at 25\% amplitude,
-    \item \texttt{dw/sw25}: ratio of diastolic width to systolic width both at 10\% amplitude,
-    \begin{multicols}{5}
+    \begin{multicols}{6}
+        \item \texttt{dw25} \columnbreak
+        \item \texttt{dw+sw25} \columnbreak
+        \item \texttt{dw/sw25} \columnbreak
         \item \texttt{dw33} \columnbreak
         \item \texttt{dw+sw33} \columnbreak
         \item \texttt{dw/sw33} \columnbreak
+    \end{multicols}
+    \begin{multicols}{6}
         \item \texttt{dw50} \columnbreak
         \item \texttt{dw+sw50} \columnbreak
-    \end{multicols}
-    \begin{multicols}{5}
         \item \texttt{dw/sw50} \columnbreak
         \item \texttt{dw75} \columnbreak
         \item \texttt{dw+sw75} \columnbreak
@@ -435,6 +462,7 @@ The following is a list of all extracted features from a single PPG pulse wave:
     \item \texttt{normalized\_power\_at\_peak}: relative contribution of the peak frequency component to the total power of the signal computed through the FFT\@.
 \end{itemize}
 
+\newpage
 All features, apart from the last 3, are extracted from the direct PPG pulse wave by calculating the values either from timestamps or from the PPG amplitude values of FIDPs
 - all of them are regarded as \enquote{time domain features}.
 The last three features are regarded as \enquote{frequency domain features}, since the values are calculated from the FFT, which is represented in the following function:
@@ -459,11 +487,10 @@ The last three features are regarded as \enquote{frequency domain features}, sin
 The code for the extraction of each feature can be found in the appendix~\ref{subsec:code_fe}.
 The visualization of time and frequency domain features can be found in Figure~\ref{fig:td_feats} and~\ref{fig:fd_feats} respectively.
 
-\vspace{-0.5cm}
 \begin{figure}[h]
-    \hspace{-1cm}
-    \includegraphics[width=1.1\textwidth]{images/methods/feats}
-    \vspace{-1.5cm}
+    \vspace{-0.3cm}
+    \includegraphics[width=1\textwidth]{images/methods/feats}
+    \vspace{-0.75cm}
     \caption{Time domain features}
     \label{fig:td_feats}
 \end{figure}
@@ -475,6 +502,7 @@ The visualization of time and frequency domain features can be found in Figure~\
     \label{fig:fd_feats}
 \end{figure}
 
+\newpage
 \textit{ABP Features}
 \vspace{0.2cm}
 
@@ -508,7 +536,6 @@ for computing feature values from both PPG and ABP signals.
 Within this interval, the median values for all features were computed, with the exception of frequency domain features.
 For the frequency domain features, the FFT was applied to the entire 7-beat window, extracting values from the complete segment as illustrated in Figure~\ref{fig:fd_feats}.
 
-\vspace{-0.3cm}
 \subsection{Machine Learning}
 \label{subsec:ml_methods}
 
@@ -516,7 +543,7 @@ In this concluding section detailing methods, the utilization of machine learnin
 drawing from a range of studies as referenced in the background section~\ref{subsubsec:machine_learning}.
 This study employed diverse models, distinct strategies for data splitting, and methods for training and validation.
 
-Utilizing version 2.2 of \textit{PyTorch}~\cite{PyTorch}, the library was enhanced with the \enquote{Compute Unified Device Architecture} (CUDA)~\cite{CUDAToolkitFree} toolkit for GPU acceleration in the context of NN processes.
+Utilizing version 2.2 of \textit{PyTorch}~\cite{PyTorch}, the library was enhanced with the \enquote{Compute Unified Device Architecture} (CUDA)~\cite{CUDAToolkitFree} toolkit for \ac{GPU} acceleration in the context of NN processes.
 The use of \textit{Scikit-Learn}~\cite{ScikitlearnMachineLearning} (version 1.4) was employed for simpler reference regression models within this study.
 The library \textit{wandb}~\cite{Wandb} was employed for the purpose of monitoring and visualizing the model's performance.
 
@@ -529,13 +556,13 @@ After this initial phase, the training of the models commenced.
 A total of 7 regression models were implemented:
 \vspace{-0.2cm}
 \begin{itemize}
-    \item Linear Regression (LR, \textit{PyTorch}),
-    \item Multi-Layer Perceptron (MLP, \textit{PyTorch}),
-    \item long short-term memory (LSTM, \textit{PyTorch}),
-    \item bidirectional LSTM (Bi-LSTM, \textit{PyTorch}),
-    \item Gated Recurrent Unit (GRU, \textit{PyTorch}),
-    \item bidirectional GRU (Bi-GRU, \textit{PyTorch}),
-    \item Random Forest Regressor (RF, \textit{Scikit-Learn})
+    \item Linear Regression (\ac{LR}) from \textit{PyTorch},
+    \item \ac{MLP} from \textit{PyTorch},
+    \item long short-term memory (\ac{LSTM}) from \textit{PyTorch},
+    \item \ac{Bi-LSTM} from \textit{PyTorch},
+    \item Gated Recurrent Unit (\ac{GRU}) from \textit{PyTorch},
+    \item \ac{Bi-GRU} from \textit{PyTorch},
+    \item \ac{RF} Regressor from \textit{Scikit-Learn}
 \end{itemize}
 
 The LR model was set up with a simple linear layer, determined by specific input and output dimensions.
@@ -563,9 +590,9 @@ However, the \enquote{RandomForestRegressor} model, configured with 15 decision 
 
 The code for these ML models is available in appendix~\ref{subsec:code_ml}.
 
-\vspace{0.2cm}
+\newpage
 \textit{Parameters and Approaches}
-\vspace{0.2cm}
+\vspace{-0.05cm}
 
 In the LR and MLP models, the optimizers used were \enquote{Stochastic Gradient Descent} (SGD)~\cite{SGDPyTorchDocumentation} and \enquote{Adaptive Moment Estimation} (Adam)~\cite{AdamPyTorchDocumentationa} respectively,
 each trained for 10000 epochs with a learning rate of 0.01.
@@ -573,20 +600,20 @@ each trained for 10000 epochs with a learning rate of 0.01.
 As for the LSTM and GRU models, the optimizer chosen was the \enquote{Limited-memory Broyden–Fletcher–Goldfarb–Shanno} (LBFGS) algorithm~\cite{LBFGSPyTorchDocumentation},
 with both models trained for 100 epochs and a learning rate set to 0.1.
 
-During the training phase, the \enquote{Mean-Squared-Error} (MSE) loss was computed and used as the performance reference.
-MSE is generally favoured in continuous value regression endeavors, because it gives more weight to larger errors, especially outliers.
+During the training phase, the \ac{MSE} loss was computed and used as the performance reference.
+MSE is generally favoured in continuous value regression endeavors, since it gives more weight to larger errors, especially outliers.
 
 For \textit{PyTorch} models, an \enquote{early-stopping} strategy was implemented, halting training if the testing loss did not improve for 3 consecutive epochs.
 
 After the training step, an evaluation of feature importance was conducted, employing a method that assesses each feature's significance by permuting their values and observing the resulting impact on model performance.
 This was followed by a subsequent identical iteration of the model, differing only by the incorporation of added weights to all features.
 
-For the testing evaluation in both iterations, the chosen metrics to be measured and logged included \textit{Root Mean-Squared-Error} (RMSE), \textit{Mean Absolute Error} (MAE), \textit{$R^2$} measure, \textit{Bias}, and \textit{Limits-of-Agreement} (LoA).
+For the testing evaluation in both iterations, the chosen metrics to be measured and logged included \ac{RMSE}, \ac{MAE}, \textit{$R^2$} measure, Bias, and Limits-of-Agreement (LoA).
 
 Finally, the dataset from the MIMIC-IV DB was utilized for model validation.
 The same data normalization techniques were applied as in the training stage.
 Following the prediction of ABP, the resulting dataset was split into three, encompassing the predicted values of SP, DP, and MAP\@.
-RMSE and MAE values were calculated for the entire prediction dataset, as well as for each of the three separate predicted value arrays.
+RMSE, MAE with their corresponding \ac{STD} values were calculated for the entire prediction dataset, as well as for each of the three separate predicted value arrays.
 Precisely these metrics effectively portrayed the ultimate accuracy of the model in predicting ABP (SBP, DBP and MAP).
 
-\newpage
+\vspace{-0.6cm}

@@ -1,3 +1,5 @@
+import torch
+
 from init_scripts import load_filter_and_save_records
 from sp_scripts import process_data
 from ml_scripts import train_test_model, validate_model
@@ -55,6 +57,7 @@ path_mm3 = configs.get('path_of_mimic3_data').data
 #
 # run_model(path_med_abp_feats, path_med_ppg_feats)  # training-testing
 #
-abs_path = os.path.abspath(os.getcwd())
-ml_scripts.main()
-validate_model(f'{abs_path}/models/LSTM_0', 'LSTM')
+# abs_path = os.path.abspath(os.getcwd())
+# ml_scripts.main()
+
+validate_model(None, 'LSTM (WA)')

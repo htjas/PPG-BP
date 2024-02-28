@@ -2,7 +2,6 @@ The general objective of this study was to ascertain the feasibility of employin
 This goal was realized by undertaking three main tasks outlined in subsection~\ref{subsec:tasks_objectives}.
 
 % Task 1
-\vspace{-0.5cm}
 \subsection{Data Fetching and Filtering}
 \label{subsec:data-fetching-and-filtering}
 
@@ -13,7 +12,7 @@ These procedures are detailed in the methods section~\ref{subsubsec:filtering}.
 Despite the thorough exploration of various data processing methods, there remains potential for further experimentation and the discovery of even more optimal techniques
 to produce discrete and optimally representative physiological pulse waveform graphics.
 
-One potential improvement, not within the scope of this study due to the substantial volume of samples analyzed, involves the manual filtering of waveform graphics.
+One potential improvement, not within the scope of this study due to the substantial volume of samples analysed, involves the manual filtering of waveform graphics.
 A straightforward method would entail reviewing all segments to determine if they present a typical healthy pulse wave.
 Segments failing to meet this criterion would then be manually excluded from subsequent procedures.
 This approach could be advantageous in identifying erroneous PPG signals that may have bypassed automated exception handling, thereby potentially negatively affecting the overall dataset quality.
@@ -24,7 +23,6 @@ The MIMIC-III dataset was captured at a rate of 125 Hz, while MIMIC-IV was at 62
 Additionally, the specific devices employed for PPG and ABP recording were not specified, making it exceedingly challenging to draw consistent conclusions regarding the accuracy and fidelity of the signals.
 
 % Task 2
-\vspace{-0.5cm}
 \subsection{PPG Feature Extraction}
 \label{subsec:ppg-feature-extraction}
 
@@ -61,18 +59,29 @@ particularly if the model encounters difficulties in discerning meaningful patte
 This challenge may be exploited by the presence of redundant or noisy features, which might introduce unnecessary complexity into the learning process.
 
 % Task 3
-\vspace{-0.5cm}
 \subsection{ML Model Development and Testing}
 \label{subsec:ml-model-development-and-testing}
 
 Finally, the third objective entailed the development and evaluation of diverse ML models utilizing the extracted features to predict BP reliably from PPG signals.
 In accordance with the collaborative 2018 statement issued by the American National Standards of the Association for the Advancement of Medical Instrumentation (AAMI), the European Society of Hypertension (ESH), and the International Organization for Standardization (ISO),
-the recommended average deviation in NIBP measurements should ideally range within 5 mmHg compared to a reference BP, based on a minimum of 85 patient assessments~\cite{stergiouUniversalStandardValidation2018}.
-Evidently, the number of patient assessments conducted in this investigation far exceeds the stipulated minimum of 85, encompassing both the training/testing and validation datasets.
+the recommended average deviation and its standard deviation in NIBP measurements should ideally range within 5 ± 8 mmHg compared to a reference BP, based on a minimum of 85 patient assessments.
+A further consensus was reached, that a BP measuring device is considered acceptable if its estimated probability of a tolerable error ($\leq$10 mmHg) is at least 85\%~\cite{stergiouUniversalStandardValidation2018}.
+Evidently, the number of patient assessments conducted in this investigation far exceeds the stipulated minimum of 85, encompassing both the training/testing and validation datasets (see available subjects in Figure~\ref{fig:data_flow} for reference).
+However, the accuracy metrics did not meet the desired levels.
 
 While the performance of advanced NN models was acceptable, it did not exhibit exceptional results.
-The Random Forest model showed promise with a low test loss, but faced challenges evidenced by a higher validation loss compared to LSTMs and GRUs.
-Notably, the Bi-LSTM (WA) model emerged as the most effective in minimizing average variation, achieving an MAE of 9.946 mmHg for estimating DBP\@.
+The RF model showed promise with a low test loss, but faced challenges evidenced by a higher validation loss compared to LSTMs and GRUs.
+Notably and surprisingly, the MLP model emerged as the most effective in minimizing average variation, achieving an MAE of 8.328 ± 5.814 mmHg for estimating DBP\@.
+The recorded average and standard deviation did not reach the ideal goal range of 5 ± 8 mmHg, as specified by the AAMI, ESH and ISO\@.
+Nonetheless, it did attain an acceptable error level, remaining below 10 mmHg.
+
+Another intriguing finding was the performance of the MLP, one of the less complex ML models developed in this project.
+Although by a slight margin, it surpassed both unidirectional and bidirectional LSTMs and GRUs, with weight adjustment showing no improvement.
+Conversely, weight adjustment resulted in even poorer performance for the MLP model.
+
+The simplest model employed was the LR, which surpassed the author's expectations by ranking at the pinnacle of validation measures.
+This could be attributed to its adeptness in optimizing the linear relationships between PPG and ABP features,
+as evidenced by the minimal variance in testing and validation metrics (less than 0.5 mmHg difference observed across both weighted and unweighted versions).
 
 An analysis of the average validation MAE across distinct BP measurements revealed significant divergences, particularly with SBP displaying the highest margin of error.
 Conversely, DBP demonstrated a substantial decrease, nearly halving the MAE, indicating comparatively lower error levels.
@@ -83,7 +92,7 @@ a prevalent cause of mortality globally according to the World Health Statistics
 
 The study yielded an intriguing observation regarding the impact of feature weight adjustment on model performance, as delineated in Table~\ref{tab:test_validate_rmse_mae}.
 An illustration of this phenomenon is exemplified by the Bi-GRU model, which exhibited a test MAE of 7.844, and displayed a notable increase, reaching 9.811 after weight adjustment.
-Conversely, the validation MAE following feature weight adjustment decreased, dropping from 15.222 to 13.096.
+Conversely, the validation MAE following feature weight adjustment decreased, dropping from 13.145 to 11.614.
 This juxtaposition suggests a mixed influence of feature weight adjustments on the models' capacity for generalization.
 While certain models experienced a deterioration in testing performance, indicated by the elevated MAE, the enhanced validation performance,
 crucial for assessing the models' ability to generalize to dissimilar datasets, was conspicuous.

@@ -2,6 +2,8 @@
 \title{Predicting Blood Pressure from Photoplethysmogram Waveform Data: A Signal Processing and
 Machine Learning Approach}
 \author{Hugas Jasinskas}
+\usepackage{mathpazo}
+\usepackage[printonlyused,withpage]{acronym}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{wrapfig}
@@ -68,11 +70,11 @@ Machine Learning Approach}
         \vfill
         \Large
         \noindent
-        Supervisor: \tab\hspace{-2cm} Prof.\ Dr. Rolf Bendl\\
-        Co-Supervisor: \tab\hspace{-2cm} Prof.\ Dr. Syed Abdul Shabbir\\
-        Submitted by: \tab\hspace{-2cm} Hugas Jasinskas\\
-        Matriculation number: \tab\hspace{-2cm} 202509\\
-        Submitted on: \tab\hspace{-2cm} March 1st, 2024\\
+        Supervisor: \tab\hspace{-1cm} Prof.\ Dr. Rolf Bendl\\
+        Co-Supervisor: \tab\hspace{-1cm} Prof.\ Dr. Syed Abdul Shabbir\\
+        Submitted by: \tab\hspace{-1cm} Hugas Jasinskas\\
+        Matriculation number: \tab\hspace{-1cm} 202509\\
+        Submitted on: \tab\hspace{-1cm} March 1st, 2024\\
 
     \end{titlepage}
 
@@ -86,13 +88,13 @@ Machine Learning Approach}
 
     \begin{Large}
 
-        Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.
-        Die Arbeit wurde bisher weder im Inland noch im Ausland in gleicher Form oder ähnlicher Form einer anderen Prüfungs behörde vorgelegt und ist auch noch nicht veröffentlicht.
-        
+        Hiermit erkläre ich, dass ich die vorliegende Arbeit selbst\-ständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.
+        Die Arbeit wurde bisher weder im Inland noch im Ausland in gleicher Form oder ähnlicher Form einer anderen Prüfungs behörde vor\-gelegt und ist auch noch nicht veröffentlicht.
+
         \vspace{1cm}
-        
+
         I confirm that the submitted thesis is original work and was written by me without further assistance.
-        Appropriate credit has been given where reference has been made to the work.
+        Appro\-priate credit has been given where reference has been made to the work.
         The work has not been submitted to any examination authority, either domestic or foreign, in the same or similar form, and has not been published.
 
     \end{Large}
@@ -114,6 +116,55 @@ Machine Learning Approach}
     \newpage
     \doublespacing
     \tableofcontents
+
+    \newpage
+    \section*{List of Acronyms}\label{sec:list-of-acronyms}
+    \begin{acronym}
+        \setlength{\itemsep}{-5\parsep}
+        \acro{CVDs}{Cardiovascular diseases}
+        \acro{BP}{blood pressure}
+        \acro{PPG}{photoplethysmography}
+        \acro{ML}{machine learning}
+        \acro{ICU}{Intensive Care Unit}
+        \acro{SpO2}{oxygen saturation}
+        \acro{NIBP}{non-invasive blood pressure}
+        \acro{ABP}{arterial blood pressure}
+        \acro{SBP}{systolic blood pressure}
+        \acro{DBP}{diastolic blood pressure}
+        \acro{MAP}{mean arterial pressure}
+        \acro{LED}{light-emitting diode}
+        \acro{PD}{photodiode}
+        \acro{MIMIC}{Multiparameter Intelligent Monitoring in Intensive Care}
+        \acro{DB}{database}
+        \acro{ECG}{electrocardiogram}
+        \acro{WFDB}{waveform-database}
+        \acro{CSV}{comma-separated values}
+        \acro{PTT}{pulse transit time}
+        \acro{PAT}{Pulse arrival time}
+        \acro{PWV}{Pulse wave velocity}
+        \acro{PWA}{Pulse wave analysis}
+        \acro{DNN}{deep neural network}
+        \acro{FFT}{Fast Fourier Transform}
+        \acro{SVM}{support vector machine}
+        \acro{LR}{linear regression}
+        \acro{DBN}{Deep Belief Network}
+        \acro{RBM}{Restricted Boltzmann Machine}
+        \acro{NN}{neural network}
+        \acro{LSTM}{Long short-term memory}
+        \acro{GRU}{Gated recurrent unit}
+        \acro{BOI}{blocks of interest}
+        \acro{FIDPs}{fiducial points}
+        \acro{GPU}{graphics processing unit}
+        \acro{MLP}{Multi-Layer Perceptron}
+        \acro{Bi-LSTM}{bidirectional LSTM}
+        \acro{Bi-GRU}{bidirectional GRU}
+        \acro{RF}{Random Forest}
+        \acro{MSE}{mean squared error}
+        \acro{RMSE}{root mean squared error}
+        \acro{MAE}{mean absolute error}
+        \acro{STD}{standard deviation $\sigma$}
+        \acro{WA}{weight adjusted}
+    \end{acronym}
 
     \newpage
     \onehalfspacing
@@ -150,13 +201,14 @@ Machine Learning Approach}
 
 
     \newpage
-    \singlespacing
     \small
+    \setstretch{0.95}
     \bibliographystyle{ieeetr}  % ieeetr
     \bibliography{literature_final_with_notes}
     \normalsize
 
     \newpage
+    \singlespacing
     \appendix
 
 
