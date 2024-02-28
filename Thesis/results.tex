@@ -34,7 +34,7 @@ Displayed within are the total records obtained from both databases, along with 
     \label{tab:records}
 \end{table}
 
-\vspace{-0.5cm}
+\vspace{-0.5cm} % TODO put more space
 In a brief summary of the table data, 5,508 records were retrieved from the MIMIC-IV database, each encompassing 37,795 values, equating to approximately 605 seconds of data (at a sampling rate of 64.4725 Hz).
 Conversely, a total of 22,083 records were obtained from the MIMIC-IV dataset, representing four times the number of records in comparison to MIMIC-IV\@.
 Each of these records consisted of 75,625 values, likewise corresponding to an approximate duration of 10 minutes (with a sampling rate of 125 Hz).
@@ -47,7 +47,7 @@ Additionally, 110,408 median values were derived from these matrices, forming da
 This set of data was utilized for the validation phase.
 
 In the case of the MIMIC-III dataset, a total of 13,659,375 values were extracted, resulting in 34 x 13,659,375 PPG and 3 x 13,659,375 ABP data matrices.
-Similarly, 1,918,623 median values were obtained from these matrices, creating datasets with identical X-axis structures.
+Similarly, 1,918,623 median values were obtained from these matrices, creating datasets with identical x-axis structures.
 These datasets were employed for the purposes of training and testing.
 
 The data flow encompassing data retrieval, feature extraction and ML dataset creation is visualized in Figure~\ref{fig:data_flow}.
@@ -330,7 +330,7 @@ This bar plot summarizes the average validation MAE for one overall and three di
 The plot compares the overall average MAE across all models, denoted in blue, showing a value of 12.392 ($\sigma$=10.05).
 
 Additionally, it highlights the best-performing model in green, represented by the best (MLP) category, with MAE values of 11.07 ($\sigma$=9.725) for Total,
-15.273 ($\sigma$=13045) for SBP, 8.328 ($\sigma$=5.814) for DBP, and 9.616 ($\sigma$=7.243) for MAP\@.
+15.273 ($\sigma$=13.045) for SBP, 8.328 ($\sigma$=5.814) for DBP, and 9.616 ($\sigma$=7.243) for MAP\@.
 
 Conversely, the worst-performing model, indicated in red as Worst (MLP WA), exhibits higher MAE values across the board, with 15.017 ($\sigma$=12.944) for Total,
 20.675 ($\sigma$=16.705) for SBP, 10.983 ($\sigma$=8.14) for DBP, and 13.393 ($\sigma$=10.312) for MAP\@.

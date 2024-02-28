@@ -20,7 +20,7 @@ The whole repository can be found on the author's \textit{GitHub} page~\cite{jas
 The initial phase in virtually all data science endeavors involves data preparation.
 This section will examine the \texttt{init\_scripts.py} class.
 For this project, data was sourced from the MIMIC-III and MIMIC-IV DBs, each serving distinct purposes.
-Data from the MIMIC-IV DB was employed as the validation dataset (detailed further in the ML methods section~\ref{subsec:ml_methods}), since it is regarded as the most modern and most reliable MIMIC DB currently available.
+Data from the MIMIC-IV DB was employed as the validation dataset (detailed further in the ML methods section~\ref{subsec:ml_methods}), since it is regarded as the most modern MIMIC DB currently available.
 In contrast, data from the MIMIC-III database was utilized for training and testing ML models due to its significantly larger size.
 Nevertheless, the data retrieval process employed similar methods for both the older and newer waveform datasets.
 
@@ -63,11 +63,11 @@ To verify if the record includes all the required signals (ABP and Pleth for thi
 {\centering \texttt{signal\_names = record\_data.sig\_name}.\par}
 \vspace{0.1cm}
 
-\noindent If a record lacks either the ABP or Pleth signals, it is excluded from further processing.
+\noindent If a record lacked either the ABP or Pleth signals, it was excluded from further processing.
 Each record comprises multiple segments, varying in duration and the signals they capture.
-In addition to signal requirements, segments must also have a minimum length of 10 minutes to be considered usable.
+In addition to signal requirements, segments had to also have a minimum length of 10 minutes to be considered usable.
 This criterion aims to ensure data reliability and variability, as longer segments offer more data points to represent physiological states accurately, reducing the impact of short-term fluctuations and noise.
-The segment duration length is determined by the following function:
+The segment duration length was determined by the following functions:
 
 \vspace{0.1cm}
 \qquad\qquad\qquad \texttt{segment\_metadata = wfdb.rdheader(segment, record\_dir)}
@@ -122,7 +122,7 @@ An iterative process is likewise applied to every segment of a record, by fetchi
     \label{fig:segments}
 \end{wrapfigure}
 
-\noindent These segments should also be devoid of any \enquote{faulty} values, identified as NumPy values \texttt{NaN} and \texttt{inf}.
+\noindent These segments had to also be devoid of any \enquote{faulty} values, identified as NumPy values \texttt{NaN} and \texttt{inf}.
 For ABP segments values outside the range of 30 to 250 (accounting for extreme and likely erroneous measurements) are omitted, and for Pleth values must strictly fall between 0 and 1 (representing the valid PPG range).
 These exclusion criteria are summarized in Table~\ref{tab:faulty}.
 
@@ -137,8 +137,8 @@ These exclusion criteria are summarized in Table~\ref{tab:faulty}.
     \label{fig:values}
 \end{wrapfigure}
 
-If a 10-minute continuous part of the segment matches these criteria, it is saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
-If a segment is longer than 10 minutes, then more 10 minute segments may be extracted (marked by an underscore and a number representing the \textit{n-th} 10 minute part of a segment)
+If a 10-minute continuous part of the segment matched these criteria, it was saved to the \texttt{./mimic3} (or \texttt{./mimic4}) directory, as 2 separate and synchronous ABP and PPG files.
+If a segment was longer than 10 minutes, then more 10 minute segments may have been extracted (marked by an underscore and a number representing the \textit{n-th} 10 minute part of a segment)
 Examples of the file names and their values are illustrated in Figures~\ref{fig:segments} and~\ref{fig:values}.
 
 \newpage
@@ -150,7 +150,7 @@ However, this restriction was not applied to data retrieval from the MIMIC-IV da
 Additionally, the primary objective was to achieve a dataset split ratio of 60/20/20 for training, testing, and validation, where 80\% of the data comprises the MIMIC-III dataset for training and testing (60/20), and the remaining 20\% consists of the MIMIC-IV dataset for validation purposes.
 To facilitate this, an initial set of x segments was retrieved from the MIMIC-IV database, followed by obtaining four times the number of x segments from the MIMIC-III database.
 However, it is important to acknowledge that the quantity of segments obtained from each database doesn't directly correspond to the number of features utilized in the ML phase, as signal processing tasks are performed in between.
-Thus, the 60/20/20 split ratio for training, testing, and validation serves more as a guideline than an absolute target for the number of segments retrieved.
+Thus, the 60/20/20 split ratio for training, testing, and validation served more as a guideline than an absolute target for the number of segments retrieved.
 Details on achieving the actual proportions are provided in the results section~\ref{subsec:machine_learning}.
 
 \subsection{Signal Processing}
@@ -333,10 +333,10 @@ In the rare event that this method also failed and fewer than 100 beats were fou
 The final stage in generating an accurate beat timestamp array involves synchronization and grouping.
 
 Due to a slight delay in the PPG waveform compared to the ABP signal (approximately 500 ms), synchronization becomes imperative.
-This process entails identifying the closest PPG beat to the first ABP beat and vice versa, and the closest ABP beat to the last PPG beat.
+This process entails identifying the closest PPG beat to the first ABP beat, and the closest ABP beat to the last PPG beat.
 Thereby splicing the respective arrays to produce two synchronized waveforms based on the indexes of the first and last PPG and ABP beats.
 
-Additionally, it's crucial to address any instances of mis-detected beats in either signal.
+Additionally, it is crucial to address any instances of mis-detected beats in either signal.
 For instance, if three ABP beats are detected at timestamps 50, 60, and 70, but only two beats are identified at timestamps 50 and 70 in the PPG waveform,
 the ABP beat at timestamp 60 must be discarded as it lacks a corresponding PPG counterpart.
 Consequently, the resulting beat arrays for both PPG and ABP waveforms possess identical lengths, with timestamps differing only marginally.
@@ -529,7 +529,7 @@ Firstly, calculating the median helps to mitigate the influence of outliers or i
 By capturing the central tendency of the data within each window, the median value offers a more stable and reliable estimate of the overall signal characteristics.
 Additionally, median values effectively filter out any left-over noise from the pre-processing part, making them more reliable measures compared to absolute values.
 Finally, this approach reduces the computational complexity compared to dealing with total features extracted from each pulse wave individually, making it more efficient for large-scale data processing tasks, such as ML model training.
-Specifically these median values were the ones used in all subsequent ML processes.
+Precisely these median values were the ones used in all subsequent ML processes.
 
 Through empirical investigation, it was determined that a window of 7 consecutive beats served as the most effective median interval
 for computing feature values from both PPG and ABP signals.
@@ -539,7 +539,7 @@ For the frequency domain features, the FFT was applied to the entire 7-beat wind
 \subsection{Machine Learning}
 \label{subsec:ml_methods}
 
-In this concluding section detailing methods, the utilization of machine learning methodologies is elaborated upon,
+In this concluding section detailing methods, the utilization of machine learning meth\-odologies is elaborated upon,
 drawing from a range of studies as referenced in the background section~\ref{subsubsec:machine_learning}.
 This study employed diverse models, distinct strategies for data splitting, and methods for training and validation.
 

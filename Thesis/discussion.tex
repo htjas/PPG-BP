@@ -9,7 +9,7 @@ The initial task of the investigation involved identifying an effective strategy
 This objective was successfully accomplished by utilizing the publicly accessible datasets of MIMIC-III and MIMIC-IV,
 employing fetching and filtering methodologies to consistently generate physiologically satisfactory ABP and PPG visual signals.
 These procedures are detailed in the methods section~\ref{subsubsec:filtering}.
-Despite the thorough exploration of various data processing methods, there remains potential for further experimentation and the discovery of even more optimal techniques
+Despite the thorough exploration of various data processing methods, there remains potential for further experimentation and the discovery of even more efficient techniques
 to produce discrete and optimally representative physiological pulse waveform graphics.
 
 One potential improvement, not within the scope of this study due to the substantial volume of samples analysed, involves the manual filtering of waveform graphics.
@@ -51,7 +51,7 @@ Consequently, as mentioned in the preceding paragraph, these features reliant on
 particularly since the Resistive Index emerged as one of the highest-scoring features in the importance hierarchy.
 
 Another noteworthy consideration is the absence of feature reduction, with the models being trained on a comprehensive set of 34 features.
-The decision against implementing feature reduction stemmed from the observation that each feature made a positive contribution to each model's performance,
+The decision against implementing feature reduction stemmed from the observation that every feature made a positive contribution to each model's performance,
 as evidenced by the feature importance plots (refer to~\ref{subsec:plots_fi}).
 In comparison, previous studies have often utilized a smaller number of features, typically ranging from around 20 to 5~\cite{el-hajjDeepLearningModels2021, charltonAssessingHemodynamicsPhotoplethysmogram2022, yilmazNocturnalBloodPressure2023}.
 Therefore, the extensive size of the training features could potentially result in reduced predictive accuracy,
@@ -65,7 +65,7 @@ This challenge may be exploited by the presence of redundant or noisy features, 
 Finally, the third objective entailed the development and evaluation of diverse ML models utilizing the extracted features to predict BP reliably from PPG signals.
 In accordance with the collaborative 2018 statement issued by the American National Standards of the Association for the Advancement of Medical Instrumentation (AAMI), the European Society of Hypertension (ESH), and the International Organization for Standardization (ISO),
 the recommended average deviation and its standard deviation in NIBP measurements should ideally range within 5 ± 8 mmHg compared to a reference BP, based on a minimum of 85 patient assessments.
-A further consensus was reached, that a BP measuring device is considered acceptable if its estimated probability of a tolerable error ($\leq$10 mmHg) is at least 85\%~\cite{stergiouUniversalStandardValidation2018}.
+A further consensus was reached, that a BP measuring device could be considered acceptable if its estimated probability of a tolerable error ($\leq$10 mmHg) is at least 85\%~\cite{stergiouUniversalStandardValidation2018}.
 Evidently, the number of patient assessments conducted in this investigation far exceeds the stipulated minimum of 85, encompassing both the training/testing and validation datasets (see available subjects in Figure~\ref{fig:data_flow} for reference).
 However, the accuracy metrics did not meet the desired levels.
 

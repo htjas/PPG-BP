@@ -163,7 +163,7 @@ while the DC component is influenced by factors such as respiration, sympathetic
 The AC component specifically illustrates changes in blood volume during phasic cardiac activity, representing both the systolic and diastolic phases.
 The systolic phase, also known as the \enquote{rise time} initiates with a valley and concludes at the pulse wave systolic peak.
 The pulse wave concludes with another valley at the end of the diastolic phase~\cite{weisslerSystolicTimeIntervals1968}.
-In most PPG waveform analyses including this one, the AC component in the form of a waveform signal is used.
+In most PPG waveform analytic studies including this one, the AC component in the form of a waveform signal is used.
 
 \begin{figure}[h]
     \centering
@@ -249,7 +249,7 @@ Both the MIMIC-III and MIMIC-IV DBs are cited and employed in this investigation
 However, the primary emphasis of this inquiry lies in the Waveform Section of the DB (highlighted by a red rectangle in Figure~\ref{fig:mimic_structure}).
 The waveform DB comprises individual records, each representing a patient's ICU stay and stored in a distinct subdirectory.
 These records lack specific date or time data to ensure patient anonymity, relying instead on elapsed time from the record's start.
-Supplemented by surrogate date and time information for cross-referencing with other DB modules.
+They are supplemented by surrogate date and time information for cross-referencing with other DB modules.
 Waveforms denote regularly sampled, high-resolution measurements stored in a signal specific numerical format.
 To optimize storage and processing, these waveforms are segmented into intervals, maintaining continuous sampling within each segment despite potential signal unavailability throughout a patient's ICU stay.
 
@@ -297,7 +297,6 @@ Their expansive datasets offer researchers an extensive pool of information to d
 \subsubsection{Signal Processing}
 \label{subsubsec:signal_processing}
 
-This section explores various techniques and methods employed in the analysis of PPG signals and their correlation to BP measurements.
 PPG-based BP estimation has emerged as a promising non-invasive approach, utilizing waveform observations from signals like PPG, recorded from different anatomical sites, or their combination with ECG signals.
 This section delves into the diverse methodologies and algorithms utilized for processing PPG signals to derive meaningful insights into BP dynamics.
 
@@ -505,7 +504,7 @@ PWA offers a novel method for cuffless, continuous, and calibration-free BP meas
 Utilizing only one PPG sensor, PWA presents several advantages over previous methods, including simplicity, affordability, straightforward signal acquisition, and a resemblance between BP pulse waveform and PPG blood volume pulse (example in Figure~\ref{fig:pwa}).
 This data-driven approach to BP estimation provides optical BP measurement with promising potential for practical applications.
 Advancements in computational technology and data analysis software have simplified the preprocessing and analysis of physiological signals.
-Techniques such as filtering and feature extraction are commonly utilized in the analysis of PPG pulse waves, often integrated into ML and \ac{DNN} models for BP estimation.
+Techniques such as filtering and feature extraction are commonly utilized in the analysis of PPG pulse waves, often integrated into ML and \ac{DNN} models for BP estimation~\cite{mahardikatPPGSignalsBasedBloodPressure2023}.
 
 \begin{figure}[h]
     \includegraphics[width=0.9\textwidth]{images/sp/pwa}
@@ -566,7 +565,7 @@ ML forms the cornerstone of predictive modeling in various fields, including hea
 At its core, ML involves the development of algorithms and statistical models that allow computers to learn from and make predictions or decisions based on data~\cite{WhatMachineLearning}.
 Supervised learning, a common ML approach, involves training a model on labeled data, where the algorithm learns the relationship between input features (like PPG signals) and the target output (such as BP).
 Unsupervised learning, on the other hand, deals with finding hidden patterns or structures in unlabeled data, which can be beneficial for feature extraction~\cite{deluaSupervisedVsUnsupervised2021}.
-In the context of this thesis, various supervised ML techniques are utilized to analyse PPG waveform features and to predict BP values.
+In the context of this thesis, various supervised learning techniques are utilized to analyse PPG waveform features and to predict BP values.
 These algorithms are trained on datasets from ICU patients to create regression models capable of estimating BP from PPG data.
 
 Building upon the foundation laid by traditional signal processing techniques, as elaborated in section~\ref{subsubsec:signal_processing}, ML emerges as a transformative force in the pursuit of accurate and non-intrusive BP estimation using PPG signals.
