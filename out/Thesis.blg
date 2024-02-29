@@ -28,37 +28,37 @@ Warning--entry type for "jasinskasHtjasPPGBPProject2024" isn't style-file define
 Warning--entry type for "LBFGSPyTorchDocumentation" isn't style-file defined
 --line 762 of file literature_final_with_notes.bib
 Warning--entry type for "MatplotlibVisualizationPython" isn't style-file defined
---line 944 of file literature_final_with_notes.bib
+--line 963 of file literature_final_with_notes.bib
 Warning--entry type for "MITLCPWfdbpython2024" isn't style-file defined
---line 985 of file literature_final_with_notes.bib
+--line 1004 of file literature_final_with_notes.bib
 Warning--entry type for "moodyMIMICIIIWaveformDatabase2017" isn't style-file defined
---line 1043 of file literature_final_with_notes.bib
+--line 1062 of file literature_final_with_notes.bib
 Warning--entry type for "moodyMIMICIVWaveformDatabase" isn't style-file defined
---line 1055 of file literature_final_with_notes.bib
+--line 1074 of file literature_final_with_notes.bib
 Warning--entry type for "NumPy" isn't style-file defined
---line 1106 of file literature_final_with_notes.bib
+--line 1125 of file literature_final_with_notes.bib
 Warning--entry type for "PandasPythonData" isn't style-file defined
---line 1127 of file literature_final_with_notes.bib
+--line 1146 of file literature_final_with_notes.bib
 Warning--entry type for "ponnadaTechnologicalConsiderationsSensorassisted2019" isn't style-file defined
---line 1154 of file literature_final_with_notes.bib
+--line 1173 of file literature_final_with_notes.bib
 Warning--entry type for "PyTorch" isn't style-file defined
---line 1177 of file literature_final_with_notes.bib
+--line 1196 of file literature_final_with_notes.bib
 Warning--entry type for "rajivLowPassHigh2022" isn't style-file defined
---line 1187 of file literature_final_with_notes.bib
+--line 1206 of file literature_final_with_notes.bib
 Warning--entry type for "ScikitlearnMachineLearning" isn't style-file defined
---line 1289 of file literature_final_with_notes.bib
+--line 1308 of file literature_final_with_notes.bib
 Warning--entry type for "SciPy" isn't style-file defined
---line 1297 of file literature_final_with_notes.bib
+--line 1316 of file literature_final_with_notes.bib
 Warning--entry type for "SGDPyTorchDocumentation" isn't style-file defined
---line 1323 of file literature_final_with_notes.bib
+--line 1342 of file literature_final_with_notes.bib
 Warning--entry type for "SignalProcessingArtifacts" isn't style-file defined
---line 1352 of file literature_final_with_notes.bib
+--line 1371 of file literature_final_with_notes.bib
 Warning--entry type for "storrButterworthFilterDesign2013" isn't style-file defined
---line 1422 of file literature_final_with_notes.bib
+--line 1441 of file literature_final_with_notes.bib
 Warning--entry type for "Wandb" isn't style-file defined
---line 1583 of file literature_final_with_notes.bib
+--line 1602 of file literature_final_with_notes.bib
 Warning--entry type for "WhatMachineLearning" isn't style-file defined
---line 1625 of file literature_final_with_notes.bib
+--line 1644 of file literature_final_with_notes.bib
 Warning--empty author and editor in WorldHealthStatistics2023
 Warning--empty year in WorldHealthStatistics2023
 Warning--empty journal in ezzatiSelectedMajorRisk2002
@@ -158,6 +158,8 @@ Warning--empty journal in urbanUnderstandingArterialBiomechanics2023
 Warning--empty year in urbanUnderstandingArterialBiomechanics2023
 Warning--empty journal in elgendiAnalysisFingertipPhotoplethysmogram2012
 Warning--empty year in elgendiAnalysisFingertipPhotoplethysmogram2012
+Warning--empty journal in mahardikatPPGSignalsBasedBloodPressure2023
+Warning--empty year in mahardikatPPGSignalsBasedBloodPressure2023
 Warning--empty journal in bikiaLeveragingPotentialMachine2021
 Warning--empty year in bikiaLeveragingPotentialMachine2021
 Warning--empty journal in takazawaAssessmentVasoactiveAgents1998a
@@ -198,45 +200,45 @@ Warning--empty journal in yilmazNocturnalBloodPressure2023
 Warning--empty year in yilmazNocturnalBloodPressure2023
 Warning--empty journal in stergiouUniversalStandardValidation2018
 Warning--empty year in stergiouUniversalStandardValidation2018
-You've used 104 entries,
+You've used 105 entries,
             1876 wiz_defined-function locations,
-            1041 strings with 31332 characters,
-and the built_in function-call counts, 30091 in all, are:
-= -- 2651
-> -- 1591
+            1047 strings with 31627 characters,
+and the built_in function-call counts, 30370 in all, are:
+= -- 2676
+> -- 1605
 < -- 0
-+ -- 575
-- -- 471
-* -- 2370
-:= -- 4090
-add.period$ -- 95
-call.type$ -- 104
-change.case$ -- 103
++ -- 580
+- -- 475
+* -- 2392
+:= -- 4128
+add.period$ -- 96
+call.type$ -- 105
+change.case$ -- 104
 chr.to.int$ -- 0
-cite$ -- 243
-duplicate$ -- 1400
-empty$ -- 2704
-format.name$ -- 471
-if$ -- 7142
+cite$ -- 246
+duplicate$ -- 1417
+empty$ -- 2726
+format.name$ -- 475
+if$ -- 7210
 int.to.chr$ -- 0
-int.to.str$ -- 104
-missing$ -- 76
-newline$ -- 337
-num.names$ -- 88
-pop$ -- 627
+int.to.str$ -- 105
+missing$ -- 77
+newline$ -- 340
+num.names$ -- 89
+pop$ -- 632
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1108
+skip$ -- 1121
 stack$ -- 0
-substring$ -- 1845
-swap$ -- 559
+substring$ -- 1853
+swap$ -- 567
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 139
-while$ -- 253
-width$ -- 107
-write$ -- 837
-(There were 167 warnings)
+warning$ -- 141
+while$ -- 255
+width$ -- 108
+write$ -- 846
+(There were 169 warnings)

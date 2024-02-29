@@ -340,6 +340,12 @@ M.~Urban, ``Understanding {{Arterial Biomechanics}} with {{Ultrasound}} and
 M.~Elgendi, ``On the {{Analysis}} of {{Fingertip Photoplethysmogram
   Signals}},'' vol.~8, no.~1, pp.~14--25.
 
+\bibitem{mahardikatPPGSignalsBasedBloodPressure2023}
+N.~Q. Mahardika~T, Y.~N. Fuadah, D.~U. Jeong, and K.~M. Lim, ``{{PPG
+  Signals-Based Blood-Pressure Estimation Using Grid Search}} in
+  {{Hyperparameter Optimization}} of {{CNN}}–{{LSTM}},'' vol.~13, no.~15,
+  p.~2566.
+
 \bibitem{bikiaLeveragingPotentialMachine2021}
 V.~Bikia, T.~Fong, R.~Climie, R.~Bruno, B.~Hametner, C.~Mayer,
   D.~Terentes-Printzios, and P.~Charlton, ``Leveraging the potential of machine
